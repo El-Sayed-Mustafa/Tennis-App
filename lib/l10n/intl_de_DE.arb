@@ -1,0 +1,13 @@
+{
+    "next": "weiter",
+    "skip": "Überspringen",
+    "getStarted": "Loslegen",
+    "onboarding_header1": "Erstelle dein Profil",
+    "onboarding_header2": "Platzreservierung",
+    "onboarding_header3": "Matchmaking",
+    "onboarding_header4": "Benachrichtigungen",
+    "onboarding_detail1": "Jedes Clubmitglied kann ein individuelles\n Profil erstellen und Informationen zu \nihrenStärken und Spieltypen \nangeben.",
+    "onboarding_detail2": "Mit dieser Funktion können Clubmitglieder\n Tennisplätze reservieren. Sie können \nfreie Zeiten anzeigen und Buchungen\neinfach vornehmen.",
+    "onboarding_detail3": "Hier finden Sie Spieler, die zu einer \nbestimmten Zeit spielen möchten oder\n ein ähnliches Spielniveau \nwie Sie haben.",
+    "onboarding_detail4": "Sie erhalten Informationen zu\nbevorstehenden Turnieren,\nVeranstaltungen, Spielaktualisierungen\noder wichtigen Clubankündigungen."
+}

@@ -1,0 +1,15 @@
+{
+    "signIn":"Sign In",
+    "signUp":"Sign Up",
+    "next": "Next",
+    "skip": "Skip",
+    "getStarted": "Get Started",
+    "onboarding_header1": "Create Your Profile",
+    "onboarding_header2": "Court Booking",
+    "onboarding_header3": "Match Making",
+    "onboarding_header4": "Notifications",
+    "onboarding_detail1": "Each club member can create an\nindividual profile and include\ninformation about their strength \n and playing type.",
+    "onboarding_detail2": "This feature allows club members to\nreserve tennis courts. They can\nview free times and make \nbookings easily.",
+    "onboarding_detail3": "You can find players who are interested\nin playing at a specific time or\nhave a similar skill level\n as you.",
+    "onboarding_detail4": "You can access information regarding\nupcoming tournaments, events,\ngame updates, or important\nclub announcements."
+}

@@ -1,0 +1,13 @@
+{
+    "next": "siguiente",
+    "skip": "Saltar",
+    "getStarted": "Comenzar",
+    "onboarding_header1": "Crea tu perfil",
+    "onboarding_header2": "Reserva de canchas",
+    "onboarding_header3": "Búsqueda de partidos",
+    "onboarding_header4": "Notificaciones",
+    "onboarding_detail1": "Cada miembro del club puede crear un perfil\n individual e incluir información\n sobre sus fortalezas y \ntipo de juego.",
+    "onboarding_detail2": "Esta función permite a los miembros del club\n reservar canchas de tenis.Pueden \nver los horarios disponibles y \nhacer reservas fácilmente.",
+    "onboarding_detail3": "Puedes encontrar jugadores interesados en \njugar en un horario específico o\n que tengan un nivel de habilidad\n similar al tuyo.",
+    "onboarding_detail4": "Puedes acceder a información sobre \npróximos torneos, eventos, \nactualizaciones de partidos o anuncios \n importantes del club."
+}
