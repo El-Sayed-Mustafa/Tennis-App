@@ -50,6 +50,186 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Sign in to your profile`
+  String get sign_in_to_profile {
+    return Intl.message(
+      'Sign in to your profile',
+      name: 'sign_in_to_profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get email {
+    return Intl.message(
+      'Email',
+      name: 'email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email Address`
+  String get email_address {
+    return Intl.message(
+      'Email Address',
+      name: 'email_address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get password {
+    return Intl.message(
+      'Password',
+      name: 'password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forgot your password?`
+  String get forgot_password {
+    return Intl.message(
+      'Forgot your password?',
+      name: 'forgot_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `SIGN IN`
+  String get sign_in {
+    return Intl.message(
+      'SIGN IN',
+      name: 'sign_in',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create your Basic Profile`
+  String get create_basic_profile {
+    return Intl.message(
+      'Create your Basic Profile',
+      name: 'create_basic_profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `SIGN UP`
+  String get sign_up {
+    return Intl.message(
+      'SIGN UP',
+      name: 'sign_up',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter Your Email`
+  String get enter_email {
+    return Intl.message(
+      'Enter Your Email',
+      name: 'enter_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset Password`
+  String get reset_password {
+    return Intl.message(
+      'Reset Password',
+      name: 'reset_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The password provided is too weak.`
+  String get weak_password {
+    return Intl.message(
+      'The password provided is too weak.',
+      name: 'weak_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The account already exists for that email.`
+  String get account_already_exists {
+    return Intl.message(
+      'The account already exists for that email.',
+      name: 'account_already_exists',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email verification sent!`
+  String get email_verification_sent {
+    return Intl.message(
+      'Email verification sent!',
+      name: 'email_verification_sent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Google Sign-In: No user selected`
+  String get google_signin_no_user {
+    return Intl.message(
+      'Google Sign-In: No user selected',
+      name: 'google_signin_no_user',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Google Sign-In: Failed to authenticate user`
+  String get google_signin_failed {
+    return Intl.message(
+      'Google Sign-In: Failed to authenticate user',
+      name: 'google_signin_failed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Google Sign-In: Unexpected error occurred`
+  String get google_signin_unexpected_error {
+    return Intl.message(
+      'Google Sign-In: Unexpected error occurred',
+      name: 'google_signin_unexpected_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password reset email sent`
+  String get password_reset_email_sent {
+    return Intl.message(
+      'Password reset email sent',
+      name: 'password_reset_email_sent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to send password reset email`
+  String get failed_send_password_reset_email {
+    return Intl.message(
+      'Failed to send password reset email',
+      name: 'failed_send_password_reset_email',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Sign In`
   String get signIn {
     return Intl.message(

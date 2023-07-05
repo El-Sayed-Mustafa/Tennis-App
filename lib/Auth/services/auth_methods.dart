@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../core/utils/snackbar.dart';
+import '../../generated/l10n.dart';
 
 class FirebaseAuthMethods {
   final FirebaseAuth _auth;
@@ -28,9 +29,9 @@ class FirebaseAuthMethods {
     } on FirebaseAuthException catch (e) {
       // if you want to display your own custom error message
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
+        showSnackBar(context, S.of(context).weak_password);
       } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+        showSnackBar(context, S.of(context).account_already_exists);
       }
       showSnackBar(
           context, e.message!); // Displaying the usual firebase error message
@@ -41,7 +42,7 @@ class FirebaseAuthMethods {
   Future<void> sendEmailVerification(BuildContext context) async {
     try {
       _auth.currentUser!.sendEmailVerification();
-      showSnackBar(context, 'Email verification sent!');
+      showSnackBar(context, S.of(context).email_verification_sent);
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!); // Display error message
     }
@@ -58,7 +59,6 @@ class FirebaseAuthMethods {
         email: email,
         password: password,
       );
-      showSnackBar(context, "hello"); // Display error message
       GoRouter.of(context).replace('/home');
 
       if (!_auth.currentUser!.emailVerified) {
@@ -85,7 +85,7 @@ class FirebaseAuthMethods {
         final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
         if (googleUser == null) {
-          print('Google Sign-In: No user selected');
+          showSnackBar(context, S.of(context).google_signin_no_user);
           return;
         }
 
@@ -93,7 +93,8 @@ class FirebaseAuthMethods {
             await googleUser.authentication;
 
         if (googleAuth == null) {
-          print('Google Sign-In: Failed to authenticate user');
+          showSnackBar(context, S.of(context).google_signin_failed);
+
           return;
         }
         final credential = GoogleAuthProvider.credential(
@@ -106,7 +107,8 @@ class FirebaseAuthMethods {
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!); // Displaying the error message
     } catch (e) {
-      print('Google Sign-In: Unexpected error occurred: $e');
+      showSnackBar(
+          context, '${S.of(context).google_signin_unexpected_error}$e');
     }
   }
 
@@ -117,13 +119,13 @@ class FirebaseAuthMethods {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
       Fluttertoast.showToast(
-        msg: "Password reset email sent",
+        msg: S.of(context).password_reset_email_sent,
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
       );
     } catch (e) {
       Fluttertoast.showToast(
-        msg: "Failed to send password reset email",
+        msg: S.of(context).failed_send_password_reset_email,
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
       );

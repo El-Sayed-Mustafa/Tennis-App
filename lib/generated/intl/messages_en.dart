@@ -22,7 +22,27 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "account_already_exists": MessageLookupByLibrary.simpleMessage(
+            "The account already exists for that email."),
+        "create_basic_profile":
+            MessageLookupByLibrary.simpleMessage("Create your Basic Profile"),
+        "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "email_address": MessageLookupByLibrary.simpleMessage("Email Address"),
+        "email_verification_sent":
+            MessageLookupByLibrary.simpleMessage("Email verification sent!"),
+        "enter_email": MessageLookupByLibrary.simpleMessage("Enter Your Email"),
+        "failed_send_password_reset_email":
+            MessageLookupByLibrary.simpleMessage(
+                "Failed to send password reset email"),
+        "forgot_password":
+            MessageLookupByLibrary.simpleMessage("Forgot your password?"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
+        "google_signin_failed": MessageLookupByLibrary.simpleMessage(
+            "Google Sign-In: Failed to authenticate user"),
+        "google_signin_no_user": MessageLookupByLibrary.simpleMessage(
+            "Google Sign-In: No user selected"),
+        "google_signin_unexpected_error": MessageLookupByLibrary.simpleMessage(
+            "Google Sign-In: Unexpected error occurred"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "onboarding_detail1": MessageLookupByLibrary.simpleMessage(
             "Each club member can create an\nindividual profile and include\ninformation about their strength \n and playing type."),
@@ -40,8 +60,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Match Making"),
         "onboarding_header4":
             MessageLookupByLibrary.simpleMessage("Notifications"),
+        "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "password_reset_email_sent":
+            MessageLookupByLibrary.simpleMessage("Password reset email sent"),
+        "reset_password":
+            MessageLookupByLibrary.simpleMessage("Reset Password"),
         "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
-        "skip": MessageLookupByLibrary.simpleMessage("Skip")
+        "sign_in": MessageLookupByLibrary.simpleMessage("SIGN IN"),
+        "sign_in_to_profile":
+            MessageLookupByLibrary.simpleMessage("Sign in to your profile"),
+        "sign_up": MessageLookupByLibrary.simpleMessage("SIGN UP"),
+        "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+        "weak_password": MessageLookupByLibrary.simpleMessage(
+            "The password provided is too weak.")
       };
 }
