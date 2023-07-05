@@ -5,6 +5,7 @@ import 'package:tennis_app/Auth/widgets/solcial_media.dart';
 import 'package:tennis_app/core/utils/widgets/dialog_prograss_indecator.dart';
 
 import '../../../core/utils/widgets/custom_button.dart';
+import '../../../generated/l10n.dart';
 import '../../widgets/divider.dart';
 import '../../widgets/input_feild.dart';
 
@@ -44,9 +45,9 @@ class _SignUpState extends State<SignUp> {
                     SizedBox(
                       height: screenHeight * .022,
                     ),
-                    const Text(
-                      'Create your Basic Profile',
-                      style: TextStyle(
+                    Text(
+                      S.of(context).create_basic_profile,
+                      style: const TextStyle(
                         color: Colors.black,
                         fontSize: 16,
                         fontFamily: 'Poppins',
@@ -59,11 +60,11 @@ class _SignUpState extends State<SignUp> {
                     Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: screenWidth * .05, vertical: 2),
-                      child: const Align(
+                      child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'Email',
-                          style: TextStyle(
+                          S.of(context).email,
+                          style: const TextStyle(
                             color: Color(0xFF797979),
                             fontSize: 14,
                             fontFamily: 'Poppins',
@@ -74,7 +75,7 @@ class _SignUpState extends State<SignUp> {
                     ),
                     MyInputText(
                       controller: emailController,
-                      hintText: "Email Address",
+                      hintText: S.of(context).email_address,
                       icon: Icons.email_outlined,
                       obscureText: false,
                     ),
@@ -84,11 +85,11 @@ class _SignUpState extends State<SignUp> {
                     Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: screenWidth * .05, vertical: 2),
-                      child: const Align(
+                      child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'Password',
-                          style: TextStyle(
+                          S.of(context).password,
+                          style: const TextStyle(
                             color: Color(0xFF797979),
                             fontSize: 14,
                             fontFamily: 'Poppins',
@@ -98,7 +99,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                     MyInputText(
-                      hintText: "Password",
+                      hintText: S.of(context).password,
                       icon: Icons.lock_open_outlined,
                       obscureText: true,
                       controller: passwordController,
@@ -109,9 +110,9 @@ class _SignUpState extends State<SignUp> {
                     SizedBox(
                       height: screenHeight * .01,
                     ),
-                    const Text(
-                      'Forgot your password?',
-                      style: TextStyle(
+                    Text(
+                      S.of(context).forgot_password,
+                      style: const TextStyle(
                         color: Color(0xFF1B262C),
                         fontSize: 12,
                         fontFamily: 'Poppins',
@@ -123,7 +124,7 @@ class _SignUpState extends State<SignUp> {
               ),
             ),
             BottomSheetContainer(
-              buttonText: 'SIGN UP',
+              buttonText: S.of(context).sign_up,
               onPressed: () {
                 signUserUp();
               },

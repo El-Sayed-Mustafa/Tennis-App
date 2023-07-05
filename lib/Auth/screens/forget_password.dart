@@ -4,6 +4,7 @@ import 'package:tennis_app/Auth/services/auth_methods.dart';
 
 import '../../../core/utils/widgets/custom_button.dart';
 import '../../core/utils/widgets/clipper.dart';
+import '../../generated/l10n.dart';
 import '../widgets/input_feild.dart';
 import '../widgets/waveClipperScreen.dart';
 
@@ -62,9 +63,9 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     SizedBox(
                       height: screenHeight * .1,
                     ),
-                    const Text(
-                      'Enter Your Email',
-                      style: TextStyle(
+                    Text(
+                      S.of(context).enter_email,
+                      style: const TextStyle(
                         color: Colors.black,
                         fontSize: 18,
                         fontFamily: 'Poppins',
@@ -77,11 +78,11 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: screenWidth * .05, vertical: 2),
-                      child: const Align(
+                      child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'Email',
-                          style: TextStyle(
+                          S.of(context).email,
+                          style: const TextStyle(
                             color: Color(0xFF797979),
                             fontSize: 14,
                             fontFamily: 'Poppins',
@@ -92,7 +93,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     ),
                     MyInputText(
                       controller: emailController,
-                      hintText: "Email Address",
+                      hintText: S.of(context).email_address,
                       icon: Icons.email_outlined,
                       obscureText: false,
                     ),
@@ -104,7 +105,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               ),
             ),
             BottomSheetContainer(
-              buttonText: 'Reset Password',
+              buttonText: S.of(context).reset_password,
               onPressed: () {
                 passwordRest();
               },
