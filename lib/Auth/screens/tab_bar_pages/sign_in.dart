@@ -1,38 +1,23 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/utils/snackbar.dart';
 import '../../../core/utils/widgets/custom_button.dart';
-import '../../../core/utils/widgets/dialog_prograss_indecator.dart';
 import '../../../generated/l10n.dart';
 import '../../cubit/auth_cubit.dart';
-import '../../services/auth_methods.dart';
 import '../../widgets/divider.dart';
 import '../../widgets/input_feild.dart';
 import '../../widgets/solcial_media.dart';
 
-class SignIn extends StatefulWidget {
+class SignIn extends StatelessWidget {
   const SignIn({Key? key}) : super(key: key);
 
   @override
-  State<SignIn> createState() => _SignInState();
-}
-
-class _SignInState extends State<SignIn> {
-  final emailController = TextEditingController();
-
-  final passwordController = TextEditingController();
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final emailController = TextEditingController();
+    final passwordController = TextEditingController();
+
     final authCubit = context.read<AuthCubit>();
     void signUserIn() async {
       authCubit.loginWithEmail(

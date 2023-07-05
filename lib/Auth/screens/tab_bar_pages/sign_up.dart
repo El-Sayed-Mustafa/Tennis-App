@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tennis_app/Auth/services/auth_methods.dart';
 import 'package:tennis_app/Auth/widgets/solcial_media.dart';
-import 'package:tennis_app/core/utils/widgets/dialog_prograss_indecator.dart';
 
 import '../../../core/utils/widgets/custom_button.dart';
 import '../../../generated/l10n.dart';
