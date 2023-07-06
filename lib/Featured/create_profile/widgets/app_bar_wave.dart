@@ -1,20 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:tennis_app/core/utils/widgets/clipper.dart';
 
-class CreateProfile extends StatelessWidget {
-  const CreateProfile({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-        body: Column(
-      children: [
-        AppBarWave(),
-      ],
-    ));
-  }
-}
+import '../../../core/utils/widgets/clipper.dart';
 
 class AppBarWave extends StatelessWidget {
   const AppBarWave({Key? key});
