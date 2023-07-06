@@ -56,7 +56,7 @@ class WaveClipperScreenChooseClub extends StatelessWidget {
                 ),
                 Positioned(
                   left: screenWidth * 0.05,
-                  top: screenHeight * 0.21,
+                  top: screenHeight * 0.18,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -70,7 +70,7 @@ class WaveClipperScreenChooseClub extends StatelessWidget {
                         ),
                       ),
                       const Text(
-                        'You have been invited to join this club\n through an invitation link.',
+                        'You have been invited to join\nthis club through an\n invitation link.',
                         style: TextStyle(
                           color: Color(0xFFDADADA),
                           fontSize: 14,
