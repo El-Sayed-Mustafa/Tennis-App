@@ -1,7 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tennis_app/Auth/services/auth_methods.dart';
 import 'package:tennis_app/Auth/widgets/solcial_media.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
 
@@ -21,9 +19,10 @@ class SignUp extends StatelessWidget {
 
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    final authCubit = context.read<AuthCubit>();
 
     void signUserUp() async {
-      await FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmail(
+      await authCubit.signUpWithEmail(
           email: emailController.text,
           password: passwordController.text,
           context: context);

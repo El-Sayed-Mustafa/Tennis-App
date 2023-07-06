@@ -2,9 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-
-import '../../core/utils/snackbar.dart';
-import '../../generated/l10n.dart';
 import '../services/auth_methods.dart';
 
 part 'auth_state.dart';
@@ -26,7 +23,6 @@ class AuthCubit extends Cubit<AuthState> {
       );
       emit(AuthSuccessState());
     } on FirebaseAuthException catch (e) {
-      showSnackBar(context, e.message!); // Displaying the error message
       emit(AuthErrorState(e.message.toString()));
     }
   }
@@ -49,15 +45,35 @@ class AuthCubit extends Cubit<AuthState> {
       );
       emit(AuthSuccessState());
     } on FirebaseAuthException catch (e) {
-      // if you want to display your own custom error message
-      if (e.code == 'weak-password') {
-        showSnackBar(context, S.of(context).weak_password);
-      } else if (e.code == 'email-already-in-use') {
-        showSnackBar(context, S.of(context).account_already_exists);
-      }
-      showSnackBar(
-          context, e.message!); // Displaying the usual firebase error message
       emit(AuthErrorState(e.message.toString()));
+    }
+  }
+
+  //reset password
+  Future<void> sendPasswordResetEmail({
+    required String email,
+    required BuildContext context,
+  }) async {
+    try {
+      emit(AuthLoadingState());
+      await FirebaseAuthMethods(FirebaseAuth.instance).sendPasswordResetEmail(
+        email: email,
+        context: context,
+      );
+      emit(AuthSuccessState());
+    } on FirebaseAuthException catch (e) {
+      emit(AuthErrorState(e.message.toString()));
+    }
+  }
+
+  Future<void> signInWithGoogle(BuildContext context) async {
+    try {
+      emit(GooglLoadingState());
+      await FirebaseAuthMethods(FirebaseAuth.instance)
+          .signInWithGoogle(context);
+      emit(GooglSuccessState());
+    } on FirebaseAuthException catch (e) {
+      emit(GooglErrorState(e.message.toString()));
     }
   }
 }

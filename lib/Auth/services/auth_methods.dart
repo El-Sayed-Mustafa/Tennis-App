@@ -97,10 +97,6 @@ class FirebaseAuthMethods {
 
           return;
         }
-        final credential = GoogleAuthProvider.credential(
-          accessToken: googleAuth.accessToken,
-          idToken: googleAuth.idToken,
-        );
 
         GoRouter.of(context).replace('/home');
       }
@@ -112,6 +108,7 @@ class FirebaseAuthMethods {
     }
   }
 
+  //reset password
   Future<void> sendPasswordResetEmail({
     required String email,
     required BuildContext context,

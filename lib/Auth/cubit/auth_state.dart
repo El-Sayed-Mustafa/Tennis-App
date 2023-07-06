@@ -14,3 +14,13 @@ class AuthErrorState extends AuthState {
 
   AuthErrorState(this.error);
 }
+
+class GooglLoadingState extends AuthState {}
+
+class GooglSuccessState extends AuthState {}
+
+class GooglErrorState extends AuthState {
+  final String error;
+
+  GooglErrorState(this.error);
+}
