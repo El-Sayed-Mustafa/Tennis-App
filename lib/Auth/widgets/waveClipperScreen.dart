@@ -4,8 +4,17 @@ import 'package:flutter_svg/svg.dart';
 import '../../../core/utils/widgets/clipper.dart';
 
 class WaveClipperScreen extends StatelessWidget {
-  const WaveClipperScreen({Key? key, this.widgetHeight}) : super(key: key);
-  final widgetHeight;
+  const WaveClipperScreen({
+    Key? key,
+    required this.widgetHeight,
+    required this.text,
+    required this.svgImage,
+  }) : super(key: key);
+
+  final double widgetHeight;
+  final String text;
+  final SvgPicture svgImage;
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -35,7 +44,7 @@ class WaveClipperScreen extends StatelessWidget {
                   child: SizedBox(
                     height: screenHeight * 0.37,
                     width: 200,
-                    child: SvgPicture.asset('assets/images/auth1.svg'),
+                    child: svgImage,
                   ),
                 ),
               ],
@@ -46,9 +55,9 @@ class WaveClipperScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'WELCOME',
-                    style: TextStyle(
+                  Text(
+                    text,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 36,
                       fontFamily: 'Poppins',

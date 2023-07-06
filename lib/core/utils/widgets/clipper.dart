@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class WaveClipper extends CustomClipper<Path> {
@@ -8,13 +7,13 @@ class WaveClipper extends CustomClipper<Path> {
     path.lineTo(0, size.height);
 
     var firstStart = Offset(size.width / 8, size.height);
-    var firstEnd = Offset(size.width / 4, size.height - 40);
+    var firstEnd = Offset(size.width / 4, size.height - 35);
     path.quadraticBezierTo(
         firstStart.dx, firstStart.dy, firstEnd.dx, firstEnd.dy);
 
     var secondStart =
         Offset(size.width - (size.width / 1.9), size.height - 100);
-    var secondEnd = Offset(size.width - (size.width / 3.5), size.height - 40);
+    var secondEnd = Offset(size.width - (size.width / 3.5), size.height - 38);
     path.quadraticBezierTo(
         secondStart.dx, secondStart.dy, secondEnd.dx, secondEnd.dy);
 

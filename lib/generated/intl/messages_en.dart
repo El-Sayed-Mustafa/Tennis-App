@@ -36,6 +36,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Failed to send password reset email"),
         "forgot_password":
             MessageLookupByLibrary.simpleMessage("Forgot your password?"),
+        "forgot_password_header":
+            MessageLookupByLibrary.simpleMessage("Forgot your\npassword?"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
         "google_signin_failed": MessageLookupByLibrary.simpleMessage(
             "Google Sign-In: Failed to authenticate user"),
@@ -73,6 +75,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sign_up": MessageLookupByLibrary.simpleMessage("SIGN UP"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
         "weak_password": MessageLookupByLibrary.simpleMessage(
-            "The password provided is too weak.")
+            "The password provided is too weak."),
+        "welcome": MessageLookupByLibrary.simpleMessage("Welcome")
       };
 }

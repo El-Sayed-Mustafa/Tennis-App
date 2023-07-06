@@ -6,6 +6,7 @@ import 'package:tennis_app/Featured/onboarding/onboarding_screen.dart';
 import 'package:tennis_app/Featured/splash/splash_screen.dart';
 
 import '../../Auth/screens/forget_password.dart';
+import '../../Featured/choose_club/choose_club_screen.dart';
 import '../../Featured/localization/choose_language.dart';
 
 abstract class AppRouter {
@@ -14,7 +15,7 @@ abstract class AppRouter {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return const SplashScreen();
+          return const ChooseClub();
         },
         routes: <RouteBase>[
           GoRoute(
@@ -45,6 +46,12 @@ abstract class AppRouter {
             path: 'forgetPassword',
             builder: (BuildContext context, GoRouterState state) {
               return const ForgetPassword();
+            },
+          ),
+          GoRoute(
+            path: 'chooseClub',
+            builder: (BuildContext context, GoRouterState state) {
+              return const ChooseClub();
             },
           ),
         ],

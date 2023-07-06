@@ -1,9 +1,11 @@
 {
+    "welcome":"Welcome",
     "sign_in_to_profile": "Sign in to your profile",
     "email": "Email",
     "email_address": "Email Address",
     "password": "Password",
     "forgot_password": "Forgot your password?",
+    "forgot_password_header": "Forgot your\npassword?",
     "sign_in": "SIGN IN",
     "create_basic_profile": "Create your Basic Profile",
     "sign_up": "SIGN UP",

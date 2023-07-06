@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../core/utils/widgets/custom_button.dart';
 import '../../core/utils/snackbar.dart';
@@ -45,7 +46,11 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               children: [
                 Stack(
                   children: [
-                    WaveClipperScreen(widgetHeight: screenHeight * .5),
+                    WaveClipperScreen(
+                      widgetHeight: screenHeight * .5,
+                      svgImage: SvgPicture.asset('assets/images/auth1.svg'),
+                      text: S.of(context).forgot_password_header,
+                    ),
                     Opacity(
                       opacity: 0.1,
                       child: Container(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:tennis_app/Auth/screens/tab_bar_pages/sign_in.dart';
 import 'package:tennis_app/Auth/screens/tab_bar_pages/sign_up.dart';
+import 'package:tennis_app/core/utils/widgets/opacity_wave.dart';
 import '../../core/utils/widgets/clipper.dart';
 import '../../generated/l10n.dart';
 import '../widgets/waveClipperScreen.dart';
@@ -38,20 +40,12 @@ class _AuthScreenState extends State<AuthScreen>
         children: [
           Stack(
             children: [
-              WaveClipperScreen(widgetHeight: screenHeight * .4),
-              Opacity(
-                opacity: 0.1,
-                child: Container(
-                  decoration: const BoxDecoration(),
-                  child: ClipPath(
-                    clipper: WaveClipper(),
-                    child: Container(
-                      color: Colors.black,
-                      height: screenHeight * 0.407,
-                    ),
-                  ),
-                ),
+              WaveClipperScreen(
+                widgetHeight: screenHeight * .4,
+                svgImage: SvgPicture.asset('assets/images/auth1.svg'),
+                text: S.of(context).welcome,
               ),
+              OpacityWave(height: screenHeight * 0.407)
             ],
           ),
           Container(

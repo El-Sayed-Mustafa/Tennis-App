@@ -50,6 +50,16 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Welcome`
+  String get welcome {
+    return Intl.message(
+      'Welcome',
+      name: 'welcome',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Sign in to your profile`
   String get sign_in_to_profile {
     return Intl.message(
@@ -95,6 +105,16 @@ class S {
     return Intl.message(
       'Forgot your password?',
       name: 'forgot_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forgot your\npassword?`
+  String get forgot_password_header {
+    return Intl.message(
+      'Forgot your\npassword?',
+      name: 'forgot_password_header',
       desc: '',
       args: [],
     );
