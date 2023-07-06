@@ -78,7 +78,7 @@ class ChooseClub extends StatelessWidget {
                   const CardDetails(
                     svgPath: 'assets/images/matches.svg',
                     value: '100',
-                    label: 'Total Members',
+                    label: 'Match Played ',
                     color: Color(0x84ED6663),
                   ),
                 ],
@@ -95,7 +95,7 @@ class ChooseClub extends StatelessWidget {
                   const CardDetails(
                     svgPath: 'assets/images/wins.svg',
                     value: '90',
-                    label: 'Total Members',
+                    label: 'Total Wins',
                     color: Color(0x8294D3D3),
                   ),
                   SizedBox(
@@ -104,7 +104,7 @@ class ChooseClub extends StatelessWidget {
                   const CardDetails(
                     svgPath: 'assets/images/courts.svg',
                     value: '3',
-                    label: 'Total Members',
+                    label: 'Court owns',
                     color: Color(0x8294B6D3),
                   ),
                 ],

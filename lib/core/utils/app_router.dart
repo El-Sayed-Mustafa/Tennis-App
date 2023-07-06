@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Auth/screens/auth_screen.dart';
+import 'package:tennis_app/Featured/create_profile/create_profile_screen.dart';
 import 'package:tennis_app/Featured/home/home.dart';
 import 'package:tennis_app/Featured/onboarding/onboarding_screen.dart';
 import 'package:tennis_app/Featured/splash/splash_screen.dart';
@@ -15,7 +16,7 @@ abstract class AppRouter {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return const ChooseClub();
+          return const CreateProfile();
         },
         routes: <RouteBase>[
           GoRoute(
@@ -52,6 +53,12 @@ abstract class AppRouter {
             path: 'chooseClub',
             builder: (BuildContext context, GoRouterState state) {
               return const ChooseClub();
+            },
+          ),
+          GoRoute(
+            path: 'createProfile',
+            builder: (BuildContext context, GoRouterState state) {
+              return const CreateProfile();
             },
           ),
         ],
