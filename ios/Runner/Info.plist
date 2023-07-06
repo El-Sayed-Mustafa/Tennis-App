@@ -88,5 +88,13 @@
 	<string>cc08cb163e01498bc3cca4dc6c0afc91</string>
 	<key>FacebookDisplayName</key>
 	<string>tennis-App</string>
+
+	<key>NSCameraUsageDescription </key>
+	<string>To take user profile image</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To choose user profile image</string>
+	<key>NSMicrophoneUsageDescription </key>
+	<string>used to capure audio for image picker plugin</string>
+	
 </dict>
 </plist>

@@ -44,6 +44,7 @@ dependencies:
   fluttertoast: ^8.2.2
   go_router: null
   google_sign_in: ^6.1.4
+  image_picker: ^1.0.0
   shared_preferences: null
   smooth_page_indicator: ^1.1.0
 
