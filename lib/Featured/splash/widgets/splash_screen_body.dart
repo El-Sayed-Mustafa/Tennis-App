@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tennis_app/core/utils/assets.dart';
 
@@ -35,13 +36,13 @@ class _SplashScreenBodyState extends State<SplashScreenBody>
     final prefs = await SharedPreferences.getInstance();
     final showHome = prefs.getBool('showHome') ?? false;
 
-    // if (showHome) {
-    //   // Navigate to the home view
-    //   GoRouter.of(context).push('/home');
-    // } else {
-    //   // Navigate to the onboarding screen
-    //   GoRouter.of(context).push('/languages');
-    // }
+    if (showHome) {
+      // Navigate to the home view
+      GoRouter.of(context).push('/home');
+    } else {
+      // Navigate to the onboarding screen
+      GoRouter.of(context).push('/languages');
+    }
   }
 
   @override

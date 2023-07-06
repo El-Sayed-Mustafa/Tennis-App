@@ -20,7 +20,6 @@ class _OnboardingState extends State<Onboarding> {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
@@ -70,7 +69,7 @@ class _OnboardingState extends State<Onboarding> {
           } else {
             final prefs = await SharedPreferences.getInstance();
             prefs.setBool('showHome', true);
-            GoRouter.of(context).push('/home');
+            GoRouter.of(context).push('/auth');
           }
         },
       ),

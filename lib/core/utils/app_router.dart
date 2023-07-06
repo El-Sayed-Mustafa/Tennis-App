@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Auth/screens/auth_screen.dart';
 import 'package:tennis_app/Featured/home/home.dart';
 import 'package:tennis_app/Featured/onboarding/onboarding_screen.dart';
+import 'package:tennis_app/Featured/splash/splash_screen.dart';
 
 import '../../Auth/screens/forget_password.dart';
 import '../../Featured/localization/choose_language.dart';
@@ -13,7 +14,7 @@ abstract class AppRouter {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return const AuthScreen();
+          return const SplashScreen();
         },
         routes: <RouteBase>[
           GoRoute(

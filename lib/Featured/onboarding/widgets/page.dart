@@ -3,7 +3,6 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tennis_app/Featured/onboarding/widgets/skip_button.dart';
 import 'package:tennis_app/Featured/onboarding/widgets/wave_clipper.dart';
 
-
 class PageViewScreen extends StatefulWidget {
   const PageViewScreen({
     Key? key,
@@ -26,9 +25,7 @@ class _PageViewScreenState extends State<PageViewScreen> {
   // Receive the PageController as a parameter
   @override
   Widget build(BuildContext context) {
-    const count = 4;
     final screenHeight = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       body: SingleChildScrollView(
