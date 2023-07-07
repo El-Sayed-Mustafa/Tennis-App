@@ -33,7 +33,7 @@ class InputDateField extends StatelessWidget {
           ),
           Container(
             width: screenWidth * .8,
-            height: 42,
+            height: 44,
             decoration: ShapeDecoration(
               color: Colors.white,
               shape: RoundedRectangleBorder(
@@ -42,7 +42,7 @@ class InputDateField extends StatelessWidget {
               ),
             ),
             child: Padding(
-              padding: const EdgeInsets.only(left: 24, right: 24, bottom: 6),
+              padding: const EdgeInsets.only(left: 24, right: 24, bottom: 8),
               child: TextFormField(
                 decoration: InputDecoration(
                   border: InputBorder.none,

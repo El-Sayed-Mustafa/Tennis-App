@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:tennis_app/Featured/create_profile/widgets/app_bar_wave.dart';
 import 'package:tennis_app/Featured/create_profile/widgets/gender_selection.dart';
 import 'package:tennis_app/Featured/create_profile/widgets/input_date.dart';
+import 'package:tennis_app/Featured/create_profile/widgets/input_time.dart';
 import 'package:tennis_app/Featured/create_profile/widgets/profile_image.dart';
 
 import '../../core/utils/widgets/text_field.dart';
@@ -12,7 +12,6 @@ class CreateProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
@@ -49,7 +48,12 @@ class CreateProfile extends StatelessWidget {
               InputDateField(
                 hint: 'Type your age here',
                 text: 'Age',
-              )
+              ),
+              SizedBox(height: screenHeight * .025),
+              const InputTimeField(
+                hint: 'Type your Preferred Playing time here',
+                text: 'Preferred Playing time  ',
+              ),
             ],
           ),
         ),
