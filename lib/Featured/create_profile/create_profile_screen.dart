@@ -9,6 +9,7 @@ import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
 import '../../core/utils/widgets/text_field.dart';
 import 'cubit/Gender_Cubit.dart';
+import 'cubit/player_type_cubit.dart';
 import 'cubit/time_cubit.dart';
 import 'widgets/player_type.dart';
 
@@ -66,7 +67,10 @@ class CreateProfile extends StatelessWidget {
                 ),
               ),
               SizedBox(height: screenHeight * .025),
-              const PlayerType(),
+              BlocProvider(
+                create: (context) => PlayerTypeCubit(),
+                child: const PlayerType(),
+              ),
               SizedBox(height: screenHeight * .01),
               BottomSheetContainer(
                 buttonText: "Create",
