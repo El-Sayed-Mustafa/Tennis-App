@@ -13,6 +13,7 @@ class InputTextWithHint extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: screenWidth * .1),
@@ -33,7 +34,7 @@ class InputTextWithHint extends StatelessWidget {
           ),
           Container(
             width: screenWidth * .8,
-            height: 44,
+            height: screenHeight * .05,
             decoration: ShapeDecoration(
               color: Colors.white,
               shape: RoundedRectangleBorder(
