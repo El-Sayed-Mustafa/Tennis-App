@@ -50,6 +50,226 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `You have been invited to join\nthis club through an\ninvitation link.`
+  String get invitationText {
+    return Intl.message(
+      'You have been invited to join\nthis club through an\ninvitation link.',
+      name: 'invitationText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Join Club`
+  String get joinClub {
+    return Intl.message(
+      'Join Club',
+      name: 'joinClub',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Members`
+  String get totalMembers {
+    return Intl.message(
+      'Total Members',
+      name: 'totalMembers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Match Played`
+  String get matchPlayed {
+    return Intl.message(
+      'Match Played',
+      name: 'matchPlayed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Wins`
+  String get totalWins {
+    return Intl.message(
+      'Total Wins',
+      name: 'totalWins',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Courts own`
+  String get courtsOwn {
+    return Intl.message(
+      'Courts own',
+      name: 'courtsOwn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Join`
+  String get join {
+    return Intl.message(
+      'Join',
+      name: 'join',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create\nYour Profile`
+  String get createProfile {
+    return Intl.message(
+      'Create\nYour Profile',
+      name: 'createProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Male`
+  String get male {
+    return Intl.message(
+      'Male',
+      name: 'male',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Female`
+  String get female {
+    return Intl.message(
+      'Female',
+      name: 'female',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Singles`
+  String get singles {
+    return Intl.message(
+      'Singles',
+      name: 'singles',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Doubles`
+  String get doubles {
+    return Intl.message(
+      'Doubles',
+      name: 'doubles',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set Profile Picture`
+  String get setProfilePicture {
+    return Intl.message(
+      'Set Profile Picture',
+      name: 'setProfilePicture',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type your name here`
+  String get typeYourName {
+    return Intl.message(
+      'Type your name here',
+      name: 'typeYourName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Player Name`
+  String get playerName {
+    return Intl.message(
+      'Player Name',
+      name: 'playerName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type your phone number here`
+  String get typeYourPhoneNumber {
+    return Intl.message(
+      'Type your phone number here',
+      name: 'typeYourPhoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone Number`
+  String get phoneNumber {
+    return Intl.message(
+      'Phone Number',
+      name: 'phoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type your age here`
+  String get typeYourAge {
+    return Intl.message(
+      'Type your age here',
+      name: 'typeYourAge',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Age`
+  String get age {
+    return Intl.message(
+      'Age',
+      name: 'age',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type your Preferred Playing time here`
+  String get typeYourPreferredPlayingTime {
+    return Intl.message(
+      'Type your Preferred Playing time here',
+      name: 'typeYourPreferredPlayingTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Preferred Playing time`
+  String get preferredPlayingTime {
+    return Intl.message(
+      'Preferred Playing time',
+      name: 'preferredPlayingTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create`
+  String get create {
+    return Intl.message(
+      'Create',
+      name: 'create',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Welcome`
   String get welcome {
     return Intl.message(

@@ -24,8 +24,14 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account_already_exists": MessageLookupByLibrary.simpleMessage(
             "The account already exists for that email."),
+        "age": MessageLookupByLibrary.simpleMessage("Age"),
+        "courtsOwn": MessageLookupByLibrary.simpleMessage("Courts own"),
+        "create": MessageLookupByLibrary.simpleMessage("Create"),
+        "createProfile":
+            MessageLookupByLibrary.simpleMessage("Create\nYour Profile"),
         "create_basic_profile":
             MessageLookupByLibrary.simpleMessage("Create your Basic Profile"),
+        "doubles": MessageLookupByLibrary.simpleMessage("Doubles"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "email_address": MessageLookupByLibrary.simpleMessage("Email Address"),
         "email_verification_sent":
@@ -34,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "failed_send_password_reset_email":
             MessageLookupByLibrary.simpleMessage(
                 "Failed to send password reset email"),
+        "female": MessageLookupByLibrary.simpleMessage("Female"),
         "forgot_password":
             MessageLookupByLibrary.simpleMessage("Forgot your password?"),
         "forgot_password_header":
@@ -45,6 +52,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Google Sign-In: No user selected"),
         "google_signin_unexpected_error": MessageLookupByLibrary.simpleMessage(
             "Google Sign-In: Unexpected error occurred"),
+        "invitationText": MessageLookupByLibrary.simpleMessage(
+            "You have been invited to join\nthis club through an\ninvitation link."),
+        "join": MessageLookupByLibrary.simpleMessage("Join"),
+        "joinClub": MessageLookupByLibrary.simpleMessage("Join Club"),
+        "male": MessageLookupByLibrary.simpleMessage("Male"),
+        "matchPlayed": MessageLookupByLibrary.simpleMessage("Match Played"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "onboarding_detail1": MessageLookupByLibrary.simpleMessage(
             "Each club member can create an\nindividual profile and include\ninformation about their strength \n and playing type."),
@@ -65,15 +78,32 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "password_reset_email_sent":
             MessageLookupByLibrary.simpleMessage("Password reset email sent"),
+        "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
+        "playerName": MessageLookupByLibrary.simpleMessage("Player Name"),
+        "preferredPlayingTime":
+            MessageLookupByLibrary.simpleMessage("Preferred Playing time"),
         "reset_password":
             MessageLookupByLibrary.simpleMessage("Reset Password"),
+        "setProfilePicture":
+            MessageLookupByLibrary.simpleMessage("Set Profile Picture"),
         "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "sign_in": MessageLookupByLibrary.simpleMessage("SIGN IN"),
         "sign_in_to_profile":
             MessageLookupByLibrary.simpleMessage("Sign in to your profile"),
         "sign_up": MessageLookupByLibrary.simpleMessage("SIGN UP"),
+        "singles": MessageLookupByLibrary.simpleMessage("Singles"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+        "totalMembers": MessageLookupByLibrary.simpleMessage("Total Members"),
+        "totalWins": MessageLookupByLibrary.simpleMessage("Total Wins"),
+        "typeYourAge":
+            MessageLookupByLibrary.simpleMessage("Type your age here"),
+        "typeYourName":
+            MessageLookupByLibrary.simpleMessage("Type your name here"),
+        "typeYourPhoneNumber":
+            MessageLookupByLibrary.simpleMessage("Type your phone number here"),
+        "typeYourPreferredPlayingTime": MessageLookupByLibrary.simpleMessage(
+            "Type your Preferred Playing time here"),
         "weak_password": MessageLookupByLibrary.simpleMessage(
             "The password provided is too weak."),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome")

@@ -16,7 +16,7 @@ abstract class AppRouter {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return const CreateProfile();
+          return const AuthScreen();
         },
         routes: <RouteBase>[
           GoRoute(

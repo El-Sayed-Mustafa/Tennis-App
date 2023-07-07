@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tennis_app/Featured/choose_club/widgets/card_details.dart';
@@ -7,6 +6,7 @@ import 'package:tennis_app/Featured/choose_club/widgets/wave_clipper_widget.dart
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
 import '../../core/utils/widgets/opacity_wave.dart';
+import '../../generated/l10n.dart';
 
 class ChooseClub extends StatelessWidget {
   const ChooseClub({super.key});
@@ -24,7 +24,7 @@ class ChooseClub extends StatelessWidget {
                 WaveClipperScreenChooseClub(
                   widgetHeight: screenHeight * .4,
                   svgImage: SvgPicture.asset('assets/images/choose-club.svg'),
-                  text: "Join Club",
+                  text: S.of(context).joinClub,
                 ),
                 OpacityWave(height: screenHeight * 0.407),
               ],
@@ -66,20 +66,20 @@ class ChooseClub extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const CardDetails(
+                  CardDetails(
                     svgPath: 'assets/images/members.svg',
                     value: '56',
-                    label: 'Total Members',
-                    color: Color(0x87FFA372),
+                    label: S.of(context).totalMembers,
+                    color: const Color(0x87FFA372),
                   ),
                   SizedBox(
                     width: screenWidth * .08,
                   ),
-                  const CardDetails(
+                  CardDetails(
                     svgPath: 'assets/images/matches.svg',
                     value: '100',
-                    label: 'Match Played ',
-                    color: Color(0x84ED6663),
+                    label: S.of(context).matchPlayed,
+                    color: const Color(0x84ED6663),
                   ),
                 ],
               ),
@@ -92,26 +92,26 @@ class ChooseClub extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const CardDetails(
+                  CardDetails(
                     svgPath: 'assets/images/wins.svg',
                     value: '90',
-                    label: 'Total Wins',
-                    color: Color(0x8294D3D3),
+                    label: S.of(context).totalWins,
+                    color: const Color(0x8294D3D3),
                   ),
                   SizedBox(
                     width: screenWidth * .08,
                   ),
-                  const CardDetails(
+                  CardDetails(
                     svgPath: 'assets/images/courts.svg',
                     value: '3',
-                    label: 'Court owns',
-                    color: Color(0x8294B6D3),
+                    label: S.of(context).courtsOwn,
+                    color: const Color(0x8294B6D3),
                   ),
                 ],
               ),
             ),
             BottomSheetContainer(
-              buttonText: 'Join',
+              buttonText: S.of(context).join,
               onPressed: () {},
               color: Colors.white,
             )

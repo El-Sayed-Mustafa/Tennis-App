@@ -8,6 +8,7 @@ import 'package:tennis_app/Featured/create_profile/widgets/profile_image.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
 import '../../core/utils/widgets/text_field.dart';
+import '../../generated/l10n.dart';
 import 'cubit/Gender_Cubit.dart';
 import 'cubit/player_type_cubit.dart';
 import 'cubit/time_cubit.dart';
@@ -29,9 +30,9 @@ class CreateProfile extends StatelessWidget {
               const AppBarWave(),
               const ProfileImage(),
               SizedBox(height: screenHeight * .01),
-              const Text(
-                'Set Profile Picture',
-                style: TextStyle(
+              Text(
+                S.of(context).setProfilePicture,
+                style: const TextStyle(
                   color: Colors.black,
                   fontSize: 14,
                   fontFamily: 'Poppins',
@@ -44,26 +45,26 @@ class CreateProfile extends StatelessWidget {
                 child: const GenderSelection(),
               ),
               SizedBox(height: screenHeight * .03),
-              const InputTextWithHint(
-                hint: 'Type your name here',
-                text: 'Player Name',
+              InputTextWithHint(
+                hint: S.of(context).typeYourName,
+                text: S.of(context).playerName,
               ),
               SizedBox(height: screenHeight * .025),
-              const InputTextWithHint(
-                hint: 'Type your phone number here',
-                text: 'Phone Number',
+              InputTextWithHint(
+                hint: S.of(context).typeYourPhoneNumber,
+                text: S.of(context).phoneNumber,
               ),
               SizedBox(height: screenHeight * .025),
-              const InputDateField(
-                hint: 'Type your age here',
-                text: 'Age',
+              InputDateField(
+                hint: S.of(context).typeYourAge,
+                text: S.of(context).age,
               ),
               SizedBox(height: screenHeight * .025),
               BlocProvider(
                 create: (context) => TimeCubit(),
-                child: const InputTimeField(
-                  hint: 'Type your Preferred Playing time here',
-                  text: 'Preferred Playing time  ',
+                child: InputTimeField(
+                  hint: S.of(context).typeYourPreferredPlayingTime,
+                  text: S.of(context).preferredPlayingTime,
                 ),
               ),
               SizedBox(height: screenHeight * .025),
@@ -73,7 +74,7 @@ class CreateProfile extends StatelessWidget {
               ),
               SizedBox(height: screenHeight * .01),
               BottomSheetContainer(
-                buttonText: "Create",
+                buttonText: S.of(context).create,
                 onPressed: () {},
                 color: const Color(0xFFF8F8F8),
               )
