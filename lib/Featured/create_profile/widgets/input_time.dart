@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class InputTimeField extends StatefulWidget {
+import '../cubit/time_cubit.dart';
+
+class InputTimeField extends StatelessWidget {
   final String text;
   final String hint;
 
@@ -11,15 +14,9 @@ class InputTimeField extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _InputTimeFieldState createState() => _InputTimeFieldState();
-}
-
-class _InputTimeFieldState extends State<InputTimeField> {
-  TimeOfDay? selectedTime;
-
-  @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+    final timeCubit = context.watch<TimeCubit>();
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: screenWidth * .1),
@@ -29,7 +26,7 @@ class _InputTimeFieldState extends State<InputTimeField> {
           Padding(
             padding: EdgeInsets.only(bottom: 2.0, left: screenWidth * .055),
             child: Text(
-              widget.text,
+              text,
               style: const TextStyle(
                 color: Color(0xFF525252),
                 fontSize: 14,
@@ -53,11 +50,11 @@ class _InputTimeFieldState extends State<InputTimeField> {
               child: TextFormField(
                 readOnly: true,
                 onTap: () {
-                  _selectTime(context);
+                  timeCubit.selectTime(context);
                 },
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintText: widget.hint,
+                  hintText: hint,
                   hintStyle: const TextStyle(
                     color: Color(0xFFA8A8A8),
                     fontSize: 13,
@@ -66,8 +63,9 @@ class _InputTimeFieldState extends State<InputTimeField> {
                   ),
                 ),
                 controller: TextEditingController(
-                  text:
-                      selectedTime != null ? selectedTime!.format(context) : '',
+                  text: timeCubit.state != null
+                      ? timeCubit.state!.format(context)
+                      : '',
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -81,18 +79,5 @@ class _InputTimeFieldState extends State<InputTimeField> {
         ],
       ),
     );
-  }
-
-  Future<void> _selectTime(BuildContext context) async {
-    final TimeOfDay? pickedTime = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now(),
-    );
-
-    if (pickedTime != null) {
-      setState(() {
-        selectedTime = pickedTime;
-      });
-    }
   }
 }
