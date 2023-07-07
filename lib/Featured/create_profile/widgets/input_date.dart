@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class InputTextWithHint extends StatelessWidget {
+class InputDateField extends StatelessWidget {
   final String text;
   final String hint;
 
-  const InputTextWithHint({
+  const InputDateField({
     Key? key,
     required this.text,
     required this.hint,
@@ -43,17 +43,28 @@ class InputTextWithHint extends StatelessWidget {
             ),
             child: Padding(
               padding: const EdgeInsets.only(left: 24, right: 24, bottom: 6),
-              child: TextField(
+              child: TextFormField(
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: hint,
-                  hintStyle: TextStyle(
+                  hintStyle: const TextStyle(
                     color: Color(0xFFA8A8A8),
                     fontSize: 13,
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w400,
                   ),
+                  suffixIcon: IconButton(
+                    icon: const Icon(Icons.calendar_month_outlined),
+                    onPressed: () {},
+                  ),
                 ),
+                keyboardType: TextInputType.datetime,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a valid date';
+                  }
+                  return null;
+                },
               ),
             ),
           ),
