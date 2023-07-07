@@ -113,6 +113,7 @@ class ChooseClub extends StatelessWidget {
             BottomSheetContainer(
               buttonText: 'Join',
               onPressed: () {},
+              color: Colors.white,
             )
           ],
         ),

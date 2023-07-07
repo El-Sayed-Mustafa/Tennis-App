@@ -1,51 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class GenderSelection extends StatefulWidget {
-  const GenderSelection({super.key});
+import '../cubit/Gender_Cubit.dart';
 
-  @override
-  _GenderSelectionState createState() => _GenderSelectionState();
-}
-
-class _GenderSelectionState extends State<GenderSelection> {
-  String selectedGender = 'Male'; // Initially no gender selected
+class GenderSelection extends StatelessWidget {
+  const GenderSelection({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
-    return Container(
-      width: screenWidth * 0.6,
-      height: screenHeight * 0.07,
-      decoration: ShapeDecoration(
-        color: Color(0x1EFFA372),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(100),
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-              height: screenHeight * .05, child: _buildGenderButton('Male')),
-          SizedBox(width: screenWidth * 0.04),
-          SizedBox(
-            height: screenHeight * .05,
-            child: _buildGenderButton('Female'),
-          )
-        ],
-      ),
+    return BlocBuilder<GenderCubit, String>(
+      builder: (context, selectedGender) {
+        return Container(
+          width: screenWidth * 0.6,
+          height: screenHeight * 0.06,
+          decoration: ShapeDecoration(
+            color: Color(0x1EFFA372),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(100),
+            ),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: screenHeight * .045,
+                child: _buildGenderButton(context, 'Male', selectedGender),
+              ),
+              SizedBox(width: screenWidth * 0.05),
+              SizedBox(
+                height: screenHeight * .045,
+                child: _buildGenderButton(context, 'Female', selectedGender),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
-  Widget _buildGenderButton(String gender) {
+  Widget _buildGenderButton(
+    BuildContext context,
+    String gender,
+    String selectedGender,
+  ) {
     final isSelected = selectedGender == gender;
+    final genderCubit = context.read<GenderCubit>();
+
     return GestureDetector(
       onTap: () {
-        setState(() {
-          selectedGender = gender;
-        });
+        genderCubit.selectGender(gender);
       },
       child: AnimatedContainer(
         duration: Duration(milliseconds: 300),
@@ -54,6 +60,15 @@ class _GenderSelectionState extends State<GenderSelection> {
         decoration: BoxDecoration(
           color: isSelected ? Colors.white : null,
           borderRadius: BorderRadius.circular(50),
+          boxShadow: isSelected
+              ? [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    blurRadius: 4,
+                    offset: Offset(0, 2),
+                  ),
+                ]
+              : null,
         ),
         child: Center(
           child: Text(

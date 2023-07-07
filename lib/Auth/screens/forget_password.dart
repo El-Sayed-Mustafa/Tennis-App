@@ -120,6 +120,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   onPressed: () {
                     passwordRest();
                   },
+                  color: Colors.white,
                 )
               ],
             ),

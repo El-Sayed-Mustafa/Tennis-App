@@ -132,6 +132,7 @@ class SignUp extends StatelessWidget {
                   onPressed: () {
                     signUserUp();
                   },
+                  color: Colors.white,
                 )
               ],
             ),
