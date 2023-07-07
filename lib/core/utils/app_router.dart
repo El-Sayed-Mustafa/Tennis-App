@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Auth/screens/auth_screen.dart';
 import 'package:tennis_app/Featured/create_profile/create_profile_screen.dart';
-import 'package:tennis_app/Featured/home/home.dart';
+import 'package:tennis_app/Featured/navigation_bar/cubit/navigation_cubit.dart';
+import 'package:tennis_app/Featured/navigation_bar/navigation_bar_screen.dart';
 import 'package:tennis_app/Featured/onboarding/onboarding_screen.dart';
 import 'package:tennis_app/Featured/splash/splash_screen.dart';
 
@@ -16,13 +18,16 @@ abstract class AppRouter {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return const AuthScreen();
+          return BlocProvider(
+            create: (context) => NavigationCubit(),
+            child: NavigationBarScreen(),
+          );
         },
         routes: <RouteBase>[
           GoRoute(
             path: 'home',
             builder: (BuildContext context, GoRouterState state) {
-              return const HomeScreen();
+              return const NavigationBarScreen();
             },
           ),
           GoRoute(

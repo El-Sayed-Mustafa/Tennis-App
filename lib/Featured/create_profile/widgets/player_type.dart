@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../generated/l10n.dart';
 import '../cubit/player_type_cubit.dart';
 
 class PlayerType extends StatelessWidget {
@@ -29,13 +30,15 @@ class PlayerType extends StatelessWidget {
             SizedBox(
               height: screenHeight * .05,
               width: screenWidth * .35,
-              child: _buildGenderButton(context, 'Singles', genderCubit.state),
+              child: _buildGenderButton(
+                  context, S.of(context).singles, genderCubit.state),
             ),
             Spacer(),
             SizedBox(
               height: screenHeight * .05,
               width: screenWidth * .35,
-              child: _buildGenderButton(context, 'Doubles', genderCubit.state),
+              child: _buildGenderButton(
+                  context, S.of(context).doubles, genderCubit.state),
             ),
           ],
         ),

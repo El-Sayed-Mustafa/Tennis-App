@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../generated/l10n.dart';
 import '../cubit/Gender_Cubit.dart';
 
 class GenderSelection extends StatelessWidget {
@@ -27,12 +28,14 @@ class GenderSelection extends StatelessWidget {
             children: [
               SizedBox(
                 height: screenHeight * .045,
-                child: _buildGenderButton(context, 'Male', selectedGender),
+                child: _buildGenderButton(
+                    context, S.of(context).male, selectedGender),
               ),
               SizedBox(width: screenWidth * 0.05),
               SizedBox(
                 height: screenHeight * .045,
-                child: _buildGenderButton(context, 'Female', selectedGender),
+                child: _buildGenderButton(
+                    context, S.of(context).female, selectedGender),
               ),
             ],
           ),
