@@ -9,9 +9,27 @@ class CreateProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Column(
-        children: [AppBarWave(), ProfileImage(), GenderSelection()],
+        children: [
+          const AppBarWave(),
+          const ProfileImage(),
+          SizedBox(height: screenHeight * .01),
+          const Text(
+            'Set Profile Picture',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 14,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          SizedBox(height: screenHeight * .03),
+          const GenderSelection()
+        ],
       ),
     );
   }

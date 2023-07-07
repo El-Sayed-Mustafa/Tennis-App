@@ -59,9 +59,10 @@ class _GenderSelectionState extends State<GenderSelection> {
           child: Text(
             gender,
             style: TextStyle(
-              fontSize: isSelected ? 20 : 18,
+              fontFamily: 'Poppins',
+              fontSize: isSelected ? 18 : 15,
               fontWeight: FontWeight.w500,
-              color: isSelected ? Colors.black : Colors.grey[600],
+              color: isSelected ? Color(0xFF00344E) : Colors.grey[600],
             ),
           ),
         ),
