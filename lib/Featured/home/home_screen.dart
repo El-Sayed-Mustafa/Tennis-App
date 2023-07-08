@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:tennis_app/Featured/home/widgets/CarouselSlider.dart';
 import 'package:tennis_app/core/utils/widgets/app_bar_wave.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key});
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +30,8 @@ class HomeScreen extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
+            SizedBox(height: 20),
+            const SizedBox(height: 300, child: CarouselSliderWidget()),
           ],
         ),
       ),
