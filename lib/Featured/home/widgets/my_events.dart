@@ -19,22 +19,26 @@ class _MyEventsState extends State<MyEvents> {
     final List<Widget> carouselItems = [
       CarouselItem(
         selected: selectedPageIndex == 0,
+        screenWidth: screenWidth,
       ),
       CarouselItem(
         selected: selectedPageIndex == 1,
+        screenWidth: screenWidth,
       ),
       CarouselItem(
         selected: selectedPageIndex == 2,
+        screenWidth: screenWidth,
       ),
       CarouselItem(
         selected: selectedPageIndex == 3,
+        screenWidth: screenWidth,
       ),
     ];
     return Column(
       children: [
         CarouselSlider(
           options: CarouselOptions(
-            height: screenHeight * 0.254,
+            height: screenHeight * 0.265,
             enlargeCenterPage: true,
             enableInfiniteScroll: false,
             viewportFraction: 0.5,
@@ -79,14 +83,20 @@ class _MyEventsState extends State<MyEvents> {
 
 class CarouselItem extends StatelessWidget {
   final bool selected;
+  final double screenWidth;
 
-  const CarouselItem({Key? key, required this.selected}) : super(key: key);
+  const CarouselItem({
+    Key? key,
+    required this.selected,
+    required this.screenWidth,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
+    final double screenHeight = MediaQuery.of(context).size.height;
     final double itemWidth = screenWidth * 0.6;
-    final double itemHeight = itemWidth * 1.2;
+    final double itemHeight = screenHeight * .3;
 
     final double scaleFactor = selected ? 1.0 : 0.72;
 
@@ -94,70 +104,65 @@ class CarouselItem extends StatelessWidget {
         selected ? const Color(0xFFFCCBB1) : const Color(0xFFF3ADAB);
 
     return Container(
-      width: itemWidth * scaleFactor,
-      height: itemHeight * scaleFactor,
+      width: 500,
       decoration: ShapeDecoration(
         color: backgroundColor,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(31),
+          borderRadius: BorderRadius.circular(screenWidth * 0.079),
         ),
       ),
-      child: Padding(
-        padding: EdgeInsets.only(top: itemWidth * .035),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: itemWidth * .03),
-            CircleAvatar(
-              backgroundImage:
-                  const AssetImage('assets/images/profile-image.jpg'),
-              radius: (itemWidth * 0.15) * scaleFactor,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CircleAvatar(
+            backgroundImage:
+                const AssetImage('assets/images/profile-image.jpg'),
+            radius: (itemHeight * 0.15) * scaleFactor,
+          ),
+          SizedBox(height: itemHeight * 0.03),
+          Text(
+            'FC Tournament',
+            style: TextStyle(
+              color: const Color(0xFF2A2A2A),
+              fontSize: itemHeight * 0.06 * scaleFactor,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w600,
             ),
-            SizedBox(height: itemWidth * .03),
-            Text(
-              'FC Tournament',
-              style: TextStyle(
-                color: const Color(0xFF2A2A2A),
-                fontSize: 14 * scaleFactor,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w600,
+          ),
+          SizedBox(height: itemHeight * 0.03),
+          Text(
+            '12:00 PM\n12/04/2023',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: const Color(0xFF00344E),
+              fontSize: itemHeight * 0.051 * scaleFactor,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          SizedBox(height: itemHeight * 0.03),
+          Container(
+            width: itemWidth * 0.55 * scaleFactor,
+            height: itemHeight * 0.125 * scaleFactor,
+            decoration: ShapeDecoration(
+              color: const Color(0xFF1B262C),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(screenWidth * 0.089),
               ),
             ),
-            SizedBox(height: itemWidth * .03),
-            Text(
-              '12:00 PM\n12/04/2023',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: const Color(0xFF00344E),
-                fontSize: 12 * scaleFactor,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            SizedBox(height: itemWidth * .03),
-            Container(
-              width: itemWidth * 0.55 * scaleFactor,
-              height: itemHeight * 0.125 * scaleFactor,
-              decoration: ShapeDecoration(
-                color: const Color(0xFF1B262C),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100),
-                ),
-              ),
-              child: Center(
-                child: Text(
-                  'Register',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14 * scaleFactor,
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w400,
-                  ),
+            child: Center(
+              child: Text(
+                'Register',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: itemHeight * 0.056 * scaleFactor,
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w400,
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -6,10 +6,17 @@ import 'package:tennis_app/Featured/home/widgets/my_events.dart';
 import 'package:tennis_app/core/utils/widgets/app_bar_wave.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({Key? key});
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    final sectionTitleSize = screenWidth * 0.052;
+
+    final spacing = screenHeight * 0.015;
+
     return Container(
       color: const Color(0xFFF8F8F8),
       alignment: Alignment.topCenter, // Aligns the column to the top
@@ -24,32 +31,35 @@ class HomeScreen extends StatelessWidget {
               text: 'Home',
               suffixIconPath: 'assets/images/app-bar-icon.svg',
             ),
-            const Text(
+            SizedBox(
+              height: spacing,
+            ),
+            Text(
               'Your Upcoming Events',
               style: TextStyle(
                 color: Color(0xFF313131),
-                fontSize: 20,
+                fontSize: sectionTitleSize,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w500,
               ),
             ),
-            const SizedBox(height: 10),
-            const MyEvents(),
-            const SizedBox(height: 20),
+            SizedBox(height: spacing),
+            MyEvents(),
+            SizedBox(height: spacing * 2),
             Text(
               'Available Courts',
               style: TextStyle(
                 color: Color(0xFF313131),
-                fontSize: 20,
+                fontSize: sectionTitleSize,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w500,
               ),
             ),
-            const SizedBox(height: 10),
-            const AvailableCourts(),
-            const SizedBox(height: 20),
+            SizedBox(height: spacing),
+            AvailableCourts(),
+            SizedBox(height: spacing * 2),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -66,9 +76,9 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 15),
+            SizedBox(height: spacing),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -85,6 +95,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
+            SizedBox(height: spacing * 2),
           ],
         ),
       ),
