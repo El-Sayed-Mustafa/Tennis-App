@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-class CarouselSliderWidget extends StatefulWidget {
-  const CarouselSliderWidget({Key? key}) : super(key: key);
+class MyEvents extends StatefulWidget {
+  const MyEvents({Key? key}) : super(key: key);
 
   @override
-  _CarouselSliderWidgetState createState() => _CarouselSliderWidgetState();
+  _MyEventsState createState() => _MyEventsState();
 }
 
-class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
+class _MyEventsState extends State<MyEvents> {
   int selectedPageIndex = 0;
   final CarouselController _carouselController = CarouselController();
 
@@ -30,30 +30,27 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
         selected: selectedPageIndex == 3,
       ),
     ];
-    return Scaffold(
-      body: Column(
-        children: [
-          CarouselSlider(
-            options: CarouselOptions(
-              height: screenHeight * 0.254,
-              autoPlay: true,
-              enlargeCenterPage: true,
-              enableInfiniteScroll: false,
-              viewportFraction: 0.5,
-              onPageChanged: (index, _) {
-                setState(() {
-                  selectedPageIndex = index;
-                });
-              },
-            ),
-            carouselController: _carouselController, // Use CarouselController
-            items: carouselItems,
+    return Column(
+      children: [
+        CarouselSlider(
+          options: CarouselOptions(
+            height: screenHeight * 0.254,
+            enlargeCenterPage: true,
+            enableInfiniteScroll: false,
+            viewportFraction: 0.5,
+            onPageChanged: (index, _) {
+              setState(() {
+                selectedPageIndex = index;
+              });
+            },
           ),
-          const SizedBox(height: 15), // Spacer for the smooth page indicator
-          buildPageIndicator(
-              carouselItems.length), // Add the smooth page indicator
-        ],
-      ),
+          carouselController: _carouselController, // Use CarouselController
+          items: carouselItems,
+        ),
+        const SizedBox(height: 10), // Spacer for the smooth page indicator
+        buildPageIndicator(
+            carouselItems.length), // Add the smooth page indicator
+      ],
     );
   }
 
@@ -65,10 +62,10 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
         (index) {
           final bool isSelected = selectedPageIndex == index;
           return AnimatedContainer(
-            duration: Duration(milliseconds: 200),
-            width: isSelected ? 15 : 10,
-            height: isSelected ? 15 : 10,
-            margin: EdgeInsets.symmetric(horizontal: 4),
+            duration: const Duration(milliseconds: 200),
+            width: isSelected ? 11 : 9,
+            height: isSelected ? 11 : 9,
+            margin: const EdgeInsets.symmetric(horizontal: 4),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: isSelected ? Colors.black : Colors.grey,
@@ -120,7 +117,7 @@ class CarouselItem extends StatelessWidget {
             Text(
               'FC Tournament',
               style: TextStyle(
-                color: Color(0xFF2A2A2A),
+                color: const Color(0xFF2A2A2A),
                 fontSize: 14 * scaleFactor,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w600,
@@ -131,7 +128,7 @@ class CarouselItem extends StatelessWidget {
               '12:00 PM\n12/04/2023',
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Color(0xFF00344E),
+                color: const Color(0xFF00344E),
                 fontSize: 12 * scaleFactor,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w500,

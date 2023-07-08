@@ -28,7 +28,7 @@ class NavigationBarScreen extends StatelessWidget {
           ),
           bottomNavigationBar: CurvedNavigationBar(
             index: state,
-            height: 55.0,
+            height: 60.0,
             items: const [
               NavigationBarItem(
                 icon: Icons.home_outlined,
