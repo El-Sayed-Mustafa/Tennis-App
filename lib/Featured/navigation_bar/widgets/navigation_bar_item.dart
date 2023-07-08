@@ -26,7 +26,7 @@ class NavigationBarItem extends StatelessWidget {
       children: [
         Icon(
           icon,
-          size: 25,
+          size: 30,
           color: isSelected ? const Color(0xFF00344E) : Colors.grey,
         ),
         if (!isSelected) Text(label),

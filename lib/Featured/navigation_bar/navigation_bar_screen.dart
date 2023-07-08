@@ -36,7 +36,7 @@ class NavigationBarScreen extends StatelessWidget {
                 index: 0,
               ),
               NavigationBarItem(
-                icon: Icons.computer,
+                icon: Icons.sports_tennis,
                 label: 'Club',
                 index: 1,
               ),
@@ -53,7 +53,7 @@ class NavigationBarScreen extends StatelessWidget {
             ],
             color: Colors.white,
             buttonBackgroundColor: Colors.white,
-            backgroundColor: const Color(0xFF1B262C),
+            backgroundColor: Color.fromARGB(255, 51, 64, 71),
             animationCurve: Curves.easeInOut,
             animationDuration: const Duration(milliseconds: 400),
             onTap: (index) {
