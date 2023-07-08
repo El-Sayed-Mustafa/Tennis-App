@@ -10,6 +10,7 @@ class CarouselSliderWidget extends StatefulWidget {
 
 class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
   int selectedPageIndex = 0;
+  final CarouselController _carouselController = CarouselController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +29,6 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
       CarouselItem(
         selected: selectedPageIndex == 3,
       ),
-      CarouselItem(
-        selected: selectedPageIndex == 4,
-      ),
-      CarouselItem(
-        selected: selectedPageIndex == 5,
-      ),
     ];
     return Scaffold(
       body: Column(
@@ -51,9 +46,35 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
                 });
               },
             ),
+            carouselController: _carouselController, // Use CarouselController
             items: carouselItems,
           ),
+          const SizedBox(height: 15), // Spacer for the smooth page indicator
+          buildPageIndicator(
+              carouselItems.length), // Add the smooth page indicator
         ],
+      ),
+    );
+  }
+
+  Widget buildPageIndicator(int itemCount) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: List.generate(
+        itemCount,
+        (index) {
+          final bool isSelected = selectedPageIndex == index;
+          return AnimatedContainer(
+            duration: Duration(milliseconds: 200),
+            width: isSelected ? 15 : 10,
+            height: isSelected ? 15 : 10,
+            margin: EdgeInsets.symmetric(horizontal: 4),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: isSelected ? Colors.black : Colors.grey,
+            ),
+          );
+        },
       ),
     );
   }
