@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:tennis_app/Featured/club/widgets/text_rich.dart';
+import 'package:tennis_app/Main-Featured/club/widgets/text_rich.dart';
 
 import '../../home/widgets/divider.dart';
 

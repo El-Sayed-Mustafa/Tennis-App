@@ -5,6 +5,7 @@ import 'package:tennis_app/Featured/club/widgets/club_info.dart';
 import 'package:tennis_app/Featured/club/widgets/num_members.dart';
 
 import '../../core/utils/widgets/app_bar_wave.dart';
+import '../home/widgets/button_home.dart';
 
 class ClubScreen extends StatelessWidget {
   const ClubScreen({Key? key}) : super(key: key);
@@ -39,7 +40,7 @@ class ClubScreen extends StatelessWidget {
             SizedBox(
               height: spacing * 2.5,
             ),
-            Text(
+            const Text(
               'Announcements',
               style: TextStyle(
                 color: Color(0xFF313131),
@@ -53,7 +54,7 @@ class ClubScreen extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.only(left: screenWidth * .13, bottom: 4),
-              child: Align(
+              child: const Align(
                 alignment: AlignmentDirectional.centerStart,
                 child: Text(
                   'Club’s Upcoming events',
@@ -66,7 +67,28 @@ class ClubScreen extends StatelessWidget {
                 ),
               ),
             ),
-            ClubEvents(),
+            const ClubEvents(),
+            SizedBox(
+              height: spacing * 2,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  HomeButton(
+                    buttonText: 'Make Offers',
+                    imagePath: 'assets/images/Make-offers.svg',
+                    onPressed: () {},
+                  ),
+                  HomeButton(
+                    buttonText: 'Create Event',
+                    imagePath: 'assets/images/Make-offers.svg',
+                    onPressed: () {},
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

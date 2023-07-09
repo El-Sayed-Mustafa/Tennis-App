@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tennis_app/Featured/localization/widgets/waveClipperScreen.dart';
+import 'package:tennis_app/Main-Featured/Featured/localization/widgets/waveClipperScreen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-import '../../core/utils/assets.dart';
-import '../../core/utils/widgets/custom_button.dart';
-import '../../Localization/generated/l10n.dart';
-import '../../main.dart';
+import '../../../core/utils/assets.dart';
+import '../../../core/utils/widgets/custom_button.dart';
+import '../../../Localization/generated/l10n.dart';
+import '../../../main.dart';
 
 class ChooseLanguage extends StatefulWidget {
   const ChooseLanguage({Key? key}) : super(key: key);

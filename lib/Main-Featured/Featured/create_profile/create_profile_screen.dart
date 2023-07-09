@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tennis_app/Featured/create_profile/widgets/app_bar_wave.dart';
-import 'package:tennis_app/Featured/create_profile/widgets/gender_selection.dart';
-import 'package:tennis_app/Featured/create_profile/widgets/input_date.dart';
-import 'package:tennis_app/Featured/create_profile/widgets/input_time.dart';
-import 'package:tennis_app/Featured/create_profile/widgets/profile_image.dart';
+import 'package:tennis_app/Main-Featured/Featured/create_profile/widgets/app_bar_wave.dart';
+import 'package:tennis_app/Main-Featured/Featured/create_profile/widgets/gender_selection.dart';
+import 'package:tennis_app/Main-Featured/Featured/create_profile/widgets/input_date.dart';
+import 'package:tennis_app/Main-Featured/Featured/create_profile/widgets/input_time.dart';
+import 'package:tennis_app/Main-Featured/Featured/create_profile/widgets/profile_image.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
-import '../../core/utils/widgets/text_field.dart';
-import '../../Localization/generated/l10n.dart';
+import '../../../core/utils/widgets/text_field.dart';
+import '../../../Localization/generated/l10n.dart';
 import 'cubit/Gender_Cubit.dart';
 import 'cubit/player_type_cubit.dart';
 import 'cubit/time_cubit.dart';

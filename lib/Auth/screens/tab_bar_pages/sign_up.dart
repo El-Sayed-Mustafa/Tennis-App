@@ -4,7 +4,7 @@ import 'package:tennis_app/Auth/widgets/solcial_media.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
 
 import '../../../core/utils/widgets/custom_button.dart';
-import '../../../generated/l10n.dart';
+import '../../../Localization/generated/l10n.dart';
 import '../../cubit/auth_cubit.dart';
 import '../../widgets/divider.dart';
 import '../../widgets/input_feild.dart';

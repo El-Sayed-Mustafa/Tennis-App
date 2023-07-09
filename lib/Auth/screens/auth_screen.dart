@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:tennis_app/Auth/screens/tab_bar_pages/sign_in.dart';
 import 'package:tennis_app/Auth/screens/tab_bar_pages/sign_up.dart';
 import 'package:tennis_app/core/utils/widgets/opacity_wave.dart';
-import '../../generated/l10n.dart';
+import '../../Localization/generated/l10n.dart';
 import '../widgets/waveClipperScreen.dart';
 
 class AuthScreen extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../Localization/generated/l10n.dart';
+import '../../../../Localization/generated/l10n.dart';
 import '../cubit/Gender_Cubit.dart';
 
 class GenderSelection extends StatelessWidget {

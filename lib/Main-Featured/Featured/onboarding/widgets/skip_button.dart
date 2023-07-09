@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../Localization/generated/l10n.dart';
+import '../../../../Localization/generated/l10n.dart';
 
 class SkipButton extends StatelessWidget {
   const SkipButton({super.key, required this.controller});

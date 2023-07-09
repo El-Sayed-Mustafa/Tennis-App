@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tennis_app/Featured/onboarding/widgets/page.dart';
+import 'package:tennis_app/Main-Featured/Featured/onboarding/widgets/page.dart';
 
-import '../../core/utils/assets.dart';
-import '../../core/utils/widgets/custom_button.dart';
-import '../../Localization/generated/l10n.dart';
+import '../../../core/utils/assets.dart';
+import '../../../core/utils/widgets/custom_button.dart';
+import '../../../Localization/generated/l10n.dart';
 
 class Onboarding extends StatefulWidget {
   const Onboarding({Key? key}) : super(key: key);

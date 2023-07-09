@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:tennis_app/Featured/choose_club/widgets/card_details.dart';
-import 'package:tennis_app/Featured/choose_club/widgets/static_rating_bar.dart';
-import 'package:tennis_app/Featured/choose_club/widgets/wave_clipper_widget.dart';
+import 'package:tennis_app/Main-Featured/Featured/choose_club/widgets/card_details.dart';
+import 'package:tennis_app/Main-Featured/Featured/choose_club/widgets/static_rating_bar.dart';
+import 'package:tennis_app/Main-Featured/Featured/choose_club/widgets/wave_clipper_widget.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
-import '../../core/utils/widgets/opacity_wave.dart';
-import '../../Localization/generated/l10n.dart';
+import '../../../core/utils/widgets/opacity_wave.dart';
+import '../../../Localization/generated/l10n.dart';
 
 class ChooseClub extends StatelessWidget {
   const ChooseClub({super.key});
