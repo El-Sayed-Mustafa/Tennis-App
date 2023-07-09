@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:tennis_app/Main-Featured/club/widgets/text_rich.dart';
+import 'package:tennis_app/Main-Features/club/widgets/text_rich.dart';
 
 import '../../home/widgets/divider.dart';
 
@@ -19,7 +19,6 @@ class _ClubEventsState extends State<ClubEvents> {
 
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
 
     final double carouselHeight = screenHeight * 0.26;

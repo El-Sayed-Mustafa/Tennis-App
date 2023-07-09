@@ -2,9 +2,8 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tennis_app/Main-Features/Featured/navigation_bar/widgets/navigation_bar_item.dart';
-
-import '../../../Main-Featured/chats/chat_screen.dart';
-import '../../../Main-Featured/club/club_screen.dart';
+import '../../chats/chat_screen.dart';
+import '../../club/club_screen.dart';
 import '../../home/home_screen.dart';
 import '../../menu/menu_screen.dart';
 import 'cubit/navigation_cubit.dart';
