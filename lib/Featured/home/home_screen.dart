@@ -13,13 +13,6 @@ class HomeScreen extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
-    final double itemWidth = screenWidth * 0.9;
-    final double imageHeight = screenHeight * 0.13;
-    final double titleFontSize = screenHeight * 0.031;
-    final double subtitleFontSize = screenHeight * 0.015;
-    final double buttonTextFontSize = screenHeight * 0.015;
-    final double buttonWidth = itemWidth * 0.4;
-    final double buttonHeight = screenHeight * 0.035;
     final sectionTitleSize = screenWidth * 0.052;
 
     final spacing = screenHeight * 0.015;

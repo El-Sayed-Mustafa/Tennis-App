@@ -1,13 +1,90 @@
+import 'package:carousel_slider/carousel_controller.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tennis_app/Featured/club/widgets/text_rich.dart';
-import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
-import '../../choose_club/widgets/static_rating_bar.dart';
 import '../../home/widgets/divider.dart';
 
-class ClubEvents extends StatelessWidget {
+class ClubEvents extends StatefulWidget {
   const ClubEvents({Key? key}) : super(key: key);
+
+  @override
+  State<ClubEvents> createState() => _ClubEventsState();
+}
+
+class _ClubEventsState extends State<ClubEvents> {
+  int selectedPageIndex = 0;
+  final CarouselController _carouselController = CarouselController();
+
+  @override
+  Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double screenHeight = MediaQuery.of(context).size.height;
+
+    final double carouselHeight = screenHeight * 0.26;
+
+    final List<Widget> carouselItems = [
+      CarouselItem(selected: selectedPageIndex == 0),
+      CarouselItem(selected: selectedPageIndex == 1),
+      CarouselItem(selected: selectedPageIndex == 2),
+      CarouselItem(selected: selectedPageIndex == 3),
+    ];
+
+    return Column(
+      children: [
+        CarouselSlider(
+          options: CarouselOptions(
+            height: carouselHeight,
+            enableInfiniteScroll: false,
+            viewportFraction: 1,
+            onPageChanged: (index, _) {
+              setState(() {
+                selectedPageIndex = index;
+              });
+            },
+          ),
+          carouselController: _carouselController, // Use CarouselController
+          items: carouselItems,
+        ),
+        SizedBox(
+          height: 8,
+        ),
+        buildPageIndicator(
+            carouselItems.length), // Add the smooth page indicator
+      ],
+    );
+  }
+
+  Widget buildPageIndicator(int itemCount) {
+    final double screenWidth = MediaQuery.of(context).size.width;
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: List.generate(
+        itemCount,
+        (index) {
+          final bool isSelected = selectedPageIndex == index;
+          return AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            width: isSelected ? 11 : 9,
+            height: isSelected ? 11 : 9,
+            margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.011),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: isSelected ? Colors.black : Colors.grey,
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class CarouselItem extends StatelessWidget {
+  final bool selected;
+
+  const CarouselItem({Key? key, required this.selected}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +99,7 @@ class ClubEvents extends StatelessWidget {
     final double buttonHeight = screenHeight * 0.035;
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.041),
+      padding: EdgeInsets.only(bottom: screenHeight * .007),
       child: PhysicalModel(
         color: Colors.transparent,
         elevation: 4, // Adjust the shadow elevation as desired
@@ -62,7 +139,7 @@ class ClubEvents extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: screenHeight * .003),
-                  Text(
+                  const Text(
                     'Sunny',
                     style: TextStyle(
                       color: Color(0xFF00344E),
