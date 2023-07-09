@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tennis_app/Featured/home/widgets/avaliable_courts.dart';
-import 'package:tennis_app/Featured/home/widgets/button_home.dart';
+import 'package:tennis_app/core/utils/widgets/button_home.dart';
 import 'package:tennis_app/Featured/home/widgets/my_events.dart';
 import 'package:tennis_app/core/utils/widgets/app_bar_wave.dart';
 
