@@ -9,21 +9,16 @@ import '../../menu/menu_screen.dart';
 import 'cubit/navigation_cubit.dart';
 
 class NavigationBarScreen extends StatelessWidget {
-  const NavigationBarScreen({super.key});
+  const NavigationBarScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NavigationCubit, int>(
       builder: (context, state) {
         return Scaffold(
-          body: IndexedStack(
-            index: state,
-            children: const [
-              HomeScreen(),
-              ClubScreen(),
-              ChatScreen(),
-              MenuScreen(),
-            ],
+          body: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 500),
+            child: _getPageByIndex(state),
           ),
           bottomNavigationBar: CurvedNavigationBar(
             index: state,
@@ -52,7 +47,7 @@ class NavigationBarScreen extends StatelessWidget {
             ],
             color: Colors.white,
             buttonBackgroundColor: Colors.white,
-            backgroundColor: Color.fromARGB(255, 51, 64, 71),
+            backgroundColor: const Color.fromARGB(255, 51, 64, 71),
             animationCurve: Curves.easeInOut,
             animationDuration: const Duration(milliseconds: 400),
             onTap: (index) {
@@ -64,5 +59,20 @@ class NavigationBarScreen extends StatelessWidget {
         );
       },
     );
+  }
+
+  Widget _getPageByIndex(int index) {
+    switch (index) {
+      case 0:
+        return const HomeScreen();
+      case 1:
+        return const ClubScreen();
+      case 2:
+        return const ChatScreen();
+      case 3:
+        return const MenuScreen();
+      default:
+        return Container();
+    }
   }
 }
