@@ -71,8 +71,9 @@ class ClubInfo extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: screenHeight * .01),
-                  const StaticRatingBar(
+                  StaticRatingBar(
                     rating: 4,
+                    iconSize: (screenHeight + screenWidth) * .02,
                   )
                 ],
               ),

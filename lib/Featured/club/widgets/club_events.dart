@@ -92,9 +92,9 @@ class CarouselItem extends StatelessWidget {
     final double screenHeight = MediaQuery.of(context).size.height;
 
     final double itemWidth = screenWidth * 0.9;
-    final double imageHeight = screenHeight * 0.13;
-    final double titleFontSize = screenHeight * 0.031;
-    final double buttonTextFontSize = screenHeight * 0.015;
+    final double imageHeight = (screenHeight + screenWidth) * 0.09;
+    final double titleFontSize = (screenHeight + screenWidth) * 0.02;
+    final double buttonTextFontSize = (screenHeight + screenWidth) * 0.01;
     final double buttonWidth = itemWidth * 0.4;
     final double buttonHeight = screenHeight * 0.035;
 
@@ -167,17 +167,17 @@ class CarouselItem extends StatelessWidget {
                     text1: 'Time',
                     text2: '4:00 PM to 8:00 PM',
                   ),
-                  SizedBox(height: screenHeight * .015),
+                  SizedBox(height: screenHeight * .012),
                   const MyTextRich(
                     text2: '4:00 PM to 8:00 PM',
                     text1: 'Date',
                   ),
-                  SizedBox(height: screenHeight * .015),
+                  SizedBox(height: screenHeight * .012),
                   const MyTextRich(
                     text1: 'At',
                     text2: 'Tenni court',
                   ),
-                  SizedBox(height: screenHeight * .015),
+                  SizedBox(height: screenHeight * .012),
                   Container(
                     width: buttonWidth,
                     height: buttonHeight,
