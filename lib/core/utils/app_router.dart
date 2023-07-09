@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Auth/screens/auth_screen.dart';
-import 'package:tennis_app/Featured/create_profile/create_profile_screen.dart';
-import 'package:tennis_app/Featured/navigation_bar/cubit/navigation_cubit.dart';
-import 'package:tennis_app/Featured/navigation_bar/navigation_bar_screen.dart';
-import 'package:tennis_app/Featured/onboarding/onboarding_screen.dart';
-import 'package:tennis_app/Featured/splash/splash_screen.dart';
+import 'package:tennis_app/Main-Features/Featured/create_profile/create_profile_screen.dart';
+import 'package:tennis_app/Main-Features/Featured/navigation_bar/cubit/navigation_cubit.dart';
+import 'package:tennis_app/Main-Features/Featured/navigation_bar/navigation_bar_screen.dart';
+import 'package:tennis_app/Main-Features/Featured/onboarding/onboarding_screen.dart';
+import 'package:tennis_app/Main-Features/Featured/splash/splash_screen.dart';
 
 import '../../Auth/screens/forget_password.dart';
-import '../../Featured/choose_club/choose_club_screen.dart';
-import '../../Featured/localization/choose_language.dart';
+import '../../Main-Features/Featured/choose_club/choose_club_screen.dart';
+import '../../Main-Features/Featured/localization/choose_language.dart';
 
 abstract class AppRouter {
   static final GoRouter router = GoRouter(
