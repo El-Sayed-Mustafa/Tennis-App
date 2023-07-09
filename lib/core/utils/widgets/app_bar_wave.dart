@@ -23,7 +23,7 @@ class AppBarWaveHome extends StatelessWidget {
     return Stack(
       children: [
         SizedBox(
-          height: screenHeight * 0.16,
+          height: screenHeight * 0.14,
           width: screenWidth,
           child: ClipPath(
             clipper: AppBarClipper(),
@@ -37,7 +37,7 @@ class AppBarWaveHome extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 6.0),
                     child: SizedBox(
-                      width: screenWidth * 0.14,
+                      width: screenWidth * 0.12,
                       height: screenHeight * 0.07,
                       child: prefixIcon,
                     ),

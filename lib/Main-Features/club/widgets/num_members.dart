@@ -8,6 +8,7 @@ class NumMembers extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    final double itemSize = (screenHeight + screenWidth);
     return Container(
       width: screenWidth * .7,
       height: screenHeight * .06,
@@ -31,7 +32,7 @@ class NumMembers extends StatelessWidget {
               'Total Members',
               style: TextStyle(
                 color: Colors.black,
-                fontSize: 15,
+                fontSize: itemSize * .012,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w500,
               ),
@@ -40,7 +41,7 @@ class NumMembers extends StatelessWidget {
               '56',
               style: TextStyle(
                 color: Color(0xFF00344E),
-                fontSize: 30,
+                fontSize: itemSize * .026,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w600,
               ),

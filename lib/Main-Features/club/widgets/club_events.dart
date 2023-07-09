@@ -128,21 +128,20 @@ class CarouselItem extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: screenHeight * .015),
+                  SizedBox(height: screenHeight * .01),
                   SizedBox(
-                    height: imageHeight / 3.5,
-                    width: imageHeight / 3.5,
+                    height: screenHeight * .03,
                     child: SvgPicture.asset(
                       'assets/images/sun.svg',
                       fit: BoxFit.contain,
                     ),
                   ),
                   SizedBox(height: screenHeight * .003),
-                  const Text(
+                  Text(
                     'Sunny',
                     style: TextStyle(
                       color: Color(0xFF00344E),
-                      fontSize: 13,
+                      fontSize: screenHeight * .017,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w400,
                     ),

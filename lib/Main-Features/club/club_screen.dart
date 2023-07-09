@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tennis_app/Main-Features/club/widgets/club_events.dart';
 import 'package:tennis_app/Main-Features/club/widgets/club_info.dart';
+import 'package:tennis_app/Main-Features/club/widgets/header_text.dart';
 import 'package:tennis_app/Main-Features/club/widgets/num_members.dart';
+import 'package:tennis_app/Main-Features/club/widgets/players_ranking.dart';
 
 import '../../core/utils/widgets/app_bar_wave.dart';
 import '../home/widgets/button_home.dart';
@@ -12,7 +14,6 @@ class ClubScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
 
     final double spacing = screenHeight * 0.01;
@@ -53,42 +54,26 @@ class ClubScreen extends StatelessWidget {
               SizedBox(
                 height: spacing * 2,
               ),
-              Padding(
-                padding: EdgeInsets.only(left: screenWidth * .13, bottom: 4),
-                child: const Align(
-                  alignment: AlignmentDirectional.centerStart,
-                  child: Text(
-                    'Club’s Upcoming events',
-                    style: TextStyle(
-                      color: Color(0xB2313131),
-                      fontSize: 14,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
+              const HeaderText(text: 'Club’s Upcoming events'),
+              SizedBox(
+                height: spacing / 3,
               ),
               const ClubEvents(),
               SizedBox(
                 height: spacing * 2,
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    HomeButton(
-                      buttonText: 'Make Offers',
-                      imagePath: 'assets/images/Make-offers.svg',
-                      onPressed: () {},
-                    ),
-                    HomeButton(
-                      buttonText: 'Create Event',
-                      imagePath: 'assets/images/Make-offers.svg',
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
+              const HeaderText(text: 'Club’s Players Ranking'),
+              const PlayersRanking(),
+              SizedBox(
+                height: spacing * 2,
+              ),
+              HomeButton(
+                buttonText: 'Create Event',
+                imagePath: 'assets/images/Make-offers.svg',
+                onPressed: () {},
+              ),
+              SizedBox(
+                height: spacing * 2,
               ),
             ],
           ),
