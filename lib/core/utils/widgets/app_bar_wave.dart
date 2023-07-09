@@ -35,7 +35,7 @@ class AppBarWaveHome extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: SizedBox(
                       width: screenWidth * 0.12,
                       height: screenHeight * 0.07,

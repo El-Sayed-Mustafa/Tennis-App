@@ -61,8 +61,8 @@ class _ChatScreenState extends State<ChatScreen>
               child: Theme(
                 data: Theme.of(context).copyWith(
                   tabBarTheme: TabBarTheme(
-                    labelColor:
-                        const Color(0xFF0F4C81), // Customize selected tab color
+                    labelColor: Color.fromARGB(
+                        255, 8, 40, 67), // Customize selected tab color
                     unselectedLabelColor:
                         const Color(0xFF6F6F6F), // Customize default tab color
                     labelStyle: TextStyle(
