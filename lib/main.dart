@@ -6,7 +6,7 @@ import 'package:tennis_app/Auth/cubit/auth_cubit.dart';
 import 'package:tennis_app/core/utils/app_router.dart';
 
 import 'firebase_options.dart';
-import 'Localization/generated/l10n.dart';
+import 'generated/l10n.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

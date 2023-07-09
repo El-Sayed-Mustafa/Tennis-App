@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../core/utils/snackbar.dart';
-import '../../Localization/generated/l10n.dart';
+import '../../generated/l10n.dart';
 
 class FirebaseAuthMethods {
   final FirebaseAuth _auth;

@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../../core/utils/widgets/custom_button.dart';
 import '../../core/utils/snackbar.dart';
 import '../../core/utils/widgets/clipper.dart';
-import '../../Localization/generated/l10n.dart';
+import '../../generated/l10n.dart';
 import '../cubit/auth_cubit.dart';
 import '../widgets/input_feild.dart';
 import '../widgets/waveClipperScreen.dart';
