@@ -46,7 +46,7 @@ class ClubInfo extends StatelessWidget {
                 ),
               ),
               Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'FC Barcelona',
@@ -59,19 +59,19 @@ class ClubInfo extends StatelessWidget {
                   ),
                   const MyDivider(),
                   SizedBox(
-                    width: itemWidth / 2.5,
+                    width: itemWidth * .4,
                     child: Text(
-                      'Buhl 9, 35043 Marburg Germany',
+                      'Buhl 9, 35043 Marburg ',
                       style: TextStyle(
-                        color: Color(0xFF6D6D6D),
+                        color: const Color(0xFF6D6D6D),
                         fontSize: subtitleFontSize,
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
-                  SizedBox(height: screenWidth * .035),
-                  StaticRatingBar(
+                  SizedBox(height: screenHeight * .01),
+                  const StaticRatingBar(
                     rating: 4,
                   )
                 ],

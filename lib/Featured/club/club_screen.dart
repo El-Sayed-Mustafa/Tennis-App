@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:tennis_app/Featured/club/widgets/club_events.dart';
 import 'package:tennis_app/Featured/club/widgets/club_info.dart';
+import 'package:tennis_app/Featured/club/widgets/num_members.dart';
 
 import '../../core/utils/widgets/app_bar_wave.dart';
 
 class ClubScreen extends StatelessWidget {
-  const ClubScreen({super.key});
+  const ClubScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double screenHeight = MediaQuery.of(context).size.height;
 
-    final sectionTitleSize = screenWidth * 0.052;
-
-    final spacing = screenHeight * 0.015;
+    final double spacing = screenHeight * 0.01;
     return Container(
       color: const Color(0xFFF8F8F8),
       child: SingleChildScrollView(
@@ -31,7 +31,42 @@ class ClubScreen extends StatelessWidget {
             SizedBox(
               height: spacing,
             ),
-            ClubInfo()
+            const ClubInfo(),
+            SizedBox(
+              height: spacing * 1.5,
+            ),
+            const NumMembers(),
+            SizedBox(
+              height: spacing * 2.5,
+            ),
+            Text(
+              'Announcements',
+              style: TextStyle(
+                color: Color(0xFF313131),
+                fontSize: 19,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            SizedBox(
+              height: spacing * 2,
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: screenWidth * .13, bottom: 4),
+              child: Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: Text(
+                  'Club’s Upcoming events',
+                  style: TextStyle(
+                    color: Color(0xB2313131),
+                    fontSize: 14,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ),
+            ClubEvents(),
           ],
         ),
       ),
