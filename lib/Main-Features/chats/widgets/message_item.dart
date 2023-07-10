@@ -20,6 +20,8 @@ class MessageItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final hasUnreadMessages = unreadMessages.isNotEmpty;
+
     return Column(
       children: [
         Container(
@@ -78,20 +80,23 @@ class MessageItem extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 4),
-                    Container(
-                      height: 15,
-                      width: 15,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Color(0xFF00344E),
-                      ),
-                      child: Center(
-                        child: Text(
-                          unreadMessages,
-                          style: const TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white,
+                    Visibility(
+                      visible: hasUnreadMessages,
+                      child: Container(
+                        height: 15,
+                        width: 15,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color(0xFF00344E),
+                        ),
+                        child: Center(
+                          child: Text(
+                            unreadMessages,
+                            style: const TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),
