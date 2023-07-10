@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/home/widgets/avaliable_courts.dart';
 import 'package:tennis_app/Main-Features/home/widgets/button_home.dart';
 import 'package:tennis_app/Main-Features/home/widgets/my_events.dart';
@@ -88,9 +89,11 @@ class HomeScreen extends StatelessWidget {
                     onPressed: () {},
                   ),
                   HomeButton(
-                    buttonText: 'Make offers',
+                    buttonText: 'Create Club',
                     imagePath: 'assets/images/Make-offers.svg',
-                    onPressed: () {},
+                    onPressed: () {
+                      GoRouter.of(context).push('/createClub');
+                    },
                   ),
                 ],
               ),

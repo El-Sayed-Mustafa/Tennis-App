@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Auth/screens/auth_screen.dart';
+import 'package:tennis_app/Main-Features/Featured/create_club/view/widgets/create_club.dart';
 import 'package:tennis_app/Main-Features/Featured/create_profile/create_profile_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/navigation_bar/cubit/navigation_cubit.dart';
 import 'package:tennis_app/Main-Features/Featured/navigation_bar/navigation_bar_screen.dart';
@@ -27,7 +28,10 @@ abstract class AppRouter {
           GoRoute(
             path: 'home',
             builder: (BuildContext context, GoRouterState state) {
-              return const NavigationBarScreen();
+              return BlocProvider(
+                create: (context) => NavigationCubit(),
+                child: const NavigationBarScreen(),
+              );
             },
           ),
           GoRoute(
@@ -64,6 +68,12 @@ abstract class AppRouter {
             path: 'createProfile',
             builder: (BuildContext context, GoRouterState state) {
               return const CreateProfile();
+            },
+          ),
+          GoRoute(
+            path: 'createClub',
+            builder: (BuildContext context, GoRouterState state) {
+              return const CreateClub();
             },
           ),
         ],
