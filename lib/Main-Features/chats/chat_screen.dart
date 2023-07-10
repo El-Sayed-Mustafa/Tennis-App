@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:tennis_app/Main-Features/chats/widgets/chats.dart';
-import 'package:tennis_app/Main-Features/chats/widgets/community.dart';
-import 'package:tennis_app/Main-Features/chats/widgets/group.dart';
+import 'package:tennis_app/Main-Features/chats/screens/chats.dart';
+import 'package:tennis_app/Main-Features/chats/screens/community.dart';
+import 'package:tennis_app/Main-Features/chats/screens/group.dart';
 
 import '../../core/utils/widgets/app_bar_wave.dart';
 
