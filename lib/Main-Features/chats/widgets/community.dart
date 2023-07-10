@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tennis_app/Main-Features/chats/widgets/community_message.dart';
+
+import 'my_reply.dart';
 
 class Community extends StatelessWidget {
   const Community({super.key});
@@ -10,7 +13,7 @@ class Community extends StatelessWidget {
       child: Container(
         width: double.infinity,
         decoration: const ShapeDecoration(
-          color: Colors.white,
+          color: const Color(0xFFF8F8F8),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(30),
@@ -25,6 +28,21 @@ class Community extends StatelessWidget {
               spreadRadius: 0,
             )
           ],
+        ),
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 12),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 15,
+              ),
+              CommunityMessage(),
+              SizedBox(height: 10),
+              CommunityMessage(),
+              SizedBox(height: 10),
+              MyReply()
+            ],
+          ),
         ),
       ),
     );
