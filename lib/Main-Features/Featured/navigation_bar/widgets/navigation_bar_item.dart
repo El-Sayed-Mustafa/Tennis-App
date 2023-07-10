@@ -26,14 +26,14 @@ class NavigationBarItem extends StatelessWidget {
       children: [
         Icon(
           icon,
-          size: 24,
+          size: 22,
           color: isSelected ? const Color(0xFF00344E) : Colors.grey,
         ),
         if (!isSelected)
           Text(label,
               style: TextStyle(
                 color: Color.fromARGB(255, 112, 112, 112),
-                fontSize: 11,
+                fontSize: 10,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w500,
               )),

@@ -22,7 +22,7 @@ class NavigationBarScreen extends StatelessWidget {
           ),
           bottomNavigationBar: CurvedNavigationBar(
             index: state,
-            height: 60.0,
+            height: 55.0,
             items: const [
               NavigationBarItem(
                 icon: Icons.home_outlined,
@@ -35,7 +35,7 @@ class NavigationBarScreen extends StatelessWidget {
                 index: 1,
               ),
               NavigationBarItem(
-                icon: Icons.message_outlined,
+                icon: Icons.messenger_outline_outlined,
                 label: 'Chat',
                 index: 2,
               ),

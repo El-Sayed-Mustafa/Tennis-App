@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tennis_app/Main-Features/chats/widgets/message_item.dart';
-import '../../../core/utils/widgets/input_feild.dart';
 import '../widgets/search_input.dart';
 
 class Chats extends StatelessWidget {
@@ -20,6 +19,7 @@ class Chats extends StatelessWidget {
     ];
 
     return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
       child: SizedBox(
         height: screenHeight,
         child: Padding(
