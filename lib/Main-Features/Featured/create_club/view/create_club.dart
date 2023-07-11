@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/create_club/view/widgets/club_type.dart';
+import 'package:tennis_app/Main-Features/Featured/create_club/view/widgets/rules_text_field.dart';
 
 import '../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../core/utils/widgets/text_field.dart';
@@ -62,7 +63,8 @@ class CreateClub extends StatelessWidget {
                   hint: 'Type Your Email here', text: 'Your Email'),
               SizedBox(height: screenHeight * .03),
               ClubTypeInput(),
-              SizedBox(height: screenHeight * .3),
+              SizedBox(height: screenHeight * .03),
+              RulesInputText()
             ],
           ),
         ),
