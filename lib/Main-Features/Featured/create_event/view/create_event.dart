@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/create_club/view/widgets/Age_restriction.dart';
 import 'package:tennis_app/Main-Features/Featured/create_club/view/widgets/club_type.dart';
 import 'package:tennis_app/Main-Features/Featured/create_club/view/widgets/rules_text_field.dart';
+import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/event_types.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
 import '../../../../core/utils/widgets/app_bar_wave.dart';
@@ -55,29 +57,27 @@ class CreateEvent extends StatelessWidget {
               SizedBox(height: screenHeight * .03),
               BlocProvider(
                 create: (context) => DateCubit(),
-                child: InputDate(
+                child: const InputDate(
                     hint: 'Type the time here', text: 'Event Start at'),
               ),
               SizedBox(height: screenHeight * .03),
-              const InputTextWithHint(
-                  hint: 'Type id here', text: 'National Id number'),
-              SizedBox(height: screenHeight * .03),
-              const InputTextWithHint(
-                  hint: 'Type your Phone number here', text: 'Phone number'),
-              SizedBox(height: screenHeight * .03),
-              const InputTextWithHint(
-                  hint: 'Type Your Email here', text: 'Your Email'),
-              SizedBox(height: screenHeight * .03),
               BlocProvider(
-                create: (context) => ClubTypeCubit(),
-                child: ClubTypeInput(),
+                create: (context) => DateCubit(),
+                child: const InputDate(
+                    hint: 'Type the time here', text: 'Event End at'),
               ),
               SizedBox(height: screenHeight * .03),
-              const RulesInputText(),
-              SizedBox(height: screenHeight * .03),
+              InputTextWithHint(
+                hint: 'Type Event address here',
+                text: 'Event Address',
+                suffixIcon: SvgPicture.asset(
+                  'assets/images/location.svg',
+                ),
+              ),
+              SizedBox(height: screenHeight * .015),
               BlocProvider(
-                create: (context) => AgeRestrictionCubit(),
-                child: AgeRestrictionWidget(),
+                create: (context) => EventTypeCubit(),
+                child: EventTypeInput(),
               ),
               SizedBox(height: screenHeight * .015),
               BottomSheetContainer(
