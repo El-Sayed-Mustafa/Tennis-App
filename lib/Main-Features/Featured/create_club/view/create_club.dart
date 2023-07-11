@@ -71,7 +71,10 @@ class CreateClub extends StatelessWidget {
               SizedBox(height: screenHeight * .03),
               const RulesInputText(),
               SizedBox(height: screenHeight * .03),
-              const AgeRestrictionWidget(),
+              BlocProvider(
+                create: (context) => AgeRestrictionCubit(),
+                child: AgeRestrictionWidget(),
+              ),
               SizedBox(height: screenHeight * .015),
               BottomSheetContainer(
                   buttonText: 'Create',
