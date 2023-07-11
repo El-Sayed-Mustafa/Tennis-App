@@ -26,9 +26,9 @@ class InputTextWithHint extends StatelessWidget {
               text,
               style: const TextStyle(
                 color: Color(0xFF525252),
-                fontSize: 14,
+                fontSize: 15,
                 fontFamily: 'Poppins',
-                fontWeight: FontWeight.w400,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ),
