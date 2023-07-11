@@ -60,6 +60,7 @@ class CreateClub extends StatelessWidget {
               SizedBox(height: screenHeight * .03),
               const InputTextWithHint(
                   hint: 'Type Your Email here', text: 'Your Email'),
+              SizedBox(height: screenHeight * .03),
               ClubTypeInput(),
               SizedBox(height: screenHeight * .3),
             ],

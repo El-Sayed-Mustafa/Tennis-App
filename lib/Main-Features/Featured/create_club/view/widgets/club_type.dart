@@ -35,9 +35,9 @@ class _ClubTypeInputState extends State<ClubTypeInput> {
         children: [
           Padding(
             padding: EdgeInsets.only(bottom: 2.0, left: screenWidth * .055),
-            child: Text(
+            child: const Text(
               'Club Type',
-              style: const TextStyle(
+              style: TextStyle(
                 color: Color(0xFF525252),
                 fontSize: 15,
                 fontFamily: 'Poppins',
@@ -60,7 +60,7 @@ class _ClubTypeInputState extends State<ClubTypeInput> {
                 Expanded(
                   child: Row(
                     children: [
-                      SizedBox(width: 20.0), // Adjust the width as needed
+                      const SizedBox(width: 20.0), // Adjust the width as needed
                       Expanded(
                         child: Align(
                           alignment: Alignment.centerLeft,
@@ -71,7 +71,8 @@ class _ClubTypeInputState extends State<ClubTypeInput> {
                               _showOptionsPopupMenu(context);
                             },
                             decoration: InputDecoration(
-                              contentPadding: EdgeInsets.only(bottom: 10),
+                              contentPadding: EdgeInsets.symmetric(
+                                  vertical: screenHeight * .018),
                               border: InputBorder.none,
                             ),
                           ),
@@ -84,7 +85,7 @@ class _ClubTypeInputState extends State<ClubTypeInput> {
                   onPressed: () {
                     _showOptionsPopupMenu(context);
                   },
-                  icon: Icon(Icons.arrow_drop_down),
+                  icon: const Icon(Icons.arrow_drop_down),
                 ),
               ],
             ),
@@ -97,7 +98,7 @@ class _ClubTypeInputState extends State<ClubTypeInput> {
   void _showOptionsPopupMenu(BuildContext context) {
     final RenderBox button = context.findRenderObject() as RenderBox;
     final RenderBox overlay =
-        Overlay.of(context)!.context.findRenderObject() as RenderBox;
+        Overlay.of(context).context.findRenderObject() as RenderBox;
     final RelativeRect position = RelativeRect.fromRect(
       Rect.fromPoints(
         button.localToGlobal(button.size.bottomRight(Offset.zero),
@@ -108,7 +109,7 @@ class _ClubTypeInputState extends State<ClubTypeInput> {
       Offset.zero & overlay.size,
     );
 
-    final List<String> options = ['private', 'public'];
+    final List<String> options = ['Private', 'Public'];
 
     showMenu<String>(
       context: context,
@@ -116,7 +117,15 @@ class _ClubTypeInputState extends State<ClubTypeInput> {
       items: options.map((String option) {
         return PopupMenuItem<String>(
           value: option,
-          child: Text(option),
+          child: Text(
+            option,
+            style: TextStyle(
+              color: Color.fromARGB(255, 82, 82, 82),
+              fontSize: 14,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w500,
+            ),
+          ),
         );
       }).toList(),
     ).then((value) {
