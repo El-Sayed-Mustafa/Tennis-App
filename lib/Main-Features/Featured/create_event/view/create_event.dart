@@ -7,12 +7,13 @@ import 'package:tennis_app/Main-Features/Featured/create_club/view/widgets/rules
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
 import '../../../../core/utils/widgets/app_bar_wave.dart';
+import '../../../../core/utils/widgets/input_date.dart';
 import '../../../../core/utils/widgets/text_field.dart';
 import '../../../../generated/l10n.dart';
 import '../../create_profile/widgets/profile_image.dart';
 
-class CreateClub extends StatelessWidget {
-  const CreateClub({super.key});
+class CreateEvent extends StatelessWidget {
+  const CreateEvent({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,13 +35,13 @@ class CreateClub extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                text: 'Create Club',
+                text: 'Create Event',
                 suffixIconPath: '',
               ),
               const ProfileImage(),
               SizedBox(height: screenHeight * .01),
               const Text(
-                'Set Club Picture',
+                'Set Event Picture',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 14,
@@ -52,8 +53,11 @@ class CreateClub extends StatelessWidget {
               const InputTextWithHint(
                   hint: 'Type event name here', text: 'Club Name'),
               SizedBox(height: screenHeight * .03),
-              const InputTextWithHint(
-                  hint: 'Type your name here', text: 'Club admin'),
+              BlocProvider(
+                create: (context) => DateCubit(),
+                child: InputDate(
+                    hint: 'Type the time here', text: 'Event Start at'),
+              ),
               SizedBox(height: screenHeight * .03),
               const InputTextWithHint(
                   hint: 'Type id here', text: 'National Id number'),

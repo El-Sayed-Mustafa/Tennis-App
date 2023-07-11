@@ -55,7 +55,7 @@ class ClubTypeInput extends StatelessWidget {
                       child: Row(
                         children: [
                           const SizedBox(
-                              width: 20.0), // Adjust the width as needed
+                              width: 25.0), // Adjust the width as needed
                           Expanded(
                             child: Align(
                               alignment: Alignment.centerLeft,

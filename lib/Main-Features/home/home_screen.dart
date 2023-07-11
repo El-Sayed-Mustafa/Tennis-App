@@ -86,7 +86,9 @@ class HomeScreen extends StatelessWidget {
                   HomeButton(
                     buttonText: 'Create Event',
                     imagePath: 'assets/images/Create-Event.svg',
-                    onPressed: () {},
+                    onPressed: () {
+                      GoRouter.of(context).push('/createEvent');
+                    },
                   ),
                   HomeButton(
                     buttonText: 'Create Club',

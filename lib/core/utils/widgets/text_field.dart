@@ -43,12 +43,18 @@ class InputTextWithHint extends StatelessWidget {
               ),
             ),
             child: Padding(
-              padding: const EdgeInsets.only(left: 24, right: 24, bottom: 8),
+              padding: const EdgeInsets.only(left: 24, right: 24, bottom: 5),
               child: TextField(
+                style: TextStyle(
+                  color: Color(0xFF6E6E6E),
+                  fontSize: 14,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w400,
+                ),
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: hint,
-                  hintStyle: TextStyle(
+                  hintStyle: const TextStyle(
                     color: Color(0xFFA8A8A8),
                     fontSize: 13,
                     fontFamily: 'Poppins',
