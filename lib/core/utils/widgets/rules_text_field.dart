@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 class RulesInputText extends StatelessWidget {
   const RulesInputText({
     Key? key,
+    required this.header,
+    required this.body,
   }) : super(key: key);
-
+  final String header;
+  final String body;
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -17,9 +20,9 @@ class RulesInputText extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.only(bottom: 2.0, left: screenWidth * .055),
-            child: const Text(
-              'Rules and regulatoins',
-              style: TextStyle(
+            child: Text(
+              header,
+              style: const TextStyle(
                 color: Color(0xFF525252),
                 fontSize: 16,
                 fontFamily: 'Poppins',
@@ -37,14 +40,15 @@ class RulesInputText extends StatelessWidget {
                 borderRadius: BorderRadius.circular(30),
               ),
             ),
-            child: const Padding(
-              padding: EdgeInsets.only(left: 24, right: 24, bottom: 6, top: 6),
+            child: Padding(
+              padding:
+                  const EdgeInsets.only(left: 24, right: 24, bottom: 6, top: 6),
               child: TextField(
                 maxLines: 8,
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintText: 'Briefly describe your club’s rule and regulations',
-                  hintStyle: TextStyle(
+                  hintText: body,
+                  hintStyle: const TextStyle(
                     color: Color(0xFFA8A8A8),
                     fontSize: 14,
                     fontFamily: 'Poppins',

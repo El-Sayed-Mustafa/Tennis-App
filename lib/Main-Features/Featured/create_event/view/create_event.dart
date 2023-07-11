@@ -4,7 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/create_club/view/widgets/Age_restriction.dart';
 import 'package:tennis_app/Main-Features/Featured/create_club/view/widgets/club_type.dart';
-import 'package:tennis_app/Main-Features/Featured/create_club/view/widgets/rules_text_field.dart';
+import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/player_level.dart';
+import 'package:tennis_app/core/utils/widgets/rules_text_field.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/event_types.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
@@ -74,10 +75,22 @@ class CreateEvent extends StatelessWidget {
                   'assets/images/location.svg',
                 ),
               ),
-              SizedBox(height: screenHeight * .015),
+              SizedBox(height: screenHeight * .03),
               BlocProvider(
                 create: (context) => EventTypeCubit(),
                 child: EventTypeInput(),
+              ),
+              SizedBox(height: screenHeight * .03),
+              const InputTextWithHint(
+                  hint: 'Type Court name here', text: 'Court Name'),
+              SizedBox(height: screenHeight * .03),
+              const RulesInputText(
+                  header: 'Instructions',
+                  body: 'Briefly describe your club’s Instructions here...'),
+              SizedBox(height: screenHeight * .03),
+              BlocProvider(
+                create: (context) => SliderCubit(),
+                child: RangeSliderWithTooltip(),
               ),
               SizedBox(height: screenHeight * .015),
               BottomSheetContainer(

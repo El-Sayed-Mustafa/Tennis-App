@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/create_club/view/widgets/Age_restriction.dart';
 import 'package:tennis_app/Main-Features/Featured/create_club/view/widgets/club_type.dart';
-import 'package:tennis_app/Main-Features/Featured/create_club/view/widgets/rules_text_field.dart';
+import 'package:tennis_app/core/utils/widgets/rules_text_field.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
 import '../../../../core/utils/widgets/app_bar_wave.dart';
@@ -66,14 +66,16 @@ class CreateClub extends StatelessWidget {
               SizedBox(height: screenHeight * .03),
               BlocProvider(
                 create: (context) => ClubTypeCubit(),
-                child: ClubTypeInput(),
+                child: const ClubTypeInput(),
               ),
               SizedBox(height: screenHeight * .03),
-              const RulesInputText(),
+              const RulesInputText(
+                  header: 'Rules and regulatoins',
+                  body: 'Briefly describe your club’s rule and regulations'),
               SizedBox(height: screenHeight * .03),
               BlocProvider(
                 create: (context) => AgeRestrictionCubit(),
-                child: AgeRestrictionWidget(),
+                child: const AgeRestrictionWidget(),
               ),
               SizedBox(height: screenHeight * .015),
               BottomSheetContainer(
