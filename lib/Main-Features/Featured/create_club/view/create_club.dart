@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tennis_app/Main-Features/Featured/create_club/view/widgets/Age_restriction.dart';
 import 'package:tennis_app/Main-Features/Featured/create_club/view/widgets/club_type.dart';
 import 'package:tennis_app/Main-Features/Featured/create_club/view/widgets/rules_text_field.dart';
+import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
 import '../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../core/utils/widgets/text_field.dart';
@@ -13,7 +16,6 @@ class CreateClub extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SingleChildScrollView(
@@ -62,9 +64,19 @@ class CreateClub extends StatelessWidget {
               const InputTextWithHint(
                   hint: 'Type Your Email here', text: 'Your Email'),
               SizedBox(height: screenHeight * .03),
-              ClubTypeInput(),
+              BlocProvider(
+                create: (context) => ClubTypeCubit(),
+                child: ClubTypeInput(),
+              ),
               SizedBox(height: screenHeight * .03),
-              RulesInputText()
+              const RulesInputText(),
+              SizedBox(height: screenHeight * .03),
+              const AgeRestrictionWidget(),
+              SizedBox(height: screenHeight * .015),
+              BottomSheetContainer(
+                  buttonText: 'Create',
+                  onPressed: () {},
+                  color: const Color(0xFFF8F8F8))
             ],
           ),
         ),

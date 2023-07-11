@@ -1,27 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ClubTypeInput extends StatefulWidget {
-  const ClubTypeInput({Key? key}) : super(key: key);
+// ignore: constant_identifier_names
+enum ClubType { Private, Public }
 
-  @override
-  _ClubTypeInputState createState() => _ClubTypeInputState();
+class ClubTypeCubit extends Cubit<ClubType> {
+  ClubTypeCubit() : super(ClubType.Private);
+
+  void setClubType(ClubType clubType) {
+    emit(clubType);
+  }
 }
 
-class _ClubTypeInputState extends State<ClubTypeInput> {
-  String _selectedOption = 'private';
-  final TextEditingController _textEditingController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    _textEditingController.text = _selectedOption;
-  }
-
-  @override
-  void dispose() {
-    _textEditingController.dispose();
-    super.dispose();
-  }
+class ClubTypeInput extends StatelessWidget {
+  const ClubTypeInput({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,50 +37,55 @@ class _ClubTypeInputState extends State<ClubTypeInput> {
               ),
             ),
           ),
-          Container(
-            width: screenWidth * .8,
-            height: screenHeight * .05,
-            decoration: ShapeDecoration(
-              color: Colors.white,
-              shape: RoundedRectangleBorder(
-                side: const BorderSide(width: 1, color: Color(0x300A557F)),
-                borderRadius: BorderRadius.circular(100),
-              ),
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Row(
-                    children: [
-                      const SizedBox(width: 20.0), // Adjust the width as needed
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: TextFormField(
-                            controller: _textEditingController,
-                            readOnly: true,
-                            onTap: () {
-                              _showOptionsPopupMenu(context);
-                            },
-                            decoration: InputDecoration(
-                              contentPadding: EdgeInsets.symmetric(
-                                  vertical: screenHeight * .018),
-                              border: InputBorder.none,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+          BlocBuilder<ClubTypeCubit, ClubType>(
+            builder: (context, state) {
+              return Container(
+                width: screenWidth * .8,
+                height: screenHeight * .05,
+                decoration: ShapeDecoration(
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    side: const BorderSide(width: 1, color: Color(0x300A557F)),
+                    borderRadius: BorderRadius.circular(100),
                   ),
                 ),
-                IconButton(
-                  onPressed: () {
-                    _showOptionsPopupMenu(context);
-                  },
-                  icon: const Icon(Icons.arrow_drop_down),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Row(
+                        children: [
+                          const SizedBox(
+                              width: 20.0), // Adjust the width as needed
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: TextFormField(
+                                readOnly: true,
+                                onTap: () {
+                                  _showOptionsPopupMenu(context);
+                                },
+                                decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.symmetric(
+                                      vertical: screenHeight * .015),
+                                  border: InputBorder.none,
+                                  hintText: state.toString().split('.').last,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        _showOptionsPopupMenu(context);
+                      },
+                      icon: const Icon(Icons.arrow_drop_down),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              );
+            },
           ),
         ],
       ),
@@ -109,17 +106,17 @@ class _ClubTypeInputState extends State<ClubTypeInput> {
       Offset.zero & overlay.size,
     );
 
-    final List<String> options = ['Private', 'Public'];
+    final List<ClubType> options = [ClubType.Private, ClubType.Public];
 
-    showMenu<String>(
+    showMenu<ClubType>(
       context: context,
       position: position,
-      items: options.map((String option) {
-        return PopupMenuItem<String>(
+      items: options.map((ClubType option) {
+        return PopupMenuItem<ClubType>(
           value: option,
           child: Text(
-            option,
-            style: TextStyle(
+            option.toString().split('.').last,
+            style: const TextStyle(
               color: Color.fromARGB(255, 82, 82, 82),
               fontSize: 14,
               fontFamily: 'Poppins',
@@ -130,10 +127,8 @@ class _ClubTypeInputState extends State<ClubTypeInput> {
       }).toList(),
     ).then((value) {
       if (value != null) {
-        setState(() {
-          _selectedOption = value;
-          _textEditingController.text = _selectedOption;
-        });
+        final cubit = context.read<ClubTypeCubit>();
+        cubit.setClubType(value);
       }
     });
   }

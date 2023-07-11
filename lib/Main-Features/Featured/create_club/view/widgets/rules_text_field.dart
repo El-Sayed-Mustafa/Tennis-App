@@ -21,7 +21,7 @@ class RulesInputText extends StatelessWidget {
               'Rules and regulatoins',
               style: TextStyle(
                 color: Color(0xFF525252),
-                fontSize: 15,
+                fontSize: 16,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w500,
               ),
