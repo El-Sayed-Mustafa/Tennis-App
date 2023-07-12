@@ -76,9 +76,15 @@ class EventTypeInput extends StatelessWidget {
                           const SizedBox(
                               width: 25.0), // Adjust the width as needed
                           Expanded(
-                            child: Align(
-                              alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 3.0),
                               child: TextFormField(
+                                style: TextStyle(
+                                  color: Color(0xFF6D6D6D),
+                                  fontSize: 14,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w400,
+                                ),
                                 readOnly: true,
                                 onTap: () {
                                   _showOptionsPopupMenu(context);
@@ -156,7 +162,7 @@ class EventTypeInput extends StatelessWidget {
             displayTexts[option]!,
             style: const TextStyle(
               color: Color.fromARGB(255, 82, 82, 82),
-              fontSize: 14,
+              fontSize: 15,
               fontFamily: 'Poppins',
               fontWeight: FontWeight.w500,
             ),
