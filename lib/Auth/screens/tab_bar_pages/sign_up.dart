@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Auth/widgets/solcial_media.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
 
@@ -114,13 +115,18 @@ class SignUp extends StatelessWidget {
                         SizedBox(
                           height: screenHeight * .01,
                         ),
-                        Text(
-                          S.of(context).forgot_password,
-                          style: const TextStyle(
-                            color: Color(0xFF1B262C),
-                            fontSize: 12,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w400,
+                        GestureDetector(
+                          onTap: () {
+                            GoRouter.of(context).replace('/forgetPassword');
+                          },
+                          child: Text(
+                            S.of(context).forgot_password,
+                            style: const TextStyle(
+                              color: Color(0xFF1B262C),
+                              fontSize: 12,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                         ),
                       ],

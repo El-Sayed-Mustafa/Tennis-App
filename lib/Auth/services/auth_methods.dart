@@ -59,7 +59,7 @@ class FirebaseAuthMethods {
         email: email,
         password: password,
       );
-      GoRouter.of(context).replace('/home');
+      GoRouter.of(context).replace('/createProfile');
 
       if (!_auth.currentUser!.emailVerified) {
         await sendEmailVerification(context);
@@ -98,7 +98,7 @@ class FirebaseAuthMethods {
           return;
         }
 
-        GoRouter.of(context).replace('/home');
+        GoRouter.of(context).replace('/createProfile');
       }
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!); // Displaying the error message

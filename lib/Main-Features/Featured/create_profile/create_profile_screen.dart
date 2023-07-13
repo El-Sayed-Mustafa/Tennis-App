@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/app_bar_wave.dart';
 import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/gender_selection.dart';
 import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/input_date.dart';
@@ -7,6 +8,7 @@ import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/input_t
 import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/profile_image.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
+import '../../../core/utils/widgets/input_date.dart';
 import '../../../core/utils/widgets/text_field.dart';
 import '../../../generated/l10n.dart';
 import 'cubit/Gender_Cubit.dart';
@@ -55,9 +57,12 @@ class CreateProfile extends StatelessWidget {
                 text: S.of(context).phoneNumber,
               ),
               SizedBox(height: screenHeight * .025),
-              InputDateField(
-                hint: S.of(context).typeYourAge,
-                text: S.of(context).age,
+              BlocProvider(
+                create: (context) => DateCubit(),
+                child: const InputDate(
+                    hint: 'Select Date of Birth',
+                    format: 'dd/MM/yyyy',
+                    text: 'Your Age'),
               ),
               SizedBox(height: screenHeight * .025),
               BlocProvider(
@@ -75,7 +80,9 @@ class CreateProfile extends StatelessWidget {
               SizedBox(height: screenHeight * .01),
               BottomSheetContainer(
                 buttonText: S.of(context).create,
-                onPressed: () {},
+                onPressed: () {
+                  GoRouter.of(context).push('/chooseClub');
+                },
                 color: const Color(0xFFF8F8F8),
               )
             ],

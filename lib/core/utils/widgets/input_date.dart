@@ -14,11 +14,13 @@ class DateCubit extends Cubit<DateTime> {
 class InputDate extends StatelessWidget {
   final String text;
   final String hint;
+  final String format; // Added format parameter
 
   const InputDate({
     Key? key,
     required this.text,
     required this.hint,
+    this.format = 'MMM d, yyyy, h:mm a', // Set default format value
   }) : super(key: key);
 
   @override
@@ -28,7 +30,8 @@ class InputDate extends StatelessWidget {
 
     return BlocBuilder<DateCubit, DateTime>(
       builder: (context, selectedDateTime) {
-        final DateFormat dateFormat = DateFormat('MMM d, yyyy, h:mm a');
+        final DateFormat dateFormat =
+            DateFormat(format); // Use the provided format
 
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: screenWidth * .1),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/choose_club/widgets/card_details.dart';
 import 'package:tennis_app/Main-Features/Featured/choose_club/widgets/static_rating_bar.dart';
 import 'package:tennis_app/Main-Features/Featured/choose_club/widgets/wave_clipper_widget.dart';
@@ -112,7 +113,9 @@ class ChooseClub extends StatelessWidget {
             ),
             BottomSheetContainer(
               buttonText: S.of(context).join,
-              onPressed: () {},
+              onPressed: () {
+                GoRouter.of(context).replace('/home');
+              },
               color: Colors.white,
             )
           ],
