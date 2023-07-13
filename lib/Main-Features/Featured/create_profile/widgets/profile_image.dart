@@ -1,7 +1,31 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-class ProfileImage extends StatelessWidget {
-  const ProfileImage({super.key});
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+
+class ProfileImage extends StatefulWidget {
+  final void Function(File imageFile) onImageSelected;
+
+  const ProfileImage({required this.onImageSelected, Key? key})
+      : super(key: key);
+
+  @override
+  State<ProfileImage> createState() => _ProfileImageState();
+}
+
+class _ProfileImageState extends State<ProfileImage> {
+  final ImagePicker _picker = ImagePicker();
+  File? _imageFile;
+
+  Future<void> _selectImage() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        _imageFile = File(pickedFile.path);
+      });
+      widget.onImageSelected(_imageFile!);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +44,15 @@ class ProfileImage extends StatelessWidget {
             offset: const Offset(0, 1),
           ),
         ],
-        image: const DecorationImage(
-          image: AssetImage('assets/images/profile-image.jpg'),
-          fit: BoxFit.cover,
-        ),
+        image: _imageFile != null
+            ? DecorationImage(
+                image: FileImage(_imageFile!),
+                fit: BoxFit.cover,
+              )
+            : const DecorationImage(
+                image: AssetImage('assets/images/profile-image.jpg'),
+                fit: BoxFit.fitHeight,
+              ),
       ),
       child: Stack(
         children: [
@@ -46,9 +75,7 @@ class ProfileImage extends StatelessWidget {
                   color: Colors.white,
                   size: 28,
                 ),
-                onPressed: () {
-                  // Handle the camera button press
-                },
+                onPressed: _selectImage,
               ),
             ),
           ),

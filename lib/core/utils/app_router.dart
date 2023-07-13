@@ -22,7 +22,7 @@ abstract class AppRouter {
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider(
             create: (context) => NavigationCubit(),
-            child: const NavigationBarScreen(),
+            child: const CreateProfile(),
           );
         },
         routes: <RouteBase>[
@@ -71,18 +71,18 @@ abstract class AppRouter {
               return const CreateProfile();
             },
           ),
-          GoRoute(
-            path: 'createClub',
-            builder: (BuildContext context, GoRouterState state) {
-              return const CreateClub();
-            },
-          ),
-          GoRoute(
-            path: 'createEvent',
-            builder: (BuildContext context, GoRouterState state) {
-              return const CreateEvent();
-            },
-          ),
+          // GoRoute(
+          //   path: 'createClub',
+          //   builder: (BuildContext context, GoRouterState state) {
+          //     return const CreateClub();
+          //   },
+          // ),
+          // GoRoute(
+          //   path: 'createEvent',
+          //   builder: (BuildContext context, GoRouterState state) {
+          //     return const CreateEvent();
+          //   },
+          // ),
         ],
       ),
     ],

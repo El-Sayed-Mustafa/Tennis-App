@@ -47,7 +47,7 @@ class EventTypeInput extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(bottom: 2.0, left: screenWidth * .055),
             child: const Text(
-              'Club Type',
+              'Event Type',
               style: TextStyle(
                 color: Color(0xFF525252),
                 fontSize: 15,

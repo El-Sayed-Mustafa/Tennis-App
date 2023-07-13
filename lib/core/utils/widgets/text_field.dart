@@ -5,12 +5,14 @@ class InputTextWithHint extends StatelessWidget {
   final String text;
   final String hint;
   final Widget? suffixIcon;
+  final TextEditingController controller;
 
   const InputTextWithHint({
     Key? key,
     required this.text,
     required this.hint,
     this.suffixIcon,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -48,6 +50,7 @@ class InputTextWithHint extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(left: 24, right: 0, bottom: 5),
               child: TextField(
+                controller: controller,
                 style: TextStyle(
                   color: Color(0xFF6E6E6E),
                   fontSize: 14,
