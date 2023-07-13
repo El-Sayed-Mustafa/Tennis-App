@@ -4,7 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tennis_app/Auth/cubit/auth_cubit.dart';
 import 'package:tennis_app/core/utils/app_router.dart';
+import 'package:tennis_app/core/utils/widgets/input_date.dart';
 
+import 'Main-Features/Featured/create_profile/cubit/Gender_Cubit.dart';
+import 'Main-Features/Featured/create_profile/cubit/player_type_cubit.dart';
+import 'Main-Features/Featured/create_profile/cubit/time_cubit.dart';
 import 'firebase_options.dart';
 import 'generated/l10n.dart';
 
@@ -43,6 +47,18 @@ class _MyAppState extends State<MyApp> {
       providers: [
         BlocProvider(
           create: (context) => AuthCubit(),
+        ),
+        BlocProvider<GenderCubit>(
+          create: (context) => GenderCubit(),
+        ),
+        BlocProvider(
+          create: (context) => TimeCubit(),
+        ),
+        BlocProvider(
+          create: (context) => DateCubit(),
+        ),
+        BlocProvider(
+          create: (context) => PlayerTypeCubit(),
         ),
       ],
       child: MaterialApp.router(

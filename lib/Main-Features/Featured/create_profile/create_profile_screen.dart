@@ -8,6 +8,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/app_bar_wave.dart';
 import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/gender_selection.dart';
+import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/input_date.dart';
 import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/input_time.dart';
 import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/profile_image.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
@@ -17,6 +18,7 @@ import '../../../core/utils/widgets/text_field.dart';
 import '../../../generated/l10n.dart';
 import 'cubit/Gender_Cubit.dart';
 import 'cubit/player_type_cubit.dart';
+import 'cubit/date_cubit.dart';
 import 'cubit/time_cubit.dart';
 import 'widgets/player_type.dart';
 
@@ -31,6 +33,8 @@ class _CreateProfileState extends State<CreateProfile> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
   Uint8List? _selectedImageBytes;
+  DateTime? _selectedDateTime;
+  TimeOfDay? _selectedTime;
 
   @override
   void dispose() {
@@ -40,13 +44,23 @@ class _CreateProfileState extends State<CreateProfile> {
   }
 
   void saveUserData() async {
+    String selectedGender = context.read<GenderCubit>().state;
     String playerName = nameController.text;
     String phoneNumber = phoneNumberController.text;
+    DateTime? selectedDateTime = context.read<DateCubit>().state;
+    String? selectedPlayerType = context.read<PlayerTypeCubit>().state;
+    TimeOfDay? preferredPlayingTime = _selectedTime;
+
     CollectionReference playersCollection =
         FirebaseFirestore.instance.collection('players');
     DocumentReference playerDocRef = await playersCollection.add({
       'playerName': playerName,
       'phoneNumber': phoneNumber,
+      'gender': selectedGender,
+      'selectedDateTime': selectedDateTime?.toUtc(),
+      'preferredPlayingTime': preferredPlayingTime != null
+          ? '${preferredPlayingTime.hour}:${preferredPlayingTime.minute.toString().padLeft(2, '0')}'
+          : null,
     });
 
     // Upload the selected image to Firebase Storage
@@ -102,10 +116,7 @@ class _CreateProfileState extends State<CreateProfile> {
                 ),
               ),
               SizedBox(height: screenHeight * .03),
-              BlocProvider(
-                create: (context) => GenderCubit(),
-                child: const GenderSelection(),
-              ),
+              const GenderSelection(),
               SizedBox(height: screenHeight * .03),
               InputTextWithHint(
                 hint: S.of(context).typeYourName,
@@ -119,21 +130,25 @@ class _CreateProfileState extends State<CreateProfile> {
                 controller: phoneNumberController,
               ),
               SizedBox(height: screenHeight * .025),
-              BlocProvider(
-                create: (context) => DateCubit(),
-                child: const InputDate(
-                  hint: 'Select Date of Birth',
-                  format: 'dd/MM/yyyy',
-                  text: 'Your Age',
-                ),
+              InputDate(
+                hint: 'Select Date of Birth',
+                format: 'dd/MM/yyyy',
+                text: 'Your Age',
+                onDateTimeSelected: (DateTime dateTime) {
+                  setState(() {
+                    _selectedDateTime = dateTime;
+                  });
+                },
               ),
               SizedBox(height: screenHeight * .025),
-              BlocProvider(
-                create: (context) => TimeCubit(),
-                child: InputTimeField(
-                  hint: S.of(context).typeYourPreferredPlayingTime,
-                  text: S.of(context).preferredPlayingTime,
-                ),
+              InputTimeField(
+                hint: S.of(context).typeYourPreferredPlayingTime,
+                text: S.of(context).preferredPlayingTime,
+                onTimeSelected: (TimeOfDay? time) {
+                  setState(() {
+                    _selectedTime = time;
+                  });
+                },
               ),
               SizedBox(height: screenHeight * .025),
               BlocProvider(

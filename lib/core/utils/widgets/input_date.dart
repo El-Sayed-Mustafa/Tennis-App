@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-// Define the cubit state
 class DateCubit extends Cubit<DateTime> {
   DateCubit() : super(DateTime.now());
 
@@ -11,17 +10,32 @@ class DateCubit extends Cubit<DateTime> {
   }
 }
 
-class InputDate extends StatelessWidget {
+class InputDate extends StatefulWidget {
   final String text;
   final String hint;
-  final String format; // Added format parameter
+  final String format;
+  final Null Function(DateTime dateTime) onDateTimeSelected;
 
   const InputDate({
     Key? key,
     required this.text,
     required this.hint,
-    this.format = 'MMM d, yyyy, h:mm a', // Set default format value
+    this.format = 'MMM d, yyyy, h:mm a',
+    required this.onDateTimeSelected,
   }) : super(key: key);
+
+  @override
+  _InputDateState createState() => _InputDateState();
+}
+
+class _InputDateState extends State<InputDate> {
+  late DateTime _selectedDateTime;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedDateTime = context.read<DateCubit>().state;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +44,7 @@ class InputDate extends StatelessWidget {
 
     return BlocBuilder<DateCubit, DateTime>(
       builder: (context, selectedDateTime) {
-        final DateFormat dateFormat =
-            DateFormat(format); // Use the provided format
+        final DateFormat dateFormat = DateFormat(widget.format);
 
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: screenWidth * .1),
@@ -41,7 +54,7 @@ class InputDate extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(bottom: 2.0, left: screenWidth * .055),
                 child: Text(
-                  text,
+                  widget.text,
                   style: const TextStyle(
                     color: Color(0xFF525252),
                     fontSize: 15,
@@ -67,29 +80,27 @@ class InputDate extends StatelessWidget {
                     onTap: () async {
                       final DateTime? picked = await showDatePicker(
                         context: context,
-                        initialDate: selectedDateTime,
+                        initialDate: _selectedDateTime,
                         firstDate: DateTime(1900),
                         lastDate: DateTime(2100),
                       );
 
                       if (picked != null) {
-                        final TimeOfDay? pickedTime = await showTimePicker(
-                          context: context,
-                          initialTime: TimeOfDay.fromDateTime(selectedDateTime),
-                        );
-
-                        if (pickedTime != null) {
-                          final newDateTime = DateTime(
+                        setState(() {
+                          _selectedDateTime = DateTime(
                             picked.year,
                             picked.month,
                             picked.day,
-                            pickedTime.hour,
-                            pickedTime.minute,
                           );
+                        });
 
-                          // Use the cubit to update the selected date and time
-                          context.read<DateCubit>().selectDateTime(newDateTime);
-                        }
+                        // Use the cubit to update the selected date
+                        context
+                            .read<DateCubit>()
+                            .selectDateTime(_selectedDateTime);
+
+                        // Invoke the callback with the selected date
+                        widget.onDateTimeSelected(_selectedDateTime);
                       }
                     },
                     child: IgnorePointer(
@@ -104,7 +115,7 @@ class InputDate extends StatelessWidget {
                           ),
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: hint,
+                            hintText: widget.hint,
                             hintStyle: const TextStyle(
                               color: Color(0xFFA8A8A8),
                               fontSize: 13,
@@ -118,7 +129,7 @@ class InputDate extends StatelessWidget {
                             ),
                           ),
                           controller: TextEditingController(
-                            text: dateFormat.format(selectedDateTime),
+                            text: dateFormat.format(_selectedDateTime),
                           ),
                         ),
                       ),

@@ -51,7 +51,7 @@ class _ProfileImageState extends State<ProfileImage> {
               )
             : const DecorationImage(
                 image: AssetImage('assets/images/profile-image.jpg'),
-                fit: BoxFit.fitHeight,
+                fit: BoxFit.cover,
               ),
       ),
       child: Stack(
