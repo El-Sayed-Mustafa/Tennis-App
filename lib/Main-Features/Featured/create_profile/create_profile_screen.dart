@@ -12,11 +12,13 @@ import '../../../core/utils/widgets/input_date.dart';
 import '../../../core/utils/widgets/text_field.dart';
 import '../../../generated/l10n.dart';
 import 'create_profile_cubit/create_profile_cubit.dart';
+import 'create_profile_cubit/temp.dart';
 
 class CreateProfile extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
 
   final TextEditingController phoneNumberController = TextEditingController();
+  var formKey = GlobalKey<FormState>();
 
   Uint8List? _selectedImageBytes;
 
@@ -50,72 +52,78 @@ class CreateProfile extends StatelessWidget {
             body: SingleChildScrollView(
               child: Container(
                 color: const Color(0xFFF8F8F8),
-                child: Column(
-                  children: [
-                    const AppBarWave(),
-                    ProfileImage(
-                      onImageSelected: (File imageFile) {
-                        _selectedImageBytes = imageFile.readAsBytesSync();
-                      },
-                    ),
-                    SizedBox(height: screenHeight * .01),
-                    Text(
-                      S.of(context).setProfilePicture,
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      const AppBarWave(),
+                      ProfileImage(
+                        onImageSelected: (File imageFile) {
+                          _selectedImageBytes = imageFile.readAsBytesSync();
+                        },
                       ),
-                    ),
-                    SizedBox(height: screenHeight * .03),
-                    const GenderSelection(),
-                    SizedBox(height: screenHeight * .03),
-                    InputTextWithHint(
-                      hint: S.of(context).typeYourName,
-                      text: S.of(context).playerName,
-                      controller: nameController,
-                    ),
-                    SizedBox(height: screenHeight * .025),
-                    InputTextWithHint(
-                      hint: S.of(context).typeYourPhoneNumber,
-                      text: S.of(context).phoneNumber,
-                      controller: phoneNumberController,
-                    ),
-                    SizedBox(height: screenHeight * .025),
-                    InputDate(
-                      hint: 'Select Date of Birth',
-                      format: 'dd/MM/yyyy',
-                      text: 'Your Age',
-                      onDateTimeSelected: (DateTime dateTime) {
-                        // Handle date selection
-                      },
-                    ),
-                    SizedBox(height: screenHeight * .025),
-                    InputTimeField(
-                      hint: S.of(context).typeYourPreferredPlayingTime,
-                      text: S.of(context).preferredPlayingTime,
-                      onTimeSelected: (TimeOfDay? time) {
-                        _selectedTime = time;
-                      },
-                    ),
-                    SizedBox(height: screenHeight * .025),
-                    const PlayerType(),
-                    SizedBox(height: screenHeight * .01),
-                    BottomSheetContainer(
-                      buttonText: S.of(context).create,
-                      onPressed: () {
-                        context.read<CreateProfileCubit>().saveUserData(
-                              context: context,
-                              nameController: nameController,
-                              phoneNumberController: phoneNumberController,
-                              selectedImageBytes: _selectedImageBytes,
-                              selectedTime: _selectedTime,
-                            );
-                      },
-                      color: const Color(0xFFF8F8F8),
-                    ),
-                  ],
+                      SizedBox(height: screenHeight * .01),
+                      Text(
+                        S.of(context).setProfilePicture,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(height: screenHeight * .03),
+                      SizedBox(height: screenHeight * .03),
+                      const GenderSelection(),
+                      SizedBox(height: screenHeight * .03),
+                      InputTextWithHint(
+                        hint: S.of(context).typeYourName,
+                        text: S.of(context).playerName,
+                        controller: nameController,
+                      ),
+                      SizedBox(height: screenHeight * .025),
+                      InputTextWithHint(
+                        hint: S.of(context).typeYourPhoneNumber,
+                        text: S.of(context).phoneNumber,
+                        controller: phoneNumberController,
+                      ),
+                      SizedBox(height: screenHeight * .025),
+                      InputDate(
+                        hint: 'Select Date of Birth',
+                        format: 'dd/MM/yyyy',
+                        text: 'Your Age',
+                        onDateTimeSelected: (DateTime dateTime) {
+                          // Handle date selection
+                        },
+                      ),
+                      SizedBox(height: screenHeight * .025),
+                      InputTimeField(
+                        hint: S.of(context).typeYourPreferredPlayingTime,
+                        text: S.of(context).preferredPlayingTime,
+                        onTimeSelected: (TimeOfDay? time) {
+                          _selectedTime = time;
+                        },
+                      ),
+                      SizedBox(height: screenHeight * .025),
+                      const PlayerType(),
+                      SizedBox(height: screenHeight * .01),
+                      BottomSheetContainer(
+                        buttonText: S.of(context).create,
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            context.read<CreateProfileCubit>().saveUserData(
+                                  context: context,
+                                  nameController: nameController,
+                                  phoneNumberController: phoneNumberController,
+                                  selectedImageBytes: _selectedImageBytes,
+                                  selectedTime: _selectedTime,
+                                );
+                          }
+                        },
+                        color: const Color(0xFFF8F8F8),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

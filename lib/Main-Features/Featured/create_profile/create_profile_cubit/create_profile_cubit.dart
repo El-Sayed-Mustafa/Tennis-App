@@ -27,6 +27,18 @@ class CreateProfileCubit extends Cubit<CreateProfileState> {
     emit(CreateProfileLoadingState());
 
     try {
+      String? nameError = validateName(nameController.text);
+      String? phoneNumberError =
+          validatePhoneNumber(phoneNumberController.text);
+
+      if (nameError != null || phoneNumberError != null) {
+        emit(CreateProfileValidationErrorState(
+          nameError: nameError,
+          phoneNumberError: phoneNumberError,
+        ));
+        return;
+      }
+
       String selectedGender = context.read<GenderCubit>().state;
       String playerName = nameController.text;
       String phoneNumber = phoneNumberController.text;
@@ -82,6 +94,21 @@ class CreateProfileCubit extends Cubit<CreateProfileState> {
       emit(CreateProfileErrorState(error: error.toString()));
     }
   }
+
+  String? validateName(String value) {
+    if (value.isEmpty) {
+      return 'Please enter your name';
+    }
+    return null;
+  }
+
+  String? validatePhoneNumber(String value) {
+    if (value.isEmpty) {
+      return 'Please enter your phone number';
+    }
+    // Add additional phone number validation if needed
+    return null;
+  }
 }
 
 abstract class CreateProfileState {}
@@ -96,4 +123,14 @@ class CreateProfileErrorState extends CreateProfileState {
   final String error;
 
   CreateProfileErrorState({required this.error});
+}
+
+class CreateProfileValidationErrorState extends CreateProfileState {
+  final String? nameError;
+  final String? phoneNumberError;
+
+  CreateProfileValidationErrorState({
+    this.nameError,
+    this.phoneNumberError,
+  });
 }
