@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../generated/l10n.dart';
-import '../cubit/player_type_cubit.dart';
+import '../cubits/player_type_cubit.dart';
 
 class PlayerType extends StatelessWidget {
   const PlayerType({Key? key}) : super(key: key);
@@ -11,7 +11,7 @@ class PlayerType extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    final genderCubit = context.watch<PlayerTypeCubit>();
+    final playerTypeCubit = context.watch<PlayerTypeCubit>();
 
     return Container(
       width: screenWidth * 0.8,
@@ -30,15 +30,21 @@ class PlayerType extends StatelessWidget {
             SizedBox(
               height: screenHeight * .05,
               width: screenWidth * .35,
-              child: _buildGenderButton(
-                  context, S.of(context).singles, genderCubit.state),
+              child: _buildPlayerTypeButton(
+                context,
+                S.of(context).singles,
+                playerTypeCubit.state,
+              ),
             ),
             Spacer(),
             SizedBox(
               height: screenHeight * .05,
               width: screenWidth * .35,
-              child: _buildGenderButton(
-                  context, S.of(context).doubles, genderCubit.state),
+              child: _buildPlayerTypeButton(
+                context,
+                S.of(context).doubles,
+                playerTypeCubit.state,
+              ),
             ),
           ],
         ),
@@ -46,17 +52,17 @@ class PlayerType extends StatelessWidget {
     );
   }
 
-  Widget _buildGenderButton(
+  Widget _buildPlayerTypeButton(
     BuildContext context,
-    String gender,
-    String? selectedGender,
+    String playerType,
+    String? selectedPlayerType,
   ) {
-    final isSelected = selectedGender == gender;
-    final genderCubit = context.read<PlayerTypeCubit>();
+    final isSelected = selectedPlayerType == playerType;
+    final playerTypeCubit = context.read<PlayerTypeCubit>();
 
     return GestureDetector(
       onTap: () {
-        genderCubit.selectGender(gender);
+        playerTypeCubit.selectPlayerType(playerType);
       },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
@@ -77,7 +83,7 @@ class PlayerType extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            gender,
+            playerType,
             style: TextStyle(
               fontFamily: 'Poppins',
               fontSize: isSelected ? 18 : 15,

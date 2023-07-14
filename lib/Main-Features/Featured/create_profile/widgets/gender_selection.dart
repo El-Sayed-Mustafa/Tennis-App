@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../generated/l10n.dart';
-import '../cubit/Gender_Cubit.dart';
+import '../cubits/Gender_Cubit.dart';
 
 class GenderSelection extends StatelessWidget {
   const GenderSelection({Key? key}) : super(key: key);

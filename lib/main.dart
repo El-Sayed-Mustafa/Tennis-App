@@ -6,9 +6,9 @@ import 'package:tennis_app/Auth/cubit/auth_cubit.dart';
 import 'package:tennis_app/core/utils/app_router.dart';
 import 'package:tennis_app/core/utils/widgets/input_date.dart';
 
-import 'Main-Features/Featured/create_profile/cubit/Gender_Cubit.dart';
-import 'Main-Features/Featured/create_profile/cubit/player_type_cubit.dart';
-import 'Main-Features/Featured/create_profile/cubit/time_cubit.dart';
+import 'Main-Features/Featured/create_profile/cubits/Gender_Cubit.dart';
+import 'Main-Features/Featured/create_profile/cubits/player_type_cubit.dart';
+import 'Main-Features/Featured/create_profile/cubits/time_cubit.dart';
 import 'firebase_options.dart';
 import 'generated/l10n.dart';
 

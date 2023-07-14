@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../cubit/time_cubit.dart';
+import '../cubits/time_cubit.dart';
 
 class InputTimeField extends StatefulWidget {
   final String text;

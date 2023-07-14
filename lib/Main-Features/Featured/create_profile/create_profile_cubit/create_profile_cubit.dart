@@ -1,0 +1,99 @@
+import 'dart:typed_data';
+
+import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:go_router/go_router.dart';
+
+import '../../../../core/utils/widgets/input_date.dart';
+import '../../../../models/player.dart';
+import '../cubits/Gender_Cubit.dart';
+import '../cubits/player_type_cubit.dart';
+
+class CreateProfileCubit extends Cubit<CreateProfileState> {
+  final BuildContext context;
+
+  CreateProfileCubit(this.context) : super(CreateProfileInitialState());
+
+  void saveUserData({
+    required TextEditingController nameController,
+    required TextEditingController phoneNumberController,
+    Uint8List? selectedImageBytes,
+    TimeOfDay? selectedTime,
+    required BuildContext context,
+  }) async {
+    emit(CreateProfileLoadingState());
+
+    try {
+      String selectedGender = context.read<GenderCubit>().state;
+      String playerName = nameController.text;
+      String phoneNumber = phoneNumberController.text;
+      DateTime? selectedDateTime = context.read<DateCubit>().state;
+      String? selectedPlayerType = context.read<PlayerTypeCubit>().state;
+
+      Player player = Player(
+        playerId: '', // Assign a player ID here if applicable
+        playerName: playerName,
+        phoneNumber: phoneNumber,
+        photoURL: '',
+        playerLevel: '',
+        matchPlayed: 0,
+        totalWins: 0,
+        skillLevel: '',
+        clubIds: [],
+        gender: selectedGender,
+        birthDate: selectedDateTime,
+        preferredPlayingTime: selectedTime != null
+            ? '${selectedTime.hour}:${selectedTime.minute.toString().padLeft(2, '0')}'
+            : '',
+        playerType: selectedPlayerType,
+      );
+
+      CollectionReference playersCollection =
+          FirebaseFirestore.instance.collection('players');
+      DocumentReference playerDocRef =
+          await playersCollection.add(player.toJson());
+
+      // Upload the selected image to Firebase Storage
+      if (selectedImageBytes != null) {
+        firebase_storage.Reference storageReference = firebase_storage
+            .FirebaseStorage.instance
+            .ref()
+            .child('players')
+            .child(playerDocRef.id)
+            .child('profile-image.jpg');
+        firebase_storage.UploadTask uploadTask =
+            storageReference.putData(selectedImageBytes);
+        firebase_storage.TaskSnapshot taskSnapshot = await uploadTask;
+        String imageUrl = await taskSnapshot.ref.getDownloadURL();
+
+        // Update the player document with the image URL
+        await playerDocRef.update({'photoURL': imageUrl});
+      }
+
+      // Data saved successfully
+      print('User data saved successfully.');
+
+      emit(CreateProfileSuccessState());
+      GoRouter.of(context).push('/chooseClub');
+    } catch (error) {
+      emit(CreateProfileErrorState(error: error.toString()));
+    }
+  }
+}
+
+abstract class CreateProfileState {}
+
+class CreateProfileInitialState extends CreateProfileState {}
+
+class CreateProfileLoadingState extends CreateProfileState {}
+
+class CreateProfileSuccessState extends CreateProfileState {}
+
+class CreateProfileErrorState extends CreateProfileState {
+  final String error;
+
+  CreateProfileErrorState({required this.error});
+}
