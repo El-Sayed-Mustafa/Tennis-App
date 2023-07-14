@@ -13,6 +13,7 @@ class Player {
   final DateTime birthDate;
   final String preferredPlayingTime;
   final String playerType;
+  final String phoneNumber;
 
   Player({
     required this.playerId,
@@ -27,6 +28,7 @@ class Player {
     required this.birthDate,
     required this.preferredPlayingTime,
     required this.playerType,
+    required this.phoneNumber,
   });
 
   Map<String, dynamic> toJson() {
@@ -43,6 +45,7 @@ class Player {
       'birthDate': birthDate,
       'preferredPlayingTime': preferredPlayingTime,
       'playerType': playerType,
+      'phoneNumber': phoneNumber,
     };
   }
 
@@ -61,6 +64,7 @@ class Player {
       birthDate: (data['birthDate'] as Timestamp).toDate(),
       preferredPlayingTime: data['preferredPlayingTime'] as String,
       playerType: data['playerType'] as String,
+      phoneNumber: data['phoneNumber'] as String,
     );
   }
 }

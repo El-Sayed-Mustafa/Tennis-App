@@ -8,19 +8,17 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/app_bar_wave.dart';
 import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/gender_selection.dart';
-import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/input_date.dart';
 import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/input_time.dart';
+import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/player_type.dart';
 import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/profile_image.dart';
-import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
+import '../../../core/utils/widgets/custom_button.dart';
 import '../../../core/utils/widgets/input_date.dart';
 import '../../../core/utils/widgets/text_field.dart';
 import '../../../generated/l10n.dart';
+import '../../../models/player.dart';
 import 'cubit/Gender_Cubit.dart';
 import 'cubit/player_type_cubit.dart';
-import 'cubit/date_cubit.dart';
-import 'cubit/time_cubit.dart';
-import 'widgets/player_type.dart';
 
 class CreateProfile extends StatefulWidget {
   const CreateProfile({Key? key}) : super(key: key);
@@ -33,7 +31,6 @@ class _CreateProfileState extends State<CreateProfile> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
   Uint8List? _selectedImageBytes;
-  DateTime? _selectedDateTime;
   TimeOfDay? _selectedTime;
 
   @override
@@ -51,17 +48,28 @@ class _CreateProfileState extends State<CreateProfile> {
     String? selectedPlayerType = context.read<PlayerTypeCubit>().state;
     TimeOfDay? preferredPlayingTime = _selectedTime;
 
+    Player player = Player(
+      playerId: '', // Assign a player ID here if applicable
+      playerName: playerName,
+      phoneNumber: phoneNumber,
+      photoURL: '',
+      playerLevel: '',
+      matchPlayed: 0,
+      totalWins: 0,
+      skillLevel: '',
+      clubIds: [],
+      gender: selectedGender,
+      birthDate: selectedDateTime,
+      preferredPlayingTime: preferredPlayingTime != null
+          ? '${preferredPlayingTime.hour}:${preferredPlayingTime.minute.toString().padLeft(2, '0')}'
+          : '',
+      playerType: selectedPlayerType,
+    );
+
     CollectionReference playersCollection =
         FirebaseFirestore.instance.collection('players');
-    DocumentReference playerDocRef = await playersCollection.add({
-      'playerName': playerName,
-      'phoneNumber': phoneNumber,
-      'gender': selectedGender,
-      'selectedDateTime': selectedDateTime?.toUtc(),
-      'preferredPlayingTime': preferredPlayingTime != null
-          ? '${preferredPlayingTime.hour}:${preferredPlayingTime.minute.toString().padLeft(2, '0')}'
-          : null,
-    });
+    DocumentReference playerDocRef =
+        await playersCollection.add(player.toJson());
 
     // Upload the selected image to Firebase Storage
     if (_selectedImageBytes != null) {
@@ -77,7 +85,7 @@ class _CreateProfileState extends State<CreateProfile> {
       String imageUrl = await taskSnapshot.ref.getDownloadURL();
 
       // Update the player document with the image URL
-      await playerDocRef.update({'profileImageUrl': imageUrl});
+      await playerDocRef.update({'photoURL': imageUrl});
     }
 
     // Data saved successfully
@@ -135,9 +143,7 @@ class _CreateProfileState extends State<CreateProfile> {
                 format: 'dd/MM/yyyy',
                 text: 'Your Age',
                 onDateTimeSelected: (DateTime dateTime) {
-                  setState(() {
-                    _selectedDateTime = dateTime;
-                  });
+                  setState(() {});
                 },
               ),
               SizedBox(height: screenHeight * .025),
