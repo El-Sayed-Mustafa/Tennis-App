@@ -1,177 +1,126 @@
 import 'dart:io';
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/app_bar_wave.dart';
 import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/gender_selection.dart';
 import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/input_time.dart';
 import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/player_type.dart';
 import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/profile_image.dart';
-
 import '../../../core/utils/widgets/custom_button.dart';
 import '../../../core/utils/widgets/input_date.dart';
 import '../../../core/utils/widgets/text_field.dart';
 import '../../../generated/l10n.dart';
-import '../../../models/player.dart';
-import 'cubit/Gender_Cubit.dart';
-import 'cubit/player_type_cubit.dart';
+import 'create_profile_cubit/create_profile_cubit.dart';
 
-class CreateProfile extends StatefulWidget {
-  const CreateProfile({Key? key}) : super(key: key);
-
-  @override
-  State<CreateProfile> createState() => _CreateProfileState();
-}
-
-class _CreateProfileState extends State<CreateProfile> {
+class CreateProfile extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
+
   final TextEditingController phoneNumberController = TextEditingController();
+
   Uint8List? _selectedImageBytes;
+
   TimeOfDay? _selectedTime;
 
-  @override
-  void dispose() {
-    nameController.dispose();
-    phoneNumberController.dispose();
-    super.dispose();
-  }
-
-  void saveUserData() async {
-    String selectedGender = context.read<GenderCubit>().state;
-    String playerName = nameController.text;
-    String phoneNumber = phoneNumberController.text;
-    DateTime? selectedDateTime = context.read<DateCubit>().state;
-    String? selectedPlayerType = context.read<PlayerTypeCubit>().state;
-    TimeOfDay? preferredPlayingTime = _selectedTime;
-
-    Player player = Player(
-      playerId: '', // Assign a player ID here if applicable
-      playerName: playerName,
-      phoneNumber: phoneNumber,
-      photoURL: '',
-      playerLevel: '',
-      matchPlayed: 0,
-      totalWins: 0,
-      skillLevel: '',
-      clubIds: [],
-      gender: selectedGender,
-      birthDate: selectedDateTime,
-      preferredPlayingTime: preferredPlayingTime != null
-          ? '${preferredPlayingTime.hour}:${preferredPlayingTime.minute.toString().padLeft(2, '0')}'
-          : '',
-      playerType: selectedPlayerType,
-    );
-
-    CollectionReference playersCollection =
-        FirebaseFirestore.instance.collection('players');
-    DocumentReference playerDocRef =
-        await playersCollection.add(player.toJson());
-
-    // Upload the selected image to Firebase Storage
-    if (_selectedImageBytes != null) {
-      firebase_storage.Reference storageReference = firebase_storage
-          .FirebaseStorage.instance
-          .ref()
-          .child('players')
-          .child(playerDocRef.id)
-          .child('profile-image.jpg');
-      firebase_storage.UploadTask uploadTask =
-          storageReference.putData(_selectedImageBytes!);
-      firebase_storage.TaskSnapshot taskSnapshot = await uploadTask;
-      String imageUrl = await taskSnapshot.ref.getDownloadURL();
-
-      // Update the player document with the image URL
-      await playerDocRef.update({'photoURL': imageUrl});
-    }
-
-    // Data saved successfully
-    print('User data saved successfully.');
-
-    // Navigate to the next screen
-    GoRouter.of(context).push('/chooseClub');
-  }
+  CreateProfile({super.key});
 
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
 
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          color: const Color(0xFFF8F8F8),
-          child: Column(
-            children: [
-              const AppBarWave(),
-              ProfileImage(
-                onImageSelected: (File imageFile) {
-                  setState(() {
-                    _selectedImageBytes = imageFile.readAsBytesSync();
-                  });
-                },
+    return BlocProvider(
+      create: (context) => CreateProfileCubit(context),
+      child: BlocBuilder<CreateProfileCubit, CreateProfileState>(
+        builder: (context, state) {
+          if (state is CreateProfileLoadingState) {
+            return const Dialog.fullscreen(
+              child: Center(
+                child: CircularProgressIndicator(),
               ),
-              SizedBox(height: screenHeight * .01),
-              Text(
-                S.of(context).setProfilePicture,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 14,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w500,
+            );
+          } else if (state is CreateProfileErrorState) {
+            return Scaffold(
+              body: Center(
+                child: Text(state.error),
+              ),
+            );
+          }
+
+          return Scaffold(
+            body: SingleChildScrollView(
+              child: Container(
+                color: const Color(0xFFF8F8F8),
+                child: Column(
+                  children: [
+                    const AppBarWave(),
+                    ProfileImage(
+                      onImageSelected: (File imageFile) {
+                        _selectedImageBytes = imageFile.readAsBytesSync();
+                      },
+                    ),
+                    SizedBox(height: screenHeight * .01),
+                    Text(
+                      S.of(context).setProfilePicture,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(height: screenHeight * .03),
+                    const GenderSelection(),
+                    SizedBox(height: screenHeight * .03),
+                    InputTextWithHint(
+                      hint: S.of(context).typeYourName,
+                      text: S.of(context).playerName,
+                      controller: nameController,
+                    ),
+                    SizedBox(height: screenHeight * .025),
+                    InputTextWithHint(
+                      hint: S.of(context).typeYourPhoneNumber,
+                      text: S.of(context).phoneNumber,
+                      controller: phoneNumberController,
+                    ),
+                    SizedBox(height: screenHeight * .025),
+                    InputDate(
+                      hint: 'Select Date of Birth',
+                      format: 'dd/MM/yyyy',
+                      text: 'Your Age',
+                      onDateTimeSelected: (DateTime dateTime) {
+                        // Handle date selection
+                      },
+                    ),
+                    SizedBox(height: screenHeight * .025),
+                    InputTimeField(
+                      hint: S.of(context).typeYourPreferredPlayingTime,
+                      text: S.of(context).preferredPlayingTime,
+                      onTimeSelected: (TimeOfDay? time) {
+                        _selectedTime = time;
+                      },
+                    ),
+                    SizedBox(height: screenHeight * .025),
+                    const PlayerType(),
+                    SizedBox(height: screenHeight * .01),
+                    BottomSheetContainer(
+                      buttonText: S.of(context).create,
+                      onPressed: () {
+                        context.read<CreateProfileCubit>().saveUserData(
+                              context: context,
+                              nameController: nameController,
+                              phoneNumberController: phoneNumberController,
+                              selectedImageBytes: _selectedImageBytes,
+                              selectedTime: _selectedTime,
+                            );
+                      },
+                      color: const Color(0xFFF8F8F8),
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(height: screenHeight * .03),
-              const GenderSelection(),
-              SizedBox(height: screenHeight * .03),
-              InputTextWithHint(
-                hint: S.of(context).typeYourName,
-                text: S.of(context).playerName,
-                controller: nameController,
-              ),
-              SizedBox(height: screenHeight * .025),
-              InputTextWithHint(
-                hint: S.of(context).typeYourPhoneNumber,
-                text: S.of(context).phoneNumber,
-                controller: phoneNumberController,
-              ),
-              SizedBox(height: screenHeight * .025),
-              InputDate(
-                hint: 'Select Date of Birth',
-                format: 'dd/MM/yyyy',
-                text: 'Your Age',
-                onDateTimeSelected: (DateTime dateTime) {
-                  setState(() {});
-                },
-              ),
-              SizedBox(height: screenHeight * .025),
-              InputTimeField(
-                hint: S.of(context).typeYourPreferredPlayingTime,
-                text: S.of(context).preferredPlayingTime,
-                onTimeSelected: (TimeOfDay? time) {
-                  setState(() {
-                    _selectedTime = time;
-                  });
-                },
-              ),
-              SizedBox(height: screenHeight * .025),
-              BlocProvider(
-                create: (context) => PlayerTypeCubit(),
-                child: const PlayerType(),
-              ),
-              SizedBox(height: screenHeight * .01),
-              BottomSheetContainer(
-                buttonText: S.of(context).create,
-                onPressed: () {
-                  saveUserData();
-                },
-                color: const Color(0xFFF8F8F8),
-              )
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }
