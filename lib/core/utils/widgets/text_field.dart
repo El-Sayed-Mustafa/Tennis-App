@@ -82,7 +82,7 @@ class InputTextWithHint extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return SizedBox(
-      width: screenWidth * .87,
+      width: screenWidth * .83,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

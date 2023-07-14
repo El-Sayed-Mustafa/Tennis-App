@@ -20,7 +20,7 @@ class InputDate extends StatefulWidget {
     Key? key,
     required this.text,
     required this.hint,
-    this.format = 'MMM d, yyyy, h:mm a',
+    this.format = 'MMM d, yyyy',
     required this.onDateTimeSelected,
   }) : super(key: key);
 
@@ -46,99 +46,99 @@ class _InputDateState extends State<InputDate> {
       builder: (context, selectedDateTime) {
         final DateFormat dateFormat = DateFormat(widget.format);
 
-        return Padding(
-          padding: EdgeInsets.symmetric(horizontal: screenWidth * .1),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(bottom: 2.0, left: screenWidth * .055),
-                child: Text(
-                  widget.text,
-                  style: const TextStyle(
-                    color: Color(0xFF525252),
-                    fontSize: 15,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w500,
-                  ),
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(bottom: 2.0, left: screenWidth * .055),
+              child: Text(
+                widget.text,
+                style: const TextStyle(
+                  color: Color(0xFF525252),
+                  fontSize: 15,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
                 ),
               ),
-              Container(
-                width: screenWidth * .8,
-                height: screenHeight * .05,
-                decoration: ShapeDecoration(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(width: 1, color: Color(0x300A557F)),
-                    borderRadius: BorderRadius.circular(100),
-                  ),
+            ),
+            Container(
+              width: screenWidth * .8,
+              height: screenHeight * .045,
+              decoration: ShapeDecoration(
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                  side: const BorderSide(width: .75, color: Colors.black),
+                  borderRadius: BorderRadius.circular(100),
                 ),
-                child: Padding(
-                  padding:
-                      EdgeInsets.only(bottom: screenHeight * .005, left: 24),
-                  child: InkWell(
-                    onTap: () async {
-                      final DateTime? picked = await showDatePicker(
-                        context: context,
-                        initialDate: _selectedDateTime,
-                        firstDate: DateTime(1900),
-                        lastDate: DateTime(2100),
-                      );
+              ),
+              child: Padding(
+                padding: EdgeInsets.only(bottom: screenHeight * .005, left: 24),
+                child: InkWell(
+                  onTap: () async {
+                    final DateTime? picked = await showDatePicker(
+                      context: context,
+                      initialDate: _selectedDateTime,
+                      firstDate: DateTime(1900),
+                      lastDate: DateTime(2100),
+                    );
 
-                      if (picked != null) {
-                        setState(() {
-                          _selectedDateTime = DateTime(
-                            picked.year,
-                            picked.month,
-                            picked.day,
-                          );
-                        });
+                    if (picked != null) {
+                      setState(() {
+                        _selectedDateTime = DateTime(
+                          picked.year,
+                          picked.month,
+                          picked.day,
+                        );
+                      });
 
-                        // Use the cubit to update the selected date
-                        context
-                            .read<DateCubit>()
-                            .selectDateTime(_selectedDateTime);
+                      // Use the cubit to update the selected date
+                      context
+                          .read<DateCubit>()
+                          .selectDateTime(_selectedDateTime);
 
-                        // Invoke the callback with the selected date
-                        widget.onDateTimeSelected(_selectedDateTime);
-                      }
-                    },
-                    child: IgnorePointer(
-                      child: Expanded(
-                        child: TextField(
-                          readOnly: true,
-                          style: const TextStyle(
-                            color: Color(0xFF6E6E6E),
-                            fontSize: 14,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w400,
-                          ),
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: widget.hint,
-                            hintStyle: const TextStyle(
-                              color: Color(0xFFA8A8A8),
-                              fontSize: 13,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w400,
-                            ),
-                            suffixIcon: IconButton(
-                              icon: const Icon(Icons.calendar_month_outlined,
-                                  size: 22),
-                              onPressed: () {},
-                            ),
-                          ),
-                          controller: TextEditingController(
-                            text: dateFormat.format(_selectedDateTime),
-                          ),
+                      // Invoke the callback with the selected date
+                      widget.onDateTimeSelected(_selectedDateTime);
+                    }
+                  },
+                  child: IgnorePointer(
+                    child: TextFormField(
+                      readOnly: true,
+                      style: const TextStyle(
+                        color: Color(0xFF6E6E6E),
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w400,
+                      ),
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: widget.hint,
+                        hintStyle: const TextStyle(
+                          color: Color(0xFFA8A8A8),
+                          fontSize: 13,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w400,
+                        ),
+                        suffixIcon: IconButton(
+                          icon: const Icon(Icons.calendar_month_outlined,
+                              size: 20),
+                          onPressed: () {},
                         ),
                       ),
+                      controller: TextEditingController(
+                        text: dateFormat.format(_selectedDateTime),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a valid date';
+                        }
+                        return null;
+                      },
                     ),
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         );
       },
     );

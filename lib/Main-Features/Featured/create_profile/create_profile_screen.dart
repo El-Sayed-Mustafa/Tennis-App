@@ -12,7 +12,6 @@ import '../../../core/utils/widgets/input_date.dart';
 import '../../../core/utils/widgets/text_field.dart';
 import '../../../generated/l10n.dart';
 import 'create_profile_cubit/create_profile_cubit.dart';
-import 'create_profile_cubit/temp.dart';
 
 class CreateProfile extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
@@ -56,7 +55,9 @@ class CreateProfile extends StatelessWidget {
                   key: formKey,
                   child: Column(
                     children: [
+                      // App bar
                       const AppBarWave(),
+                      //Profile image
                       ProfileImage(
                         onImageSelected: (File imageFile) {
                           _selectedImageBytes = imageFile.readAsBytesSync();
@@ -72,7 +73,6 @@ class CreateProfile extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(height: screenHeight * .03),
                       SizedBox(height: screenHeight * .03),
                       const GenderSelection(),
                       SizedBox(height: screenHeight * .03),

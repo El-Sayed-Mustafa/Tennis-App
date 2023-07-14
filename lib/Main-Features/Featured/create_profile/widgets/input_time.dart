@@ -7,12 +7,14 @@ class InputTimeField extends StatefulWidget {
   final String text;
   final String hint;
   final ValueChanged<TimeOfDay?> onTimeSelected;
+  final IconData? suffix;
 
   const InputTimeField({
     Key? key,
     required this.text,
     required this.hint,
     required this.onTimeSelected,
+    this.suffix,
   }) : super(key: key);
 
   @override
@@ -52,55 +54,50 @@ class _InputTimeFieldState extends State<InputTimeField> {
                   ),
                 ),
               ),
-              Container(
-                width: screenWidth * .8,
-                height: screenHeight * .05,
-                decoration: ShapeDecoration(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(width: 1, color: Color(0x300A557F)),
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                ),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.only(left: 24, right: 24, bottom: 8),
-                  child: InkWell(
-                    onTap: () async {
-                      final TimeOfDay? pickedTime = await showTimePicker(
-                        context: context,
-                        initialTime: selectedTime ?? TimeOfDay.now(),
-                      );
+              InkWell(
+                onTap: () async {
+                  final TimeOfDay? pickedTime = await showTimePicker(
+                    context: context,
+                    initialTime: selectedTime ?? TimeOfDay.now(),
+                  );
 
-                      if (pickedTime != null) {
-                        widget.onTimeSelected(pickedTime);
-                        setState(() {
-                          _controller.text = pickedTime.format(context);
-                        });
-                      }
-                    },
-                    child: IgnorePointer(
-                      child: TextFormField(
-                        readOnly: true,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: widget.hint,
-                          hintStyle: const TextStyle(
-                            color: Color(0xFFA8A8A8),
-                            fontSize: 13,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        controller: _controller,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter a valid time';
-                          }
-                          return null;
-                        },
+                  if (pickedTime != null) {
+                    widget.onTimeSelected(pickedTime);
+                    setState(() {
+                      _controller.text = pickedTime.format(context);
+                    });
+                  }
+                },
+                child: IgnorePointer(
+                  child: TextFormField(
+                    readOnly: true,
+                    decoration: InputDecoration(
+                      suffixIcon:
+                          widget.suffix != null ? Icon(widget.suffix) : null,
+                      isDense: true,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
                       ),
+                      hintText: widget.hint,
+                      hintStyle: const TextStyle(
+                        color: Color(0xFFA8A8A8),
+                        fontSize: 13,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w400,
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10), // Remove the padding
+
+                      filled: true, // Enable background fill
+                      fillColor: Colors.white, // Set the background color
                     ),
+                    controller: _controller,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter a valid time';
+                      }
+                      return null;
+                    },
                   ),
                 ),
               ),
