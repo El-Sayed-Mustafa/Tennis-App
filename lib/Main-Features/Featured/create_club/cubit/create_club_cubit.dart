@@ -5,7 +5,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:meta/meta.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 import '../../../../models/club.dart';
@@ -13,7 +12,7 @@ import '../view/widgets/Age_restriction.dart';
 import '../view/widgets/club_type.dart';
 import 'create_club_state.dart';
 
-class CreateClubCubit extends Cubit<CreateClubInitialState> {
+class CreateClubCubit extends Cubit<CreateClubState> {
   CreateClubCubit(this.context) : super(CreateClubInitialState());
   final BuildContext context;
 
@@ -28,7 +27,7 @@ class CreateClubCubit extends Cubit<CreateClubInitialState> {
   }) async {
     ClubType selectedClubType = context.read<ClubTypeCubit>().state;
     int selectedChoice = context.read<AgeRestrictionCubit>().getSelectedValue();
-
+    emit(CreateClubLoadingState());
     try {
       String clubName = clubNameController.text;
       String clubAdmin = adminNameController.text;
@@ -84,12 +83,13 @@ class CreateClubCubit extends Cubit<CreateClubInitialState> {
       print('Club data saved successfully.');
 
       // You can emit a success state if needed
-      // emit(CreateClubSuccessState());
+      emit(CreateClubSuccessState());
 
       // Redirect to the next screen using GoRouter
       GoRouter.of(context).push('/home');
     } catch (error) {
       // Handle the error if needed
+      emit(CreateClubErrorState(error: error.toString()));
       print('Error: $error');
     }
   }

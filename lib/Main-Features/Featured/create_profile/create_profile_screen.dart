@@ -14,6 +14,7 @@ import '../../../generated/l10n.dart';
 import 'create_profile_cubit/create_profile_cubit.dart';
 import 'create_profile_cubit/create_profile_states.dart';
 
+// ignore: must_be_immutable
 class CreateProfile extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
 

@@ -13,9 +13,9 @@ import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
 import '../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../core/utils/widgets/text_field.dart';
-import '../../../../generated/l10n.dart';
 import '../../create_profile/widgets/profile_image.dart';
 
+// ignore: must_be_immutable
 class CreateClub extends StatelessWidget {
   CreateClub({Key? key}) : super(key: key);
   Uint8List? _selectedImageBytes;

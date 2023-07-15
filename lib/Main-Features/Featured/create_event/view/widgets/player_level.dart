@@ -14,7 +14,6 @@ class RangeSliderWithTooltip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
 
     return BlocBuilder<SliderCubit, double>(
@@ -26,9 +25,9 @@ class RangeSliderWithTooltip extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.only(bottom: 2.0, left: screenWidth * .13),
-                child: Text(
+                child: const Text(
                   'Player level',
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Color(0xFF525252),
                     fontSize: 16,
                     fontFamily: 'Poppins',

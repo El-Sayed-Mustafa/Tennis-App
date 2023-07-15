@@ -41,8 +41,8 @@ class CreateEventCubit extends Cubit<CreateEventState> {
       Event event = Event(
         eventId: '', // The event ID will be assigned by Firestore
         eventName: eventName,
-        eventStartAt: selectedStartDateTime!,
-        eventEndsAt: selectedEndDateTime!,
+        eventStartAt: selectedStartDateTime,
+        eventEndsAt: selectedEndDateTime,
         eventAddress: eventAddress,
         eventType: selectedEventType.toString().split('.').last,
         courtName: courtName,

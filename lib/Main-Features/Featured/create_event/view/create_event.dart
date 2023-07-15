@@ -18,6 +18,7 @@ import '../../../../core/utils/widgets/text_field.dart';
 import '../../create_profile/widgets/profile_image.dart';
 import '../cubit/create_event_state.dart';
 
+// ignore: must_be_immutable
 class CreateEvent extends StatelessWidget {
   CreateEvent({Key? key}) : super(key: key);
 
