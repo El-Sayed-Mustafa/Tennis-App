@@ -22,8 +22,8 @@ abstract class AppRouter {
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider(
-            create: (context) => CreateEventCubit(context),
-            child: SplashScreen(),
+            create: (context) => NavigationCubit(),
+            child: NavigationBarScreen(),
           );
         },
         routes: <RouteBase>[

@@ -11,6 +11,7 @@ class Event {
   final String instructions;
   final List<String> playerIds;
   final double playerLevel;
+  final String clubId;
 
   Event({
     required this.eventId,
@@ -23,6 +24,7 @@ class Event {
     required this.instructions,
     required this.playerIds,
     required this.playerLevel,
+    required this.clubId,
   });
 
   Map<String, dynamic> toJson() {
@@ -37,6 +39,7 @@ class Event {
       'instructions': instructions,
       'playerIds': playerIds,
       'playerLevel': playerLevel,
+      'clubName': clubId, // Included in the JSON
     };
   }
 
@@ -53,6 +56,7 @@ class Event {
       instructions: data['instructions'] as String,
       playerIds: List<String>.from(data['playerIds'] ?? []),
       playerLevel: (data['playerLevel'] as num).toDouble(),
+      clubId: data['clubName'] as String, // Assigned to the club name field
     );
   }
 }

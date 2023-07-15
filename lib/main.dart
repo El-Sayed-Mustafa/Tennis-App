@@ -75,7 +75,7 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => CreateEventCubit(context),
-        )
+        ),
       ],
       child: MaterialApp.router(
         routerConfig: AppRouter.router,

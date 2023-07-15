@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:go_router/go_router.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../../core/utils/widgets/input_date.dart';
 import '../../../../models/player.dart';
@@ -46,8 +47,11 @@ class CreateProfileCubit extends Cubit<CreateProfileState> {
       DateTime? selectedDateTime = context.read<DateCubit>().state;
       String? selectedPlayerType = context.read<PlayerTypeCubit>().state;
 
+      // Get the currently authenticated user ID
+      String playerId = FirebaseAuth.instance.currentUser?.uid ?? '';
+
       Player player = Player(
-        playerId: '', // The player ID will be assigned by Firestore
+        playerId: playerId, // Use the UID as the player ID
         playerName: playerName,
         phoneNumber: phoneNumber,
         photoURL: '',
@@ -67,11 +71,9 @@ class CreateProfileCubit extends Cubit<CreateProfileState> {
 
       CollectionReference playersCollection =
           FirebaseFirestore.instance.collection('players');
-      DocumentReference playerDocRef =
-          await playersCollection.doc(); // Generate a new unique ID
+      DocumentReference playerDocRef = playersCollection.doc(playerId);
 
-      await playerDocRef.set(
-          player.toJson()); // Set the player document with the generated ID
+      await playerDocRef.set(player.toJson());
 
       // Upload the selected image to Firebase Storage
       if (selectedImageBytes != null) {
@@ -79,7 +81,7 @@ class CreateProfileCubit extends Cubit<CreateProfileState> {
             .FirebaseStorage.instance
             .ref()
             .child('players')
-            .child(playerDocRef.id)
+            .child(playerId)
             .child('profile-image.jpg');
         firebase_storage.UploadTask uploadTask =
             storageReference.putData(selectedImageBytes);

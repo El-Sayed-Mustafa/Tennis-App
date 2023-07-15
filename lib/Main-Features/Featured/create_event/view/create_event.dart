@@ -1,11 +1,14 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/cubit/create_event_cubit.dart';
+import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/club_names.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/input_end_date.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/player_level.dart';
 import 'package:tennis_app/core/utils/widgets/rules_text_field.dart';
@@ -27,6 +30,8 @@ class CreateEvent extends StatelessWidget {
   final TextEditingController eventAddressController = TextEditingController();
   final TextEditingController courtNameController = TextEditingController();
   final TextEditingController rulesController = TextEditingController();
+  final TextEditingController clubNameController = TextEditingController();
+
   Uint8List? _selectedImageBytes;
   var formKey = GlobalKey<FormState>();
 
@@ -44,6 +49,9 @@ class CreateEvent extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => SliderCubit(),
+        ),
+        BlocProvider(
+          create: (context) => ClubNamesCubit(),
         )
       ],
       child: BlocProvider(
@@ -102,6 +110,10 @@ class CreateEvent extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: screenHeight * .03),
+                        ClubComboBox(
+                          controller: clubNameController,
+                        ),
+                        SizedBox(height: screenHeight * .03),
                         InputTextWithHint(
                           hint: 'Type event name here',
                           text: 'Event Name',
@@ -153,6 +165,7 @@ class CreateEvent extends StatelessWidget {
                                     courtNameController: courtNameController,
                                     eventNameController: eventNameController,
                                     instructionsController: rulesController,
+                                    clubNameController: clubNameController,
                                   );
                             }
                           },

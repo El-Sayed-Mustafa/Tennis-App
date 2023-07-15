@@ -9,7 +9,7 @@ class Player {
   final int totalWins;
   final String skillLevel;
   final List<String> clubIds;
-  final List<String> eventIds; // Added field for event IDs
+  final List<String> eventIds;
   final String gender;
   final DateTime birthDate;
   final String preferredPlayingTime;
