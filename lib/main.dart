@@ -11,6 +11,7 @@ import 'Main-Features/Featured/create_club/view/widgets/club_type.dart';
 import 'Main-Features/Featured/create_profile/cubits/Gender_Cubit.dart';
 import 'Main-Features/Featured/create_profile/cubits/player_type_cubit.dart';
 import 'Main-Features/Featured/create_profile/cubits/time_cubit.dart';
+import 'core/utils/widgets/input_date_and_time.dart';
 import 'firebase_options.dart';
 import 'generated/l10n.dart';
 
@@ -67,6 +68,9 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => AgeRestrictionCubit(),
+        ),
+        BlocProvider(
+          create: (context) => DateTimeCubit(),
         ),
       ],
       child: MaterialApp.router(

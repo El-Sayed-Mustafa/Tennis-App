@@ -39,81 +39,75 @@ class EventTypeInput extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: screenWidth * .1),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(bottom: 2.0, left: screenWidth * .055),
-            child: const Text(
-              'Event Type',
-              style: TextStyle(
-                color: Color(0xFF525252),
-                fontSize: 15,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w500,
-              ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(bottom: 2.0, left: screenWidth * .055),
+          child: const Text(
+            'Event Type',
+            style: TextStyle(
+              color: Color(0xFF525252),
+              fontSize: 15,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w500,
             ),
           ),
-          BlocBuilder<EventTypeCubit, ClubType>(
-            builder: (context, state) {
-              return Container(
-                width: screenWidth * .8,
-                height: screenHeight * .05,
-                decoration: ShapeDecoration(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(width: 1, color: Color(0x300A557F)),
-                    borderRadius: BorderRadius.circular(100),
-                  ),
+        ),
+        BlocBuilder<EventTypeCubit, ClubType>(
+          builder: (context, state) {
+            return Container(
+              width: screenWidth * .83,
+              height: screenHeight * .045,
+              decoration: ShapeDecoration(
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                  side: const BorderSide(width: .75, color: Colors.black),
+                  borderRadius: BorderRadius.circular(100),
                 ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Row(
-                        children: [
-                          const SizedBox(
-                              width: 25.0), // Adjust the width as needed
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(bottom: 3.0),
-                              child: TextFormField(
-                                style: TextStyle(
-                                  color: Color(0xFF6D6D6D),
-                                  fontSize: 14,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w400,
-                                ),
-                                readOnly: true,
-                                onTap: () {
-                                  _showOptionsPopupMenu(context);
-                                },
-                                decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.symmetric(
-                                      vertical: screenHeight * .015),
-                                  border: InputBorder.none,
-                                  hintText: displayTexts[state],
-                                ),
-                              ),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                            width: 25.0), // Adjust the width as needed
+                        Expanded(
+                          child: TextFormField(
+                            style: const TextStyle(
+                              color: Color(0xFF6D6D6D),
+                              fontSize: 14,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w400,
+                            ),
+                            readOnly: true,
+                            onTap: () {
+                              _showOptionsPopupMenu(context);
+                            },
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.symmetric(
+                                  vertical: screenHeight * .015),
+                              border: InputBorder.none,
+                              hintText: displayTexts[state],
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    IconButton(
-                      onPressed: () {
-                        _showOptionsPopupMenu(context);
-                      },
-                      icon: const Icon(Icons.arrow_drop_down),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
-        ],
-      ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      _showOptionsPopupMenu(context);
+                    },
+                    icon: const Icon(Icons.arrow_drop_down),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ],
     );
   }
 

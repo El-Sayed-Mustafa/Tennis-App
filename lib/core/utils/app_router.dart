@@ -10,6 +10,7 @@ import 'package:tennis_app/Main-Features/Featured/onboarding/onboarding_screen.d
 import '../../Auth/screens/forget_password.dart';
 import '../../Main-Features/Featured/choose_club/choose_club_screen.dart';
 import '../../Main-Features/Featured/create_club/view/create_club.dart';
+import '../../Main-Features/Featured/create_event/view/create_event.dart';
 import '../../Main-Features/Featured/localization/choose_language.dart';
 
 abstract class AppRouter {
@@ -20,7 +21,7 @@ abstract class AppRouter {
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider(
             create: (context) => NavigationCubit(),
-            child: CreateClub(),
+            child: CreateEvent(),
           );
         },
         routes: <RouteBase>[
@@ -75,12 +76,12 @@ abstract class AppRouter {
               return CreateClub();
             },
           ),
-          // GoRoute(
-          //   path: 'createEvent',
-          //   builder: (BuildContext context, GoRouterState state) {
-          //     return const CreateEvent();
-          //   },
-          // ),
+          GoRoute(
+            path: 'createEvent',
+            builder: (BuildContext context, GoRouterState state) {
+              return CreateEvent();
+            },
+          ),
         ],
       ),
     ],
