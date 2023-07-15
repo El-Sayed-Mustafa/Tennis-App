@@ -11,6 +11,7 @@ import '../../../../core/utils/widgets/input_date.dart';
 import '../../../../models/player.dart';
 import '../cubits/Gender_Cubit.dart';
 import '../cubits/player_type_cubit.dart';
+import 'create_profile_states.dart';
 
 class CreateProfileCubit extends Cubit<CreateProfileState> {
   final BuildContext context;
@@ -109,28 +110,4 @@ class CreateProfileCubit extends Cubit<CreateProfileState> {
     // Add additional phone number validation if needed
     return null;
   }
-}
-
-abstract class CreateProfileState {}
-
-class CreateProfileInitialState extends CreateProfileState {}
-
-class CreateProfileLoadingState extends CreateProfileState {}
-
-class CreateProfileSuccessState extends CreateProfileState {}
-
-class CreateProfileErrorState extends CreateProfileState {
-  final String error;
-
-  CreateProfileErrorState({required this.error});
-}
-
-class CreateProfileValidationErrorState extends CreateProfileState {
-  final String? nameError;
-  final String? phoneNumberError;
-
-  CreateProfileValidationErrorState({
-    this.nameError,
-    this.phoneNumberError,
-  });
 }

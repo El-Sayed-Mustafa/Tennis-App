@@ -7,6 +7,10 @@ class AgeRestrictionCubit extends Cubit<int> {
   void setSelectedValue(int value) {
     emit(value);
   }
+
+  int getSelectedValue() {
+    return state;
+  }
 }
 
 class AgeRestrictionWidget extends StatelessWidget {

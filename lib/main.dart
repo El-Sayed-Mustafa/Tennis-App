@@ -6,6 +6,8 @@ import 'package:tennis_app/Auth/cubit/auth_cubit.dart';
 import 'package:tennis_app/core/utils/app_router.dart';
 import 'package:tennis_app/core/utils/widgets/input_date.dart';
 
+import 'Main-Features/Featured/create_club/view/widgets/Age_restriction.dart';
+import 'Main-Features/Featured/create_club/view/widgets/club_type.dart';
 import 'Main-Features/Featured/create_profile/cubits/Gender_Cubit.dart';
 import 'Main-Features/Featured/create_profile/cubits/player_type_cubit.dart';
 import 'Main-Features/Featured/create_profile/cubits/time_cubit.dart';
@@ -59,6 +61,12 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => PlayerTypeCubit(),
+        ),
+        BlocProvider(
+          create: (context) => ClubTypeCubit(),
+        ),
+        BlocProvider(
+          create: (context) => AgeRestrictionCubit(),
         ),
       ],
       child: MaterialApp.router(

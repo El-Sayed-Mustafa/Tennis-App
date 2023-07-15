@@ -12,6 +12,7 @@ import '../../../core/utils/widgets/input_date.dart';
 import '../../../core/utils/widgets/text_field.dart';
 import '../../../generated/l10n.dart';
 import 'create_profile_cubit/create_profile_cubit.dart';
+import 'create_profile_cubit/create_profile_states.dart';
 
 class CreateProfile extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();

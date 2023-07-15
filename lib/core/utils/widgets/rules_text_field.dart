@@ -5,9 +5,12 @@ class RulesInputText extends StatelessWidget {
     Key? key,
     required this.header,
     required this.body,
+    required this.controller,
   }) : super(key: key);
   final String header;
   final String body;
+  final TextEditingController controller;
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -45,6 +48,7 @@ class RulesInputText extends StatelessWidget {
                   const EdgeInsets.only(left: 24, right: 24, bottom: 6, top: 6),
               child: TextField(
                 maxLines: 8,
+                controller: controller,
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: body,
