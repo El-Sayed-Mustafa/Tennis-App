@@ -3,18 +3,20 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import 'package:tennis_app/Main-Features/Featured/create_event/cubit/create_event_cubit.dart';
+import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/input_end_date.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/player_level.dart';
 import 'package:tennis_app/core/utils/widgets/rules_text_field.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/event_types.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
 import '../../../../core/utils/widgets/app_bar_wave.dart';
-import '../../../../core/utils/widgets/input_date.dart';
 import '../../../../core/utils/widgets/input_date_and_time.dart';
 import '../../../../core/utils/widgets/text_field.dart';
 import '../../create_profile/widgets/profile_image.dart';
+import '../cubit/create_event_state.dart';
 
 class CreateEvent extends StatelessWidget {
   CreateEvent({Key? key}) : super(key: key);
@@ -25,107 +27,143 @@ class CreateEvent extends StatelessWidget {
   final TextEditingController courtNameController = TextEditingController();
   final TextEditingController rulesController = TextEditingController();
   Uint8List? _selectedImageBytes;
+  var formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          color: const Color(0xFFF8F8F8),
-          child: Column(
-            children: [
-              AppBarWaveHome(
-                prefixIcon: IconButton(
-                  onPressed: () {
-                    GoRouter.of(context).replace('/home');
-                  },
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    size: 30,
-                    color: Colors.white,
+
+    return MultiProvider(
+      providers: [
+        Provider<EventTypeCubit>(
+          create: (context) => EventTypeCubit(),
+        ),
+        Provider<EndDateTimeCubit>(
+          create: (context) => EndDateTimeCubit(),
+        ),
+      ],
+      child: BlocProvider(
+        create: (context) => CreateEventCubit(context),
+        child: BlocBuilder<CreateEventCubit, CreateEventState>(
+          builder: (context, state) {
+            if (state is CreateEventLoadingState) {
+              return const Dialog.fullscreen(
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            } else if (state is CreateEventErrorState) {
+              return Scaffold(
+                body: Center(
+                  child: Text(state.error),
+                ),
+              );
+            }
+
+            return Scaffold(
+              body: SingleChildScrollView(
+                child: Container(
+                  color: const Color(0xFFF8F8F8),
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                      children: [
+                        AppBarWaveHome(
+                          prefixIcon: IconButton(
+                            onPressed: () {
+                              GoRouter.of(context).replace('/home');
+                            },
+                            icon: const Icon(
+                              Icons.arrow_back,
+                              size: 30,
+                              color: Colors.white,
+                            ),
+                          ),
+                          text: 'Create Event',
+                          suffixIconPath: '',
+                        ),
+                        ProfileImage(
+                          onImageSelected: (File imageFile) {
+                            _selectedImageBytes = imageFile.readAsBytesSync();
+                          },
+                        ),
+                        SizedBox(height: screenHeight * .01),
+                        const Text(
+                          'Set Event Picture',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        SizedBox(height: screenHeight * .03),
+                        InputTextWithHint(
+                          hint: 'Type event name here',
+                          text: 'Event Name',
+                          controller: eventNameController,
+                        ),
+                        SizedBox(height: screenHeight * .03),
+                        InputDateAndTime(
+                          text: 'Event Start',
+                          hint: 'Select start date and time',
+                          onDateTimeSelected: (DateTime dateTime) {},
+                        ),
+                        InputEndDateAndTime(
+                          text: 'Event End',
+                          hint: 'Select end date and time',
+                          onDateTimeSelected: (DateTime dateTime) {},
+                        ),
+                        SizedBox(height: screenHeight * .03),
+                        InputTextWithHint(
+                          hint: 'Type Event address here',
+                          text: 'Event Address',
+                          controller: eventAddressController,
+                        ),
+                        SizedBox(height: screenHeight * .03),
+                        EventTypeInput(),
+                        SizedBox(height: screenHeight * .03),
+                        InputTextWithHint(
+                          hint: 'Type Court name here',
+                          text: 'Court Name',
+                          controller: courtNameController,
+                        ),
+                        SizedBox(height: screenHeight * .03),
+                        RulesInputText(
+                          header: 'Instructions',
+                          body:
+                              'Briefly describe your club’s Instructions here...',
+                          controller: rulesController,
+                        ),
+                        SizedBox(height: screenHeight * .03),
+                        BlocProvider(
+                          create: (context) => SliderCubit(),
+                          child: RangeSliderWithTooltip(),
+                        ),
+                        SizedBox(height: screenHeight * .015),
+                        BottomSheetContainer(
+                          buttonText: 'Create',
+                          onPressed: () {
+                            if (formKey.currentState!.validate()) {
+                              context.read<CreateEventCubit>().saveEventData(
+                                    context: context,
+                                    selectedImageBytes: _selectedImageBytes,
+                                    addressController: eventAddressController,
+                                    courtNameController: courtNameController,
+                                    eventNameController: eventNameController,
+                                    instructionsController: rulesController,
+                                  );
+                            }
+                          },
+                          color: const Color(0xFFF8F8F8),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                text: 'Create Event',
-                suffixIconPath: '',
               ),
-              ProfileImage(
-                onImageSelected: (File imageFile) {
-                  _selectedImageBytes = imageFile.readAsBytesSync();
-                },
-              ),
-              SizedBox(height: screenHeight * .01),
-              const Text(
-                'Set Event Picture',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 14,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              SizedBox(height: screenHeight * .03),
-              InputTextWithHint(
-                hint: 'Type event name here',
-                text: 'Event Name',
-                controller: eventNameController,
-              ),
-              SizedBox(height: screenHeight * .03),
-              InputDateAndTime(
-                hint: 'Type the time here',
-                text: 'Event Start at',
-                onDateTimeSelected: (DateTime dateTime) {},
-              ),
-              SizedBox(height: screenHeight * .03),
-              InputDateAndTime(
-                hint: 'Type the time here',
-                text: 'Event End at',
-                onDateTimeSelected: (DateTime dateTime) {},
-              ),
-              SizedBox(height: screenHeight * .03),
-              InputTextWithHint(
-                hint: 'Type Event address here',
-                text: 'Event Address',
-                controller: eventAddressController,
-              ),
-              SizedBox(height: screenHeight * .03),
-              BlocProvider(
-                create: (context) => EventTypeCubit(),
-                child: EventTypeInput(),
-              ),
-              SizedBox(height: screenHeight * .03),
-              InputTextWithHint(
-                hint: 'Type Court name here',
-                text: 'Court Name',
-                controller: courtNameController,
-              ),
-              SizedBox(height: screenHeight * .03),
-              RulesInputText(
-                header: 'Instructions',
-                body: 'Briefly describe your club’s Instructions here...',
-                controller: rulesController,
-              ),
-              SizedBox(height: screenHeight * .03),
-              BlocProvider(
-                create: (context) => SliderCubit(),
-                child: RangeSliderWithTooltip(),
-              ),
-              SizedBox(height: screenHeight * .015),
-              BottomSheetContainer(
-                buttonText: 'Create',
-                onPressed: () {
-                  // Access the input field values using controllers
-                  String eventName = eventNameController.text;
-                  String eventAddress = eventAddressController.text;
-                  String courtName = courtNameController.text;
-
-                  // Use the input values as needed
-                  // For example, pass them to a Cubit or process them further
-                },
-                color: const Color(0xFFF8F8F8),
-              ),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-enum ClubType {
+enum EventType {
   Tournament,
   OneDay,
   Challenge,
@@ -12,10 +12,10 @@ enum ClubType {
   TrainingPlan,
 }
 
-class EventTypeCubit extends Cubit<ClubType> {
-  EventTypeCubit() : super(ClubType.Tournament);
+class EventTypeCubit extends Cubit<EventType> {
+  EventTypeCubit() : super(EventType.Tournament);
 
-  void setClubType(ClubType clubType) {
+  void setClubType(EventType clubType) {
     emit(clubType);
   }
 }
@@ -23,15 +23,15 @@ class EventTypeCubit extends Cubit<ClubType> {
 class EventTypeInput extends StatelessWidget {
   EventTypeInput({Key? key}) : super(key: key);
 
-  final Map<ClubType, String> displayTexts = {
-    ClubType.Tournament: 'Tournament',
-    ClubType.OneDay: 'One Day',
-    ClubType.Challenge: 'Challenge',
-    ClubType.Competition: 'Competition',
-    ClubType.FriendlyMatch: 'Friendly Match',
-    ClubType.DailyTraining: 'Daily Training',
-    ClubType.PartyEvent: 'Party Event',
-    ClubType.TrainingPlan: 'Training Plan',
+  final Map<EventType, String> displayTexts = {
+    EventType.Tournament: 'Tournament',
+    EventType.OneDay: 'One Day',
+    EventType.Challenge: 'Challenge',
+    EventType.Competition: 'Competition',
+    EventType.FriendlyMatch: 'Friendly Match',
+    EventType.DailyTraining: 'Daily Training',
+    EventType.PartyEvent: 'Party Event',
+    EventType.TrainingPlan: 'Training Plan',
   };
 
   @override
@@ -54,7 +54,7 @@ class EventTypeInput extends StatelessWidget {
             ),
           ),
         ),
-        BlocBuilder<EventTypeCubit, ClubType>(
+        BlocBuilder<EventTypeCubit, EventType>(
           builder: (context, state) {
             return Container(
               width: screenWidth * .83,
@@ -124,33 +124,33 @@ class EventTypeInput extends StatelessWidget {
       ),
       Offset.zero & overlay.size,
     );
-    final Map<ClubType, String> displayTexts = {
-      ClubType.Tournament: 'Tournament',
-      ClubType.OneDay: 'One Day',
-      ClubType.Challenge: 'Challenge',
-      ClubType.Competition: 'Competition',
-      ClubType.FriendlyMatch: 'Friendly Match',
-      ClubType.DailyTraining: 'Daily Training',
-      ClubType.PartyEvent: 'Party Event',
-      ClubType.TrainingPlan: 'Training Plan',
+    final Map<EventType, String> displayTexts = {
+      EventType.Tournament: 'Tournament',
+      EventType.OneDay: 'One Day',
+      EventType.Challenge: 'Challenge',
+      EventType.Competition: 'Competition',
+      EventType.FriendlyMatch: 'Friendly Match',
+      EventType.DailyTraining: 'Daily Training',
+      EventType.PartyEvent: 'Party Event',
+      EventType.TrainingPlan: 'Training Plan',
     };
 
-    final List<ClubType> options = [
-      ClubType.Tournament,
-      ClubType.OneDay,
-      ClubType.Challenge,
-      ClubType.Competition,
-      ClubType.FriendlyMatch,
-      ClubType.DailyTraining,
-      ClubType.PartyEvent,
-      ClubType.TrainingPlan,
+    final List<EventType> options = [
+      EventType.Tournament,
+      EventType.OneDay,
+      EventType.Challenge,
+      EventType.Competition,
+      EventType.FriendlyMatch,
+      EventType.DailyTraining,
+      EventType.PartyEvent,
+      EventType.TrainingPlan,
     ];
 
-    showMenu<ClubType>(
+    showMenu<EventType>(
       context: context,
       position: position,
-      items: options.map((ClubType option) {
-        return PopupMenuItem<ClubType>(
+      items: options.map((EventType option) {
+        return PopupMenuItem<EventType>(
           value: option,
           child: Text(
             displayTexts[option]!,

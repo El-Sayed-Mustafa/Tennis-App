@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Auth/screens/auth_screen.dart';
+import 'package:tennis_app/Main-Features/Featured/create_event/cubit/create_event_cubit.dart';
 import 'package:tennis_app/Main-Features/Featured/create_profile/create_profile_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/navigation_bar/cubit/navigation_cubit.dart';
 import 'package:tennis_app/Main-Features/Featured/navigation_bar/navigation_bar_screen.dart';
@@ -20,7 +21,7 @@ abstract class AppRouter {
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider(
-            create: (context) => NavigationCubit(),
+            create: (context) => CreateEventCubit(context),
             child: CreateEvent(),
           );
         },

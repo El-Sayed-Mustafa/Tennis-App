@@ -13,7 +13,7 @@ import '../view/widgets/Age_restriction.dart';
 import '../view/widgets/club_type.dart';
 import 'create_club_state.dart';
 
-class CreateClubCubit extends Cubit<CreateClubState> {
+class CreateClubCubit extends Cubit<CreateClubInitialState> {
   CreateClubCubit(this.context) : super(CreateClubInitialState());
   final BuildContext context;
 
@@ -30,8 +30,6 @@ class CreateClubCubit extends Cubit<CreateClubState> {
     int selectedChoice = context.read<AgeRestrictionCubit>().getSelectedValue();
 
     try {
-      emit(CreateClubLoadingState());
-
       String clubName = clubNameController.text;
       String clubAdmin = adminNameController.text;
       String nationalID = nationalIDController.text;
@@ -85,13 +83,13 @@ class CreateClubCubit extends Cubit<CreateClubState> {
       // Data saved successfully
       print('Club data saved successfully.');
 
-      emit(CreateClubSuccessState());
+      // You can emit a success state if needed
+      // emit(CreateClubSuccessState());
 
       // Redirect to the next screen using GoRouter
       GoRouter.of(context).push('/home');
     } catch (error) {
       // Handle the error if needed
-      emit(CreateClubErrorState(error: error.toString()));
       print('Error: $error');
     }
   }
