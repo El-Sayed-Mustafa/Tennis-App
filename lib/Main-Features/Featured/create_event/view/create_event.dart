@@ -1,12 +1,9 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/cubit/create_event_cubit.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/club_names.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/input_end_date.dart';
@@ -39,7 +36,7 @@ class CreateEvent extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
 
-    return MultiProvider(
+    return MultiBlocProvider(
       providers: [
         BlocProvider<EventTypeCubit>(
           create: (context) => EventTypeCubit(),
