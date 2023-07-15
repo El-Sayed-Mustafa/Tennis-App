@@ -9,9 +9,10 @@ class Club {
   final String phoneNumber;
   final String email;
   final String rulesAndRegulations;
-  final int ageRestriction;
+  final String ageRestriction;
   final List<String> eventIds;
   final List<String> memberIds;
+  final String? photoURL; // Added field for photo URL
 
   Club({
     required this.clubId,
@@ -25,6 +26,7 @@ class Club {
     required this.ageRestriction,
     required this.eventIds,
     required this.memberIds,
+    this.photoURL, // Initialized as nullable
   });
 
   Map<String, dynamic> toJson() {
@@ -40,6 +42,7 @@ class Club {
       'ageRestriction': ageRestriction,
       'eventIds': eventIds,
       'memberIds': memberIds,
+      'photoURL': photoURL, // Included in the JSON
     };
   }
 
@@ -54,9 +57,10 @@ class Club {
       phoneNumber: data['phoneNumber'] as String,
       email: data['email'] as String,
       rulesAndRegulations: data['rulesAndRegulations'] as String,
-      ageRestriction: data['ageRestriction'] as int,
+      ageRestriction: data['ageRestriction'] as String,
       eventIds: List<String>.from(data['eventIds'] ?? []),
       memberIds: List<String>.from(data['memberIds'] ?? []),
+      photoURL: data['photoURL'] as String?, // Assigned to the nullable field
     );
   }
 }
