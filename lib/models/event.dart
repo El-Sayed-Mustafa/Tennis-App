@@ -39,7 +39,7 @@ class Event {
       'instructions': instructions,
       'playerIds': playerIds,
       'playerLevel': playerLevel,
-      'clubName': clubId, // Included in the JSON
+      'clubId': clubId,
     };
   }
 
@@ -56,7 +56,7 @@ class Event {
       instructions: data['instructions'] as String,
       playerIds: List<String>.from(data['playerIds'] ?? []),
       playerLevel: (data['playerLevel'] as num).toDouble(),
-      clubId: data['clubName'] as String, // Assigned to the club name field
+      clubId: data['clubId'] as String,
     );
   }
 }
