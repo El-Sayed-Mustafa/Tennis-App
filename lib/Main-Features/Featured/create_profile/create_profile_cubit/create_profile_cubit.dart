@@ -47,7 +47,7 @@ class CreateProfileCubit extends Cubit<CreateProfileState> {
       String? selectedPlayerType = context.read<PlayerTypeCubit>().state;
 
       Player player = Player(
-        playerId: '', // Assign a player ID here if applicable
+        playerId: '', // The player ID will be assigned by Firestore
         playerName: playerName,
         phoneNumber: phoneNumber,
         photoURL: '',
@@ -62,12 +62,16 @@ class CreateProfileCubit extends Cubit<CreateProfileState> {
             ? '${selectedTime.hour}:${selectedTime.minute.toString().padLeft(2, '0')}'
             : '',
         playerType: selectedPlayerType,
+        eventIds: [],
       );
 
       CollectionReference playersCollection =
           FirebaseFirestore.instance.collection('players');
       DocumentReference playerDocRef =
-          await playersCollection.add(player.toJson());
+          await playersCollection.doc(); // Generate a new unique ID
+
+      await playerDocRef.set(
+          player.toJson()); // Set the player document with the generated ID
 
       // Upload the selected image to Firebase Storage
       if (selectedImageBytes != null) {

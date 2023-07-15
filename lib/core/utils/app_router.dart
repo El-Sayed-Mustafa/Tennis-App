@@ -7,6 +7,7 @@ import 'package:tennis_app/Main-Features/Featured/create_profile/create_profile_
 import 'package:tennis_app/Main-Features/Featured/navigation_bar/cubit/navigation_cubit.dart';
 import 'package:tennis_app/Main-Features/Featured/navigation_bar/navigation_bar_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/onboarding/onboarding_screen.dart';
+import 'package:tennis_app/Main-Features/Featured/splash/splash_screen.dart';
 
 import '../../Auth/screens/forget_password.dart';
 import '../../Main-Features/Featured/choose_club/choose_club_screen.dart';
@@ -22,7 +23,7 @@ abstract class AppRouter {
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider(
             create: (context) => CreateEventCubit(context),
-            child: CreateEvent(),
+            child: SplashScreen(),
           );
         },
         routes: <RouteBase>[

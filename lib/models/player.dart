@@ -9,6 +9,7 @@ class Player {
   final int totalWins;
   final String skillLevel;
   final List<String> clubIds;
+  final List<String> eventIds; // Added field for event IDs
   final String gender;
   final DateTime birthDate;
   final String preferredPlayingTime;
@@ -24,6 +25,7 @@ class Player {
     required this.totalWins,
     required this.skillLevel,
     required this.clubIds,
+    required this.eventIds,
     required this.gender,
     required this.birthDate,
     required this.preferredPlayingTime,
@@ -41,6 +43,7 @@ class Player {
       'totalWins': totalWins,
       'skillLevel': skillLevel,
       'clubIds': clubIds,
+      'eventIds': eventIds, // Added field for event IDs
       'gender': gender,
       'birthDate': birthDate,
       'preferredPlayingTime': preferredPlayingTime,
@@ -60,6 +63,8 @@ class Player {
       totalWins: data['totalWins'] as int,
       skillLevel: data['skillLevel'] as String,
       clubIds: List<String>.from(data['clubIds'] ?? []),
+      eventIds: List<String>.from(
+          data['eventIds'] ?? []), // Added field for event IDs
       gender: data['gender'] as String,
       birthDate: (data['birthDate'] as Timestamp).toDate(),
       preferredPlayingTime: data['preferredPlayingTime'] as String,

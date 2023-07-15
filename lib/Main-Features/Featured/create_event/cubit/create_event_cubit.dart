@@ -37,17 +37,14 @@ class CreateEventCubit extends Cubit<CreateEventState> {
       DateTime? selectedEndDateTime = context.read<EndDateTimeCubit>().state;
       EventType selectedEventType = context.read<EventTypeCubit>().state;
       double level = context.read<SliderCubit>().state;
+
       Event event = Event(
-        eventId: '', // Assign an event ID here if applicable
+        eventId: '', // The event ID will be assigned by Firestore
         eventName: eventName,
-        eventStartAt:
-            selectedStartDateTime, // Replace with the actual start time
-        eventEndsAt: selectedEndDateTime, // Replace with the actual end time
+        eventStartAt: selectedStartDateTime!,
+        eventEndsAt: selectedEndDateTime!,
         eventAddress: eventAddress,
-        eventType: selectedEventType
-            .toString()
-            .split('.')
-            .last, // Convert the enum value to string
+        eventType: selectedEventType.toString().split('.').last,
         courtName: courtName,
         instructions: instructions,
         playerIds: [],
@@ -57,7 +54,10 @@ class CreateEventCubit extends Cubit<CreateEventState> {
       CollectionReference eventsCollection =
           FirebaseFirestore.instance.collection('events');
       DocumentReference eventDocRef =
-          await eventsCollection.add(event.toJson());
+          await eventsCollection.doc(); // Generate a new unique ID
+
+      await eventDocRef
+          .set(event.toJson()); // Set the event document with the generated ID
 
       // Upload the selected image to Firebase Storage
       if (selectedImageBytes != null) {
@@ -75,6 +75,15 @@ class CreateEventCubit extends Cubit<CreateEventState> {
         // Update the event document with the image URL
         await eventDocRef.update({'eventImageUrl': imageUrl});
       }
+
+      // Add the event ID to the user's eventIds list
+      String playerId = ""; // Replace with the actual player ID
+      CollectionReference playersCollection =
+          FirebaseFirestore.instance.collection('players');
+      DocumentReference playerDocRef = playersCollection.doc(playerId);
+      await playerDocRef.update({
+        'eventIds': FieldValue.arrayUnion([eventDocRef.id]),
+      });
 
       // Data saved successfully
       print('Event data saved successfully.');
