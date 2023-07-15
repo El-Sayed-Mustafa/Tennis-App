@@ -35,12 +35,15 @@ class CreateEvent extends StatelessWidget {
 
     return MultiProvider(
       providers: [
-        Provider<EventTypeCubit>(
+        BlocProvider<EventTypeCubit>(
           create: (context) => EventTypeCubit(),
         ),
-        Provider<EndDateTimeCubit>(
+        BlocProvider<EndDateTimeCubit>(
           create: (context) => EndDateTimeCubit(),
         ),
+        BlocProvider(
+          create: (context) => SliderCubit(),
+        )
       ],
       child: BlocProvider(
         create: (context) => CreateEventCubit(context),
@@ -136,10 +139,7 @@ class CreateEvent extends StatelessWidget {
                           controller: rulesController,
                         ),
                         SizedBox(height: screenHeight * .03),
-                        BlocProvider(
-                          create: (context) => SliderCubit(),
-                          child: RangeSliderWithTooltip(),
-                        ),
+                        const RangeSliderWithTooltip(),
                         SizedBox(height: screenHeight * .015),
                         BottomSheetContainer(
                           buttonText: 'Create',

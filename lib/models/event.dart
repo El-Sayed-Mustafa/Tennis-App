@@ -10,6 +10,7 @@ class Event {
   final String courtName;
   final String instructions;
   final List<String> playerIds;
+  final double playerLevel;
 
   Event({
     required this.eventId,
@@ -21,6 +22,7 @@ class Event {
     required this.courtName,
     required this.instructions,
     required this.playerIds,
+    required this.playerLevel,
   });
 
   Map<String, dynamic> toJson() {
@@ -34,6 +36,7 @@ class Event {
       'courtName': courtName,
       'instructions': instructions,
       'playerIds': playerIds,
+      'playerLevel': playerLevel,
     };
   }
 
@@ -49,6 +52,7 @@ class Event {
       courtName: data['courtName'] as String,
       instructions: data['instructions'] as String,
       playerIds: List<String>.from(data['playerIds'] ?? []),
+      playerLevel: (data['playerLevel'] as num).toDouble(),
     );
   }
 }

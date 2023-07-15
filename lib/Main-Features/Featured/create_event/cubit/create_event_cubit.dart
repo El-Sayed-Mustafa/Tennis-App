@@ -12,6 +12,7 @@ import '../../../../models/event.dart';
 import '../../create_event/cubit/create_event_state.dart';
 import '../../create_event/view/widgets/event_types.dart';
 import '../view/widgets/input_end_date.dart';
+import '../view/widgets/player_level.dart';
 
 class CreateEventCubit extends Cubit<CreateEventState> {
   CreateEventCubit(this.context) : super(CreateEventInitialState());
@@ -35,7 +36,7 @@ class CreateEventCubit extends Cubit<CreateEventState> {
       DateTime? selectedStartDateTime = context.read<DateTimeCubit>().state;
       DateTime? selectedEndDateTime = context.read<EndDateTimeCubit>().state;
       EventType selectedEventType = context.read<EventTypeCubit>().state;
-
+      double level = context.read<SliderCubit>().state;
       Event event = Event(
         eventId: '', // Assign an event ID here if applicable
         eventName: eventName,
@@ -50,6 +51,7 @@ class CreateEventCubit extends Cubit<CreateEventState> {
         courtName: courtName,
         instructions: instructions,
         playerIds: [],
+        playerLevel: level,
       );
 
       CollectionReference eventsCollection =
