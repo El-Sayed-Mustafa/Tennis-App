@@ -13,6 +13,7 @@ import '../../Main-Features/Featured/choose_club/choose_club_screen.dart';
 import '../../Main-Features/Featured/create_club/view/create_club.dart';
 import '../../Main-Features/Featured/create_event/view/create_event.dart';
 import '../../Main-Features/Featured/localization/choose_language.dart';
+import '../../Main-Features/Featured/roles/create_role/view/create_role_screen.dart';
 
 abstract class AppRouter {
   static final GoRouter router = GoRouter(
@@ -22,7 +23,7 @@ abstract class AppRouter {
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider(
             create: (context) => NavigationCubit(),
-            child: AuthScreen(),
+            child: WordSelector(),
           );
         },
         routes: <RouteBase>[
