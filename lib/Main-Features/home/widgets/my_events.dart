@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MyEvents extends StatefulWidget {
   const MyEvents({Key? key}) : super(key: key);
@@ -11,50 +13,103 @@ class MyEvents extends StatefulWidget {
 class _MyEventsState extends State<MyEvents> {
   int selectedPageIndex = 0;
   final CarouselController _carouselController = CarouselController();
+  final CollectionReference eventsCollection =
+      FirebaseFirestore.instance.collection('events');
 
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
-    final double screenHeight = MediaQuery.of(context).size.height;
-    final List<Widget> carouselItems = [
-      CarouselItem(
-        selected: selectedPageIndex == 0,
-        screenWidth: screenWidth,
-      ),
-      CarouselItem(
-        selected: selectedPageIndex == 1,
-        screenWidth: screenWidth,
-      ),
-      CarouselItem(
-        selected: selectedPageIndex == 2,
-        screenWidth: screenWidth,
-      ),
-      CarouselItem(
-        selected: selectedPageIndex == 3,
-        screenWidth: screenWidth,
-      ),
-    ];
-    return Column(
-      children: [
-        CarouselSlider(
-          options: CarouselOptions(
-            height: screenHeight * 0.265,
-            enlargeCenterPage: true,
-            enableInfiniteScroll: false,
-            viewportFraction: 0.5,
-            onPageChanged: (index, _) {
-              setState(() {
-                selectedPageIndex = index;
-              });
-            },
-          ),
-          carouselController: _carouselController, // Use CarouselController
-          items: carouselItems,
-        ),
-        const SizedBox(height: 10), // Spacer for the smooth page indicator
-        buildPageIndicator(
-            carouselItems.length), // Add the smooth page indicator
-      ],
+    return FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+      future: FirebaseFirestore.instance
+          .collection('players')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .get(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final playerData = snapshot.data!.data();
+          final List<String> eventIds =
+              (playerData?['eventIds'] as List<dynamic>?)
+                      ?.map((id) => id.toString())
+                      .toList() ??
+                  [];
+
+          return Column(
+            children: [
+              CarouselSlider(
+                options: CarouselOptions(
+                  height: MediaQuery.of(context).size.height * 0.265,
+                  enlargeCenterPage: true,
+                  enableInfiniteScroll: false,
+                  viewportFraction: 0.5,
+                  onPageChanged: (index, _) {
+                    setState(() {
+                      selectedPageIndex = index;
+                    });
+                  },
+                ),
+                carouselController: _carouselController,
+                items: eventIds.map((eventId) {
+                  return FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                    future: eventsCollection.doc(eventId).get()
+                        as Future<DocumentSnapshot<Map<String, dynamic>>>,
+                    builder: (context, eventSnapshot) {
+                      if (eventSnapshot.hasData) {
+                        final eventData = eventSnapshot.data!.data()!;
+                        final String eventName = eventData['eventName'];
+                        final DateTime eventStartAt =
+                            eventData['eventStartAt'].toDate();
+                        final DateTime eventEndsAt =
+                            eventData['eventEndsAt'].toDate();
+                        final String eventAddress = eventData['eventAddress'];
+                        final String eventType = eventData['eventType'];
+                        final String courtName = eventData['courtName'];
+                        final String instructions = eventData['instructions'];
+                        final List<String> playerIds =
+                            List<String>.from(eventData['playerIds'] ?? []);
+                        final double playerLevel = eventData['playerLevel'];
+                        final String clubId = eventData['clubId'];
+
+                        return CarouselItem(
+                          selected:
+                              selectedPageIndex == eventIds.indexOf(eventId),
+                          screenWidth: MediaQuery.of(context).size.width,
+                          eventName: eventName,
+                          eventStartAt: eventStartAt,
+                          eventEndsAt: eventEndsAt,
+                          eventAddress: eventAddress,
+                          eventType: eventType,
+                          courtName: courtName,
+                          instructions: instructions,
+                          playerIds: playerIds,
+                          playerLevel: playerLevel,
+                          clubId: clubId,
+                        );
+                      } else if (eventSnapshot.hasError) {
+                        return Center(
+                          child: Text('Error fetching event data'),
+                        );
+                      } else {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    },
+                  );
+                }).toList(),
+              ),
+              const SizedBox(height: 10),
+              buildPageIndicator(eventIds.length),
+            ],
+          );
+        } else if (snapshot.hasError) {
+          return Center(
+            child: Text('Error fetching player data'),
+          );
+        } else {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
     );
   }
 
@@ -84,11 +139,31 @@ class _MyEventsState extends State<MyEvents> {
 class CarouselItem extends StatelessWidget {
   final bool selected;
   final double screenWidth;
+  final String eventName;
+  final DateTime eventStartAt;
+  final DateTime eventEndsAt;
+  final String eventAddress;
+  final String eventType;
+  final String courtName;
+  final String instructions;
+  final List<String> playerIds;
+  final double playerLevel;
+  final String clubId;
 
   const CarouselItem({
     Key? key,
     required this.selected,
     required this.screenWidth,
+    required this.eventName,
+    required this.eventStartAt,
+    required this.eventEndsAt,
+    required this.eventAddress,
+    required this.eventType,
+    required this.courtName,
+    required this.instructions,
+    required this.playerIds,
+    required this.playerLevel,
+    required this.clubId,
   }) : super(key: key);
 
   @override
@@ -121,7 +196,7 @@ class CarouselItem extends StatelessWidget {
           ),
           SizedBox(height: itemHeight * 0.03),
           Text(
-            'FC Tournament',
+            eventName,
             style: TextStyle(
               color: const Color(0xFF2A2A2A),
               fontSize: itemHeight * 0.06 * scaleFactor,
@@ -131,7 +206,7 @@ class CarouselItem extends StatelessWidget {
           ),
           SizedBox(height: itemHeight * 0.03),
           Text(
-            '12:00 PM\n12/04/2023',
+            '${eventStartAt.hour}:${eventStartAt.minute} ${eventStartAt.day}/${eventStartAt.month}/${eventStartAt.year}',
             textAlign: TextAlign.center,
             style: TextStyle(
               color: const Color(0xFF00344E),

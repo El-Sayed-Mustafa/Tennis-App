@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tennis_app/Main-Features/home/services/firebase_methods.dart';
 import 'package:tennis_app/Main-Features/home/widgets/avaliable_courts.dart';
 import 'package:tennis_app/Main-Features/home/widgets/button_home.dart';
 import 'package:tennis_app/Main-Features/home/widgets/my_events.dart';
@@ -38,26 +41,26 @@ class HomeScreen extends StatelessWidget {
             Text(
               'Your Upcoming Events',
               style: TextStyle(
-                color: Color(0xFF313131),
+                color: const Color(0xFF313131),
                 fontSize: sectionTitleSize,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w500,
               ),
             ),
             SizedBox(height: spacing),
-            MyEvents(),
+            const MyEvents(),
             SizedBox(height: spacing * 2),
             Text(
               'Available Courts',
               style: TextStyle(
-                color: Color(0xFF313131),
+                color: const Color(0xFF313131),
                 fontSize: sectionTitleSize,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w500,
               ),
             ),
             SizedBox(height: spacing),
-            AvailableCourts(),
+            const AvailableCourts(),
             SizedBox(height: spacing * 2),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
@@ -84,12 +87,11 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   HomeButton(
-                    buttonText: 'Create Event',
-                    imagePath: 'assets/images/Create-Event.svg',
-                    onPressed: () {
-                      GoRouter.of(context).push('/createEvent');
-                    },
-                  ),
+                      buttonText: 'Create Event',
+                      imagePath: 'assets/images/Create-Event.svg',
+                      onPressed: () async {
+                        navigateToCreateEvent(context);
+                      }),
                   HomeButton(
                     buttonText: 'Create Club',
                     imagePath: 'assets/images/Make-offers.svg',
