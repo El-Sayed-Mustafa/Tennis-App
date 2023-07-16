@@ -31,7 +31,32 @@ class _MyEventsState extends State<MyEvents> {
                       ?.map((id) => id.toString())
                       .toList() ??
                   [];
-
+          if (eventIds.isEmpty) {
+            return const Card(
+              margin: EdgeInsets.all(16.0),
+              child: Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    Icon(
+                      Icons.event_busy,
+                      size: 48.0,
+                      color: Color(0xFF00344E),
+                    ),
+                    SizedBox(height: 16.0),
+                    Text(
+                      'Register for the events\n to view them here',
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }
           return Column(
             children: [
               CarouselSlider(
@@ -84,11 +109,11 @@ class _MyEventsState extends State<MyEvents> {
                           clubId: clubId,
                         );
                       } else if (eventSnapshot.hasError) {
-                        return Center(
+                        return const Center(
                           child: Text('Error fetching event data'),
                         );
                       } else {
-                        return Center(
+                        return const Center(
                           child: CircularProgressIndicator(),
                         );
                       }
@@ -101,11 +126,11 @@ class _MyEventsState extends State<MyEvents> {
             ],
           );
         } else if (snapshot.hasError) {
-          return Center(
+          return const Center(
             child: Text('Error fetching player data'),
           );
         } else {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         }

@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -78,6 +79,14 @@ class CreateClubCubit extends Cubit<CreateClubState> {
         // Update the club document with the image URL
         await clubDocRef.update({'clubImageURL': imageUrl});
       }
+
+      // Save the club ID in the current user's data
+      String currentUserID = FirebaseAuth.instance.currentUser!.uid;
+      DocumentReference userDocRef =
+          FirebaseFirestore.instance.collection('players').doc(currentUserID);
+      await userDocRef.update({
+        'clubIds': FieldValue.arrayUnion([clubDocRef.id])
+      });
 
       // Data saved successfully
       print('Club data saved successfully.');
