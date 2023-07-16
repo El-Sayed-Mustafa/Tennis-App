@@ -96,7 +96,7 @@ class CreateEventCubit extends Cubit<CreateEventState> {
       final firebase_storage.TaskSnapshot taskSnapshot = await uploadTask;
       final String imageUrl = await taskSnapshot.ref.getDownloadURL();
 
-      await eventDocRef.update({'eventImageUrl': imageUrl});
+      await eventDocRef.update({'photoURL': imageUrl});
     }
   }
 

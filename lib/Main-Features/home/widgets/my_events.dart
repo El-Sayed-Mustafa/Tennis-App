@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class MyEvents extends StatefulWidget {
   const MyEvents({Key? key}) : super(key: key);
@@ -92,6 +93,7 @@ class _MyEventsState extends State<MyEvents> {
                             List<String>.from(eventData['playerIds'] ?? []);
                         final double playerLevel = eventData['playerLevel'];
                         final String clubId = eventData['clubId'];
+                        final String? photoURL = eventData['photoURL'];
 
                         return CarouselItem(
                           selected:
@@ -107,6 +109,7 @@ class _MyEventsState extends State<MyEvents> {
                           playerIds: playerIds,
                           playerLevel: playerLevel,
                           clubId: clubId,
+                          photoURL: photoURL,
                         );
                       } else if (eventSnapshot.hasError) {
                         return const Center(
@@ -174,6 +177,7 @@ class CarouselItem extends StatelessWidget {
   final List<String> playerIds;
   final double playerLevel;
   final String clubId;
+  final String? photoURL;
 
   const CarouselItem({
     Key? key,
@@ -189,6 +193,7 @@ class CarouselItem extends StatelessWidget {
     required this.playerIds,
     required this.playerLevel,
     required this.clubId,
+    this.photoURL,
   }) : super(key: key);
 
   @override
@@ -202,7 +207,7 @@ class CarouselItem extends StatelessWidget {
 
     final Color backgroundColor =
         selected ? const Color(0xFFFCCBB1) : const Color(0xFFF3ADAB);
-
+    print(photoURL);
     return Container(
       width: 500,
       decoration: ShapeDecoration(
@@ -214,10 +219,20 @@ class CarouselItem extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CircleAvatar(
-            backgroundImage:
-                const AssetImage('assets/images/profile-image.jpg'),
-            radius: (itemHeight * 0.15) * scaleFactor,
+          Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: Colors.white,
+                width: 2.0,
+              ),
+            ),
+            child: CircleAvatar(
+              backgroundImage: photoURL != null
+                  ? NetworkImage(photoURL!)
+                  : Image.asset('assets/images/profile-event.jpg').image,
+              radius: (itemHeight * 0.15) * scaleFactor,
+            ),
           ),
           SizedBox(height: itemHeight * 0.03),
           Text(
@@ -231,7 +246,7 @@ class CarouselItem extends StatelessWidget {
           ),
           SizedBox(height: itemHeight * 0.03),
           Text(
-            '${eventStartAt.hour}:${eventStartAt.minute} ${eventStartAt.day}/${eventStartAt.month}/${eventStartAt.year}',
+            '${eventStartAt.hour}:${eventStartAt.minute} \n${eventStartAt.day}/${eventStartAt.month}/${eventStartAt.year}',
             textAlign: TextAlign.center,
             style: TextStyle(
               color: const Color(0xFF00344E),
