@@ -3,13 +3,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Role {
   final String id;
   final String name;
-  final String clubId;
   final List<Right> rights;
 
   Role({
     required this.id,
     required this.name,
-    required this.clubId,
     required this.rights,
   });
 
@@ -17,7 +15,6 @@ class Role {
     return {
       'id': id,
       'name': name,
-      'clubId': clubId,
       'rights': rights.map((right) => right.toJson()).toList(),
     };
   }
@@ -30,7 +27,6 @@ class Role {
     return Role(
       id: snapshot.id,
       name: data['name'] as String,
-      clubId: data['clubId'] as String,
       rights: rightsList,
     );
   }
