@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/roles/create_role/view/widgets/name_role.dart';
 import 'package:tennis_app/Main-Features/Featured/roles/create_role/view/widgets/rights_selector.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
-
 import '../../../../../core/utils/widgets/app_bar_wave.dart';
+import '../services/firebase_methods.dart';
 
 class CreateRole extends StatefulWidget {
   const CreateRole({Key? key}) : super(key: key);
@@ -101,30 +100,10 @@ class _CreateRoleState extends State<CreateRole> {
                   color: const Color(0xFFF8F8F8),
                   child: BottomSheetContainer(
                     buttonText: 'Create Role',
-                    onPressed: () {
-                      if (roleController.text.isNotEmpty) {
-                        if (selectedWords.isNotEmpty) {
-                          // Perform the desired action with the selected words
-                          // ...
-                        } else {
-                          Fluttertoast.showToast(
-                            msg: "Please select at least one right",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.BOTTOM,
-                            backgroundColor: Colors.red,
-                            textColor: Colors.white,
-                          );
-                        }
-                      } else {
-                        Fluttertoast.showToast(
-                          msg: "Please fill in the role name",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.white,
-                        );
-                      }
-                    },
+                    onPressed: () => RoleService.createRole(
+                      roleController: roleController,
+                      selectedWords: selectedWords,
+                    ),
                     color: const Color(0xFFF8F8F8),
                   ),
                 ),
@@ -135,8 +114,4 @@ class _CreateRoleState extends State<CreateRole> {
       ),
     );
   }
-}
-
-void main() {
-  runApp(const MaterialApp(home: CreateRole()));
 }

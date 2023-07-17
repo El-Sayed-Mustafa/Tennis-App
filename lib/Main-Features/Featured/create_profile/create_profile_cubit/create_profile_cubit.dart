@@ -59,14 +59,14 @@ class CreateProfileCubit extends Cubit<CreateProfileState> {
         matchPlayed: 0,
         totalWins: 0,
         skillLevel: '',
-        createdClubIds: [],
+        createdClubId: '',
         gender: selectedGender,
         birthDate: selectedDateTime,
         preferredPlayingTime: selectedTime != null
             ? '${selectedTime.hour}:${selectedTime.minute.toString().padLeft(2, '0')}'
             : '',
         playerType: selectedPlayerType,
-        eventIds: [],
+        eventIds: [], participatedClubIds: [],
       );
 
       CollectionReference playersCollection =

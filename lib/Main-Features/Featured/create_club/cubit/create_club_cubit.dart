@@ -56,7 +56,7 @@ class CreateClubCubit extends Cubit<CreateClubState> {
         rulesAndRegulations: rulesAndRegulations,
         ageRestriction: ageRestriction,
         eventIds: eventIds,
-        memberIds: memberIds,
+        memberIds: memberIds, roleIds: [],
       );
 
       CollectionReference clubsCollection =

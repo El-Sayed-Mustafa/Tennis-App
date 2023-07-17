@@ -8,7 +8,7 @@ class Player {
   final int matchPlayed;
   final int totalWins;
   final String skillLevel;
-  final List<String> createdClubIds;
+  final String createdClubId;
   final List<String> eventIds;
   final List<String>
       participatedClubIds; // Added property for participated club IDs
@@ -27,7 +27,7 @@ class Player {
     required this.matchPlayed,
     required this.totalWins,
     required this.skillLevel,
-    required this.createdClubIds,
+    required this.createdClubId,
     required this.eventIds,
     required this.participatedClubIds,
     required this.gender,
@@ -47,7 +47,7 @@ class Player {
       'matchPlayed': matchPlayed,
       'totalWins': totalWins,
       'skillLevel': skillLevel,
-      'createdClubIds': createdClubIds,
+      'createdClubId': createdClubId,
       'eventIds': eventIds,
       'participatedClubIds':
           participatedClubIds, // Include participated club IDs in the JSON
@@ -70,7 +70,7 @@ class Player {
       matchPlayed: data['matchPlayed'] as int,
       totalWins: data['totalWins'] as int,
       skillLevel: data['skillLevel'] as String,
-      createdClubIds: List<String>.from(data['createdClubIds'] ?? []),
+      createdClubId: data['createdClubId'] as String,
       eventIds: List<String>.from(data['eventIds'] ?? []),
       participatedClubIds: List<String>.from(data['participatedClubIds'] ??
           []), // Assign participated club IDs from snapshot
