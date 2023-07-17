@@ -8,7 +8,7 @@ class Player {
   final int matchPlayed;
   final int totalWins;
   final String skillLevel;
-  final List<String> clubIds;
+  final List<String> createdClubIds;
   final List<String> eventIds;
   final String gender;
   final DateTime birthDate;
@@ -24,7 +24,7 @@ class Player {
     required this.matchPlayed,
     required this.totalWins,
     required this.skillLevel,
-    required this.clubIds,
+    required this.createdClubIds,
     required this.eventIds,
     required this.gender,
     required this.birthDate,
@@ -42,7 +42,7 @@ class Player {
       'matchPlayed': matchPlayed,
       'totalWins': totalWins,
       'skillLevel': skillLevel,
-      'clubIds': clubIds,
+      'createdClubIds': createdClubIds,
       'eventIds': eventIds, // Added field for event IDs
       'gender': gender,
       'birthDate': birthDate,
@@ -62,7 +62,7 @@ class Player {
       matchPlayed: data['matchPlayed'] as int,
       totalWins: data['totalWins'] as int,
       skillLevel: data['skillLevel'] as String,
-      clubIds: List<String>.from(data['clubIds'] ?? []),
+      createdClubIds: List<String>.from(data['createdClubIds'] ?? []),
       eventIds: List<String>.from(
           data['eventIds'] ?? []), // Added field for event IDs
       gender: data['gender'] as String,
