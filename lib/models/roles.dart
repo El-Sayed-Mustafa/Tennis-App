@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Role {
   final String id;
   final String name;
-  final List<Right> rights;
+  final List<String> rights;
 
   Role({
     required this.id,
@@ -15,43 +15,17 @@ class Role {
     return {
       'id': id,
       'name': name,
-      'rights': rights.map((right) => right.toJson()).toList(),
+      'rights': rights,
     };
   }
 
   static Role fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot) {
     final data = snapshot.data()!;
-    final rightsList = (data['rights'] as List<dynamic>)
-        .map((right) => Right.fromMap(right))
-        .toList();
+    final rightsList = List<String>.from(data['rights'] ?? []);
     return Role(
       id: snapshot.id,
       name: data['name'] as String,
       rights: rightsList,
-    );
-  }
-}
-
-class Right {
-  final String id;
-  final String name;
-
-  Right({
-    required this.id,
-    required this.name,
-  });
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-    };
-  }
-
-  static Right fromMap(Map<String, dynamic> map) {
-    return Right(
-      id: map['id'] as String,
-      name: map['name'] as String,
     );
   }
 }

@@ -102,7 +102,6 @@ class _CreateRoleState extends State<CreateRole> {
                   child: BottomSheetContainer(
                     buttonText: 'Create Role',
                     onPressed: () {
-                      print(selectedWords);
                       if (roleController.text.isNotEmpty) {
                         if (selectedWords.isNotEmpty) {
                           // Perform the desired action with the selected words
