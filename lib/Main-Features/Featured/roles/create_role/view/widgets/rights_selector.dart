@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class RightSelector extends StatefulWidget {
-  const RightSelector({super.key});
+  const RightSelector({Key? key}) : super(key: key);
 
   @override
   _RightSelectorState createState() => _RightSelectorState();
@@ -21,9 +21,9 @@ class _RightSelectorState extends State<RightSelector> {
   ];
 
   List<Color> wordColors = [
-    Color(0x5172B8FF),
-    Color(0x51EE746C),
-    Color(0x51FFA372),
+    const Color(0x5172B8FF),
+    const Color(0x51EE746C),
+    const Color(0x51FFA372),
   ];
 
   List<String> selectedWords = [];
@@ -31,15 +31,35 @@ class _RightSelectorState extends State<RightSelector> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 50),
+        Padding(
+          padding: EdgeInsets.only(bottom: 2.0, left: screenWidth * .055),
+          child: const Text(
+            'Rights',
+            style: TextStyle(
+              color: Color(0xFF525252),
+              fontSize: 15,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: Colors.grey),
+            borderRadius: BorderRadius.circular(30),
+            border: Border.all(color: const Color(0x300A557F), width: 1),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.white,
+                blurRadius: 4,
+                offset: Offset(0, 0),
+              ),
+            ],
           ),
           child: Row(
             children: [
@@ -56,8 +76,8 @@ class _RightSelectorState extends State<RightSelector> {
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
-                      padding: EdgeInsets.all(10),
-                      margin: EdgeInsets.symmetric(vertical: 4),
+                      padding: const EdgeInsets.all(10),
+                      margin: const EdgeInsets.symmetric(vertical: 4),
                       child: Text(word),
                     );
                   }).toList(),
@@ -77,21 +97,21 @@ class _RightSelectorState extends State<RightSelector> {
                       }
                     });
                   },
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                     fontSize: 16,
                   ),
                   borderRadius: BorderRadius.circular(16),
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_drop_down,
-                    color: Colors.black,
+                    color: Color(0xFF1B262C),
                     size: 30,
                   ),
                   items: words.map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8),
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Text(value),
                       ),
                     );

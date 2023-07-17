@@ -7,6 +7,7 @@ import 'package:tennis_app/Main-Features/Featured/navigation_bar/cubit/navigatio
 import 'package:tennis_app/Main-Features/Featured/navigation_bar/navigation_bar_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/onboarding/onboarding_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/splash/splash_screen.dart';
+import 'package:tennis_app/Main-Features/menu/menu_screen.dart';
 
 import '../../Auth/screens/forget_password.dart';
 import '../../Main-Features/Featured/choose_club/choose_club_screen.dart';
@@ -82,6 +83,12 @@ abstract class AppRouter {
             path: 'createEvent',
             builder: (BuildContext context, GoRouterState state) {
               return CreateEvent();
+            },
+          ),
+          GoRoute(
+            path: 'menu',
+            builder: (BuildContext context, GoRouterState state) {
+              return MenuScreen();
             },
           ),
         ],
