@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/roles/create_role/view/widgets/name_role.dart';
 import 'package:tennis_app/Main-Features/Featured/roles/create_role/view/widgets/rights_selector.dart';
@@ -6,13 +7,20 @@ import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
 import '../../../../../core/utils/widgets/app_bar_wave.dart';
 
-class CreateRole extends StatelessWidget {
+class CreateRole extends StatefulWidget {
   const CreateRole({Key? key}) : super(key: key);
+
+  @override
+  State<CreateRole> createState() => _CreateRoleState();
+}
+
+class _CreateRoleState extends State<CreateRole> {
+  final TextEditingController roleController = TextEditingController();
+  List<String> selectedWords = [];
 
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    final TextEditingController roleController = TextEditingController();
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -74,8 +82,15 @@ class CreateRole extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: screenHeight * .03),
-                      const RightSelector(),
-                      const Spacer(), // Add Spacer to push the BottomSheetContainer to the bottom
+                      RightSelector(
+                        selectedWords: selectedWords,
+                        onSelectedWordsChanged: (words) {
+                          setState(() {
+                            selectedWords = words;
+                          });
+                        },
+                      ),
+                      const Spacer(),
                     ],
                   ),
                 ),
@@ -86,7 +101,30 @@ class CreateRole extends StatelessWidget {
                   color: const Color(0xFFF8F8F8),
                   child: BottomSheetContainer(
                     buttonText: 'Create Role',
-                    onPressed: () {},
+                    onPressed: () {
+                      if (roleController.text.isNotEmpty) {
+                        if (selectedWords.isNotEmpty) {
+                          // Perform the desired action with the selected words
+                          // ...
+                        } else {
+                          Fluttertoast.showToast(
+                            msg: "Please select at least one right",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                          );
+                        }
+                      } else {
+                        Fluttertoast.showToast(
+                          msg: "Please fill in the role name",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                        );
+                      }
+                    },
                     color: const Color(0xFFF8F8F8),
                   ),
                 ),

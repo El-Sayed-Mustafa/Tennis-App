@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
 class RightSelector extends StatefulWidget {
-  const RightSelector({Key? key}) : super(key: key);
+  final List<String> selectedWords;
+  final Function(List<String>) onSelectedWordsChanged;
+
+  const RightSelector({
+    Key? key,
+    required this.selectedWords,
+    required this.onSelectedWordsChanged,
+  }) : super(key: key);
 
   @override
   _RightSelectorState createState() => _RightSelectorState();
@@ -26,7 +33,6 @@ class _RightSelectorState extends State<RightSelector> {
     const Color(0x51FFA372),
   ];
 
-  List<String> selectedWords = [];
   bool isDropdownVisible = false;
 
   @override
@@ -67,11 +73,11 @@ class _RightSelectorState extends State<RightSelector> {
                 child: Wrap(
                   spacing: 8.0,
                   runSpacing: 8.0,
-                  children: selectedWords.map<Widget>((String word) {
+                  children: widget.selectedWords.map<Widget>((String word) {
                     return Container(
                       decoration: ShapeDecoration(
-                        color: wordColors[
-                            selectedWords.indexOf(word) % wordColors.length],
+                        color: wordColors[widget.selectedWords.indexOf(word) %
+                            wordColors.length],
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
@@ -89,11 +95,12 @@ class _RightSelectorState extends State<RightSelector> {
                   onChanged: (String? newValue) {
                     setState(() {
                       if (newValue != null) {
-                        if (selectedWords.contains(newValue)) {
-                          selectedWords.remove(newValue);
+                        if (widget.selectedWords.contains(newValue)) {
+                          widget.selectedWords.remove(newValue);
                         } else {
-                          selectedWords.add(newValue);
+                          widget.selectedWords.add(newValue);
                         }
+                        widget.onSelectedWordsChanged(widget.selectedWords);
                       }
                     });
                   },
