@@ -12,7 +12,8 @@ class Club {
   final String ageRestriction;
   final List<String> eventIds;
   final List<String> memberIds;
-  final String? photoURL; // Added field for photo URL
+  final String? photoURL;
+  final List<String> roleIds; // Added property for role IDs
 
   Club({
     required this.clubId,
@@ -26,7 +27,8 @@ class Club {
     required this.ageRestriction,
     required this.eventIds,
     required this.memberIds,
-    this.photoURL, // Initialized as nullable
+    this.photoURL,
+    required this.roleIds,
   });
 
   Map<String, dynamic> toJson() {
@@ -42,7 +44,8 @@ class Club {
       'ageRestriction': ageRestriction,
       'eventIds': eventIds,
       'memberIds': memberIds,
-      'photoURL': photoURL, // Included in the JSON
+      'photoURL': photoURL,
+      'roleIds': roleIds, // Include role IDs in the JSON
     };
   }
 
@@ -60,7 +63,9 @@ class Club {
       ageRestriction: data['ageRestriction'] as String,
       eventIds: List<String>.from(data['eventIds'] ?? []),
       memberIds: List<String>.from(data['memberIds'] ?? []),
-      photoURL: data['photoURL'] as String?, // Assigned to the nullable field
+      photoURL: data['photoURL'] as String?,
+      roleIds: List<String>.from(
+          data['roleIds'] ?? []), // Assign role IDs from snapshot
     );
   }
 }

@@ -10,11 +10,14 @@ class Player {
   final String skillLevel;
   final List<String> createdClubIds;
   final List<String> eventIds;
+  final List<String>
+      participatedClubIds; // Added property for participated club IDs
   final String gender;
   final DateTime birthDate;
   final String preferredPlayingTime;
   final String playerType;
   final String phoneNumber;
+  final String? roleId;
 
   Player({
     required this.playerId,
@@ -26,11 +29,13 @@ class Player {
     required this.skillLevel,
     required this.createdClubIds,
     required this.eventIds,
+    required this.participatedClubIds,
     required this.gender,
     required this.birthDate,
     required this.preferredPlayingTime,
     required this.playerType,
     required this.phoneNumber,
+    this.roleId,
   });
 
   Map<String, dynamic> toJson() {
@@ -43,12 +48,15 @@ class Player {
       'totalWins': totalWins,
       'skillLevel': skillLevel,
       'createdClubIds': createdClubIds,
-      'eventIds': eventIds, // Added field for event IDs
+      'eventIds': eventIds,
+      'participatedClubIds':
+          participatedClubIds, // Include participated club IDs in the JSON
       'gender': gender,
       'birthDate': birthDate,
       'preferredPlayingTime': preferredPlayingTime,
       'playerType': playerType,
       'phoneNumber': phoneNumber,
+      'roleId': roleId,
     };
   }
 
@@ -63,13 +71,15 @@ class Player {
       totalWins: data['totalWins'] as int,
       skillLevel: data['skillLevel'] as String,
       createdClubIds: List<String>.from(data['createdClubIds'] ?? []),
-      eventIds: List<String>.from(
-          data['eventIds'] ?? []), // Added field for event IDs
+      eventIds: List<String>.from(data['eventIds'] ?? []),
+      participatedClubIds: List<String>.from(data['participatedClubIds'] ??
+          []), // Assign participated club IDs from snapshot
       gender: data['gender'] as String,
       birthDate: (data['birthDate'] as Timestamp).toDate(),
       preferredPlayingTime: data['preferredPlayingTime'] as String,
       playerType: data['playerType'] as String,
       phoneNumber: data['phoneNumber'] as String,
+      roleId: data['roleId'] as String?,
     );
   }
 }
