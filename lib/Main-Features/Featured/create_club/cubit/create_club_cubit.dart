@@ -85,7 +85,7 @@ class CreateClubCubit extends Cubit<CreateClubState> {
       DocumentReference userDocRef =
           FirebaseFirestore.instance.collection('players').doc(currentUserID);
       await userDocRef.update({
-        'clubIds': FieldValue.arrayUnion([clubDocRef.id])
+        'createdClubIds': FieldValue.arrayUnion([clubDocRef.id])
       });
 
       // Data saved successfully
