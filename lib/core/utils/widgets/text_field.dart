@@ -107,7 +107,7 @@ class InputTextWithHint extends StatelessWidget {
             isPassword: false,
             validate: (value) {
               if (value!.isEmpty) {
-                return 'Please enter your email address';
+                return 'Please this field is required';
               }
               return null;
             },
