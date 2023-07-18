@@ -57,7 +57,7 @@ class AppBarIcon extends StatelessWidget {
                 ),
                 Positioned(
                   left: screenWidth * 0.05,
-                  top: screenHeight * 0.18,
+                  top: screenHeight * 0.15,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -78,7 +78,7 @@ class AppBarIcon extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: widgetHeight * 1.21,
+          height: widgetHeight * 1.25,
           child: Column(
             mainAxisAlignment: MainAxisAlignment
                 .center, // Align items to the center vertically
@@ -92,27 +92,6 @@ class AppBarIcon extends StatelessWidget {
                 ),
               ),
             ],
-          ),
-        ),
-        Positioned(
-          top: 40,
-          left: 0,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: SizedBox(
-              width: screenWidth * 0.12,
-              height: screenHeight * 0.07,
-              child: IconButton(
-                onPressed: () {
-                  GoRouter.of(context).replace('/menu');
-                },
-                icon: const Icon(
-                  Icons.arrow_back,
-                  size: 50,
-                  color: Colors.white,
-                ),
-              ),
-            ),
           ),
         ),
       ],

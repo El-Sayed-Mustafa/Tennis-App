@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
 import '../../../../core/utils/widgets/app_bar_icon.dart';
 import '../../../../core/utils/widgets/opacity_wave.dart';
-import '../../../../generated/l10n.dart';
+import '../../../menu/widgets/button_menu.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -11,22 +13,91 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      body: Column(
-        children: [
-          Stack(
+      body: SingleChildScrollView(
+        child: Container(
+          color: const Color(0xFFF8F8F8),
+          child: Column(
             children: [
-              AppBarIcon(
-                widgetHeight: screenHeight * .35,
-                //TODO:Change the svg path
-                svgImage: SvgPicture.asset('assets/images/app-bar-icon.svg'),
-                text: 'Settings',
+              Stack(
+                children: [
+                  AppBarIcon(
+                    widgetHeight: screenHeight * .32,
+                    //TODO:Change the svg path
+                    svgImage:
+                        SvgPicture.asset('assets/images/app-bar-icon.svg'),
+                    text: 'Settings',
+                  ),
+                  OpacityWave(height: screenHeight * 0.327),
+                  Positioned(
+                    top: 40,
+                    left: 0,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: SizedBox(
+                        width: screenWidth * 0.12,
+                        height: screenHeight * 0.07,
+                        child: IconButton(
+                          onPressed: () {
+                            print("Press");
+                            GoRouter.of(context).push('/menu');
+                          },
+                          icon: const Icon(
+                            Icons.arrow_back,
+                            size: 50,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              OpacityWave(height: screenHeight * 0.357),
+              SizedBox(
+                height: 30,
+              ),
+              //TODO: add correct pathes
+
+              ButtonMenu(
+                imagePath: 'assets/images/Create-role.svg',
+                buttonText: 'Your Profile',
+                onPressed: () {},
+              ),
+              ButtonMenu(
+                imagePath: 'assets/images/Create-role.svg',
+                buttonText: 'Rate Us',
+                onPressed: () {},
+              ),
+              ButtonMenu(
+                imagePath: 'assets/images/Create-role.svg',
+                buttonText: 'Feedbacks',
+                onPressed: () {},
+              ),
+              ButtonMenu(
+                imagePath: 'assets/images/Create-role.svg',
+                buttonText: 'Notifications',
+                onPressed: () {},
+              ),
+              ButtonMenu(
+                imagePath: 'assets/images/Create-role.svg',
+                buttonText: 'Language',
+                onPressed: () {},
+              ),
+              ButtonMenu(
+                imagePath: 'assets/images/Create-role.svg',
+                buttonText: 'Help',
+                onPressed: () {},
+              ),
+              BottomSheetContainer(
+                buttonText: 'LogOut',
+                onPressed: () {},
+                color: const Color(0xFFF8F8F8),
+              )
             ],
-          )
-        ],
+          ),
+        ),
       ),
     );
   }
