@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:tennis_app/Main-Features/Featured/profile/view/widgets/personal_info.dart';
 import 'package:tennis_app/Main-Features/Featured/profile/view/widgets/playing_info.dart';
 
-import '../../../../../generated/l10n.dart';
 import '../../../../club/widgets/club_info.dart';
+import '../../../create_event/view/widgets/player_level.dart';
 
 class ProfileBody extends StatelessWidget {
   const ProfileBody({super.key});
@@ -31,7 +31,7 @@ class ProfileBody extends StatelessWidget {
             'Your Club',
             style: TextStyle(
               color: Color(0xFF313131),
-              fontSize: 18,
+              fontSize: 20,
               fontFamily: 'Poppins',
               fontWeight: FontWeight.w500,
             ),
@@ -43,6 +43,30 @@ class ProfileBody extends StatelessWidget {
                 left: screenWidth * .05,
                 bottom: screenWidth * .05),
             child: const ClubInfo()),
+        const Text(
+          'Your Strength',
+          style: TextStyle(
+            color: Color(0xFF313131),
+            fontSize: 20,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        //TODO: make it constant with the value
+        // const RangeSliderWithTooltip(),
+
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          child: Text(
+            'Your strength will be determined based on your playing record,\nand your performance may impact your strength rating.',
+            style: TextStyle(
+              color: Color(0xFF6A6A6A),
+              fontSize: 11,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        )
       ],
     );
   }
