@@ -14,6 +14,7 @@ import '../../Main-Features/Featured/choose_club/choose_club_screen.dart';
 import '../../Main-Features/Featured/create_club/view/create_club.dart';
 import '../../Main-Features/Featured/create_event/view/create_event.dart';
 import '../../Main-Features/Featured/localization/choose_language.dart';
+import '../../Main-Features/Featured/profile/view/profile_screen.dart';
 import '../../Main-Features/Featured/roles/create_role/view/create_role_screen.dart';
 import '../../Main-Features/Featured/roles/roles_list/view/roles_list_screen.dart';
 import '../../Main-Features/Featured/settings/view/settings_screen.dart';
@@ -26,7 +27,7 @@ abstract class AppRouter {
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider(
             create: (context) => NavigationCubit(),
-            child: SettingsScreen(),
+            child: ProfileScreen(),
           );
         },
         routes: <RouteBase>[

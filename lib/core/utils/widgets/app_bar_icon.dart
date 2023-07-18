@@ -57,7 +57,7 @@ class AppBarIcon extends StatelessWidget {
                 ),
                 Positioned(
                   left: screenWidth * 0.05,
-                  top: screenHeight * 0.15,
+                  top: screenHeight * 0.2,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
