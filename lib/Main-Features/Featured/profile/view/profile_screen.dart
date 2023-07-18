@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tennis_app/Main-Features/Featured/profile/view/widgets/profile_body.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
 import '../../../../core/utils/widgets/app_bar_icon.dart';
 import '../../../../core/utils/widgets/opacity_wave.dart';
-import '../../../menu/widgets/button_menu.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -55,11 +55,18 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 30,
+              const SizedBox(height: 5),
+              const Text(
+                'Kevin',
+                style: TextStyle(
+                  color: Color(0xFF1B262C),
+                  fontSize: 26,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                ),
               ),
-              //TODO: add correct pathes
-
+              const SizedBox(height: 30),
+              const ProfileBody(),
               BottomSheetContainer(
                 buttonText: 'Edit',
                 onPressed: () {},
