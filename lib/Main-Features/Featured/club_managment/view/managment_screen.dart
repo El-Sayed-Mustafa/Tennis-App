@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/app_bar_wave.dart';
+import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
 import '../../../../core/utils/widgets/app_bar_wave.dart';
+import '../../../../core/utils/widgets/rules_text_field.dart';
 import '../../../club/widgets/club_info.dart';
 import '../../../club/widgets/num_members.dart';
+import '../../create_club/view/widgets/Age_restriction.dart';
 
 class ManagementScreen extends StatelessWidget {
-  const ManagementScreen({super.key});
+  ManagementScreen({super.key});
+  final TextEditingController rulesController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: Container(
@@ -36,6 +41,7 @@ class ManagementScreen extends StatelessWidget {
               Container(
                   margin: EdgeInsets.only(
                       right: screenWidth * .05,
+                      top: screenWidth * .02,
                       left: screenWidth * .05,
                       bottom: screenWidth * .05),
                   child: const ClubInfo()),
@@ -63,10 +69,41 @@ class ManagementScreen extends StatelessWidget {
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w500,
                       ),
-                    )
+                    ),
                   ],
                 ),
-              )
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                'Rules and regulations',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: 10),
+              RulesInputText(
+                header: 'Set the rules for members',
+                body: 'Briefly describe your club’s rule and regulations',
+                controller: rulesController,
+              ),
+              SizedBox(height: screenHeight * .03),
+              const Text(
+                'Age restriction',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: 10),
+              const AgeRestrictionWidget(),
+              SizedBox(height: screenHeight * .015),
+              BottomSheetContainer(
+                  buttonText: 'Set', onPressed: () {}, color: Color(0xFFF8F8F8))
             ],
           ),
         ),
