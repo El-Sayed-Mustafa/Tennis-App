@@ -83,7 +83,7 @@ class AppBarIcon extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment
                 .center, // Align items to the center vertically
             children: [
-              Spacer(),
+              const Spacer(),
               Center(
                 child: SizedBox(
                   height: screenHeight * 0.14,
@@ -106,7 +106,7 @@ class AppBarIcon extends StatelessWidget {
                 onPressed: () {
                   GoRouter.of(context).replace('/menu');
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back,
                   size: 50,
                   color: Colors.white,
