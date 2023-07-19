@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/app_bar_wave.dart';
+import 'package:tennis_app/Main-Features/Featured/club_managment/view/widgets/member_item.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
 import '../../../../core/utils/widgets/app_bar_wave.dart';
@@ -46,9 +46,11 @@ class ManagementScreen extends StatelessWidget {
                       bottom: screenWidth * .05),
                   child: const ClubInfo()),
               const NumMembers(),
+              const SizedBox(height: 20),
               Padding(
                 padding: EdgeInsets.symmetric(
-                    horizontal: screenWidth * .08, vertical: screenWidth * .04),
+                    horizontal: screenWidth * .13,
+                    vertical: screenWidth * .035),
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -73,7 +75,8 @@ class ManagementScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: 10),
+              const MemberItem(),
+              SizedBox(height: screenHeight * .03),
               const Text(
                 'Rules and regulations',
                 style: TextStyle(
@@ -103,7 +106,9 @@ class ManagementScreen extends StatelessWidget {
               const AgeRestrictionWidget(),
               SizedBox(height: screenHeight * .015),
               BottomSheetContainer(
-                  buttonText: 'Set', onPressed: () {}, color: Color(0xFFF8F8F8))
+                  buttonText: 'Set',
+                  onPressed: () {},
+                  color: const Color(0xFFF8F8F8))
             ],
           ),
         ),
