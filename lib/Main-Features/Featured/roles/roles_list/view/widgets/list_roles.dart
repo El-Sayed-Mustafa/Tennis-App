@@ -1,61 +1,96 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../../../../../../models/club.dart';
+import '../../../../../../models/player.dart';
+import '../../../../../../models/roles.dart';
 
 class ListRoles extends StatelessWidget {
   const ListRoles({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final List<String> items = [
-      'Item 1',
-      'Item 2',
-      'Item 2',
-      'Item 2',
-      'Item 2',
-      'Item 2',
-      'Item 2',
-      'Item 2',
-      'Item 2',
-      'Item 2',
-      'Item 2',
-      'Item 2',
-      'Item 2',
-      'Item 2',
-      'Item 2',
-      'Item 2',
-      'Item 2',
-      'Item 2',
-      'Item 2',
-      'Item 2',
-      'Item 2',
-      'Item 2',
-      'Item 2',
-      'Item 3',
-      'Item 4',
-    ];
+    String currentUserID = FirebaseAuth.instance.currentUser!.uid;
+    return FutureBuilder<Player>(
+      future: getPlayerData(currentUserID),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        }
+        if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        }
+        if (!snapshot.hasData) {
+          return const Text('No data found');
+        }
+        final player = snapshot.data!;
+        return FutureBuilder<Club>(
+          future: getClubData(player.createdClubId),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator();
+            }
+            if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
+            }
+            if (!snapshot.hasData) {
+              return const Text('No data found');
+            }
+            final club = snapshot.data!;
+            return FutureBuilder<List<Role>>(
+              future: getRoles(club.roleIds),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                }
+                if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                }
+                if (!snapshot.hasData) {
+                  return const Text('No data found');
+                }
+                final roles = snapshot.data!;
+                return buildListView(roles);
+              },
+            );
+          },
+        );
+      },
+    );
+  }
 
-    final List<Color> colors = [
-      Color(0x5172B8FF),
-      Color(0x51EE746C),
-      Color(0x51FFA372),
-    ];
+  Future<Player> getPlayerData(String playerId) async {
+    final playerDoc = await FirebaseFirestore.instance
+        .collection('players')
+        .doc(playerId)
+        .get();
+    return Player.fromSnapshot(playerDoc);
+  }
 
-    final List<IconData> icons = [
-      Icons.person_add_alt,
-      Icons.personal_injury_outlined,
-      Icons.switch_access_shortcut_add_outlined,
-      Icons.add_task_sharp,
-      Icons.transfer_within_a_station_sharp,
-      Icons.transcribe_sharp,
-      Icons.change_circle_rounded,
-    ];
+  Future<Club> getClubData(String clubId) async {
+    final clubDoc =
+        await FirebaseFirestore.instance.collection('clubs').doc(clubId).get();
+    return Club.fromSnapshot(clubDoc);
+  }
 
+  Future<List<Role>> getRoles(List<String> roleIds) async {
+    final rolesQuery = await FirebaseFirestore.instance
+        .collection('roles')
+        .where(FieldPath.documentId, whereIn: roleIds)
+        .get();
+    return rolesQuery.docs.map((doc) => Role.fromSnapshot(doc)).toList();
+  }
+
+  Widget buildListView(List<Role> roles) {
     return Expanded(
       child: ListView.builder(
-        physics: BouncingScrollPhysics(),
-        itemCount: items.length,
+        physics: const BouncingScrollPhysics(),
+        itemCount: roles.length,
         itemBuilder: (context, index) {
-          final color = colors[index % colors.length];
-          final icon = icons[index % icons.length];
+          final role = roles[index];
+          final color = const Color(0x5172B8FF);
+          final icon = Icons.person_add_alt;
 
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16),
@@ -66,7 +101,7 @@ class ListRoles extends StatelessWidget {
                   borderRadius: BorderRadius.circular(25),
                 ),
               ),
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               child: Row(
                 children: [
                   Padding(
@@ -77,10 +112,10 @@ class ListRoles extends StatelessWidget {
                       size: 25,
                     ),
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Text(
-                    items[index],
-                    style: TextStyle(
+                    role.name,
+                    style: const TextStyle(
                       color: Color(0xFF15324F),
                       fontSize: 18,
                       fontFamily: 'Poppins',
