@@ -13,8 +13,7 @@ class ClubInfo extends StatelessWidget {
 
     final double itemWidth = screenWidth * 0.9;
     final double imageHeight = screenHeight * 0.13;
-    final double titleFontSize = screenHeight * 0.031;
-    final double subtitleFontSize = screenHeight * 0.015;
+    final combine = (screenHeight + screenWidth);
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.041),
@@ -37,8 +36,8 @@ class ClubInfo extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(imageHeight / 5),
                 child: Container(
-                  height: imageHeight,
-                  width: imageHeight,
+                  height: combine * .075,
+                  width: combine * .075,
                   child: Image.asset(
                     'assets/images/clubimage.png',
                     fit: BoxFit.cover,
@@ -52,7 +51,7 @@ class ClubInfo extends StatelessWidget {
                     'FC Barcelona',
                     style: TextStyle(
                       color: Colors.black,
-                      fontSize: titleFontSize,
+                      fontSize: combine * .02,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w700,
                     ),
@@ -64,7 +63,7 @@ class ClubInfo extends StatelessWidget {
                       'Buhl 9, 35043 Marburg ',
                       style: TextStyle(
                         color: const Color(0xFF6D6D6D),
-                        fontSize: subtitleFontSize,
+                        fontSize: combine * .01,
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w500,
                       ),

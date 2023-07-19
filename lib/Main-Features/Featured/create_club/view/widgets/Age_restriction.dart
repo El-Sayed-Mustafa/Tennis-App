@@ -24,12 +24,20 @@ class AgeRestrictionWidget extends StatelessWidget {
     return Container(
       width: screenWidth * .8,
       height: screenHeight * .2,
-      decoration: ShapeDecoration(
+      decoration: BoxDecoration(
         color: Colors.white,
-        shape: RoundedRectangleBorder(
-          side: const BorderSide(width: 1, color: Color(0x300A557F)),
-          borderRadius: BorderRadius.circular(30),
-        ),
+        shape: BoxShape.rectangle,
+        borderRadius: BorderRadius.circular(31),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(
+                0x440D5FC3), // Shadow color with opacity (adjust the alpha value)
+            blurRadius: 3.0, // Adjust the blur radius as per your preference
+            spreadRadius: .5, // Adjust the spread radius as per your preference
+            offset: Offset(0,
+                3), // Adjust the offset to control the position of the shadow
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

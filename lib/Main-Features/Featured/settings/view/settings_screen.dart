@@ -25,9 +25,7 @@ class SettingsScreen extends StatelessWidget {
                 children: [
                   AppBarIcon(
                     widgetHeight: screenHeight * .32,
-                    //TODO:Change the svg path
-                    svgImage:
-                        SvgPicture.asset('assets/images/app-bar-icon.svg'),
+                    svgImage: SvgPicture.asset('assets/images/setting.svg'),
                     text: 'Settings',
                   ),
                   OpacityWave(height: screenHeight * 0.327),
@@ -58,20 +56,18 @@ class SettingsScreen extends StatelessWidget {
               SizedBox(
                 height: 30,
               ),
-              //TODO: add correct pathes
-
               ButtonMenu(
-                imagePath: 'assets/images/Create-role.svg',
+                imagePath: 'assets/images/setting1.svg',
                 buttonText: 'Your Profile',
                 onPressed: () {},
               ),
               ButtonMenu(
-                imagePath: 'assets/images/Create-role.svg',
+                imagePath: 'assets/images/setting2.svg',
                 buttonText: 'Rate Us',
                 onPressed: () {},
               ),
               ButtonMenu(
-                imagePath: 'assets/images/Create-role.svg',
+                imagePath: 'assets/images/Feedbacks.svg',
                 buttonText: 'Feedbacks',
                 onPressed: () {},
               ),
@@ -81,12 +77,12 @@ class SettingsScreen extends StatelessWidget {
                 onPressed: () {},
               ),
               ButtonMenu(
-                imagePath: 'assets/images/Create-role.svg',
+                imagePath: 'assets/images/languages.svg',
                 buttonText: 'Language',
                 onPressed: () {},
               ),
               ButtonMenu(
-                imagePath: 'assets/images/Create-role.svg',
+                imagePath: 'assets/images/help.svg',
                 buttonText: 'Help',
                 onPressed: () {},
               ),

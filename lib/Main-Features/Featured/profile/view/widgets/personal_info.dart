@@ -7,9 +7,9 @@ class PersonalInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
-
+    final combine = (screenHeight + screenWidth);
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(combine * .013),
       width: screenWidth,
       height: screenHeight * .15,
       decoration: ShapeDecoration(
@@ -22,14 +22,14 @@ class PersonalInfo extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 'Preferred Playing time',
                 style: TextStyle(
-                  color: Color(0xFF525252),
-                  fontSize: 14,
+                  color: const Color(0xFF525252),
+                  fontSize: combine * .013,
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.w400,
                 ),
@@ -37,31 +37,8 @@ class PersonalInfo extends StatelessWidget {
               Text(
                 '4:00 PM ',
                 style: TextStyle(
-                  color: Color(0xFF00344E),
-                  fontSize: 14,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w500,
-                ),
-              )
-            ],
-          ),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Date of birth',
-                style: TextStyle(
-                  color: Color(0xFF525252),
-                  fontSize: 14,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              Text(
-                '16-01-2001',
-                style: TextStyle(
-                  color: Color(0xFF00344E),
-                  fontSize: 14,
+                  color: const Color(0xFF00344E),
+                  fontSize: combine * .013,
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.w500,
                 ),
@@ -71,28 +48,51 @@ class PersonalInfo extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
+                'Date of birth',
+                style: TextStyle(
+                  color: const Color(0xFF525252),
+                  fontSize: combine * .013,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              Text(
+                '16-01-2001',
+                style: TextStyle(
+                  color: const Color(0xFF00344E),
+                  fontSize: combine * .013,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                ),
+              )
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
                 'Player type',
                 style: TextStyle(
-                  color: Color(0xFF525252),
-                  fontSize: 14,
+                  color: const Color(0xFF525252),
+                  fontSize: combine * .013,
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.w400,
                 ),
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                 decoration: ShapeDecoration(
                   color: const Color(0x0F00344E),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(100),
                   ),
                 ),
-                child: const Text(
+                child: Text(
                   'Singles',
                   style: TextStyle(
-                    color: Color(0xFF00344E),
-                    fontSize: 14,
+                    color: const Color(0xFF00344E),
+                    fontSize: combine * .013,
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w500,
                   ),

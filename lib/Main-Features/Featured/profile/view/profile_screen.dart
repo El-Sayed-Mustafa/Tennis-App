@@ -25,7 +25,6 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   AppBarIcon(
                     widgetHeight: screenHeight * .37,
-                    //TODO:Change the svg path
                     svgImage:
                         SvgPicture.asset('assets/images/create-profile.svg'),
                     text: 'Your Profile',

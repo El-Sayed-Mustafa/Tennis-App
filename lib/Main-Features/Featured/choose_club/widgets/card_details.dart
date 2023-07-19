@@ -26,7 +26,7 @@ class CardDetails extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(containerWidth * 0.05),
       width: containerWidth,
-      height: containerHeight,
+      height: containerHeight * 1.05,
       decoration: ShapeDecoration(
         color: color,
         shape: RoundedRectangleBorder(

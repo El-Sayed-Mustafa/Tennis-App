@@ -16,12 +16,21 @@ class MemberItem extends StatelessWidget {
       padding: EdgeInsets.all(8),
       width: screenWidth * .8,
       height: screenHeight * .27,
-      decoration: ShapeDecoration(
+      decoration: BoxDecoration(
         color: Colors.white,
-        shape: RoundedRectangleBorder(
-          side: const BorderSide(width: 0.50, color: Color(0x440D5FC3)),
-          borderRadius: BorderRadius.circular(31),
-        ),
+        shape: BoxShape.rectangle,
+        borderRadius: BorderRadius.circular(31),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(
+                0x440D5FC3), // Shadow color with opacity (adjust the alpha value)
+            blurRadius: 5.0, // Adjust the blur radius as per your preference
+            spreadRadius:
+                1.0, // Adjust the spread radius as per your preference
+            offset: Offset(0,
+                3), // Adjust the offset to control the position of the shadow
+          ),
+        ],
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

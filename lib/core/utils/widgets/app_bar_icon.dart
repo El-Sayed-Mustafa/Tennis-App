@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../core/utils/widgets/clipper.dart';
 
@@ -57,7 +56,7 @@ class AppBarIcon extends StatelessWidget {
                 ),
                 Positioned(
                   left: screenWidth * 0.05,
-                  top: screenHeight * 0.2,
+                  top: screenHeight * 0.17,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -78,7 +77,7 @@ class AppBarIcon extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: widgetHeight * 1.25,
+          height: widgetHeight * 1.26,
           child: Column(
             mainAxisAlignment: MainAxisAlignment
                 .center, // Align items to the center vertically
@@ -86,7 +85,7 @@ class AppBarIcon extends StatelessWidget {
               const Spacer(),
               Center(
                 child: SizedBox(
-                  height: screenHeight * 0.14,
+                  height: screenHeight * 0.15,
                   child: Image.asset('assets/images/clubimage.png',
                       fit: BoxFit.cover),
                 ),
