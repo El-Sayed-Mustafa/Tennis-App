@@ -19,9 +19,27 @@ Future<Club> getClubData(String clubId) async {
 }
 
 Future<List<Role>> getRoles(List<String> roleIds) async {
-  final rolesQuery = await FirebaseFirestore.instance
-      .collection('roles')
-      .where(FieldPath.documentId, whereIn: roleIds)
-      .get();
-  return rolesQuery.docs.map((doc) => Role.fromSnapshot(doc)).toList();
+  const batchSize = 10;
+  final List<List<String>> batches = [
+    for (int i = 0; i < roleIds.length; i += batchSize)
+      roleIds.sublist(
+          i, i + batchSize > roleIds.length ? roleIds.length : i + batchSize)
+  ];
+
+  final List<QuerySnapshot> querySnapshots = await Future.wait(
+    batches.map(
+      (batch) => FirebaseFirestore.instance
+          .collection('roles')
+          .where(FieldPath.documentId, whereIn: batch)
+          .get(),
+    ),
+  );
+
+  final List<Role> roles = [];
+  for (var querySnapshot in querySnapshots) {
+    roles.addAll(querySnapshot.docs.map((doc) =>
+        Role.fromSnapshot(doc as DocumentSnapshot<Map<String, dynamic>>)));
+  }
+
+  return roles;
 }

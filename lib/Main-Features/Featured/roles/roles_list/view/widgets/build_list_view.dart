@@ -53,7 +53,7 @@ Widget buildListView(List<Role> roles) {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Icon(
-                      icon,
+                      Icons.person_add_alt,
                       color: Colors.black,
                       size: 25,
                     ),
