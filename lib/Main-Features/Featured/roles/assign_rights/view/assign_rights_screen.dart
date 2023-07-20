@@ -1,11 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../../core/utils/widgets/custom_button.dart';
 import '../../../../../models/roles.dart';
-import '../../create_role/view/widgets/rights_selector.dart'; // Import the RightSelector widget
+import '../../create_role/view/widgets/rights_selector.dart';
+import '../services/firebase_methodes.dart'; // Import the RightSelector widget
 
 class AssignRights extends StatefulWidget {
   const AssignRights({super.key, required this.role});
@@ -30,59 +30,6 @@ class _AssignRightsState extends State<AssignRights> {
     setState(() {
       selectedRights = rights;
     });
-  }
-
-  // Function to update Role data on Firestore
-  Future<void> updateRoleOnFirestore() async {
-    try {
-      final updatedRole = Role(
-        id: widget.role.id,
-        name: widget.role.name,
-        rights: selectedRights,
-      );
-
-      // Update the role document in Firestore
-      await FirebaseFirestore.instance
-          .collection('roles')
-          .doc(updatedRole.id)
-          .update(updatedRole.toJson());
-
-      // Show a success message or navigate to a success screen
-      // ignore: use_build_context_synchronously
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Role Updated'),
-          content: const Text('Role rights have been updated successfully.'),
-          actions: [
-            ElevatedButton(
-              onPressed: () {
-                // Navigate to the previous screen or any other desired screen
-                GoRouter.of(context).pop();
-              },
-              child: const Text('OK'),
-            ),
-          ],
-        ),
-      );
-    } catch (e) {
-      // Show an error message
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Error'),
-          content: const Text('An error occurred while updating the role.'),
-          actions: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text('OK'),
-            ),
-          ],
-        ),
-      );
-    }
   }
 
   @override
@@ -127,25 +74,52 @@ class _AssignRightsState extends State<AssignRights> {
                         ),
                       ),
                       SizedBox(height: screenHeight * .03),
-                      // Display the role details
-                      Text(
-                        'Role ID: ${widget.role.id}',
-                        style: const TextStyle(
-                          color: Color(0xFF616161),
-                          fontSize: 16,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 12.0, horizontal: 16),
+                        child: Container(
+                          decoration: ShapeDecoration(
+                            color: const Color(0x51FFA372),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                          ),
+                          padding: const EdgeInsets.all(16),
+                          child: Row(
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Icon(
+                                  Icons.person_add_alt,
+                                  color: Colors.black,
+                                  size: 25,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                widget.role.name,
+                                style: const TextStyle(
+                                  color: Color(0xFF15324F),
+                                  fontSize: 18,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: screenHeight * .03),
+                      const Text(
+                        'You can more rights to a role.',
+                        style: TextStyle(
+                          color: Color(0xFF989898),
+                          fontSize: 15,
                           fontFamily: 'Poppins',
                           fontWeight: FontWeight.w400,
                         ),
                       ),
-                      Text(
-                        'Role Name: ${widget.role.name}',
-                        style: const TextStyle(
-                          color: Color(0xFF616161),
-                          fontSize: 16,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
+                      SizedBox(height: screenHeight * .03),
                       RightSelector(
                         selectedWords: selectedRights,
                         onSelectedWordsChanged: (words) {
@@ -167,7 +141,8 @@ class _AssignRightsState extends State<AssignRights> {
                     buttonText: 'Update Role', // Update the button text
                     onPressed: () async {
                       // Call the function to update the Role with selected rights
-                      updateRoleOnFirestore();
+                      AssignRightsService.updateRoleOnFirestore(
+                          context, widget.role, selectedRights);
                     },
                     color: const Color(0xFFF8F8F8),
                   ),
