@@ -16,7 +16,8 @@ class ListRoles extends StatelessWidget {
       future: getPlayerData(currentUserID),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
+          return const Expanded(
+              child: Center(child: CircularProgressIndicator()));
         }
         if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
@@ -29,26 +30,32 @@ class ListRoles extends StatelessWidget {
           future: getClubData(player.createdClubId),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CircularProgressIndicator();
+              return const Expanded(
+                  child: Center(child: CircularProgressIndicator()));
             }
             if (snapshot.hasError) {
-              return Text('Error: ${snapshot.error}');
+              return Expanded(
+                  child: Center(child: Text('Error: ${snapshot.error}')));
             }
             if (!snapshot.hasData) {
-              return const Text('No data found');
+              return const Expanded(
+                  child: Center(child: Text('No data found')));
             }
             final club = snapshot.data!;
             return FutureBuilder<List<Role>>(
               future: getRoles(club.roleIds),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
+                  return const Expanded(
+                      child: Center(child: CircularProgressIndicator()));
                 }
                 if (snapshot.hasError) {
-                  return Text('Error: ${snapshot.error}');
+                  return Expanded(
+                      child: Center(child: Text('Error: ${snapshot.error}')));
                 }
                 if (!snapshot.hasData) {
-                  return const Text('No data found');
+                  return const Expanded(
+                      child: Center(child: Text('No data found')));
                 }
                 final roles = snapshot.data!;
                 return buildListView(roles);

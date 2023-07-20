@@ -69,7 +69,9 @@ class RolesScreen extends StatelessWidget {
           ),
           BottomSheetContainer(
               buttonText: 'Create Role',
-              onPressed: () {},
+              onPressed: () {
+                GoRouter.of(context).push('/createRole');
+              },
               color: const Color(0xFFF8F8F8))
         ]),
       ),

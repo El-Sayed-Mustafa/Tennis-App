@@ -95,6 +95,12 @@ abstract class AppRouter {
               return MenuScreen();
             },
           ),
+          GoRoute(
+            path: 'createRole',
+            builder: (BuildContext context, GoRouterState state) {
+              return CreateRole();
+            },
+          ),
         ],
       ),
     ],

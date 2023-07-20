@@ -68,8 +68,8 @@ class _RightSelectorState extends State<RightSelector> {
                   return Container(
                     width: double.infinity,
                     height: containerHeight,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 4),
+                    padding: const EdgeInsets.only(
+                        left: 8.0, top: 4, bottom: 4, right: 35),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                       border:
