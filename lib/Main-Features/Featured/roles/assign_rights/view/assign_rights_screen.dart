@@ -35,7 +35,19 @@ class _AssignRightsState extends State<AssignRights> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-
+    List<String> words = [
+      'Send invitation',
+      'Create Events',
+      'Create tennis courts',
+      'Create offers',
+      'Edit club',
+      'Delete club',
+      'Edit members',
+      'Delete members',
+      'Create Training',
+      'Set up leagues',
+      'Create Roles',
+    ];
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -126,6 +138,7 @@ class _AssignRightsState extends State<AssignRights> {
                           // Call the function to update the Role with selected rights
                           updateRoleWithSelectedRights(words);
                         },
+                        words: words,
                       ),
                       SizedBox(height: screenHeight * .03),
                       const Spacer(),

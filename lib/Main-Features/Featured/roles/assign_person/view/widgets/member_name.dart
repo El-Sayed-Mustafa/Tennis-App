@@ -5,15 +5,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../cubit/member_names_cubit.dart';
 
-class ClubComboBox extends StatefulWidget {
-  const ClubComboBox({super.key, required this.controller});
+class MembersName extends StatefulWidget {
+  const MembersName({super.key, required this.controller});
   final TextEditingController controller;
 
   @override
-  _ClubComboBoxState createState() => _ClubComboBoxState();
+  _MembersNameState createState() => _MembersNameState();
 }
 
-class _ClubComboBoxState extends State<ClubComboBox> {
+class _MembersNameState extends State<MembersName> {
   final String playerId = FirebaseAuth.instance.currentUser!.uid;
   late final PlayerNamesCubit clubNamesCubit;
 
@@ -62,11 +62,11 @@ class _ClubComboBoxState extends State<ClubComboBox> {
             borderRadius: BorderRadius.circular(30),
           ),
           contentPadding:
-              const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
           // Add prefix icon with a search icon
           prefixIcon: Icon(Icons.search),
           // You can adjust the padding between the icon and the text if needed
-          prefixIconConstraints: BoxConstraints(minWidth: 40, minHeight: 40),
+          prefixIconConstraints: BoxConstraints(minWidth: 50, minHeight: 40),
         ),
       ),
       suggestionsCallback: (pattern) {

@@ -17,7 +17,19 @@ class CreateRole extends StatefulWidget {
 class _CreateRoleState extends State<CreateRole> {
   final TextEditingController roleController = TextEditingController();
   List<String> selectedWords = [];
-
+  List<String> words = [
+    'Send invitation',
+    'Create Events',
+    'Create tennis courts',
+    'Create offers',
+    'Edit club',
+    'Delete club',
+    'Edit members',
+    'Delete members',
+    'Create Training',
+    'Set up leagues',
+    'Create Roles',
+  ];
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -134,6 +146,7 @@ class _CreateRoleState extends State<CreateRole> {
                                     selectedWords = words;
                                   });
                                 },
+                                words: words,
                               ),
                               const Spacer(),
                             ],

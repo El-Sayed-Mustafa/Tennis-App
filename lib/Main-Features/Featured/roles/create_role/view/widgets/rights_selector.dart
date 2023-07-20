@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 
 class RightSelector extends StatefulWidget {
   final List<String> selectedWords;
+  final List<String> words;
   final Function(List<String>) onSelectedWordsChanged;
 
   const RightSelector({
     Key? key,
     required this.selectedWords,
     required this.onSelectedWordsChanged,
+    required this.words,
   }) : super(key: key);
 
   @override
@@ -15,20 +17,6 @@ class RightSelector extends StatefulWidget {
 }
 
 class _RightSelectorState extends State<RightSelector> {
-  List<String> words = [
-    'Send invitation',
-    'Create Events',
-    'Create tennis courts',
-    'Create offers',
-    'Edit club',
-    'Delete club',
-    'Edit members',
-    'Delete members',
-    'Create Training',
-    'Set up leagues',
-    'Create Roles',
-  ];
-
   List<Color> wordColors = [
     const Color(0x5172B8FF),
     const Color(0x51EE746C),
@@ -132,7 +120,8 @@ class _RightSelectorState extends State<RightSelector> {
                       color: Color(0xFF1B262C),
                       size: 30,
                     ),
-                    items: words.map<DropdownMenuItem<String>>((String value) {
+                    items: widget.words
+                        .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Padding(
