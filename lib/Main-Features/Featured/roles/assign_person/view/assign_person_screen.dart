@@ -6,6 +6,7 @@ import 'package:tennis_app/Main-Features/Featured/roles/assign_person/view/widge
 
 import '../../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../create_role/view/widgets/rights_selector.dart';
+import '../service/club_roles_service.dart';
 
 class AssignPerson extends StatefulWidget {
   AssignPerson({Key? key}) : super(key: key);
@@ -17,56 +18,22 @@ class AssignPerson extends StatefulWidget {
 class _AssignPersonState extends State<AssignPerson> {
   final TextEditingController memberNameController = TextEditingController();
   late List<String> selectedRole;
-  late List<String> roleNames; // To store the role names
-
-  String getCurrentUserId() {
-    final User? user = FirebaseAuth.instance.currentUser;
-    return user?.uid ?? '';
-  }
-
-  Future<void> fetchClubRolesAndSetState(String clubId) async {
-    try {
-      final clubDoc = await FirebaseFirestore.instance
-          .collection('clubs')
-          .doc(clubId)
-          .get();
-      final clubData = clubDoc.data();
-      if (clubData != null) {
-        setState(() {});
-      }
-    } catch (e) {
-      // Handle errors if necessary
-      print('Error fetching data: $e');
-    }
-  }
-
-  Future<void> fetchRoleNames() async {
-    try {
-      final roleNamesList = <String>[];
-      final rolesSnapshot =
-          await FirebaseFirestore.instance.collection('roles').get();
-      final rolesData = rolesSnapshot.docs;
-      for (final roleDoc in rolesData) {
-        final roleData = roleDoc.data();
-        final roleName = roleData['name'] as String;
-        roleNamesList.add(roleName);
-      }
-      setState(() {
-        roleNames = roleNamesList;
-      });
-    } catch (e) {
-      // Handle errors if necessary
-      print('Error fetching data: $e');
-    }
-  }
+  late List<String> roleNames;
+  late final ClubRolesService clubRolesService;
 
   @override
   void initState() {
     super.initState();
-    selectedRole = [];
-    roleNames = []; // Initialize the roleNames list
+    selectedRole = []; // Initialize selectedRole as an empty list
+    roleNames = [];
+    clubRolesService = ClubRolesService();
     loadClubRoles();
-    fetchRoleNames(); // Fetch role names
+    fetchRoleNames();
+  }
+
+  String getCurrentUserId() {
+    final User? user = FirebaseAuth.instance.currentUser;
+    return user?.uid ?? '';
   }
 
   Future<void> loadClubRoles() async {
@@ -78,12 +45,23 @@ class _AssignPersonState extends State<AssignPerson> {
           .get();
       final playerData = playerSnapshot.data();
       if (playerData != null) {
-        final clubId = playerData['createdClubId'] as String;
-        await fetchClubRolesAndSetState(clubId);
+        setState(() {});
       }
     } catch (e) {
       // Handle errors if necessary
-      print('Error fetching data: $e');
+      print('Error loading club roles: $e');
+    }
+  }
+
+  Future<void> fetchRoleNames() async {
+    try {
+      final roleNamesList = await clubRolesService.fetchRoleNames();
+      setState(() {
+        roleNames.addAll(roleNamesList);
+      });
+    } catch (e) {
+      // Handle errors if necessary
+      print('Error fetching role names: $e');
     }
   }
 
