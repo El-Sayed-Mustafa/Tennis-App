@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/roles/create_role/view/widgets/name_role.dart';
 import 'package:tennis_app/Main-Features/Featured/roles/create_role/view/widgets/rights_selector.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import '../../../../../core/utils/widgets/app_bar_wave.dart';
 import '../cubit/role_cubit.dart';
-import '../services/firebase_methods.dart';
 
 class CreateRole extends StatefulWidget {
   const CreateRole({Key? key}) : super(key: key);

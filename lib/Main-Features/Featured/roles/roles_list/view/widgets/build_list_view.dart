@@ -5,9 +5,9 @@ import '../../../../../../models/roles.dart';
 
 Widget buildListView(List<Role> roles) {
   final List<Color> colors = [
-    const Color(0x5172B8FF),
-    const Color(0x51EE746C),
-    const Color(0x51FFA372),
+    Color(0x5172B8FF),
+    Color(0x51EE746C),
+    Color(0x51FFA372),
   ];
 
   final List<IconData> icons = [
@@ -50,10 +50,10 @@ Widget buildListView(List<Role> roles) {
               padding: const EdgeInsets.all(16),
               child: Row(
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.0),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Icon(
-                      Icons.person_add_alt,
+                      icon,
                       color: Colors.black,
                       size: 25,
                     ),
