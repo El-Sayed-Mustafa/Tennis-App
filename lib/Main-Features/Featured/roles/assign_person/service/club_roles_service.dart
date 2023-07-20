@@ -1,6 +1,27 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ClubRolesService {
+  Future<String?> getPlayerIdByName(String playerName) async {
+    try {
+      final QuerySnapshot playerSnapshot = await FirebaseFirestore.instance
+          .collection('players')
+          .where('playerName', isEqualTo: playerName)
+          .limit(1)
+          .get();
+
+      if (playerSnapshot.docs.isNotEmpty) {
+        final QueryDocumentSnapshot<Object?> playerDoc =
+            playerSnapshot.docs.first;
+        return playerDoc.id;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print('Error fetching player ID: $e');
+      return null;
+    }
+  }
+
   Future<List<String>> fetchClubRoles(String clubId) async {
     try {
       final clubDoc = await FirebaseFirestore.instance

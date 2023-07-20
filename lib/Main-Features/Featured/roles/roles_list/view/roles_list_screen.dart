@@ -42,20 +42,21 @@ class RolesScreen extends StatelessWidget {
             ),
           ),
           ListRoles(),
-          Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: Container(
-              width: screenWidth * 0.4,
-              height: 50,
-              decoration: ShapeDecoration(
-                color: const Color(0x30FFA372),
-                shape: RoundedRectangleBorder(
-                  side: const BorderSide(width: 0.50, color: Color(0xFF00344E)),
-                  borderRadius: BorderRadius.circular(100),
+          GestureDetector(
+            onTap: () => GoRouter.of(context).push('/assignPerson'),
+            child: Padding(
+              padding: const EdgeInsets.all(30.0),
+              child: Container(
+                width: screenWidth * 0.4,
+                height: 50,
+                decoration: ShapeDecoration(
+                  color: const Color(0x30FFA372),
+                  shape: RoundedRectangleBorder(
+                    side:
+                        const BorderSide(width: 0.50, color: Color(0xFF00344E)),
+                    borderRadius: BorderRadius.circular(100),
+                  ),
                 ),
-              ),
-              child: GestureDetector(
-                onTap: () => GoRouter.of(context).push('/assignPerson'),
                 child: const Center(
                   child: Text(
                     'Assign Roles to a Person',
