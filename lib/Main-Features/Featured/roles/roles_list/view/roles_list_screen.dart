@@ -54,14 +54,17 @@ class RolesScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(100),
                 ),
               ),
-              child: const Center(
-                child: Text(
-                  'Assign Roles to a Person',
-                  style: TextStyle(
-                    color: Color(0xFF00344E),
-                    fontSize: 12,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w500,
+              child: GestureDetector(
+                onTap: () => GoRouter.of(context).push('/assignPerson'),
+                child: const Center(
+                  child: Text(
+                    'Assign Roles to a Person',
+                    style: TextStyle(
+                      color: Color(0xFF00344E),
+                      fontSize: 12,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
               ),
