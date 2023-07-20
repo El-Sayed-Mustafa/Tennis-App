@@ -17,7 +17,7 @@ class Player {
   final String preferredPlayingTime;
   final String playerType;
   final String phoneNumber;
-  final String? roleId;
+  final Map<String, String> clubRoles;
 
   Player({
     required this.playerId,
@@ -32,10 +32,10 @@ class Player {
     required this.participatedClubIds,
     required this.gender,
     required this.birthDate,
+    required this.clubRoles,
     required this.preferredPlayingTime,
     required this.playerType,
     required this.phoneNumber,
-    this.roleId,
   });
 
   Map<String, dynamic> toJson() {
@@ -56,7 +56,7 @@ class Player {
       'preferredPlayingTime': preferredPlayingTime,
       'playerType': playerType,
       'phoneNumber': phoneNumber,
-      'roleId': roleId,
+      'clubRoles': clubRoles,
     };
   }
 
@@ -79,7 +79,7 @@ class Player {
       preferredPlayingTime: data['preferredPlayingTime'] as String,
       playerType: data['playerType'] as String,
       phoneNumber: data['phoneNumber'] as String,
-      roleId: data['roleId'] as String?,
+      clubRoles: Map<String, String>.from(data['clubRoles'] ?? {}),
     );
   }
 }
