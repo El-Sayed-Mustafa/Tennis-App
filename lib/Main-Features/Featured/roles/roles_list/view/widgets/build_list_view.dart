@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tennis_app/Main-Features/Featured/roles/assign_rights/view/assign_rights_screen.dart';
 
 import '../../../../../../models/roles.dart';
 
@@ -27,37 +28,48 @@ Widget buildListView(List<Role> roles) {
         final color = colors[index % colors.length];
         final icon = icons[index % icons.length];
 
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16),
-          child: Container(
-            decoration: ShapeDecoration(
-              color: color,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(25),
+        return GestureDetector(
+          onTap: () {
+            // Navigate to the new screen here, passing the selected role's data
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AssignRights(role: role),
               ),
-            ),
-            padding: const EdgeInsets.all(16),
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Icon(
-                    icon,
-                    color: Colors.black,
-                    size: 25,
-                  ),
+            );
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16),
+            child: Container(
+              decoration: ShapeDecoration(
+                color: color,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
                 ),
-                const SizedBox(width: 8),
-                Text(
-                  role.name,
-                  style: const TextStyle(
-                    color: Color(0xFF15324F),
-                    fontSize: 18,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w500,
+              ),
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Icon(
+                      icon,
+                      color: Colors.black,
+                      size: 25,
+                    ),
                   ),
-                ),
-              ],
+                  const SizedBox(width: 8),
+                  Text(
+                    role.name,
+                    style: const TextStyle(
+                      color: Color(0xFF15324F),
+                      fontSize: 18,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         );
