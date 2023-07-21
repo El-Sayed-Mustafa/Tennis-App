@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../models/player.dart';
 import 'member_item.dart';
 
 class HorizontalListView extends StatefulWidget {
-  final List<String> memberNames;
+  final List<Player> memberNames;
 
   HorizontalListView({required this.memberNames});
 
@@ -39,9 +40,12 @@ class _HorizontalListViewState extends State<HorizontalListView> {
             scrollDirection: Axis.horizontal,
             itemCount: widget.memberNames.length,
             itemBuilder: (context, index) {
+              final Player member =
+                  widget.memberNames[index]; // Get the correct Player object
               return Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: MemberItem(memberName: widget.memberNames[index]),
+                child: MemberItem(
+                    member: member), // Pass the Player object to MemberItem
               );
             },
           ),

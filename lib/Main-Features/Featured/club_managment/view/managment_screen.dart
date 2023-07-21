@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/club_managment/view/widgets/member_item.dart';
@@ -6,24 +8,98 @@ import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
 import '../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../core/utils/widgets/rules_text_field.dart';
+import '../../../../models/player.dart';
 import '../../../club/widgets/club_info.dart';
 import '../../../club/widgets/num_members.dart';
 import '../../create_club/view/widgets/Age_restriction.dart';
 
-class ManagementScreen extends StatelessWidget {
+class ManagementScreen extends StatefulWidget {
   ManagementScreen({super.key});
+
+  @override
+  State<ManagementScreen> createState() => _ManagementScreenState();
+}
+
+class _ManagementScreenState extends State<ManagementScreen> {
   final TextEditingController rulesController = TextEditingController();
+  String? createdClubId;
+  List<Player> members = []; // Correctly initialize the members list
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentUserClubId();
+  }
+
+  Future<void> getCurrentUserClubId() async {
+    final User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      final String? currentUserId = user.uid;
+      final userSnapshot = await FirebaseFirestore.instance
+          .collection('players')
+          .doc(currentUserId)
+          .get();
+      print(currentUserId);
+      if (userSnapshot.exists) {
+        final userData = userSnapshot.data();
+        if (userData != null && userData.containsKey('createdClubId')) {
+          createdClubId = userData['createdClubId'] as String?;
+          setState(() {
+            // Update the UI with the fetched club data
+            fetchClubData();
+          });
+        }
+      }
+    }
+  }
+
+  Future<void> fetchClubData() async {
+    if (createdClubId != null && createdClubId!.isNotEmpty) {
+      final clubSnapshot = await FirebaseFirestore.instance
+          .collection('clubs')
+          .doc(createdClubId)
+          .get();
+
+      if (clubSnapshot.exists) {
+        final clubData = clubSnapshot.data();
+        if (clubData != null) {
+          final List<String> memberIds =
+              List<String>.from(clubData['memberIds'] ?? []);
+          // Now you have the list of memberIds, fetch the memer data for each member
+          print(memberIds.length);
+          await fetchMembersData(memberIds);
+        }
+      }
+    }
+  }
+
+  Future<void> fetchMembersData(List<String> memberIds) async {
+    for (String memberId in memberIds) {
+      final memberSnapshot = await FirebaseFirestore.instance
+          .collection('players')
+          .doc(memberId)
+          .get();
+
+      if (memberSnapshot.exists) {
+        final memberData = memberSnapshot.data();
+        print(memberData);
+
+        Player member = Player.fromSnapshot(memberSnapshot);
+        print("sayed" + member.playerName);
+        print(member.gender);
+        members.add(member);
+      }
+    }
+
+    // Once all member objects are fetched, update the widget's state
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-  final List<String> memberNames = [
-    'Sayed Member',
-    'John Doe',
-    'Jane Smith',
-    // Add more member names here...
-  ];
+
     return Scaffold(
       body: Container(
         color: const Color(0xFFF8F8F8),
@@ -81,9 +157,7 @@ class ManagementScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              HorizontalListView(
-                memberNames: ['sayed', 'ahmed'],
-              ),
+              HorizontalListView(memberNames: members),
               SizedBox(height: screenHeight * .03),
               const Text(
                 'Rules and regulations',

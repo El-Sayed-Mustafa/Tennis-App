@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:tennis_app/Main-Features/Featured/club_managment/view/widgets/text_rich.dart';
-
+import '../../../../../models/player.dart';
 import '../../../../home/widgets/divider.dart';
 
 class MemberItem extends StatelessWidget {
-  final String memberName;
+  final Player member; // Modify the memberName type to Player
 
-  const MemberItem({required this.memberName, Key? key}) : super(key: key);
+  const MemberItem({required this.member, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,8 @@ class MemberItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            memberName,
+            member
+                .playerName, // Access the member's name from the Player object
             style: TextStyle(
               color: Colors.black,
               fontSize: 18,
@@ -57,27 +58,27 @@ class MemberItem extends StatelessWidget {
                 children: [
                   MyTextRich(
                     text1: 'Skill level ',
-                    text2: '10',
+                    text2: member.skillLevel,
                   ),
                   SizedBox(height: screenHeight * .01),
                   MyTextRich(
                     text1: 'Membership  ',
-                    text2: 'Clear',
+                    text2: member.clubRoles['membership'] ?? '',
                   ),
                   SizedBox(height: screenHeight * .01),
                   MyTextRich(
                     text1: 'Player type ',
-                    text2: 'Singles',
+                    text2: member.playerType,
                   ),
                   SizedBox(height: screenHeight * .01),
                   MyTextRich(
                     text1: 'Date  ',
-                    text2: '20-12-2023',
+                    text2: member.birthDate.toString(),
                   ),
                   SizedBox(height: screenHeight * .01),
                   MyTextRich(
                     text1: 'Role ',
-                    text2: 'Lead Player',
+                    text2: member.clubRoles['role'] ?? '',
                   ),
                 ],
               ),
@@ -88,10 +89,15 @@ class MemberItem extends StatelessWidget {
                     child: Container(
                       height: imageHeight,
                       width: imageHeight,
-                      child: Image.asset(
-                        'assets/images/clubimage.png',
-                        fit: BoxFit.cover,
-                      ),
+                      child: member.photoURL != null
+                          ? Image.network(
+                              member.photoURL!,
+                              fit: BoxFit.cover,
+                            )
+                          : Image.asset(
+                              'assets/images/clubimage.png',
+                              fit: BoxFit.cover,
+                            ),
                     ),
                   ),
                   SizedBox(
