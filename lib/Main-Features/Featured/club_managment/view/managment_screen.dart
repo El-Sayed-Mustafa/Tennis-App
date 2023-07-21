@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/club_managment/view/widgets/member_item.dart';
+import 'package:tennis_app/Main-Features/Featured/club_managment/view/widgets/members_list.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
 import '../../../../core/utils/widgets/app_bar_wave.dart';
@@ -17,7 +18,12 @@ class ManagementScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-
+  final List<String> memberNames = [
+    'Sayed Member',
+    'John Doe',
+    'Jane Smith',
+    // Add more member names here...
+  ];
     return Scaffold(
       body: Container(
         color: const Color(0xFFF8F8F8),
@@ -75,7 +81,9 @@ class ManagementScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              const MemberItem(),
+              HorizontalListView(
+                memberNames: ['sayed', 'ahmed'],
+              ),
               SizedBox(height: screenHeight * .03),
               const Text(
                 'Rules and regulations',

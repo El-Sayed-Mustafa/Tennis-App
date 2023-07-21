@@ -19,8 +19,6 @@ class PlayerNamesCubit extends Cubit<List<String>> {
         // If createdClubId is null, it means the playerId doesn't have a created club.
         emit([]);
       }
-      print(playerId);
-      print(createdClubId);
     } catch (error) {
       emit([]);
       throw Exception('Failed to fetch created club ID: $error');

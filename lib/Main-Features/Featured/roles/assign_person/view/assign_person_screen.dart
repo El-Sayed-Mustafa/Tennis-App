@@ -6,7 +6,6 @@ import 'package:tennis_app/Main-Features/Featured/roles/assign_person/view/widge
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
 import '../../../../../core/utils/widgets/app_bar_wave.dart';
-import '../../../../../models/player.dart';
 import '../../create_role/view/widgets/rights_selector.dart';
 import '../service/club_roles_service.dart';
 
@@ -38,6 +37,8 @@ class _AssignPersonState extends State<AssignPerson> {
     return user?.uid ?? '';
   }
 
+  bool _isLoading = false; // Add a variable to track loading state
+
   void _assignRole() async {
     final String memberName = memberNameController.text.trim();
     if (memberName.isEmpty) {
@@ -54,6 +55,9 @@ class _AssignPersonState extends State<AssignPerson> {
     }
 
     try {
+      setState(() {
+        _isLoading = true; // Set loading state to true
+      });
       final User? currentUser = FirebaseAuth.instance.currentUser;
       if (currentUser != null) {
         final ClubRolesService clubRolesService = ClubRolesService();
@@ -101,6 +105,11 @@ class _AssignPersonState extends State<AssignPerson> {
         SnackBar(
             content: Text('Error assigning roles. Please try again later.')),
       );
+    } finally {
+      setState(() {
+        _isLoading =
+            false; // Set loading state to false after the operation is done
+      });
     }
   }
 
@@ -198,11 +207,22 @@ class _AssignPersonState extends State<AssignPerson> {
                 ),
               ),
             ),
-            BottomSheetContainer(
-              buttonText: 'Assign Role',
-              onPressed:
-                  _assignRole, // Use the _assignRole function for onPressed
-              color: Color(0xFFF8F8F8),
+            // Use FutureBuilder to show the circular progress indicator
+            FutureBuilder(
+              future: Future.delayed(Duration.zero), // Create a delayed Future
+              builder: (context, snapshot) {
+                // Show the circular progress indicator if _isLoading is true
+                if (_isLoading) {
+                  return CircularProgressIndicator();
+                } else {
+                  // Show the "Assign Role" button otherwise
+                  return BottomSheetContainer(
+                    buttonText: 'Assign Role',
+                    onPressed: _assignRole,
+                    color: Color(0xFFF8F8F8),
+                  );
+                }
+              },
             )
           ],
         ),

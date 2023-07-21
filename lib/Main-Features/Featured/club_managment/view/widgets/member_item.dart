@@ -4,7 +4,9 @@ import 'package:tennis_app/Main-Features/Featured/club_managment/view/widgets/te
 import '../../../../home/widgets/divider.dart';
 
 class MemberItem extends StatelessWidget {
-  const MemberItem({super.key});
+  final String memberName;
+
+  const MemberItem({required this.memberName, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +16,7 @@ class MemberItem extends StatelessWidget {
 
     return Container(
       padding: EdgeInsets.all(8),
+      margin: EdgeInsets.symmetric(horizontal: 20),
       width: screenWidth * .8,
       height: screenHeight * .27,
       decoration: BoxDecoration(
@@ -35,8 +38,8 @@ class MemberItem extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            'Sayed Member',
+          Text(
+            memberName,
             style: TextStyle(
               color: Colors.black,
               fontSize: 18,
@@ -44,7 +47,7 @@ class MemberItem extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          const MyDivider(),
+          MyDivider(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -52,27 +55,27 @@ class MemberItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const MyTextRich(
+                  MyTextRich(
                     text1: 'Skill level ',
                     text2: '10',
                   ),
                   SizedBox(height: screenHeight * .01),
-                  const MyTextRich(
+                  MyTextRich(
                     text1: 'Membership  ',
                     text2: 'Clear',
                   ),
                   SizedBox(height: screenHeight * .01),
-                  const MyTextRich(
+                  MyTextRich(
                     text1: 'Player type ',
                     text2: 'Singles',
                   ),
                   SizedBox(height: screenHeight * .01),
-                  const MyTextRich(
+                  MyTextRich(
                     text1: 'Date  ',
                     text2: '20-12-2023',
                   ),
                   SizedBox(height: screenHeight * .01),
-                  const MyTextRich(
+                  MyTextRich(
                     text1: 'Role ',
                     text2: 'Lead Player',
                   ),
@@ -95,7 +98,7 @@ class MemberItem extends StatelessWidget {
                     height: screenHeight * .005,
                   ),
                   Container(
-                    decoration: const ShapeDecoration(
+                    decoration: ShapeDecoration(
                       color: Color.fromARGB(212, 15, 32, 42),
                       shape: OvalBorder(),
                     ),

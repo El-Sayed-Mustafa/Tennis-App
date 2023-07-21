@@ -34,6 +34,7 @@ dependencies:
   cloud_firestore: null
   cupertino_icons: ^1.0.2
   curved_navigation_bar: ^1.0.3
+  dots_indicator: ^2.1.1
   firebase_auth: null
   firebase_core: null
   firebase_storage: ^11.2.4
@@ -48,6 +49,7 @@ dependencies:
   flutter_material_pickers: ^3.5.0
   flutter_rating_bar: ^4.0.1
   flutter_svg: null
+
   flutter_typeahead: ^4.6.2
   fluttertoast: ^8.2.2
   go_router: null
