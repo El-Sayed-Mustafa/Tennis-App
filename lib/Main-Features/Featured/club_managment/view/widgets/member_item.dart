@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tennis_app/Main-Features/Featured/club_managment/view/widgets/text_rich.dart';
 import '../../../../../models/player.dart';
 import '../../../../home/widgets/divider.dart';
+import 'package:intl/intl.dart';
 
 class MemberItem extends StatelessWidget {
   final Player member; // Modify the memberName type to Player
@@ -12,11 +13,11 @@ class MemberItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    final double imageHeight = (screenHeight + screenWidth) * 0.09;
+    final double imageHeight = (screenHeight + screenWidth) * 0.08;
 
     return Container(
-      padding: EdgeInsets.all(8),
-      margin: EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.all(8),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
       width: screenWidth * .8,
       height: screenHeight * .27,
       decoration: BoxDecoration(
@@ -41,14 +42,14 @@ class MemberItem extends StatelessWidget {
           Text(
             member
                 .playerName, // Access the member's name from the Player object
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black,
               fontSize: 18,
               fontFamily: 'Poppins',
               fontWeight: FontWeight.w500,
             ),
           ),
-          MyDivider(),
+          const MyDivider(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -73,7 +74,7 @@ class MemberItem extends StatelessWidget {
                   SizedBox(height: screenHeight * .01),
                   MyTextRich(
                     text1: 'Date  ',
-                    text2: member.birthDate.toString(),
+                    text2: DateFormat('MMM d, yyyy').format(member.birthDate),
                   ),
                   SizedBox(height: screenHeight * .01),
                   MyTextRich(
@@ -89,13 +90,14 @@ class MemberItem extends StatelessWidget {
                     child: Container(
                       height: imageHeight,
                       width: imageHeight,
-                      child: member.photoURL != null
-                          ? Image.network(
-                              member.photoURL!,
+                      child: member.photoURL != ''
+                          ? FadeInImage.assetNetwork(
+                              placeholder: 'assets/images/loadin.gif',
+                              image: member.photoURL!,
                               fit: BoxFit.cover,
                             )
                           : Image.asset(
-                              'assets/images/clubimage.png',
+                              'assets/images/profileimage.png',
                               fit: BoxFit.cover,
                             ),
                     ),
@@ -104,12 +106,12 @@ class MemberItem extends StatelessWidget {
                     height: screenHeight * .005,
                   ),
                   Container(
-                    decoration: ShapeDecoration(
+                    decoration: const ShapeDecoration(
                       color: Color.fromARGB(212, 15, 32, 42),
                       shape: OvalBorder(),
                     ),
                     child: IconButton(
-                      icon: Icon(Icons.ads_click, color: Colors.white),
+                      icon: const Icon(Icons.ads_click, color: Colors.white),
                       onPressed: () {},
                     ),
                   ),
