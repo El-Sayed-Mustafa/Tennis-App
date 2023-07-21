@@ -12,6 +12,7 @@ import 'package:tennis_app/Main-Features/menu/menu_screen.dart';
 import '../../Auth/screens/forget_password.dart';
 import '../../Main-Features/Featured/choose_club/choose_club_screen.dart';
 import '../../Main-Features/Featured/club_managment/view/managment_screen.dart';
+import '../../Main-Features/Featured/club_managment/view/widgets/player_screen.dart';
 import '../../Main-Features/Featured/create_club/view/create_club.dart';
 import '../../Main-Features/Featured/create_event/view/create_event.dart';
 import '../../Main-Features/Featured/localization/choose_language.dart';
@@ -20,6 +21,7 @@ import '../../Main-Features/Featured/roles/assign_person/view/assign_person_scre
 import '../../Main-Features/Featured/roles/create_role/view/create_role_screen.dart';
 import '../../Main-Features/Featured/roles/roles_list/view/roles_list_screen.dart';
 import '../../Main-Features/Featured/settings/view/settings_screen.dart';
+import '../../models/player.dart';
 
 abstract class AppRouter {
   static final GoRouter router = GoRouter(

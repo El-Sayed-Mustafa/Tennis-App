@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:tennis_app/Main-Features/Featured/club_managment/view/widgets/player_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/club_managment/view/widgets/text_rich.dart';
 import '../../../../../models/player.dart';
 import '../../../../home/widgets/divider.dart';
@@ -112,7 +114,14 @@ class MemberItem extends StatelessWidget {
                     ),
                     child: IconButton(
                       icon: const Icon(Icons.ads_click, color: Colors.white),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PlayerScreen(player: member),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],
