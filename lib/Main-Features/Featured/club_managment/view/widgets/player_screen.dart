@@ -1,19 +1,20 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tennis_app/Main-Features/Featured/roles/create_role/view/widgets/rights_selector.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import '../../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../../models/player.dart';
 import 'package:intl/intl.dart';
 
+import '../../../roles/assign_person/cubit/assign_person_cubit.dart';
+import '../../../roles/assign_person/cubit/assign_person_state.dart';
 import '../../../roles/assign_person/service/club_roles_service.dart';
+import '../../../roles/create_role/view/widgets/rights_selector.dart';
 
 class PlayerScreen extends StatefulWidget {
   final Player player;
 
-  const PlayerScreen({required this.player, Key? key}) : super(key: key);
+  PlayerScreen({required this.player, Key? key}) : super(key: key);
 
   @override
   State<PlayerScreen> createState() => _PlayerScreenState();
@@ -24,56 +25,24 @@ class _PlayerScreenState extends State<PlayerScreen> {
   late List<String> selectedRole;
   late List<String> roleNames;
   late final ClubRolesService clubRolesService;
+  late final AssignPersonCubit cubit;
 
   @override
   void initState() {
     super.initState();
-    selectedRole = []; // Initialize selectedRole as an empty list
+    selectedRole = [];
     roleNames = [];
     clubRolesService = ClubRolesService();
-    loadClubRoles();
-    fetchRoleNames();
+    cubit = AssignPersonCubit();
+    cubit.loadClubRoles();
+    cubit.fetchRoleNames();
   }
 
-  String getCurrentUserId() {
-    final User? user = FirebaseAuth.instance.currentUser;
-    return user?.uid ?? '';
-  }
-
-  Future<void> loadClubRoles() async {
-    try {
-      final userId = getCurrentUserId();
-      final playerSnapshot = await FirebaseFirestore.instance
-          .collection('players')
-          .doc(userId)
-          .get();
-      final playerData = playerSnapshot.data();
-      if (playerData != null) {
-        setState(() {});
-      }
-    } catch (e) {
-      // Handle errors if necessary
-      print('Error loading club roles: $e');
-    }
-  }
-
-  Future<void> fetchRoleNames() async {
-    try {
-      final roleNamesList = await clubRolesService.fetchRoleNames();
-      setState(() {
-        roleNames.addAll(roleNamesList);
-      });
-    } catch (e) {
-      // Handle errors if necessary
-      print('Error fetching role names: $e');
-    }
-  }
-
-  void updateRoleWithSelectedRole(List<String> roles) {
-    setState(() {
-      selectedRole = roles;
-    });
-  }
+  @override
+  void dispose() {
+    cubit.close(); // Close the cubit when disposing of the widget
+    super.dispose();
+  } // Add this line
 
   @override
   Widget build(BuildContext context) {
@@ -263,16 +232,56 @@ class _PlayerScreenState extends State<PlayerScreen> {
               child: RightSelector(
                 selectedWords: selectedRole,
                 onSelectedWordsChanged: (words) {
-                  updateRoleWithSelectedRole(words);
+                  cubit.updateRoleWithSelectedRole(words);
                 },
-                words: roleNames, // Use the fetched role names here
+                words: roleNames,
               ),
             ),
             Spacer(),
-            BottomSheetContainer(
-              buttonText: 'Assign Role',
-              onPressed: () {},
-              color: Colors.transparent,
+            BlocBuilder<AssignPersonCubit, AssignPersonState>(
+              bloc: cubit,
+              builder: (context, state) {
+                if (state is AssignPersonLoading) {
+                  return CircularProgressIndicator();
+                } else if (state is AssignPersonError) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(state.message),
+                  );
+                } else if (state is AssignPersonSuccess) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(state.message),
+                  );
+                } else if (state is AssignPersonFetchedRoleNames) {
+                  // Assign the fetched role names to the local variable
+                  roleNames = state.roleNames;
+                  return BottomSheetContainer(
+                    buttonText: 'Assign Role',
+                    onPressed: () {
+                      cubit.assignRole(
+                        memberNameController.text.trim(),
+                        selectedRole,
+                      );
+                    },
+                    color: Color(0xFFF8F8F8),
+                  );
+                } else if (state is AssignPersonSelectedRoles) {
+                  selectedRole = state.selectedRoles;
+                  return BottomSheetContainer(
+                    buttonText: 'Assign Role',
+                    onPressed: () {
+                      cubit.assignRole(
+                        widget.player.playerName,
+                        selectedRole,
+                      );
+                    },
+                    color: Color(0xFFF8F8F8),
+                  );
+                } else {
+                  return Container();
+                }
+              },
             ),
           ],
         ),
