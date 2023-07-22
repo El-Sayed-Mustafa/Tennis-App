@@ -6,9 +6,7 @@ import '../../../../home/widgets/divider.dart';
 import 'package:intl/intl.dart';
 
 class MemberItem extends StatelessWidget {
-  final Player member; // Modify the memberName type to Player
-
-  const MemberItem({required this.member, Key? key}) : super(key: key);
+  const MemberItem({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +47,7 @@ class MemberItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            member
-                .playerName, // Access the member's name from the Player object
+            'member',
             style: const TextStyle(
               color: Colors.black,
               fontSize: 18,
@@ -66,34 +63,28 @@ class MemberItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MyTextRich(
-                    text1: 'Skill level ',
-                    text2:
-                        member.skillLevel.isNotEmpty ? member.skillLevel : '0',
-                  ),
+                  MyTextRich(text1: 'Skill level ', text2: 'Skill level'),
                   SizedBox(height: screenHeight * .01),
                   MyTextRich(
                     text1: 'Membership  ',
-                    text2: member.clubRoles['membership'] ?? 'Clear',
+                    text2: 'Members',
                   ),
                   SizedBox(height: screenHeight * .01),
                   MyTextRich(
                     text1: 'Player type ',
-                    text2: member.playerType,
+                    text2: 'member.',
                   ),
                   SizedBox(height: screenHeight * .01),
                   MyTextRich(
                     text1: 'Date  ',
-                    text2: DateFormat('MMM d, yyyy').format(member.birthDate),
+                    text2: 'Date',
                   ),
                   SizedBox(height: screenHeight * .01),
                   SizedBox(
                     width: screenWidth * .4,
                     child: MyTextRich(
                       text1: 'Role ',
-                      text2:
-                          getRolesFromClubRoles(member.clubRoles).join(', ') ??
-                              'No Role Assigned',
+                      text2: 'No Role Assigned',
                     ),
                   ),
                 ],
@@ -103,19 +94,9 @@ class MemberItem extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(imageHeight / 5),
                     child: Container(
-                      height: imageHeight,
-                      width: imageHeight,
-                      child: member.photoURL != ''
-                          ? FadeInImage.assetNetwork(
-                              placeholder: 'assets/images/loadin.gif',
-                              image: member.photoURL!,
-                              fit: BoxFit.cover,
-                            )
-                          : Image.asset(
-                              'assets/images/profileimage.png',
-                              fit: BoxFit.cover,
-                            ),
-                    ),
+                        height: imageHeight,
+                        width: imageHeight,
+                        child: Text('photo')),
                   ),
                   SizedBox(
                     height: screenHeight * .005,
@@ -127,14 +108,7 @@ class MemberItem extends StatelessWidget {
                     ),
                     child: IconButton(
                       icon: const Icon(Icons.ads_click, color: Colors.white),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => PlayerScreen(player: member),
-                          ),
-                        );
-                      },
+                      onPressed: () {},
                     ),
                   ),
                 ],

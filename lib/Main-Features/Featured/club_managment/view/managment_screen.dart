@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
-import 'package:tennis_app/Main-Features/Featured/club_managment/view/widgets/members_list.dart';
+import 'package:tennis_app/Main-Features/Featured/club_managment/view/screens/invite_members.dart';
+import 'package:tennis_app/Main-Features/Featured/club_managment/view/screens/members_list.dart';
 import 'package:tennis_app/core/utils/widgets/app_bar_wave.dart';
 import 'package:tennis_app/core/utils/widgets/rules_text_field.dart';
 import 'package:tennis_app/models/player.dart';
@@ -120,25 +121,36 @@ class _ManagementScreenState extends State<ManagementScreen> {
                       padding: EdgeInsets.symmetric(
                           horizontal: screenWidth * .13,
                           vertical: screenWidth * .035),
-                      child: const Row(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
+                          const Text(
                             'Manage Members',
                             style: TextStyle(
                               color: Colors.black,
-                              fontSize: 20,
+                              fontSize: 18,
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          Text(
-                            'See all',
-                            style: TextStyle(
-                              color: Color(0xFF0D5FC3),
-                              fontSize: 13,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w500,
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      InviteMember(club: club),
+                                ),
+                              );
+                            },
+                            child: const Text(
+                              'Invite Members',
+                              style: TextStyle(
+                                color: Color(0xFF0D5FC3),
+                                fontSize: 12,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
                         ],
@@ -172,7 +184,7 @@ class _ManagementScreenState extends State<ManagementScreen> {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    AgeRestrictionWidget(),
+                    const AgeRestrictionWidget(),
                     SizedBox(height: screenHeight * .015),
                     BottomSheetContainer(
                       buttonText: 'Set',
@@ -206,7 +218,8 @@ class _ManagementScreenState extends State<ManagementScreen> {
 
                         // Optionally, you can show a confirmation message to the user
                         ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Updated successfully!')));
+                            const SnackBar(
+                                content: Text('Updated successfully!')));
 
                         // Refetch the club data to update the UI with the latest changes
                         clubManagementCubit.fetchClubData(createdClubId);

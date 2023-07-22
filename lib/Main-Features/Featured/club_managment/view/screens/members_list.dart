@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../../models/player.dart';
-import 'member_item.dart';
+import '../widgets/member_item.dart';
 
 class HorizontalListView extends StatefulWidget {
   final List<Player> memberNames;
@@ -32,8 +32,16 @@ class _HorizontalListViewState extends State<HorizontalListView> {
     return Column(
       children: [
         Visibility(
-          visible:
-              widget.memberNames.isNotEmpty, // Show only if there are members
+          visible: widget.memberNames.isNotEmpty,
+          replacement: const Center(
+            child: Text(
+              'You don\'t have any members.',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey,
+              ),
+            ),
+          ), // Show only if there are members
           child: Container(
             height: screenHeight * 0.3, // Adjust the height as needed
             child: PageView.builder(
@@ -52,17 +60,8 @@ class _HorizontalListViewState extends State<HorizontalListView> {
               },
             ),
           ),
-          replacement: Center(
-            child: Text(
-              'You don\'t have any members.',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey,
-              ),
-            ),
-          ),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         buildPageIndicator(widget.memberNames.length),
       ],
     );
