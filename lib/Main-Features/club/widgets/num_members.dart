@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class NumMembers extends StatelessWidget {
-  const NumMembers({super.key});
-
+  const NumMembers({super.key, required this.num});
+  final String num;
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -38,7 +38,7 @@ class NumMembers extends StatelessWidget {
               ),
             ),
             Text(
-              '56',
+              num,
               style: TextStyle(
                 color: Color(0xFF00344E),
                 fontSize: itemSize * .026,

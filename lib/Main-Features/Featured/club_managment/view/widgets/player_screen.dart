@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tennis_app/Main-Features/Featured/club_managment/view/managment_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/roles/create_role/view/widgets/rights_selector.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import '../../../../../core/utils/widgets/app_bar_wave.dart';
@@ -76,6 +77,59 @@ class _PlayerScreenState extends State<PlayerScreen> {
     setState(() {
       selectedRole = roles;
     });
+  }
+
+  Future<void> removePlayerFromClub(String playerId) async {
+    try {
+      final User? currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser != null) {
+        final DocumentSnapshot<Map<String, dynamic>> admin =
+            await FirebaseFirestore.instance
+                .collection('players')
+                .doc(currentUser.uid)
+                .get();
+        final data = admin.data();
+        final String clubId = data!['createdClubId'] as String? ?? '';
+
+        final DocumentReference<Map<String, dynamic>> clubReference =
+            FirebaseFirestore.instance.collection('clubs').doc(clubId);
+
+        final clubSnapshot = await clubReference.get();
+        final clubData = clubSnapshot.data();
+        if (clubData != null) {
+          final List<String> memberIds =
+              List<String>.from(clubData['memberIds'] ?? []);
+          if (memberIds.contains(playerId)) {
+            memberIds.remove(playerId);
+            await clubReference.update({'memberIds': memberIds});
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Player removed from the club')),
+            );
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                  content: Text('Player is not a member of the club')),
+            );
+          }
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Club data not found')),
+          );
+        }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('User not logged in')),
+        );
+      }
+    } catch (e) {
+      print('Error removing player from club: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content:
+              Text('Error removing player from club. Please try again later.'),
+        ),
+      );
+    }
   }
 
   void _assignRole() async {
@@ -187,263 +241,278 @@ class _PlayerScreenState extends State<PlayerScreen> {
     return Scaffold(
       body: Container(
         color: const Color(0xFFF8F8F8),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              AppBarWaveHome(
-                prefixIcon: IconButton(
-                  onPressed: () {
-                    GoRouter.of(context).pop();
-                  },
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    size: 30,
-                    color: Colors.white,
-                  ),
+        child: Column(
+          children: [
+            AppBarWaveHome(
+              prefixIcon: IconButton(
+                onPressed: () {
+                  GoRouter.of(context).pop();
+                },
+                icon: const Icon(
+                  Icons.arrow_back,
+                  size: 30,
+                  color: Colors.white,
                 ),
-                text: '    Management',
-                suffixIconPath: '',
               ),
-              Stack(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                        left: (screenHeight + screenWidth) * 0.025,
-                        right: (screenHeight + screenWidth) * 0.025,
-                        top: (screenHeight + screenWidth) * 0.05),
-                    child: Center(
-                      child: Container(
-                        padding: EdgeInsets.only(
-                          top: (screenHeight + screenWidth) * 0.06,
+              text: '    Management',
+              suffixIconPath: '',
+            ),
+            Stack(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                      left: (screenHeight + screenWidth) * 0.025,
+                      right: (screenHeight + screenWidth) * 0.025,
+                      top: (screenHeight + screenWidth) * 0.05),
+                  child: Center(
+                    child: Container(
+                      padding: EdgeInsets.only(
+                        top: (screenHeight + screenWidth) * 0.06,
+                      ),
+                      decoration: ShapeDecoration(
+                        color: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          side: const BorderSide(
+                              width: 0.50, color: Color(0x440D5FC3)),
+                          borderRadius: BorderRadius.circular(31),
                         ),
-                        decoration: ShapeDecoration(
-                          color: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            side: const BorderSide(
-                                width: 0.50, color: Color(0x440D5FC3)),
-                            borderRadius: BorderRadius.circular(31),
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          child: Column(
-                            children: [
-                              Text(
-                                widget.player.playerName,
-                                style: const TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w500,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Column(
+                          children: [
+                            Text(
+                              widget.player.playerName,
+                              style: const TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const SizedBox(height: 18),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  'Skill level',
+                                  style: TextStyle(
+                                    color: Color(0xFF15324F),
+                                    fontSize: 18,
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: 18),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Text(
-                                    'Skill level',
-                                    style: TextStyle(
-                                      color: Color(0xFF15324F),
-                                      fontSize: 18,
-                                      fontFamily: 'Roboto',
-                                      fontWeight: FontWeight.w400,
-                                    ),
+                                Text(
+                                  widget.player.skillLevel.isNotEmpty
+                                      ? widget.player.skillLevel
+                                      : '0',
+                                  style: const TextStyle(
+                                    color: Color(0xFF6D6D6D),
+                                    fontSize: 18,
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w400,
                                   ),
-                                  Text(
-                                    widget.player.skillLevel.isNotEmpty
-                                        ? widget.player.skillLevel
-                                        : '0',
-                                    style: const TextStyle(
-                                      color: Color(0xFF6D6D6D),
-                                      fontSize: 18,
-                                      fontFamily: 'Roboto',
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  )
-                                ],
-                              ),
-                              const SizedBox(height: 18),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Text(
-                                    'Membership',
-                                    style: TextStyle(
-                                      color: Color(0xFF15324F),
-                                      fontSize: 18,
-                                      fontFamily: 'Roboto',
-                                      fontWeight: FontWeight.w400,
-                                    ),
+                                )
+                              ],
+                            ),
+                            const SizedBox(height: 18),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  'Membership',
+                                  style: TextStyle(
+                                    color: Color(0xFF15324F),
+                                    fontSize: 18,
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w400,
                                   ),
-                                  Text(
-                                    widget.player.clubRoles['membership'] ??
-                                        'Clear',
-                                    style: const TextStyle(
-                                      color: Color(0xFF6D6D6D),
-                                      fontSize: 16,
-                                      fontFamily: 'Roboto',
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  )
-                                ],
-                              ),
-                              const SizedBox(height: 18),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Text(
-                                    'Player type',
-                                    style: TextStyle(
-                                      color: Color(0xFF15324F),
-                                      fontSize: 18,
-                                      fontFamily: 'Roboto',
-                                      fontWeight: FontWeight.w400,
-                                    ),
+                                ),
+                                Text(
+                                  widget.player.clubRoles['membership'] ??
+                                      'Clear',
+                                  style: const TextStyle(
+                                    color: Color(0xFF6D6D6D),
+                                    fontSize: 16,
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w400,
                                   ),
-                                  Text(
-                                    widget.player.playerType,
-                                    style: const TextStyle(
-                                      color: Color(0xFF6D6D6D),
-                                      fontSize: 18,
-                                      fontFamily: 'Roboto',
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  )
-                                ],
-                              ),
-                              const SizedBox(height: 18),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Text(
-                                    'Date',
-                                    style: TextStyle(
-                                      color: Color(0xFF15324F),
-                                      fontSize: 18,
-                                      fontFamily: 'Roboto',
-                                      fontWeight: FontWeight.w400,
-                                    ),
+                                )
+                              ],
+                            ),
+                            const SizedBox(height: 18),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  'Player type',
+                                  style: TextStyle(
+                                    color: Color(0xFF15324F),
+                                    fontSize: 18,
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w400,
                                   ),
-                                  Text(
-                                    DateFormat('MMM d, yyyy')
-                                        .format(widget.player.birthDate),
-                                    style: const TextStyle(
-                                      color: Color(0xFF6D6D6D),
-                                      fontSize: 18,
-                                      fontFamily: 'Roboto',
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  )
-                                ],
-                              ),
-                              const SizedBox(height: 18),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Text(
-                                    'Role',
-                                    style: TextStyle(
-                                      color: Color(0xFF15324F),
-                                      fontSize: 18,
-                                      fontFamily: 'Roboto',
-                                      fontWeight: FontWeight.w400,
-                                    ),
+                                ),
+                                Text(
+                                  widget.player.playerType,
+                                  style: const TextStyle(
+                                    color: Color(0xFF6D6D6D),
+                                    fontSize: 18,
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w400,
                                   ),
-                                  Text(
-                                    selectedRole.join(', ').isNotEmpty
-                                        ? selectedRole.join(', ')
-                                        : widget.player.clubRoles.isNotEmpty
-                                            ? getRolesFromClubRoles(
-                                                    widget.player.clubRoles)
-                                                .join(', ')
-                                            : 'No Role Assigned',
-                                    style: const TextStyle(
-                                      color: Color(0xFF6D6D6D),
-                                      fontSize: 18,
-                                      fontFamily: 'Roboto',
-                                      fontWeight: FontWeight.w400,
-                                    ),
+                                )
+                              ],
+                            ),
+                            const SizedBox(height: 18),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  'Date',
+                                  style: TextStyle(
+                                    color: Color(0xFF15324F),
+                                    fontSize: 18,
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w400,
                                   ),
-                                ],
-                              ),
-                              const SizedBox(height: 50),
-                            ],
-                          ),
+                                ),
+                                Text(
+                                  DateFormat('MMM d, yyyy')
+                                      .format(widget.player.birthDate),
+                                  style: const TextStyle(
+                                    color: Color(0xFF6D6D6D),
+                                    fontSize: 18,
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                )
+                              ],
+                            ),
+                            const SizedBox(height: 18),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  'Role',
+                                  style: TextStyle(
+                                    color: Color(0xFF15324F),
+                                    fontSize: 18,
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                Text(
+                                  selectedRole.join(', ').isNotEmpty
+                                      ? selectedRole.join(', ')
+                                      : widget.player.clubRoles.isNotEmpty
+                                          ? getRolesFromClubRoles(
+                                                  widget.player.clubRoles)
+                                              .join(', ')
+                                          : 'No Role Assigned',
+                                  style: const TextStyle(
+                                    color: Color(0xFF6D6D6D),
+                                    fontSize: 18,
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 20),
+                          ],
                         ),
                       ),
                     ),
                   ),
-                  Column(
-                    children: [
-                      Align(
-                        alignment: Alignment.center, // Center the photo
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(
-                              (screenHeight + screenWidth) * 0.08 / 3),
-                          child: Container(
-                            height: (screenHeight + screenWidth) * 0.1,
-                            width: (screenHeight + screenWidth) * 0.08,
-                            child: widget.player.photoURL != ''
-                                ? Image.network(
-                                    widget.player.photoURL!,
-                                    fit: BoxFit.cover,
-                                  )
-                                : Image.asset(
-                                    'assets/images/profileimage.png',
-                                    fit: BoxFit.cover,
-                                  ),
-                          ),
+                ),
+                Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.center, // Center the photo
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(
+                            (screenHeight + screenWidth) * 0.08 / 3),
+                        child: Container(
+                          height: (screenHeight + screenWidth) * 0.1,
+                          width: (screenHeight + screenWidth) * 0.08,
+                          child: widget.player.photoURL != ''
+                              ? Image.network(
+                                  widget.player.photoURL!,
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.asset(
+                                  'assets/images/profileimage.png',
+                                  fit: BoxFit.cover,
+                                ),
                         ),
                       ),
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: screenHeight * .025,
-              ),
-              const Text(
-                'Assign Role',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w400,
+                    ),
+                  ],
                 ),
-              ), //call the function here
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
-                child: RightSelector(
-                  selectedWords: selectedRole,
-                  onSelectedWordsChanged: (words) {
-                    updateRoleWithSelectedRole(words);
-                  },
-                  words: roleNames, // Use the fetched role names here
-                ),
+              ],
+            ),
+            SizedBox(
+              height: screenHeight * .025,
+            ),
+            const Text(
+              'Assign Role',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w400,
               ),
-              SizedBox(
-                height: screenHeight * .025,
+            ), //call the function here
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
+              child: RightSelector(
+                selectedWords: selectedRole,
+                onSelectedWordsChanged: (words) {
+                  updateRoleWithSelectedRole(words);
+                },
+                words: roleNames, // Use the fetched role names here
               ),
-              const Text(
-                'Assign Player Skill Level',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w400,
-                ),
+            ),
+            SizedBox(
+              height: screenHeight * .025,
+            ),
+            const Text(
+              'Assign Player Skill Level',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w400,
               ),
+            ),
 
-              const RangeSliderWithTooltip(
-                text1: '',
-                text2: '',
+            const RangeSliderWithTooltip(
+              text1: '',
+              text2: '',
+            ),
+            GestureDetector(
+              onTap: () async {
+                await removePlayerFromClub(widget.player.playerId);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ManagementScreen(),
+                  ),
+                );
+              },
+              child: const Text(
+                'Remove Member?',
+                style: TextStyle(
+                  color: Color(0xFF0D5FC3),
+                  fontSize: 14,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w400,
+                ),
               ),
-              FutureBuilder(
+            ),
+            Expanded(
+              child: FutureBuilder(
                 future:
                     Future.delayed(Duration.zero), // Create a delayed Future
                 builder: (context, snapshot) {
@@ -459,9 +528,9 @@ class _PlayerScreenState extends State<PlayerScreen> {
                     );
                   }
                 },
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
       ),
     );

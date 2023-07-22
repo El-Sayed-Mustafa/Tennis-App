@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../../../models/player.dart';
 import 'member_item.dart';
 
@@ -32,21 +31,35 @@ class _HorizontalListViewState extends State<HorizontalListView> {
 
     return Column(
       children: [
-        Container(
-          height: screenHeight * 0.3, // Adjust the height as needed
-          child: PageView.builder(
-            controller: _pageController,
-            scrollDirection: Axis.horizontal,
-            itemCount: widget.memberNames.length,
-            itemBuilder: (context, index) {
-              final Player member =
-                  widget.memberNames[index]; // Get the correct Player object
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: MemberItem(
-                    member: member), // Pass the Player object to MemberItem
-              );
-            },
+        Visibility(
+          visible:
+              widget.memberNames.isNotEmpty, // Show only if there are members
+          child: Container(
+            height: screenHeight * 0.3, // Adjust the height as needed
+            child: PageView.builder(
+              controller: _pageController,
+              scrollDirection: Axis.horizontal,
+              itemCount: widget.memberNames.length,
+              itemBuilder: (context, index) {
+                final Player member =
+                    widget.memberNames[index]; // Get the correct Player object
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: MemberItem(
+                    member: member,
+                  ), // Pass the Player object to MemberItem
+                );
+              },
+            ),
+          ),
+          replacement: Center(
+            child: Text(
+              'You don\'t have any members.',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey,
+              ),
+            ),
           ),
         ),
         SizedBox(height: 16),

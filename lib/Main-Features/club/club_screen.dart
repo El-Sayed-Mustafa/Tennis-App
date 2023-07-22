@@ -38,7 +38,10 @@ class ClubScreen extends StatelessWidget {
               SizedBox(
                 height: spacing * 1.5,
               ),
-              const NumMembers(),
+              //todo num
+              const NumMembers(
+                num: 'hey ',
+              ),
               SizedBox(
                 height: spacing * 2.5,
               ),

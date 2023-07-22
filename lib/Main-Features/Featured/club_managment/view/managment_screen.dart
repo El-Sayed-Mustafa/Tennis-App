@@ -112,7 +112,9 @@ class _ManagementScreenState extends State<ManagementScreen> {
                         child: ClubInfo(
                           clubData: club,
                         )),
-                    const NumMembers(),
+                    NumMembers(
+                      num: club.memberIds.length.toString(),
+                    ),
                     const SizedBox(height: 20),
                     Padding(
                       padding: EdgeInsets.symmetric(
