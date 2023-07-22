@@ -24,6 +24,7 @@ class CreateClubCubit extends Cubit<CreateClubState> {
     required TextEditingController phoneController,
     required TextEditingController emailController,
     required TextEditingController rulesController,
+    required TextEditingController addressController,
     Uint8List? selectedImageBytes,
   }) async {
     ClubType selectedClubType = context.read<ClubTypeCubit>().state;
@@ -36,8 +37,8 @@ class CreateClubCubit extends Cubit<CreateClubState> {
       String phoneNumber = phoneController.text;
       String email = emailController.text;
       String rulesAndRegulations = rulesController.text;
-      String ageRestriction = getAgeRestrictionLabel(
-          selectedChoice); // Convert selectedChoice to the corresponding label
+      String ageRestriction = getAgeRestrictionLabel(selectedChoice);
+      String address = addressController.text;
 
       List<String> eventIds = []; // Add the event IDs if needed
       List<String> memberIds = []; // Add the member IDs if needed
@@ -56,7 +57,7 @@ class CreateClubCubit extends Cubit<CreateClubState> {
         rulesAndRegulations: rulesAndRegulations,
         ageRestriction: ageRestriction,
         eventIds: eventIds,
-        memberIds: memberIds, roleIds: [],
+        memberIds: memberIds, roleIds: [], address: address, rate: 0,
       );
 
       CollectionReference clubsCollection =

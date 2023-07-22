@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-
+import 'package:tennis_app/models/club.dart'; // Import the Club class
 import '../../Featured/choose_club/widgets/static_rating_bar.dart';
 import '../../home/widgets/divider.dart';
 
 class ClubInfo extends StatelessWidget {
-  const ClubInfo({Key? key}) : super(key: key);
+  final Club clubData; // Add a parameter for clubData
+
+  const ClubInfo({Key? key, required this.clubData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +50,7 @@ class ClubInfo extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'FC Barcelona',
+                    clubData.clubName, // Use clubData's clubName
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: combine * .02,
@@ -60,7 +62,7 @@ class ClubInfo extends StatelessWidget {
                   SizedBox(
                     width: itemWidth * .4,
                     child: Text(
-                      'Buhl 9, 35043 Marburg ',
+                      clubData.ageRestriction, // Use clubData's clubLocation
                       style: TextStyle(
                         color: const Color(0xFF6D6D6D),
                         fontSize: combine * .01,
@@ -71,7 +73,7 @@ class ClubInfo extends StatelessWidget {
                   ),
                   SizedBox(height: screenHeight * .01),
                   StaticRatingBar(
-                    rating: 4,
+                    rating: clubData.rate, // Use clubData's rating
                     iconSize: (screenHeight + screenWidth) * .02,
                   )
                 ],

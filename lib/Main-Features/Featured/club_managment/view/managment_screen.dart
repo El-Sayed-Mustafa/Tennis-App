@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:intl/intl.dart';
 import 'package:tennis_app/Main-Features/Featured/club_managment/view/widgets/members_list.dart';
 import 'package:tennis_app/core/utils/widgets/app_bar_wave.dart';
 import 'package:tennis_app/core/utils/widgets/rules_text_field.dart';
@@ -10,6 +11,7 @@ import 'package:tennis_app/models/player.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/utils/widgets/custom_button.dart';
+import '../../../../models/club.dart';
 import '../../../club/widgets/club_info.dart';
 import '../../../club/widgets/num_members.dart';
 import '../../create_club/view/widgets/Age_restriction.dart';
@@ -56,7 +58,6 @@ class _ManagementScreenState extends State<ManagementScreen> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
       body: BlocBuilder<ClubManagementCubit, ClubManagementState>(
         bloc: clubManagementCubit,
@@ -67,6 +68,7 @@ class _ManagementScreenState extends State<ManagementScreen> {
           } else if (state is ClubManagementLoaded) {
             // Club data and members data are loaded, update the UI with the fetched data
             List<Player> members = state.members;
+            Club club = state.club; // Get the club data
 
             return Container(
               color: const Color(0xFFF8F8F8),
@@ -87,13 +89,13 @@ class _ManagementScreenState extends State<ManagementScreen> {
                       text: '    Management',
                       suffixIconPath: '',
                     ),
-                    Container(
-                        margin: EdgeInsets.only(
-                            right: screenWidth * .05,
-                            top: screenWidth * .02,
-                            left: screenWidth * .05,
-                            bottom: screenWidth * .05),
-                        child: const ClubInfo()),
+                    // Container(
+                    //     margin: EdgeInsets.only(
+                    //         right: screenWidth * .05,
+                    //         top: screenWidth * .02,
+                    //         left: screenWidth * .05,
+                    //         bottom: screenWidth * .05),
+                    //     child: const ClubInfo()),
                     const NumMembers(),
                     const SizedBox(height: 20),
                     Padding(

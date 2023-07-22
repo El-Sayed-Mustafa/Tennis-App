@@ -36,12 +36,12 @@ class ProfileBody extends StatelessWidget {
             ),
           ),
         ),
-        Container(
-            margin: EdgeInsets.only(
-                right: screenWidth * .05,
-                left: screenWidth * .05,
-                bottom: screenWidth * .05),
-            child: const ClubInfo()),
+        //TODO: Container(
+        //     margin: EdgeInsets.only(
+        //         right: screenWidth * .05,
+        //         left: screenWidth * .05,
+        //         bottom: screenWidth * .05),
+        //     child: const ClubInfo()),
         const Text(
           'Your Strength',
           style: TextStyle(
