@@ -89,13 +89,15 @@ class _ManagementScreenState extends State<ManagementScreen> {
                       text: '    Management',
                       suffixIconPath: '',
                     ),
-                    // Container(
-                    //     margin: EdgeInsets.only(
-                    //         right: screenWidth * .05,
-                    //         top: screenWidth * .02,
-                    //         left: screenWidth * .05,
-                    //         bottom: screenWidth * .05),
-                    //     child: const ClubInfo()),
+                    Container(
+                        margin: EdgeInsets.only(
+                            right: screenWidth * .05,
+                            top: screenWidth * .02,
+                            left: screenWidth * .05,
+                            bottom: screenWidth * .05),
+                        child: ClubInfo(
+                          clubData: club,
+                        )),
                     const NumMembers(),
                     const SizedBox(height: 20),
                     Padding(

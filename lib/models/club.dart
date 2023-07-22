@@ -50,7 +50,7 @@ class Club {
       'rate': rate, // Include rate in the JSON
       'eventIds': eventIds,
       'memberIds': memberIds,
-      'photoURL': photoURL,
+      'clubImageURL': photoURL,
       'roleIds': roleIds, // Include role IDs in the JSON
     };
   }
@@ -71,7 +71,7 @@ class Club {
       rate: (data?['rate'] as num?)?.toDouble() ?? 0.0,
       eventIds: List<String>.from(data?['eventIds'] ?? []),
       memberIds: List<String>.from(data?['memberIds'] ?? []),
-      photoURL: data?['photoURL'] as String?,
+      photoURL: data?['clubImageURL'] as String?,
       roleIds: List<String>.from(data?['roleIds'] ?? []),
     );
   }
