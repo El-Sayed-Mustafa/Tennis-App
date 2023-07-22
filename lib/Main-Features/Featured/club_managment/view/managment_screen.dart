@@ -54,6 +54,20 @@ class _ManagementScreenState extends State<ManagementScreen> {
     }
   }
 
+  int mapAgeRestrictionToValue(String ageRestriction) {
+    // Map age restriction string to numeric value
+    switch (ageRestriction) {
+      case "Everyone":
+        return 3;
+      case "Above 18":
+        return 2;
+      case "Above 20":
+        return 1;
+      default:
+        return 0; // Set a default numeric value if the ageRestriction doesn't match any case
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -142,7 +156,7 @@ class _ManagementScreenState extends State<ManagementScreen> {
                     const SizedBox(height: 10),
                     RulesInputText(
                       header: 'Set the rules for members',
-                      body: 'Briefly describe your club’s rule and regulations',
+                      body: club.rulesAndRegulations,
                       controller: rulesController,
                     ),
                     SizedBox(height: screenHeight * .03),
@@ -156,11 +170,45 @@ class _ManagementScreenState extends State<ManagementScreen> {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    const AgeRestrictionWidget(),
+                    AgeRestrictionWidget(),
                     SizedBox(height: screenHeight * .015),
                     BottomSheetContainer(
                       buttonText: 'Set',
-                      onPressed: () {},
+                      onPressed: () async {
+                        // Update the club data with new rules and age restriction
+                        String newRules = rulesController.text;
+                        int selectedChoice = context
+                            .read<AgeRestrictionCubit>()
+                            .getSelectedValue();
+
+                        // If newRules is empty, use the current club rulesAndRegulations
+                        if (newRules.isEmpty) {
+                          newRules = club.rulesAndRegulations;
+                        }
+
+                        // If the selectedChoice is 0, use the current club ageRestriction
+                        if (selectedChoice == 0) {
+                          selectedChoice =
+                              mapAgeRestrictionToValue(club.ageRestriction);
+                        }
+                        print("dddddd" + selectedChoice.toString());
+                        // Update Firestore document for the club
+                        await FirebaseFirestore.instance
+                            .collection('clubs')
+                            .doc(createdClubId)
+                            .update({
+                          'rulesAndRegulations': newRules,
+                          'ageRestriction':
+                              mapValueToAgeRestriction(selectedChoice),
+                        });
+
+                        // Optionally, you can show a confirmation message to the user
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Updated successfully!')));
+
+                        // Refetch the club data to update the UI with the latest changes
+                        clubManagementCubit.fetchClubData(createdClubId);
+                      },
                       color: const Color(0xFFF8F8F8),
                     ),
                   ],
@@ -177,6 +225,20 @@ class _ManagementScreenState extends State<ManagementScreen> {
         },
       ),
     );
+  }
+
+  String mapValueToAgeRestriction(int value) {
+    // Map numeric value to age restriction string
+    switch (value) {
+      case 1:
+        return "Above 20";
+      case 2:
+        return "Above 18";
+      case 3:
+        return "Everyone";
+      default:
+        return ""; // Set a default value if the value doesn't match any case
+    }
   }
 
   @override

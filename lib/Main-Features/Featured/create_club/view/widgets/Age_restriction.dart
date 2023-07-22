@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AgeRestrictionCubit extends Cubit<int> {
-  AgeRestrictionCubit() : super(0);
+  AgeRestrictionCubit({int defaultValue = 0}) : super(defaultValue);
 
   void setSelectedValue(int value) {
     emit(value);
@@ -14,7 +14,10 @@ class AgeRestrictionCubit extends Cubit<int> {
 }
 
 class AgeRestrictionWidget extends StatelessWidget {
-  const AgeRestrictionWidget({Key? key}) : super(key: key);
+  final int defaultSelectedValue;
+
+  const AgeRestrictionWidget({Key? key, this.defaultSelectedValue = 0})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +70,7 @@ class AgeRestrictionWidget extends StatelessWidget {
                       final cubit = context.read<AgeRestrictionCubit>();
                       cubit.setSelectedValue(value);
                     },
+                    defaultValue: defaultSelectedValue,
                   ),
                   AgeOptionRow(
                     value: 2,
@@ -76,6 +80,7 @@ class AgeRestrictionWidget extends StatelessWidget {
                       final cubit = context.read<AgeRestrictionCubit>();
                       cubit.setSelectedValue(value);
                     },
+                    defaultValue: defaultSelectedValue,
                   ),
                   AgeOptionRow(
                     value: 3,
@@ -85,6 +90,7 @@ class AgeRestrictionWidget extends StatelessWidget {
                       final cubit = context.read<AgeRestrictionCubit>();
                       cubit.setSelectedValue(value);
                     },
+                    defaultValue: defaultSelectedValue,
                   ),
                 ],
               );
@@ -101,6 +107,7 @@ class AgeOptionRow extends StatelessWidget {
   final String label;
   final int selectedValue;
   final ValueChanged<int> onChanged;
+  final int defaultValue;
 
   const AgeOptionRow({
     Key? key,
@@ -108,6 +115,7 @@ class AgeOptionRow extends StatelessWidget {
     required this.label,
     required this.selectedValue,
     required this.onChanged,
+    this.defaultValue = 0,
   }) : super(key: key);
 
   @override
@@ -130,7 +138,10 @@ class AgeOptionRow extends StatelessWidget {
               value: value,
               groupValue: selectedValue,
               activeColor: Colors.black,
-              onChanged: (value) => onChanged(value!),
+              onChanged: (value) {
+                final cubit = context.read<AgeRestrictionCubit>();
+                cubit.setSelectedValue(value!);
+              },
             ),
           ),
           Text(
