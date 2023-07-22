@@ -150,6 +150,15 @@ class _PlayerScreenState extends State<PlayerScreen> {
     }
   }
 
+  List<String> getRolesFromClubRoles(Map<String, String> clubRoles) {
+    List<String> roles = [];
+    for (var roleValue in clubRoles.values) {
+      final individualRoles = roleValue.split(',');
+      roles.addAll(individualRoles.map((role) => role.trim()));
+    }
+    return roles;
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -218,7 +227,17 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
-                                Text(widget.player.skillLevel)
+                                Text(
+                                  widget.player.skillLevel.isNotEmpty
+                                      ? widget.player.skillLevel
+                                      : '0',
+                                  style: TextStyle(
+                                    color: Color(0xFF6D6D6D),
+                                    fontSize: 18,
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                )
                               ],
                             ),
                             const SizedBox(height: 18),
@@ -235,7 +254,15 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                   ),
                                 ),
                                 Text(
-                                    widget.player.clubRoles['membership'] ?? '')
+                                  widget.player.clubRoles['membership'] ??
+                                      'Clear',
+                                  style: TextStyle(
+                                    color: Color(0xFF6D6D6D),
+                                    fontSize: 16,
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                )
                               ],
                             ),
                             const SizedBox(height: 18),
@@ -251,7 +278,15 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
-                                Text(widget.player.playerType)
+                                Text(
+                                  widget.player.playerType,
+                                  style: TextStyle(
+                                    color: Color(0xFF6D6D6D),
+                                    fontSize: 18,
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                )
                               ],
                             ),
                             const SizedBox(height: 18),
@@ -267,8 +302,16 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
-                                Text(DateFormat('MMM d, yyyy')
-                                    .format(widget.player.birthDate))
+                                Text(
+                                  DateFormat('MMM d, yyyy')
+                                      .format(widget.player.birthDate),
+                                  style: TextStyle(
+                                    color: Color(0xFF6D6D6D),
+                                    fontSize: 18,
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                )
                               ],
                             ),
                             const SizedBox(height: 18),
@@ -284,7 +327,15 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
-                                Text(widget.player.clubRoles['role'] ?? '')
+                                Text(
+                                  selectedRole.join(', ') ?? 'No Role Assigned',
+                                  style: TextStyle(
+                                    color: Color(0xFF6D6D6D),
+                                    fontSize: 18,
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                )
                               ],
                             ),
                             const SizedBox(height: 50),
