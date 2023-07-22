@@ -24,6 +24,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
   late List<String> selectedRole;
   late List<String> roleNames;
   late final ClubRolesService clubRolesService;
+  bool _isLoading = false; // Add a variable to track loading state
 
   @override
   void initState() {
@@ -73,6 +74,80 @@ class _PlayerScreenState extends State<PlayerScreen> {
     setState(() {
       selectedRole = roles;
     });
+  }
+
+  void _assignRole() async {
+    final String memberName = widget.player.playerName;
+    if (memberName.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Please enter the member name')),
+      );
+      return;
+    }
+    if (selectedRole.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Please select at least one role')),
+      );
+      return;
+    }
+
+    try {
+      setState(() {
+        _isLoading = true; // Set loading state to true
+      });
+      final User? currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser != null) {
+        final ClubRolesService clubRolesService = ClubRolesService();
+        final String? playerId =
+            await clubRolesService.getPlayerIdByName(memberName);
+        if (playerId == null) {
+          // Show error message if player not found with the given name
+          return;
+        }
+        final DocumentSnapshot<Map<String, dynamic>> playerSnapshot =
+            await FirebaseFirestore.instance
+                .collection('players')
+                .doc(playerId)
+                .get();
+        final DocumentSnapshot<Map<String, dynamic>> admin =
+            await FirebaseFirestore.instance
+                .collection('players')
+                .doc(currentUser.uid) //put id for current user
+                .get();
+        final data = admin.data();
+        if (data != null) {
+          final String createdClubId = data['createdClubId'] as String? ?? '';
+          final Map<String, String> clubRoles = <String, String>{
+            createdClubId: selectedRole.join(",")
+          };
+          // Update the player document with the new roles
+          await playerSnapshot.reference.update({'clubRoles': clubRoles});
+
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Roles assigned successfully')),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Player data not found')),
+          );
+        }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('User not logged in')),
+        );
+      }
+    } catch (e) {
+      print('Error assigning roles: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content: Text('Error assigning roles. Please try again later.')),
+      );
+    } finally {
+      setState(() {
+        _isLoading =
+            false; // Set loading state to false after the operation is done
+      });
+    }
   }
 
   @override
@@ -269,11 +344,22 @@ class _PlayerScreenState extends State<PlayerScreen> {
               ),
             ),
             Spacer(),
-            BottomSheetContainer(
-              buttonText: 'Assign Role',
-              onPressed: () {},
-              color: Colors.transparent,
-            ),
+            FutureBuilder(
+              future: Future.delayed(Duration.zero), // Create a delayed Future
+              builder: (context, snapshot) {
+                // Show the circular progress indicator if _isLoading is true
+                if (_isLoading) {
+                  return CircularProgressIndicator();
+                } else {
+                  // Show the "Assign Role" button otherwise
+                  return BottomSheetContainer(
+                    buttonText: 'Assign Role',
+                    onPressed: _assignRole,
+                    color: Color(0xFFF8F8F8),
+                  );
+                }
+              },
+            )
           ],
         ),
       ),

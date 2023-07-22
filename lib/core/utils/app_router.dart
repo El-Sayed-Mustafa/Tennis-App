@@ -31,7 +31,7 @@ abstract class AppRouter {
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider(
             create: (context) => NavigationCubit(),
-            child: RolesScreen(),
+            child: ManagementScreen(),
           );
         },
         routes: <RouteBase>[
