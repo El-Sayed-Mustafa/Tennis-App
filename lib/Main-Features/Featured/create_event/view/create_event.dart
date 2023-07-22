@@ -149,7 +149,12 @@ class CreateEvent extends StatelessWidget {
                           controller: rulesController,
                         ),
                         SizedBox(height: screenHeight * .03),
-                        const RangeSliderWithTooltip(),
+                        const RangeSliderWithTooltip(
+                          text1:
+                              'Player level', // Replace with your desired text for text1
+                          text2:
+                              'You can set a skill level requirement for players, allowing\nonly those whose skill level matches the requirement\nyou have set to participate.', // Replace with your desired text for text2
+                        ),
                         SizedBox(height: screenHeight * .015),
                         BottomSheetContainer(
                           buttonText: 'Create',

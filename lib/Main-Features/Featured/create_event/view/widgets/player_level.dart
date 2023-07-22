@@ -10,7 +10,14 @@ class SliderCubit extends Cubit<double> {
 }
 
 class RangeSliderWithTooltip extends StatelessWidget {
-  const RangeSliderWithTooltip({Key? key}) : super(key: key);
+  final String text1;
+  final String text2;
+
+  const RangeSliderWithTooltip({
+    Key? key,
+    required this.text1,
+    required this.text2,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +26,15 @@ class RangeSliderWithTooltip extends StatelessWidget {
     return BlocBuilder<SliderCubit, double>(
       builder: (context, state) {
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding: EdgeInsets.only(bottom: 2.0, left: screenWidth * .13),
-                child: const Text(
-                  'Player level',
-                  style: TextStyle(
+                child: Text(
+                  text1, // Use the provided text1 here
+                  style: const TextStyle(
                     color: Color(0xFF525252),
                     fontSize: 16,
                     fontFamily: 'Poppins',
@@ -64,8 +71,8 @@ class RangeSliderWithTooltip extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(bottom: 2.0, left: screenWidth * .05),
                 child: Text(
-                  'You can set a skill level requirement for players, allowing\nonly those whose skill level matches the requirement\nyou have set to participate.',
-                  style: TextStyle(
+                  text2, // Use the provided text2 here
+                  style: const TextStyle(
                     color: Color(0xFF6A6A6A),
                     fontSize: 12,
                     fontFamily: 'Poppins',
