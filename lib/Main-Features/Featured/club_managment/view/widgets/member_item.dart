@@ -16,6 +16,14 @@ class MemberItem extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     final double imageHeight = (screenHeight + screenWidth) * 0.08;
+    List<String> getRolesFromClubRoles(Map<String, String> clubRoles) {
+      List<String> roles = [];
+      for (var roleValue in clubRoles.values) {
+        final individualRoles = roleValue.split(',');
+        roles.addAll(individualRoles.map((role) => role.trim()));
+      }
+      return roles;
+    }
 
     return Container(
       padding: const EdgeInsets.all(8),
@@ -79,9 +87,14 @@ class MemberItem extends StatelessWidget {
                     text2: DateFormat('MMM d, yyyy').format(member.birthDate),
                   ),
                   SizedBox(height: screenHeight * .01),
-                  MyTextRich(
-                    text1: 'Role ',
-                    text2: member.clubRoles['role'] ?? '',
+                  SizedBox(
+                    width: screenWidth * .4,
+                    child: MyTextRich(
+                      text1: 'Role ',
+                      text2:
+                          getRolesFromClubRoles(member.clubRoles).join(', ') ??
+                              'No Role Assigned',
+                    ),
                   ),
                 ],
               ),

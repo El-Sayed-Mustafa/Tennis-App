@@ -13,8 +13,8 @@ class MyTextRich extends StatelessWidget {
     final double fontSize1 = (screenWidth + screenHeight) * 0.013;
     final double fontSize2 = (screenWidth + screenHeight) * 0.012;
 
-    return Text.rich(
-      TextSpan(
+    return RichText(
+      text: TextSpan(
         children: [
           TextSpan(
             text: text1,
@@ -42,6 +42,8 @@ class MyTextRich extends StatelessWidget {
           ),
         ],
       ),
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
     );
   }
 }

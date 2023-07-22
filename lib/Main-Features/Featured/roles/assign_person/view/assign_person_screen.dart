@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,8 +7,6 @@ import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
 import '../../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../create_role/view/widgets/rights_selector.dart';
-import '../cubit/assign_person_cubit.dart';
-import '../cubit/assign_person_state.dart';
 import '../service/club_roles_service.dart';
 
 class AssignPerson extends StatefulWidget {
@@ -24,23 +21,131 @@ class _AssignPersonState extends State<AssignPerson> {
   late List<String> selectedRole;
   late List<String> roleNames;
   late final ClubRolesService clubRolesService;
-  late final AssignPersonCubit cubit;
 
   @override
   void initState() {
     super.initState();
-    selectedRole = [];
+    selectedRole = []; // Initialize selectedRole as an empty list
     roleNames = [];
     clubRolesService = ClubRolesService();
-    cubit = AssignPersonCubit();
-    cubit.loadClubRoles();
-    cubit.fetchRoleNames();
+    loadClubRoles();
+    fetchRoleNames();
   }
 
-  @override
-  void dispose() {
-    cubit.close(); // Close the cubit when disposing of the widget
-    super.dispose();
+  String getCurrentUserId() {
+    final User? user = FirebaseAuth.instance.currentUser;
+    return user?.uid ?? '';
+  }
+
+  bool _isLoading = false; // Add a variable to track loading state
+
+  void _assignRole() async {
+    final String memberName = memberNameController.text.trim();
+    if (memberName.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Please enter the member name')),
+      );
+      return;
+    }
+    if (selectedRole.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Please select at least one role')),
+      );
+      return;
+    }
+
+    try {
+      setState(() {
+        _isLoading = true; // Set loading state to true
+      });
+      final User? currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser != null) {
+        final ClubRolesService clubRolesService = ClubRolesService();
+        final String? playerId =
+            await clubRolesService.getPlayerIdByName(memberName);
+        if (playerId == null) {
+          // Show error message if player not found with the given name
+          return;
+        }
+        final DocumentSnapshot<Map<String, dynamic>> playerSnapshot =
+            await FirebaseFirestore.instance
+                .collection('players')
+                .doc(playerId)
+                .get();
+        final DocumentSnapshot<Map<String, dynamic>> admin =
+            await FirebaseFirestore.instance
+                .collection('players')
+                .doc(currentUser.uid) //put id for current user
+                .get();
+        final data = admin.data();
+        if (data != null) {
+          final String createdClubId = data['createdClubId'] as String? ?? '';
+          final Map<String, String> clubRoles = <String, String>{
+            createdClubId: selectedRole.join(",")
+          };
+          // Update the player document with the new roles
+          await playerSnapshot.reference.update({'clubRoles': clubRoles});
+
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Roles assigned successfully')),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Player data not found')),
+          );
+        }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('User not logged in')),
+        );
+      }
+    } catch (e) {
+      print('Error assigning roles: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content: Text('Error assigning roles. Please try again later.')),
+      );
+    } finally {
+      setState(() {
+        _isLoading =
+            false; // Set loading state to false after the operation is done
+      });
+    }
+  }
+
+  Future<void> loadClubRoles() async {
+    try {
+      final userId = getCurrentUserId();
+      final playerSnapshot = await FirebaseFirestore.instance
+          .collection('players')
+          .doc(userId)
+          .get();
+      final playerData = playerSnapshot.data();
+      if (playerData != null) {
+        setState(() {});
+      }
+    } catch (e) {
+      // Handle errors if necessary
+      print('Error loading club roles: $e');
+    }
+  }
+
+  Future<void> fetchRoleNames() async {
+    try {
+      final roleNamesList = await clubRolesService.fetchRoleNames();
+      setState(() {
+        roleNames.addAll(roleNamesList);
+      });
+    } catch (e) {
+      // Handle errors if necessary
+      print('Error fetching role names: $e');
+    }
+  }
+
+  void updateRoleWithSelectedRole(List<String> roles) {
+    setState(() {
+      selectedRole = roles;
+    });
   }
 
   @override
@@ -96,58 +201,29 @@ class _AssignPersonState extends State<AssignPerson> {
                 child: RightSelector(
                   selectedWords: selectedRole,
                   onSelectedWordsChanged: (words) {
-                    cubit.updateRoleWithSelectedRole(words);
+                    updateRoleWithSelectedRole(words);
                   },
-                  words: roleNames,
+                  words: roleNames, // Use the fetched role names here
                 ),
               ),
             ),
-            // Use BlocBuilder to handle UI changes based on state
-            BlocBuilder<AssignPersonCubit, AssignPersonState>(
-              bloc: cubit,
-              builder: (context, state) {
-                if (state is AssignPersonLoading) {
+            // Use FutureBuilder to show the circular progress indicator
+            FutureBuilder(
+              future: Future.delayed(Duration.zero), // Create a delayed Future
+              builder: (context, snapshot) {
+                // Show the circular progress indicator if _isLoading is true
+                if (_isLoading) {
                   return CircularProgressIndicator();
-                } else if (state is AssignPersonError) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(state.message),
-                  );
-                } else if (state is AssignPersonSuccess) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(state.message),
-                  );
-                } else if (state is AssignPersonFetchedRoleNames) {
-                  // Assign the fetched role names to the local variable
-                  roleNames = state.roleNames;
-                  return BottomSheetContainer(
-                    buttonText: 'Assign Role',
-                    onPressed: () {
-                      cubit.assignRole(
-                        memberNameController.text.trim(),
-                        selectedRole,
-                      );
-                    },
-                    color: Color(0xFFF8F8F8),
-                  );
-                } else if (state is AssignPersonSelectedRoles) {
-                  selectedRole = state.selectedRoles;
-                  return BottomSheetContainer(
-                    buttonText: 'Assign Role',
-                    onPressed: () {
-                      cubit.assignRole(
-                        memberNameController.text.trim(),
-                        selectedRole,
-                      );
-                    },
-                    color: Color(0xFFF8F8F8),
-                  );
                 } else {
-                  return Container();
+                  // Show the "Assign Role" button otherwise
+                  return BottomSheetContainer(
+                    buttonText: 'Assign Role',
+                    onPressed: _assignRole,
+                    color: Color(0xFFF8F8F8),
+                  );
                 }
               },
-            ),
+            )
           ],
         ),
       ),
