@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/roles/create_role/view/widgets/rights_selector.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
@@ -8,6 +9,7 @@ import '../../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../../models/player.dart';
 import 'package:intl/intl.dart';
 
+import '../../../create_event/view/widgets/player_level.dart';
 import '../../../roles/assign_person/service/club_roles_service.dart';
 
 class PlayerScreen extends StatefulWidget {
@@ -164,256 +166,276 @@ class _PlayerScreenState extends State<PlayerScreen> {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
-    return Scaffold(
-      body: Container(
-        color: const Color(0xFFF8F8F8),
-        child: Column(
-          children: [
-            AppBarWaveHome(
-              prefixIcon: IconButton(
-                onPressed: () {
-                  GoRouter.of(context).pop();
-                },
-                icon: const Icon(
-                  Icons.arrow_back,
-                  size: 30,
-                  color: Colors.white,
-                ),
-              ),
-              text: '    Management',
-              suffixIconPath: '',
-            ),
-            Stack(
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => SliderCubit(),
+          ),
+        ],
+        child: Scaffold(
+          body: Container(
+            color: const Color(0xFFF8F8F8),
+            child: Column(
               children: [
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: (screenHeight + screenWidth) * 0.025,
-                      right: (screenHeight + screenWidth) * 0.025,
-                      top: (screenHeight + screenWidth) * 0.05),
-                  child: Center(
-                    child: Container(
+                AppBarWaveHome(
+                  prefixIcon: IconButton(
+                    onPressed: () {
+                      GoRouter.of(context).pop();
+                    },
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      size: 30,
+                      color: Colors.white,
+                    ),
+                  ),
+                  text: '    Management',
+                  suffixIconPath: '',
+                ),
+                Stack(
+                  children: [
+                    Padding(
                       padding: EdgeInsets.only(
-                        top: (screenHeight + screenWidth) * 0.06,
-                      ),
-                      decoration: ShapeDecoration(
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          side: const BorderSide(
-                              width: 0.50, color: Color(0x440D5FC3)),
-                          borderRadius: BorderRadius.circular(31),
-                        ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Column(
-                          children: [
-                            Text(
-                              widget.player.playerName,
-                              style: const TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.w500,
-                              ),
+                          left: (screenHeight + screenWidth) * 0.025,
+                          right: (screenHeight + screenWidth) * 0.025,
+                          top: (screenHeight + screenWidth) * 0.05),
+                      child: Center(
+                        child: Container(
+                          padding: EdgeInsets.only(
+                            top: (screenHeight + screenWidth) * 0.06,
+                          ),
+                          decoration: ShapeDecoration(
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              side: const BorderSide(
+                                  width: 0.50, color: Color(0x440D5FC3)),
+                              borderRadius: BorderRadius.circular(31),
                             ),
-                            const SizedBox(height: 18),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          ),
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 20.0),
+                            child: Column(
                               children: [
-                                const Text(
-                                  'Skill level',
-                                  style: TextStyle(
-                                    color: Color(0xFF15324F),
-                                    fontSize: 18,
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w400,
+                                Text(
+                                  widget.player.playerName,
+                                  style: const TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
-                                Text(
-                                  widget.player.skillLevel.isNotEmpty
-                                      ? widget.player.skillLevel
-                                      : '0',
-                                  style: TextStyle(
-                                    color: Color(0xFF6D6D6D),
-                                    fontSize: 18,
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                )
-                              ],
-                            ),
-                            const SizedBox(height: 18),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
-                                  'Membership',
-                                  style: TextStyle(
-                                    color: Color(0xFF15324F),
-                                    fontSize: 18,
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w400,
-                                  ),
+                                const SizedBox(height: 18),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Text(
+                                      'Skill level',
+                                      style: TextStyle(
+                                        color: Color(0xFF15324F),
+                                        fontSize: 18,
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    Text(
+                                      widget.player.skillLevel.isNotEmpty
+                                          ? widget.player.skillLevel
+                                          : '0',
+                                      style: TextStyle(
+                                        color: Color(0xFF6D6D6D),
+                                        fontSize: 18,
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    )
+                                  ],
                                 ),
-                                Text(
-                                  widget.player.clubRoles['membership'] ??
-                                      'Clear',
-                                  style: TextStyle(
-                                    color: Color(0xFF6D6D6D),
-                                    fontSize: 16,
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                )
-                              ],
-                            ),
-                            const SizedBox(height: 18),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
-                                  'Player type',
-                                  style: TextStyle(
-                                    color: Color(0xFF15324F),
-                                    fontSize: 18,
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w400,
-                                  ),
+                                const SizedBox(height: 18),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Text(
+                                      'Membership',
+                                      style: TextStyle(
+                                        color: Color(0xFF15324F),
+                                        fontSize: 18,
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    Text(
+                                      widget.player.clubRoles['membership'] ??
+                                          'Clear',
+                                      style: TextStyle(
+                                        color: Color(0xFF6D6D6D),
+                                        fontSize: 16,
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    )
+                                  ],
                                 ),
-                                Text(
-                                  widget.player.playerType,
-                                  style: TextStyle(
-                                    color: Color(0xFF6D6D6D),
-                                    fontSize: 18,
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                )
-                              ],
-                            ),
-                            const SizedBox(height: 18),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
-                                  'Date',
-                                  style: TextStyle(
-                                    color: Color(0xFF15324F),
-                                    fontSize: 18,
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w400,
-                                  ),
+                                const SizedBox(height: 18),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Text(
+                                      'Player type',
+                                      style: TextStyle(
+                                        color: Color(0xFF15324F),
+                                        fontSize: 18,
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    Text(
+                                      widget.player.playerType,
+                                      style: TextStyle(
+                                        color: Color(0xFF6D6D6D),
+                                        fontSize: 18,
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    )
+                                  ],
                                 ),
-                                Text(
-                                  DateFormat('MMM d, yyyy')
-                                      .format(widget.player.birthDate),
-                                  style: TextStyle(
-                                    color: Color(0xFF6D6D6D),
-                                    fontSize: 18,
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                )
-                              ],
-                            ),
-                            const SizedBox(height: 18),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
-                                  'Role',
-                                  style: TextStyle(
-                                    color: Color(0xFF15324F),
-                                    fontSize: 18,
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w400,
-                                  ),
+                                const SizedBox(height: 18),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Text(
+                                      'Date',
+                                      style: TextStyle(
+                                        color: Color(0xFF15324F),
+                                        fontSize: 18,
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    Text(
+                                      DateFormat('MMM d, yyyy')
+                                          .format(widget.player.birthDate),
+                                      style: TextStyle(
+                                        color: Color(0xFF6D6D6D),
+                                        fontSize: 18,
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    )
+                                  ],
                                 ),
-                                Text(
-                                  selectedRole.join(', ') ?? 'No Role Assigned',
-                                  style: TextStyle(
-                                    color: Color(0xFF6D6D6D),
-                                    fontSize: 18,
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                )
+                                const SizedBox(height: 18),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Text(
+                                      'Role',
+                                      style: TextStyle(
+                                        color: Color(0xFF15324F),
+                                        fontSize: 18,
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    Text(
+                                      selectedRole.join(', ').isNotEmpty
+                                          ? selectedRole.join(', ')
+                                          : widget.player.clubRoles.isNotEmpty
+                                              ? getRolesFromClubRoles(
+                                                      widget.player.clubRoles)
+                                                  .join(', ')
+                                              : 'No Role Assigned',
+                                      style: TextStyle(
+                                        color: Color(0xFF6D6D6D),
+                                        fontSize: 18,
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 50),
                               ],
                             ),
-                            const SizedBox(height: 50),
-                          ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-                Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.center, // Center the photo
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(
-                            (screenHeight + screenWidth) * 0.08 / 3),
-                        child: Container(
-                          height: (screenHeight + screenWidth) * 0.1,
-                          width: (screenHeight + screenWidth) * 0.08,
-                          child: widget.player.photoURL != ''
-                              ? Image.network(
-                                  widget.player.photoURL!,
-                                  fit: BoxFit.cover,
-                                )
-                              : Image.asset(
-                                  'assets/images/profileimage.png',
-                                  fit: BoxFit.cover,
-                                ),
+                    Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.center, // Center the photo
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(
+                                (screenHeight + screenWidth) * 0.08 / 3),
+                            child: Container(
+                              height: (screenHeight + screenWidth) * 0.1,
+                              width: (screenHeight + screenWidth) * 0.08,
+                              child: widget.player.photoURL != ''
+                                  ? Image.network(
+                                      widget.player.photoURL!,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : Image.asset(
+                                      'assets/images/profileimage.png',
+                                      fit: BoxFit.cover,
+                                    ),
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ],
                 ),
+                SizedBox(
+                  height: screenHeight * .025,
+                ),
+                const Text(
+                  'Assign Role',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w400,
+                  ),
+                ), //call the function here
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
+                  child: RightSelector(
+                    selectedWords: selectedRole,
+                    onSelectedWordsChanged: (words) {
+                      updateRoleWithSelectedRole(words);
+                    },
+                    words: roleNames, // Use the fetched role names here
+                  ),
+                ),
+                RangeSliderWithTooltip(),
+                Spacer(),
+                FutureBuilder(
+                  future:
+                      Future.delayed(Duration.zero), // Create a delayed Future
+                  builder: (context, snapshot) {
+                    // Show the circular progress indicator if _isLoading is true
+                    if (_isLoading) {
+                      return CircularProgressIndicator();
+                    } else {
+                      // Show the "Assign Role" button otherwise
+                      return BottomSheetContainer(
+                        buttonText: 'Assign Role',
+                        onPressed: _assignRole,
+                        color: Color(0xFFF8F8F8),
+                      );
+                    }
+                  },
+                )
               ],
             ),
-            SizedBox(
-              height: screenHeight * .025,
-            ),
-            const Text(
-              'Assign Role',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w400,
-              ),
-            ), //call the function here
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
-              child: RightSelector(
-                selectedWords: selectedRole,
-                onSelectedWordsChanged: (words) {
-                  updateRoleWithSelectedRole(words);
-                },
-                words: roleNames, // Use the fetched role names here
-              ),
-            ),
-            Spacer(),
-            FutureBuilder(
-              future: Future.delayed(Duration.zero), // Create a delayed Future
-              builder: (context, snapshot) {
-                // Show the circular progress indicator if _isLoading is true
-                if (_isLoading) {
-                  return CircularProgressIndicator();
-                } else {
-                  // Show the "Assign Role" button otherwise
-                  return BottomSheetContainer(
-                    buttonText: 'Assign Role',
-                    onPressed: _assignRole,
-                    color: Color(0xFFF8F8F8),
-                  );
-                }
-              },
-            )
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
 }

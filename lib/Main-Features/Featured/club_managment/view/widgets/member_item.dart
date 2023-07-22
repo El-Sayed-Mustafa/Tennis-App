@@ -68,12 +68,13 @@ class MemberItem extends StatelessWidget {
                 children: [
                   MyTextRich(
                     text1: 'Skill level ',
-                    text2: member.skillLevel,
+                    text2:
+                        member.skillLevel.isNotEmpty ? member.skillLevel : '0',
                   ),
                   SizedBox(height: screenHeight * .01),
                   MyTextRich(
                     text1: 'Membership  ',
-                    text2: member.clubRoles['membership'] ?? '',
+                    text2: member.clubRoles['membership'] ?? 'Clear',
                   ),
                   SizedBox(height: screenHeight * .01),
                   MyTextRich(
