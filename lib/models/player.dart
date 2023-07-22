@@ -16,6 +16,8 @@ class Player {
   final String playerType;
   final String phoneNumber;
   final Map<String, String> clubRoles;
+  final List<String> participatedClubIds;
+  final List<String> clubInvitationsIds;
 
   Player({
     required this.playerId,
@@ -33,6 +35,8 @@ class Player {
     required this.preferredPlayingTime,
     required this.playerType,
     required this.phoneNumber,
+    required this.participatedClubIds,
+    required this.clubInvitationsIds,
   });
 
   Map<String, dynamic> toJson() {
@@ -85,6 +89,8 @@ class Player {
       phoneNumber:
           data['phoneNumber'] as String? ?? '', // Use default value if null
       clubRoles: Map<String, String>.from(data['clubRoles'] ?? {}),
+      participatedClubIds: List<String>.from(data['participatedClubIds'] ?? []),
+      clubInvitationsIds: List<String>.from(data['clubInvitationsIds'] ?? []),
     );
   }
 }

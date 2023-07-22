@@ -66,7 +66,8 @@ class CreateProfileCubit extends Cubit<CreateProfileState> {
             ? '${selectedTime.hour}:${selectedTime.minute.toString().padLeft(2, '0')}'
             : '',
         playerType: selectedPlayerType,
-        eventIds: [], clubRoles: {},
+        eventIds: [], clubRoles: {}, clubInvitationsIds: [],
+        participatedClubIds: [],
       );
 
       CollectionReference playersCollection =
