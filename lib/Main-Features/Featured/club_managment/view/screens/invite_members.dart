@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tennis_app/Main-Features/Featured/club_managment/view/widgets/item_invite.dart';
 import '../../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../../models/club.dart';
 import '../../../../../models/player.dart';
@@ -46,7 +47,7 @@ class InviteMember extends StatelessWidget {
                       final player = players[index];
                       return Container(
                         padding: EdgeInsets.all(8.0),
-                        child: MemberItem(
+                        child: ItemInvite(
                           // Pass the player to the MemberItem widget
                           member: player,
                         ),

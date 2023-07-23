@@ -1,12 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:tennis_app/models/club.dart'; // Import the Club class
+import 'package:connectivity_plus/connectivity_plus.dart'; // Import the connectivity_plus plugin
 import '../../Featured/choose_club/widgets/static_rating_bar.dart';
 import '../../home/widgets/divider.dart';
 
-class ClubInfo extends StatelessWidget {
+class ClubInfo extends StatefulWidget {
   final Club clubData; // Add a parameter for clubData
 
   const ClubInfo({Key? key, required this.clubData}) : super(key: key);
+
+  @override
+  _ClubInfoState createState() => _ClubInfoState();
+}
+
+class _ClubInfoState extends State<ClubInfo> {
+  bool hasInternet =
+      true; // Add a boolean variable to track internet connectivity
+
+  @override
+  void initState() {
+    super.initState();
+    checkInternetConnectivity();
+  }
+
+  Future<void> checkInternetConnectivity() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      setState(() {
+        hasInternet = false;
+      });
+    } else {
+      setState(() {
+        hasInternet = true;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +44,7 @@ class ClubInfo extends StatelessWidget {
     final double itemWidth = screenWidth * 0.9;
     final double imageHeight = screenHeight * 0.13;
     final combine = (screenHeight + screenWidth);
-    print(clubData.photoURL);
+    print(widget.clubData.photoURL);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.041),
       child: PhysicalModel(
@@ -40,14 +68,26 @@ class ClubInfo extends StatelessWidget {
                 child: Container(
                   height: imageHeight,
                   width: imageHeight,
-                  child: clubData.photoURL != null
-                      ? FadeInImage.assetNetwork(
-                          placeholder: 'assets/images/loadin.gif',
-                          image: clubData.photoURL!,
-                          fit: BoxFit.cover,
-                        )
+                  child: hasInternet // Check if there's internet connection
+                      ? (widget.clubData.photoURL != ''
+                          ? FadeInImage.assetNetwork(
+                              placeholder: 'assets/images/loadin.gif',
+                              image: widget.clubData.photoURL!,
+                              fit: BoxFit.cover,
+                              imageErrorBuilder: (context, error, stackTrace) {
+                                // Show the placeholder image on error
+                                return Image.asset(
+                                  'assets/images/internet.png',
+                                  fit: BoxFit.cover,
+                                );
+                              },
+                            )
+                          : Image.asset(
+                              'assets/images/internet.png',
+                              fit: BoxFit.cover,
+                            ))
                       : Image.asset(
-                          'assets/images/profileimage.png',
+                          'assets/images/loadin.gif',
                           fit: BoxFit.cover,
                         ),
                 ),
@@ -58,7 +98,7 @@ class ClubInfo extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      clubData.clubName, // Use clubData's clubName
+                      widget.clubData.clubName, // Use clubData's clubName
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: combine * .02,
@@ -68,7 +108,7 @@ class ClubInfo extends StatelessWidget {
                     ),
                     const MyDivider(),
                     Text(
-                      clubData.address, // Use clubData's clubLocation
+                      widget.clubData.address, // Use clubData's clubLocation
                       style: TextStyle(
                           color: const Color(0xFF6D6D6D),
                           fontSize: combine * .01,
@@ -79,7 +119,7 @@ class ClubInfo extends StatelessWidget {
                     ),
                     SizedBox(height: screenHeight * .01),
                     StaticRatingBar(
-                      rating: clubData.rate, // Use clubData's rating
+                      rating: widget.clubData.rate, // Use clubData's rating
                       iconSize: (screenHeight + screenWidth) * .02,
                     )
                   ],

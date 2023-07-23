@@ -76,7 +76,7 @@ class Player {
           data['matchPlayed'] as int? ?? 0, // Use default value if null
       totalWins: data['totalWins'] as int? ?? 0, // Use default value if null
       skillLevel:
-          data['skillLevel'] as String? ?? '', // Use default value if null
+          data['skillLevel'] as String? ?? '0', // Use default value if null
       createdClubId:
           data['createdClubId'] as String? ?? '', // Use default value if null
       eventIds: List<String>.from(data['eventIds'] ?? []),

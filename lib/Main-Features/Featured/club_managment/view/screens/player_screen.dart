@@ -12,6 +12,7 @@ import 'package:intl/intl.dart';
 
 import '../../../create_event/view/widgets/player_level.dart';
 import '../../../roles/assign_person/service/club_roles_service.dart';
+import 'package:connectivity_plus/connectivity_plus.dart'; // Import the connectivity_plus plugin
 
 class PlayerScreen extends StatefulWidget {
   final Player player;
@@ -28,6 +29,8 @@ class _PlayerScreenState extends State<PlayerScreen> {
   late List<String> roleNames;
   late final ClubRolesService clubRolesService;
   bool _isLoading = false; // Add a variable to track loading state
+  bool hasInternet =
+      true; // Add a boolean variable to track internet connectivity
 
   @override
   void initState() {
@@ -36,7 +39,21 @@ class _PlayerScreenState extends State<PlayerScreen> {
     roleNames = [];
     clubRolesService = ClubRolesService();
     loadClubRoles();
+    checkInternetConnectivity();
     fetchRoleNames();
+  }
+
+  Future<void> checkInternetConnectivity() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      setState(() {
+        hasInternet = false;
+      });
+    } else {
+      setState(() {
+        hasInternet = true;
+      });
+    }
   }
 
   String getCurrentUserId() {

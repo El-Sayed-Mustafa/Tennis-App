@@ -4,17 +4,46 @@ import 'package:tennis_app/Main-Features/Featured/club_managment/view/widgets/te
 import '../../../../../models/player.dart';
 import '../../../../home/widgets/divider.dart';
 import 'package:intl/intl.dart';
+import 'package:connectivity_plus/connectivity_plus.dart'; // Import the connectivity_plus plugin
 
-class MemberItem extends StatelessWidget {
+class MemberItem extends StatefulWidget {
   final Player member; // Modify the memberName type to Player
 
   const MemberItem({required this.member, Key? key}) : super(key: key);
+
+  @override
+  _MemberItemState createState() => _MemberItemState();
+}
+
+class _MemberItemState extends State<MemberItem> {
+  bool hasInternet =
+      true; // Add a boolean variable to track internet connectivity
+
+  @override
+  void initState() {
+    super.initState();
+    checkInternetConnectivity();
+  }
+
+  Future<void> checkInternetConnectivity() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      setState(() {
+        hasInternet = false;
+      });
+    } else {
+      setState(() {
+        hasInternet = true;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     final double imageHeight = (screenHeight + screenWidth) * 0.08;
+
     List<String> getRolesFromClubRoles(Map<String, String> clubRoles) {
       List<String> roles = [];
       for (var roleValue in clubRoles.values) {
@@ -49,7 +78,7 @@ class MemberItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            member
+            widget.member
                 .playerName, // Access the member's name from the Player object
             style: const TextStyle(
               color: Colors.black,
@@ -67,35 +96,26 @@ class MemberItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   MyTextRich(
-                    text1: 'Skill level ',
-                    text2:
-                        member.skillLevel.isNotEmpty ? member.skillLevel : '0',
+                    text1: 'Matched Played ',
+                    text2: widget.member.matchPlayed.toString(),
                   ),
                   SizedBox(height: screenHeight * .01),
                   MyTextRich(
-                    text1: 'Membership  ',
-                    text2: member.clubRoles['membership'] ?? 'Clear',
+                    text1: 'Total Win  ',
+                    text2: widget.member.totalWins.toString(),
                   ),
                   SizedBox(height: screenHeight * .01),
                   MyTextRich(
                     text1: 'Player type ',
-                    text2: member.playerType,
+                    text2: widget.member.playerType,
                   ),
                   SizedBox(height: screenHeight * .01),
                   MyTextRich(
-                    text1: 'Date  ',
-                    text2: DateFormat('MMM d, yyyy').format(member.birthDate),
+                    text1: 'Birth date ',
+                    text2: DateFormat('MMM d, yyyy')
+                        .format(widget.member.birthDate),
                   ),
                   SizedBox(height: screenHeight * .01),
-                  SizedBox(
-                    width: screenWidth * .4,
-                    child: MyTextRich(
-                      text1: 'Role ',
-                      text2:
-                          getRolesFromClubRoles(member.clubRoles).join(', ') ??
-                              'No Role Assigned',
-                    ),
-                  ),
                 ],
               ),
               Column(
@@ -105,14 +125,27 @@ class MemberItem extends StatelessWidget {
                     child: Container(
                       height: imageHeight,
                       width: imageHeight,
-                      child: member.photoURL != ''
-                          ? FadeInImage.assetNetwork(
-                              placeholder: 'assets/images/loadin.gif',
-                              image: member.photoURL!,
-                              fit: BoxFit.cover,
-                            )
+                      child: hasInternet // Check if there's internet connection
+                          ? (widget.member.photoURL != ''
+                              ? FadeInImage.assetNetwork(
+                                  placeholder: 'assets/images/loadin.gif',
+                                  image: widget.member.photoURL!,
+                                  fit: BoxFit.cover,
+                                  imageErrorBuilder:
+                                      (context, error, stackTrace) {
+                                    // Show the placeholder image on error
+                                    return Image.asset(
+                                      'assets/images/profileimage.png',
+                                      fit: BoxFit.cover,
+                                    );
+                                  },
+                                )
+                              : Image.asset(
+                                  'assets/images/profileimage.png',
+                                  fit: BoxFit.cover,
+                                ))
                           : Image.asset(
-                              'assets/images/profileimage.png',
+                              'assets/images/loadin.gif',
                               fit: BoxFit.cover,
                             ),
                     ),
@@ -131,7 +164,8 @@ class MemberItem extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => PlayerScreen(player: member),
+                            builder: (context) =>
+                                PlayerScreen(player: widget.member),
                           ),
                         );
                       },

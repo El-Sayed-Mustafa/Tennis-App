@@ -4,15 +4,46 @@ import 'package:tennis_app/Main-Features/Featured/club_managment/view/widgets/te
 import '../../../../../models/player.dart';
 import '../../../../home/widgets/divider.dart';
 import 'package:intl/intl.dart';
+import 'package:connectivity_plus/connectivity_plus.dart'; // Import the connectivity_plus plugin
 
-class MemberItem extends StatelessWidget {
-  const MemberItem({Key? key}) : super(key: key);
+class ItemInvite extends StatefulWidget {
+  final Player member; // Modify the memberName type to Player
+
+  const ItemInvite({required this.member, Key? key}) : super(key: key);
+
+  @override
+  _ItemInviteState createState() => _ItemInviteState();
+}
+
+class _ItemInviteState extends State<ItemInvite> {
+  bool hasInternet =
+      true; // Add a boolean variable to track internet connectivity
+
+  @override
+  void initState() {
+    super.initState();
+    checkInternetConnectivity();
+  }
+
+  Future<void> checkInternetConnectivity() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      setState(() {
+        hasInternet = false;
+      });
+    } else {
+      setState(() {
+        hasInternet = true;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     final double imageHeight = (screenHeight + screenWidth) * 0.08;
+
     List<String> getRolesFromClubRoles(Map<String, String> clubRoles) {
       List<String> roles = [];
       for (var roleValue in clubRoles.values) {
@@ -47,7 +78,8 @@ class MemberItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'member',
+            widget.member
+                .playerName, // Access the member's name from the Player object
             style: const TextStyle(
               color: Colors.black,
               fontSize: 18,
@@ -63,30 +95,27 @@ class MemberItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MyTextRich(text1: 'Skill level ', text2: 'Skill level'),
+                  MyTextRich(
+                    text1: 'Matched Played ',
+                    text2: widget.member.matchPlayed.toString(),
+                  ),
                   SizedBox(height: screenHeight * .01),
                   MyTextRich(
-                    text1: 'Membership  ',
-                    text2: 'Members',
+                    text1: 'Total Win  ',
+                    text2: widget.member.totalWins.toString(),
                   ),
                   SizedBox(height: screenHeight * .01),
                   MyTextRich(
                     text1: 'Player type ',
-                    text2: 'member.',
+                    text2: widget.member.playerType,
                   ),
                   SizedBox(height: screenHeight * .01),
                   MyTextRich(
-                    text1: 'Date  ',
-                    text2: 'Date',
+                    text1: 'Birth date ',
+                    text2: DateFormat('MMM d, yyyy')
+                        .format(widget.member.birthDate),
                   ),
                   SizedBox(height: screenHeight * .01),
-                  SizedBox(
-                    width: screenWidth * .4,
-                    child: MyTextRich(
-                      text1: 'Role ',
-                      text2: 'No Role Assigned',
-                    ),
-                  ),
                 ],
               ),
               Column(
@@ -94,9 +123,32 @@ class MemberItem extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(imageHeight / 5),
                     child: Container(
-                        height: imageHeight,
-                        width: imageHeight,
-                        child: Text('photo')),
+                      height: imageHeight,
+                      width: imageHeight,
+                      child: hasInternet // Check if there's internet connection
+                          ? (widget.member.photoURL != ''
+                              ? FadeInImage.assetNetwork(
+                                  placeholder: 'assets/images/loadin.gif',
+                                  image: widget.member.photoURL!,
+                                  fit: BoxFit.cover,
+                                  imageErrorBuilder:
+                                      (context, error, stackTrace) {
+                                    // Show the placeholder image on error
+                                    return Image.asset(
+                                      'assets/images/profileimage.png',
+                                      fit: BoxFit.cover,
+                                    );
+                                  },
+                                )
+                              : Image.asset(
+                                  'assets/images/profileimage.png',
+                                  fit: BoxFit.cover,
+                                ))
+                          : Image.asset(
+                              'assets/images/loadin.gif',
+                              fit: BoxFit.cover,
+                            ),
+                    ),
                   ),
                   SizedBox(
                     height: screenHeight * .005,
@@ -107,8 +159,17 @@ class MemberItem extends StatelessWidget {
                       shape: OvalBorder(),
                     ),
                     child: IconButton(
-                      icon: const Icon(Icons.ads_click, color: Colors.white),
-                      onPressed: () {},
+                      icon:
+                          const Icon(Icons.person_add_alt, color: Colors.white),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                PlayerScreen(player: widget.member),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],

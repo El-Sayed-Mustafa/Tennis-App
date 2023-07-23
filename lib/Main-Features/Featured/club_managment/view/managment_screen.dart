@@ -205,7 +205,6 @@ class _ManagementScreenState extends State<ManagementScreen> {
                           selectedChoice =
                               mapAgeRestrictionToValue(club.ageRestriction);
                         }
-                        print("dddddd" + selectedChoice.toString());
                         // Update Firestore document for the club
                         await FirebaseFirestore.instance
                             .collection('clubs')
