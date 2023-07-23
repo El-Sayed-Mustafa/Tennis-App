@@ -16,12 +16,14 @@ import '../../Main-Features/Featured/club_managment/view/screens/player_screen.d
 import '../../Main-Features/Featured/create_club/view/create_club.dart';
 import '../../Main-Features/Featured/create_event/view/create_event.dart';
 import '../../Main-Features/Featured/find_match/view/find_match_screen.dart';
+import '../../Main-Features/Featured/find_match/view/screens/people_requirment.dart';
 import '../../Main-Features/Featured/localization/choose_language.dart';
 import '../../Main-Features/Featured/profile/view/profile_screen.dart';
 import '../../Main-Features/Featured/roles/assign_person/view/assign_person_screen.dart';
 import '../../Main-Features/Featured/roles/create_role/view/create_role_screen.dart';
 import '../../Main-Features/Featured/roles/roles_list/view/roles_list_screen.dart';
 import '../../Main-Features/Featured/settings/view/settings_screen.dart';
+import '../../Main-Features/chats/screens/private_chat.dart';
 import '../../models/player.dart';
 
 abstract class AppRouter {
@@ -32,7 +34,7 @@ abstract class AppRouter {
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider(
             create: (context) => NavigationCubit(),
-            child: FindMatch(),
+            child: PrivateChat(),
           );
         },
         routes: <RouteBase>[
