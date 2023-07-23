@@ -50,7 +50,7 @@ Widget defaultFormField({
                 )
               : null,
           contentPadding: const EdgeInsets.symmetric(
-              horizontal: 20, vertical: 10), // Remove the padding
+              horizontal: 20, vertical: 15), // Remove the padding
 
           filled: true, // Enable background fill
           fillColor: Colors.white, // Set the background color

@@ -15,6 +15,7 @@ import '../../Main-Features/Featured/club_managment/view/managment_screen.dart';
 import '../../Main-Features/Featured/club_managment/view/screens/player_screen.dart';
 import '../../Main-Features/Featured/create_club/view/create_club.dart';
 import '../../Main-Features/Featured/create_event/view/create_event.dart';
+import '../../Main-Features/Featured/find_match/view/find_match_screen.dart';
 import '../../Main-Features/Featured/localization/choose_language.dart';
 import '../../Main-Features/Featured/profile/view/profile_screen.dart';
 import '../../Main-Features/Featured/roles/assign_person/view/assign_person_screen.dart';
@@ -31,7 +32,7 @@ abstract class AppRouter {
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider(
             create: (context) => NavigationCubit(),
-            child: ManagementScreen(),
+            child: FindMatch(),
           );
         },
         routes: <RouteBase>[

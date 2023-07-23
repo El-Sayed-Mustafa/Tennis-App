@@ -63,7 +63,7 @@ class _InputDateState extends State<InputDate> {
             ),
             Container(
               width: screenWidth * .8,
-              height: screenHeight * .045,
+              height: screenHeight * .055,
               decoration: ShapeDecoration(
                 color: Colors.white,
                 shape: RoundedRectangleBorder(
@@ -72,7 +72,7 @@ class _InputDateState extends State<InputDate> {
                 ),
               ),
               child: Padding(
-                padding: EdgeInsets.only(bottom: screenHeight * .005, left: 24),
+                padding: EdgeInsets.only(top: screenHeight * .007, left: 24),
                 child: InkWell(
                   onTap: () async {
                     final DateTime? picked = await showDatePicker(
@@ -110,6 +110,7 @@ class _InputDateState extends State<InputDate> {
                         fontWeight: FontWeight.w400,
                       ),
                       decoration: InputDecoration(
+                        isDense: true,
                         border: InputBorder.none,
                         hintText: widget.hint,
                         hintStyle: const TextStyle(

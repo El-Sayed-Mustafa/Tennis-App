@@ -37,7 +37,7 @@ class _InputTimeFieldState extends State<InputTimeField> {
     return BlocBuilder<TimeCubit, TimeOfDay?>(
       builder: (context, selectedTime) {
         return Padding(
-          padding: EdgeInsets.symmetric(horizontal: screenWidth * .1),
+          padding: EdgeInsets.symmetric(horizontal: screenWidth * .055),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -47,9 +47,9 @@ class _InputTimeFieldState extends State<InputTimeField> {
                   widget.text,
                   style: const TextStyle(
                     color: Color(0xFF525252),
-                    fontSize: 14,
+                    fontSize: 15,
                     fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w400,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
@@ -80,12 +80,12 @@ class _InputTimeFieldState extends State<InputTimeField> {
                       hintText: widget.hint,
                       hintStyle: const TextStyle(
                         color: Color(0xFFA8A8A8),
-                        fontSize: 13,
+                        fontSize: 14,
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w400,
                       ),
                       contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10), // Remove the padding
+                          horizontal: 20, vertical: 15), // Remove the padding
 
                       filled: true, // Enable background fill
                       fillColor: Colors.white, // Set the background color

@@ -88,6 +88,11 @@ class _ClubComboBoxState extends State<ClubComboBox> {
       textFieldConfiguration: TextFieldConfiguration(
         controller: widget.controller,
         decoration: InputDecoration(
+          suffixIcon: Icon(
+            Icons.keyboard_arrow_down_rounded,
+            size: 30,
+            color: Colors.black,
+          ),
           isDense: true,
           filled: true,
           fillColor: Colors.white,
@@ -102,7 +107,7 @@ class _ClubComboBoxState extends State<ClubComboBox> {
             borderRadius: BorderRadius.circular(30),
           ),
           contentPadding:
-              const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
         ),
       ),
       suggestionsCallback: (pattern) {
