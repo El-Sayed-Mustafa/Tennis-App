@@ -12,6 +12,7 @@ class FindMatchCubit extends Cubit<FindMatchState> {
   FindMatchCubit() : super(FindMatchInitial());
 
   void saveData(
+    String userId,
     TextEditingController nameController,
     TextEditingController addressController,
     DateTime? selectedDateTime,
@@ -40,8 +41,7 @@ class FindMatchCubit extends Cubit<FindMatchState> {
 
       // Create a new Match object with the form data
       Matches newMatch = Matches(
-        matchId:
-            '', // Leave this empty since Firestore will generate the ID automatically
+        userId: userId,
         playerName: nameController.text,
         photoURL: selectedImageBytes != null ? imageUrl : null,
         address: addressController.text,

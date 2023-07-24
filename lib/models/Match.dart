@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Matches {
-  final String matchId;
+  final String userId;
   final String? photoURL;
   final String playerName;
   final String address;
@@ -11,7 +11,7 @@ class Matches {
   final String clubName;
 
   Matches({
-    required this.matchId,
+    required this.userId,
     required this.playerName,
     required this.photoURL,
     required this.address,
@@ -22,7 +22,7 @@ class Matches {
   });
   Map<String, dynamic> toJson() {
     return {
-      'matchId': matchId,
+      'userId': userId,
       'playerName': playerName,
       'photoURL': photoURL,
       'address': address,
@@ -41,7 +41,7 @@ class Matches {
     }
 
     return Matches(
-      matchId: snapshot.id,
+      userId: snapshot.id,
       playerName:
           data['playerName'] as String? ?? '', // Use default value if null
       photoURL: data['photoURL'] as String?, // Nullable String

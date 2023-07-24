@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -166,22 +167,24 @@ class FindMatch extends StatelessWidget {
                                           // Retrieve the necessary data from the form and other widgets
                                           DateTime? selectedDateTime =
                                               context.read<DateCubit>().state;
-                                          TimeOfDay? selectedTime =
-                                              context.read<TimeCubit>().state;
+
                                           String? selectedPlayerType = context
                                               .read<PlayerTypeCubit>()
                                               .state;
                                           Uint8List? selectedImageBytes =
                                               _selectedImageBytes;
+                                          User? user =
+                                              FirebaseAuth.instance.currentUser;
 
                                           // Call the Cubit method to save data
                                           context
                                               .read<FindMatchCubit>()
                                               .saveData(
+                                                  user!.uid.toString(),
                                                   nameController,
                                                   addressController,
                                                   selectedDateTime,
-                                                  selectedTime,
+                                                  _selectedTime,
                                                   selectedPlayerType,
                                                   clubNameController,
                                                   selectedImageBytes,
