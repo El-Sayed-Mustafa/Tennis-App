@@ -62,7 +62,7 @@ class PeopleRequirement extends StatelessWidget {
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   }
@@ -112,14 +112,38 @@ class PeopleRequirement extends StatelessWidget {
 
                   // Reverse the matches list before passing it to ListView
                   final reversedMatches = List.of(matches.reversed);
-                  final excludedFirstItemMatches = reversedMatches.sublist(1);
+                  final filteredMatches =
+                      matches.where((m) => m.matchId != match.matchId).toList();
+
+                  if (filteredMatches.isEmpty) {
+                    // If there are no matches available, show the text
+                    return const Center(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 16.0),
+                        child: SizedBox(
+                          height: 200,
+                          child: Center(
+                            child: Text(
+                              "No matches available now.",
+                              style: TextStyle(
+                                color: Color(0xFF313131),
+                                fontSize: 16,
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  }
 
                   return ListView.builder(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: excludedFirstItemMatches.length,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: filteredMatches.length,
                     itemBuilder: (context, index) {
-                      final opponent = excludedFirstItemMatches[index];
+                      final opponent = filteredMatches[index];
                       return OpponentItem(
                         match: match,
                         opponent: opponent,

@@ -18,6 +18,7 @@ class Player {
   final Map<String, String> clubRoles;
   final List<String> participatedClubIds;
   final List<String> clubInvitationsIds;
+  final List<Map<String, dynamic>> matches; // New property for matches
 
   Player({
     required this.playerId,
@@ -37,6 +38,7 @@ class Player {
     required this.phoneNumber,
     required this.participatedClubIds,
     required this.clubInvitationsIds,
+    required this.matches,
   });
 
   Map<String, dynamic> toJson() {
@@ -56,6 +58,7 @@ class Player {
       'playerType': playerType,
       'phoneNumber': phoneNumber,
       'clubRoles': clubRoles,
+      'matches': matches,
     };
   }
 
@@ -67,30 +70,23 @@ class Player {
 
     return Player(
       playerId: snapshot.id,
-      playerName:
-          data['playerName'] as String? ?? '', // Use default value if null
-      photoURL: data['photoURL'] as String?, // Nullable String
-      playerLevel:
-          data['playerLevel'] as String? ?? '', // Use default value if null
-      matchPlayed:
-          data['matchPlayed'] as int? ?? 0, // Use default value if null
-      totalWins: data['totalWins'] as int? ?? 0, // Use default value if null
-      skillLevel:
-          data['skillLevel'] as String? ?? '0', // Use default value if null
-      createdClubId:
-          data['createdClubId'] as String? ?? '', // Use default value if null
+      playerName: data['playerName'] as String? ?? '',
+      photoURL: data['photoURL'] as String?,
+      playerLevel: data['playerLevel'] as String? ?? '',
+      matchPlayed: data['matchPlayed'] as int? ?? 0,
+      totalWins: data['totalWins'] as int? ?? 0,
+      skillLevel: data['skillLevel'] as String? ?? '0',
+      createdClubId: data['createdClubId'] as String? ?? '',
       eventIds: List<String>.from(data['eventIds'] ?? []),
-      gender: data['gender'] as String? ?? '', // Nullable String
+      gender: data['gender'] as String? ?? '',
       birthDate: (data['birthDate'] as Timestamp).toDate(),
-      preferredPlayingTime: data['preferredPlayingTime'] as String? ??
-          '', // Use default value if null
-      playerType:
-          data['playerType'] as String? ?? '', // Use default value if null
-      phoneNumber:
-          data['phoneNumber'] as String? ?? '', // Use default value if null
+      preferredPlayingTime: data['preferredPlayingTime'] as String? ?? '',
+      playerType: data['playerType'] as String? ?? '',
+      phoneNumber: data['phoneNumber'] as String? ?? '',
       clubRoles: Map<String, String>.from(data['clubRoles'] ?? {}),
       participatedClubIds: List<String>.from(data['participatedClubIds'] ?? []),
       clubInvitationsIds: List<String>.from(data['clubInvitationsIds'] ?? []),
+      matches: List<Map<String, dynamic>>.from(data['matches'] ?? []),
     );
   }
 }

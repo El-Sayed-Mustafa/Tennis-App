@@ -9,6 +9,7 @@ class Matches {
   final String preferredPlayingTime;
   final String playerType;
   final String clubName;
+  final String matchId; // New property for match ID
 
   Matches({
     required this.userId,
@@ -19,7 +20,9 @@ class Matches {
     required this.preferredPlayingTime,
     required this.playerType,
     required this.clubName,
+    required this.matchId, // Initialize the match ID
   });
+
   Map<String, dynamic> toJson() {
     return {
       'userId': userId,
@@ -30,6 +33,7 @@ class Matches {
       'preferredPlayingTime': preferredPlayingTime,
       'playerType': playerType,
       'clubName': clubName,
+      'matchId': matchId, // Serialize the match ID
     };
   }
 
@@ -42,18 +46,17 @@ class Matches {
 
     return Matches(
       userId: snapshot.id,
-      playerName:
-          data['playerName'] as String? ?? '', // Use default value if null
-      photoURL: data['photoURL'] as String?, // Nullable String
-      address: data['address'] as String? ?? '', // Use default value if null
+      playerName: data['playerName'] as String? ?? '',
+      photoURL: data['photoURL'] as String?,
+      address: data['address'] as String? ?? '',
       dob: (data['dob'] as Timestamp).toDate(),
-      preferredPlayingTime: data['preferredPlayingTime'] as String? ??
-          '', // Use default value if null
-      playerType:
-          data['playerType'] as String? ?? '', // Use default value if null
-      clubName: data['clubName'] as String? ?? '', // Use default value if null
+      preferredPlayingTime: data['preferredPlayingTime'] as String? ?? '',
+      playerType: data['playerType'] as String? ?? '',
+      clubName: data['clubName'] as String? ?? '',
+      matchId: data['matchId'] as String? ?? '', // Deserialize the match ID
     );
   }
+
   Matches copyWith({
     String? userId,
     String? photoURL,
@@ -63,6 +66,7 @@ class Matches {
     String? preferredPlayingTime,
     String? playerType,
     String? clubName,
+    String? matchId, // Add matchId to the copyWith method
   }) {
     return Matches(
       userId: userId ?? this.userId,
@@ -73,6 +77,8 @@ class Matches {
       preferredPlayingTime: preferredPlayingTime ?? this.preferredPlayingTime,
       playerType: playerType ?? this.playerType,
       clubName: clubName ?? this.clubName,
+      matchId: matchId ??
+          this.matchId, // Copy the match ID when creating a new instance
     );
   }
 }

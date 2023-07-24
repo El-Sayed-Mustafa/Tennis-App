@@ -59,20 +59,24 @@ class FindMatchCubit extends Cubit<FindMatchState> {
         preferredPlayingTime: selectedTime?.format(context) ?? '',
         playerType: selectedPlayerType!,
         clubName: clubNameController.text,
+        matchId: '', // Set matchId to an empty string for now
       );
 
       // Save the new match to Firestore
       final CollectionReference matchesCollection =
           FirebaseFirestore.instance.collection('matches');
-      await matchesCollection.add(newMatch.toJson());
+      DocumentReference docRef = await matchesCollection.add(newMatch.toJson());
 
       // Get the ID of the newly added match from Firestore
-      String matchId = matchesCollection.id;
+      String matchId = docRef.id;
 
-      // Create a new Matches object with the Firestore-generated ID
-      Matches newMatchWithId = newMatch.copyWith(userId: matchId);
+      // Update the matchId property of the newMatch object
+      newMatch = newMatch.copyWith(matchId: matchId);
 
-      emit(FindMatchSuccess(newMatchWithId));
+      // Save the updated match with the correct matchId to Firestore
+      await docRef.set(newMatch.toJson());
+
+      emit(FindMatchSuccess(newMatch));
     } catch (e) {
       emit(FindMatchError('Error saving data: $e'));
     }
