@@ -4,6 +4,7 @@ import 'package:tennis_app/Main-Features/Featured/club_managment/view/widgets/me
 
 import '../../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../../models/Match.dart';
+import '../widgets/match_item.dart';
 
 class PeopleRequirement extends StatelessWidget {
   PeopleRequirement({super.key, required this.match});
@@ -39,7 +40,8 @@ class PeopleRequirement extends StatelessWidget {
               ),
             ),
             //TODO: add member
-            // MemberItem(member: member),
+            Expanded(
+                child: SingleChildScrollView(child: MatchItem(match: match))),
             Text(
               match.clubName,
               style: const TextStyle(

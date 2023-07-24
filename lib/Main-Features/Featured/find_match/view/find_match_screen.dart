@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/find_match/view/screens/people_requirment.dart';
 import 'package:tennis_app/core/utils/widgets/app_bar_wave.dart';
@@ -184,10 +185,18 @@ class FindMatch extends StatelessWidget {
                                           User? user =
                                               FirebaseAuth.instance.currentUser;
 
-                                          // Call the Cubit method to save data
-                                          context
-                                              .read<FindMatchCubit>()
-                                              .saveData(
+                                          // Check if the club name is empty
+                                          if (clubNameController.text.isEmpty) {
+                                            Fluttertoast.showToast(
+                                              msg: 'Please choose a club',
+                                              toastLength: Toast.LENGTH_SHORT,
+                                              gravity: ToastGravity.BOTTOM,
+                                            );
+                                          } else {
+                                            // Call the Cubit method to save data
+                                            context
+                                                .read<FindMatchCubit>()
+                                                .saveData(
                                                   user!.uid.toString(),
                                                   nameController,
                                                   addressController,
@@ -196,7 +205,9 @@ class FindMatch extends StatelessWidget {
                                                   selectedPlayerType,
                                                   clubNameController,
                                                   selectedImageBytes,
-                                                  context);
+                                                  context,
+                                                );
+                                          }
                                         }
                                       },
                                       color: Colors.white,

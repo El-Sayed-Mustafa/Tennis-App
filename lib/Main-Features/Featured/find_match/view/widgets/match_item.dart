@@ -1,21 +1,20 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:tennis_app/Main-Features/Featured/club_managment/view/screens/player_screen.dart';
-import 'package:tennis_app/Main-Features/Featured/club_managment/view/widgets/text_rich.dart';
-import '../../../../../models/player.dart';
+
+import '../../../../../models/Match.dart';
+import '../../../../club/widgets/text_rich.dart';
 import '../../../../home/widgets/divider.dart';
 import 'package:intl/intl.dart';
-import 'package:connectivity_plus/connectivity_plus.dart'; // Import the connectivity_plus plugin
 
-class MemberItem extends StatefulWidget {
-  final Player member; // Modify the memberName type to Player
-
-  const MemberItem({required this.member, Key? key}) : super(key: key);
+class MatchItem extends StatefulWidget {
+  const MatchItem({super.key, required this.match});
+  final Matches match;
 
   @override
-  _MemberItemState createState() => _MemberItemState();
+  State<MatchItem> createState() => _MatchItemState();
 }
 
-class _MemberItemState extends State<MemberItem> {
+class _MatchItemState extends State<MatchItem> {
   bool hasInternet =
       true; // Add a boolean variable to track internet connectivity
 
@@ -48,7 +47,7 @@ class _MemberItemState extends State<MemberItem> {
       padding: const EdgeInsets.all(8),
       margin: const EdgeInsets.symmetric(horizontal: 20),
       width: screenWidth * .8,
-      height: screenHeight * .27,
+      height: screenHeight * .25,
       decoration: BoxDecoration(
         color: Colors.white,
         shape: BoxShape.rectangle,
@@ -69,7 +68,7 @@ class _MemberItemState extends State<MemberItem> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            widget.member
+            widget.match
                 .playerName, // Access the member's name from the Player object
             style: const TextStyle(
               color: Colors.black,
@@ -83,44 +82,17 @@ class _MemberItemState extends State<MemberItem> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  MyTextRich(
-                    text1: 'Matched Played ',
-                    text2: widget.member.matchPlayed.toString(),
-                  ),
-                  SizedBox(height: screenHeight * .01),
-                  MyTextRich(
-                    text1: 'Total Win  ',
-                    text2: widget.member.totalWins.toString(),
-                  ),
-                  SizedBox(height: screenHeight * .01),
-                  MyTextRich(
-                    text1: 'Player type ',
-                    text2: widget.member.playerType,
-                  ),
-                  SizedBox(height: screenHeight * .01),
-                  MyTextRich(
-                    text1: 'Birth date ',
-                    text2: DateFormat('MMM d, yyyy')
-                        .format(widget.member.birthDate),
-                  ),
-                  SizedBox(height: screenHeight * .01),
-                ],
-              ),
-              Column(
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(imageHeight / 5),
+                    borderRadius: BorderRadius.circular(imageHeight / 3),
                     child: Container(
-                      height: imageHeight,
+                      height: imageHeight * 1.3,
                       width: imageHeight,
                       child: hasInternet // Check if there's internet connection
-                          ? (widget.member.photoURL != ''
+                          ? (widget.match.photoURL != null
                               ? FadeInImage.assetNetwork(
                                   placeholder: 'assets/images/loadin.gif',
-                                  image: widget.member.photoURL!,
+                                  image: widget.match.photoURL!,
                                   fit: BoxFit.cover,
                                   imageErrorBuilder:
                                       (context, error, stackTrace) {
@@ -144,23 +116,27 @@ class _MemberItemState extends State<MemberItem> {
                   SizedBox(
                     height: screenHeight * .005,
                   ),
-                  Container(
-                    decoration: const ShapeDecoration(
-                      color: Color.fromARGB(212, 15, 32, 42),
-                      shape: OvalBorder(),
-                    ),
-                    child: IconButton(
-                      icon: const Icon(Icons.ads_click, color: Colors.white),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                PlayerScreen(player: widget.member),
-                          ),
-                        );
-                      },
-                    ),
+                ],
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MyTextRich(
+                    text1: 'Player Type ',
+                    text2: widget.match.playerType,
+                  ),
+                  SizedBox(height: screenHeight * .01),
+                  MyTextRich(text1: 'Address ', text2: widget.match.address),
+                  SizedBox(height: screenHeight * .01),
+                  MyTextRich(
+                    text1: 'Date ',
+                    text2: DateFormat('MMM d, yyyy').format(widget.match.dob),
+                  ),
+                  SizedBox(height: screenHeight * .01),
+                  MyTextRich(
+                    text1: 'Preferred time  ',
+                    text2: widget.match.preferredPlayingTime,
                   ),
                 ],
               ),
@@ -169,5 +145,6 @@ class _MemberItemState extends State<MemberItem> {
         ],
       ),
     );
+    ;
   }
 }

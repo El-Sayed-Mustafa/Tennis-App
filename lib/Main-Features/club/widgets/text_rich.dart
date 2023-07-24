@@ -11,7 +11,7 @@ class MyTextRich extends StatelessWidget {
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
     final double fontSize1 = (screenWidth + screenHeight) * 0.012;
-    final double fontSize2 = (screenWidth + screenHeight) * 0.009;
+    final double fontSize2 = (screenWidth + screenHeight) * 0.01;
 
     return Text.rich(
       TextSpan(
