@@ -1,9 +1,13 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/core/utils/widgets/app_bar_wave.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 import '../../../../core/utils/widgets/input_date.dart';
 import '../../../../core/utils/widgets/text_field.dart';
@@ -12,6 +16,7 @@ import '../../create_event/view/widgets/club_names.dart';
 import '../../create_profile/cubits/player_type_cubit.dart';
 import '../../create_profile/widgets/input_time.dart';
 import '../../create_profile/widgets/player_type.dart';
+import '../../create_profile/widgets/profile_image.dart';
 
 // ignore: must_be_immutable
 class FindMatch extends StatelessWidget {
@@ -21,6 +26,7 @@ class FindMatch extends StatelessWidget {
   final TextEditingController clubNameController = TextEditingController();
   TimeOfDay? _selectedTime;
   var formKey = GlobalKey<FormState>();
+  Uint8List? _selectedImageBytes;
 
   @override
   Widget build(BuildContext context) {
@@ -82,10 +88,10 @@ class FindMatch extends StatelessWidget {
                       child: Column(
                         children: [
                           SizedBox(height: screenHeight * .025),
-                          SizedBox(
-                            height: screenHeight * 0.13,
-                            child: Image.asset('assets/images/profileimage.png',
-                                fit: BoxFit.cover),
+                          ProfileImage(
+                            onImageSelected: (File imageFile) {
+                              _selectedImageBytes = imageFile.readAsBytesSync();
+                            },
                           ),
                           SizedBox(height: screenHeight * .025),
                           InputTextWithHint(
@@ -129,23 +135,56 @@ class FindMatch extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: BottomSheetContainer(
-                                buttonText: 'Find',
-                                onPressed: () async {
-                                  if (formKey.currentState!.validate()) {
-                                    // Save the data to Firebase Firestore
-                                    try {
-                                      final CollectionReference
-                                          matchesCollection = FirebaseFirestore
-                                              .instance
-                                              .collection('matches');
-                                      DateTime? selectedDateTime =
-                                          context.read<DateCubit>().state;
-                                      String? selectedPlayerType =
-                                          context.read<PlayerTypeCubit>().state;
+                              buttonText: 'Find',
+                              onPressed: () async {
+                                if (formKey.currentState!.validate()) {
+                                  // Save the data to Firebase Firestore
+                                  try {
+                                    final CollectionReference
+                                        matchesCollection = FirebaseFirestore
+                                            .instance
+                                            .collection('matches');
+                                    DateTime? selectedDateTime =
+                                        context.read<DateCubit>().state;
+                                    String? selectedPlayerType =
+                                        context.read<PlayerTypeCubit>().state;
 
-                                      // Create a new document in the "matches" collection with auto-generated ID
-                                      final DocumentReference newMatchRef =
-                                          await matchesCollection.add({
+                                    // Upload the selected image to Firebase Storage
+                                    if (_selectedImageBytes != null) {
+                                      firebase_storage.Reference
+                                          storageReference = firebase_storage
+                                              .FirebaseStorage.instance
+                                              .ref()
+                                              .child('matches')
+                                              .child(DateTime.now()
+                                                      .millisecondsSinceEpoch
+                                                      .toString() +
+                                                  '.jpg');
+                                      firebase_storage.UploadTask uploadTask =
+                                          storageReference
+                                              .putData(_selectedImageBytes!);
+                                      firebase_storage.TaskSnapshot
+                                          taskSnapshot = await uploadTask;
+                                      String imageUrl = await taskSnapshot.ref
+                                          .getDownloadURL();
+
+                                      // Update the player document with the image URL
+                                      await matchesCollection.add({
+                                        'name': nameController.text,
+                                        'address': addressController.text,
+                                        'dob':
+                                            selectedDateTime, // Replace 'selectedDate' with the selected date value
+                                        'preferredPlayingTime':
+                                            _selectedTime?.format(
+                                                context), // Replace '_selectedTime' with the selected time value
+                                        'playerType':
+                                            selectedPlayerType, // Replace 'selectedPlayerType' with the selected player type value
+                                        'clubName': clubNameController.text,
+                                        'photoURL': imageUrl,
+                                      });
+                                    } else {
+                                      // If no image is selected, save data without the image URL
+                                      await matchesCollection.add({
                                         'name': nameController.text,
                                         'address': addressController.text,
                                         'dob':
@@ -157,22 +196,17 @@ class FindMatch extends StatelessWidget {
                                             selectedPlayerType, // Replace 'selectedPlayerType' with the selected player type value
                                         'clubName': clubNameController.text,
                                       });
-
-                                      if (newMatchRef.id.isNotEmpty) {
-                                        // Data saved successfully
-                                        print(
-                                            'Data saved successfully. Document ID: ${newMatchRef.id}');
-                                      } else {
-                                        // Data could not be saved
-                                        print('Failed to save data.');
-                                      }
-                                    } catch (e) {
-                                      // Handle any errors that occurred during data saving
-                                      print('Error saving data: $e');
                                     }
+
+                                    print('Data saved successfully.');
+                                  } catch (e) {
+                                    // Handle any errors that occurred during data saving
+                                    print('Error saving data: $e');
                                   }
-                                },
-                                color: Colors.white),
+                                }
+                              },
+                              color: Colors.white,
+                            ),
                           )
                         ],
                       ),

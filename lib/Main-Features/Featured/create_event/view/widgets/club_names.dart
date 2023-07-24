@@ -15,6 +15,7 @@ class ClubNamesCubit extends Cubit<List<String>> {
 
   Future<void> fetchClubNames(String playerId) async {
     try {
+      print(playerId);
       final DocumentSnapshot<Map<String, dynamic>> snapshot =
           await FirebaseFirestore.instance
               .collection('players')
