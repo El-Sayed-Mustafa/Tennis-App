@@ -1,5 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:tennis_app/Main-Features/Featured/find_match/view/screens/playing_screen.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
 import '../../../../../models/Match.dart';
@@ -8,16 +9,16 @@ import '../../../../home/widgets/divider.dart';
 import 'package:intl/intl.dart';
 
 class OpponentItem extends StatefulWidget {
-  const OpponentItem({super.key, required this.match});
+  const OpponentItem({super.key, required this.match, required this.opponent});
   final Matches match;
+  final Matches opponent;
 
   @override
   State<OpponentItem> createState() => _OpponentItemState();
 }
 
 class _OpponentItemState extends State<OpponentItem> {
-  bool hasInternet =
-      true; // Add a boolean variable to track internet connectivity
+  bool hasInternet = true;
 
   @override
   void initState() {
@@ -76,7 +77,7 @@ class _OpponentItemState extends State<OpponentItem> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    widget.match
+                    widget.opponent
                         .playerName, // Access the member's name from the Player object
                     style: const TextStyle(
                       color: Colors.black,
@@ -99,11 +100,11 @@ class _OpponentItemState extends State<OpponentItem> {
                               width: imageHeight,
                               child:
                                   hasInternet // Check if there's internet connection
-                                      ? (widget.match.photoURL != null
+                                      ? (widget.opponent.photoURL != null
                                           ? FadeInImage.assetNetwork(
                                               placeholder:
                                                   'assets/images/loadin.gif',
-                                              image: widget.match.photoURL!,
+                                              image: widget.opponent.photoURL!,
                                               fit: BoxFit.cover,
                                               imageErrorBuilder:
                                                   (context, error, stackTrace) {
@@ -135,21 +136,22 @@ class _OpponentItemState extends State<OpponentItem> {
                         children: [
                           MyTextRich(
                             text1: 'Player Type ',
-                            text2: widget.match.playerType,
+                            text2: widget.opponent.playerType,
                           ),
                           SizedBox(height: screenHeight * .01),
                           MyTextRich(
-                              text1: 'Address ', text2: widget.match.address),
+                              text1: 'Address ',
+                              text2: widget.opponent.address),
                           SizedBox(height: screenHeight * .01),
                           MyTextRich(
                             text1: 'Date ',
                             text2: DateFormat('MMM d, yyyy')
-                                .format(widget.match.dob),
+                                .format(widget.opponent.dob),
                           ),
                           SizedBox(height: screenHeight * .01),
                           MyTextRich(
                             text1: 'Preferred time  ',
-                            text2: widget.match.preferredPlayingTime,
+                            text2: widget.opponent.preferredPlayingTime,
                           ),
                         ],
                       ),
@@ -166,7 +168,17 @@ class _OpponentItemState extends State<OpponentItem> {
                 padding: const EdgeInsets.symmetric(horizontal: 28.0),
                 child: BottomSheetContainer(
                     buttonText: 'Play',
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PlayingScreen(
+                            match: widget.match,
+                            opponent: widget.opponent,
+                          ),
+                        ),
+                      );
+                    },
                     color: Colors.transparent),
               )
             ],

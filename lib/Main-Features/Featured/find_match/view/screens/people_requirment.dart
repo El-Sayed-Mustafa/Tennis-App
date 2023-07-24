@@ -119,8 +119,11 @@ class PeopleRequirement extends StatelessWidget {
                     physics: NeverScrollableScrollPhysics(),
                     itemCount: excludedFirstItemMatches.length,
                     itemBuilder: (context, index) {
-                      final match = excludedFirstItemMatches[index];
-                      return OpponentItem(match: match);
+                      final opponent = excludedFirstItemMatches[index];
+                      return OpponentItem(
+                        match: match,
+                        opponent: opponent,
+                      );
                     },
                   );
                 },
