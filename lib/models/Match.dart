@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Match {
+class Matches {
   final String matchId;
   final String? photoURL;
   final String playerName;
@@ -10,7 +10,7 @@ class Match {
   final String playerType;
   final String clubName;
 
-  Match({
+  Matches({
     required this.matchId,
     required this.playerName,
     required this.photoURL,
@@ -20,7 +20,6 @@ class Match {
     required this.playerType,
     required this.clubName,
   });
-
   Map<String, dynamic> toJson() {
     return {
       'matchId': matchId,
@@ -34,13 +33,14 @@ class Match {
     };
   }
 
-  factory Match.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot) {
+  factory Matches.fromSnapshot(
+      DocumentSnapshot<Map<String, dynamic>> snapshot) {
     final data = snapshot.data();
     if (data == null) {
       throw ArgumentError("Invalid data for Match from DocumentSnapshot");
     }
 
-    return Match(
+    return Matches(
       matchId: snapshot.id,
       playerName:
           data['playerName'] as String? ?? '', // Use default value if null

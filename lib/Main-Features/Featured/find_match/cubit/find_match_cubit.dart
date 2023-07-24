@@ -1,0 +1,64 @@
+import 'dart:typed_data';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+
+import '../../../../models/Match.dart';
+import 'find_match_states.dart';
+
+class FindMatchCubit extends Cubit<FindMatchState> {
+  FindMatchCubit() : super(FindMatchInitial());
+
+  void saveData(
+    TextEditingController nameController,
+    TextEditingController addressController,
+    DateTime? selectedDateTime,
+    TimeOfDay? selectedTime,
+    String? selectedPlayerType,
+    TextEditingController clubNameController,
+    Uint8List? selectedImageBytes,
+    BuildContext context,
+  ) async {
+    try {
+      emit(FindMatchLoading());
+
+      // Upload the selected image to Firebase Storage
+      String imageUrl = '';
+      if (selectedImageBytes != null) {
+        firebase_storage.Reference storageReference = firebase_storage
+            .FirebaseStorage.instance
+            .ref()
+            .child('matches')
+            .child(DateTime.now().millisecondsSinceEpoch.toString() + '.jpg');
+        firebase_storage.UploadTask uploadTask =
+            storageReference.putData(selectedImageBytes);
+        firebase_storage.TaskSnapshot taskSnapshot = await uploadTask;
+        imageUrl = await taskSnapshot.ref.getDownloadURL();
+      }
+
+      // Create a new Match object with the form data
+      Matches newMatch = Matches(
+        matchId:
+            '', // Leave this empty since Firestore will generate the ID automatically
+        playerName: nameController.text,
+        photoURL: selectedImageBytes != null ? imageUrl : null,
+        address: addressController.text,
+        dob: selectedDateTime!,
+        preferredPlayingTime: selectedTime?.format(context) ?? '',
+        playerType: selectedPlayerType!,
+        clubName: clubNameController.text,
+      );
+
+      // Save the new match to Firestore
+      final CollectionReference matchesCollection =
+          FirebaseFirestore.instance.collection('matches');
+      await matchesCollection.add(newMatch.toJson());
+
+      emit(FindMatchSuccess());
+    } catch (e) {
+      emit(FindMatchError('Error saving data: $e'));
+    }
+  }
+}
