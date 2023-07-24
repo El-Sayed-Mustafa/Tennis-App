@@ -56,7 +56,13 @@ class FindMatchCubit extends Cubit<FindMatchState> {
           FirebaseFirestore.instance.collection('matches');
       await matchesCollection.add(newMatch.toJson());
 
-      emit(FindMatchSuccess());
+      // Get the ID of the newly added match from Firestore
+      String matchId = matchesCollection.id;
+
+      // Create a new Matches object with the Firestore-generated ID
+      Matches newMatchWithId = newMatch.copyWith(userId: matchId);
+
+      emit(FindMatchSuccess(newMatchWithId));
     } catch (e) {
       emit(FindMatchError('Error saving data: $e'));
     }

@@ -54,4 +54,25 @@ class Matches {
       clubName: data['clubName'] as String? ?? '', // Use default value if null
     );
   }
+  Matches copyWith({
+    String? userId,
+    String? photoURL,
+    String? playerName,
+    String? address,
+    DateTime? dob,
+    String? preferredPlayingTime,
+    String? playerType,
+    String? clubName,
+  }) {
+    return Matches(
+      userId: userId ?? this.userId,
+      photoURL: photoURL ?? this.photoURL,
+      playerName: playerName ?? this.playerName,
+      address: address ?? this.address,
+      dob: dob ?? this.dob,
+      preferredPlayingTime: preferredPlayingTime ?? this.preferredPlayingTime,
+      playerType: playerType ?? this.playerType,
+      clubName: clubName ?? this.clubName,
+    );
+  }
 }

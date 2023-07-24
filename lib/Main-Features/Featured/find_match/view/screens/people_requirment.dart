@@ -3,10 +3,11 @@ import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/club_managment/view/widgets/member_item.dart';
 
 import '../../../../../core/utils/widgets/app_bar_wave.dart';
+import '../../../../../models/Match.dart';
 
 class PeopleRequirement extends StatelessWidget {
-  const PeopleRequirement({super.key});
-
+  PeopleRequirement({super.key, required this.match});
+  final Matches match;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +29,7 @@ class PeopleRequirement extends StatelessWidget {
               text: '    Find Match',
               suffixIconPath: '',
             ),
-            Text(
+            const Text(
               'Your Requirements',
               style: TextStyle(
                 color: Color(0xFF313131),
@@ -40,8 +41,8 @@ class PeopleRequirement extends StatelessWidget {
             //TODO: add member
             // MemberItem(member: member),
             Text(
-              'People’ Requirements',
-              style: TextStyle(
+              match.clubName,
+              style: const TextStyle(
                 color: Color(0xFF313131),
                 fontSize: 20,
                 fontFamily: 'Roboto',

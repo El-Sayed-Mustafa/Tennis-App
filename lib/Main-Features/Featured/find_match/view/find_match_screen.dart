@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tennis_app/Main-Features/Featured/find_match/view/screens/people_requirment.dart';
 import 'package:tennis_app/core/utils/widgets/app_bar_wave.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -41,8 +42,12 @@ class FindMatch extends StatelessWidget {
       child: BlocConsumer<FindMatchCubit, FindMatchState>(
         listener: (context, state) {
           if (state is FindMatchSuccess) {
-            // Data saved successfully, do any necessary actions here
-            print('Data saved successfully.');
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PeopleRequirement(match: state.match),
+              ),
+            );
           } else if (state is FindMatchError) {
             // Handle errors that occurred during data saving
             print(state.errorMessage);
@@ -51,8 +56,11 @@ class FindMatch extends StatelessWidget {
         builder: (context, state) {
           if (state is FindMatchLoading) {
             // Show a loading indicator here if needed
-            return Center(
-              child: CircularProgressIndicator(),
+            return Container(
+              color: Colors.white,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
             );
           } else {
             return BlocProvider(
