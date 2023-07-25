@@ -4,30 +4,26 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tennis_app/Main-Features/Featured/create_event/cubit/create_event_cubit.dart';
+import 'package:tennis_app/Main-Features/Featured/create_court/cubit/create_court_states.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/club_names.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/input_end_date.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/player_level.dart';
-import 'package:tennis_app/core/utils/widgets/rules_text_field.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/event_types.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
 import '../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../core/utils/widgets/input_date_and_time.dart';
 import '../../../../core/utils/widgets/text_field.dart';
-import '../../create_event/cubit/create_event_state.dart';
 import '../../create_profile/widgets/profile_image.dart';
+import '../cubit/create_court_cubit.dart';
 
 // ignore: must_be_immutable
 class CreateCourt extends StatelessWidget {
   CreateCourt({Key? key}) : super(key: key);
 
   // Declare controllers for input fields
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController eventAddressController = TextEditingController();
   final TextEditingController courtNameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
-  final TextEditingController clubNameController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
 
   Uint8List? _selectedImageBytes;
@@ -53,16 +49,16 @@ class CreateCourt extends StatelessWidget {
         )
       ],
       child: BlocProvider(
-        create: (context) => CreateEventCubit(context),
-        child: BlocBuilder<CreateEventCubit, CreateEventState>(
+        create: (context) => CreateCourtCubit(context),
+        child: BlocBuilder<CreateCourtCubit, CreateCourtState>(
           builder: (context, state) {
-            if (state is CreateEventLoadingState) {
+            if (state is CreateCourtLoadingState) {
               return const Dialog.fullscreen(
                 child: Center(
                   child: CircularProgressIndicator(),
                 ),
               );
-            } else if (state is CreateEventErrorState) {
+            } else if (state is CreateCourtErrorState) {
               return Scaffold(
                 body: Center(
                   child: Text(state.error),
@@ -98,7 +94,7 @@ class CreateCourt extends StatelessWidget {
                       ),
                       SizedBox(height: screenHeight * .015),
                       const Text(
-                        'Set  Court Picture',
+                        'Set Court Picture',
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 14,
@@ -110,7 +106,7 @@ class CreateCourt extends StatelessWidget {
                       InputTextWithHint(
                         hint: 'Type Court Name here',
                         text: 'Court Name',
-                        controller: nameController,
+                        controller: courtNameController,
                       ),
                       SizedBox(height: screenHeight * .03),
                       InputTextWithHint(
@@ -133,7 +129,7 @@ class CreateCourt extends StatelessWidget {
                       SizedBox(height: screenHeight * .03),
                       InputTextWithHint(
                         hint: 'Type Club Address here',
-                        text: 'Club Address',
+                        text: 'Court Address',
                         controller: addressController,
                       ),
                       SizedBox(height: screenHeight * .025),
@@ -141,14 +137,11 @@ class CreateCourt extends StatelessWidget {
                         buttonText: 'Create',
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
-                            context.read<CreateEventCubit>().saveEventData(
-                                  context: context,
+                            context.read<CreateCourtCubit>().saveCourtData(
                                   selectedImageBytes: _selectedImageBytes,
-                                  addressController: eventAddressController,
+                                  addressController: addressController,
                                   courtNameController: courtNameController,
-                                  eventNameController: nameController,
-                                  instructionsController: phoneController,
-                                  clubNameController: clubNameController,
+                                  phoneController: phoneController,
                                 );
                           }
                         },
