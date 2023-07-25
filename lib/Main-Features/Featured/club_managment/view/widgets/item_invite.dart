@@ -44,26 +44,25 @@ class _ItemInviteState extends State<ItemInvite> {
   }
 
   void sendInvitation(Player player) async {
-    setState(() {
-      player.isInvitationSent = true;
-      player.clubInvitationsIds
-          .add(widget.club.clubId); // Add clubId to the clubInvitationsIds list
-    });
+    if (!player.isInvitationSent) {
+      setState(() {
+        player.isInvitationSent = true;
+        player.clubInvitationsIds.add(widget.club.clubId);
+      });
 
-    // Print relevant variables to debug
-    print('Widget clubId: ${widget.club.clubId}');
-    print('Player playerId: ${player.playerId}');
-    print('Player clubInvitationsIds: ${player.clubInvitationsIds}');
-
-    // Update the player data in Firebase
-    try {
-      FirebaseFirestore firestore = FirebaseFirestore.instance;
-      CollectionReference playersCollection = firestore.collection('players');
-      await playersCollection.doc(player.playerId).update(player.toJson());
-      print('Successfully updated player data');
-    } catch (e) {
-      // Handle any errors while saving data to Firebase
-      print('Error saving player data to Firebase: $e');
+      // Update the player data in Firebase
+      try {
+        FirebaseFirestore firestore = FirebaseFirestore.instance;
+        CollectionReference playersCollection = firestore.collection('players');
+        await playersCollection.doc(player.playerId).update(player.toJson());
+        print('Successfully updated player data');
+      } catch (e) {
+        // Handle any errors while saving data to Firebase
+        print('Error saving player data to Firebase: $e');
+      }
+    } else {
+      // Invitation already sent, show a message or perform any action as needed
+      print('Invitation has already been sent to this player.');
     }
   }
 
