@@ -70,10 +70,14 @@ class InviteMember extends StatelessWidget {
           await FirebaseFirestore.instance.collection('players').get();
 
       // Filter out players who are already members of the current club
+      // and players who have the club's invitation ID in clubInvitationsIds
       final existingMembers = club.memberIds;
+      final clubInvitationId = club.clubId;
       final eligiblePlayers = playersSnapshot.docs
           .map((doc) => Player.fromSnapshot(doc))
-          .where((player) => !existingMembers.contains(player.playerId))
+          .where((player) =>
+              !existingMembers.contains(player.playerId) &&
+              !player.clubInvitationsIds.contains(clubInvitationId))
           .toList();
 
       // Sort players based on the number of clubs involved in ascending order
