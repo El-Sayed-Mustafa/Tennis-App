@@ -186,6 +186,5 @@ class _OpponentItemState extends State<OpponentItem> {
         ],
       ),
     );
-    ;
   }
 }

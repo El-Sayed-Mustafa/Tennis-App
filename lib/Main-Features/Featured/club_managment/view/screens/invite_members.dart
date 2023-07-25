@@ -6,8 +6,6 @@ import '../../../../../models/club.dart';
 import '../../../../../models/player.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../widgets/member_item.dart';
-
 class InviteMember extends StatelessWidget {
   const InviteMember({super.key, required this.club});
   final Club club;

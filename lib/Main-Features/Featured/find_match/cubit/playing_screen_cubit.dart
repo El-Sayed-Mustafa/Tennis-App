@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../models/Match.dart';
 import '../../../../models/player.dart';
@@ -62,6 +63,7 @@ class PlayingCubit extends Cubit<PlayingStatus> {
       // Show a success message to the user (optional)
       showSnackbar(context, "Match data saved successfully!");
       emit(PlayingStatus.success);
+      GoRouter.of(context).push('/home');
     } catch (e) {
       // Emit error state
       emit(PlayingStatus.error);

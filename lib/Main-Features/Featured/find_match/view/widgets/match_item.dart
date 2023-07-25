@@ -145,6 +145,5 @@ class _MatchItemState extends State<MatchItem> {
         ],
       ),
     );
-    ;
   }
 }
