@@ -122,6 +122,7 @@ class CreateEvent extends StatelessWidget {
                           hint: 'Select start date and time',
                           onDateTimeSelected: (DateTime dateTime) {},
                         ),
+                        SizedBox(height: screenHeight * .03),
                         InputEndDateAndTime(
                           text: 'Event End',
                           hint: 'Select end date and time',

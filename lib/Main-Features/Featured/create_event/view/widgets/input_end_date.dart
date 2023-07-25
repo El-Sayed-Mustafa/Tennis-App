@@ -103,7 +103,7 @@ class _InputEndDateAndTimeState extends State<InputEndDateAndTime> {
             ),
             Container(
               width: screenWidth * .83,
-              height: screenHeight * .045,
+              height: screenHeight * .057,
               decoration: ShapeDecoration(
                 color: Colors.white,
                 shape: RoundedRectangleBorder(
@@ -112,41 +112,50 @@ class _InputEndDateAndTimeState extends State<InputEndDateAndTime> {
                 ),
               ),
               child: Padding(
-                padding: EdgeInsets.only(bottom: screenHeight * .005, left: 24),
+                padding: EdgeInsets.only(left: 24),
                 child: InkWell(
                   onTap: _selectDateTime,
                   child: IgnorePointer(
-                    child: TextFormField(
-                      readOnly: true,
-                      style: const TextStyle(
-                        color: Color.fromARGB(255, 66, 65, 65),
-                        fontSize: 15,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w400,
-                      ),
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: widget.hint,
-                        hintStyle: const TextStyle(
-                          color: Color(0xFFA8A8A8),
-                          fontSize: 13,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w400,
+                    child: Row(
+                      mainAxisAlignment:
+                          MainAxisAlignment.center, // Center the TextFormField
+                      children: [
+                        Expanded(
+                          child: TextFormField(
+                            readOnly: true,
+                            style: const TextStyle(
+                              color: Color.fromARGB(255, 66, 65, 65),
+                              fontSize: 15,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w400,
+                            ),
+                            decoration: InputDecoration(
+                              isDense: true,
+                              border: InputBorder.none,
+                              hintText: widget.hint,
+                              hintStyle: const TextStyle(
+                                color: Color(0xFFA8A8A8),
+                                fontSize: 13,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            controller:
+                                TextEditingController(text: formattedDateTime),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter a valid date and time';
+                              }
+                              return null;
+                            },
+                          ),
                         ),
-                        suffixIcon: IconButton(
+                        IconButton(
                           icon: const Icon(Icons.calendar_month_outlined,
                               size: 20),
                           onPressed: _selectDateTime,
                         ),
-                      ),
-                      controller:
-                          TextEditingController(text: formattedDateTime),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter a valid date and time';
-                        }
-                        return null;
-                      },
+                      ],
                     ),
                   ),
                 ),
