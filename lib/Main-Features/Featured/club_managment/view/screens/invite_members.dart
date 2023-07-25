@@ -8,15 +8,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../widgets/member_item.dart';
 
-class InviteMember extends StatefulWidget {
+class InviteMember extends StatelessWidget {
   const InviteMember({super.key, required this.club});
   final Club club;
 
-  @override
-  State<InviteMember> createState() => _InviteMemberState();
-}
-
-class _InviteMemberState extends State<InviteMember> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +49,7 @@ class _InviteMemberState extends State<InviteMember> {
                         padding: EdgeInsets.all(8.0),
                         child: ItemInvite(
                           // Pass the player to the MemberItem widget
-                          member: player,
+                          member: player, club: club,
                         ),
                       );
                     },
@@ -75,7 +70,7 @@ class _InviteMemberState extends State<InviteMember> {
           await FirebaseFirestore.instance.collection('players').get();
 
       // Filter out players who are already members of the current club
-      final existingMembers = widget.club.memberIds;
+      final existingMembers = club.memberIds;
       final eligiblePlayers = playersSnapshot.docs
           .map((doc) => Player.fromSnapshot(doc))
           .where((player) => !existingMembers.contains(player.playerId))

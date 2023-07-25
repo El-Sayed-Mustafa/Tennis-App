@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tennis_app/Main-Features/Featured/club_managment/view/screens/player_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/club_managment/view/widgets/text_rich.dart';
+import 'package:tennis_app/models/club.dart';
 import '../../../../../models/player.dart';
 import '../../../../home/widgets/divider.dart';
 import 'package:intl/intl.dart';
@@ -8,8 +10,9 @@ import 'package:connectivity_plus/connectivity_plus.dart'; // Import the connect
 
 class ItemInvite extends StatefulWidget {
   final Player member; // Modify the memberName type to Player
-
-  const ItemInvite({required this.member, Key? key}) : super(key: key);
+  final Club club;
+  const ItemInvite({required this.member, Key? key, required this.club})
+      : super(key: key);
 
   @override
   _ItemInviteState createState() => _ItemInviteState();
@@ -40,14 +43,28 @@ class _ItemInviteState extends State<ItemInvite> {
     }
   }
 
-  void sendInvitation(Player player) {
-    // Place your logic here to send the invitation
-    // For example, you can show a confirmation dialog, call an API, etc.
-
-    // After the invitation is successfully sent, update the invitation status
+  void sendInvitation(Player player) async {
     setState(() {
       player.isInvitationSent = true;
+      player.clubInvitationsIds
+          .add(widget.club.clubId); // Add clubId to the clubInvitationsIds list
     });
+
+    // Print relevant variables to debug
+    print('Widget clubId: ${widget.club.clubId}');
+    print('Player playerId: ${player.playerId}');
+    print('Player clubInvitationsIds: ${player.clubInvitationsIds}');
+
+    // Update the player data in Firebase
+    try {
+      FirebaseFirestore firestore = FirebaseFirestore.instance;
+      CollectionReference playersCollection = firestore.collection('players');
+      await playersCollection.doc(player.playerId).update(player.toJson());
+      print('Successfully updated player data');
+    } catch (e) {
+      // Handle any errors while saving data to Firebase
+      print('Error saving player data to Firebase: $e');
+    }
   }
 
   IconData getIconForPlayer(Player player) {
