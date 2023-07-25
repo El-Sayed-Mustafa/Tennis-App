@@ -18,7 +18,7 @@ class Player {
   final Map<String, String> clubRoles;
   final List<String> participatedClubIds;
   final List<String> clubInvitationsIds;
-  final List<Map<String, dynamic>> matches; // New property for matches
+  final List<Map<String, dynamic>> matches;
 
   Player({
     required this.playerId,
@@ -58,7 +58,7 @@ class Player {
       'playerType': playerType,
       'phoneNumber': phoneNumber,
       'clubRoles': clubRoles,
-      'matches': matches,
+      'matchId': matches,
     };
   }
 
@@ -86,7 +86,7 @@ class Player {
       clubRoles: Map<String, String>.from(data['clubRoles'] ?? {}),
       participatedClubIds: List<String>.from(data['participatedClubIds'] ?? []),
       clubInvitationsIds: List<String>.from(data['clubInvitationsIds'] ?? []),
-      matches: List<Map<String, dynamic>>.from(data['matches'] ?? []),
+      matches: List<Map<String, dynamic>>.from(data['matchId'] ?? []),
     );
   }
 }

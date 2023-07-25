@@ -45,7 +45,7 @@ class Matches {
     }
 
     return Matches(
-      userId: snapshot.id,
+      userId: data['userId'] as String? ?? '',
       playerName: data['playerName'] as String? ?? '',
       photoURL: data['photoURL'] as String?,
       address: data['address'] as String? ?? '',
@@ -53,7 +53,7 @@ class Matches {
       preferredPlayingTime: data['preferredPlayingTime'] as String? ?? '',
       playerType: data['playerType'] as String? ?? '',
       clubName: data['clubName'] as String? ?? '',
-      matchId: data['matchId'] as String? ?? '', // Deserialize the match ID
+      matchId: snapshot.id, // Deserialize the match ID
     );
   }
 

@@ -12,7 +12,6 @@ class PeopleRequirement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -107,13 +106,11 @@ class PeopleRequirement extends StatelessWidget {
                     return playerTypeComparison;
                   });
 
-                  // Filter out the match you passed above from the list
-                  matches.remove(match);
-
                   // Reverse the matches list before passing it to ListView
                   final reversedMatches = List.of(matches.reversed);
-                  final filteredMatches =
-                      matches.where((m) => m.matchId != match.matchId).toList();
+                  final filteredMatches = reversedMatches
+                      .where((m) => m.matchId != match.matchId)
+                      .toList();
 
                   if (filteredMatches.isEmpty) {
                     // If there are no matches available, show the text
@@ -144,6 +141,7 @@ class PeopleRequirement extends StatelessWidget {
                     itemCount: filteredMatches.length,
                     itemBuilder: (context, index) {
                       final opponent = filteredMatches[index];
+                      print("People’ " + opponent.userId);
                       return OpponentItem(
                         match: match,
                         opponent: opponent,
