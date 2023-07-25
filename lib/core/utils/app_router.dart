@@ -34,7 +34,7 @@ abstract class AppRouter {
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider(
             create: (context) => NavigationCubit(),
-            child: FindMatch(),
+            child: ManagementScreen(),
           );
         },
         routes: <RouteBase>[

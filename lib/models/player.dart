@@ -19,6 +19,7 @@ class Player {
   final List<String> participatedClubIds;
   final List<String> clubInvitationsIds;
   final List<Map<String, dynamic>> matches;
+  bool isInvitationSent = false; // Add this line to track invitation status
 
   Player({
     required this.playerId,

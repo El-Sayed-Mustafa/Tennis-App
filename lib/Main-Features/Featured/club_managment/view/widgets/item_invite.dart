@@ -18,6 +18,7 @@ class ItemInvite extends StatefulWidget {
 class _ItemInviteState extends State<ItemInvite> {
   bool hasInternet =
       true; // Add a boolean variable to track internet connectivity
+  Map<Player, bool> invitationStatusMap = {};
 
   @override
   void initState() {
@@ -25,6 +26,7 @@ class _ItemInviteState extends State<ItemInvite> {
     checkInternetConnectivity();
   }
 
+  @override
   Future<void> checkInternetConnectivity() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.none) {
@@ -36,6 +38,22 @@ class _ItemInviteState extends State<ItemInvite> {
         hasInternet = true;
       });
     }
+  }
+
+  void sendInvitation(Player player) {
+    // Place your logic here to send the invitation
+    // For example, you can show a confirmation dialog, call an API, etc.
+
+    // After the invitation is successfully sent, update the invitation status
+    setState(() {
+      player.isInvitationSent = true;
+    });
+  }
+
+  IconData getIconForPlayer(Player player) {
+    return player.isInvitationSent
+        ? Icons.check_circle_outline
+        : Icons.person_add_alt;
   }
 
   @override
@@ -159,16 +177,13 @@ class _ItemInviteState extends State<ItemInvite> {
                       shape: OvalBorder(),
                     ),
                     child: IconButton(
-                      icon:
-                          const Icon(Icons.person_add_alt, color: Colors.white),
+                      icon: Icon(
+                        getIconForPlayer(widget.member),
+                        color: Colors.white,
+                      ),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                PlayerScreen(player: widget.member),
-                          ),
-                        );
+                        // Call the function to handle sending the invitation
+                        sendInvitation(widget.member);
                       },
                     ),
                   ),
