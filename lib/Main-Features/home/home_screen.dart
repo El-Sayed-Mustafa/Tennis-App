@@ -5,6 +5,7 @@ import 'package:tennis_app/Main-Features/home/services/firebase_methods.dart';
 import 'package:tennis_app/Main-Features/home/widgets/avaliable_courts.dart';
 import 'package:tennis_app/Main-Features/home/widgets/button_home.dart';
 import 'package:tennis_app/Main-Features/home/widgets/my_events.dart';
+import 'package:tennis_app/Main-Features/home/widgets/my_matches.dart';
 import 'package:tennis_app/core/utils/widgets/app_bar_wave.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -19,10 +20,8 @@ class HomeScreen extends StatelessWidget {
 
     final spacing = screenHeight * 0.015;
 
-    return Container(
-      color: const Color(0xFFF8F8F8),
-      alignment: Alignment.topCenter, // Aligns the column to the top
-      child: SingleChildScrollView(
+    return Scaffold(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             AppBarWaveHome(
@@ -49,7 +48,7 @@ class HomeScreen extends StatelessWidget {
             const MyEvents(),
             SizedBox(height: spacing * 2),
             Text(
-              'Available Courts',
+              'Your Reversed Courts',
               style: TextStyle(
                 color: const Color(0xFF313131),
                 fontSize: sectionTitleSize,
@@ -57,8 +56,18 @@ class HomeScreen extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(height: spacing),
             const AvailableCourts(),
+            SizedBox(height: spacing * 2),
+            Text(
+              'Your Upcoming Matches',
+              style: TextStyle(
+                color: const Color(0xFF313131),
+                fontSize: sectionTitleSize,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            MyMatches(),
             SizedBox(height: spacing * 2),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
@@ -68,12 +77,16 @@ class HomeScreen extends StatelessWidget {
                   HomeButton(
                     buttonText: 'Find Court',
                     imagePath: 'assets/images/Find-Court.svg',
-                    onPressed: () {},
+                    onPressed: () {
+                      GoRouter.of(context).push('/findCourt');
+                    },
                   ),
                   HomeButton(
                     buttonText: 'Find Partner',
                     imagePath: 'assets/images/Find-Partner.svg',
-                    onPressed: () {},
+                    onPressed: () {
+                      GoRouter.of(context).push('/findPartner');
+                    },
                   ),
                 ],
               ),

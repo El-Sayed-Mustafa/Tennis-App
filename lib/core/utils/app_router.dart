@@ -7,6 +7,7 @@ import 'package:tennis_app/Main-Features/Featured/navigation_bar/cubit/navigatio
 import 'package:tennis_app/Main-Features/Featured/navigation_bar/navigation_bar_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/onboarding/onboarding_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/splash/splash_screen.dart';
+import 'package:tennis_app/Main-Features/home/home_screen.dart';
 import 'package:tennis_app/Main-Features/menu/menu_screen.dart';
 
 import '../../Auth/screens/forget_password.dart';
@@ -36,7 +37,7 @@ abstract class AppRouter {
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider(
             create: (context) => NavigationCubit(),
-            child: CourtSearchScreen(),
+            child: HomeScreen(),
           );
         },
         routes: <RouteBase>[
@@ -113,6 +114,18 @@ abstract class AppRouter {
             path: 'assignPerson',
             builder: (BuildContext context, GoRouterState state) {
               return AssignPerson();
+            },
+          ),
+          GoRoute(
+            path: 'findPartner',
+            builder: (BuildContext context, GoRouterState state) {
+              return FindMatch();
+            },
+          ),
+          GoRoute(
+            path: 'findCourt',
+            builder: (BuildContext context, GoRouterState state) {
+              return CourtSearchScreen();
             },
           ),
         ],

@@ -44,9 +44,8 @@ class _MatchItemState extends State<MatchItem> {
     final double imageHeight = (screenHeight + screenWidth) * 0.08;
 
     return Container(
-      padding: const EdgeInsets.all(8),
-      margin: const EdgeInsets.symmetric(horizontal: 20),
-      width: screenWidth * .8,
+      margin: const EdgeInsets.only(bottom: 20, right: 20, left: 20, top: 10),
+      width: screenWidth * .9,
       height: screenHeight * .25,
       decoration: BoxDecoration(
         color: Colors.white,

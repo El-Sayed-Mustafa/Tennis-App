@@ -266,7 +266,7 @@ class CarouselItem extends StatelessWidget {
             ),
             child: Center(
               child: Text(
-                'Register',
+                'Register Done',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: itemHeight * 0.056 * scaleFactor,
