@@ -19,7 +19,8 @@ class Player {
   final List<String> participatedClubIds;
   final List<String> clubInvitationsIds;
   final List<Map<String, dynamic>> matches;
-  bool isInvitationSent = false; // Add this line to track invitation status
+  bool isInvitationSent = false;
+  final List<String> reversedCourtsIds;
 
   Player({
     required this.playerId,
@@ -39,6 +40,7 @@ class Player {
     required this.phoneNumber,
     required this.participatedClubIds,
     required this.clubInvitationsIds,
+    required this.reversedCourtsIds,
     required this.matches,
   });
 
@@ -60,6 +62,7 @@ class Player {
       'clubInvitationsIds': clubInvitationsIds,
       'phoneNumber': phoneNumber,
       'clubRoles': clubRoles,
+      'reversedCourtsIds': reversedCourtsIds,
       'matchId': matches,
     };
   }
@@ -89,6 +92,7 @@ class Player {
       participatedClubIds: List<String>.from(data['participatedClubIds'] ?? []),
       clubInvitationsIds: List<String>.from(data['clubInvitationsIds'] ?? []),
       matches: List<Map<String, dynamic>>.from(data['matchId'] ?? []),
+      reversedCourtsIds: List<String>.from(data['reversedCourtsIds'] ?? []),
     );
   }
 }

@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Main-Features/home/widgets/divider.dart';
 import '../../../models/court.dart';
 import 'package:intl/intl.dart';
+
+import '../../../models/player.dart';
 
 class CourtItem extends StatefulWidget {
   CourtItem({Key? key, required this.court}) : super(key: key);
@@ -15,17 +18,20 @@ class CourtItem extends StatefulWidget {
 
 class _CourtItemState extends State<CourtItem> {
   late Stream<DocumentSnapshot<Map<String, dynamic>>> _courtStream;
+  bool canTap = true;
 
   @override
   void initState() {
     super.initState();
+    canTap = !widget.court.reversed;
+
     _courtStream = FirebaseFirestore.instance
         .collection('courts')
         .doc(widget.court.courtId)
         .snapshots();
   }
 
-  void _updateCourtReservedStatus(String courtId) {
+  void _currentPlayerCourts(String courtId) async {
     // Update the 'reversed' property to true for the corresponding court document in Firestore
     FirebaseFirestore.instance.collection('courts').doc(courtId).update({
       'reversed': true,
@@ -36,6 +42,50 @@ class _CourtItemState extends State<CourtItem> {
       // Handle the error if updating fails
       print('Error updating court reversed status: $error');
     });
+  }
+
+  void _updateCourtReservedStatus(String courtId) async {
+    try {
+      // Step 1: Get the current user ID from Firebase Authentication
+      User? currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser == null) {
+        print('No user is currently signed in.');
+        return;
+      }
+
+      String currentUserId = currentUser.uid;
+
+      // Step 2: Fetch the player document for the current user
+      DocumentSnapshot<Map<String, dynamic>> playerSnapshot =
+          await FirebaseFirestore.instance
+              .collection('players')
+              .doc(currentUserId)
+              .get();
+
+      if (!playerSnapshot.exists) {
+        print('Player document does not exist for current user.');
+        return;
+      }
+
+      // Step 3: Update the 'reversedCourtsIds' property with the new courtId
+      Player currentPlayer = Player.fromSnapshot(playerSnapshot);
+      List<String> updatedReversedCourtsIds = currentPlayer.reversedCourtsIds;
+      updatedReversedCourtsIds.add(courtId);
+
+      // Step 4: Save the updated player document back to Firestore
+      await FirebaseFirestore.instance
+          .collection('players')
+          .doc(currentUserId)
+          .update({
+        'reversedCourtsIds': updatedReversedCourtsIds,
+      });
+
+      // Print a success message
+      print('Court reversed status updated successfully for the current user.');
+    } catch (error) {
+      // Handle any errors that occur during the process
+      print('Error updating court reversed status: $error');
+    }
   }
 
   @override
@@ -159,7 +209,11 @@ class _CourtItemState extends State<CourtItem> {
                   child: Center(
                     child: GestureDetector(
                       onTap: () {
-                        _updateCourtReservedStatus(widget.court.courtId);
+                        if (canTap) {
+                          _currentPlayerCourts(widget.court.courtId);
+                          _updateCourtReservedStatus(widget.court.courtId);
+                          canTap = false;
+                        }
                       },
                       child:
                           StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
