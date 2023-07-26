@@ -30,14 +30,14 @@ class CreateCourtCubit extends Cubit<CreateCourtState> {
       DateTime? selectedStartDateTime = context.read<DateTimeCubit>().state;
       DateTime? selectedEndDateTime = context.read<EndDateTimeCubit>().state;
       Court court = Court(
-        courtId: '', // Assign a court ID here if applicable
-        courtName: courtName,
-        phoneNumber: phoneNumber,
-        startDate: selectedStartDateTime,
-        endDate: selectedEndDateTime,
-        courtAddress: address,
-        photoURL: '',
-      );
+          courtId: '', // Assign a court ID here if applicable
+          courtName: courtName,
+          phoneNumber: phoneNumber,
+          startDate: selectedStartDateTime,
+          endDate: selectedEndDateTime,
+          courtAddress: address,
+          photoURL: '',
+          reversed: false);
 
       CollectionReference courtsCollection =
           FirebaseFirestore.instance.collection('courts');

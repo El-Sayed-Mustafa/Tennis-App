@@ -7,7 +7,8 @@ class Court {
   final DateTime startDate;
   final DateTime endDate;
   final String courtAddress;
-  final String photoURL; // New photo field
+  final String photoURL;
+  final bool reversed; // New property with default value false
 
   Court({
     required this.courtId,
@@ -17,6 +18,7 @@ class Court {
     required this.endDate,
     required this.courtAddress,
     required this.photoURL,
+    this.reversed = false, // Optional
   });
 
   Map<String, dynamic> toJson() {
@@ -28,6 +30,7 @@ class Court {
       'endDate': endDate,
       'courtAddress': courtAddress,
       'photoURL': photoURL,
+      'reversed': reversed,
     };
   }
 
@@ -41,6 +44,8 @@ class Court {
       endDate: (data['endDate'] as Timestamp).toDate(),
       courtAddress: data['courtAddress'] as String,
       photoURL: data['photoURL'] as String,
+      reversed: data['reversed'] as bool? ??
+          false, // Provide a default value of false if 'reversed' is null
     );
   }
 }

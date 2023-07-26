@@ -1,12 +1,43 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Main-Features/home/widgets/divider.dart';
 import '../../../models/court.dart';
 import 'package:intl/intl.dart';
 
-class CourtItem extends StatelessWidget {
+class CourtItem extends StatefulWidget {
   CourtItem({Key? key, required this.court}) : super(key: key);
   final Court court;
+
+  @override
+  State<CourtItem> createState() => _CourtItemState();
+}
+
+class _CourtItemState extends State<CourtItem> {
+  late Stream<DocumentSnapshot<Map<String, dynamic>>> _courtStream;
+
+  @override
+  void initState() {
+    super.initState();
+    _courtStream = FirebaseFirestore.instance
+        .collection('courts')
+        .doc(widget.court.courtId)
+        .snapshots();
+  }
+
+  void _updateCourtReservedStatus(String courtId) {
+    // Update the 'reversed' property to true for the corresponding court document in Firestore
+    FirebaseFirestore.instance.collection('courts').doc(courtId).update({
+      'reversed': true,
+    }).then((_) {
+      // Successfully updated the 'reversed' property in Firestore
+      print('Court reversed status updated successfully');
+    }).catchError((error) {
+      // Handle the error if updating fails
+      print('Error updating court reversed status: $error');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
@@ -21,8 +52,10 @@ class CourtItem extends StatelessWidget {
     final double buttonHeight = screenHeight * 0.035;
 
     final DateFormat dateTimeFormat = DateFormat('yyyy-MM-dd HH:mm:ss.SSS');
-    final DateTime startDate = dateTimeFormat.parse(court.startDate.toString());
-    final DateTime endDate = dateTimeFormat.parse(court.endDate.toString());
+    final DateTime startDate =
+        dateTimeFormat.parse(widget.court.startDate.toString());
+    final DateTime endDate =
+        dateTimeFormat.parse(widget.court.endDate.toString());
 
     final String formattedStartDate =
         DateFormat('MMMM d, yyyy - h:mm a').format(startDate);
@@ -50,10 +83,10 @@ class CourtItem extends StatelessWidget {
               child: Container(
                 height: imageHeight * 1.2,
                 width: imageHeight,
-                child: court.photoURL != ''
+                child: widget.court.photoURL != ''
                     ? FadeInImage.assetNetwork(
                         placeholder: 'assets/images/loadin.gif',
-                        image: court.photoURL!,
+                        image: widget.court.photoURL,
                         fit: BoxFit.cover,
                         imageErrorBuilder: (context, error, stackTrace) {
                           // Show the placeholder image on error
@@ -70,10 +103,12 @@ class CourtItem extends StatelessWidget {
               ),
             ),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                SizedBox(height: screenWidth * .005),
                 Text(
-                  court.courtName,
+                  widget.court.courtName,
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: titleFontSize,
@@ -103,7 +138,7 @@ class CourtItem extends StatelessWidget {
                 ),
                 SizedBox(height: screenWidth * .015),
                 Text(
-                  'Adress : ${court.courtAddress}',
+                  'Adress : ${widget.court.courtAddress}',
                   style: TextStyle(
                     color: Color(0xFF6D6D6D),
                     fontSize: subtitleFontSize,
@@ -122,13 +157,40 @@ class CourtItem extends StatelessWidget {
                     ),
                   ),
                   child: Center(
-                    child: Text(
-                      'Get Reserved',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: buttonTextFontSize,
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w500,
+                    child: GestureDetector(
+                      onTap: () {
+                        _updateCourtReservedStatus(widget.court.courtId);
+                      },
+                      child:
+                          StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                        stream: _courtStream,
+                        builder: (context, snapshot) {
+                          if (snapshot.hasError) {
+                            return Text('Error fetching data');
+                          }
+
+                          if (!snapshot.hasData) {
+                            return CircularProgressIndicator();
+                          }
+
+                          final courtData = snapshot.data?.data();
+                          if (courtData == null) {
+                            return Text('No data available');
+                          }
+
+                          final bool isReversed =
+                              courtData['reversed'] ?? false;
+
+                          return Text(
+                            isReversed ? 'Occupied' : 'Get Reserved',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: buttonTextFontSize,
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w500,
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ),

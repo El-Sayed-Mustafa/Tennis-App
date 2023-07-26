@@ -5,15 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/create_court/cubit/create_court_states.dart';
+import 'package:tennis_app/Main-Features/Featured/create_event/cubit/create_event_cubit.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/club_names.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/input_end_date.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/player_level.dart';
+import 'package:tennis_app/core/utils/widgets/rules_text_field.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/event_types.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
 import '../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../core/utils/widgets/input_date_and_time.dart';
 import '../../../../core/utils/widgets/text_field.dart';
+import '../../create_event/cubit/create_event_state.dart';
 import '../../create_profile/widgets/profile_image.dart';
 import '../cubit/create_court_cubit.dart';
 

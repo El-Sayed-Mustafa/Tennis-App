@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tennis_app/Main-Features/club/widgets/club_events.dart';
-
 import '../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../core/utils/widgets/court_item.dart';
 import '../../../../models/court.dart';
-import '../../../home/widgets/avaliable_courts.dart';
 
 class CourtSearchScreen extends StatefulWidget {
+  const CourtSearchScreen({super.key});
+
   @override
   _CourtSearchScreenState createState() => _CourtSearchScreenState();
 }
