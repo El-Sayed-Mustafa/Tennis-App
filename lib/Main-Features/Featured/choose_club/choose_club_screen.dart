@@ -38,12 +38,24 @@ class _ClubInvitationsPageState extends State<ClubInvitationsPage> {
   void _joinClub(String clubId) {
     final playerRef =
         FirebaseFirestore.instance.collection('players').doc(currentUserId);
+
     // Fetch the player document to get the current data
     playerRef.get().then((playerSnapshot) {
       if (playerSnapshot.exists) {
         // Update the player's document with the new clubId in the participatedClubId field
         playerRef.update({'participatedClubId': clubId}).then((_) {
           print('Joined club successfully!');
+
+          // Add the current userId to the clubMembersIds list in the club document
+          final clubRef =
+              FirebaseFirestore.instance.collection('clubs').doc(clubId);
+          clubRef.update({
+            'memberIds': FieldValue.arrayUnion([currentUserId])
+          }).then((_) {
+            print('Updated clubMembersIds successfully!');
+          }).catchError((error) {
+            print('Error updating clubMembersIds: $error');
+          });
         }).catchError((error) {
           print('Error updating player document: $error');
         });

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SliderCubit extends Cubit<double> {
-  SliderCubit() : super(5.0);
+  SliderCubit({double defaultValue = 5.0}) : super(defaultValue);
 
   void setSliderValue(double value) {
     emit(value);
@@ -13,10 +13,15 @@ class RangeSliderWithTooltip extends StatelessWidget {
   final String text1;
   final String text2;
 
+  final double? skillLevel;
+  final ValueChanged<double>? onSkillLevelChanged;
+
   const RangeSliderWithTooltip({
     Key? key,
     required this.text1,
     required this.text2,
+    this.skillLevel,
+    this.onSkillLevelChanged,
   }) : super(key: key);
 
   @override
@@ -61,10 +66,12 @@ class RangeSliderWithTooltip extends StatelessWidget {
                   divisions: 9,
                   onChanged: (newValue) {
                     context.read<SliderCubit>().setSliderValue(newValue);
+                    onSkillLevelChanged!(newValue);
                   },
                   label: state.round().toString(),
                   onChangeEnd: (newValue) {
                     context.read<SliderCubit>().setSliderValue(newValue);
+                    onSkillLevelChanged!(newValue);
                   },
                 ),
               ),

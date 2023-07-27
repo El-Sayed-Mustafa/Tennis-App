@@ -38,7 +38,7 @@ abstract class AppRouter {
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider(
             create: (context) => NavigationCubit(),
-            child: ProfileScreen(),
+            child: ManagementScreen(),
           );
         },
         routes: <RouteBase>[
@@ -127,6 +127,12 @@ abstract class AppRouter {
             path: 'findCourt',
             builder: (BuildContext context, GoRouterState state) {
               return CourtSearchScreen();
+            },
+          ),
+          GoRoute(
+            path: 'management',
+            builder: (BuildContext context, GoRouterState state) {
+              return ManagementScreen();
             },
           ),
         ],
