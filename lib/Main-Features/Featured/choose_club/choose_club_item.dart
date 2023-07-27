@@ -13,8 +13,13 @@ import '../../../core/utils/widgets/opacity_wave.dart';
 import '../../../generated/l10n.dart';
 
 class ChooseClubItem extends StatelessWidget {
-  const ChooseClubItem({super.key, required this.club, this.onCancelPressed});
+  const ChooseClubItem(
+      {super.key,
+      required this.club,
+      this.onJoinPressed,
+      this.onCancelPressed});
   final Club club;
+  final VoidCallback? onJoinPressed;
   final VoidCallback? onCancelPressed;
 
   @override
@@ -125,6 +130,7 @@ class ChooseClubItem extends StatelessWidget {
               ChooseClubButtons(
                 buttonText: S.of(context).join,
                 join: () {
+                  onJoinPressed!();
                   GoRouter.of(context).replace('/home');
                 },
                 color: kPrimaryColor,

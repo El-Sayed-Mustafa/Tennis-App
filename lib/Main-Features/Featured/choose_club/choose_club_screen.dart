@@ -14,6 +14,7 @@ class _ClubInvitationsPageState extends State<ClubInvitationsPage> {
   String? currentUserId;
   final _pageController = PageController();
   List<String> clubInvitationsIds = []; // Declare as an instance variable
+  Map<String, dynamic>? playerData; // Declare playerData here
 
   @override
   void initState() {
@@ -31,6 +32,26 @@ class _ClubInvitationsPageState extends State<ClubInvitationsPage> {
         currentUserId = user.uid;
       });
     }
+  }
+
+// Method to join a club and add the clubId to the participatedClubId field for the player
+  void _joinClub(String clubId) {
+    final playerRef =
+        FirebaseFirestore.instance.collection('players').doc(currentUserId);
+    // Fetch the player document to get the current data
+    playerRef.get().then((playerSnapshot) {
+      if (playerSnapshot.exists) {
+        // Update the player's document with the new clubId in the participatedClubId field
+        playerRef.update({'participatedClubId': clubId}).then((_) {
+          print('Joined club successfully!');
+        }).catchError((error) {
+          print('Error updating player document: $error');
+        });
+      }
+      _removeInvitation(clubId);
+    }).catchError((error) {
+      print('Error fetching player document: $error');
+    });
   }
 
   // Method to handle the removal of the club invitation ID
@@ -105,6 +126,7 @@ class _ClubInvitationsPageState extends State<ClubInvitationsPage> {
                             final club = clubs[index];
                             return ChooseClubItem(
                               club: club,
+                              onJoinPressed: () => _joinClub(club.clubId),
                               onCancelPressed: () =>
                                   _removeInvitation(club.clubId),
                             );

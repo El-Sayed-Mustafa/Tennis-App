@@ -80,7 +80,7 @@ class InviteMember extends StatelessWidget {
 
       // Sort players based on the number of clubs involved in ascending order
       eligiblePlayers.sort((a, b) =>
-          a.participatedClubIds.length.compareTo(b.participatedClubIds.length));
+          a.participatedClubId.length.compareTo(b.participatedClubId.length));
 
       // Take the first ten players (or less if the list is smaller)
       final firstTenPlayers = eligiblePlayers.take(10).toList();
