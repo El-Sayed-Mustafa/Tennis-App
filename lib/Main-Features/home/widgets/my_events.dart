@@ -1,7 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../../../models/event.dart';
 
 class MyEvents extends StatefulWidget {
   const MyEvents({Key? key}) : super(key: key);
@@ -31,32 +34,36 @@ class _MyEventsState extends State<MyEvents> {
                       ?.map((id) => id.toString())
                       .toList() ??
                   [];
+
           if (eventIds.isEmpty) {
-            return const Card(
-              margin: EdgeInsets.all(16.0),
-              child: Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.event_busy,
-                      size: 48.0,
-                      color: Color(0xFF00344E),
-                    ),
-                    SizedBox(height: 16.0),
-                    Text(
-                      'Register for the events\n to view them here',
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
+            // Show a dummy item when the eventIds list is empty
+            final dummyEvent = Event(
+              eventId: 'dummyId',
+              eventName: 'Dummy Event',
+              eventStartAt: DateTime.now(),
+              eventEndsAt: DateTime.now().add(Duration(days: 1)),
+              eventAddress: 'Dummy Address',
+              eventType: 'Dummy Type',
+              courtName: 'Dummy Court',
+              instructions: 'Dummy Instructions',
+              playerIds: [],
+              playerLevel: 0.0,
+              clubId: 'dummyClubId',
+              photoURL: null, // No photo for the dummy event
+            );
+
+            return Column(
+              children: [
+                CarouselItem(
+                  selected: true,
+                  event: dummyEvent,
                 ),
-              ),
+                const SizedBox(height: 10),
+                buildPageIndicator(1),
+              ],
             );
           }
+
           return Column(
             children: [
               CarouselSlider(
@@ -79,36 +86,12 @@ class _MyEventsState extends State<MyEvents> {
                     builder: (context, eventSnapshot) {
                       if (eventSnapshot.hasData) {
                         final eventData = eventSnapshot.data!.data()!;
-                        final String eventName = eventData['eventName'];
-                        final DateTime eventStartAt =
-                            eventData['eventStartAt'].toDate();
-                        final DateTime eventEndsAt =
-                            eventData['eventEndsAt'].toDate();
-                        final String eventAddress = eventData['eventAddress'];
-                        final String eventType = eventData['eventType'];
-                        final String courtName = eventData['courtName'];
-                        final String instructions = eventData['instructions'];
-                        final List<String> playerIds =
-                            List<String>.from(eventData['playerIds'] ?? []);
-                        final double playerLevel = eventData['playerLevel'];
-                        final String clubId = eventData['clubId'];
-                        final String? photoURL = eventData['photoURL'];
+                        final event = Event.fromSnapshot(eventSnapshot.data!);
 
                         return CarouselItem(
                           selected:
                               selectedPageIndex == eventIds.indexOf(eventId),
-                          screenWidth: MediaQuery.of(context).size.width,
-                          eventName: eventName,
-                          eventStartAt: eventStartAt,
-                          eventEndsAt: eventEndsAt,
-                          eventAddress: eventAddress,
-                          eventType: eventType,
-                          courtName: courtName,
-                          instructions: instructions,
-                          playerIds: playerIds,
-                          playerLevel: playerLevel,
-                          clubId: clubId,
-                          photoURL: photoURL,
+                          event: event, // Pass the event object here
                         );
                       } else if (eventSnapshot.hasError) {
                         return const Center(
@@ -165,34 +148,12 @@ class _MyEventsState extends State<MyEvents> {
 
 class CarouselItem extends StatelessWidget {
   final bool selected;
-  final double screenWidth;
-  final String eventName;
-  final DateTime eventStartAt;
-  final DateTime eventEndsAt;
-  final String eventAddress;
-  final String eventType;
-  final String courtName;
-  final String instructions;
-  final List<String> playerIds;
-  final double playerLevel;
-  final String clubId;
-  final String? photoURL;
+  final Event event; // Receive the Event object as a parameter
 
   const CarouselItem({
     Key? key,
     required this.selected,
-    required this.screenWidth,
-    required this.eventName,
-    required this.eventStartAt,
-    required this.eventEndsAt,
-    required this.eventAddress,
-    required this.eventType,
-    required this.courtName,
-    required this.instructions,
-    required this.playerIds,
-    required this.playerLevel,
-    required this.clubId,
-    this.photoURL,
+    required this.event,
   }) : super(key: key);
 
   @override
@@ -206,7 +167,7 @@ class CarouselItem extends StatelessWidget {
 
     final Color backgroundColor =
         selected ? const Color(0xFFFCCBB1) : const Color(0xFFF3ADAB);
-    print(photoURL);
+    print(event.photoURL);
     return Container(
       width: 500,
       decoration: ShapeDecoration(
@@ -227,15 +188,15 @@ class CarouselItem extends StatelessWidget {
               ),
             ),
             child: CircleAvatar(
-              backgroundImage: photoURL != null
-                  ? NetworkImage(photoURL!)
+              backgroundImage: event.photoURL != null
+                  ? NetworkImage(event.photoURL!)
                   : Image.asset('assets/images/profile-event.jpg').image,
               radius: (itemHeight * 0.15) * scaleFactor,
             ),
           ),
           SizedBox(height: itemHeight * 0.03),
           Text(
-            eventName,
+            event.eventName,
             style: TextStyle(
               color: const Color(0xFF2A2A2A),
               fontSize: itemHeight * 0.06 * scaleFactor,
@@ -245,7 +206,7 @@ class CarouselItem extends StatelessWidget {
           ),
           SizedBox(height: itemHeight * 0.03),
           Text(
-            '${eventStartAt.hour}:${eventStartAt.minute} \n${eventStartAt.day}/${eventStartAt.month}/${eventStartAt.year}',
+            '${event.eventStartAt.hour}:${event.eventStartAt.minute} \n${event.eventStartAt.day}/${event.eventStartAt.month}/${event.eventStartAt.year}',
             textAlign: TextAlign.center,
             style: TextStyle(
               color: const Color(0xFF00344E),

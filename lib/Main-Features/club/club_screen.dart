@@ -97,7 +97,9 @@ class ClubScreen extends StatelessWidget {
                               SizedBox(height: spacing * 2),
                               const HeaderText(text: 'Club’s Upcoming events'),
                               SizedBox(height: spacing / 3),
-                              ClubEvents(),
+                              ClubEvents(
+                                eventsId: clubData.eventIds,
+                              ),
                               SizedBox(height: spacing * 2),
                               const HeaderText(text: 'Club’s Players Ranking'),
                               PlayersRanking(),

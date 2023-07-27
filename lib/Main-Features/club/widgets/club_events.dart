@@ -7,8 +7,8 @@ import 'package:tennis_app/Main-Features/club/widgets/text_rich.dart';
 import '../../home/widgets/divider.dart';
 
 class ClubEvents extends StatefulWidget {
-  const ClubEvents({Key? key}) : super(key: key);
-
+  const ClubEvents({Key? key, required this.eventsId}) : super(key: key);
+  final List<String> eventsId;
   @override
   State<ClubEvents> createState() => _ClubEventsState();
 }
