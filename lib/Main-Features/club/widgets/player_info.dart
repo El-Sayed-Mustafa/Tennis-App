@@ -21,7 +21,10 @@ class PlayerInfo extends StatelessWidget {
     final double screenHeight = MediaQuery.of(context).size.height;
     final double itemWidth = screenWidth * 0.3;
     final double itemHeight = screenHeight * .2;
+    final double imageHeight = (screenHeight + screenWidth) * 0.05;
+
     return Container(
+      margin: EdgeInsets.symmetric(vertical: 8),
       width: itemWidth,
       height: itemHeight,
       decoration: BoxDecoration(
@@ -38,9 +41,29 @@ class PlayerInfo extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CircleAvatar(
-            backgroundImage: AssetImage(imagePath),
-            radius: (itemHeight * 0.175),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(imageHeight),
+            child: Container(
+              height: imageHeight,
+              width: imageHeight,
+              child: imagePath.isNotEmpty
+                  ? FadeInImage.assetNetwork(
+                      placeholder: 'assets/images/loadin.gif',
+                      image: imagePath,
+                      fit: BoxFit.cover,
+                      imageErrorBuilder: (context, error, stackTrace) {
+                        // Show the placeholder image on error
+                        return Image.asset(
+                          'assets/images/internet.png',
+                          fit: BoxFit.cover,
+                        );
+                      },
+                    )
+                  : Image.asset(
+                      'assets/images/profile-event.jpg',
+                      fit: BoxFit.cover,
+                    ),
+            ),
           ),
           SizedBox(height: itemHeight * 0.03),
           Text(
