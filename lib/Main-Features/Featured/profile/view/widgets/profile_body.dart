@@ -3,10 +3,12 @@ import 'package:tennis_app/Main-Features/Featured/profile/view/widgets/personal_
 import 'package:tennis_app/Main-Features/Featured/profile/view/widgets/player_strength.dart';
 import 'package:tennis_app/Main-Features/Featured/profile/view/widgets/playing_info.dart';
 
+import '../../../../../models/player.dart';
 import '../../../../club/widgets/club_info.dart';
 
 class ProfileBody extends StatelessWidget {
-  const ProfileBody({super.key});
+  const ProfileBody({super.key, required this.player});
+  final Player player;
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +17,15 @@ class ProfileBody extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.symmetric(horizontal: screenWidth * .07),
-          child: const Column(
+          child: Column(
             children: [
-              PersonalInfo(),
+              PersonalInfo(
+                player: player,
+              ),
               SizedBox(height: 20),
-              PlayingInfo(),
+              PlayingInfo(
+                player: player,
+              ),
             ],
           ),
         ),
@@ -36,12 +42,14 @@ class ProfileBody extends StatelessWidget {
             ),
           ),
         ),
-        //TODO: Container(
+        // Container(
         //     margin: EdgeInsets.only(
         //         right: screenWidth * .05,
         //         left: screenWidth * .05,
         //         bottom: screenWidth * .05),
-        //     child: const ClubInfo()),
+        //     child: ClubInfo(
+        //       clubData: null,
+        //     )),
         const Text(
           'Your Strength',
           style: TextStyle(
@@ -51,8 +59,8 @@ class ProfileBody extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
         ),
-        const PlayerStrength(
-          value: 9,
+        PlayerStrength(
+          value: double.parse(player.skillLevel),
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.0),

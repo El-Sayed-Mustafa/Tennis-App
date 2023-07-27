@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../models/player.dart';
+
 class PersonalInfo extends StatelessWidget {
-  const PersonalInfo({super.key});
+  const PersonalInfo({super.key, required this.player});
+  final Player player;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,7 @@ class PersonalInfo extends StatelessWidget {
                 ),
               ),
               Text(
-                '4:00 PM ',
+                player.preferredPlayingTime,
                 style: TextStyle(
                   color: const Color(0xFF00344E),
                   fontSize: combine * .013,
@@ -58,7 +61,7 @@ class PersonalInfo extends StatelessWidget {
                 ),
               ),
               Text(
-                '16-01-2001',
+                "${player.birthDate.day}-${player.birthDate.month}-${player.birthDate.year}",
                 style: TextStyle(
                   color: const Color(0xFF00344E),
                   fontSize: combine * .013,
@@ -89,7 +92,7 @@ class PersonalInfo extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'Singles',
+                  player.playerType,
                   style: TextStyle(
                     color: const Color(0xFF00344E),
                     fontSize: combine * .013,

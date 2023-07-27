@@ -94,16 +94,22 @@ class _MyMatchesState extends State<MyMatches> {
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
-                        return Text('Error fetching match data');
+                        return const Text('Error fetching match data');
                       }
 
                       if (!snapshot.hasData) {
-                        return CircularProgressIndicator();
+                        return const CircularProgressIndicator();
                       }
 
                       final courtData = snapshot.data?.data();
                       if (courtData == null) {
-                        return Center(child: Text('No match data available'));
+                        return const Center(
+                          child: Text(
+                            'No match data available',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                        );
                       }
 
                       // Create a Matches instance from the snapshot data
@@ -116,8 +122,8 @@ class _MyMatchesState extends State<MyMatches> {
                   );
                 }).toList(),
               )
-            : Padding(
-                padding: const EdgeInsets.all(16.0),
+            : const Padding(
+                padding: EdgeInsets.all(16.0),
                 child: Text(
                   'No matches',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
