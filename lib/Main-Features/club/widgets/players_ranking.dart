@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tennis_app/Main-Features/club/widgets/player_info.dart';
-import 'package:tennis_app/Main-Features/club/widgets/see_all.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../models/club.dart';

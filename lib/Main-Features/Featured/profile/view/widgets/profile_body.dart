@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tennis_app/Main-Features/Featured/profile/view/widgets/personal_info.dart';
 import 'package:tennis_app/Main-Features/Featured/profile/view/widgets/player_strength.dart';
 import 'package:tennis_app/Main-Features/Featured/profile/view/widgets/playing_info.dart';

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tennis_app/Main-Features/club/widgets/text_rich.dart';
-import 'package:tennis_app/core/methodes/firebase_methodes.dart';
 
 import '../../../core/methodes/global_method.dart';
 import '../../home/widgets/divider.dart';

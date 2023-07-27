@@ -4,11 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tennis_app/Main-Features/Featured/find_match/view/widgets/match_item.dart';
-
-import '../../../core/utils/widgets/court_item.dart';
 import '../../../models/Match.dart';
 import '../../../models/player.dart';
-import '../../../models/court.dart'; // Import the Court class
 
 class MyMatches extends StatefulWidget {
   const MyMatches({Key? key}) : super(key: key);
@@ -66,7 +63,6 @@ class _MyMatchesState extends State<MyMatches> {
 
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
 
     final double carouselHeight = screenHeight * 0.25;

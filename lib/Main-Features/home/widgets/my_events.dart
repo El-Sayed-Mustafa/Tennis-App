@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -85,7 +84,6 @@ class _MyEventsState extends State<MyEvents> {
                         as Future<DocumentSnapshot<Map<String, dynamic>>>,
                     builder: (context, eventSnapshot) {
                       if (eventSnapshot.hasData) {
-                        final eventData = eventSnapshot.data!.data()!;
                         final event = Event.fromSnapshot(eventSnapshot.data!);
 
                         return CarouselItem(
