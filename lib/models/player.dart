@@ -16,7 +16,7 @@ class Player {
   final String playerType;
   final String phoneNumber;
   final Map<String, String> clubRoles;
-  final List<String> participatedClubIds;
+  final String participatedClubIds;
   final List<String> clubInvitationsIds;
   final List<Map<String, dynamic>> matches;
   bool isInvitationSent = false;
@@ -89,7 +89,7 @@ class Player {
       playerType: data['playerType'] as String? ?? '',
       phoneNumber: data['phoneNumber'] as String? ?? '',
       clubRoles: Map<String, String>.from(data['clubRoles'] ?? {}),
-      participatedClubIds: List<String>.from(data['participatedClubIds'] ?? []),
+      participatedClubIds: data['participatedClubIds'] as String? ?? '',
       clubInvitationsIds: List<String>.from(data['clubInvitationsIds'] ?? []),
       matches: List<Map<String, dynamic>>.from(data['matchId'] ?? []),
       reversedCourtsIds: List<String>.from(data['reversedCourtsIds'] ?? []),

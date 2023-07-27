@@ -13,6 +13,7 @@ class ClubInvitationsPage extends StatefulWidget {
 class _ClubInvitationsPageState extends State<ClubInvitationsPage> {
   String? currentUserId;
   final _pageController = PageController();
+  List<String> clubInvitationsIds = []; // Declare as an instance variable
 
   @override
   void initState() {
@@ -30,6 +31,18 @@ class _ClubInvitationsPageState extends State<ClubInvitationsPage> {
         currentUserId = user.uid;
       });
     }
+  }
+
+  // Method to handle the removal of the club invitation ID
+  void _removeInvitation(String clubId) {
+    final playerRef =
+        FirebaseFirestore.instance.collection('players').doc(currentUserId);
+    setState(() {
+      clubInvitationsIds.remove(clubId);
+    });
+
+    // Update the clubInvitationsIds field in Firestore
+    playerRef.update({'clubInvitationsIds': clubInvitationsIds});
   }
 
   @override
@@ -62,7 +75,7 @@ class _ClubInvitationsPageState extends State<ClubInvitationsPage> {
                   return const Center(child: Text('Player data not found'));
                 }
 
-                final clubInvitationsIds =
+                clubInvitationsIds =
                     List<String>.from(playerData['clubInvitationsIds'] ?? []);
 
                 return FutureBuilder<List<Club>>(
@@ -90,7 +103,11 @@ class _ClubInvitationsPageState extends State<ClubInvitationsPage> {
                           itemCount: clubs.length,
                           itemBuilder: (context, index) {
                             final club = clubs[index];
-                            return ChooseClubItem(club: club);
+                            return ChooseClubItem(
+                              club: club,
+                              onCancelPressed: () =>
+                                  _removeInvitation(club.clubId),
+                            );
                           },
                         ),
                         Padding(
