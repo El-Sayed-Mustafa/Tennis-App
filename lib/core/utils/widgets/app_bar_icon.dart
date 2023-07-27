@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/utils/widgets/clipper.dart';
+import '../../../models/player.dart';
 
 class AppBarIcon extends StatelessWidget {
   const AppBarIcon({
@@ -9,17 +10,20 @@ class AppBarIcon extends StatelessWidget {
     required this.widgetHeight,
     required this.text,
     required this.svgImage,
+    required this.player,
   }) : super(key: key);
 
   final double widgetHeight;
   final String text;
   final SvgPicture svgImage;
+  final Player player;
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-
+    final double imageHeight = screenHeight * 0.13;
+    print(player.photoURL);
     return Stack(
       children: [
         SizedBox(
@@ -84,10 +88,29 @@ class AppBarIcon extends StatelessWidget {
             children: [
               const Spacer(),
               Center(
-                child: SizedBox(
-                  height: screenHeight * 0.15,
-                  child: Image.asset('assets/images/clubimage.png',
-                      fit: BoxFit.cover),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(imageHeight / 5),
+                  child: Container(
+                    height: imageHeight,
+                    width: imageHeight,
+                    child: (player.photoURL != ''
+                        ? FadeInImage.assetNetwork(
+                            placeholder: 'assets/images/loadin.gif',
+                            image: player.photoURL!,
+                            fit: BoxFit.cover,
+                            imageErrorBuilder: (context, error, stackTrace) {
+                              // Show the placeholder image on error
+                              return Image.asset(
+                                'assets/images/profileimage.png',
+                                fit: BoxFit.cover,
+                              );
+                            },
+                          )
+                        : Image.asset(
+                            'assets/images/internet.png',
+                            fit: BoxFit.cover,
+                          )),
+                  ),
                 ),
               ),
             ],

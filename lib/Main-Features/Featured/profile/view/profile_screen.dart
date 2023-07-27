@@ -51,6 +51,7 @@ class ProfileScreen extends StatelessWidget {
                           svgImage: SvgPicture.asset(
                               'assets/images/create-profile.svg'),
                           text: 'Your Profile',
+                          player: player,
                         ),
                         OpacityWave(height: screenHeight * 0.377),
                         Positioned(

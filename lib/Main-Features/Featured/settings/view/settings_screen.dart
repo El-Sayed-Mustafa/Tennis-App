@@ -23,11 +23,11 @@ class SettingsScreen extends StatelessWidget {
             children: [
               Stack(
                 children: [
-                  AppBarIcon(
-                    widgetHeight: screenHeight * .32,
-                    svgImage: SvgPicture.asset('assets/images/setting.svg'),
-                    text: 'Settings',
-                  ),
+                  // AppBarIcon(
+                  //   widgetHeight: screenHeight * .32,
+                  //   svgImage: SvgPicture.asset('assets/images/setting.svg'),
+                  //   text: 'Settings',
+                  // ),
                   OpacityWave(height: screenHeight * 0.327),
                   Positioned(
                     top: 40,
