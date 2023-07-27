@@ -46,38 +46,48 @@ class _ClubEventsState extends State<ClubEvents> {
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
-
     final double carouselHeight = screenHeight * 0.26;
-
-    // Use the fetched clubEvents to build the carouselItems
-    final List<Widget> carouselItems = clubEvents.map((event) {
-      return CarouselItem(
-        selected: selectedPageIndex == clubEvents.indexOf(event),
-        event: event,
-      );
-    }).toList();
 
     return Column(
       children: [
-        CarouselSlider(
-          options: CarouselOptions(
-            height: carouselHeight,
-            enableInfiniteScroll: false,
-            viewportFraction: 1,
-            onPageChanged: (index, _) {
-              setState(() {
-                selectedPageIndex = index;
-              });
-            },
+        if (clubEvents.isNotEmpty)
+          CarouselSlider(
+            options: CarouselOptions(
+              height: carouselHeight,
+              enableInfiniteScroll: false,
+              viewportFraction: 1,
+              onPageChanged: (index, _) {
+                setState(() {
+                  selectedPageIndex = index;
+                });
+              },
+            ),
+            carouselController: _carouselController,
+            items: clubEvents.map((event) {
+              return CarouselItem(
+                selected: selectedPageIndex == clubEvents.indexOf(event),
+                event: event,
+              );
+            }).toList(),
+          )
+        else
+          CarouselSlider(
+            options: CarouselOptions(
+              height: carouselHeight,
+              enableInfiniteScroll: false,
+              viewportFraction: 1,
+              onPageChanged: (index, _) {
+                setState(() {
+                  selectedPageIndex = index;
+                });
+              },
+            ),
+            carouselController: _carouselController,
+            // Show a single dummy CarouselItem with dummy data
+            items: [CarouselItem(selected: true, event: _createDummyEvent())],
           ),
-          carouselController: _carouselController, // Use CarouselController
-          items: carouselItems,
-        ),
-        SizedBox(
-          height: 8,
-        ),
-        buildPageIndicator(
-            carouselItems.length), // Add the smooth page indicator
+        SizedBox(height: 8),
+        buildPageIndicator(clubEvents.isNotEmpty ? clubEvents.length : 1),
       ],
     );
   }
@@ -103,6 +113,19 @@ class _ClubEventsState extends State<ClubEvents> {
           );
         },
       ),
+    );
+  }
+
+  // Create a dummy event for the single CarouselItem
+  Event _createDummyEvent() {
+    return Event(
+      eventId: 'dummy_event_id',
+      eventType: 'Dummy Event',
+      eventStartAt: DateTime.now(),
+      eventEndsAt: DateTime.now().add(Duration(hours: 2)),
+      eventAddress: 'Dummy Address', clubId: '', courtName: '', eventName: '',
+      instructions: '', playerIds: [], playerLevel: 0,
+      // Add other properties as needed
     );
   }
 }
@@ -147,29 +170,30 @@ class CarouselItem extends StatelessWidget {
               Column(
                 children: [
                   ClipRRect(
-                      borderRadius: BorderRadius.circular(imageHeight / 5),
-                      child: Container(
-                          height: imageHeight,
-                          width: imageHeight,
-                          child: event.photoURL != null &&
-                                  event.photoURL!.isNotEmpty
-                              ? FadeInImage.assetNetwork(
-                                  placeholder: 'assets/images/loadin.gif',
-                                  image: event.photoURL!,
+                    borderRadius: BorderRadius.circular(imageHeight / 5),
+                    child: Container(
+                      height: imageHeight,
+                      width: imageHeight,
+                      child: event.photoURL != null &&
+                              event.photoURL!.isNotEmpty
+                          ? FadeInImage.assetNetwork(
+                              placeholder: 'assets/images/loadin.gif',
+                              image: event.photoURL!,
+                              fit: BoxFit.cover,
+                              imageErrorBuilder: (context, error, stackTrace) {
+                                // Show the placeholder image on error
+                                return Image.asset(
+                                  'assets/images/internet.png',
                                   fit: BoxFit.cover,
-                                  imageErrorBuilder:
-                                      (context, error, stackTrace) {
-                                    // Show the placeholder image on error
-                                    return Image.asset(
-                                      'assets/images/internet.png',
-                                      fit: BoxFit.cover,
-                                    );
-                                  },
-                                )
-                              : Image.asset(
-                                  'assets/images/profile-event.jpg',
-                                  fit: BoxFit.cover,
-                                ))),
+                                );
+                              },
+                            )
+                          : Image.asset(
+                              'assets/images/profile-event.jpg',
+                              fit: BoxFit.cover,
+                            ),
+                    ),
+                  ),
                   SizedBox(height: screenHeight * .01),
                   SizedBox(
                     height: screenHeight * .03,
