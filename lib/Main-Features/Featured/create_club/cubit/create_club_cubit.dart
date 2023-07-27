@@ -25,6 +25,7 @@ class CreateClubCubit extends Cubit<CreateClubState> {
     required TextEditingController emailController,
     required TextEditingController rulesController,
     required TextEditingController addressController,
+    required TextEditingController courtsNumController,
     Uint8List? selectedImageBytes,
   }) async {
     ClubType selectedClubType = context.read<ClubTypeCubit>().state;
@@ -58,6 +59,8 @@ class CreateClubCubit extends Cubit<CreateClubState> {
         ageRestriction: ageRestriction,
         eventIds: eventIds,
         memberIds: memberIds, roleIds: [], address: address, rate: 0,
+        courtsNum: int.parse(courtsNumController.text), matchPlayed: 0,
+        totalWins: 0,
       );
 
       CollectionReference clubsCollection =

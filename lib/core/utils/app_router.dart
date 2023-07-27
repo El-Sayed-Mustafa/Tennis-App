@@ -11,6 +11,7 @@ import 'package:tennis_app/Main-Features/home/home_screen.dart';
 import 'package:tennis_app/Main-Features/menu/menu_screen.dart';
 
 import '../../Auth/screens/forget_password.dart';
+import '../../Main-Features/Featured/choose_club/choose_club_item.dart';
 import '../../Main-Features/Featured/choose_club/choose_club_screen.dart';
 import '../../Main-Features/Featured/club_managment/view/managment_screen.dart';
 import '../../Main-Features/Featured/club_managment/view/screens/player_screen.dart';
@@ -37,7 +38,7 @@ abstract class AppRouter {
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider(
             create: (context) => NavigationCubit(),
-            child: ProfileScreen(),
+            child: ClubInvitationsPage(),
           );
         },
         routes: <RouteBase>[
@@ -77,7 +78,7 @@ abstract class AppRouter {
           GoRoute(
             path: 'chooseClub',
             builder: (BuildContext context, GoRouterState state) {
-              return const ChooseClub();
+              return ClubInvitationsPage();
             },
           ),
           GoRoute(

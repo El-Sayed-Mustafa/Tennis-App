@@ -1,126 +1,135 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
-import 'package:tennis_app/Main-Features/Featured/choose_club/widgets/card_details.dart';
-import 'package:tennis_app/Main-Features/Featured/choose_club/widgets/static_rating_bar.dart';
-import 'package:tennis_app/Main-Features/Featured/choose_club/widgets/wave_clipper_widget.dart';
-import 'package:tennis_app/core/utils/widgets/custom_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import '../../../models/club.dart';
+import 'choose_club_item.dart';
 
-import '../../../core/utils/widgets/opacity_wave.dart';
-import '../../../generated/l10n.dart';
+class ClubInvitationsPage extends StatefulWidget {
+  @override
+  _ClubInvitationsPageState createState() => _ClubInvitationsPageState();
+}
 
-class ChooseClub extends StatelessWidget {
-  const ChooseClub({super.key});
+class _ClubInvitationsPageState extends State<ClubInvitationsPage> {
+  String? currentUserId;
+  final _pageController = PageController();
+
+  @override
+  void initState() {
+    super.initState();
+    _getCurrentUserId();
+  }
+
+  // Method to get the current user ID
+  void _getCurrentUserId() {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+
+    if (user != null) {
+      setState(() {
+        currentUserId = user.uid;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Stack(
-              children: [
-                WaveClipperScreenChooseClub(
-                  widgetHeight: screenHeight * .4,
-                  svgImage: SvgPicture.asset('assets/images/choose-club.svg'),
-                  text: S.of(context).joinClub,
-                ),
-                OpacityWave(height: screenHeight * 0.407),
-              ],
-            ),
-            SizedBox(
-              height: screenHeight * .005,
-            ),
-            const Text(
-              'FC Barcelona',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            SizedBox(
-              height: screenHeight * .007,
-            ),
-            const StaticRatingBar(rating: 4.5),
-            SizedBox(
-              height: screenHeight * .007,
-            ),
-            const Text(
-              'Buhl 9, 35043 Marburg\nGermany',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Color(0xFF6D6D6D),
-                fontSize: 14,
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            SizedBox(
-              height: screenHeight * .007,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CardDetails(
-                    svgPath: 'assets/images/members.svg',
-                    value: '56',
-                    label: S.of(context).totalMembers,
-                    color: const Color(0x87FFA372),
-                  ),
-                  SizedBox(
-                    width: screenWidth * .08,
-                  ),
-                  CardDetails(
-                    svgPath: 'assets/images/matches.svg',
-                    value: '100',
-                    label: S.of(context).matchPlayed,
-                    color: const Color(0x84ED6663),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 24,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CardDetails(
-                    svgPath: 'assets/images/wins.svg',
-                    value: '90',
-                    label: S.of(context).totalWins,
-                    color: const Color(0x8294D3D3),
-                  ),
-                  SizedBox(
-                    width: screenWidth * .08,
-                  ),
-                  CardDetails(
-                    svgPath: 'assets/images/courts.svg',
-                    value: '3',
-                    label: S.of(context).courtsOwn,
-                    color: const Color(0x8294B6D3),
-                  ),
-                ],
-              ),
-            ),
-            BottomSheetContainer(
-              buttonText: S.of(context).join,
-              onPressed: () {
-                GoRouter.of(context).replace('/home');
+      body: currentUserId == null
+          ? const Center(child: CircularProgressIndicator())
+          : StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+              stream: FirebaseFirestore.instance
+                  .collection('players')
+                  .doc(currentUserId)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+
+                if (!snapshot.hasData) {
+                  return const Center(child: Text('No player data available'));
+                }
+
+                final playerData = snapshot.data!.data();
+                if (playerData == null) {
+                  return const Center(child: Text('Player data not found'));
+                }
+
+                final clubInvitationsIds =
+                    List<String>.from(playerData['clubInvitationsIds'] ?? []);
+
+                return FutureBuilder<List<Club>>(
+                  future: fetchClubs(clubInvitationsIds),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+
+                    if (!snapshot.hasData) {
+                      return const Center(
+                          child: Text('No club invitations found'));
+                    }
+
+                    final clubs = snapshot.data!;
+                    if (clubs.isEmpty) {
+                      return const Center(
+                          child: Text('No club invitations found'));
+                    }
+
+                    return Stack(
+                      children: [
+                        PageView.builder(
+                          controller: _pageController,
+                          itemCount: clubs.length,
+                          itemBuilder: (context, index) {
+                            final club = clubs[index];
+                            return ChooseClubItem(club: club);
+                          },
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(50.0),
+                          child: SmoothPageIndicator(
+                            controller: _pageController,
+                            count: clubs.length,
+                            effect: const ExpandingDotsEffect(
+                              dotColor: Colors.grey,
+                              activeDotColor: Colors.blue,
+                              dotHeight: 8,
+                              dotWidth: 8,
+                              spacing: 10,
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                );
               },
-              color: Colors.white,
-            )
-          ],
-        ),
-      ),
+            ),
     );
+  }
+
+  Future<List<Club>> fetchClubs(List<String> clubIds) async {
+    final List<Club> clubs = [];
+
+    for (final clubId in clubIds) {
+      final clubSnapshot = await FirebaseFirestore.instance
+          .collection('clubs')
+          .doc(clubId)
+          .get();
+      if (clubSnapshot.exists) {
+        final club = Club.fromSnapshot(clubSnapshot);
+        clubs.add(club);
+      }
+    }
+
+    return clubs;
   }
 }

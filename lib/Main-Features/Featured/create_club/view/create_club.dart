@@ -26,6 +26,7 @@ class CreateClub extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController rulesController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
+  final TextEditingController courtsNumController = TextEditingController();
   var formKey = GlobalKey<FormState>();
 
   @override
@@ -122,6 +123,12 @@ class CreateClub extends StatelessWidget {
                         controller: emailController,
                       ),
                       SizedBox(height: screenHeight * .03),
+                      InputTextWithHint(
+                        hint: 'Type Number of Courts Own',
+                        text: 'Your Courts Own',
+                        controller: courtsNumController,
+                      ),
+                      SizedBox(height: screenHeight * .03),
                       ClubTypeInput(),
                       SizedBox(height: screenHeight * .03),
                       RulesInputText(
@@ -146,6 +153,7 @@ class CreateClub extends StatelessWidget {
                                     phoneController: phoneController,
                                     rulesController: rulesController,
                                     addressController: addressController,
+                                    courtsNumController: courtsNumController,
                                   );
                             }
                           },

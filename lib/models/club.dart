@@ -15,25 +15,30 @@ class Club {
   final List<String> eventIds;
   final List<String> memberIds;
   final String? photoURL;
+  final int matchPlayed;
+  final int totalWins;
+  final int courtsNum;
   final List<String> roleIds; // Added property for role IDs
 
-  Club({
-    required this.clubId,
-    required this.clubName,
-    required this.clubType,
-    required this.clubAdmin,
-    required this.nationalIdNumber,
-    required this.phoneNumber,
-    required this.email,
-    required this.rulesAndRegulations,
-    required this.ageRestriction,
-    required this.address,
-    required this.rate,
-    required this.eventIds,
-    required this.memberIds,
-    this.photoURL,
-    required this.roleIds,
-  });
+  Club(
+      {required this.clubId,
+      required this.clubName,
+      required this.clubType,
+      required this.clubAdmin,
+      required this.nationalIdNumber,
+      required this.phoneNumber,
+      required this.email,
+      required this.matchPlayed,
+      required this.totalWins,
+      required this.rulesAndRegulations,
+      required this.ageRestriction,
+      required this.address,
+      required this.rate,
+      required this.eventIds,
+      required this.memberIds,
+      this.photoURL,
+      required this.roleIds,
+      required this.courtsNum});
 
   Map<String, dynamic> toJson() {
     return {
@@ -47,11 +52,13 @@ class Club {
       'rulesAndRegulations': rulesAndRegulations,
       'ageRestriction': ageRestriction,
       'address': address, // Include address in the JSON
-      'rate': rate, // Include rate in the JSON
+      'matchPlayed': matchPlayed,
+      'totalWins': totalWins, 'rate': rate, // Include rate in the JSON
       'eventIds': eventIds,
       'memberIds': memberIds,
       'clubImageURL': photoURL,
       'roleIds': roleIds, // Include role IDs in the JSON
+      'courtsNum': courtsNum,
     };
   }
 
@@ -65,6 +72,9 @@ class Club {
       nationalIdNumber: data?['nationalIdNumber'] as String? ?? '',
       phoneNumber: data?['phoneNumber'] as String? ?? '',
       email: data?['email'] as String? ?? '',
+      matchPlayed: data?['matchPlayed'] as int? ?? 0,
+      courtsNum: data?['courtsNum'] as int? ?? 0,
+      totalWins: data?['totalWins'] as int? ?? 0,
       rulesAndRegulations: data?['rulesAndRegulations'] as String? ?? '',
       ageRestriction: data?['ageRestriction'] as String? ?? '',
       address: data?['address'] as String? ?? '',
