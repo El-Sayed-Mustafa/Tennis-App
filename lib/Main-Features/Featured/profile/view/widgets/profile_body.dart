@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tennis_app/Main-Features/Featured/profile/view/widgets/personal_info.dart';
 import 'package:tennis_app/Main-Features/Featured/profile/view/widgets/player_strength.dart';
 import 'package:tennis_app/Main-Features/Featured/profile/view/widgets/playing_info.dart';
+import 'package:tennis_app/models/club.dart'; // Replace 'Club' with the correct Club class path
 
 import '../../../../../models/player.dart';
 import '../../../../club/widgets/club_info.dart';
@@ -13,68 +15,100 @@ class ProfileBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: screenWidth * .07),
-          child: Column(
+
+    return FutureBuilder<Club?>(
+      future: fetchClubData(player.participatedClubId), // Fetch club data here
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          // While waiting for data, you can show a loading indicator or an empty container
+          return Container();
+        } else if (snapshot.hasError) {
+          // Handle error if any
+          return Text('Error: ${snapshot.error}');
+        } else {
+          // Data has been successfully fetched
+          final clubData = snapshot.data;
+
+          return Column(
             children: [
-              PersonalInfo(
-                player: player,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * .07),
+                child: Column(
+                  children: [
+                    PersonalInfo(
+                      player: player,
+                    ),
+                    SizedBox(height: 20),
+                    PlayingInfo(
+                      player: player,
+                    ),
+                  ],
+                ),
               ),
-              SizedBox(height: 20),
-              PlayingInfo(
-                player: player,
+              const SizedBox(height: 10),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  'Your Club',
+                  style: TextStyle(
+                    color: Color(0xFF313131),
+                    fontSize: 20,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(
+                  right: screenWidth * .05,
+                  left: screenWidth * .05,
+                  bottom: screenWidth * .05,
+                ),
+                child: clubData != null
+                    ? ClubInfo(
+                        clubData: clubData, // Pass the club data here
+                      )
+                    : Text(
+                        'No Club Data'), // Show a message when clubData is null
+              ),
+              const Text(
+                'Your Strength',
+                style: TextStyle(
+                  color: Color(0xFF313131),
+                  fontSize: 20,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              PlayerStrength(
+                value: double.parse(player.skillLevel),
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: Text(
+                  'Your strength will be determined based on your playing record,\nand your performance may impact your strength rating.',
+                  style: TextStyle(
+                    color: Color(0xFF6A6A6A),
+                    fontSize: 11,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
               ),
             ],
-          ),
-        ),
-        const SizedBox(height: 10),
-        const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text(
-            'Your Club',
-            style: TextStyle(
-              color: Color(0xFF313131),
-              fontSize: 20,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
-        // Container(
-        //     margin: EdgeInsets.only(
-        //         right: screenWidth * .05,
-        //         left: screenWidth * .05,
-        //         bottom: screenWidth * .05),
-        //     child: ClubInfo(
-        //       clubData: null,
-        //     )),
-        const Text(
-          'Your Strength',
-          style: TextStyle(
-            color: Color(0xFF313131),
-            fontSize: 20,
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        PlayerStrength(
-          value: double.parse(player.skillLevel),
-        ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
-          child: Text(
-            'Your strength will be determined based on your playing record,\nand your performance may impact your strength rating.',
-            style: TextStyle(
-              color: Color(0xFF6A6A6A),
-              fontSize: 11,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-        )
-      ],
+          );
+        }
+      },
     );
+  }
+
+  // Function to fetch club data using the provided clubId
+  Future<Club> fetchClubData(String clubId) async {
+    final clubSnapshot =
+        await FirebaseFirestore.instance.collection('clubs').doc(clubId).get();
+
+    // Assuming the Club class has a factory constructor to parse data from Firestore
+    final clubData = Club.fromSnapshot(clubSnapshot);
+    return clubData;
   }
 }

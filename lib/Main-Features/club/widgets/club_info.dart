@@ -69,7 +69,8 @@ class _ClubInfoState extends State<ClubInfo> {
                   height: imageHeight,
                   width: imageHeight,
                   child: hasInternet // Check if there's internet connection
-                      ? (widget.clubData.photoURL != ''
+                      ? (widget.clubData.photoURL != null &&
+                              widget.clubData.photoURL!.isNotEmpty
                           ? FadeInImage.assetNetwork(
                               placeholder: 'assets/images/loadin.gif',
                               image: widget.clubData.photoURL!,
@@ -83,11 +84,11 @@ class _ClubInfoState extends State<ClubInfo> {
                               },
                             )
                           : Image.asset(
-                              'assets/images/internet.png',
+                              'assets/images/profile-event.jpg',
                               fit: BoxFit.cover,
                             ))
                       : Image.asset(
-                          'assets/images/loadin.gif',
+                          'assets/images/internet.png',
                           fit: BoxFit.cover,
                         ),
                 ),

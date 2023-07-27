@@ -64,6 +64,9 @@ class Club {
 
   static Club fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot) {
     final data = snapshot.data();
+    if (data == null) {
+      throw ArgumentError("Invalid data for Player from DocumentSnapshot");
+    }
     return Club(
       clubId: snapshot.id,
       clubName: data?['clubName'] as String? ?? '',
