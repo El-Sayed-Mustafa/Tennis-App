@@ -1,10 +1,14 @@
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tennis_app/Main-Features/club/widgets/text_rich.dart';
+import 'package:tennis_app/core/methodes/firebase_methodes.dart';
 
+import '../../../core/methodes/global_method.dart';
 import '../../home/widgets/divider.dart';
+import '../../../models/event.dart'; // Import the Event model
 
 class ClubEvents extends StatefulWidget {
   const ClubEvents({Key? key, required this.eventsId}) : super(key: key);
@@ -16,6 +20,28 @@ class ClubEvents extends StatefulWidget {
 class _ClubEventsState extends State<ClubEvents> {
   int selectedPageIndex = 0;
   final CarouselController _carouselController = CarouselController();
+  List<Event> clubEvents = []; // List to store fetched club events
+
+  @override
+  void initState() {
+    super.initState();
+    fetchClubEvents(); // Fetch the club events when the widget is initialized
+  }
+
+  void fetchClubEvents() async {
+    // Fetch events from Firestore using eventIds in the club collection
+    final eventsCollection = FirebaseFirestore.instance.collection('events');
+    final List<Event> fetchedEvents = [];
+    for (String eventId in widget.eventsId) {
+      final eventSnapshot = await eventsCollection.doc(eventId).get();
+      final event = Event.fromSnapshot(eventSnapshot);
+      fetchedEvents.add(event);
+      print(event.clubId);
+    }
+    setState(() {
+      clubEvents = fetchedEvents;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +49,13 @@ class _ClubEventsState extends State<ClubEvents> {
 
     final double carouselHeight = screenHeight * 0.26;
 
-    final List<Widget> carouselItems = [
-      CarouselItem(selected: selectedPageIndex == 0),
-      CarouselItem(selected: selectedPageIndex == 1),
-      CarouselItem(selected: selectedPageIndex == 2),
-      CarouselItem(selected: selectedPageIndex == 3),
-    ];
+    // Use the fetched clubEvents to build the carouselItems
+    final List<Widget> carouselItems = clubEvents.map((event) {
+      return CarouselItem(
+        selected: selectedPageIndex == clubEvents.indexOf(event),
+        event: event,
+      );
+    }).toList();
 
     return Column(
       children: [
@@ -82,8 +109,9 @@ class _ClubEventsState extends State<ClubEvents> {
 
 class CarouselItem extends StatelessWidget {
   final bool selected;
-
-  const CarouselItem({Key? key, required this.selected}) : super(key: key);
+  final Event event;
+  const CarouselItem({Key? key, required this.selected, required this.event})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -96,6 +124,7 @@ class CarouselItem extends StatelessWidget {
     final double buttonTextFontSize = (screenHeight + screenWidth) * 0.01;
     final double buttonWidth = itemWidth * 0.4;
     final double buttonHeight = screenHeight * 0.035;
+    GlobalMethod globalMethod = GlobalMethod();
 
     return Padding(
       padding: EdgeInsets.only(bottom: screenHeight * .007),
@@ -118,16 +147,29 @@ class CarouselItem extends StatelessWidget {
               Column(
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(imageHeight / 5),
-                    child: Container(
-                      height: imageHeight,
-                      width: imageHeight,
-                      child: Image.asset(
-                        'assets/images/clubimage.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
+                      borderRadius: BorderRadius.circular(imageHeight / 5),
+                      child: Container(
+                          height: imageHeight,
+                          width: imageHeight,
+                          child: event.photoURL != null &&
+                                  event.photoURL!.isNotEmpty
+                              ? FadeInImage.assetNetwork(
+                                  placeholder: 'assets/images/loadin.gif',
+                                  image: event.photoURL!,
+                                  fit: BoxFit.cover,
+                                  imageErrorBuilder:
+                                      (context, error, stackTrace) {
+                                    // Show the placeholder image on error
+                                    return Image.asset(
+                                      'assets/images/internet.png',
+                                      fit: BoxFit.cover,
+                                    );
+                                  },
+                                )
+                              : Image.asset(
+                                  'assets/images/profile-event.jpg',
+                                  fit: BoxFit.cover,
+                                ))),
                   SizedBox(height: screenHeight * .01),
                   SizedBox(
                     height: screenHeight * .03,
@@ -152,7 +194,7 @@ class CarouselItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Friendly Match',
+                    event.eventType,
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: titleFontSize,
@@ -161,19 +203,21 @@ class CarouselItem extends StatelessWidget {
                     ),
                   ),
                   const MyDivider(),
-                  const MyTextRich(
-                    text1: 'Time',
-                    text2: '4:00 PM to 8:00 PM',
+                  MyTextRich(
+                    text1: 'Start',
+                    text2: globalMethod
+                        .formatDateTimeString(event.eventStartAt.toString()),
                   ),
                   SizedBox(height: screenHeight * .012),
-                  const MyTextRich(
-                    text2: '4:00 PM to 8:00 PM',
-                    text1: 'Date',
+                  MyTextRich(
+                    text2: globalMethod
+                        .formatDateTimeString(event.eventEndsAt.toString()),
+                    text1: 'End',
                   ),
                   SizedBox(height: screenHeight * .012),
-                  const MyTextRich(
+                  MyTextRich(
                     text1: 'At',
-                    text2: 'Tenni court',
+                    text2: event.eventAddress,
                   ),
                   SizedBox(height: screenHeight * .012),
                   Container(
