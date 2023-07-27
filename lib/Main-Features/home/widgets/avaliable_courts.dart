@@ -10,14 +10,14 @@ import '../../../core/utils/widgets/court_item.dart';
 import '../../../models/player.dart';
 import '../../../models/court.dart'; // Import the Court class
 
-class AvailableCourts extends StatefulWidget {
-  const AvailableCourts({Key? key}) : super(key: key);
+class ReversedCourts extends StatefulWidget {
+  const ReversedCourts({Key? key}) : super(key: key);
 
   @override
-  State<AvailableCourts> createState() => _AvailableCourtsState();
+  State<ReversedCourts> createState() => _ReversedCourtsState();
 }
 
-class _AvailableCourtsState extends State<AvailableCourts> {
+class _ReversedCourtsState extends State<ReversedCourts> {
   int selectedPageIndex = 0;
   final CarouselController _carouselController = CarouselController();
   List<String> reversedCourtsIds = []; // List to store reversed court IDs

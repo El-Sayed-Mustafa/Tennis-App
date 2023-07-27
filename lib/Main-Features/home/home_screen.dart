@@ -56,7 +56,7 @@ class HomeScreen extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            const AvailableCourts(),
+            const ReversedCourts(),
             SizedBox(height: spacing * 2),
             Text(
               'Your Upcoming Matches',

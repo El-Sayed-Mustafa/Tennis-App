@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tennis_app/Main-Features/club/widgets/avaliable_courts.dart';
 import 'package:tennis_app/Main-Features/club/widgets/club_events.dart';
 import 'package:tennis_app/Main-Features/club/widgets/club_info.dart';
 import 'package:tennis_app/Main-Features/club/widgets/header_text.dart';
@@ -109,6 +110,9 @@ class ClubScreen extends StatelessWidget {
                                 clubId: clubData.clubId,
                                 clubName: clubData.clubName,
                               ),
+                              SizedBox(height: spacing * 2),
+                              const HeaderText(text: 'Available Courts'),
+                              AvailableCourts(),
                               SizedBox(height: spacing * 2),
                               Padding(
                                 padding: EdgeInsets.symmetric(

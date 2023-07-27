@@ -153,8 +153,7 @@ class _CourtItemState extends State<CourtItem> {
               ),
             ),
             Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(height: screenWidth * .005),
                 Text(
@@ -166,37 +165,43 @@ class _CourtItemState extends State<CourtItem> {
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                const MyDivider(),
-                Text(
-                  'From : $formattedStartDate',
-                  style: TextStyle(
-                    color: Color(0xFF6D6D6D),
-                    fontSize: subtitleFontSize,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w500,
-                  ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const MyDivider(),
+                    Text(
+                      'From : $formattedStartDate',
+                      style: TextStyle(
+                        color: Color(0xFF6D6D6D),
+                        fontSize: subtitleFontSize,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(height: screenWidth * .015),
+                    Text(
+                      'To : $formattedEndDate',
+                      style: TextStyle(
+                        color: Color(0xFF6D6D6D),
+                        fontSize: subtitleFontSize,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(height: screenWidth * .015),
+                    Text(
+                      'Adress : ${widget.court.courtAddress}',
+                      style: TextStyle(
+                        color: Color(0xFF6D6D6D),
+                        fontSize: subtitleFontSize,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(height: screenWidth * .03),
+                  ],
                 ),
-                SizedBox(height: screenWidth * .015),
-                Text(
-                  'To : $formattedEndDate',
-                  style: TextStyle(
-                    color: Color(0xFF6D6D6D),
-                    fontSize: subtitleFontSize,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                SizedBox(height: screenWidth * .015),
-                Text(
-                  'Adress : ${widget.court.courtAddress}',
-                  style: TextStyle(
-                    color: Color(0xFF6D6D6D),
-                    fontSize: subtitleFontSize,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                SizedBox(height: screenWidth * .03),
                 Container(
                   width: buttonWidth,
                   height: buttonHeight,
