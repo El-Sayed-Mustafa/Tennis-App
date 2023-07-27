@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/profile/view/widgets/profile_body.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
+import '../../../../core/methodes/firebase_methodes.dart';
 import '../../../../core/utils/widgets/app_bar_icon.dart';
 import '../../../../core/utils/widgets/opacity_wave.dart';
 import '../../../../models/player.dart';
@@ -15,13 +16,14 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
+    final Method method = Method();
 
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
           color: const Color(0xFFF8F8F8),
           child: FutureBuilder<Player>(
-            future: _getCurrentUser(),
+            future: method.getCurrentUser(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 // While waiting for the user data to be fetched
@@ -103,21 +105,5 @@ class ProfileScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Future<Player> _getCurrentUser() async {
-    // Get the current user from Firebase Authentication
-    User? user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      // Fetch additional user data from Firestore based on the uid
-      DocumentSnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
-          .instance
-          .collection('players')
-          .doc(user.uid)
-          .get();
-
-      return Player.fromSnapshot(snapshot);
-    }
-    throw Exception("User not found");
   }
 }

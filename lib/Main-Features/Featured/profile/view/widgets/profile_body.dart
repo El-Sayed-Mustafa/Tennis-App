@@ -5,6 +5,7 @@ import 'package:tennis_app/Main-Features/Featured/profile/view/widgets/player_st
 import 'package:tennis_app/Main-Features/Featured/profile/view/widgets/playing_info.dart';
 import 'package:tennis_app/models/club.dart'; // Replace 'Club' with the correct Club class path
 
+import '../../../../../core/methodes/firebase_methodes.dart';
 import '../../../../../models/player.dart';
 import '../../../../club/widgets/club_info.dart';
 
@@ -15,9 +16,11 @@ class ProfileBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+    final Method method = Method();
 
     return FutureBuilder<Club?>(
-      future: fetchClubData(player.participatedClubId), // Fetch club data here
+      future: method
+          .fetchClubData(player.participatedClubId), // Fetch club data here
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           // While waiting for data, you can show a loading indicator or an empty container
@@ -103,12 +106,4 @@ class ProfileBody extends StatelessWidget {
   }
 
   // Function to fetch club data using the provided clubId
-  Future<Club> fetchClubData(String clubId) async {
-    final clubSnapshot =
-        await FirebaseFirestore.instance.collection('clubs').doc(clubId).get();
-
-    // Assuming the Club class has a factory constructor to parse data from Firestore
-    final clubData = Club.fromSnapshot(clubSnapshot);
-    return clubData;
-  }
 }
