@@ -5,9 +5,9 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:intl/intl.dart';
 import 'package:tennis_app/Main-Features/Featured/event_calender/widgets/daily_calendar.dart';
 import 'package:tennis_app/Main-Features/Featured/event_calender/widgets/day_crausal.dart';
-import 'package:tennis_app/Main-Features/Featured/event_calender/widgets/monthly_calendar.dart';
-import 'package:tennis_app/Main-Features/Featured/event_calender/widgets/tab_bar_with_indicator.dart';
 import 'package:tennis_app/Main-Features/Featured/event_calender/widgets/weekly_calendar.dart';
+import 'package:tennis_app/Main-Features/Featured/event_calender/widgets/tab_bar_with_indicator.dart';
+import 'package:tennis_app/Main-Features/Featured/event_calender/widgets/schedule_calendar.dart';
 
 import '../../../core/utils/widgets/app_bar_wave.dart';
 
@@ -54,19 +54,19 @@ class _CalendarScreenState extends State<CalendarScreen>
       // Add your actual data here
       Appointment(
         startTime: DateTime.now().add(Duration(hours: 2)),
-        endTime: DateTime.now().add(Duration(hours: 3)),
+        endTime: DateTime.now().add(Duration(hours: 7)),
         subject: 'Meeting with Client',
         color: Colors.blue,
       ),
       Appointment(
         startTime: DateTime.now().add(Duration(hours: 5)),
-        endTime: DateTime.now().add(Duration(hours: 6)),
+        endTime: DateTime.now().add(Duration(hours: 8)),
         subject: 'Lunch Break',
         color: Colors.green,
       ),
       Appointment(
         startTime: DateTime.now().add(Duration(hours: 9)),
-        endTime: DateTime.now().add(Duration(hours: 10)),
+        endTime: DateTime.now().add(Duration(hours: 12)),
         subject: 'Project Discussion',
         color: Colors.orange,
       ),
@@ -97,14 +97,14 @@ class _CalendarScreenState extends State<CalendarScreen>
           ),
           TabBarWithIndicator(
             tabController: _tabController,
-            tabs: ['Daily', 'Weekly', 'Monthly'],
+            tabs: ['Daily', 'Schedule', 'Weekly'],
           ),
           Expanded(
             child: TabBarView(
               controller: _tabController,
               children: [
                 DailyCalendar(appointments),
-                WeeklyCalendar(appointments),
+                ScheduleCalendar(appointments),
                 MonthlyCalendar(appointments),
               ],
             ),

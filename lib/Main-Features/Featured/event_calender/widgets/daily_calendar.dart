@@ -10,7 +10,7 @@ class DailyCalendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SfCalendar(
-      view: CalendarView.week,
+      view: CalendarView.day,
       showDatePickerButton: true,
       allowDragAndDrop: true,
       dataSource: AppointmentDataSource(appointments),
@@ -18,6 +18,7 @@ class DailyCalendar extends StatelessWidget {
         appointmentItemHeight: 70,
       ),
       timeSlotViewSettings: TimeSlotViewSettings(
+        numberOfDaysInView: 1,
         timeTextStyle: TextStyle(
           fontWeight: FontWeight.w500,
           fontStyle: FontStyle.normal,
