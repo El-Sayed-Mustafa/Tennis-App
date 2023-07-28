@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/core/utils/widgets/no_data_text.dart';
 
+import '../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../core/utils/widgets/button_home.dart';
 import '../../../core/utils/widgets/court_item.dart';
 import '../../../models/player.dart';

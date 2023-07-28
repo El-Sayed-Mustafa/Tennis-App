@@ -19,6 +19,7 @@ import '../../Main-Features/Featured/create_club/view/create_club.dart';
 import '../../Main-Features/Featured/create_court/view/court_search.dart';
 import '../../Main-Features/Featured/create_court/view/create_court_screen.dart';
 import '../../Main-Features/Featured/create_event/view/create_event.dart';
+import '../../Main-Features/Featured/event_calender/event_calender_screen.dart';
 import '../../Main-Features/Featured/find_match/view/find_match_screen.dart';
 import '../../Main-Features/Featured/find_match/view/screens/people_requirment.dart';
 import '../../Main-Features/Featured/localization/choose_language.dart';
@@ -38,7 +39,7 @@ abstract class AppRouter {
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider(
             create: (context) => NavigationCubit(),
-            child: NavigationBarScreen(),
+            child: CalendarScreen(),
           );
         },
         routes: <RouteBase>[

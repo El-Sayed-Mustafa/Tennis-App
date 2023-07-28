@@ -28,7 +28,6 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  quickalert:
   bloc_provider: ^1.0.0
   cached_network_image: ^3.2.3
   carousel_slider: ^4.1.0
@@ -58,8 +57,10 @@ dependencies:
   google_sign_in: ^6.1.4
   image_picker: ^1.0.0
   multi_select_flutter: null
+  quickalert: null
   shared_preferences: null
   smooth_page_indicator: ^1.1.0
+  syncfusion_flutter_calendar: ^22.2.5
 
 dev_dependencies:
   flutter_lints: ^2.0.0
