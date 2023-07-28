@@ -1,8 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../../../core/utils/widgets/no_data_text.dart';
 import '../../../models/event.dart';
 
 class MyEvents extends StatefulWidget {
@@ -35,31 +36,12 @@ class _MyEventsState extends State<MyEvents> {
                   [];
 
           if (eventIds.isEmpty) {
-            // Show a dummy item when the eventIds list is empty
-            final dummyEvent = Event(
-              eventId: 'dummyId',
-              eventName: 'Dummy Event',
-              eventStartAt: DateTime.now(),
-              eventEndsAt: DateTime.now().add(Duration(days: 1)),
-              eventAddress: 'Dummy Address',
-              eventType: 'Dummy Type',
-              courtName: 'Dummy Court',
-              instructions: 'Dummy Instructions',
-              playerIds: [],
-              playerLevel: 0.0,
-              clubId: 'dummyClubId',
-              photoURL: null, // No photo for the dummy event
-            );
-
-            return Column(
-              children: [
-                CarouselItem(
-                  selected: true,
-                  event: dummyEvent,
-                ),
-                const SizedBox(height: 10),
-                buildPageIndicator(1),
-              ],
+            // Show the NoData widget when the eventIds list is empty
+            return NoData(
+              text: 'You Don\'t have Events',
+              height: MediaQuery.of(context).size.height * .15,
+              width: MediaQuery.of(context).size.width * .8,
+              buttonText: 'Register for events on the Club page',
             );
           }
 

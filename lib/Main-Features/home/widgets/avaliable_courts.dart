@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tennis_app/core/utils/widgets/no_data_text.dart';
 
 import '../../../core/utils/widgets/button_home.dart';
 import '../../../core/utils/widgets/court_item.dart';
@@ -67,6 +68,7 @@ class _ReversedCourtsState extends State<ReversedCourts> {
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
+    final double screenWidth = MediaQuery.of(context).size.width;
 
     final double carouselHeight = screenHeight * 0.215;
 
@@ -94,16 +96,16 @@ class _ReversedCourtsState extends State<ReversedCourts> {
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
-                        return Text('Error fetching court data');
+                        return const Text('Error fetching court data');
                       }
 
                       if (!snapshot.hasData) {
-                        return CircularProgressIndicator();
+                        return const CircularProgressIndicator();
                       }
 
                       final courtData = snapshot.data?.data();
                       if (courtData == null) {
-                        return Text('No court data available');
+                        return const Text('No court data available');
                       }
 
                       // Create a Court instance from the snapshot data
@@ -115,28 +117,15 @@ class _ReversedCourtsState extends State<ReversedCourts> {
                   );
                 }).toList(),
               )
-            : Container(
-                color: Colors.white,
-                padding: EdgeInsets.all(8),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Icon(
-                        Icons
-                            .sentiment_dissatisfied_sharp, // Replace 'Icons.sports_tennis' with your chosen icon
-                        size: 100,
-                        color: Colors.grey,
-                      ),
-                    ),
-                    HomeButton(
-                      buttonText: 'Find Court',
-                      imagePath: 'assets/images/Find-Court.svg',
-                      onPressed: () {
-                        GoRouter.of(context).push('/findCourt');
-                      },
-                    ),
-                  ],
+            : Center(
+                child: NoData(
+                  text: 'No Reversed Courts',
+                  height: screenHeight * .15,
+                  width: screenWidth * .8,
+                  buttonText: 'Click to Reverse Court',
+                  onPressed: () {
+                    GoRouter.of(context).push('/findCourt');
+                  },
                 ),
               ),
 
