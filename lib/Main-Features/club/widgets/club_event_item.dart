@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:tennis_app/Main-Features/Featured/set_reminder/set_reminder_screen.dart';
 import 'package:tennis_app/Main-Features/club/widgets/text_rich.dart';
 
 import '../../../core/methodes/global_method.dart';
 import '../../home/widgets/divider.dart';
-import '../../../models/event.dart'; // Import the Event model
+import '../../../models/event.dart';
+import 'header_text.dart'; // Import the Event model
 
 class ClubEventItem extends StatelessWidget {
-  final bool selected;
   final Event event;
-  const ClubEventItem({Key? key, required this.selected, required this.event})
+  final bool showSetReminder;
+
+  const ClubEventItem(
+      {Key? key, required this.event, required this.showSetReminder})
       : super(key: key);
 
   @override
@@ -120,27 +124,42 @@ class ClubEventItem extends StatelessWidget {
                     text2: event.eventAddress,
                   ),
                   SizedBox(height: screenHeight * .012),
-                  Container(
-                    width: buttonWidth,
-                    height: buttonHeight,
-                    decoration: ShapeDecoration(
-                      color: const Color(0xFF1B262C),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(buttonHeight / 2),
-                      ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Set Reminder',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: buttonTextFontSize,
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                  ),
+                  showSetReminder // Conditionally show the "Set Reminder" button
+                      ? Container(
+                          width: buttonWidth,
+                          height: buttonHeight,
+                          decoration: ShapeDecoration(
+                            color: const Color(0xFF1B262C),
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(buttonHeight / 2),
+                            ),
+                          ),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      SetReminder(event: event),
+                                ),
+                              );
+                            },
+                            child: Center(
+                              child: Text(
+                                'Set Reminder',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: buttonTextFontSize,
+                                  fontFamily: 'Roboto',
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          )
+                          // Empty SizedBox to hide the button
+                          )
+                      : SizedBox(),
                 ],
               ),
             ],

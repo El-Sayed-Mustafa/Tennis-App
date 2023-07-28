@@ -17,7 +17,7 @@ class DailyCalendar extends StatelessWidget {
       scheduleViewSettings: const ScheduleViewSettings(
         appointmentItemHeight: 70,
       ),
-      timeSlotViewSettings: TimeSlotViewSettings(
+      timeSlotViewSettings: const TimeSlotViewSettings(
         numberOfDaysInView: 1,
         timeTextStyle: TextStyle(
           fontWeight: FontWeight.w500,

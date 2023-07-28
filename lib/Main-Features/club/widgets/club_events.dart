@@ -61,8 +61,8 @@ class _ClubEventsState extends State<ClubEvents> {
             carouselController: _carouselController,
             items: clubEvents.map((event) {
               return ClubEventItem(
-                selected: selectedPageIndex == clubEvents.indexOf(event),
                 event: event,
+                showSetReminder: true,
               );
             }).toList(),
           )
@@ -80,7 +80,12 @@ class _ClubEventsState extends State<ClubEvents> {
             ),
             carouselController: _carouselController,
             // Show a single dummy CarouselItem with dummy data
-            items: [ClubEventItem(selected: true, event: _createDummyEvent())],
+            items: [
+              ClubEventItem(
+                event: _createDummyEvent(),
+                showSetReminder: false,
+              )
+            ],
           ),
         SizedBox(height: 8),
         buildPageIndicator(clubEvents.isNotEmpty ? clubEvents.length : 1),

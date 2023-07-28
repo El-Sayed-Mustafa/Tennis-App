@@ -6,6 +6,7 @@ import 'package:tennis_app/Main-Features/Featured/create_profile/create_profile_
 import 'package:tennis_app/Main-Features/Featured/navigation_bar/cubit/navigation_cubit.dart';
 import 'package:tennis_app/Main-Features/Featured/navigation_bar/navigation_bar_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/onboarding/onboarding_screen.dart';
+import 'package:tennis_app/Main-Features/Featured/set_reminder/set_reminder_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/splash/splash_screen.dart';
 import 'package:tennis_app/Main-Features/home/home_screen.dart';
 import 'package:tennis_app/Main-Features/menu/menu_screen.dart';
@@ -39,7 +40,7 @@ abstract class AppRouter {
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider(
             create: (context) => NavigationCubit(),
-            child: CalendarScreen(),
+            child: NavigationBarScreen(),
           );
         },
         routes: <RouteBase>[

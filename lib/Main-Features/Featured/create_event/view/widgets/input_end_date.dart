@@ -151,8 +151,11 @@ class _InputEndDateAndTimeState extends State<InputEndDateAndTime> {
                           ),
                         ),
                         IconButton(
-                          icon: const Icon(Icons.calendar_month_outlined,
-                              size: 20),
+                          icon: const Icon(
+                            Icons.calendar_month_outlined,
+                            size: 20,
+                            color: Colors.grey,
+                          ),
                           onPressed: _selectDateTime,
                         ),
                       ],

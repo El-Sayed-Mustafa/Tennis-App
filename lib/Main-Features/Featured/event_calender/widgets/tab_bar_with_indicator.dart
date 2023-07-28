@@ -14,7 +14,7 @@ class TabBarWithIndicator extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Container(
-      width: screenWidth * .9,
+      width: screenWidth * .83,
       decoration: ShapeDecoration(
         color: const Color(0x5400344E),
         shape: RoundedRectangleBorder(
