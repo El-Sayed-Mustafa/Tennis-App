@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
+import 'package:tennis_app/constants.dart';
 import 'appointment_data_source.dart';
 
 class WeeklyCalendar extends StatelessWidget {
@@ -17,7 +18,7 @@ class WeeklyCalendar extends StatelessWidget {
           endDateFormat: 'dd MMM, yy',
           height: 50,
           textAlign: TextAlign.center,
-          backgroundColor: Colors.red,
+          backgroundColor: Color(0x5400344E),
           weekTextStyle: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w400,
@@ -42,9 +43,9 @@ class WeeklyCalendar extends StatelessWidget {
           monthFormat: 'MMMM, yyyy',
           height: 100,
           textAlign: TextAlign.left,
-          backgroundColor: Colors.green,
+          backgroundColor: kPrimaryColor,
           monthTextStyle: TextStyle(
-            color: Colors.white,
+            color: Color(0xFF00344E),
             fontSize: 25,
             fontWeight: FontWeight.w400,
           ),
