@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tennis_app/Main-Features/chats/screens/private_chat.dart';
 
 import '../../../models/player.dart';
 
@@ -95,10 +96,21 @@ class _PlayerSearchScreenState extends State<PlayerSearchScreen> {
           itemCount: filteredPlayers.length,
           itemBuilder: (context, index) {
             final player = Player.fromSnapshot(filteredPlayers[index]);
-            return ListTile(
-              title: Text(player.playerName),
-              subtitle: Text(player.playerLevel),
-              // Add more player information or actions here if needed
+            return GestureDetector(
+              onTap: () {
+                // Navigate to the PrivateChat screen when the item is tapped
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PrivateChat(player: player),
+                  ),
+                );
+              },
+              child: ListTile(
+                title: Text(player.playerName),
+                subtitle: Text(player.playerLevel),
+                // Add more player information or actions here if needed
+              ),
             );
           },
         );

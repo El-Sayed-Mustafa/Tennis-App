@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:tennis_app/Main-Features/chats/widgets/message_item.dart';
 import '../widgets/search_input.dart';
 
-class Chats extends StatelessWidget {
-  const Chats({Key? key});
+class ChatsScreen extends StatelessWidget {
+  const ChatsScreen({Key? key});
 
   @override
   Widget build(BuildContext context) {

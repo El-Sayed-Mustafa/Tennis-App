@@ -40,10 +40,10 @@ class Community extends StatelessWidget {
                     SizedBox(
                       height: 15,
                     ),
-                    CommunityMessage(),
-                    CommunityMessage(),
-                    MyReply(),
-                    CommunityMessage(),
+                    // CommunityMessage(),
+                    // CommunityMessage(),
+                    // MyReply(),
+                    // CommunityMessage(),
                     SizedBox(
                       height: 64,
                     ),
@@ -53,9 +53,9 @@ class Community extends StatelessWidget {
             ),
           ),
         ),
-        MessageInput(
-          onPressed: () {},
-        )
+        // MessageInput(
+        //   onPressed: () {},
+        // )
       ],
     );
   }

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../models/chats.dart';
+
 class CommunityMessage extends StatelessWidget {
-  const CommunityMessage({super.key});
+  const CommunityMessage({super.key, required this.message});
+  final ChatMessage message;
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +58,8 @@ class CommunityMessage extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Text(
-                  'I commented on Figma I want to add some fancy icons. Do you have any icon set?',
+                Text(
+                  message.content, // Display the message content
                   style: TextStyle(
                     color: Color(0xFF757575),
                     fontSize: 13,

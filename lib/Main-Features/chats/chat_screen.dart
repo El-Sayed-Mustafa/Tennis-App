@@ -110,7 +110,7 @@ class _ChatScreenState extends State<ChatScreen>
               children: const [
                 Community(),
                 Groups(),
-                Chats(),
+                ChatsScreen(),
               ],
             ))
           ],

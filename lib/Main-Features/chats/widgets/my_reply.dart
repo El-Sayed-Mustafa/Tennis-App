@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../models/chats.dart';
+
 class MyReply extends StatelessWidget {
-  const MyReply({super.key});
+  const MyReply({super.key, required this.message});
+  final ChatMessage message;
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +35,10 @@ class MyReply extends StatelessWidget {
               color: const Color(0x5BC7C7C7),
             ),
           ),
-          child: const Column(
+          child: Column(
             children: [
               Text(
-                'I commented on Figma I want to add some fancy icons. Do you have any icon set?',
+                message.content,
                 style: TextStyle(
                   color: Color(0xFF757575),
                   fontSize: 13,

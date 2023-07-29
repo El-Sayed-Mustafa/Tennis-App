@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 
 class MessageInput extends StatelessWidget {
-  const MessageInput({super.key, required this.onPressed});
+  final TextEditingController controller;
   final VoidCallback onPressed;
+
+  const MessageInput({
+    required this.controller,
+    required this.onPressed,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +64,7 @@ class MessageInput extends StatelessWidget {
                 ),
                 child: IconButton(
                   onPressed: () {
-                    // Add your button's onPressed action here
+                    onPressed();
                   },
                   icon: const Icon(Icons.send),
                   color: Colors.white,
