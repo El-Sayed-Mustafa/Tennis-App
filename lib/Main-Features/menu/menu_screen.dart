@@ -49,7 +49,7 @@ class MenuScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(18),
                         child: (player.photoURL != ''
                             ? FadeInImage.assetNetwork(
-                                placeholder: 'assets/images/loading.gif',
+                                placeholder: 'assets/images/loadin.gif',
                                 image: player.photoURL!,
                                 fit: BoxFit.cover,
                                 imageErrorBuilder:

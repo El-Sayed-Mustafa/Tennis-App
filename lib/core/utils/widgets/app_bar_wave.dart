@@ -85,10 +85,10 @@ class AppBarWaveHome extends StatelessWidget {
                                 ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(50),
-                                  child: (player.photoURL != ''
+                                  child: (player.photoURL != null
                                       ? FadeInImage.assetNetwork(
                                           placeholder:
-                                              'assets/images/loading.gif',
+                                              'assets/images/loadin.gif',
                                           image: player.photoURL!,
                                           fit: BoxFit.cover,
                                           imageErrorBuilder:
