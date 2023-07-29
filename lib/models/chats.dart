@@ -42,25 +42,15 @@ class ChatMessage {
       timestamp: data['timestamp'] as Timestamp? ?? Timestamp.now(),
     );
   }
-}
 
-// Function to send a message
-Future<void> sendMessage(String chatId, ChatMessage message) async {
-  final chatRef = FirebaseFirestore.instance.collection('chats').doc(chatId);
-  await chatRef
-      .collection('messages')
-      .doc(message.messageId)
-      .set(message.toJson());
-}
-
-// Function to listen for new messages in a chat
-Stream<List<ChatMessage>> listenToChat(String chatId) {
-  final chatRef = FirebaseFirestore.instance.collection('chats').doc(chatId);
-  return chatRef
-      .collection('messages')
-      .orderBy('timestamp', descending: true)
-      .snapshots()
-      .map((snapshot) {
-    return snapshot.docs.map((doc) => ChatMessage.fromSnapshot(doc)).toList();
-  });
+  // Factory method to create a message from map (JSON) data
+  factory ChatMessage.fromMap(Map<String, dynamic> map) {
+    return ChatMessage(
+      messageId: map['messageId'] as String? ?? '',
+      senderId: map['senderId'] as String? ?? '',
+      receiverId: map['receiverId'] as String? ?? '',
+      content: map['content'] as String? ?? '',
+      timestamp: map['timestamp'] as Timestamp? ?? Timestamp.now(),
+    );
+  }
 }

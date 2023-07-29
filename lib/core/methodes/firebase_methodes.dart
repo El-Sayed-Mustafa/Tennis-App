@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../../models/chats.dart';
 import '../../models/club.dart';
 import '../../models/player.dart';
 
@@ -28,5 +29,35 @@ class Method {
     // Assuming the Club class has a factory constructor to parse data from Firestore
     final clubData = Club.fromSnapshot(clubSnapshot);
     return clubData;
+  }
+
+// Function to get chat messages for the current player
+  Future<List<ChatMessage>> getChatMessagesForCurrentPlayer(
+      String currentPlayerId) async {
+    try {
+      // Perform a query to get messages where the senderId or receiverId matches the currentPlayerId
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection('chats')
+          .where('messages', arrayContains: {
+        'senderId': currentPlayerId,
+      }).get();
+
+      // Extract the messages from the query result
+      final messages = querySnapshot.docs
+          .map((doc) {
+            final chatData = doc.data();
+            final messagesData = chatData['messages'] as List<dynamic>;
+            return messagesData
+                .map((messageData) => ChatMessage.fromMap(messageData))
+                .toList();
+          })
+          .expand((element) => element)
+          .toList();
+
+      return messages;
+    } catch (e) {
+      print('Error getting chat messages: $e');
+      return [];
+    }
   }
 }
