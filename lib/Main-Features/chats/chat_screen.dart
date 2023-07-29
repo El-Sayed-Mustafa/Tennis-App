@@ -40,10 +40,6 @@ class _ChatScreenState extends State<ChatScreen>
         child: Column(
           children: [
             AppBarWaveHome(
-              prefixIcon: SvgPicture.asset(
-                'assets/images/profile-icon.svg',
-                fit: BoxFit.contain,
-              ),
               text: 'Messages',
               suffixIconPath: 'assets/images/app-bar-icon.svg',
             ),

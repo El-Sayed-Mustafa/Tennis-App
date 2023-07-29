@@ -33,10 +33,6 @@ class ClubScreen extends StatelessWidget {
           child: Column(
             children: [
               AppBarWaveHome(
-                prefixIcon: SvgPicture.asset(
-                  'assets/images/profile-icon.svg',
-                  fit: BoxFit.contain,
-                ),
                 text: 'Your Club',
                 suffixIconPath: 'assets/images/app-bar-icon.svg',
               ),

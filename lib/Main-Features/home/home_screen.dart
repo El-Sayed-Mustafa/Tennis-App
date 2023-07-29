@@ -25,10 +25,6 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             AppBarWaveHome(
-              prefixIcon: SvgPicture.asset(
-                'assets/images/profile-icon.svg',
-                fit: BoxFit.contain,
-              ),
               text: 'Home',
               suffixIconPath: 'assets/images/app-bar-icon.svg',
             ),
