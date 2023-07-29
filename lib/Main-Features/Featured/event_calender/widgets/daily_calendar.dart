@@ -3,32 +3,18 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 import '../../set_reminder/model/evenet_data.dart';
 import 'appointment_data_source.dart';
 
-class DailyCalendar extends StatefulWidget {
+class DailyCalendar extends StatelessWidget {
   final List<EventModel> events;
 
   DailyCalendar(this.events);
 
   @override
-  State<DailyCalendar> createState() => _DailyCalendarState();
-}
-
-class _DailyCalendarState extends State<DailyCalendar> {
-  late AppointmentDataSource dataSource;
-
-  @override
-  void initState() {
-    dataSource = AppointmentDataSource(widget.events);
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    print(dataSource.events[0].subject);
+    final dataSource = AppointmentDataSource(events);
     return SfCalendar(
       dataSource: dataSource,
       view: CalendarView.day,
       showDatePickerButton: true,
-      allowAppointmentResize: true,
       allowDragAndDrop: true,
       scheduleViewSettings: const ScheduleViewSettings(
         appointmentItemHeight: 70,

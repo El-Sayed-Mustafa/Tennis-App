@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -128,15 +130,18 @@ class SetReminder extends StatelessWidget {
               DateTime? endDate = context.read<EndDateTimeCubit>().state;
               DateTime? startDate = context.read<DateTimeCubit>().state;
               String name = eventNameController.text;
-              Color color = Colors.blue; // Replace this with your desired color
+
+              // Get a random color from the Google Calendar-like colors
+              Color color = GoogleCalendarColors.getRandomEventColor();
 
               // Save the event to the database
               await saveEvent(startDate!, endDate!, name, color);
 
               NotificationApi.showSchaduleNotification(
-                  title: name,
-                  body: "Your Event will start now",
-                  scheduleDate: startDate);
+                title: name,
+                body: "Your Event will start now",
+                scheduleDate: startDate,
+              );
               GoRouter.of(context).push('/calendar');
             } catch (e) {
               // Handle any exceptions that occurred during event saving
@@ -148,5 +153,28 @@ class SetReminder extends StatelessWidget {
         color: Colors.transparent,
       ),
     );
+  }
+}
+
+class GoogleCalendarColors {
+  static final List<Color> eventColors = [
+    Colors.blue,
+    Colors.red,
+    Colors.green,
+    Colors.purple,
+    Colors.orange,
+    Colors.teal,
+    Colors.pink,
+    Colors.indigo,
+    Colors.deepOrange,
+    Colors.amber,
+    Colors.cyan,
+    Colors.lime,
+  ];
+
+  static Color getRandomEventColor() {
+    // Generate a random index to pick a color from the eventColors list
+    int randomIndex = Random().nextInt(eventColors.length);
+    return eventColors[randomIndex];
   }
 }
