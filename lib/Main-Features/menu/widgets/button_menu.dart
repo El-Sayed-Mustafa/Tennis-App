@@ -22,7 +22,7 @@ class ButtonMenu extends StatelessWidget {
     final textFontSize = screenWidth * 0.04;
     return GestureDetector(
       onTap: () {
-        onPressed;
+        onPressed();
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),

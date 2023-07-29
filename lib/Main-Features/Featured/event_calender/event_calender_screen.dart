@@ -10,6 +10,8 @@ import 'package:tennis_app/Main-Features/Featured/event_calender/widgets/tab_bar
 import 'package:tennis_app/Main-Features/Featured/event_calender/widgets/schedule_calendar.dart';
 
 import '../../../core/utils/widgets/app_bar_wave.dart';
+import '../set_reminder/model/database_helper.dart';
+import '../set_reminder/model/evenet_data.dart';
 
 class CalendarScreen extends StatefulWidget {
   @override
@@ -46,31 +48,19 @@ class _CalendarScreenState extends State<CalendarScreen>
     });
   }
 
+  // Database helper instance
+  final dbHelper = DatabaseHelper();
+
+  // Fetch all events from the database and return them as a list
+  Future<List<EventModel>> getAllEventsFromDatabase() async {
+    return dbHelper.getAllEvents();
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    List<Appointment> appointments = [
-      // Add your actual data here
-      Appointment(
-        startTime: DateTime.now().add(Duration(hours: 2)),
-        endTime: DateTime.now().add(Duration(hours: 7)),
-        subject: 'Meeting with Client',
-        color: Colors.blue,
-      ),
-      Appointment(
-        startTime: DateTime.now().add(Duration(hours: 5)),
-        endTime: DateTime.now().add(Duration(hours: 8)),
-        subject: 'Lunch Break',
-        color: Colors.green,
-      ),
-      Appointment(
-        startTime: DateTime.now().add(Duration(hours: 9)),
-        endTime: DateTime.now().add(Duration(hours: 12)),
-        subject: 'Project Discussion',
-        color: Colors.orange,
-      ),
-    ];
+
     return Scaffold(
       body: Column(
         children: [
@@ -85,7 +75,7 @@ class _CalendarScreenState extends State<CalendarScreen>
                 color: Colors.white,
               ),
             ),
-            text: '   Event Calender',
+            text: '   Event Calendar',
             suffixIconPath: '',
           ),
           DayCarousel(
@@ -103,9 +93,65 @@ class _CalendarScreenState extends State<CalendarScreen>
             child: TabBarView(
               controller: _tabController,
               children: [
-                DailyCalendar(appointments),
-                ScheduleCalendar(appointments),
-                MonthlyCalendar(appointments),
+                FutureBuilder<List<EventModel>>(
+                  future: getAllEventsFromDatabase(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (snapshot.hasData) {
+                      // Retrieve the list of events from the snapshot data
+                      List<EventModel> allEvents = snapshot.data!;
+                      print("sss" + allEvents[4].subject);
+
+                      return DailyCalendar(allEvents);
+                    } else {
+                      return Center(
+                        child: Text('No events found.'),
+                      );
+                    }
+                  },
+                ),
+                FutureBuilder<List<EventModel>>(
+                  future: getAllEventsFromDatabase(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (snapshot.hasData) {
+                      // Retrieve the list of events from the snapshot data
+                      List<EventModel> allEvents = snapshot.data!;
+                      print("sss" + allEvents[4].subject);
+                      return ScheduleCalendar(allEvents);
+                    } else {
+                      return Center(
+                        child: Text('No events found.'),
+                      );
+                    }
+                  },
+                ),
+                FutureBuilder<List<EventModel>>(
+                  future: getAllEventsFromDatabase(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (snapshot.hasData) {
+                      // Retrieve the list of events from the snapshot data
+                      List<EventModel> allEvents = snapshot.data!;
+                      print("sss" + allEvents[4].subject);
+
+                      return MonthlyCalendar(allEvents);
+                    } else {
+                      return Center(
+                        child: Text('No events found.'),
+                      );
+                    }
+                  },
+                ),
               ],
             ),
           ),

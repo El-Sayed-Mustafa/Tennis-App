@@ -58,9 +58,11 @@ dependencies:
   google_sign_in: ^6.1.4
   image_picker: ^1.0.0
   multi_select_flutter: null
+  provider: ^6.0.5
   quickalert: null
   shared_preferences: null
   smooth_page_indicator: ^1.1.0
+  sqflite: ^2.3.0
   syncfusion_flutter_calendar: ^22.2.5
 
 dev_dependencies:

@@ -10,6 +10,7 @@ import 'package:tennis_app/Main-Features/Featured/set_reminder/set_reminder_scre
 import 'package:tennis_app/Main-Features/Featured/splash/splash_screen.dart';
 import 'package:tennis_app/Main-Features/home/home_screen.dart';
 import 'package:tennis_app/Main-Features/menu/menu_screen.dart';
+import 'package:provider/provider.dart';
 
 import '../../Auth/screens/forget_password.dart';
 import '../../Main-Features/Featured/choose_club/choose_club_item.dart';
@@ -28,6 +29,7 @@ import '../../Main-Features/Featured/profile/view/profile_screen.dart';
 import '../../Main-Features/Featured/roles/assign_person/view/assign_person_screen.dart';
 import '../../Main-Features/Featured/roles/create_role/view/create_role_screen.dart';
 import '../../Main-Features/Featured/roles/roles_list/view/roles_list_screen.dart';
+import '../../Main-Features/Featured/set_reminder/model/evenet_data.dart';
 import '../../Main-Features/Featured/settings/view/settings_screen.dart';
 import '../../Main-Features/chats/screens/private_chat.dart';
 import '../../models/player.dart';
@@ -135,6 +137,13 @@ abstract class AppRouter {
             path: 'management',
             builder: (BuildContext context, GoRouterState state) {
               return ManagementScreen();
+            },
+          ),
+          GoRoute(
+            path: 'calendar',
+            builder: (BuildContext context, GoRouterState state) {
+              // Wrap the CalendarScreen with ChangeNotifierProvider
+              return CalendarScreen();
             },
           ),
         ],

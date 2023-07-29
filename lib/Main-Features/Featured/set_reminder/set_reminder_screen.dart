@@ -12,6 +12,8 @@ import '../../club/widgets/club_event_item.dart';
 import '../../club/widgets/header_text.dart';
 import '../create_event/view/widgets/event_types.dart';
 import '../create_event/view/widgets/input_end_date.dart';
+import 'model/database_helper.dart';
+import 'model/evenet_data.dart';
 
 class SetReminder extends StatelessWidget {
   SetReminder({Key? key, required this.event}) : super(key: key);
@@ -19,6 +21,21 @@ class SetReminder extends StatelessWidget {
   final Event event;
   final TextEditingController eventNameController = TextEditingController();
   var formKey = GlobalKey<FormState>();
+
+  // Database helper instance
+  final dbHelper = DatabaseHelper();
+
+  // Method to save the event to the database
+  Future<void> saveEvent(
+      DateTime startTime, DateTime endTime, String subject, Color color) async {
+    final event = EventModel(
+      startTime: startTime,
+      endTime: endTime,
+      subject: subject,
+      color: color,
+    );
+    await dbHelper.insertEvent(event);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,15 +122,27 @@ class SetReminder extends StatelessWidget {
       ),
       bottomNavigationBar: BottomSheetContainer(
         buttonText: 'Set Reminder',
-        onPressed: () {
+        onPressed: () async {
           if (formKey.currentState!.validate()) {
-            DateTime? endDate = context.read<EndDateTimeCubit>().state;
-            DateTime? startDate = context.read<DateTimeCubit>().state;
-            String name = eventNameController.text;
-            NotificationApi.showSchaduleNotification(
-                title: name,
-                body: "Your Event will start now",
-                scheduleDate: startDate);
+            try {
+              DateTime? endDate = context.read<EndDateTimeCubit>().state;
+              DateTime? startDate = context.read<DateTimeCubit>().state;
+              String name = eventNameController.text;
+              Color color = Colors.blue; // Replace this with your desired color
+
+              // Save the event to the database
+              await saveEvent(startDate!, endDate!, name, color);
+
+              NotificationApi.showSchaduleNotification(
+                  title: name,
+                  body: "Your Event will start now",
+                  scheduleDate: startDate);
+              GoRouter.of(context).push('/calendar');
+            } catch (e) {
+              // Handle any exceptions that occurred during event saving
+              print('Error saving event: $e');
+              // You can show a snackbar, dialog, or any other error message to the user.
+            }
           }
         },
         color: Colors.transparent,

@@ -1,34 +1,25 @@
-// models/event_data.dart
-class EventData {
-  int? id; // Auto-generated ID for the event in the database
-  String name;
-  DateTime startDate;
-  DateTime endDate;
+import 'package:flutter/material.dart';
 
-  EventData({
-    this.id,
-    required this.name,
-    required this.startDate,
-    required this.endDate,
+class EventModel {
+  final DateTime startTime;
+  final DateTime endTime;
+  final String subject;
+  final Color color;
+
+  EventModel({
+    required this.startTime,
+    required this.endTime,
+    required this.subject,
+    required this.color,
   });
 
-  // Convert the EventData object to a map for saving to the database
+  // Convert EventModel to a map for database insertion
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
-      'name': name,
-      'startDate': startDate.toIso8601String(),
-      'endDate': endDate.toIso8601String(),
+      'startTime': startTime.millisecondsSinceEpoch,
+      'endTime': endTime.millisecondsSinceEpoch,
+      'subject': subject,
+      'color': color.value,
     };
-  }
-
-  // Create an EventData object from a map retrieved from the database
-  static EventData fromMap(Map<String, dynamic> map) {
-    return EventData(
-      id: map['id'],
-      name: map['name'],
-      startDate: DateTime.parse(map['startDate']),
-      endDate: DateTime.parse(map['endDate']),
-    );
   }
 }

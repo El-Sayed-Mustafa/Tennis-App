@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:tennis_app/constants.dart';
+import '../../set_reminder/model/evenet_data.dart';
 import 'appointment_data_source.dart';
 
 class ScheduleCalendar extends StatelessWidget {
-  final List<Appointment> appointments;
+  final List<EventModel> events;
 
-  ScheduleCalendar(this.appointments);
+  ScheduleCalendar(this.events);
 
   @override
   Widget build(BuildContext context) {
+    final dataSource = AppointmentDataSource(events);
+
     return SfCalendar(
       view: CalendarView.schedule,
+      dataSource: dataSource,
       scheduleViewSettings: const ScheduleViewSettings(
         weekHeaderSettings: WeekHeaderSettings(
           startDateFormat: 'dd MMM ',
@@ -51,7 +55,6 @@ class ScheduleCalendar extends StatelessWidget {
           ),
         ),
       ),
-      dataSource: AppointmentDataSource(appointments),
     );
   }
 }

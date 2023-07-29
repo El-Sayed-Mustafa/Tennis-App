@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/menu/widgets/button_menu.dart';
 
 import '../../core/utils/widgets/app_bar_wave.dart';
@@ -40,7 +41,9 @@ class MenuScreen extends StatelessWidget {
               ButtonMenu(
                 imagePath: 'assets/images/Event-Calnder.svg',
                 buttonText: 'Event Calnder',
-                onPressed: () {},
+                onPressed: () {
+                  GoRouter.of(context).push('/calendar');
+                },
               ),
               ButtonMenu(
                 imagePath: 'assets/images/Member-administration.svg',
