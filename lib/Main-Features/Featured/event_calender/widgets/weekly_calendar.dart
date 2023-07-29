@@ -15,9 +15,8 @@ class MonthlyCalendar extends StatelessWidget {
     return SfCalendar(
       dataSource:
           dataSource, // dataSource: AppointmentDataSource(appointments),
-      allowAppointmentResize: true, view: CalendarView.week,
-      timeSlotViewSettings:
-          TimeSlotViewSettings(timeInterval: Duration(hours: 2)),
+      allowAppointmentResize: true, view: CalendarView.month,
+      monthViewSettings: MonthViewSettings(showAgenda: true),
     );
   }
 }

@@ -87,7 +87,7 @@ class _CalendarScreenState extends State<CalendarScreen>
           ),
           TabBarWithIndicator(
             tabController: _tabController,
-            tabs: ['Daily', 'Schedule', 'Weekly'],
+            tabs: ['Daily', 'Schedule', 'Monthly'],
           ),
           Expanded(
             child: TabBarView(
