@@ -46,6 +46,7 @@ dependencies:
   flutter_chips_input: ^2.0.0
   flutter_datetime_picker: null
   flutter_facebook_auth: ^6.0.0
+  flutter_local_notifications: ^15.1.0+1
   flutter_localizations:
     sdk: flutter
   flutter_material_pickers: ^3.5.0

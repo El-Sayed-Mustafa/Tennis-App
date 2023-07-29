@@ -16,12 +16,16 @@ import 'Main-Features/Featured/create_profile/cubits/time_cubit.dart';
 import 'core/utils/widgets/input_date_and_time.dart';
 import 'firebase_options.dart';
 import 'generated/l10n.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  tz.initializeTimeZones();
+
   runApp(const MyApp());
 }
 

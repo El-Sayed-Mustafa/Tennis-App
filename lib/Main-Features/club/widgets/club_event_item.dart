@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tennis_app/Main-Features/Featured/set_reminder/set_reminder_screen.dart';
 import 'package:tennis_app/Main-Features/club/widgets/text_rich.dart';
 
 import '../../../core/methodes/global_method.dart';
+import '../../Featured/create_event/view/widgets/input_end_date.dart';
 import '../../home/widgets/divider.dart';
 import '../../../models/event.dart';
 import 'header_text.dart'; // Import the Event model
@@ -140,8 +142,10 @@ class ClubEventItem extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      SetReminder(event: event),
+                                  builder: (context) => BlocProvider(
+                                    create: (context) => EndDateTimeCubit(),
+                                    child: SetReminder(event: event),
+                                  ),
                                 ),
                               );
                             },
