@@ -1,17 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class SearchInput extends StatelessWidget {
+import '../../../models/player.dart';
+
+class SearchInput extends StatefulWidget {
   final IconData icon;
   final String hintText;
-  final controller;
+  final TextEditingController controller;
   final bool obscureText;
   const SearchInput({
     Key? key,
     required this.icon,
     required this.hintText,
-    this.controller,
+    required this.controller,
     required this.obscureText,
   }) : super(key: key);
+
+  @override
+  _SearchInputState createState() => _SearchInputState();
+}
+
+class _SearchInputState extends State<SearchInput> {
+  List<Player> searchResults = [];
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +42,7 @@ class SearchInput extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Row(
           children: [
-            Icon(icon, size: 20),
+            Icon(widget.icon, size: 20),
             const SizedBox(width: 10),
             Container(
               width: 1,
@@ -42,10 +52,11 @@ class SearchInput extends StatelessWidget {
             const SizedBox(width: 10),
             Expanded(
               child: TextField(
-                controller: controller,
-                obscureText: obscureText,
+                controller: widget.controller,
+                obscureText: widget.obscureText,
+                onChanged: onSearchTextChanged,
                 decoration: InputDecoration(
-                  hintText: hintText,
+                  hintText: widget.hintText,
                   hintStyle: const TextStyle(
                     color: Color(0xFF15324F),
                     fontSize: 15,
@@ -60,5 +71,18 @@ class SearchInput extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void onSearchTextChanged(String query) async {
+    final querySnapshot = await FirebaseFirestore.instance
+        .collection('players')
+        .where('playerName', isGreaterThanOrEqualTo: query)
+        .where('playerName', isLessThanOrEqualTo: query + '\uf8ff')
+        .get();
+
+    setState(() {
+      searchResults =
+          querySnapshot.docs.map((doc) => Player.fromSnapshot(doc)).toList();
+    });
   }
 }

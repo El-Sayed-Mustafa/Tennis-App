@@ -31,6 +31,7 @@ import '../../Main-Features/Featured/roles/create_role/view/create_role_screen.d
 import '../../Main-Features/Featured/roles/roles_list/view/roles_list_screen.dart';
 import '../../Main-Features/Featured/set_reminder/model/evenet_data.dart';
 import '../../Main-Features/Featured/settings/view/settings_screen.dart';
+import '../../Main-Features/chats/screens/player_search_screen.dart';
 import '../../Main-Features/chats/screens/private_chat.dart';
 import '../../models/player.dart';
 
@@ -42,7 +43,7 @@ abstract class AppRouter {
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider(
             create: (context) => NavigationCubit(),
-            child: NavigationBarScreen(),
+            child: PlayerSearchScreen(),
           );
         },
         routes: <RouteBase>[
