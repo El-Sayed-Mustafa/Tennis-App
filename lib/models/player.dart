@@ -67,6 +67,7 @@ class Player {
       'reversedCourtsIds': reversedCourtsIds,
       'matchId': matches,
       'participatedClubId': participatedClubId,
+      'chatIds': chatIds, // Add the chatIds field to the JSON representation.
     };
   }
 
@@ -97,6 +98,30 @@ class Player {
       matches: List<Map<String, dynamic>>.from(data['matchId'] ?? []),
       reversedCourtsIds: List<String>.from(data['reversedCourtsIds'] ?? []),
       chatIds: List<String>.from(data['chatIds'] ?? []),
+    );
+  }
+  factory Player.fromMap(Map<String, dynamic> map) {
+    return Player(
+      playerId: map['playerId'] as String? ?? '',
+      playerName: map['playerName'] as String? ?? '',
+      photoURL: map['photoURL'] as String?,
+      playerLevel: map['playerLevel'] as String? ?? '',
+      matchPlayed: map['matchPlayed'] as int? ?? 0,
+      totalWins: map['totalWins'] as int? ?? 0,
+      skillLevel: map['skillLevel'] as String? ?? '0',
+      createdClubId: map['createdClubId'] as String? ?? '',
+      eventIds: List<String>.from(map['eventIds'] ?? []),
+      gender: map['gender'] as String? ?? '',
+      birthDate: (map['birthDate'] as Timestamp?)?.toDate() ?? DateTime.now(),
+      preferredPlayingTime: map['preferredPlayingTime'] as String? ?? '',
+      playerType: map['playerType'] as String? ?? '',
+      phoneNumber: map['phoneNumber'] as String? ?? '',
+      clubRoles: Map<String, String>.from(map['clubRoles'] ?? {}),
+      participatedClubId: map['participatedClubId'] as String? ?? '',
+      clubInvitationsIds: List<String>.from(map['clubInvitationsIds'] ?? []),
+      chatIds: List<String>.from(map['chatIds'] ?? []),
+      reversedCourtsIds: List<String>.from(map['reversedCourtsIds'] ?? []),
+      matches: List<Map<String, dynamic>>.from(map['matchId'] ?? []),
     );
   }
 }

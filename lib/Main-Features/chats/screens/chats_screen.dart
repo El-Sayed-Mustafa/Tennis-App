@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tennis_app/Main-Features/chats/screens/private_chat.dart';
 
-import '../../../models/chats.dart'; // Assuming you have the ChatMessage and Chat class defined.
+import '../../../models/chats.dart';
+import '../../../models/player.dart'; // Import the ChatMessage model class
 
 class ChatsScreen extends StatelessWidget {
   const ChatsScreen({
@@ -61,21 +62,60 @@ class ChatsScreen extends StatelessWidget {
                     );
                   }
 
-                  final lastMessage = chatDocs.first.data();
+                  final lastMessage = ChatMessage.fromSnapshot(chatDocs.first);
                   return ListTile(
-                    title: Text('Chat with ${lastMessage['receiverId']}'),
-                    subtitle: Text(lastMessage['content']),
-                    onTap: () {
-                      // Navigate to the PrivateChat screen when the item is tapped
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => PrivateChat(
-                      //       chat: Chat.fromMap(lastMessage), // Pass the last message data as chat data
-                      //       currentUserId: currentUserId,
-                      //     ),
-                      //   ),
-                      // );
+                    title: Text('Chat with ${lastMessage.receiverId}'),
+                    subtitle: Text(lastMessage.content),
+                    onTap: () async {
+                      // Fetch receiver's player data from Firestore
+                      final receiverId = lastMessage.receiverId;
+                      DocumentSnapshot<Map<String, dynamic>> receiverSnapshot;
+
+                      if (receiverId != currentUserId) {
+                        receiverSnapshot = await FirebaseFirestore.instance
+                            .collection('players')
+                            .doc(receiverId)
+                            .get();
+                      } else {
+                        receiverSnapshot = await FirebaseFirestore.instance
+                            .collection('players')
+                            .doc(lastMessage.senderId)
+                            .get();
+                      }
+
+                      // Check if the receiver's player data exists
+                      if (receiverSnapshot.exists) {
+                        final receiverPlayerData = receiverSnapshot.data();
+                        final receiverPlayer =
+                            Player.fromMap(receiverPlayerData!);
+
+                        // Navigate to the PrivateChat screen when the item is tapped
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PrivateChat(
+                              player:
+                                  receiverPlayer, // Pass the receiver's player data to the PrivateChat screen
+                            ),
+                          ),
+                        );
+                      } else {
+                        // Handle the case when the receiver's player data doesn't exist (optional)
+                        // ignore: use_build_context_synchronously
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Text('Error'),
+                            content: Text('Receiver player data not found.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
                     },
                   );
                 },
