@@ -94,7 +94,7 @@ class AppBarWaveHome extends StatelessWidget {
                                           imageErrorBuilder:
                                               (context, error, stackTrace) {
                                             return Image.asset(
-                                              'assets/images/profileimage.png',
+                                              'assets/images/profile-event.jpg',
                                               fit: BoxFit.cover,
                                             );
                                           },

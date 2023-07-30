@@ -1,122 +1,138 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart'; // Import the intl package
 
 class MessageItem extends StatelessWidget {
   final double screenWidth;
-  final String imagePath;
+  final String? photoUrl;
   final String name;
   final String message;
-  final String time;
-  final String unreadMessages;
+  final Timestamp time;
+  final void Function() onTap; // Update the type of onTap
 
   const MessageItem({
     Key? key,
     required this.screenWidth,
-    required this.imagePath,
+    required this.photoUrl,
     required this.name,
     required this.message,
     required this.time,
-    required this.unreadMessages,
-    required Null Function() onTap,
+    required this.onTap,
   }) : super(key: key);
+  String formatTime(Timestamp timestamp) {
+    final dateTime = DateTime.fromMillisecondsSinceEpoch(
+      timestamp.seconds * 1000 + timestamp.nanoseconds ~/ 1000000,
+    );
+    final formatter = DateFormat('HH:mm'); // Format the time as HH:mm
+    return formatter.format(dateTime);
+  }
 
   @override
   Widget build(BuildContext context) {
-    final hasUnreadMessages = unreadMessages.isNotEmpty;
-
-    return Column(
-      children: [
-        Container(
-          width: screenWidth * 0.9,
-          height: 60,
-          decoration: ShapeDecoration(
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(50),
+    return GestureDetector(
+      onTap: () {
+        onTap();
+      },
+      child: Column(
+        children: [
+          Container(
+            width: screenWidth * 0.9,
+            height: 60,
+            decoration: ShapeDecoration(
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50),
+              ),
+            ),
+            child: Row(
+              children: [
+                Container(
+                  height: 50,
+                  width: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    border: Border.all(
+                      color: Colors.grey, // Customize the border color here
+                      width: 1.0, // Customize the border width here
+                    ),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(50),
+                    child: (photoUrl != null
+                        ? FadeInImage.assetNetwork(
+                            placeholder: 'assets/images/loadin.gif',
+                            image: photoUrl!,
+                            fit: BoxFit.cover,
+                            imageErrorBuilder: (context, error, stackTrace) {
+                              return Image.asset(
+                                'assets/images/profile-event.jpg',
+                                fit: BoxFit.cover,
+                              );
+                            },
+                          )
+                        : Image.asset(
+                            'assets/images/internet.png',
+                            fit: BoxFit.cover,
+                          )),
+                  ),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        name,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        message,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        formatTime(time as Timestamp),
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
-          child: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: CircleAvatar(
-                  backgroundImage: AssetImage(imagePath),
-                  radius: 25,
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      name,
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      message,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      time,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Visibility(
-                      visible: hasUnreadMessages,
-                      child: Container(
-                        height: 15,
-                        width: 15,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Color(0xFF00344E),
-                        ),
-                        child: Center(
-                          child: Text(
-                            unreadMessages,
-                            style: const TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 5.0),
-          child: Container(
-            width: screenWidth * .8,
-            height: 1,
-            color: Colors.black12,
-          ),
-        )
-      ],
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
+            child: Container(
+              width: screenWidth * .8,
+              height: 1,
+              color: Colors.black12,
+            ),
+          )
+        ],
+      ),
     );
   }
 }
