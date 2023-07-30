@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/chats/screens/private_chat.dart';
 import 'package:tennis_app/Main-Features/chats/widgets/message_item.dart';
 
@@ -55,128 +56,82 @@ class ChatsScreen extends StatelessWidget {
               final List<String> chatIds =
                   List<String>.from(playerData!['chatIds'] ?? []);
 
-              return ListView.builder(
-                itemCount: chatIds.length,
-                itemBuilder: (context, index) {
-                  final String chatId = chatIds[index];
+              return FutureBuilder<List<ChatWithLastMessage>>(
+                future: _getChatsWithLastMessage(chatIds, currentUserId),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  }
 
-                  return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                    stream: FirebaseFirestore.instance
-                        .collection('chats')
-                        .doc(chatId)
-                        .collection('messages')
-                        .orderBy('timestamp',
-                            descending: true) // Sort messages by timestamp
-                        .snapshots(),
-                    builder: (context, chatSnapshot) {
-                      if (chatSnapshot.connectionState ==
-                          ConnectionState.waiting) {
-                        return Center(child: CircularProgressIndicator());
-                      }
+                  final chatItems = snapshot.data;
+                  if (chatItems == null || chatItems.isEmpty) {
+                    return Center(child: Text('No chats found.'));
+                  }
 
-                      final chatDocs = chatSnapshot.data!.docs;
-                      if (chatDocs.isEmpty) {
-                        return ListTile(
-                          title: Text('Chat with ${chatId}'),
-                          subtitle: Text('No messages'),
-                        );
-                      }
+                  return ListView.builder(
+                    itemCount: chatItems.length,
+                    itemBuilder: (context, index) {
+                      final chatItem = chatItems[index];
 
-                      final lastMessage =
-                          ChatMessage.fromSnapshot(chatDocs.first);
+                      return MessageItem(
+                        screenWidth: double.infinity,
+                        photoUrl: chatItem.player.photoURL,
+                        name: chatItem.player.playerName,
+                        message: chatItem.lastMessage.content,
+                        time: chatItem.lastMessage.timestamp,
+                        onTap: () async {
+                          // Fetch receiver's player data from Firestore
+                          final receiverId = chatItem.lastMessage.receiverId;
+                          DocumentSnapshot<Map<String, dynamic>>
+                              receiverSnapshot;
 
-                      // Create an async function to fetch player data
-                      Future<Player> fetchPlayerData() async {
-                        if (lastMessage.receiverId != currentUserId) {
-                          final receiverSnapshot = await FirebaseFirestore
-                              .instance
-                              .collection('players')
-                              .doc(lastMessage.receiverId)
-                              .get();
-                          return Player.fromSnapshot(receiverSnapshot);
-                        } else {
-                          final senderSnapshot = await FirebaseFirestore
-                              .instance
-                              .collection('players')
-                              .doc(lastMessage.senderId)
-                              .get();
-                          return Player.fromSnapshot(senderSnapshot);
-                        }
-                      }
-
-                      return FutureBuilder<Player>(
-                        future: fetchPlayerData(),
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return Center(child: CircularProgressIndicator());
+                          if (receiverId != currentUserId) {
+                            receiverSnapshot = await FirebaseFirestore.instance
+                                .collection('players')
+                                .doc(receiverId)
+                                .get();
+                          } else {
+                            receiverSnapshot = await FirebaseFirestore.instance
+                                .collection('players')
+                                .doc(chatItem.lastMessage.senderId)
+                                .get();
                           }
 
-                          final player = snapshot.data;
+                          // Check if the receiver's player data exists
+                          if (receiverSnapshot.exists) {
+                            final receiverPlayerData = receiverSnapshot.data();
+                            final receiverPlayer =
+                                Player.fromMap(receiverPlayerData!);
 
-                          return MessageItem(
-                            screenWidth: double.infinity,
-                            photoUrl:
-                                player!.photoURL, // Retrieve player's photoUrl
-                            name: player!.playerName,
-                            message: lastMessage.content,
-                            time: lastMessage.timestamp,
-                            onTap: () async {
-                              // Fetch receiver's player data from Firestore
-                              final receiverId = lastMessage.receiverId;
-                              DocumentSnapshot<Map<String, dynamic>>
-                                  receiverSnapshot;
-
-                              if (receiverId != currentUserId) {
-                                receiverSnapshot = await FirebaseFirestore
-                                    .instance
-                                    .collection('players')
-                                    .doc(receiverId)
-                                    .get();
-                              } else {
-                                receiverSnapshot = await FirebaseFirestore
-                                    .instance
-                                    .collection('players')
-                                    .doc(lastMessage.senderId)
-                                    .get();
-                              }
-
-                              // Check if the receiver's player data exists
-                              if (receiverSnapshot.exists) {
-                                final receiverPlayerData =
-                                    receiverSnapshot.data();
-                                final receiverPlayer =
-                                    Player.fromMap(receiverPlayerData!);
-
-                                // Navigate to the PrivateChat screen when the item is tapped
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => PrivateChat(
-                                      player: receiverPlayer,
-                                      // Pass the receiver's player data to the PrivateChat screen
-                                    ),
+                            // Navigate to the PrivateChat screen when the item is tapped
+                            // ignore: use_build_context_synchronously
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PrivateChat(
+                                  player: receiverPlayer,
+                                  // Pass the receiver's player data to the PrivateChat screen
+                                ),
+                              ),
+                            );
+                          } else {
+                            // Handle the case when the receiver's player data doesn't exist (optional)
+                            // ignore: use_build_context_synchronously
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: Text('Error'),
+                                content:
+                                    Text('Receiver player data not found.'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(context),
+                                    child: Text('OK'),
                                   ),
-                                );
-                              } else {
-                                // Handle the case when the receiver's player data doesn't exist (optional)
-                                showDialog(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
-                                    title: Text('Error'),
-                                    content:
-                                        Text('Receiver player data not found.'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () => Navigator.pop(context),
-                                        child: Text('OK'),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              }
-                            },
-                          );
+                                ],
+                              ),
+                            );
+                          }
                         },
                       );
                     },
@@ -187,6 +142,66 @@ class ChatsScreen extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          GoRouter.of(context).go('/searchChat');
+        },
+        child: Icon(
+          Icons.search,
+        ),
+        backgroundColor: Colors.black,
+      ),
     );
   }
+
+  Future<List<ChatWithLastMessage>> _getChatsWithLastMessage(
+      List<String> chatIds, String currentUserId) async {
+    final List<ChatWithLastMessage> chatItems = [];
+
+    for (final chatId in chatIds) {
+      final chatSnapshot = await FirebaseFirestore.instance
+          .collection('chats')
+          .doc(chatId)
+          .collection('messages')
+          .orderBy('timestamp', descending: true)
+          .limit(1)
+          .get();
+
+      if (chatSnapshot.docs.isNotEmpty) {
+        final lastMessage = ChatMessage.fromSnapshot(chatSnapshot.docs.first);
+
+        // Fetch player data for last message
+        Player player;
+        if (lastMessage.receiverId != currentUserId) {
+          final receiverSnapshot = await FirebaseFirestore.instance
+              .collection('players')
+              .doc(lastMessage.receiverId)
+              .get();
+          player = Player.fromSnapshot(receiverSnapshot);
+        } else {
+          final senderSnapshot = await FirebaseFirestore.instance
+              .collection('players')
+              .doc(lastMessage.senderId)
+              .get();
+          player = Player.fromSnapshot(senderSnapshot);
+        }
+
+        chatItems
+            .add(ChatWithLastMessage(player: player, lastMessage: lastMessage));
+      }
+    }
+
+    // Sort chatItems based on the time of the last message (most recent first)
+    chatItems.sort(
+        (a, b) => b.lastMessage.timestamp.compareTo(a.lastMessage.timestamp));
+
+    return chatItems;
+  }
+}
+
+class ChatWithLastMessage {
+  final Player player;
+  final ChatMessage lastMessage;
+
+  ChatWithLastMessage({required this.player, required this.lastMessage});
 }
