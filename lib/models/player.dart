@@ -21,6 +21,7 @@ class Player {
   final List<Map<String, dynamic>> matches;
   bool isInvitationSent = false;
   final List<String> reversedCourtsIds;
+  final List<String> chatIds; // New field to store chat conversation IDs.
 
   Player({
     required this.playerId,
@@ -40,6 +41,7 @@ class Player {
     required this.phoneNumber,
     required this.participatedClubId,
     required this.clubInvitationsIds,
+    required this.chatIds,
     required this.reversedCourtsIds,
     required this.matches,
   });
@@ -94,6 +96,7 @@ class Player {
       clubInvitationsIds: List<String>.from(data['clubInvitationsIds'] ?? []),
       matches: List<Map<String, dynamic>>.from(data['matchId'] ?? []),
       reversedCourtsIds: List<String>.from(data['reversedCourtsIds'] ?? []),
+      chatIds: List<String>.from(data['chatIds'] ?? []),
     );
   }
 }

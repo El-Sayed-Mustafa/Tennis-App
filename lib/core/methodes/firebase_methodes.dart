@@ -61,37 +61,37 @@ class Method {
 //     }
 //   }
 
-// Function to get all chats for the current player sorted from newest to oldest
-  // Future<List<ChatMessage>> getAllChatsForCurrentPlayer(
-  //     String currentPlayerId) async {
-  //   try {
-  //     // Perform a query to get chats where the current player is either the sender or receiver
-  //     final querySnapshot = await FirebaseFirestore.instance
-  //         .collection('chats')
-  //         .where('messages', arrayContainsAny: [
-  //       {'senderId': currentPlayerId},
-  //       {'receiverId': currentPlayerId},
-  //     ]).get();
+//Function to get all chats for the current player sorted from newest to oldest
+  Future<List<ChatMessage>> getAllChatsForCurrentPlayer(
+      String currentPlayerId) async {
+    try {
+      // Perform a query to get chats where the current player is either the sender or receiver
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection('chats')
+          .where('messages', arrayContainsAny: [
+        {'senderId': currentPlayerId},
+        {'receiverId': currentPlayerId},
+      ]).get();
 
-  //     // Extract the chats from the query result
-  //     final chats = querySnapshot.docs.map((doc) {
-  //       final chatData = doc.data();
-  //       final messagesData = chatData['messages'] as List<dynamic>;
-  //       // Sort the messages based on the timestamp (newest to oldest)
-  //       messagesData.sort((a, b) {
-  //         final aTimestamp = a['timestamp'] as Timestamp;
-  //         final bTimestamp = b['timestamp'] as Timestamp;
-  //         return bTimestamp.compareTo(aTimestamp);
-  //       });
+      // Extract the chats from the query result
+      final chats = querySnapshot.docs.map((doc) {
+        final chatData = doc.data();
+        final messagesData = chatData['messages'] as List<dynamic>;
+        // Sort the messages based on the timestamp (newest to oldest)
+        messagesData.sort((a, b) {
+          final aTimestamp = a['timestamp'] as Timestamp;
+          final bTimestamp = b['timestamp'] as Timestamp;
+          return bTimestamp.compareTo(aTimestamp);
+        });
 
-  //       // Create the ChatMessage instance from the first (latest) message in each chat
-  //       return ChatMessage.fromMap(messagesData.first);
-  //     }).toList();
+        // Create the ChatMessage instance from the first (latest) message in each chat
+        return ChatMessage.fromMap(messagesData.first);
+      }).toList();
 
-  //     return chats;
-  //   } catch (e) {
-  //     print('Error getting chats: $e');
-  //     return [];
-  //   }
-  // }
+      return chats;
+    } catch (e) {
+      print('Error getting chats: $e');
+      return [];
+    }
+  }
 }

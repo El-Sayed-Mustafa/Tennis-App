@@ -16,6 +16,7 @@ class MessageItem extends StatelessWidget {
     required this.message,
     required this.time,
     required this.unreadMessages,
+    required Null Function() onTap,
   }) : super(key: key);
 
   @override

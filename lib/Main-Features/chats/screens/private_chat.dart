@@ -1,64 +1,16 @@
+// private_chat.dart
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:go_router/go_router.dart';
+import 'package:tennis_app/Main-Features/chats/widgets/community_message.dart';
+import 'package:tennis_app/Main-Features/chats/widgets/my_reply.dart';
+import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 
+import '../../../core/utils/widgets/app_bar_wave.dart';
+import '../../../models/chats.dart';
 import '../../../models/player.dart';
-
-// Model class for chat messages
-class ChatMessage {
-  final String messageId;
-  final String senderId;
-  final String receiverId;
-  final String content;
-  final Timestamp timestamp;
-
-  ChatMessage({
-    required this.messageId,
-    required this.senderId,
-    required this.receiverId,
-    required this.content,
-    required this.timestamp,
-  });
-
-  // Convert message to JSON
-  Map<String, dynamic> toJson() {
-    return {
-      'messageId': messageId,
-      'senderId': senderId,
-      'receiverId': receiverId,
-      'content': content,
-      'timestamp': timestamp,
-    };
-  }
-
-  // Factory method to create a message from Firestore snapshot
-  factory ChatMessage.fromSnapshot(
-      DocumentSnapshot<Map<String, dynamic>> snapshot) {
-    final data = snapshot.data();
-    if (data == null) {
-      throw ArgumentError("Invalid data for ChatMessage from DocumentSnapshot");
-    }
-
-    return ChatMessage(
-      messageId: snapshot.id,
-      senderId: data['senderId'] as String? ?? '',
-      receiverId: data['receiverId'] as String? ?? '',
-      content: data['content'] as String? ?? '',
-      timestamp: data['timestamp'] as Timestamp? ?? Timestamp.now(),
-    );
-  }
-
-  // Factory method to create a message from map (JSON) data
-  factory ChatMessage.fromMap(Map<String, dynamic> map) {
-    return ChatMessage(
-      messageId: map['messageId'] as String? ?? '',
-      senderId: map['senderId'] as String? ?? '',
-      receiverId: map['receiverId'] as String? ?? '',
-      content: map['content'] as String? ?? '',
-      timestamp: map['timestamp'] as Timestamp? ?? Timestamp.now(),
-    );
-  }
-}
+import '../widgets/message_input.dart';
 
 // Function to get chat messages for the chat conversation between the current user and the other player
 Stream<List<ChatMessage>> getChatMessages(
@@ -90,40 +42,123 @@ class PrivateChat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
+    final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Chat with ${player.playerName}'),
-      ),
-      body: Column(
+      body: Stack(
         children: [
-          Expanded(
-            child: StreamBuilder<List<ChatMessage>>(
-              stream: getChatMessages(user!.uid, player.playerId),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (snapshot.hasError) {
-                  return Center(
-                    child: Text('Error: ${snapshot.error}'),
-                  );
-                } else {
-                  final chatMessages = snapshot.data ?? [];
-                  return ListView.builder(
-                    reverse: true, // To show latest messages at the bottom
-                    itemCount: chatMessages.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(chatMessages[index].content),
-                        subtitle:
-                            Text(chatMessages[index].timestamp.toString()),
-                      );
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                PoPAppBarWave(
+                  prefixIcon: IconButton(
+                    onPressed: () {
+                      GoRouter.of(context).pop();
                     },
-                  );
-                }
-              },
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      size: 30,
+                      color: Colors.white,
+                    ),
+                  ),
+                  text: '    Chat',
+                  suffixIconPath: '',
+                ),
+                Container(
+                  height: screenHeight * 0.13,
+                  width: screenHeight * 0.13,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color: Colors.grey, // Customize the border color here
+                      width: 2.0, // Customize the border width here
+                    ),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(18),
+                    child: (player.photoURL != ''
+                        ? FadeInImage.assetNetwork(
+                            placeholder: 'assets/images/loadin.gif',
+                            image: player.photoURL!,
+                            fit: BoxFit.cover,
+                            imageErrorBuilder: (context, error, stackTrace) {
+                              // Show the placeholder image on error
+                              return Image.asset(
+                                'assets/images/profileimage.png',
+                                fit: BoxFit.cover,
+                              );
+                            },
+                          )
+                        : Image.asset(
+                            'assets/images/profile-event.jpg',
+                            fit: BoxFit.cover,
+                          )),
+                  ),
+                ),
+                SizedBox(height: screenHeight * .005),
+                Text(
+                  player.playerName,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                SizedBox(height: screenHeight * .02),
+                Container(
+                  height: 600,
+                  width: double.infinity,
+                  decoration: const ShapeDecoration(
+                    color: Color(0xF8F8F8F8),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(30),
+                      ),
+                    ),
+                    shadows: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 5,
+                        offset: Offset(0, -4),
+                        spreadRadius: 0,
+                      )
+                    ],
+                  ),
+                  child: StreamBuilder<List<ChatMessage>>(
+                    stream: getChatMessages(user!.uid, player.playerId),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else if (snapshot.hasError) {
+                        return Center(
+                          child: Text('Error: ${snapshot.error}'),
+                        );
+                      } else {
+                        final chatMessages = snapshot.data?.toList() ?? [];
+                        return Container(
+                          padding: const EdgeInsets.only(bottom: 70.0),
+                          child: ListView.builder(
+                            itemCount: chatMessages.length,
+                            reverse: true,
+                            itemBuilder: (context, index) {
+                              final message = chatMessages[index];
+                              return message.senderId == user.uid
+                                  ? MyReply(message: message)
+                                  : SenderMessage(
+                                      message: message,
+                                      player: player,
+                                    );
+                            },
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
           MessageInput(
@@ -133,76 +168,5 @@ class PrivateChat extends StatelessWidget {
         ],
       ),
     );
-  }
-}
-
-class MessageInput extends StatefulWidget {
-  final String currentUserId;
-  final String otherPlayerId;
-
-  MessageInput({required this.currentUserId, required this.otherPlayerId});
-
-  @override
-  _MessageInputState createState() => _MessageInputState();
-}
-
-class _MessageInputState extends State<MessageInput> {
-  final TextEditingController _textController = TextEditingController();
-
-  void _sendMessage() {
-    final String content = _textController.text.trim();
-    if (content.isNotEmpty) {
-      final chatId = generateChatId(widget.currentUserId, widget.otherPlayerId);
-      final chatRef =
-          FirebaseFirestore.instance.collection('chats').doc(chatId);
-
-      final newMessage = ChatMessage(
-        messageId: '',
-        senderId: widget.currentUserId,
-        receiverId: widget.otherPlayerId,
-        content: content,
-        timestamp: Timestamp.now(),
-      );
-
-      chatRef.collection('messages').add(newMessage.toJson());
-
-      // Clear the text input field after sending the message
-      _textController.clear();
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8.0),
-      decoration: BoxDecoration(
-        color: Colors.grey[300],
-        border: Border(top: BorderSide(color: Colors.grey[500]!)),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: TextField(
-              controller: _textController,
-              decoration: InputDecoration(
-                hintText: 'Type a message...',
-                border: InputBorder.none,
-              ),
-              onSubmitted: (_) => _sendMessage(),
-            ),
-          ),
-          IconButton(
-            icon: Icon(Icons.send),
-            onPressed: _sendMessage,
-          ),
-        ],
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    _textController.dispose();
-    super.dispose();
   }
 }

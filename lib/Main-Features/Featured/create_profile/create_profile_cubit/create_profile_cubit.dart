@@ -67,7 +67,7 @@ class CreateProfileCubit extends Cubit<CreateProfileState> {
             : '',
         playerType: selectedPlayerType,
         eventIds: [], clubRoles: {}, clubInvitationsIds: [],
-        participatedClubId: '', matches: [], reversedCourtsIds: [],
+        participatedClubId: '', matches: [], reversedCourtsIds: [], chatIds: [],
       );
 
       CollectionReference playersCollection =

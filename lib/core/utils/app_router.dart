@@ -8,6 +8,7 @@ import 'package:tennis_app/Main-Features/Featured/navigation_bar/navigation_bar_
 import 'package:tennis_app/Main-Features/Featured/onboarding/onboarding_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/set_reminder/set_reminder_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/splash/splash_screen.dart';
+import 'package:tennis_app/Main-Features/chats/screens/player_search_screen.dart';
 import 'package:tennis_app/Main-Features/home/home_screen.dart';
 import 'package:tennis_app/Main-Features/menu/menu_screen.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +32,7 @@ import '../../Main-Features/Featured/roles/create_role/view/create_role_screen.d
 import '../../Main-Features/Featured/roles/roles_list/view/roles_list_screen.dart';
 import '../../Main-Features/Featured/set_reminder/model/evenet_data.dart';
 import '../../Main-Features/Featured/settings/view/settings_screen.dart';
-import '../../Main-Features/chats/screens/player_search_screen.dart';
+import '../../Main-Features/chats/screens/chats_screen.dart';
 import '../../Main-Features/chats/screens/private_chat.dart';
 import '../../models/player.dart';
 
@@ -43,7 +44,7 @@ abstract class AppRouter {
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider(
             create: (context) => NavigationCubit(),
-            child: PlayerSearchScreen(),
+            child: ChatsScreen(),
           );
         },
         routes: <RouteBase>[
