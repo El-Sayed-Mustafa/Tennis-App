@@ -8,7 +8,6 @@ class Player {
   final int matchPlayed;
   final int totalWins;
   final String skillLevel;
-  final String createdClubId;
   final List<String> eventIds;
   final String gender;
   final DateTime birthDate;
@@ -31,7 +30,6 @@ class Player {
     required this.matchPlayed,
     required this.totalWins,
     required this.skillLevel,
-    required this.createdClubId,
     required this.eventIds,
     required this.gender,
     required this.birthDate,
@@ -55,7 +53,6 @@ class Player {
       'matchPlayed': matchPlayed,
       'totalWins': totalWins,
       'skillLevel': skillLevel,
-      'createdClubId': createdClubId,
       'eventIds': eventIds,
       'gender': gender,
       'birthDate': birthDate,
@@ -85,7 +82,6 @@ class Player {
       matchPlayed: data['matchPlayed'] as int? ?? 0,
       totalWins: data['totalWins'] as int? ?? 0,
       skillLevel: data['skillLevel'] as String? ?? '0',
-      createdClubId: data['createdClubId'] as String? ?? '',
       eventIds: List<String>.from(data['eventIds'] ?? []),
       gender: data['gender'] as String? ?? '',
       birthDate: (data['birthDate'] as Timestamp).toDate(),
@@ -109,7 +105,6 @@ class Player {
       matchPlayed: map['matchPlayed'] as int? ?? 0,
       totalWins: map['totalWins'] as int? ?? 0,
       skillLevel: map['skillLevel'] as String? ?? '0',
-      createdClubId: map['createdClubId'] as String? ?? '',
       eventIds: List<String>.from(map['eventIds'] ?? []),
       gender: map['gender'] as String? ?? '',
       birthDate: (map['birthDate'] as Timestamp?)?.toDate() ?? DateTime.now(),

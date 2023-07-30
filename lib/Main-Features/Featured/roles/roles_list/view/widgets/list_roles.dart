@@ -27,7 +27,7 @@ class ListRoles extends StatelessWidget {
         }
         final player = snapshot.data!;
         return FutureBuilder<Club>(
-          future: getClubData(player.createdClubId),
+          future: getClubData(player.participatedClubId),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Expanded(

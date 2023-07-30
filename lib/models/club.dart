@@ -19,9 +19,10 @@ class Club {
   final int totalWins;
   final int courtsNum;
   final List<String> roleIds; // Added property for role IDs
-
+  final String clubChatId;
   Club(
-      {required this.clubId,
+      {required this.clubChatId,
+      required this.clubId,
       required this.clubName,
       required this.clubType,
       required this.clubAdmin,
@@ -59,6 +60,7 @@ class Club {
       'clubImageURL': photoURL,
       'roleIds': roleIds, // Include role IDs in the JSON
       'courtsNum': courtsNum,
+      'clubChatId': clubChatId,
     };
   }
 
@@ -86,6 +88,7 @@ class Club {
       memberIds: List<String>.from(data['memberIds'] ?? []),
       photoURL: data['clubImageURL'] as String?,
       roleIds: List<String>.from(data['roleIds'] ?? []),
+      clubChatId: data['clubChatId'] as String? ?? '',
     );
   }
 }

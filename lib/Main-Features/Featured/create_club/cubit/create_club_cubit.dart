@@ -60,12 +60,23 @@ class CreateClubCubit extends Cubit<CreateClubState> {
         eventIds: eventIds,
         memberIds: memberIds, roleIds: [], address: address, rate: 0,
         courtsNum: int.parse(courtsNumController.text), matchPlayed: 0,
-        totalWins: 0,
+        totalWins: 0, clubChatId: '',
       );
 
       CollectionReference clubsCollection =
           FirebaseFirestore.instance.collection('clubs');
       DocumentReference clubDocRef = await clubsCollection.add(club.toJson());
+
+      // Create a new chat document in the 'Chat' collection
+      CollectionReference chatCollection =
+          FirebaseFirestore.instance.collection('Chats');
+      DocumentReference chatDocRef = await chatCollection.add({
+        'clubId': clubDocRef.id, // Store the reference to the club
+        'messages': [], // Initialize with an empty array of messages
+      });
+
+      // Update the club document with the chat ID
+      await clubDocRef.update({'clubChatId': chatDocRef.id});
 
       // Upload the selected image to Firebase Storage
       if (selectedImageBytes != null) {
@@ -89,7 +100,7 @@ class CreateClubCubit extends Cubit<CreateClubState> {
       DocumentReference userDocRef =
           FirebaseFirestore.instance.collection('players').doc(currentUserID);
       await userDocRef.update({
-        'createdClubIds': FieldValue.arrayUnion([clubDocRef.id])
+        'participatedClubId': FieldValue.arrayUnion([clubDocRef.id])
       });
 
       // Data saved successfully

@@ -59,7 +59,6 @@ class CreateProfileCubit extends Cubit<CreateProfileState> {
         matchPlayed: 0,
         totalWins: 0,
         skillLevel: '',
-        createdClubId: '',
         gender: selectedGender,
         birthDate: selectedDateTime,
         preferredPlayingTime: selectedTime != null
