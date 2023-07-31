@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/chats/screens/private_chat.dart';
 import 'package:tennis_app/Main-Features/chats/widgets/message_item.dart';
 
+import '../../../generated/l10n.dart';
 import '../../../models/chats.dart';
 import '../../../models/player.dart'; // Import the ChatMessage model class
 
@@ -49,7 +50,7 @@ class ChatsScreen extends StatelessWidget {
                 return Center(child: CircularProgressIndicator());
               }
               if (!snapshot.hasData || !snapshot.data!.exists) {
-                return Center(child: Text('No chats found.'));
+                return Center(child: Text(S.of(context).no_chats_found));
               }
 
               final playerData = snapshot.data!.data();
@@ -65,7 +66,7 @@ class ChatsScreen extends StatelessWidget {
 
                   final chatItems = snapshot.data;
                   if (chatItems == null || chatItems.isEmpty) {
-                    return Center(child: Text('No chats found.'));
+                    return Center(child: Text(S.of(context).no_chats_found));
                   }
 
                   return ListView.builder(
@@ -120,13 +121,13 @@ class ChatsScreen extends StatelessWidget {
                             showDialog(
                               context: context,
                               builder: (context) => AlertDialog(
-                                title: Text('Error'),
+                                title: Text(S.of(context).error),
                                 content:
-                                    Text('Receiver player data not found.'),
+                                    Text(S.of(context).receiver_data_not_found),
                                 actions: [
                                   TextButton(
                                     onPressed: () => Navigator.pop(context),
-                                    child: Text('OK'),
+                                    child: Text(S.of(context).ok),
                                   ),
                                 ],
                               ),

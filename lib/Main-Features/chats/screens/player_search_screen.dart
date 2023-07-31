@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/chats/screens/private_chat.dart';
 
 import '../../../core/utils/widgets/pop_app_bar.dart';
+import '../../../generated/l10n.dart';
 import '../../../models/player.dart';
 import '../widgets/player_card.dart';
 
@@ -32,7 +33,7 @@ class _PlayerSearchScreenState extends State<PlayerSearchScreen> {
                 color: Colors.white,
               ),
             ),
-            text: '    Players Search',
+            text: S.of(context).players_search,
             suffixIconPath: '',
           ),
           Padding(
@@ -40,7 +41,7 @@ class _PlayerSearchScreenState extends State<PlayerSearchScreen> {
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
-                hintText: 'Search players...',
+                hintText: S.of(context).search_players,
                 suffixIcon: IconButton(
                   icon: Icon(Icons.clear),
                   onPressed: () {
@@ -83,12 +84,13 @@ class _PlayerSearchScreenState extends State<PlayerSearchScreen> {
         }
 
         if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}'));
+          return Center(
+              child: Text('${S.of(context).error}: ${snapshot.error}'));
         }
 
         final players = snapshot.data!.docs;
         if (players.isEmpty) {
-          return Center(child: Text('No players found'));
+          return Center(child: Text(S.of(context).no_players_found));
         }
 
         final normalizedSearchQuery = _normalizeSearchQuery(_searchQuery);
@@ -103,7 +105,7 @@ class _PlayerSearchScreenState extends State<PlayerSearchScreen> {
         }).toList();
 
         if (filteredPlayers.isEmpty) {
-          return Center(child: Text('No matching players found'));
+          return Center(child: Text(S.of(context).no_matching_players_found));
         }
 
         return ListView.builder(

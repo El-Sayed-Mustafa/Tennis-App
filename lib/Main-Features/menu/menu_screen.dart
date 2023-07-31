@@ -79,7 +79,7 @@ class MenuScreen extends StatelessWidget {
                     ),
                     ButtonMenu(
                       imagePath: 'assets/images/Event-Calnder.svg',
-                      buttonText: 'Event Calnder',
+                      buttonText: 'Event Calender',
                       onPressed: () {
                         GoRouter.of(context).push('/calendar');
                       },
@@ -102,16 +102,6 @@ class MenuScreen extends StatelessWidget {
                     ButtonMenu(
                       imagePath: 'assets/images/Your-Membership.svg',
                       buttonText: 'Your Membership',
-                      onPressed: () {},
-                    ),
-                    ButtonMenu(
-                      imagePath: 'assets/images/Feedbacks.svg',
-                      buttonText: 'Feedbacks',
-                      onPressed: () {},
-                    ),
-                    ButtonMenu(
-                      imagePath: 'assets/images/Settings.svg',
-                      buttonText: 'Settings',
                       onPressed: () {},
                     ),
                   ],

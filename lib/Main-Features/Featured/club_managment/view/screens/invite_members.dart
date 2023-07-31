@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/club_managment/view/widgets/item_invite.dart';
 import '../../../../../core/utils/widgets/app_bar_wave.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../../../models/club.dart';
 import '../../../../../models/player.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -26,7 +27,7 @@ class InviteMember extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            text: '   Send Invitations',
+            text: S.of(context).Send_Invitations,
             suffixIconPath: '',
           ),
           Expanded(

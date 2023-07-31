@@ -8,6 +8,7 @@ import 'package:tennis_app/Main-Features/chats/widgets/my_reply.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 
 import '../../../core/utils/widgets/app_bar_wave.dart';
+import '../../../generated/l10n.dart';
 import '../../../models/chats.dart';
 import '../../../models/player.dart';
 import '../widgets/message_input.dart';
@@ -61,7 +62,7 @@ class PrivateChat extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
-                  text: '    Chat',
+                  text: S.of(context).chat,
                   suffixIconPath: '',
                 ),
                 Container(
@@ -134,7 +135,8 @@ class PrivateChat extends StatelessWidget {
                         );
                       } else if (snapshot.hasError) {
                         return Center(
-                          child: Text('Error: ${snapshot.error}'),
+                          child:
+                              Text('${S.of(context).error}: ${snapshot.error}'),
                         );
                       } else {
                         final chatMessages = snapshot.data?.toList() ?? [];

@@ -94,17 +94,16 @@ class _CalendarScreenState extends State<CalendarScreen>
                   future: getAllEventsFromDatabase(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(),
                       );
                     } else if (snapshot.hasData) {
                       // Retrieve the list of events from the snapshot data
                       List<EventModel> allEvents = snapshot.data!;
-                      print("sss" + allEvents[4].subject);
 
                       return DailyCalendar(allEvents);
                     } else {
-                      return Center(
+                      return const Center(
                         child: Text('No events found.'),
                       );
                     }
@@ -114,16 +113,15 @@ class _CalendarScreenState extends State<CalendarScreen>
                   future: getAllEventsFromDatabase(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(),
                       );
                     } else if (snapshot.hasData) {
                       // Retrieve the list of events from the snapshot data
                       List<EventModel> allEvents = snapshot.data!;
-                      print("sss" + allEvents[4].subject);
                       return ScheduleCalendar(allEvents);
                     } else {
-                      return Center(
+                      return const Center(
                         child: Text('No events found.'),
                       );
                     }
@@ -133,17 +131,16 @@ class _CalendarScreenState extends State<CalendarScreen>
                   future: getAllEventsFromDatabase(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(),
                       );
                     } else if (snapshot.hasData) {
                       // Retrieve the list of events from the snapshot data
                       List<EventModel> allEvents = snapshot.data!;
-                      print("sss" + allEvents[4].subject);
 
                       return MonthlyCalendar(allEvents);
                     } else {
-                      return Center(
+                      return const Center(
                         child: Text('No events found.'),
                       );
                     }

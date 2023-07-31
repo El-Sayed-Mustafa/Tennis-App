@@ -5,6 +5,7 @@ import 'package:tennis_app/Main-Features/chats/screens/community_screen.dart';
 import 'package:tennis_app/Main-Features/chats/screens/club_chat_screen.dart';
 
 import '../../core/utils/widgets/app_bar_wave.dart';
+import '../../generated/l10n.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -40,7 +41,7 @@ class _ChatScreenState extends State<ChatScreen>
         child: Column(
           children: [
             AppBarWaveHome(
-              text: 'Messages',
+              text: S.of(context).messages,
               suffixIconPath: 'assets/images/app-bar-icon.svg',
             ),
             SizedBox(
@@ -80,15 +81,15 @@ class _ChatScreenState extends State<ChatScreen>
                     physics: const BouncingScrollPhysics(),
                     controller: tabController,
                     isScrollable: false,
-                    tabs: const [
+                    tabs: [
                       Tab(
-                        text: 'Community',
+                        text: S.of(context).community,
                       ),
                       Tab(
-                        text: 'Club',
+                        text: S.of(context).club,
                       ),
                       Tab(
-                        text: 'Chats',
+                        text: S.of(context).chats,
                       ),
                     ],
                     indicator: ShapeDecoration(

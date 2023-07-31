@@ -599,6 +599,2062 @@ class S {
       args: [],
     );
   }
+
+  /// `No chats found.`
+  String get no_chats_found {
+    return Intl.message(
+      'No chats found.',
+      name: 'no_chats_found',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error`
+  String get error {
+    return Intl.message(
+      'Error',
+      name: 'error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Receiver player data not found.`
+  String get receiver_data_not_found {
+    return Intl.message(
+      'Receiver player data not found.',
+      name: 'receiver_data_not_found',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OK`
+  String get ok {
+    return Intl.message(
+      'OK',
+      name: 'ok',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Players Search`
+  String get players_search {
+    return Intl.message(
+      'Players Search',
+      name: 'players_search',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search players...`
+  String get search_players {
+    return Intl.message(
+      'Search players...',
+      name: 'search_players',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No players found`
+  String get no_players_found {
+    return Intl.message(
+      'No players found',
+      name: 'no_players_found',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No matching players found`
+  String get no_matching_players_found {
+    return Intl.message(
+      'No matching players found',
+      name: 'no_matching_players_found',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chat`
+  String get chat {
+    return Intl.message(
+      'Chat',
+      name: 'chat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Now`
+  String get now {
+    return Intl.message(
+      'Now',
+      name: 'now',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `min`
+  String get min {
+    return Intl.message(
+      'min',
+      name: 'min',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type your message...`
+  String get enter_your_message {
+    return Intl.message(
+      'Type your message...',
+      name: 'enter_your_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Messages`
+  String get messages {
+    return Intl.message(
+      'Messages',
+      name: 'messages',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Community`
+  String get community {
+    return Intl.message(
+      'Community',
+      name: 'community',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Club`
+  String get club {
+    return Intl.message(
+      'Club',
+      name: 'club',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chats`
+  String get chats {
+    return Intl.message(
+      'Chats',
+      name: 'chats',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set Reminder`
+  String get set_reminder {
+    return Intl.message(
+      'Set Reminder',
+      name: 'set_reminder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `At`
+  String get at {
+    return Intl.message(
+      'At',
+      name: 'at',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start`
+  String get start {
+    return Intl.message(
+      'Start',
+      name: 'start',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `End`
+  String get end {
+    return Intl.message(
+      'End',
+      name: 'end',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sunny`
+  String get sunny {
+    return Intl.message(
+      'Sunny',
+      name: 'sunny',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Members`
+  String get total_members {
+    return Intl.message(
+      'Total Members',
+      name: 'total_members',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Club`
+  String get your_club {
+    return Intl.message(
+      'Your Club',
+      name: 'your_club',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error fetching club data.`
+  String get error_fetching_club_data {
+    return Intl.message(
+      'Error fetching club data.',
+      name: 'error_fetching_club_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Club’s Upcoming events`
+  String get clubs_upcoming_events {
+    return Intl.message(
+      'Club’s Upcoming events',
+      name: 'clubs_upcoming_events',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Club’s Players Ranking`
+  String get clubs_players_ranking {
+    return Intl.message(
+      'Club’s Players Ranking',
+      name: 'clubs_players_ranking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Available Courts`
+  String get available_courts {
+    return Intl.message(
+      'Available Courts',
+      name: 'available_courts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Announcements`
+  String get announcements {
+    return Intl.message(
+      'Announcements',
+      name: 'announcements',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create Event`
+  String get create_event {
+    return Intl.message(
+      'Create Event',
+      name: 'create_event',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Find Partner`
+  String get find_partner {
+    return Intl.message(
+      'Find Partner',
+      name: 'find_partner',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have been invited to join\nthis club through an\ninvitation link.`
+  String get invitation_text {
+    return Intl.message(
+      'You have been invited to join\nthis club through an\ninvitation link.',
+      name: 'invitation_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No player data available`
+  String get No_player_data_available {
+    return Intl.message(
+      'No player data available',
+      name: 'No_player_data_available',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Player data not found`
+  String get Player_data_not_found {
+    return Intl.message(
+      'Player data not found',
+      name: 'Player_data_not_found',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No club invitations found`
+  String get No_club_invitations_found {
+    return Intl.message(
+      'No club invitations found',
+      name: 'No_club_invitations_found',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send Invitations`
+  String get Send_Invitations {
+    return Intl.message(
+      'Send Invitations',
+      name: 'Send_Invitations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You don't have any members.`
+  String get You_dont_have_any_members {
+    return Intl.message(
+      'You don\'t have any members.',
+      name: 'You_dont_have_any_members',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Management`
+  String get Management {
+    return Intl.message(
+      'Management',
+      name: 'Management',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Membership`
+  String get Membership {
+    return Intl.message(
+      'Membership',
+      name: 'Membership',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Skill level`
+  String get Skill_level {
+    return Intl.message(
+      'Skill level',
+      name: 'Skill_level',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Clear`
+  String get Clear {
+    return Intl.message(
+      'Clear',
+      name: 'Clear',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Player type`
+  String get Player_type {
+    return Intl.message(
+      'Player type',
+      name: 'Player_type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date`
+  String get Date {
+    return Intl.message(
+      'Date',
+      name: 'Date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Role`
+  String get Role {
+    return Intl.message(
+      'Role',
+      name: 'Role',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Role Assigned`
+  String get No_Role_Assigned {
+    return Intl.message(
+      'No Role Assigned',
+      name: 'No_Role_Assigned',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Assign Role`
+  String get Assign_Role {
+    return Intl.message(
+      'Assign Role',
+      name: 'Assign_Role',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Assign Player Skill Level`
+  String get Assign_Player_Skill_Level {
+    return Intl.message(
+      'Assign Player Skill Level',
+      name: 'Assign_Player_Skill_Level',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the 'Remove_Member?' key
+
+  /// `Update Player`
+  String get Update_Player {
+    return Intl.message(
+      'Update Player',
+      name: 'Update_Player',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Matched Played `
+  String get Matched_Played {
+    return Intl.message(
+      'Matched Played ',
+      name: 'Matched_Played',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Win `
+  String get Total_Win {
+    return Intl.message(
+      'Total Win ',
+      name: 'Total_Win',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Player type `
+  String get Player_type_ {
+    return Intl.message(
+      'Player type ',
+      name: 'Player_type_',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Birth date `
+  String get Birth_date_ {
+    return Intl.message(
+      'Birth date ',
+      name: 'Birth_date_',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Manage Members`
+  String get Manage_Members {
+    return Intl.message(
+      'Manage Members',
+      name: 'Manage_Members',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invite Members`
+  String get Invite_Members {
+    return Intl.message(
+      'Invite Members',
+      name: 'Invite_Members',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rules and regulations`
+  String get Rules_and_regulations {
+    return Intl.message(
+      'Rules and regulations',
+      name: 'Rules_and_regulations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set the rules for members`
+  String get Set_the_rules_for_members {
+    return Intl.message(
+      'Set the rules for members',
+      name: 'Set_the_rules_for_members',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Age restriction`
+  String get Age_restriction {
+    return Intl.message(
+      'Age restriction',
+      name: 'Age_restriction',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set`
+  String get Set {
+    return Intl.message(
+      'Set',
+      name: 'Set',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the 'Updated_successfully!' key
+
+  // skipped getter for the 'Loading...' key
+
+  /// `Above 20`
+  String get Above_20 {
+    return Intl.message(
+      'Above 20',
+      name: 'Above_20',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Above 18`
+  String get Above_18 {
+    return Intl.message(
+      'Above 18',
+      name: 'Above_18',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Everyone`
+  String get Everyone {
+    return Intl.message(
+      'Everyone',
+      name: 'Everyone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Club Type`
+  String get Club_Type {
+    return Intl.message(
+      'Club Type',
+      name: 'Club_Type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create Club`
+  String get Create_Club {
+    return Intl.message(
+      'Create Club',
+      name: 'Create_Club',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set Club Picture`
+  String get Set_Club_Picture {
+    return Intl.message(
+      'Set Club Picture',
+      name: 'Set_Club_Picture',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type event name here`
+  String get Type_event_name_here {
+    return Intl.message(
+      'Type event name here',
+      name: 'Type_event_name_here',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Club Name`
+  String get Club_Name {
+    return Intl.message(
+      'Club Name',
+      name: 'Club_Name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type your name here`
+  String get Type_your_name_here {
+    return Intl.message(
+      'Type your name here',
+      name: 'Type_your_name_here',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Club admin`
+  String get Club_admin {
+    return Intl.message(
+      'Club admin',
+      name: 'Club_admin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type id here`
+  String get Type_id_here {
+    return Intl.message(
+      'Type id here',
+      name: 'Type_id_here',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `National Id number`
+  String get National_Id_number {
+    return Intl.message(
+      'National Id number',
+      name: 'National_Id_number',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type your Phone number here`
+  String get Type_your_Phone_number_here {
+    return Intl.message(
+      'Type your Phone number here',
+      name: 'Type_your_Phone_number_here',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone number`
+  String get Phone_number {
+    return Intl.message(
+      'Phone number',
+      name: 'Phone_number',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type Club Address here`
+  String get Type_Club_Address_here {
+    return Intl.message(
+      'Type Club Address here',
+      name: 'Type_Club_Address_here',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Club Address`
+  String get Club_Address {
+    return Intl.message(
+      'Club Address',
+      name: 'Club_Address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type Your Email here`
+  String get Type_Your_Email_here {
+    return Intl.message(
+      'Type Your Email here',
+      name: 'Type_Your_Email_here',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Email`
+  String get Your_Email {
+    return Intl.message(
+      'Your Email',
+      name: 'Your_Email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type Number of Courts Own`
+  String get Type_Number_of_Courts_Own {
+    return Intl.message(
+      'Type Number of Courts Own',
+      name: 'Type_Number_of_Courts_Own',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Courts Own`
+  String get Your_Courts_Own {
+    return Intl.message(
+      'Your Courts Own',
+      name: 'Your_Courts_Own',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the 'Briefly_describe_your_club’s_rule_and_regulations' key
+
+  /// `Create`
+  String get Create {
+    return Intl.message(
+      'Create',
+      name: 'Create',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Find Court`
+  String get Find_Court {
+    return Intl.message(
+      'Find Court',
+      name: 'Find_Court',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Courts`
+  String get Courts {
+    return Intl.message(
+      'Courts',
+      name: 'Courts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create Court`
+  String get Create_Court {
+    return Intl.message(
+      'Create Court',
+      name: 'Create_Court',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set Court Picture`
+  String get Set_Court_Picture {
+    return Intl.message(
+      'Set Court Picture',
+      name: 'Set_Court_Picture',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type Court Name here`
+  String get Type_Court_Name_here {
+    return Intl.message(
+      'Type Court Name here',
+      name: 'Type_Court_Name_here',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Court Name`
+  String get Court_Name {
+    return Intl.message(
+      'Court Name',
+      name: 'Court_Name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type your phone number here`
+  String get Type_your_phone_number_here {
+    return Intl.message(
+      'Type your phone number here',
+      name: 'Type_your_phone_number_here',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Phone`
+  String get Your_Phone {
+    return Intl.message(
+      'Your Phone',
+      name: 'Your_Phone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start Date and Time`
+  String get Start_Date_and_Time {
+    return Intl.message(
+      'Start Date and Time',
+      name: 'Start_Date_and_Time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select start date and time`
+  String get Select_start_date_and_time {
+    return Intl.message(
+      'Select start date and time',
+      name: 'Select_start_date_and_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `End Date and time`
+  String get End_Date_and_time {
+    return Intl.message(
+      'End Date and time',
+      name: 'End_Date_and_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select end date and time`
+  String get Select_end_date_and_time {
+    return Intl.message(
+      'Select end date and time',
+      name: 'Select_end_date_and_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Court Address`
+  String get Court_Address {
+    return Intl.message(
+      'Court Address',
+      name: 'Court_Address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Club name for hosting the event`
+  String get Club_name_for_hosting_the_event {
+    return Intl.message(
+      'Club name for hosting the event',
+      name: 'Club_name_for_hosting_the_event',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tournament`
+  String get Tournament {
+    return Intl.message(
+      'Tournament',
+      name: 'Tournament',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `One Day`
+  String get One_Day {
+    return Intl.message(
+      'One Day',
+      name: 'One_Day',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Challenge`
+  String get Challenge {
+    return Intl.message(
+      'Challenge',
+      name: 'Challenge',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Competition`
+  String get Competition {
+    return Intl.message(
+      'Competition',
+      name: 'Competition',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Friendly Match`
+  String get Friendly_Match {
+    return Intl.message(
+      'Friendly Match',
+      name: 'Friendly_Match',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Daily Training`
+  String get Daily_Training {
+    return Intl.message(
+      'Daily Training',
+      name: 'Daily_Training',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Party Event`
+  String get Party_Event {
+    return Intl.message(
+      'Party Event',
+      name: 'Party_Event',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Training Plan`
+  String get Training_Plan {
+    return Intl.message(
+      'Training Plan',
+      name: 'Training_Plan',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Event Type`
+  String get Event_Type {
+    return Intl.message(
+      'Event Type',
+      name: 'Event_Type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a valid date and time`
+  String get Please_enter_a_valid_date_and_time {
+    return Intl.message(
+      'Please enter a valid date and time',
+      name: 'Please_enter_a_valid_date_and_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create Event`
+  String get Create_Event {
+    return Intl.message(
+      'Create Event',
+      name: 'Create_Event',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set Event Picture`
+  String get Set_Event_Picture {
+    return Intl.message(
+      'Set Event Picture',
+      name: 'Set_Event_Picture',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Event Name`
+  String get Event_Name {
+    return Intl.message(
+      'Event Name',
+      name: 'Event_Name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Event Start`
+  String get Event_Start {
+    return Intl.message(
+      'Event Start',
+      name: 'Event_Start',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Event End`
+  String get Event_End {
+    return Intl.message(
+      'Event End',
+      name: 'Event_End',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type Event address here`
+  String get Type_Event_address_here {
+    return Intl.message(
+      'Type Event address here',
+      name: 'Type_Event_address_here',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Event Address`
+  String get Event_Address {
+    return Intl.message(
+      'Event Address',
+      name: 'Event_Address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type Court name here`
+  String get Type_Court_name_here {
+    return Intl.message(
+      'Type Court name here',
+      name: 'Type_Court_name_here',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Instructions`
+  String get Instructions {
+    return Intl.message(
+      'Instructions',
+      name: 'Instructions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the 'Briefly_describe_your_club’s_Instructions_here...' key
+
+  /// `Player level`
+  String get Player_level {
+    return Intl.message(
+      'Player level',
+      name: 'Player_level',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the 'You_can_set_a_skill_level_requirement_for_players,_allowing\nonly_those_whose_skill_level_matches_the_requirement\nyou_have_set_to_participate.' key
+
+  /// `Create Your Profile`
+  String get Create_Your_Profile {
+    return Intl.message(
+      'Create Your Profile',
+      name: 'Create_Your_Profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a valid date`
+  String get Please_enter_a_valid_date {
+    return Intl.message(
+      'Please enter a valid date',
+      name: 'Please_enter_a_valid_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a valid time`
+  String get Please_enter_a_valid_time {
+    return Intl.message(
+      'Please enter a valid time',
+      name: 'Please_enter_a_valid_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Date of Birth`
+  String get Select_Date_of_Birth {
+    return Intl.message(
+      'Select Date of Birth',
+      name: 'Select_Date_of_Birth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Age`
+  String get Your_Age {
+    return Intl.message(
+      'Your Age',
+      name: 'Your_Age',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Event Calendar`
+  String get Event_Calendar {
+    return Intl.message(
+      'Event Calendar',
+      name: 'Event_Calendar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Daily`
+  String get Daily {
+    return Intl.message(
+      'Daily',
+      name: 'Daily',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Schedule`
+  String get Schedule {
+    return Intl.message(
+      'Schedule',
+      name: 'Schedule',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Monthly`
+  String get Monthly {
+    return Intl.message(
+      'Monthly',
+      name: 'Monthly',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the 'No_events_found.' key
+
+  /// `Find Match`
+  String get Find_Match {
+    return Intl.message(
+      'Find Match',
+      name: 'Find_Match',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Requirements`
+  String get Your_Requirements {
+    return Intl.message(
+      'Your Requirements',
+      name: 'Your_Requirements',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the 'People’_Requirements' key
+
+  // skipped getter for the 'No_matches_available_now.' key
+
+  /// `You`
+  String get You {
+    return Intl.message(
+      'You',
+      name: 'You',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Opponent`
+  String get Opponent {
+    return Intl.message(
+      'Opponent',
+      name: 'Opponent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the 'Match_data_saved_successfully!' key
+
+  // skipped getter for the 'Error_occurred_while_saving_match_data!' key
+
+  /// `Play`
+  String get Play {
+    return Intl.message(
+      'Play',
+      name: 'Play',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Player Type`
+  String get Player_Type {
+    return Intl.message(
+      'Player Type',
+      name: 'Player_Type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Address`
+  String get Address {
+    return Intl.message(
+      'Address',
+      name: 'Address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Preferred time`
+  String get Preferred_time {
+    return Intl.message(
+      'Preferred time',
+      name: 'Preferred_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Find`
+  String get Find {
+    return Intl.message(
+      'Find',
+      name: 'Find',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please choose a club`
+  String get Please_choose_a_club {
+    return Intl.message(
+      'Please choose a club',
+      name: 'Please_choose_a_club',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Home`
+  String get Home {
+    return Intl.message(
+      'Home',
+      name: 'Home',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Club`
+  String get Club {
+    return Intl.message(
+      'Club',
+      name: 'Club',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chat`
+  String get Chat {
+    return Intl.message(
+      'Chat',
+      name: 'Chat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Menu`
+  String get Menu {
+    return Intl.message(
+      'Menu',
+      name: 'Menu',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Preferred Playing time`
+  String get Preferred_Playing_time {
+    return Intl.message(
+      'Preferred Playing time',
+      name: 'Preferred_Playing_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date of birth`
+  String get Date_of_birth {
+    return Intl.message(
+      'Date of birth',
+      name: 'Date_of_birth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Match Played`
+  String get Match_Played {
+    return Intl.message(
+      'Match Played',
+      name: 'Match_Played',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `In Club Ranking`
+  String get In_Club_Ranking {
+    return Intl.message(
+      'In Club Ranking',
+      name: 'In_Club_Ranking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Club`
+  String get Your_Club {
+    return Intl.message(
+      'Your Club',
+      name: 'Your_Club',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Club Data`
+  String get No_Club_Data {
+    return Intl.message(
+      'No Club Data',
+      name: 'No_Club_Data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Strength`
+  String get Your_Strength {
+    return Intl.message(
+      'Your Strength',
+      name: 'Your_Strength',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the 'Your_strength_will_be_determined_based_on_your_playing_record,\nand_your_performance_may_impact_your_strength_rating.' key
+
+  // skipped getter for the 'Error_fetching_user_data.' key
+
+  /// `Your Profile`
+  String get Your_Profile {
+    return Intl.message(
+      'Your Profile',
+      name: 'Your_Profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Person`
+  String get Select_Person {
+    return Intl.message(
+      'Select Person',
+      name: 'Select_Person',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter the member name`
+  String get Please_enter_the_member_name {
+    return Intl.message(
+      'Please enter the member name',
+      name: 'Please_enter_the_member_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select at least one role`
+  String get Please_select_at_least_one_role {
+    return Intl.message(
+      'Please select at least one role',
+      name: 'Please_select_at_least_one_role',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Roles assigned successfully`
+  String get Roles_assigned_successfully {
+    return Intl.message(
+      'Roles assigned successfully',
+      name: 'Roles_assigned_successfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User not logged in`
+  String get User_not_logged_in {
+    return Intl.message(
+      'User not logged in',
+      name: 'User_not_logged_in',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the 'Error_assigning_roles._Please_try_again_later.' key
+
+  /// `Assign Person`
+  String get Assign_Person {
+    return Intl.message(
+      'Assign Person',
+      name: 'Assign_Person',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Assign Roles`
+  String get Assign_Roles {
+    return Intl.message(
+      'Assign Roles',
+      name: 'Assign_Roles',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send invitation`
+  String get Send_invitation {
+    return Intl.message(
+      'Send invitation',
+      name: 'Send_invitation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create Events`
+  String get Create_Events {
+    return Intl.message(
+      'Create Events',
+      name: 'Create_Events',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create tennis courts`
+  String get Create_tennis_courts {
+    return Intl.message(
+      'Create tennis courts',
+      name: 'Create_tennis_courts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create offers`
+  String get Create_offers {
+    return Intl.message(
+      'Create offers',
+      name: 'Create_offers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit club`
+  String get Edit_club {
+    return Intl.message(
+      'Edit club',
+      name: 'Edit_club',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete club`
+  String get Delete_club {
+    return Intl.message(
+      'Delete club',
+      name: 'Delete_club',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit members`
+  String get Edit_members {
+    return Intl.message(
+      'Edit members',
+      name: 'Edit_members',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete members`
+  String get Delete_members {
+    return Intl.message(
+      'Delete members',
+      name: 'Delete_members',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create Training`
+  String get Create_Training {
+    return Intl.message(
+      'Create Training',
+      name: 'Create_Training',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set up leagues`
+  String get Set_up_leagues {
+    return Intl.message(
+      'Set up leagues',
+      name: 'Set_up_leagues',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create Roles`
+  String get Create_Roles {
+    return Intl.message(
+      'Create Roles',
+      name: 'Create_Roles',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Roles`
+  String get Roles {
+    return Intl.message(
+      'Roles',
+      name: 'Roles',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Role Details`
+  String get Role_Details {
+    return Intl.message(
+      'Role Details',
+      name: 'Role_Details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the 'You_can_add_more_rights_to_a_role.' key
+
+  /// `Update Role`
+  String get Update_Role {
+    return Intl.message(
+      'Update Role',
+      name: 'Update_Role',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create Role`
+  String get Create_Role {
+    return Intl.message(
+      'Create Role',
+      name: 'Create_Role',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Describe Role type here`
+  String get Describe_Role_type_here {
+    return Intl.message(
+      'Describe Role type here',
+      name: 'Describe_Role_type_here',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rights`
+  String get Rights {
+    return Intl.message(
+      'Rights',
+      name: 'Rights',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Role Created`
+  String get Role_Created {
+    return Intl.message(
+      'Role Created',
+      name: 'Role_Created',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the 'Role_has_been_created_successfully.' key
+
+  /// `Error creating role`
+  String get Error_creating_role {
+    return Intl.message(
+      'Error creating role',
+      name: 'Error_creating_role',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Roles list`
+  String get Roles_list {
+    return Intl.message(
+      'Roles list',
+      name: 'Roles_list',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Assign Roles to a Person`
+  String get Assign_Roles_to_a_Person {
+    return Intl.message(
+      'Assign Roles to a Person',
+      name: 'Assign_Roles_to_a_Person',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Describe Rights`
+  String get Describe_Rights {
+    return Intl.message(
+      'Describe Rights',
+      name: 'Describe_Rights',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can add more rights to a role`
+  String get You_can_add_more_rights_to_a_role {
+    return Intl.message(
+      'You can add more rights to a role',
+      name: 'You_can_add_more_rights_to_a_role',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No data found`
+  String get No_data_found {
+    return Intl.message(
+      'No data found',
+      name: 'No_data_found',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set Reminder`
+  String get Set_Reminder {
+    return Intl.message(
+      'Set Reminder',
+      name: 'Set_Reminder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Reversed Courts`
+  String get No_Reversed_Courts {
+    return Intl.message(
+      'No Reversed Courts',
+      name: 'No_Reversed_Courts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error fetching court data`
+  String get Error_fetching_court_data {
+    return Intl.message(
+      'Error fetching court data',
+      name: 'Error_fetching_court_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No court data available`
+  String get No_court_data_available {
+    return Intl.message(
+      'No court data available',
+      name: 'No_court_data_available',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Click to Reverse Court`
+  String get Click_to_Reverse_Court {
+    return Intl.message(
+      'Click to Reverse Court',
+      name: 'Click_to_Reverse_Court',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the 'You_Don\'t_have_Events' key
+
+  /// `Register for events on the Club page`
+  String get Register_for_events_on_the_Club_page {
+    return Intl.message(
+      'Register for events on the Club page',
+      name: 'Register_for_events_on_the_Club_page',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error fetching event data`
+  String get Error_fetching_event_data {
+    return Intl.message(
+      'Error fetching event data',
+      name: 'Error_fetching_event_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error fetching player data`
+  String get Error_fetching_player_data {
+    return Intl.message(
+      'Error fetching player data',
+      name: 'Error_fetching_player_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register Done`
+  String get Register_Done {
+    return Intl.message(
+      'Register Done',
+      name: 'Register_Done',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error fetching match data`
+  String get Error_fetching_match_data {
+    return Intl.message(
+      'Error fetching match data',
+      name: 'Error_fetching_match_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the 'You_Don\'t_have_Matches' key
+
+  /// `Click to Find Your Partner`
+  String get Click_to_Find_Your_Partner {
+    return Intl.message(
+      'Click to Find Your Partner',
+      name: 'Click_to_Find_Your_Partner',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No matches`
+  String get No_matches {
+    return Intl.message(
+      'No matches',
+      name: 'No_matches',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Upcoming Events`
+  String get Your_Upcoming_Events {
+    return Intl.message(
+      'Your Upcoming Events',
+      name: 'Your_Upcoming_Events',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Reversed Courts`
+  String get Your_Reversed_Courts {
+    return Intl.message(
+      'Your Reversed Courts',
+      name: 'Your_Reversed_Courts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Upcoming Matches`
+  String get Your_Upcoming_Matches {
+    return Intl.message(
+      'Your Upcoming Matches',
+      name: 'Your_Upcoming_Matches',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Find Partner`
+  String get Find_Partner {
+    return Intl.message(
+      'Find Partner',
+      name: 'Find_Partner',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Member administration`
+  String get Member_administration {
+    return Intl.message(
+      'Member administration',
+      name: 'Member_administration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create a role`
+  String get Create_a_role {
+    return Intl.message(
+      'Create a role',
+      name: 'Create_a_role',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tournament management`
+  String get Tournament_management {
+    return Intl.message(
+      'Tournament management',
+      name: 'Tournament_management',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Membership`
+  String get Your_Membership {
+    return Intl.message(
+      'Your Membership',
+      name: 'Your_Membership',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `From :`
+  String get From_ {
+    return Intl.message(
+      'From :',
+      name: 'From_',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `To :`
+  String get To_ {
+    return Intl.message(
+      'To :',
+      name: 'To_',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Address :`
+  String get Address_ {
+    return Intl.message(
+      'Address :',
+      name: 'Address_',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error fetching data`
+  String get Error_fetching_data {
+    return Intl.message(
+      'Error fetching data',
+      name: 'Error_fetching_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No data available`
+  String get No_data_available {
+    return Intl.message(
+      'No data available',
+      name: 'No_data_available',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get Reserved`
+  String get Get_Reserved {
+    return Intl.message(
+      'Get Reserved',
+      name: 'Get_Reserved',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Occupied`
+  String get Occupied {
+    return Intl.message(
+      'Occupied',
+      name: 'Occupied',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

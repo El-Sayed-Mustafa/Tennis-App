@@ -121,7 +121,7 @@ class _CourtItemState extends State<CourtItem> {
         decoration: ShapeDecoration(
           color: Colors.white,
           shape: RoundedRectangleBorder(
-            side: BorderSide(width: 0.50, color: Color(0x440D5FC3)),
+            side: const BorderSide(width: 0.50, color: Color(0x440D5FC3)),
             borderRadius: BorderRadius.circular(screenWidth * 0.079),
           ),
         ),
@@ -173,7 +173,7 @@ class _CourtItemState extends State<CourtItem> {
                     Text(
                       'From : $formattedStartDate',
                       style: TextStyle(
-                        color: Color(0xFF6D6D6D),
+                        color: const Color(0xFF6D6D6D),
                         fontSize: subtitleFontSize,
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w500,
@@ -183,7 +183,7 @@ class _CourtItemState extends State<CourtItem> {
                     Text(
                       'To : $formattedEndDate',
                       style: TextStyle(
-                        color: Color(0xFF6D6D6D),
+                        color: const Color(0xFF6D6D6D),
                         fontSize: subtitleFontSize,
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w500,
@@ -191,9 +191,9 @@ class _CourtItemState extends State<CourtItem> {
                     ),
                     SizedBox(height: screenWidth * .015),
                     Text(
-                      'Adress : ${widget.court.courtAddress}',
+                      'Address :${widget.court.courtAddress}',
                       style: TextStyle(
-                        color: Color(0xFF6D6D6D),
+                        color: const Color(0xFF6D6D6D),
                         fontSize: subtitleFontSize,
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w500,
@@ -225,16 +225,16 @@ class _CourtItemState extends State<CourtItem> {
                         stream: _courtStream,
                         builder: (context, snapshot) {
                           if (snapshot.hasError) {
-                            return Text('Error fetching data');
+                            return const Text('Error fetching data');
                           }
 
                           if (!snapshot.hasData) {
-                            return CircularProgressIndicator();
+                            return const CircularProgressIndicator();
                           }
 
                           final courtData = snapshot.data?.data();
                           if (courtData == null) {
-                            return Text('No data available');
+                            return const Text('No data available');
                           }
 
                           final bool isReversed =

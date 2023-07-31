@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/utils/widgets/clipper.dart';
+import '../../../../generated/l10n.dart';
 
 class WaveClipperScreenChooseClub extends StatelessWidget {
   const WaveClipperScreenChooseClub({
@@ -69,9 +70,9 @@ class WaveClipperScreenChooseClub extends StatelessWidget {
                           fontWeight: FontWeight.w700,
                         ),
                       ),
-                      const Text(
-                        'You have been invited to join\nthis club through an\n invitation link.',
-                        style: TextStyle(
+                      Text(
+                        S.of(context).invitation_text,
+                        style: const TextStyle(
                           color: Color(0xFFDADADA),
                           fontSize: 14,
                           fontFamily: 'Poppins',
@@ -91,7 +92,7 @@ class WaveClipperScreenChooseClub extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment
                 .center, // Align items to the center vertically
             children: [
-              Spacer(),
+              const Spacer(),
               Center(
                 child: SizedBox(
                   height: screenHeight * 0.14,

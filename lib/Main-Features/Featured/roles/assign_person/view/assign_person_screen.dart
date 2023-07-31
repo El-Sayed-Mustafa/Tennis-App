@@ -43,13 +43,13 @@ class _AssignPersonState extends State<AssignPerson> {
     final String memberName = memberNameController.text.trim();
     if (memberName.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Please enter the member name')),
+        const SnackBar(content: Text('Please enter the member name')),
       );
       return;
     }
     if (selectedRole.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Please select at least one role')),
+        const SnackBar(content: Text('Please select at least one role')),
       );
       return;
     }
@@ -87,22 +87,22 @@ class _AssignPersonState extends State<AssignPerson> {
           await playerSnapshot.reference.update({'clubRoles': clubRoles});
 
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Roles assigned successfully')),
+            const SnackBar(content: Text('Roles assigned successfully')),
           );
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Player data not found')),
+            const SnackBar(content: Text('Player data not found')),
           );
         }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('User not logged in')),
+          const SnackBar(content: Text('User not logged in')),
         );
       }
     } catch (e) {
       print('Error assigning roles: $e');
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
             content: Text('Error assigning roles. Please try again later.')),
       );
     } finally {
@@ -154,7 +154,7 @@ class _AssignPersonState extends State<AssignPerson> {
 
     return Scaffold(
       body: Container(
-        color: Color(0xFFF8F8F8),
+        color: const Color(0xFFF8F8F8),
         child: Column(
           children: [
             AppBarWaveHome(
@@ -213,13 +213,13 @@ class _AssignPersonState extends State<AssignPerson> {
               builder: (context, snapshot) {
                 // Show the circular progress indicator if _isLoading is true
                 if (_isLoading) {
-                  return CircularProgressIndicator();
+                  return const CircularProgressIndicator();
                 } else {
                   // Show the "Assign Role" button otherwise
                   return BottomSheetContainer(
                     buttonText: 'Assign Role',
                     onPressed: _assignRole,
-                    color: Color(0xFFF8F8F8),
+                    color: const Color(0xFFF8F8F8),
                   );
                 }
               },

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import '../../../generated/l10n.dart';
 import '../../../models/club.dart';
 import 'choose_club_item.dart';
 
@@ -100,12 +101,14 @@ class _ClubInvitationsPageState extends State<ClubInvitationsPage> {
                 }
 
                 if (!snapshot.hasData) {
-                  return const Center(child: Text('No player data available'));
+                  return Center(
+                      child: Text(S.of(context).No_player_data_available));
                 }
 
                 final playerData = snapshot.data!.data();
                 if (playerData == null) {
-                  return const Center(child: Text('Player data not found'));
+                  return Center(
+                      child: Text(S.of(context).No_player_data_available));
                 }
 
                 clubInvitationsIds =
@@ -119,14 +122,14 @@ class _ClubInvitationsPageState extends State<ClubInvitationsPage> {
                     }
 
                     if (!snapshot.hasData) {
-                      return const Center(
-                          child: Text('No club invitations found'));
+                      return Center(
+                          child: Text(S.of(context).No_player_data_available));
                     }
 
                     final clubs = snapshot.data!;
                     if (clubs.isEmpty) {
-                      return const Center(
-                          child: Text('No club invitations found'));
+                      return Center(
+                          child: Text(S.of(context).No_club_invitations_found));
                     }
 
                     return Stack(

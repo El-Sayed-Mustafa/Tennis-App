@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../../../generated/l10n.dart';
 import '../../../models/chats.dart';
 import '../../../models/player.dart';
 import '../widgets/community_message.dart';
@@ -132,7 +133,8 @@ class _CommunityScreenState extends State<CommunityScreen> {
               ),
               child: TextField(
                 controller: _messageController,
-                decoration: InputDecoration(hintText: 'Type your message...'),
+                decoration:
+                    InputDecoration(hintText: S.of(context).enter_your_message),
               ),
             ),
           ),

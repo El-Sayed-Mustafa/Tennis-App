@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../generated/l10n.dart';
+
 class ChooseClubButtons extends StatelessWidget {
   const ChooseClubButtons({
     Key? key,
@@ -45,7 +47,7 @@ class ChooseClubButtons extends StatelessWidget {
                     ),
                     onPressed: cancel,
                     child: Text(
-                      'Cancel',
+                      S.of(context).cancel,
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,

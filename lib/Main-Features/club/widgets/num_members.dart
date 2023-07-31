@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../generated/l10n.dart';
+
 class NumMembers extends StatelessWidget {
   const NumMembers({super.key, required this.num});
   final String num;
@@ -29,7 +31,7 @@ class NumMembers extends StatelessWidget {
               height: screenHeight * 0.03,
             ),
             Text(
-              'Total Members',
+              S.of(context).totalMembers,
               style: TextStyle(
                 color: Colors.black,
                 fontSize: itemSize * .012,

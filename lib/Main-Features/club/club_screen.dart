@@ -9,6 +9,7 @@ import 'package:tennis_app/Main-Features/club/widgets/num_members.dart';
 import 'package:tennis_app/Main-Features/club/widgets/players_ranking.dart';
 
 import '../../core/utils/widgets/app_bar_wave.dart';
+import '../../generated/l10n.dart';
 import '../../models/club.dart';
 import '../../models/player.dart';
 import '../home/services/firebase_methods.dart';
@@ -33,7 +34,7 @@ class ClubScreen extends StatelessWidget {
           child: Column(
             children: [
               AppBarWaveHome(
-                text: 'Your Club',
+                text: S.of(context).your_club,
                 suffixIconPath: 'assets/images/app-bar-icon.svg',
               ),
               SizedBox(height: spacing),
@@ -51,8 +52,8 @@ class ClubScreen extends StatelessWidget {
                     );
                   } else if (playerSnapshot.hasError) {
                     // If there was an error while fetching the user data
-                    return const Center(
-                      child: Text('Error fetching user data.'),
+                    return Center(
+                      child: Text(S.of(context).error_fetching_club_data),
                     );
                   } else {
                     // If the user data was successfully fetched, show the UI
@@ -70,8 +71,8 @@ class ClubScreen extends StatelessWidget {
                             ),
                           );
                         } else if (clubSnapshot.hasError) {
-                          return const Center(
-                            child: Text('Error fetching club data.'),
+                          return Center(
+                            child: Text(S.of(context).error_fetching_club_data),
                           );
                         } else {
                           final clubData = clubSnapshot.data!;
@@ -85,9 +86,9 @@ class ClubScreen extends StatelessWidget {
                                 num: clubData.memberIds.length.toString(),
                               ),
                               SizedBox(height: spacing * 2.5),
-                              const Text(
-                                'Announcements',
-                                style: TextStyle(
+                              Text(
+                                S.of(context).announcements,
+                                style: const TextStyle(
                                   color: Color(0xFF313131),
                                   fontSize: 19,
                                   fontFamily: 'Poppins',
@@ -95,20 +96,22 @@ class ClubScreen extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(height: spacing * 2),
-                              const HeaderText(text: 'Club’s Upcoming events'),
+                              HeaderText(
+                                  text: S.of(context).clubs_upcoming_events),
                               SizedBox(height: spacing / 3),
                               ClubEvents(
                                 eventsId: clubData.eventIds,
                               ),
                               SizedBox(height: spacing * 2),
-                              const HeaderText(text: 'Club’s Players Ranking'),
+                              HeaderText(
+                                  text: S.of(context).clubs_players_ranking),
                               PlayersRanking(
                                 clubId: clubData.clubId,
                                 clubName: clubData.clubName,
                               ),
                               SizedBox(height: spacing * 2),
-                              const HeaderText(text: 'Available Courts'),
-                              AvailableCourts(),
+                              HeaderText(text: S.of(context).available_courts),
+                              const AvailableCourts(),
                               SizedBox(height: spacing * 2),
                               Padding(
                                 padding: EdgeInsets.symmetric(
@@ -118,14 +121,14 @@ class ClubScreen extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     HomeButton(
-                                        buttonText: 'Create Event',
+                                        buttonText: S.of(context).create_event,
                                         imagePath:
                                             'assets/images/Create-Event.svg',
                                         onPressed: () async {
                                           navigateToCreateEvent(context);
                                         }),
                                     HomeButton(
-                                      buttonText: 'Find Partner',
+                                      buttonText: S.of(context).find_partner,
                                       imagePath:
                                           'assets/images/Make-offers.svg',
                                       onPressed: () {

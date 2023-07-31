@@ -5,6 +5,7 @@ import 'package:tennis_app/Main-Features/Featured/set_reminder/set_reminder_scre
 import 'package:tennis_app/Main-Features/club/widgets/text_rich.dart';
 
 import '../../../core/methodes/global_method.dart';
+import '../../../generated/l10n.dart';
 import '../../Featured/create_event/view/widgets/input_end_date.dart';
 import '../../home/widgets/divider.dart';
 import '../../../models/event.dart';
@@ -86,7 +87,7 @@ class ClubEventItem extends StatelessWidget {
                   ),
                   SizedBox(height: screenHeight * .003),
                   Text(
-                    'Sunny',
+                    S.of(context).sunny,
                     style: TextStyle(
                       color: Color(0xFF00344E),
                       fontSize: screenHeight * .017,
@@ -110,7 +111,7 @@ class ClubEventItem extends StatelessWidget {
                   ),
                   const MyDivider(),
                   MyTextRich(
-                    text1: 'Start',
+                    text1: S.of(context).start,
                     text2: globalMethod
                         .formatDateTimeString(event.eventStartAt.toString()),
                   ),
@@ -118,11 +119,11 @@ class ClubEventItem extends StatelessWidget {
                   MyTextRich(
                     text2: globalMethod
                         .formatDateTimeString(event.eventEndsAt.toString()),
-                    text1: 'End',
+                    text1: S.of(context).end,
                   ),
                   SizedBox(height: screenHeight * .012),
                   MyTextRich(
-                    text1: 'At',
+                    text1: S.of(context).at,
                     text2: event.eventAddress,
                   ),
                   SizedBox(height: screenHeight * .012),
@@ -151,7 +152,7 @@ class ClubEventItem extends StatelessWidget {
                             },
                             child: Center(
                               child: Text(
-                                'Set Reminder',
+                                S.of(context).set_reminder,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: buttonTextFontSize,

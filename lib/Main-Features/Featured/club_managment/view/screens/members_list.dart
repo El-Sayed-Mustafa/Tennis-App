@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../../../models/player.dart';
 import '../widgets/member_item.dart';
 
@@ -33,9 +34,9 @@ class _HorizontalListViewState extends State<HorizontalListView> {
       children: [
         Visibility(
           visible: widget.memberNames.isNotEmpty,
-          replacement: const Center(
+          replacement: Center(
             child: Text(
-              'You don\'t have any members.',
+              S.of(context).You_dont_have_any_members,
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey,

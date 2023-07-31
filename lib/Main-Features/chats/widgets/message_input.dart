@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../../../generated/l10n.dart';
 import '../../../models/chats.dart';
 import '../screens/private_chat.dart';
 
@@ -95,7 +96,7 @@ class _MessageInputState extends State<MessageInput> {
                 child: TextField(
                   controller: _textController,
                   decoration: InputDecoration(
-                    hintText: 'Enter your message...',
+                    hintText: S.of(context).enter_your_message,
                     contentPadding: EdgeInsets.symmetric(horizontal: 16),
                     border: InputBorder.none,
                   ),
