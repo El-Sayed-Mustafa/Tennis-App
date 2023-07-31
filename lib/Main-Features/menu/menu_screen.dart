@@ -71,9 +71,11 @@ class MenuScreen extends StatelessWidget {
                       height: 10,
                     ),
                     ButtonMenu(
-                      imagePath: 'assets/images/League-Information.svg',
-                      buttonText: 'League Information',
-                      onPressed: () {},
+                      imagePath: 'assets/images/setting1.svg',
+                      buttonText: 'Your Profile',
+                      onPressed: () {
+                        GoRouter.of(context).push('/profileScreen');
+                      },
                     ),
                     ButtonMenu(
                       imagePath: 'assets/images/Event-Calnder.svg',

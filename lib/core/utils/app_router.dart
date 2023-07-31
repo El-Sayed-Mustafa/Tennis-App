@@ -144,15 +144,19 @@ abstract class AppRouter {
           GoRoute(
             path: 'calendar',
             builder: (BuildContext context, GoRouterState state) {
-              // Wrap the CalendarScreen with ChangeNotifierProvider
               return CalendarScreen();
             },
           ),
           GoRoute(
             path: 'searchChat',
             builder: (BuildContext context, GoRouterState state) {
-              // Wrap the CalendarScreen with ChangeNotifierProvider
               return PlayerSearchScreen();
+            },
+          ),
+          GoRoute(
+            path: 'profileScreen',
+            builder: (BuildContext context, GoRouterState state) {
+              return ProfileScreen();
             },
           ),
         ],

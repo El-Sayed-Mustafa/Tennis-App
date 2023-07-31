@@ -28,7 +28,7 @@ class _CalendarScreenState extends State<CalendarScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 3, vsync: this, initialIndex: 1);
     _pageController = PageController(initialPage: selectedDay.day - 1);
     _pageController.addListener(_onPageChange);
   }
@@ -58,16 +58,13 @@ class _CalendarScreenState extends State<CalendarScreen>
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
       body: Column(
         children: [
           AppBarWaveHome(
             prefixIcon: IconButton(
               onPressed: () {
-                GoRouter.of(context).replace('/home');
+                GoRouter.of(context).pop();
               },
               icon: const Icon(
                 Icons.arrow_back,
