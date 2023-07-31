@@ -22,6 +22,8 @@ class _MessageInputState extends State<MessageInput> {
 
   void _sendMessage() async {
     final String content = _textController.text.trim();
+    _textController.clear();
+
     if (content.isNotEmpty) {
       final chatId = generateChatId(widget.currentUserId, widget.otherPlayerId);
       final chatRef =
@@ -60,7 +62,6 @@ class _MessageInputState extends State<MessageInput> {
       }
 
       // Clear the text input field after sending the message
-      _textController.clear();
     }
   }
 

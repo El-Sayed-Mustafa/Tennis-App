@@ -61,7 +61,7 @@ class MyReply extends StatelessWidget {
         alignment: Alignment.centerRight,
         child: Container(
           padding: const EdgeInsets.all(15),
-          width: 268,
+          width: 250,
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(25),

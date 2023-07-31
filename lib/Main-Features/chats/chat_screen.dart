@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tennis_app/Main-Features/chats/screens/chats_screen.dart';
-import 'package:tennis_app/Main-Features/chats/screens/community.dart';
+import 'package:tennis_app/Main-Features/chats/screens/community_screen.dart';
 import 'package:tennis_app/Main-Features/chats/screens/club_chat_screen.dart';
 
 import '../../core/utils/widgets/app_bar_wave.dart';
@@ -79,12 +79,13 @@ class _ChatScreenState extends State<ChatScreen>
                   child: TabBar(
                     physics: const BouncingScrollPhysics(),
                     controller: tabController,
+                    isScrollable: false,
                     tabs: const [
                       Tab(
                         text: 'Community',
                       ),
                       Tab(
-                        text: 'Groups',
+                        text: 'Club',
                       ),
                       Tab(
                         text: 'Chats',
@@ -108,10 +109,8 @@ class _ChatScreenState extends State<ChatScreen>
                 child: TabBarView(
               controller: tabController,
               children: [
-                Community(),
-                ClubChatScreen(
-                  chatId: '',
-                ),
+                CommunityScreen(),
+                ClubChatScreen(),
                 ChatsScreen(),
               ],
             ))

@@ -112,14 +112,17 @@ class SenderMessage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Text(
-                  message.content, // Display the message content
-                  style: const TextStyle(
-                    color: Color(0xFF757575),
-                    fontSize: 13,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w400,
-                    letterSpacing: 1,
+                Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    message.content, // Display the message content
+                    style: const TextStyle(
+                      color: Color(0xFF757575),
+                      fontSize: 13,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w400,
+                      letterSpacing: 1,
+                    ),
                   ),
                 ),
                 const SizedBox(
