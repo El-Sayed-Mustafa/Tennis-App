@@ -17,7 +17,7 @@ class PlayingInfo extends StatelessWidget {
           children: [
             CardDetails(
               color: Color(0x30ED6663),
-              label: 'Match Played ',
+              label: '${S.of(context).Matched_Played} ',
               svgPath: 'assets/images/courts.svg',
               value: player.matchPlayed.toString(),
             ),
@@ -35,15 +35,15 @@ class PlayingInfo extends StatelessWidget {
           children: [
             CardDetails(
               color: Color(0x3094B6D3),
-              label: 'Skill level',
+              label: S.of(context).Skill_level,
               svgPath: 'assets/images/matches.svg',
               value: player.skillLevel.toString(),
             ),
             CardDetails(
               color: Color.fromARGB(108, 252, 179, 140),
-              label: 'In Club Ranking',
+              label: S.of(context).In_Club_Ranking,
               svgPath: 'assets/images/members.svg',
-              value: '12',
+              value: '_',
             )
           ],
         )

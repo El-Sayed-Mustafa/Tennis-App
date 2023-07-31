@@ -6,6 +6,7 @@ import 'package:tennis_app/Main-Features/Featured/roles/assign_person/view/widge
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
 import '../../../../../core/utils/widgets/app_bar_wave.dart';
+import '../../../../../generated/l10n.dart';
 import '../../create_role/view/widgets/rights_selector.dart';
 import '../service/club_roles_service.dart';
 
@@ -43,13 +44,13 @@ class _AssignPersonState extends State<AssignPerson> {
     final String memberName = memberNameController.text.trim();
     if (memberName.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter the member name')),
+        SnackBar(content: Text(S.of(context).Please_enter_the_member_name)),
       );
       return;
     }
     if (selectedRole.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please select at least one role')),
+        SnackBar(content: Text(S.of(context).Please_select_at_least_one_role)),
       );
       return;
     }
@@ -87,23 +88,24 @@ class _AssignPersonState extends State<AssignPerson> {
           await playerSnapshot.reference.update({'clubRoles': clubRoles});
 
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Roles assigned successfully')),
+            SnackBar(content: Text(S.of(context).Roles_assigned_successfully)),
           );
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Player data not found')),
+            SnackBar(content: Text(S.of(context).Player_data_not_found)),
           );
         }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('User not logged in')),
+          SnackBar(content: Text(S.of(context).User_not_logged_in)),
         );
       }
     } catch (e) {
       print('Error assigning roles: $e');
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-            content: Text('Error assigning roles. Please try again later.')),
+        SnackBar(
+            content: Text(
+                S.of(context).Error_assigning_roles_Please_try_again_later)),
       );
     } finally {
       setState(() {
@@ -168,12 +170,12 @@ class _AssignPersonState extends State<AssignPerson> {
                   color: Colors.white,
                 ),
               ),
-              text: '   Assign Person',
+              text: S.of(context).Assign_Person,
               suffixIconPath: '',
             ),
-            const Text(
-              'Select Person',
-              style: TextStyle(
+            Text(
+              S.of(context).Select_Person,
+              style: const TextStyle(
                 color: Color(0xFF616161),
                 fontSize: 20,
                 fontFamily: 'Poppins',
@@ -185,9 +187,9 @@ class _AssignPersonState extends State<AssignPerson> {
               controller: memberNameController,
             ),
             SizedBox(height: screenHeight * .05),
-            const Text(
-              'Assign Roles',
-              style: TextStyle(
+            Text(
+              S.of(context).Assign_Roles,
+              style: const TextStyle(
                 color: Color(0xFF616161),
                 fontSize: 18,
                 fontFamily: 'Poppins',
@@ -217,7 +219,7 @@ class _AssignPersonState extends State<AssignPerson> {
                 } else {
                   // Show the "Assign Role" button otherwise
                   return BottomSheetContainer(
-                    buttonText: 'Assign Role',
+                    buttonText: S.of(context).Assign_Role,
                     onPressed: _assignRole,
                     color: const Color(0xFFF8F8F8),
                   );

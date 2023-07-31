@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../../core/utils/widgets/custom_button.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../../../models/roles.dart';
 import '../../create_role/view/widgets/rights_selector.dart';
 import '../services/firebase_methodes.dart'; // Import the RightSelector widget
@@ -36,17 +37,17 @@ class _AssignRightsState extends State<AssignRights> {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     List<String> words = [
-      'Send invitation',
-      'Create Events',
-      'Create tennis courts',
-      'Create offers',
-      'Edit club',
-      'Delete club',
-      'Edit members',
-      'Delete members',
-      'Create Training',
-      'Set up leagues',
-      'Create Roles',
+      S.of(context).Send_Invitations,
+      S.of(context).Create_Event,
+      S.of(context).Create_tennis_courts,
+      S.of(context).Create_offers,
+      S.of(context).Edit_club,
+      S.of(context).Delete_club,
+      S.of(context).Edit_members,
+      S.of(context).Delete_members,
+      S.of(context).Create_Training,
+      S.of(context).Set_up_leagues,
+      S.of(context).Create_Roles,
     ];
     return Scaffold(
       body: SingleChildScrollView(
@@ -67,7 +68,7 @@ class _AssignRightsState extends State<AssignRights> {
                     color: Colors.white,
                   ),
                 ),
-                text: '   Roles',
+                text: '   ${S.of(context).Roles}',
                 suffixIconPath: '',
               ),
               Expanded(
@@ -76,9 +77,9 @@ class _AssignRightsState extends State<AssignRights> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Text(
-                        'Role Details', // Update the header text
-                        style: TextStyle(
+                      Text(
+                        S.of(context).Role_Details, // Update the header text
+                        style: const TextStyle(
                           color: Color(0xFF616161),
                           fontSize: 20,
                           fontFamily: 'Poppins',
@@ -122,9 +123,9 @@ class _AssignRightsState extends State<AssignRights> {
                         ),
                       ),
                       SizedBox(height: screenHeight * .03),
-                      const Text(
-                        'You can more rights to a role.',
-                        style: TextStyle(
+                      Text(
+                        S.of(context).You_can_add_more_rights_to_a_role,
+                        style: const TextStyle(
                           color: Color(0xFF989898),
                           fontSize: 15,
                           fontFamily: 'Poppins',
@@ -151,7 +152,8 @@ class _AssignRightsState extends State<AssignRights> {
                 child: Container(
                   color: const Color(0xFFF8F8F8),
                   child: BottomSheetContainer(
-                    buttonText: 'Update Role', // Update the button text
+                    buttonText:
+                        S.of(context).Update_Role, // Update the button text
                     onPressed: () async {
                       // Call the function to update the Role with selected rights
                       AssignRightsService.updateRoleOnFirestore(

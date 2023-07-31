@@ -78,11 +78,11 @@ class FindMatch extends StatelessWidget {
                               color: Colors.white,
                             ),
                           ),
-                          text: '    Find Match',
+                          text: S.of(context).Find_Match,
                           suffixIconPath: '',
                         ),
-                        const Text(
-                          'Set Requirements',
+                        Text(
+                          S.of(context).set_requirements,
                           style: TextStyle(
                             color: Color(0xFF313131),
                             fontSize: 20,
@@ -129,14 +129,14 @@ class FindMatch extends StatelessWidget {
                                   ),
                                   SizedBox(height: screenHeight * .025),
                                   InputTextWithHint(
-                                    hint: 'Type Club Address here',
-                                    text: 'Club Address',
+                                    hint: S.of(context).Type_Club_Address_here,
+                                    text: S.of(context).Club_Address,
                                     controller: addressController,
                                   ),
                                   SizedBox(height: screenHeight * .025),
                                   InputDate(
-                                    hint: 'Select Date of Birth',
-                                    text: 'Your Age',
+                                    hint: S.of(context).Select_Date_of_Birth,
+                                    text: S.of(context).Your_Age,
                                     onDateTimeSelected: (DateTime dateTime) {
                                       // Handle date selection
                                     },
@@ -165,7 +165,7 @@ class FindMatch extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: BottomSheetContainer(
-                                      buttonText: 'Find',
+                                      buttonText: S.of(context).Find,
                                       onPressed: () async {
                                         if (formKey.currentState!.validate()) {
                                           // Retrieve the necessary data from the form and other widgets
@@ -183,7 +183,9 @@ class FindMatch extends StatelessWidget {
                                           // Check if the club name is empty
                                           if (clubNameController.text.isEmpty) {
                                             Fluttertoast.showToast(
-                                              msg: 'Please choose a club',
+                                              msg: S
+                                                  .of(context)
+                                                  .Please_choose_a_club,
                                               toastLength: Toast.LENGTH_SHORT,
                                               gravity: ToastGravity.BOTTOM,
                                             );

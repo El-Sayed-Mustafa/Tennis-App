@@ -6,6 +6,7 @@ import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import '../../../../core/methodes/firebase_methodes.dart';
 import '../../../../core/utils/widgets/app_bar_icon.dart';
 import '../../../../core/utils/widgets/opacity_wave.dart';
+import '../../../../generated/l10n.dart';
 import '../../../../models/player.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -33,8 +34,8 @@ class ProfileScreen extends StatelessWidget {
                 );
               } else if (snapshot.hasError) {
                 // If there was an error while fetching the user data
-                return const Center(
-                  child: Text('Error fetching user data.'),
+                return Center(
+                  child: Text(S.of(context).error_fetching_club_data),
                 );
               } else {
                 // If the user data was successfully fetched, show the UI
@@ -50,7 +51,7 @@ class ProfileScreen extends StatelessWidget {
                           widgetHeight: screenHeight * .37,
                           svgImage: SvgPicture.asset(
                               'assets/images/create-profile.svg'),
-                          text: 'Your Profile',
+                          text: S.of(context).Your_Profile,
                           player: player,
                         ),
                         OpacityWave(height: screenHeight * 0.377),
@@ -91,7 +92,7 @@ class ProfileScreen extends StatelessWidget {
                     const SizedBox(height: 30),
                     ProfileBody(player: player),
                     BottomSheetContainer(
-                      buttonText: 'Edit',
+                      buttonText: S.of(context).edit,
                       onPressed: () {},
                       color: const Color(0xFFF8F8F8),
                     )

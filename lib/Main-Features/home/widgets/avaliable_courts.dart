@@ -9,6 +9,7 @@ import 'package:tennis_app/core/utils/widgets/no_data_text.dart';
 import '../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../core/utils/widgets/button_home.dart';
 import '../../../core/utils/widgets/court_item.dart';
+import '../../../generated/l10n.dart';
 import '../../../models/player.dart';
 import '../../../models/court.dart'; // Import the Court class
 
@@ -120,10 +121,10 @@ class _ReversedCourtsState extends State<ReversedCourts> {
               )
             : Center(
                 child: NoData(
-                  text: 'No Reversed Courts',
+                  text: S.of(context).No_Reversed_Courts,
                   height: screenHeight * .15,
                   width: screenWidth * .8,
-                  buttonText: 'Click to Reverse Court',
+                  buttonText: S.of(context).Click_to_Reverse_Court,
                   onPressed: () {
                     GoRouter.of(context).push('/findCourt');
                   },

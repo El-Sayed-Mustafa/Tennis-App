@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tennis_app/Main-Features/Featured/club_managment/view/screens/player_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/club_managment/view/widgets/text_rich.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../../../models/player.dart';
 import '../../../../home/widgets/divider.dart';
 import 'package:intl/intl.dart';
@@ -87,22 +88,22 @@ class _MemberItemState extends State<MemberItem> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   MyTextRich(
-                    text1: 'Matched Played ',
+                    text1: S.of(context).Matched_Played,
                     text2: widget.member.matchPlayed.toString(),
                   ),
                   SizedBox(height: screenHeight * .01),
                   MyTextRich(
-                    text1: 'Total Win  ',
+                    text1: S.of(context).Total_Win,
                     text2: widget.member.totalWins.toString(),
                   ),
                   SizedBox(height: screenHeight * .01),
                   MyTextRich(
-                    text1: 'Player type ',
+                    text1: S.of(context).Player_Type,
                     text2: widget.member.playerType,
                   ),
                   SizedBox(height: screenHeight * .01),
                   MyTextRich(
-                    text1: 'Birth date ',
+                    text1: S.of(context).Birth_date_,
                     text2: DateFormat('MMM d, yyyy')
                         .format(widget.member.birthDate),
                   ),

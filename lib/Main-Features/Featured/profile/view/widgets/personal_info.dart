@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../generated/l10n.dart';
 import '../../../../../models/player.dart';
 
 class PersonalInfo extends StatelessWidget {
@@ -29,7 +30,7 @@ class PersonalInfo extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Preferred Playing time',
+                S.of(context).preferredPlayingTime,
                 style: TextStyle(
                   color: const Color(0xFF525252),
                   fontSize: combine * .013,
@@ -52,7 +53,7 @@ class PersonalInfo extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Date of birth',
+                S.of(context).Date_of_birth,
                 style: TextStyle(
                   color: const Color(0xFF525252),
                   fontSize: combine * .013,
@@ -75,7 +76,7 @@ class PersonalInfo extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Player type',
+                S.of(context).Player_Type,
                 style: TextStyle(
                   color: const Color(0xFF525252),
                   fontSize: combine * .013,

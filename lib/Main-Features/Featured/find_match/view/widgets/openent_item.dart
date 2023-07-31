@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tennis_app/Main-Features/Featured/find_match/view/screens/playing_screen.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
+import '../../../../../generated/l10n.dart';
 import '../../../../../models/Match.dart';
 import '../../../../club/widgets/text_rich.dart';
 import '../../../../home/widgets/divider.dart';
@@ -135,22 +136,22 @@ class _OpponentItemState extends State<OpponentItem> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           MyTextRich(
-                            text1: 'Player Type ',
+                            text1: S.of(context).Player_type_,
                             text2: widget.opponent.playerType,
                           ),
                           SizedBox(height: screenHeight * .01),
                           MyTextRich(
-                              text1: 'Address ',
+                              text1: S.of(context).Address_,
                               text2: widget.opponent.address),
                           SizedBox(height: screenHeight * .01),
                           MyTextRich(
-                            text1: 'Date ',
+                            text1: S.of(context).Date_,
                             text2: DateFormat('MMM d, yyyy')
                                 .format(widget.opponent.dob),
                           ),
                           SizedBox(height: screenHeight * .01),
                           MyTextRich(
-                            text1: 'Preferred time  ',
+                            text1: S.of(context).Preferred_time_,
                             text2: widget.opponent.preferredPlayingTime,
                           ),
                         ],
@@ -167,7 +168,7 @@ class _OpponentItemState extends State<OpponentItem> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 28.0),
                 child: BottomSheetContainer(
-                    buttonText: 'Play',
+                    buttonText: S.of(context).Play,
                     onPressed: () {
                       Navigator.push(
                         context,

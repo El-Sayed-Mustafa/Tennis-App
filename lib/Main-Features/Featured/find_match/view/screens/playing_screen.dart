@@ -5,6 +5,7 @@ import 'package:tennis_app/Main-Features/Featured/find_match/view/widgets/match_
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
 import '../../../../../core/utils/widgets/app_bar_wave.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../../../models/Match.dart';
 import '../../cubit/playing_screen_cubit.dart';
 
@@ -39,12 +40,12 @@ class PlayingScreen extends StatelessWidget {
                           color: Colors.white,
                         ),
                       ),
-                      text: '    Find Match',
+                      text: S.of(context).Find_Match,
                       suffixIconPath: '',
                     ),
-                    const Text(
-                      'You',
-                      style: TextStyle(
+                    Text(
+                      S.of(context).You,
+                      style: const TextStyle(
                         color: Color(0xFF313131),
                         fontSize: 20,
                         fontFamily: 'Roboto',
@@ -53,11 +54,11 @@ class PlayingScreen extends StatelessWidget {
                     ),
                     SizedBox(height: screenHeight * .02),
                     MatchItem(match: match),
-                    const Padding(
-                      padding: EdgeInsets.all(25.0),
+                    Padding(
+                      padding: const EdgeInsets.all(25.0),
                       child: Text(
-                        'Opponent',
-                        style: TextStyle(
+                        S.of(context).Opponent,
+                        style: const TextStyle(
                           color: Color(0xFF313131),
                           fontSize: 18,
                           fontFamily: 'Roboto',
@@ -85,14 +86,14 @@ class PlayingScreen extends StatelessWidget {
                     ),
                     SizedBox(height: screenHeight * .02),
                     if (state == PlayingStatus.loading)
-                      CircularProgressIndicator()
+                      const CircularProgressIndicator()
                     else if (state == PlayingStatus.success)
-                      const Text('Match data saved successfully!')
+                      Text(S.of(context).Match_data_saved_successfully)
                     else if (state == PlayingStatus.error)
-                      const Text('Error occurred while saving match data!')
+                      Text(S.of(context).Error_occurred_while_saving_match_data)
                     else
                       BottomSheetContainer(
-                        buttonText: 'Play',
+                        buttonText: S.of(context).Play,
                         onPressed: () {
                           playingCubit.fetchPlayersDataAndSaveMatchId(
                               match, opponent, context);

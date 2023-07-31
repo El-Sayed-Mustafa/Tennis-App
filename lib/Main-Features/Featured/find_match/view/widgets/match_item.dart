@@ -1,6 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../generated/l10n.dart';
 import '../../../../../models/Match.dart';
 import '../../../../club/widgets/text_rich.dart';
 import '../../../../home/widgets/divider.dart';
@@ -122,19 +123,21 @@ class _MatchItemState extends State<MatchItem> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   MyTextRich(
-                    text1: 'Player Type ',
+                    text1: S.of(context).Player_Type,
                     text2: widget.match.playerType,
                   ),
                   SizedBox(height: screenHeight * .01),
-                  MyTextRich(text1: 'Address ', text2: widget.match.address),
+                  MyTextRich(
+                      text1: S.of(context).Address,
+                      text2: widget.match.address),
                   SizedBox(height: screenHeight * .01),
                   MyTextRich(
-                    text1: 'Date ',
+                    text1: S.of(context).Date_,
                     text2: DateFormat('MMM d, yyyy').format(widget.match.dob),
                   ),
                   SizedBox(height: screenHeight * .01),
                   MyTextRich(
-                    text1: 'Preferred time  ',
+                    text1: S.of(context).Preferred_time_,
                     text2: widget.match.preferredPlayingTime,
                   ),
                 ],

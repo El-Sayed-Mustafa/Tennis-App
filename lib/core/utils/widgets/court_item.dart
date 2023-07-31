@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Main-Features/home/widgets/divider.dart';
+import '../../../generated/l10n.dart';
 import '../../../models/court.dart';
 import 'package:intl/intl.dart';
 
@@ -171,7 +172,7 @@ class _CourtItemState extends State<CourtItem> {
                   children: [
                     const MyDivider(),
                     Text(
-                      'From : $formattedStartDate',
+                      '${S.of(context).From_}: $formattedStartDate',
                       style: TextStyle(
                         color: const Color(0xFF6D6D6D),
                         fontSize: subtitleFontSize,
@@ -181,7 +182,7 @@ class _CourtItemState extends State<CourtItem> {
                     ),
                     SizedBox(height: screenWidth * .015),
                     Text(
-                      'To : $formattedEndDate',
+                      '${S.of(context).To_}: $formattedEndDate',
                       style: TextStyle(
                         color: const Color(0xFF6D6D6D),
                         fontSize: subtitleFontSize,
@@ -191,7 +192,7 @@ class _CourtItemState extends State<CourtItem> {
                     ),
                     SizedBox(height: screenWidth * .015),
                     Text(
-                      'Address :${widget.court.courtAddress}',
+                      '${S.of(context).Address_}:${widget.court.courtAddress}',
                       style: TextStyle(
                         color: const Color(0xFF6D6D6D),
                         fontSize: subtitleFontSize,
@@ -225,7 +226,7 @@ class _CourtItemState extends State<CourtItem> {
                         stream: _courtStream,
                         builder: (context, snapshot) {
                           if (snapshot.hasError) {
-                            return const Text('Error fetching data');
+                            return Text(S.of(context).Error_fetching_data);
                           }
 
                           if (!snapshot.hasData) {
@@ -234,14 +235,16 @@ class _CourtItemState extends State<CourtItem> {
 
                           final courtData = snapshot.data?.data();
                           if (courtData == null) {
-                            return const Text('No data available');
+                            return Text(S.of(context).No_data_available);
                           }
 
                           final bool isReversed =
                               courtData['reversed'] ?? false;
 
                           return Text(
-                            isReversed ? 'Occupied' : 'Get Reserved',
+                            isReversed
+                                ? S.of(context).Occupied
+                                : S.of(context).Get_Reserved,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: buttonTextFontSize,

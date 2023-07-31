@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../generated/l10n.dart';
+
 class AgeRestrictionCubit extends Cubit<int> {
   AgeRestrictionCubit({int defaultValue = 0}) : super(defaultValue);
 
@@ -48,8 +50,8 @@ class AgeRestrictionWidget extends StatelessWidget {
           Padding(
             padding:
                 EdgeInsets.only(left: screenWidth * .07, top: 16, bottom: 8),
-            child: const Text(
-              'Age restriction',
+            child: Text(
+              S.of(context).Age_restriction,
               style: TextStyle(
                 color: Color(0xFF525252),
                 fontSize: 17,
@@ -64,7 +66,7 @@ class AgeRestrictionWidget extends StatelessWidget {
                 children: [
                   AgeOptionRow(
                     value: 1,
-                    label: 'Above 20',
+                    label: S.of(context).Above_20,
                     selectedValue: selectedValue,
                     onChanged: (value) {
                       final cubit = context.read<AgeRestrictionCubit>();
@@ -74,7 +76,7 @@ class AgeRestrictionWidget extends StatelessWidget {
                   ),
                   AgeOptionRow(
                     value: 2,
-                    label: 'Above 18',
+                    label: S.of(context).Above_18,
                     selectedValue: selectedValue,
                     onChanged: (value) {
                       final cubit = context.read<AgeRestrictionCubit>();
@@ -84,7 +86,7 @@ class AgeRestrictionWidget extends StatelessWidget {
                   ),
                   AgeOptionRow(
                     value: 3,
-                    label: 'Everyone',
+                    label: S.of(context).Everyone,
                     selectedValue: selectedValue,
                     onChanged: (value) {
                       final cubit = context.read<AgeRestrictionCubit>();

@@ -5,6 +5,7 @@ import 'package:tennis_app/Main-Features/menu/widgets/button_menu.dart';
 
 import '../../core/methodes/firebase_methodes.dart';
 import '../../core/utils/widgets/app_bar_wave.dart';
+import '../../generated/l10n.dart';
 import '../../models/player.dart';
 
 class MenuScreen extends StatelessWidget {
@@ -32,7 +33,7 @@ class MenuScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     AppBarWaveHome(
-                      text: 'Menu',
+                      text: S.of(context).Menu,
                       suffixIconPath: 'assets/images/app-bar-icon.svg',
                     ),
                     Container(
@@ -72,36 +73,36 @@ class MenuScreen extends StatelessWidget {
                     ),
                     ButtonMenu(
                       imagePath: 'assets/images/setting1.svg',
-                      buttonText: 'Your Profile',
+                      buttonText: S.of(context).Your_Profile,
                       onPressed: () {
                         GoRouter.of(context).push('/profileScreen');
                       },
                     ),
                     ButtonMenu(
                       imagePath: 'assets/images/Event-Calnder.svg',
-                      buttonText: 'Event Calender',
+                      buttonText: S.of(context).Event_Calendar,
                       onPressed: () {
                         GoRouter.of(context).push('/calendar');
                       },
                     ),
                     ButtonMenu(
                       imagePath: 'assets/images/Member-administration.svg',
-                      buttonText: 'Member administration',
+                      buttonText: S.of(context).Member_administration,
                       onPressed: () {},
                     ),
                     ButtonMenu(
                       imagePath: 'assets/images/Create-role.svg',
-                      buttonText: 'Create a role',
+                      buttonText: S.of(context).Create_Role,
                       onPressed: () {},
                     ),
                     ButtonMenu(
                       imagePath: 'assets/images/Tournament-management.svg',
-                      buttonText: 'Tournament management',
+                      buttonText: S.of(context).Tournament_management,
                       onPressed: () {},
                     ),
                     ButtonMenu(
                       imagePath: 'assets/images/Your-Membership.svg',
-                      buttonText: 'Your Membership',
+                      buttonText: S.of(context).Your_Membership,
                       onPressed: () {},
                     ),
                   ],

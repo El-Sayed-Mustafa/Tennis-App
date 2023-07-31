@@ -4,6 +4,7 @@ import 'package:tennis_app/Main-Features/Featured/roles/roles_list/view/widgets/
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
 import '../../../../../core/utils/widgets/app_bar_wave.dart';
+import '../../../../../generated/l10n.dart';
 
 class RolesScreen extends StatelessWidget {
   const RolesScreen({super.key});
@@ -29,11 +30,11 @@ class RolesScreen extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            text: '   Roles',
+            text: S.of(context).Roles,
             suffixIconPath: '',
           ),
-          const Text(
-            'Roles list',
+          Text(
+            S.of(context).Roles_list,
             style: TextStyle(
               color: Color(0xFF616161),
               fontSize: 22,
@@ -57,9 +58,9 @@ class RolesScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(100),
                   ),
                 ),
-                child: const Center(
+                child: Center(
                   child: Text(
-                    'Assign Roles to a Person',
+                    S.of(context).Assign_Roles_to_a_Person,
                     style: TextStyle(
                       color: Color(0xFF00344E),
                       fontSize: 12,
@@ -72,7 +73,7 @@ class RolesScreen extends StatelessWidget {
             ),
           ),
           BottomSheetContainer(
-              buttonText: 'Create Role',
+              buttonText: S.of(context).Create_Role,
               onPressed: () {
                 GoRouter.of(context).push('/createRole');
               },

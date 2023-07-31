@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/find_match/view/widgets/match_item.dart';
 import 'package:tennis_app/core/utils/widgets/no_data_text.dart';
+import '../../../generated/l10n.dart';
 import '../../../models/Match.dart';
 import '../../../models/player.dart';
 
@@ -93,7 +94,7 @@ class _MyMatchesState extends State<MyMatches> {
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
-                        return const Text('Error fetching match data');
+                        return Text(S.of(context).Error_fetching_match_data);
                       }
 
                       if (!snapshot.hasData) {
@@ -104,8 +105,9 @@ class _MyMatchesState extends State<MyMatches> {
                       if (courtData == null) {
                         return Center(
                           child: NoData(
-                            text: 'You Don\'t have Matches',
-                            buttonText: 'Click to Find Your Partner',
+                            text: S.of(context).You_Dont_have_Matches,
+                            buttonText:
+                                S.of(context).Click_to_Find_Your_Partner,
                             onPressed: () {
                               GoRouter.of(context).push('/findPartner');
                             },
@@ -125,11 +127,12 @@ class _MyMatchesState extends State<MyMatches> {
                   );
                 }).toList(),
               )
-            : const Padding(
-                padding: EdgeInsets.all(16.0),
+            : Padding(
+                padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  'No matches',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  S.of(context).No_matches,
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
 

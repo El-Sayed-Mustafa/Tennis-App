@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../../generated/l10n.dart';
+
 class RightSelector extends StatefulWidget {
   final List<String> selectedWords;
   final List<String> words;
@@ -34,9 +36,9 @@ class _RightSelectorState extends State<RightSelector> {
       children: [
         Padding(
           padding: EdgeInsets.only(bottom: 2.0, left: screenWidth * .055),
-          child: const Text(
-            'Rights',
-            style: TextStyle(
+          child: Text(
+            S.of(context).Rights,
+            style: const TextStyle(
               color: Color(0xFF525252),
               fontSize: 15,
               fontFamily: 'Poppins',

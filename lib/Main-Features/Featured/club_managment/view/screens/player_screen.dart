@@ -7,6 +7,7 @@ import 'package:tennis_app/Main-Features/Featured/club_managment/view/managment_
 import 'package:tennis_app/Main-Features/Featured/roles/create_role/view/widgets/rights_selector.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import '../../../../../core/utils/widgets/app_bar_wave.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../../../models/player.dart';
 import 'package:intl/intl.dart';
 
@@ -124,30 +125,32 @@ class _PlayerScreenState extends State<PlayerScreen> {
             memberIds.remove(playerId);
             await clubReference.update({'memberIds': memberIds});
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Player removed from the club')),
+              SnackBar(
+                  content: Text(S.of(context).Player_removed_from_the_club)),
             );
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                  content: Text('Player is not a member of the club')),
+              SnackBar(
+                  content:
+                      Text(S.of(context).Player_is_not_a_member_of_the_club)),
             );
           }
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Club data not found')),
+            SnackBar(content: Text(S.of(context).Club_data_not_found)),
           );
         }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('User not logged in')),
+          SnackBar(content: Text(S.of(context).User_not_logged_in)),
         );
       }
     } catch (e) {
       print('Error removing player from club: $e');
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content:
-              Text('Error removing player from club. Please try again later.'),
+              Text(S.of(context).Error_assigning_roles_Please_try_again_later),
         ),
       );
     }
@@ -160,7 +163,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
 
     if (memberName.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter the member name')),
+        SnackBar(content: Text(S.of(context).Please_enter_the_member_name)),
       );
       return;
     }
@@ -177,8 +180,9 @@ class _PlayerScreenState extends State<PlayerScreen> {
             await clubRolesService.getPlayerIdByName(memberName);
         if (playerId == null) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-                content: Text('Player not found with the given name')),
+            SnackBar(
+                content:
+                    Text(S.of(context).Player_not_found_with_the_given_name)),
           );
           return;
         }
@@ -219,7 +223,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
           }
 
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Roles assigned successfully')),
+            SnackBar(content: Text(S.of(context).Roles_assigned_successfully)),
           );
           Navigator.pushReplacement(
             context,
@@ -230,19 +234,20 @@ class _PlayerScreenState extends State<PlayerScreen> {
           GoRouter.of(context).push('/management');
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Player data not found')),
+            SnackBar(content: Text(S.of(context).Player_data_not_found)),
           );
         }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('User not logged in')),
+          SnackBar(content: Text(S.of(context).User_not_logged_in)),
         );
       }
     } catch (e) {
       print('Error assigning roles: $e');
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-            content: Text('Error assigning roles. Please try again later.')),
+        SnackBar(
+            content: Text(
+                S.of(context).Error_assigning_roles_Please_try_again_later)),
       );
     } finally {
       setState(() {
@@ -287,7 +292,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                       color: Colors.white,
                     ),
                   ),
-                  text: '    Management',
+                  text: S.of(context).Management,
                   suffixIconPath: '',
                 ),
                 Stack(
@@ -327,9 +332,9 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const Text(
-                                      'Skill level',
-                                      style: TextStyle(
+                                    Text(
+                                      S.of(context).Skill_level,
+                                      style: const TextStyle(
                                         color: Color(0xFF15324F),
                                         fontSize: 18,
                                         fontFamily: 'Roboto',
@@ -352,9 +357,9 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const Text(
-                                      'Membership',
-                                      style: TextStyle(
+                                    Text(
+                                      S.of(context).Membership,
+                                      style: const TextStyle(
                                         color: Color(0xFF15324F),
                                         fontSize: 18,
                                         fontFamily: 'Roboto',
@@ -363,7 +368,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                     ),
                                     Text(
                                       widget.player.clubRoles['membership'] ??
-                                          'Clear',
+                                          S.of(context).Clear,
                                       style: const TextStyle(
                                         color: Color(0xFF6D6D6D),
                                         fontSize: 16,
@@ -378,9 +383,9 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const Text(
-                                      'Player type',
-                                      style: TextStyle(
+                                    Text(
+                                      S.of(context).Player_Type,
+                                      style: const TextStyle(
                                         color: Color(0xFF15324F),
                                         fontSize: 18,
                                         fontFamily: 'Roboto',
@@ -403,9 +408,9 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const Text(
-                                      'Date',
-                                      style: TextStyle(
+                                    Text(
+                                      S.of(context).Date,
+                                      style: const TextStyle(
                                         color: Color(0xFF15324F),
                                         fontSize: 18,
                                         fontFamily: 'Roboto',
@@ -429,9 +434,9 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const Text(
-                                      'Role',
-                                      style: TextStyle(
+                                    Text(
+                                      S.of(context).Role,
+                                      style: const TextStyle(
                                         color: Color(0xFF15324F),
                                         fontSize: 18,
                                         fontFamily: 'Roboto',
@@ -445,7 +450,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                               ? getRolesFromClubRoles(
                                                       widget.player.clubRoles)
                                                   .join(', ')
-                                              : 'No Role Assigned',
+                                              : S.of(context).No_Role_Assigned,
                                       style: const TextStyle(
                                         color: Color(0xFF6D6D6D),
                                         fontSize: 18,
@@ -491,9 +496,9 @@ class _PlayerScreenState extends State<PlayerScreen> {
                 SizedBox(
                   height: screenHeight * .025,
                 ),
-                const Text(
-                  'Assign Role',
-                  style: TextStyle(
+                Text(
+                  S.of(context).Assign_Role,
+                  style: const TextStyle(
                     color: Colors.black,
                     fontSize: 20,
                     fontFamily: 'Poppins',
@@ -514,9 +519,9 @@ class _PlayerScreenState extends State<PlayerScreen> {
                 SizedBox(
                   height: screenHeight * .025,
                 ),
-                const Text(
-                  'Assign Player Skill Level',
-                  style: TextStyle(
+                Text(
+                  S.of(context).Assign_Player_Skill_Level,
+                  style: const TextStyle(
                     color: Colors.black,
                     fontSize: 20,
                     fontFamily: 'Poppins',
@@ -547,8 +552,8 @@ class _PlayerScreenState extends State<PlayerScreen> {
                       ),
                     );
                   },
-                  child: const Text(
-                    'Remove Member?',
+                  child: Text(
+                    S.of(context).Remove_Member,
                     style: TextStyle(
                       color: Color(0xFF0D5FC3),
                       fontSize: 14,
@@ -568,7 +573,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                       } else {
                         // Show the "Assign Role" button otherwise
                         return BottomSheetContainer(
-                          buttonText: 'Update Player',
+                          buttonText: S.of(context).Update_Player,
                           onPressed: _assignRole,
                           color: const Color(0xFFF8F8F8),
                         );

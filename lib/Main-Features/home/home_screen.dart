@@ -8,6 +8,8 @@ import 'package:tennis_app/Main-Features/home/widgets/my_events.dart';
 import 'package:tennis_app/Main-Features/home/widgets/my_matches.dart';
 import 'package:tennis_app/core/utils/widgets/app_bar_wave.dart';
 
+import '../../generated/l10n.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key});
 
@@ -25,14 +27,14 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             AppBarWaveHome(
-              text: 'Home',
+              text: S.of(context).Home,
               suffixIconPath: 'assets/images/app-bar-icon.svg',
             ),
             SizedBox(
               height: spacing,
             ),
             Text(
-              'Your Upcoming Events',
+              S.of(context).Your_Upcoming_Events,
               style: TextStyle(
                 color: const Color(0xFF313131),
                 fontSize: sectionTitleSize,
@@ -44,7 +46,7 @@ class HomeScreen extends StatelessWidget {
             const MyEvents(),
             SizedBox(height: spacing * 2),
             Text(
-              'Your Reversed Courts',
+              S.of(context).Your_Reversed_Courts,
               style: TextStyle(
                 color: const Color(0xFF313131),
                 fontSize: sectionTitleSize,
@@ -55,7 +57,7 @@ class HomeScreen extends StatelessWidget {
             const ReversedCourts(),
             SizedBox(height: spacing * 2),
             Text(
-              'Your Upcoming Matches',
+              S.of(context).Your_Upcoming_Matches,
               style: TextStyle(
                 color: const Color(0xFF313131),
                 fontSize: sectionTitleSize,
@@ -71,14 +73,14 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   HomeButton(
-                    buttonText: 'Find Court',
+                    buttonText: S.of(context).Find_Court,
                     imagePath: 'assets/images/Find-Court.svg',
                     onPressed: () {
                       GoRouter.of(context).push('/findCourt');
                     },
                   ),
                   HomeButton(
-                    buttonText: 'Find Partner',
+                    buttonText: S.of(context).Find_Partner,
                     imagePath: 'assets/images/Find-Partner.svg',
                     onPressed: () {
                       GoRouter.of(context).push('/findPartner');
@@ -94,13 +96,13 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   HomeButton(
-                      buttonText: 'Create Event',
+                      buttonText: S.of(context).Create_Event,
                       imagePath: 'assets/images/Create-Event.svg',
                       onPressed: () async {
                         navigateToCreateEvent(context);
                       }),
                   HomeButton(
-                    buttonText: 'Create Club',
+                    buttonText: S.of(context).Create_Club,
                     imagePath: 'assets/images/Make-offers.svg',
                     onPressed: () {
                       GoRouter.of(context).push('/createClub');

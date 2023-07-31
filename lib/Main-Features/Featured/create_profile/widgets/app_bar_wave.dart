@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/utils/widgets/clipper.dart';
+import '../../../../generated/l10n.dart';
 
 class AppBarWave extends StatelessWidget {
   const AppBarWave({Key? key});
@@ -30,7 +31,7 @@ class AppBarWave extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Create\nYour Profile',
+                        S.of(context).Create_Your_Profile,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: screenHeight * 0.05,

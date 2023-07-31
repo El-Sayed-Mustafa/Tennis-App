@@ -5,6 +5,7 @@ import 'package:tennis_app/Main-Features/Featured/profile/view/widgets/playing_i
 import 'package:tennis_app/models/club.dart'; // Replace 'Club' with the correct Club class path
 
 import '../../../../../core/methodes/firebase_methodes.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../../../models/player.dart';
 import '../../../../club/widgets/club_info.dart';
 
@@ -40,7 +41,7 @@ class ProfileBody extends StatelessWidget {
                     PersonalInfo(
                       player: player,
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     PlayingInfo(
                       player: player,
                     ),
@@ -70,12 +71,13 @@ class ProfileBody extends StatelessWidget {
                     ? ClubInfo(
                         clubData: clubData, // Pass the club data here
                       )
-                    : Text(
-                        'No Club Data'), // Show a message when clubData is null
+                    : Text(S
+                        .of(context)
+                        .No_Club_Data), // Show a message when clubData is null
               ),
-              const Text(
-                'Your Strength',
-                style: TextStyle(
+              Text(
+                S.of(context).Your_Strength,
+                style: const TextStyle(
                   color: Color(0xFF313131),
                   fontSize: 20,
                   fontFamily: 'Poppins',
@@ -85,11 +87,13 @@ class ProfileBody extends StatelessWidget {
               PlayerStrength(
                 value: double.parse(player.skillLevel),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Text(
-                  'Your strength will be determined based on your playing record,\nand your performance may impact your strength rating.',
-                  style: TextStyle(
+                  S
+                      .of(context)
+                      .Your_strength_will_be_determined_based_on_your_playing_record_and_your_performance_may_impact_your_strength_rating,
+                  style: const TextStyle(
                     color: Color(0xFF6A6A6A),
                     fontSize: 11,
                     fontFamily: 'Poppins',

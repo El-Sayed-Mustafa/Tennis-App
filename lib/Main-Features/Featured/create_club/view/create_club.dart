@@ -13,6 +13,7 @@ import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
 import '../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../core/utils/widgets/text_field.dart';
+import '../../../../generated/l10n.dart';
 import '../../create_profile/widgets/profile_image.dart';
 
 // ignore: must_be_immutable
@@ -68,7 +69,7 @@ class CreateClub extends StatelessWidget {
                             color: Colors.white,
                           ),
                         ),
-                        text: 'Create Club',
+                        text: S.of(context).Create_Club,
                         suffixIconPath: '',
                       ),
                       ProfileImage(
@@ -77,8 +78,8 @@ class CreateClub extends StatelessWidget {
                         },
                       ),
                       SizedBox(height: screenHeight * .01),
-                      const Text(
-                        'Set Club Picture',
+                      Text(
+                        S.of(context).Set_Club_Picture,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 14,
@@ -88,60 +89,61 @@ class CreateClub extends StatelessWidget {
                       ),
                       SizedBox(height: screenHeight * .03),
                       InputTextWithHint(
-                        hint: 'Type event name here',
-                        text: 'Club Name',
+                        hint: S.of(context).Type_club_name_here,
+                        text: S.of(context).Club_Name,
                         controller: clubNameController,
                       ),
                       SizedBox(height: screenHeight * .03),
                       InputTextWithHint(
-                        hint: 'Type your name here',
-                        text: 'Club admin',
+                        hint: S.of(context).Type_your_name_here,
+                        text: S.of(context).Club_admin,
                         controller: adminNameController,
                       ),
                       SizedBox(height: screenHeight * .03),
                       InputTextWithHint(
-                        hint: 'Type id here',
-                        text: 'National Id number',
+                        hint: S.of(context).Type_id_here,
+                        text: S.of(context).National_Id_number,
                         controller: nationalIDController,
                       ),
                       SizedBox(height: screenHeight * .03),
                       InputTextWithHint(
-                        hint: 'Type your Phone number here',
-                        text: 'Phone number',
+                        hint: S.of(context).Type_your_Phone_number_here,
+                        text: S.of(context).Phone_number,
                         controller: phoneController,
                       ),
                       SizedBox(height: screenHeight * .03),
                       InputTextWithHint(
-                        hint: 'Type Club Address here',
-                        text: 'Club Address',
+                        hint: S.of(context).Type_Club_Address_here,
+                        text: S.of(context).Club_Address,
                         controller: addressController,
                       ),
                       SizedBox(height: screenHeight * .03),
                       InputTextWithHint(
-                        hint: 'Type Your Email here',
-                        text: 'Your Email',
+                        hint: S.of(context).Type_Your_Email_here,
+                        text: S.of(context).Your_Email,
                         controller: emailController,
                       ),
                       SizedBox(height: screenHeight * .03),
                       InputTextWithHint(
-                        hint: 'Type Number of Courts Own',
-                        text: 'Your Courts Own',
+                        hint: S.of(context).Type_Court_Name_here,
+                        text: S.of(context).Your_Courts_Own,
                         controller: courtsNumController,
                       ),
                       SizedBox(height: screenHeight * .03),
                       ClubTypeInput(),
                       SizedBox(height: screenHeight * .03),
                       RulesInputText(
-                        header: 'Rules and regulatoins',
-                        body:
-                            'Briefly describe your club’s rule and regulations',
+                        header: S.of(context).Rules_and_regulations,
+                        body: S
+                            .of(context)
+                            .Briefly_describe_your_clubs_rule_and_regulations,
                         controller: rulesController,
                       ),
                       SizedBox(height: screenHeight * .03),
                       AgeRestrictionWidget(),
                       SizedBox(height: screenHeight * .015),
                       BottomSheetContainer(
-                          buttonText: 'Create',
+                          buttonText: S.of(context).Create,
                           onPressed: () {
                             if (formKey.currentState!.validate()) {
                               context.read<CreateClubCubit>().saveClubData(

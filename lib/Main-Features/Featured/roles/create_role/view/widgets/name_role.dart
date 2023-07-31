@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../../generated/l10n.dart';
+
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
 
@@ -11,11 +13,11 @@ class CustomTextFormField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.only(left: 16.0, bottom: 2),
+        Padding(
+          padding: const EdgeInsets.only(left: 16.0, bottom: 2),
           child: Text(
-            'Create Role',
-            style: TextStyle(
+            S.of(context).Create_Role,
+            style: const TextStyle(
               color: Color(0xFF525252),
               fontSize: 15,
               fontFamily: 'Poppins',
@@ -27,7 +29,7 @@ class CustomTextFormField extends StatelessWidget {
           margin: const EdgeInsets.only(bottom: 8.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50),
-            border: Border.all(color: Color(0x300A557F), width: 1),
+            border: Border.all(color: const Color(0x300A557F), width: 1),
             color: Colors.white,
           ),
           child: TextFormField(
@@ -37,7 +39,7 @@ class CustomTextFormField extends StatelessWidget {
                 borderRadius: BorderRadius.circular(50),
                 borderSide: BorderSide.none, // Remove the line
               ),
-              hintText: 'Describe Role type here',
+              hintText: S.of(context).Describe_Role_type_here,
               hintStyle: const TextStyle(
                 color: Color(0xFFA8A8A8),
                 fontSize: 14,

@@ -24,7 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "Above_18": MessageLookupByLibrary.simpleMessage("Above 18"),
         "Above_20": MessageLookupByLibrary.simpleMessage("Above 20"),
-        "Address": MessageLookupByLibrary.simpleMessage("Address"),
+        "Address": MessageLookupByLibrary.simpleMessage("Address "),
         "Address_": MessageLookupByLibrary.simpleMessage("Address :"),
         "Age_restriction":
             MessageLookupByLibrary.simpleMessage("Age restriction"),
@@ -36,6 +36,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "Assign_Roles_to_a_Person":
             MessageLookupByLibrary.simpleMessage("Assign Roles to a Person"),
         "Birth_date_": MessageLookupByLibrary.simpleMessage("Birth date "),
+        "Briefly_describe_your_clubs_rule_and_regulations":
+            MessageLookupByLibrary.simpleMessage(
+                "Briefly describe your club’s rule and regulations"),
         "Challenge": MessageLookupByLibrary.simpleMessage("Challenge"),
         "Chat": MessageLookupByLibrary.simpleMessage("Chat"),
         "Clear": MessageLookupByLibrary.simpleMessage("Clear"),
@@ -48,6 +51,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Club_Name": MessageLookupByLibrary.simpleMessage("Club Name"),
         "Club_Type": MessageLookupByLibrary.simpleMessage("Club Type"),
         "Club_admin": MessageLookupByLibrary.simpleMessage("Club admin"),
+        "Club_data_not_found":
+            MessageLookupByLibrary.simpleMessage("Club data not found"),
         "Club_name_for_hosting_the_event": MessageLookupByLibrary.simpleMessage(
             "Club name for hosting the event"),
         "Competition": MessageLookupByLibrary.simpleMessage("Competition"),
@@ -64,7 +69,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Create_Training":
             MessageLookupByLibrary.simpleMessage("Create Training"),
         "Create_Your_Profile":
-            MessageLookupByLibrary.simpleMessage("Create Your Profile"),
+            MessageLookupByLibrary.simpleMessage("Create \nYour Profile"),
         "Create_a_role": MessageLookupByLibrary.simpleMessage("Create a role"),
         "Create_offers": MessageLookupByLibrary.simpleMessage("Create offers"),
         "Create_tennis_courts":
@@ -73,6 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Daily_Training":
             MessageLookupByLibrary.simpleMessage("Daily Training"),
         "Date": MessageLookupByLibrary.simpleMessage("Date"),
+        "Date_": MessageLookupByLibrary.simpleMessage("Date "),
         "Date_of_birth": MessageLookupByLibrary.simpleMessage("Date of birth"),
         "Delete_club": MessageLookupByLibrary.simpleMessage("Delete club"),
         "Delete_members":
@@ -85,6 +91,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "Edit_members": MessageLookupByLibrary.simpleMessage("Edit members"),
         "End_Date_and_time":
             MessageLookupByLibrary.simpleMessage("End Date and time"),
+        "Error_assigning_roles_Please_try_again_later":
+            MessageLookupByLibrary.simpleMessage(
+                "Error assigning roles. Please try again later."),
         "Error_creating_role":
             MessageLookupByLibrary.simpleMessage("Error creating role"),
         "Error_fetching_court_data":
@@ -97,6 +106,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Error fetching match data"),
         "Error_fetching_player_data":
             MessageLookupByLibrary.simpleMessage("Error fetching player data"),
+        "Error_fetching_user_data":
+            MessageLookupByLibrary.simpleMessage("Error fetching user data."),
+        "Error_occurred_while_saving_match_data":
+            MessageLookupByLibrary.simpleMessage(
+                "Error occurred while saving match data!"),
         "Event_Address": MessageLookupByLibrary.simpleMessage("Event Address"),
         "Event_Calendar":
             MessageLookupByLibrary.simpleMessage("Event Calendar"),
@@ -119,10 +133,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "Instructions": MessageLookupByLibrary.simpleMessage("Instructions"),
         "Invite_Members":
             MessageLookupByLibrary.simpleMessage("Invite Members"),
+        "Loading": MessageLookupByLibrary.simpleMessage("Loading..."),
         "Manage_Members":
             MessageLookupByLibrary.simpleMessage("Manage Members"),
         "Management": MessageLookupByLibrary.simpleMessage("Management"),
         "Match_Played": MessageLookupByLibrary.simpleMessage("Match Played"),
+        "Match_data_saved_successfully": MessageLookupByLibrary.simpleMessage(
+            "Match data saved successfully!"),
         "Matched_Played":
             MessageLookupByLibrary.simpleMessage("Matched Played "),
         "Member_administration":
@@ -144,19 +161,33 @@ class MessageLookup extends MessageLookupByLibrary {
         "No_data_available":
             MessageLookupByLibrary.simpleMessage("No data available"),
         "No_data_found": MessageLookupByLibrary.simpleMessage("No data found"),
+        "No_events_found":
+            MessageLookupByLibrary.simpleMessage("No events found."),
         "No_matches": MessageLookupByLibrary.simpleMessage("No matches"),
+        "No_matches_available_now":
+            MessageLookupByLibrary.simpleMessage("No matches available now."),
         "No_player_data_available":
             MessageLookupByLibrary.simpleMessage("No player data available"),
         "Occupied": MessageLookupByLibrary.simpleMessage("Occupied"),
         "One_Day": MessageLookupByLibrary.simpleMessage("One Day"),
         "Opponent": MessageLookupByLibrary.simpleMessage("Opponent"),
         "Party_Event": MessageLookupByLibrary.simpleMessage("Party Event"),
+        "People_Requirements":
+            MessageLookupByLibrary.simpleMessage("People’ Requirements"),
         "Phone_number": MessageLookupByLibrary.simpleMessage("Phone number"),
         "Play": MessageLookupByLibrary.simpleMessage("Play"),
-        "Player_Type": MessageLookupByLibrary.simpleMessage("Player Type"),
+        "Player_Type": MessageLookupByLibrary.simpleMessage("Player Type "),
         "Player_data_not_found":
             MessageLookupByLibrary.simpleMessage("Player data not found"),
+        "Player_is_not_a_member_of_the_club":
+            MessageLookupByLibrary.simpleMessage(
+                "Player is not a member of the club"),
         "Player_level": MessageLookupByLibrary.simpleMessage("Player level"),
+        "Player_not_found_with_the_given_name":
+            MessageLookupByLibrary.simpleMessage(
+                "Player not found with the given name"),
+        "Player_removed_from_the_club": MessageLookupByLibrary.simpleMessage(
+            "Player removed from the club"),
         "Player_type": MessageLookupByLibrary.simpleMessage("Player type"),
         "Player_type_": MessageLookupByLibrary.simpleMessage("Player type "),
         "Please_choose_a_club":
@@ -174,12 +205,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please select at least one role"),
         "Preferred_Playing_time":
             MessageLookupByLibrary.simpleMessage("Preferred Playing time"),
-        "Preferred_time":
-            MessageLookupByLibrary.simpleMessage("Preferred time"),
+        "Preferred_time_":
+            MessageLookupByLibrary.simpleMessage("Preferred time  "),
         "Register_Done": MessageLookupByLibrary.simpleMessage("Register Done"),
         "Register_for_events_on_the_Club_page":
             MessageLookupByLibrary.simpleMessage(
                 "Register for events on the Club page"),
+        "Remove_Member": MessageLookupByLibrary.simpleMessage("Remove Member?"),
         "Rights": MessageLookupByLibrary.simpleMessage("Rights"),
         "Role": MessageLookupByLibrary.simpleMessage("Role"),
         "Role_Created": MessageLookupByLibrary.simpleMessage("Role Created"),
@@ -225,6 +257,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Training_Plan": MessageLookupByLibrary.simpleMessage("Training Plan"),
         "Type_Club_Address_here":
             MessageLookupByLibrary.simpleMessage("Type Club Address here"),
+        "Type_Court_Address_here":
+            MessageLookupByLibrary.simpleMessage("Type Court Address here"),
         "Type_Court_Name_here":
             MessageLookupByLibrary.simpleMessage("Type Court Name here"),
         "Type_Court_name_here":
@@ -235,6 +269,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Type Number of Courts Own"),
         "Type_Your_Email_here":
             MessageLookupByLibrary.simpleMessage("Type Your Email here"),
+        "Type_club_name_here":
+            MessageLookupByLibrary.simpleMessage("Type club name here"),
         "Type_event_name_here":
             MessageLookupByLibrary.simpleMessage("Type event name here"),
         "Type_id_here": MessageLookupByLibrary.simpleMessage("Type id here"),
@@ -249,9 +285,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "User_not_logged_in":
             MessageLookupByLibrary.simpleMessage("User not logged in"),
         "You": MessageLookupByLibrary.simpleMessage("You"),
+        "You_Dont_have_Events":
+            MessageLookupByLibrary.simpleMessage("You Don\'t have Events"),
+        "You_Dont_have_Matches":
+            MessageLookupByLibrary.simpleMessage("You Don\'t have Matches"),
         "You_can_add_more_rights_to_a_role":
             MessageLookupByLibrary.simpleMessage(
-                "You can add more rights to a role"),
+                "You can add more rights to a role."),
+        "You_can_set_a_skill_level_requirement_for_players_allowing_only_those_whose_skill_level_matches_the_requirement_you_have_set_to_participate":
+            MessageLookupByLibrary.simpleMessage(
+                "You can set a skill level requirement for players, allowing\nonly those whose skill level matches the requirement\nyou have set to participate."),
         "You_dont_have_any_members": MessageLookupByLibrary.simpleMessage(
             "You don\'t have any members."),
         "Your_Age": MessageLookupByLibrary.simpleMessage("Your Age"),
@@ -272,6 +315,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Your Upcoming Events"),
         "Your_Upcoming_Matches":
             MessageLookupByLibrary.simpleMessage("Your Upcoming Matches"),
+        "Your_strength_will_be_determined_based_on_your_playing_record_and_your_performance_may_impact_your_strength_rating":
+            MessageLookupByLibrary.simpleMessage(
+                "Your strength will be determined based on your playing record,\nand your performance may impact your strength rating."),
         "account_already_exists": MessageLookupByLibrary.simpleMessage(
             "The account already exists for that email."),
         "age": MessageLookupByLibrary.simpleMessage("Age"),
@@ -296,6 +342,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Create your Basic Profile"),
         "create_event": MessageLookupByLibrary.simpleMessage("Create Event"),
         "doubles": MessageLookupByLibrary.simpleMessage("Doubles"),
+        "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "email_address": MessageLookupByLibrary.simpleMessage("Email Address"),
         "email_verification_sent":
@@ -376,6 +423,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "setProfilePicture":
             MessageLookupByLibrary.simpleMessage("Set Profile Picture"),
         "set_reminder": MessageLookupByLibrary.simpleMessage("Set Reminder"),
+        "set_requirements":
+            MessageLookupByLibrary.simpleMessage("Set Requirements"),
         "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "sign_in": MessageLookupByLibrary.simpleMessage("SIGN IN"),
@@ -400,6 +449,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "weak_password": MessageLookupByLibrary.simpleMessage(
             "The password provided is too weak."),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
-        "your_club": MessageLookupByLibrary.simpleMessage("Your Club")
+        "your_club": MessageLookupByLibrary.simpleMessage("Your Club"),
+        "your_event_will_start_now":
+            MessageLookupByLibrary.simpleMessage("Your event will start now")
       };
 }

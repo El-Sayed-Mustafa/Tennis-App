@@ -9,6 +9,7 @@ import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import '../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../core/utils/widgets/input_date_and_time.dart';
 import '../../../core/utils/widgets/text_field.dart';
+import '../../../generated/l10n.dart';
 import '../../../models/event.dart';
 import '../../club/widgets/club_event_item.dart';
 import '../../club/widgets/header_text.dart';
@@ -59,7 +60,7 @@ class SetReminder extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-              text: '   Set Reminder',
+              text: S.of(context).set_reminder,
               suffixIconPath: '',
             ),
             ClubEventItem(
@@ -69,10 +70,10 @@ class SetReminder extends StatelessWidget {
             SizedBox(height: spacing * 3),
             Padding(
               padding: EdgeInsets.only(left: screenWidth * .13, bottom: 4),
-              child: const Align(
+              child: Align(
                 alignment: AlignmentDirectional.centerStart,
                 child: Text(
-                  'Set Reminder',
+                  S.of(context).set_reminder,
                   style: TextStyle(
                     color: Color(0xB2313131),
                     fontSize: 16,
@@ -98,20 +99,20 @@ class SetReminder extends StatelessWidget {
                   children: [
                     SizedBox(height: screenHeight * .01),
                     InputTextWithHint(
-                      hint: 'Type event name here',
-                      text: 'Event Name',
+                      hint: S.of(context).Type_event_name_here,
+                      text: S.of(context).Event_Name,
                       controller: eventNameController,
                     ),
                     SizedBox(height: screenHeight * .03),
                     InputDateAndTime(
-                      text: 'Event Start',
-                      hint: 'Select start date and time',
+                      text: S.of(context).Event_Start,
+                      hint: S.of(context).Select_start_date_and_time,
                       onDateTimeSelected: (DateTime dateTime) {},
                     ),
                     SizedBox(height: screenHeight * .03),
                     InputEndDateAndTime(
-                      text: 'Event End',
-                      hint: 'Select end date and time',
+                      text: S.of(context).Event_End,
+                      hint: S.of(context).Select_end_date_and_time,
                       onDateTimeSelected: (DateTime dateTime) {},
                     ),
                     SizedBox(height: screenHeight * .01),
@@ -123,7 +124,7 @@ class SetReminder extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomSheetContainer(
-        buttonText: 'Set Reminder',
+        buttonText: S.of(context).Set_Reminder,
         onPressed: () async {
           if (formKey.currentState!.validate()) {
             try {
@@ -139,7 +140,7 @@ class SetReminder extends StatelessWidget {
 
               NotificationApi.showSchaduleNotification(
                 title: name,
-                body: "Your Event will start now",
+                body: S.of(context).your_event_will_start_now,
                 scheduleDate: startDate,
               );
               GoRouter.of(context).push('/calendar');

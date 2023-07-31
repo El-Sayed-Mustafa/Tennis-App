@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../generated/l10n.dart';
+
 // ignore: constant_identifier_names
 enum ClubType { Private, Public }
 
@@ -27,8 +29,8 @@ class ClubTypeInput extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.only(bottom: 2.0, left: screenWidth * .055),
-            child: const Text(
-              'Club Type',
+            child: Text(
+              S.of(context).Club_Type,
               style: TextStyle(
                 color: Color(0xFF525252),
                 fontSize: 15,

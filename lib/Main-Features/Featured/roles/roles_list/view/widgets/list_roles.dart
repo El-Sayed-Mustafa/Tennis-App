@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../../../../models/club.dart';
 import '../../../../../../models/player.dart';
 import '../../../../../../models/roles.dart';
@@ -23,7 +24,7 @@ class ListRoles extends StatelessWidget {
           return Text('Error: ${snapshot.error}');
         }
         if (!snapshot.hasData) {
-          return const Text('No data found');
+          return Text(S.of(context).No_data_found);
         }
         final player = snapshot.data!;
         return FutureBuilder<Club>(
@@ -35,11 +36,13 @@ class ListRoles extends StatelessWidget {
             }
             if (snapshot.hasError) {
               return Expanded(
-                  child: Center(child: Text('Error: ${snapshot.error}')));
+                  child: Center(
+                      child:
+                          Text('${S.of(context).error}: ${snapshot.error}')));
             }
             if (!snapshot.hasData) {
-              return const Expanded(
-                  child: Center(child: Text('No data found')));
+              return Expanded(
+                  child: Center(child: Text(S.of(context).No_data_found)));
             }
             final club = snapshot.data!;
             return FutureBuilder<List<Role>>(
@@ -51,11 +54,13 @@ class ListRoles extends StatelessWidget {
                 }
                 if (snapshot.hasError) {
                   return Expanded(
-                      child: Center(child: Text('Error: ${snapshot.error}')));
+                      child: Center(
+                          child: Text(
+                              '${S.of(context).error}: ${snapshot.error}')));
                 }
                 if (!snapshot.hasData) {
-                  return const Expanded(
-                      child: Center(child: Text('No data found')));
+                  return Expanded(
+                      child: Center(child: Text(S.of(context).No_data_found)));
                 }
                 final roles = snapshot.data!;
                 return buildListView(roles);

@@ -15,6 +15,7 @@ import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import '../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../core/utils/widgets/input_date_and_time.dart';
 import '../../../../core/utils/widgets/text_field.dart';
+import '../../../../generated/l10n.dart';
 import '../../create_profile/widgets/profile_image.dart';
 import '../cubit/create_event_state.dart';
 
@@ -88,7 +89,7 @@ class CreateEvent extends StatelessWidget {
                               color: Colors.white,
                             ),
                           ),
-                          text: 'Create Event',
+                          text: S.of(context).Create_Event,
                           suffixIconPath: '',
                         ),
                         ProfileImage(
@@ -97,8 +98,8 @@ class CreateEvent extends StatelessWidget {
                           },
                         ),
                         SizedBox(height: screenHeight * .01),
-                        const Text(
-                          'Set Event Picture',
+                        Text(
+                          S.of(context).Set_Event_Picture,
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 14,
@@ -112,53 +113,56 @@ class CreateEvent extends StatelessWidget {
                         ),
                         SizedBox(height: screenHeight * .03),
                         InputTextWithHint(
-                          hint: 'Type event name here',
-                          text: 'Event Name',
+                          hint: S.of(context).Type_event_name_here,
+                          text: S.of(context).Event_Name,
                           controller: eventNameController,
                         ),
                         SizedBox(height: screenHeight * .03),
                         InputDateAndTime(
-                          text: 'Event Start',
-                          hint: 'Select start date and time',
+                          text: S.of(context).Event_Start,
+                          hint: S.of(context).Select_start_date_and_time,
                           onDateTimeSelected: (DateTime dateTime) {},
                         ),
                         SizedBox(height: screenHeight * .03),
                         InputEndDateAndTime(
-                          text: 'Event End',
-                          hint: 'Select end date and time',
+                          text: S.of(context).Event_End,
+                          hint: S.of(context).Select_end_date_and_time,
                           onDateTimeSelected: (DateTime dateTime) {},
                         ),
                         SizedBox(height: screenHeight * .03),
                         InputTextWithHint(
-                          hint: 'Type Event address here',
-                          text: 'Event Address',
+                          hint: S.of(context).Type_Event_address_here,
+                          text: S.of(context).Event_Address,
                           controller: eventAddressController,
                         ),
                         SizedBox(height: screenHeight * .03),
                         EventTypeInput(),
                         SizedBox(height: screenHeight * .03),
                         InputTextWithHint(
-                          hint: 'Type Court name here',
-                          text: 'Court Name',
+                          hint: S.of(context).Type_Court_Address_here,
+                          text: S.of(context).Court_Name,
                           controller: courtNameController,
                         ),
                         SizedBox(height: screenHeight * .03),
                         RulesInputText(
-                          header: 'Instructions',
-                          body:
-                              'Briefly describe your club’s Instructions here...',
+                          header: S.of(context).Instructions,
+                          body: S
+                              .of(context)
+                              .Briefly_describe_your_clubs_rule_and_regulations,
                           controller: rulesController,
                         ),
                         SizedBox(height: screenHeight * .03),
-                        const RangeSliderWithTooltip(
-                          text1:
-                              'Player level', // Replace with your desired text for text1
-                          text2:
-                              'You can set a skill level requirement for players, allowing\nonly those whose skill level matches the requirement\nyou have set to participate.', // Replace with your desired text for text2
+                        RangeSliderWithTooltip(
+                          text1: S
+                              .of(context)
+                              .Player_level, // Replace with your desired text for text1
+                          text2: S
+                              .of(context)
+                              .You_can_set_a_skill_level_requirement_for_players_allowing_only_those_whose_skill_level_matches_the_requirement_you_have_set_to_participate, // Replace with your desired text for text2
                         ),
                         SizedBox(height: screenHeight * .015),
                         BottomSheetContainer(
-                          buttonText: 'Create',
+                          buttonText: S.of(context).Create,
                           onPressed: () {
                             if (formKey.currentState!.validate()) {
                               context.read<CreateEventCubit>().saveEventData(

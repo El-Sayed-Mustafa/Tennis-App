@@ -91,8 +91,8 @@ class CreateProfile extends StatelessWidget {
                       ),
                       SizedBox(height: screenHeight * .025),
                       InputDate(
-                        hint: 'Select Date of Birth',
-                        text: 'Your Age',
+                        hint: S.of(context).Select_Date_of_Birth,
+                        text: S.of(context).Your_Age,
                         onDateTimeSelected: (DateTime dateTime) {
                           // Handle date selection
                         },

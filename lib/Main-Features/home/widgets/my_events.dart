@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../core/utils/widgets/no_data_text.dart';
+import '../../../generated/l10n.dart';
 import '../../../models/event.dart';
 
 class MyEvents extends StatefulWidget {
@@ -38,10 +39,10 @@ class _MyEventsState extends State<MyEvents> {
           if (eventIds.isEmpty) {
             // Show the NoData widget when the eventIds list is empty
             return NoData(
-              text: 'You Don\'t have Events',
+              text: S.of(context).You_Dont_have_Events,
               height: MediaQuery.of(context).size.height * .15,
               width: MediaQuery.of(context).size.width * .8,
-              buttonText: 'Register for events on the Club page',
+              buttonText: S.of(context).Register_for_events_on_the_Club_page,
             );
           }
 
@@ -74,8 +75,8 @@ class _MyEventsState extends State<MyEvents> {
                           event: event, // Pass the event object here
                         );
                       } else if (eventSnapshot.hasError) {
-                        return const Center(
-                          child: Text('Error fetching event data'),
+                        return Center(
+                          child: Text(S.of(context).error_fetching_club_data),
                         );
                       } else {
                         return const Center(
@@ -91,8 +92,8 @@ class _MyEventsState extends State<MyEvents> {
             ],
           );
         } else if (snapshot.hasError) {
-          return const Center(
-            child: Text('Error fetching player data'),
+          return Center(
+            child: Text(S.of(context).Error_fetching_player_data),
           );
         } else {
           return const Center(
@@ -207,7 +208,7 @@ class CarouselItem extends StatelessWidget {
             ),
             child: Center(
               child: Text(
-                'Register Done',
+                S.of(context).Register_Done,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: itemHeight * 0.056 * scaleFactor,

@@ -11,6 +11,7 @@ import 'package:tennis_app/models/player.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/utils/widgets/custom_button.dart';
+import '../../../../generated/l10n.dart';
 import '../../../../models/club.dart';
 import '../../../club/widgets/club_info.dart';
 import '../../../club/widgets/num_members.dart';
@@ -100,7 +101,7 @@ class _ManagementScreenState extends State<ManagementScreen> {
                           color: Colors.white,
                         ),
                       ),
-                      text: '    Management',
+                      text: S.of(context).Management,
                       suffixIconPath: '',
                     ),
                     Container(
@@ -123,8 +124,8 @@ class _ManagementScreenState extends State<ManagementScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
-                            'Manage Members',
+                          Text(
+                            S.of(context).Manage_Members,
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 18,
@@ -142,8 +143,8 @@ class _ManagementScreenState extends State<ManagementScreen> {
                                 ),
                               );
                             },
-                            child: const Text(
-                              'Invite Members',
+                            child: Text(
+                              S.of(context).Invite_Members,
                               style: TextStyle(
                                 color: Color(0xFF0D5FC3),
                                 fontSize: 12,
@@ -157,8 +158,8 @@ class _ManagementScreenState extends State<ManagementScreen> {
                     ),
                     HorizontalListView(memberNames: members),
                     SizedBox(height: screenHeight * .03),
-                    const Text(
-                      'Rules and regulations',
+                    Text(
+                      S.of(context).Rules_and_regulations,
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 18,
@@ -168,13 +169,13 @@ class _ManagementScreenState extends State<ManagementScreen> {
                     ),
                     const SizedBox(height: 10),
                     RulesInputText(
-                      header: 'Set the rules for members',
+                      header: S.of(context).Set_the_rules_for_members,
                       body: club.rulesAndRegulations,
                       controller: rulesController,
                     ),
                     SizedBox(height: screenHeight * .03),
-                    const Text(
-                      'Age restriction',
+                    Text(
+                      S.of(context).Age_restriction,
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 18,
@@ -186,7 +187,7 @@ class _ManagementScreenState extends State<ManagementScreen> {
                     const AgeRestrictionWidget(),
                     SizedBox(height: screenHeight * .015),
                     BottomSheetContainer(
-                      buttonText: 'Set',
+                      buttonText: S.of(context).Set,
                       onPressed: () async {
                         // Update the club data with new rules and age restriction
                         String newRules = rulesController.text;
@@ -215,9 +216,8 @@ class _ManagementScreenState extends State<ManagementScreen> {
                         });
 
                         // Optionally, you can show a confirmation message to the user
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text('Updated successfully!')));
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(S.of(context).Update_Player)));
 
                         // Refetch the club data to update the UI with the latest changes
                         clubManagementCubit.fetchClubData(createdClubId);
@@ -233,7 +233,7 @@ class _ManagementScreenState extends State<ManagementScreen> {
             return Center(child: Text(state.errorMessage));
           } else {
             // Show an initial state UI
-            return const Center(child: Text('Loading...'));
+            return Center(child: Text(S.of(context).Loading));
           }
         },
       ),

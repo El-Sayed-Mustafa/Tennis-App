@@ -5,6 +5,7 @@ import 'package:tennis_app/Main-Features/Featured/roles/create_role/view/widgets
 import 'package:tennis_app/Main-Features/Featured/roles/create_role/view/widgets/rights_selector.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import '../../../../../core/utils/widgets/app_bar_wave.dart';
+import '../../../../../generated/l10n.dart';
 import '../cubit/role_cubit.dart';
 
 class CreateRole extends StatefulWidget {
@@ -17,23 +18,23 @@ class CreateRole extends StatefulWidget {
 class _CreateRoleState extends State<CreateRole> {
   final TextEditingController roleController = TextEditingController();
   List<String> selectedWords = [];
-  List<String> words = [
-    'Send invitation',
-    'Create Events',
-    'Create tennis courts',
-    'Create offers',
-    'Edit club',
-    'Delete club',
-    'Edit members',
-    'Delete members',
-    'Create Training',
-    'Set up leagues',
-    'Create Roles',
-  ];
+
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-
+    List<String> words = [
+      S.of(context).Send_Invitations,
+      S.of(context).Create_Event,
+      S.of(context).Create_tennis_courts,
+      S.of(context).Create_offers,
+      S.of(context).Edit_club,
+      S.of(context).Delete_club,
+      S.of(context).Edit_members,
+      S.of(context).Delete_members,
+      S.of(context).Create_Training,
+      S.of(context).Set_up_leagues,
+      S.of(context).Create_Roles,
+    ];
     return BlocProvider(
       create: (context) => RoleCubit(),
       child: BlocConsumer<RoleCubit, RoleCreationStatus>(

@@ -12,6 +12,7 @@ import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import '../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../core/utils/widgets/input_date_and_time.dart';
 import '../../../../core/utils/widgets/text_field.dart';
+import '../../../../generated/l10n.dart';
 import '../../create_profile/widgets/profile_image.dart';
 import '../cubit/create_court_cubit.dart';
 
@@ -81,7 +82,7 @@ class CreateCourt extends StatelessWidget {
                             color: Colors.white,
                           ),
                         ),
-                        text: '   Create Court',
+                        text: S.of(context).Create_Court,
                         suffixIconPath: '',
                       ),
                       SizedBox(height: screenHeight * .01),
@@ -91,8 +92,8 @@ class CreateCourt extends StatelessWidget {
                         },
                       ),
                       SizedBox(height: screenHeight * .015),
-                      const Text(
-                        'Set Court Picture',
+                      Text(
+                        S.of(context).Set_Court_Picture,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 14,
@@ -102,37 +103,37 @@ class CreateCourt extends StatelessWidget {
                       ),
                       SizedBox(height: screenHeight * .03),
                       InputTextWithHint(
-                        hint: 'Type Court Name here',
-                        text: 'Court Name',
+                        hint: S.of(context).Type_Court_Name_here,
+                        text: S.of(context).Court_Name,
                         controller: courtNameController,
                       ),
                       SizedBox(height: screenHeight * .03),
                       InputTextWithHint(
-                        hint: 'Type your phone number here',
-                        text: 'Your Phone',
+                        hint: S.of(context).Type_your_Phone_number_here,
+                        text: S.of(context).Your_Phone,
                         controller: phoneController,
                       ),
                       SizedBox(height: screenHeight * .03),
                       InputDateAndTime(
-                        text: 'Start Date and Time',
-                        hint: 'Select start date and time',
+                        text: S.of(context).Start_Date_and_Time,
+                        hint: S.of(context).Select_start_date_and_time,
                         onDateTimeSelected: (DateTime dateTime) {},
                       ),
                       SizedBox(height: screenHeight * .03),
                       InputEndDateAndTime(
-                        text: 'End Date and time',
-                        hint: 'Select end date and time',
+                        text: S.of(context).End_Date_and_time,
+                        hint: S.of(context).Select_end_date_and_time,
                         onDateTimeSelected: (DateTime dateTime) {},
                       ),
                       SizedBox(height: screenHeight * .03),
                       InputTextWithHint(
-                        hint: 'Type Club Address here',
-                        text: 'Court Address',
+                        hint: S.of(context).Type_Court_Address_here,
+                        text: S.of(context).Court_Address,
                         controller: addressController,
                       ),
                       SizedBox(height: screenHeight * .025),
                       BottomSheetContainer(
-                        buttonText: 'Create',
+                        buttonText: S.of(context).Create,
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
                             context.read<CreateCourtCubit>().saveCourtData(

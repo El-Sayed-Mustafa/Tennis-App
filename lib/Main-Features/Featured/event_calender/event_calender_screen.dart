@@ -10,6 +10,7 @@ import 'package:tennis_app/Main-Features/Featured/event_calender/widgets/tab_bar
 import 'package:tennis_app/Main-Features/Featured/event_calender/widgets/schedule_calendar.dart';
 
 import '../../../core/utils/widgets/app_bar_wave.dart';
+import '../../../generated/l10n.dart';
 import '../set_reminder/model/database_helper.dart';
 import '../set_reminder/model/evenet_data.dart';
 
@@ -72,7 +73,7 @@ class _CalendarScreenState extends State<CalendarScreen>
                 color: Colors.white,
               ),
             ),
-            text: '   Event Calendar',
+            text: S.of(context).Event_Calendar,
             suffixIconPath: '',
           ),
           DayCarousel(
@@ -84,7 +85,11 @@ class _CalendarScreenState extends State<CalendarScreen>
           ),
           TabBarWithIndicator(
             tabController: _tabController,
-            tabs: ['Daily', 'Schedule', 'Monthly'],
+            tabs: [
+              S.of(context).Daily,
+              S.of(context).Schedule,
+              S.of(context).Schedule
+            ],
           ),
           Expanded(
             child: TabBarView(
@@ -103,8 +108,8 @@ class _CalendarScreenState extends State<CalendarScreen>
 
                       return DailyCalendar(allEvents);
                     } else {
-                      return const Center(
-                        child: Text('No events found.'),
+                      return Center(
+                        child: Text(S.of(context).No_events_found),
                       );
                     }
                   },
@@ -121,8 +126,8 @@ class _CalendarScreenState extends State<CalendarScreen>
                       List<EventModel> allEvents = snapshot.data!;
                       return ScheduleCalendar(allEvents);
                     } else {
-                      return const Center(
-                        child: Text('No events found.'),
+                      return Center(
+                        child: Text(S.of(context).No_events_found),
                       );
                     }
                   },
@@ -140,8 +145,8 @@ class _CalendarScreenState extends State<CalendarScreen>
 
                       return MonthlyCalendar(allEvents);
                     } else {
-                      return const Center(
-                        child: Text('No events found.'),
+                      return Center(
+                        child: Text(S.of(context).No_events_found),
                       );
                     }
                   },

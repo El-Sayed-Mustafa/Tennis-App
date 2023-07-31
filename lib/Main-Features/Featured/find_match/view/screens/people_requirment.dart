@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../core/utils/widgets/app_bar_wave.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../../../models/Match.dart';
 import '../widgets/match_item.dart';
 import '../widgets/openent_item.dart';
@@ -29,12 +30,12 @@ class PeopleRequirement extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                text: '    Find Match',
+                text: S.of(context).Find_Match,
                 suffixIconPath: '',
               ),
-              const Text(
-                'Your Requirements',
-                style: TextStyle(
+              Text(
+                S.of(context).Your_Requirements,
+                style: const TextStyle(
                   color: Color(0xFF313131),
                   fontSize: 20,
                   fontFamily: 'Roboto',
@@ -43,11 +44,11 @@ class PeopleRequirement extends StatelessWidget {
               ),
               SizedBox(height: screenHeight * .02),
               MatchItem(match: match),
-              const Padding(
-                padding: EdgeInsets.only(top: 28.0),
+              Padding(
+                padding: const EdgeInsets.only(top: 28.0),
                 child: Text(
-                  'People’ Requirements',
-                  style: TextStyle(
+                  S.of(context).People_Requirements,
+                  style: const TextStyle(
                     color: Color(0xFF313131),
                     fontSize: 20,
                     fontFamily: 'Roboto',
@@ -114,15 +115,15 @@ class PeopleRequirement extends StatelessWidget {
 
                   if (filteredMatches.isEmpty) {
                     // If there are no matches available, show the text
-                    return const Center(
+                    return Center(
                       child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 16.0),
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
                         child: SizedBox(
                           height: 200,
                           child: Center(
                             child: Text(
-                              "No matches available now.",
-                              style: TextStyle(
+                              S.of(context).No_matches_available_now,
+                              style: const TextStyle(
                                 color: Color(0xFF313131),
                                 fontSize: 16,
                                 fontFamily: 'Roboto',
@@ -141,7 +142,6 @@ class PeopleRequirement extends StatelessWidget {
                     itemCount: filteredMatches.length,
                     itemBuilder: (context, index) {
                       final opponent = filteredMatches[index];
-                      print("People’ " + opponent.userId);
                       return OpponentItem(
                         match: match,
                         opponent: opponent,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../generated/l10n.dart';
 import '../cubits/time_cubit.dart';
 
 class InputTimeField extends StatefulWidget {
@@ -93,7 +94,7 @@ class _InputTimeFieldState extends State<InputTimeField> {
                     controller: _controller,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter a valid time';
+                        return S.of(context).Please_enter_a_valid_time;
                       }
                       return null;
                     },

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../../../../../../generated/l10n.dart';
 import '../../cubit/member_names_cubit.dart';
 
 class MembersName extends StatefulWidget {
@@ -51,7 +52,7 @@ class _MembersNameState extends State<MembersName> {
           isDense: true,
           filled: true,
           fillColor: Colors.white,
-          hintText: 'Select Person',
+          hintText: S.of(context).Select_Person,
           hintStyle: const TextStyle(
             color: Color(0xFFA8A8A8),
             fontSize: 14,

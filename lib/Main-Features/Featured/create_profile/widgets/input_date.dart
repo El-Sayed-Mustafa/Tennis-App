@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../generated/l10n.dart';
+
 class InputDateField extends StatelessWidget {
   final String text;
   final String hint;
@@ -62,7 +64,7 @@ class InputDateField extends StatelessWidget {
                 keyboardType: TextInputType.datetime,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter a valid date';
+                    return S.of(context).Please_enter_a_valid_date;
                   }
                   return null;
                 },

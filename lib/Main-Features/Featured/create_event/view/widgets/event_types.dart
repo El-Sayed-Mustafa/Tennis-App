@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../generated/l10n.dart';
+
 enum EventType {
   Tournament,
   OneDay,
@@ -125,14 +127,14 @@ class EventTypeInput extends StatelessWidget {
       Offset.zero & overlay.size,
     );
     final Map<EventType, String> displayTexts = {
-      EventType.Tournament: 'Tournament',
-      EventType.OneDay: 'One Day',
-      EventType.Challenge: 'Challenge',
-      EventType.Competition: 'Competition',
-      EventType.FriendlyMatch: 'Friendly Match',
-      EventType.DailyTraining: 'Daily Training',
-      EventType.PartyEvent: 'Party Event',
-      EventType.TrainingPlan: 'Training Plan',
+      EventType.Tournament: S.of(context).Tournament,
+      EventType.OneDay: S.of(context).One_Day,
+      EventType.Challenge: S.of(context).Challenge,
+      EventType.Competition: S.of(context).Competition,
+      EventType.FriendlyMatch: S.of(context).Friendly_Match,
+      EventType.DailyTraining: S.of(context).Daily_Training,
+      EventType.PartyEvent: S.of(context).Party_Event,
+      EventType.TrainingPlan: S.of(context).Training_Plan,
     };
 
     final List<EventType> options = [

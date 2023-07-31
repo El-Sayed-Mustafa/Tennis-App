@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../../../../../generated/l10n.dart';
+
 class ClubNamesCubit extends Cubit<List<String>> {
   ClubNamesCubit() : super([]);
   late String selectedClubId; // Add this property
@@ -97,7 +99,7 @@ class _ClubComboBoxState extends State<ClubComboBox> {
           isDense: true,
           filled: true,
           fillColor: Colors.white,
-          hintText: 'Club name for hosting the event',
+          hintText: S.of(context).Club_name_for_hosting_the_event,
           hintStyle: const TextStyle(
             color: Color(0xFFA8A8A8),
             fontSize: 14,

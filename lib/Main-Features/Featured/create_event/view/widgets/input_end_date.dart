@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../../generated/l10n.dart';
+
 class EndDateTimeCubit extends Cubit<DateTime> {
   EndDateTimeCubit() : super(DateTime.now());
 
@@ -144,7 +146,9 @@ class _InputEndDateAndTimeState extends State<InputEndDateAndTime> {
                                 TextEditingController(text: formattedDateTime),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter a valid date and time';
+                                return S
+                                    .of(context)
+                                    .Please_enter_a_valid_date_and_time;
                               }
                               return null;
                             },

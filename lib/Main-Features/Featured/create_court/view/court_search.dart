@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../core/utils/widgets/court_item.dart';
+import '../../../../generated/l10n.dart';
 import '../../../../models/court.dart';
 
 class CourtSearchScreen extends StatefulWidget {
@@ -78,7 +79,7 @@ class _CourtSearchScreenState extends State<CourtSearchScreen> {
                 color: Colors.white,
               ),
             ),
-            text: '   Find Court',
+            text: S.of(context).Find_Court,
             suffixIconPath: '',
           ),
           SizedBox(height: screenHeight * .03),
@@ -104,8 +105,8 @@ class _CourtSearchScreenState extends State<CourtSearchScreen> {
                   onChanged: (value) {
                     filterCourts(value);
                   },
-                  decoration: const InputDecoration(
-                    hintText: 'Find Court',
+                  decoration: InputDecoration(
+                    hintText: S.of(context).Find_Court,
                     contentPadding: EdgeInsets.symmetric(horizontal: 16),
                     border: InputBorder.none,
                     prefixIcon: Icon(Icons.search),
@@ -119,8 +120,8 @@ class _CourtSearchScreenState extends State<CourtSearchScreen> {
                 top: screenHeight * .03,
                 bottom: screenHeight * .01,
                 left: screenWidth * .07),
-            child: const Text(
-              'Courts',
+            child: Text(
+              S.of(context).Courts,
               style: TextStyle(
                 color: Color(0xFF313131),
                 fontSize: 18,
