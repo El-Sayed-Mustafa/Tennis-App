@@ -59,6 +59,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
               .map((doc) => ChatMessage.fromSnapshot(doc))
               .toList();
           return ListView.builder(
+            physics: BouncingScrollPhysics(),
             reverse: true,
             itemCount: messages.length,
             itemBuilder: (context, index) {

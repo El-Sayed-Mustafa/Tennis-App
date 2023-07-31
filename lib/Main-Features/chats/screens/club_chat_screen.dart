@@ -75,6 +75,7 @@ class _ClubChatScreenState extends State<ClubChatScreen> {
               final List<ChatMessage> messages = snapshot.data!;
               return ListView.builder(
                 padding: const EdgeInsets.only(bottom: 70.0),
+                physics: BouncingScrollPhysics(),
                 reverse: true,
                 itemCount: messages.length,
                 itemBuilder: (context, index) {

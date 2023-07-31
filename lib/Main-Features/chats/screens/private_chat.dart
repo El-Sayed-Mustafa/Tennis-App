@@ -141,6 +141,7 @@ class PrivateChat extends StatelessWidget {
                         return Container(
                           padding: const EdgeInsets.only(bottom: 70.0),
                           child: ListView.builder(
+                            physics: BouncingScrollPhysics(),
                             itemCount: chatMessages.length,
                             reverse: true,
                             itemBuilder: (context, index) {
