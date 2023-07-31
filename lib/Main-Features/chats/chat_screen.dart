@@ -36,7 +36,7 @@ class _ChatScreenState extends State<ChatScreen>
 
     return Scaffold(
       body: Container(
-        color: const Color(0xFFF8F8F8),
+        padding: EdgeInsets.only(bottom: 8),
         child: Column(
           children: [
             AppBarWaveHome(

@@ -22,7 +22,7 @@ class NavigationBarScreen extends StatelessWidget {
           ),
           bottomNavigationBar: CurvedNavigationBar(
             index: state,
-            height: 55.0,
+            height: 60.0,
             items: const [
               NavigationBarItem(
                 icon: Icons.home_outlined,
@@ -46,8 +46,8 @@ class NavigationBarScreen extends StatelessWidget {
               ),
             ],
             color: Colors.white,
-            buttonBackgroundColor: Colors.white,
-            backgroundColor: const Color.fromARGB(255, 51, 64, 71),
+            buttonBackgroundColor: Color(0xFF15324F),
+            backgroundColor: Colors.transparent,
             animationCurve: Curves.easeInOut,
             animationDuration: const Duration(milliseconds: 400),
             onTap: (index) {
