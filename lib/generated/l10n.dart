@@ -1856,7 +1856,7 @@ class S {
     );
   }
 
-  // skipped getter for the 'Briefly_describe_your_club’s_Instructions_here...' key
+  // skipped getter for the 'Briefly_describe_your_clubs_Instructions_here...' key
 
   /// `Player level`
   String get Player_level {
@@ -2301,8 +2301,6 @@ class S {
       args: [],
     );
   }
-
-  // skipped getter for the 'Error_assigning_roles._Please_try_again_later.' key
 
   /// `Assign Person`
   String get Assign_Person {
