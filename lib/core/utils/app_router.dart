@@ -6,6 +6,7 @@ import 'package:tennis_app/Main-Features/Featured/create_profile/create_profile_
 import 'package:tennis_app/Main-Features/Featured/navigation_bar/cubit/navigation_cubit.dart';
 import 'package:tennis_app/Main-Features/Featured/navigation_bar/navigation_bar_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/onboarding/onboarding_screen.dart';
+import 'package:tennis_app/Main-Features/Featured/roles/roles_list/view/widgets/list_roles.dart';
 import 'package:tennis_app/Main-Features/Featured/set_reminder/set_reminder_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/splash/splash_screen.dart';
 import 'package:tennis_app/Main-Features/chats/screens/player_search_screen.dart';
@@ -121,6 +122,12 @@ abstract class AppRouter {
             path: 'assignPerson',
             builder: (BuildContext context, GoRouterState state) {
               return AssignPerson();
+            },
+          ),
+          GoRoute(
+            path: 'rolesList',
+            builder: (BuildContext context, GoRouterState state) {
+              return RolesScreen();
             },
           ),
           GoRoute(

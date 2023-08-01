@@ -7,6 +7,7 @@ import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 
 import '../../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../../generated/l10n.dart';
+import '../../../../../models/roles.dart';
 import '../../create_role/view/widgets/rights_selector.dart';
 import '../service/club_roles_service.dart';
 
@@ -76,14 +77,20 @@ class _AssignPersonState extends State<AssignPerson> {
         final DocumentSnapshot<Map<String, dynamic>> admin =
             await FirebaseFirestore.instance
                 .collection('players')
-                .doc(currentUser.uid) //put id for current user
+                .doc(currentUser.uid)
                 .get();
         final data = admin.data();
         if (data != null) {
           final String createdClubId = data['createdClubId'] as String? ?? '';
-          final Map<String, String> clubRoles = <String, String>{
-            createdClubId: selectedRole.join(",")
-          };
+          final List<String> roleIds =
+              await clubRolesService.fetchRoleIdsByNames(selectedRole);
+
+          // Join the roleIds list into a single string using a delimiter (e.g., comma)
+          final String roleIdsString = roleIds.join(',');
+
+          // Create a map of clubRoles with the joined roleIds string
+          final Map<String, String> clubRoles = {createdClubId: roleIdsString};
+
           // Update the player document with the new roles
           await playerSnapshot.reference.update({'clubRoles': clubRoles});
 
@@ -104,8 +111,9 @@ class _AssignPersonState extends State<AssignPerson> {
       print('Error assigning roles: $e');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-            content: Text(
-                S.of(context).Error_assigning_roles_Please_try_again_later)),
+          content:
+              Text(S.of(context).Error_assigning_roles_Please_try_again_later),
+        ),
       );
     } finally {
       setState(() {

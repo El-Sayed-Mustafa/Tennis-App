@@ -88,12 +88,30 @@ class MenuScreen extends StatelessWidget {
                     ButtonMenu(
                       imagePath: 'assets/images/Member-administration.svg',
                       buttonText: S.of(context).Member_administration,
-                      onPressed: () {},
+                      onPressed: () {
+                        GoRouter.of(context).push('/management');
+                      },
                     ),
                     ButtonMenu(
                       imagePath: 'assets/images/Create-role.svg',
                       buttonText: S.of(context).Create_Role,
-                      onPressed: () {},
+                      onPressed: () {
+                        GoRouter.of(context).push('/createRole');
+                      },
+                    ),
+                    ButtonMenu(
+                      imagePath: 'assets/images/Create-role.svg',
+                      buttonText: S.of(context).Assign_Person,
+                      onPressed: () {
+                        GoRouter.of(context).push('/assignPerson');
+                      },
+                    ),
+                    ButtonMenu(
+                      imagePath: 'assets/images/Create-role.svg',
+                      buttonText: S.of(context).Roles_list,
+                      onPressed: () {
+                        GoRouter.of(context).push('/rolesList');
+                      },
                     ),
                     ButtonMenu(
                       imagePath: 'assets/images/Tournament-management.svg',

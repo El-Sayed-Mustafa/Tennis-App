@@ -11,6 +11,7 @@ import '../../../../../generated/l10n.dart';
 import '../../../../../models/player.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../../models/roles.dart';
 import '../../../create_event/view/widgets/player_level.dart';
 import '../../../roles/assign_person/service/club_roles_service.dart';
 import 'package:connectivity_plus/connectivity_plus.dart'; // Import the connectivity_plus plugin
@@ -202,6 +203,8 @@ class _PlayerScreenState extends State<PlayerScreen> {
         final data = admin.data();
         if (data != null) {
           final String createdClubId = data['createdClubId'] as String? ?? '';
+          final List<String> roleIds =
+              await clubRolesService.fetchRoleIdsByNames(selectedRole);
 
           if (selectedRole.isEmpty) {
             // Update only skill level if no roles are selected
@@ -210,9 +213,9 @@ class _PlayerScreenState extends State<PlayerScreen> {
             };
             await playerSnapshot.reference.update(updatedPlayerData);
           } else {
-            // Update both club roles and skill level if roles are selected
+            final String roleIdsString = roleIds.join(',');
             final Map<String, String> clubRoles = {
-              createdClubId: selectedRole.join(","),
+              createdClubId: roleIdsString
             };
 
             final Map<String, dynamic> updatedPlayerData = {
@@ -257,12 +260,22 @@ class _PlayerScreenState extends State<PlayerScreen> {
     }
   }
 
-  List<String> getRolesFromClubRoles(Map<String, String> clubRoles) {
+  Future<List<String>> getRolesFromClubRoles(
+      Map<String, String> clubRoles) async {
     List<String> roles = [];
+
+    // Fetch the role names from role IDs in clubRoles
     for (var roleValue in clubRoles.values) {
-      final individualRoles = roleValue.split(',');
-      roles.addAll(individualRoles.map((role) => role.trim()));
+      final roleIds = roleValue.split(',');
+      final List<Role> fetchedRoles =
+          await clubRolesService.fetchRolesByIds(roleIds);
+
+      // Extract role names from the fetched roles
+      final List<String> roleNames =
+          fetchedRoles.map((role) => role.name).toList();
+      roles.addAll(roleNames);
     }
+
     return roles;
   }
 
@@ -443,20 +456,36 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),
-                                    Text(
-                                      selectedRole.join(', ').isNotEmpty
-                                          ? selectedRole.join(', ')
-                                          : widget.player.clubRoles.isNotEmpty
-                                              ? getRolesFromClubRoles(
-                                                      widget.player.clubRoles)
-                                                  .join(', ')
-                                              : S.of(context).No_Role_Assigned,
-                                      style: const TextStyle(
-                                        color: Color(0xFF6D6D6D),
-                                        fontSize: 18,
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w400,
-                                      ),
+                                    FutureBuilder<List<String>>(
+                                      future: widget.player.clubRoles.isNotEmpty
+                                          ? getRolesFromClubRoles(
+                                              widget.player.clubRoles)
+                                          : Future.value([]),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return CircularProgressIndicator(); // Show a loading indicator while fetching data.
+                                        } else if (snapshot.hasError) {
+                                          return Text(
+                                              'Error: ${snapshot.error}');
+                                        } else {
+                                          final List<String> roleNames =
+                                              snapshot.data ?? [];
+                                          return Text(
+                                            roleNames.isNotEmpty
+                                                ? roleNames.join(', ')
+                                                : S
+                                                    .of(context)
+                                                    .No_Role_Assigned,
+                                            style: const TextStyle(
+                                              color: Color(0xFF6D6D6D),
+                                              fontSize: 18,
+                                              fontFamily: 'Roboto',
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          );
+                                        }
+                                      },
                                     ),
                                   ],
                                 ),

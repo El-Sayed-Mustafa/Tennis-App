@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/chats/screens/private_chat.dart';
 import 'package:tennis_app/Main-Features/chats/widgets/message_item.dart';
 
+import '../../../constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/chats.dart';
 import '../../../models/player.dart'; // Import the ChatMessage model class
@@ -24,7 +25,7 @@ class ChatsScreen extends StatelessWidget {
         child: Container(
           width: double.infinity,
           decoration: const ShapeDecoration(
-            color: Colors.white,
+            color: kPrimaryColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(30),
