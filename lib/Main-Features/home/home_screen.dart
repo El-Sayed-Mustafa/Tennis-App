@@ -8,6 +8,7 @@ import 'package:tennis_app/Main-Features/home/widgets/my_events.dart';
 import 'package:tennis_app/Main-Features/home/widgets/my_matches.dart';
 import 'package:tennis_app/core/methodes/firebase_methodes.dart';
 import 'package:tennis_app/core/utils/widgets/app_bar_wave.dart';
+import 'package:tennis_app/core/utils/widgets/custom_dialouge.dart';
 
 import '../../generated/l10n.dart';
 
@@ -107,9 +108,17 @@ class HomeScreen extends StatelessWidget {
                     imagePath: 'assets/images/Make-offers.svg',
                     onPressed: () async {
                       bool hasRight =
-                          await method.doesPlayerHaveRight('Create offers');
-                      print(hasRight);
-                      GoRouter.of(context).push('/createClub');
+                          await method.doesPlayerHaveRight('Create offefrs');
+                      if (hasRight) {
+                        GoRouter.of(context).push('/createClub');
+                      } else {
+                        showDialog(
+                          context: context,
+                          builder: (context) => CustomDialog(
+                            text: 'You don\'t have the right to create Club',
+                          ),
+                        );
+                      }
                     },
                   ),
                 ],
