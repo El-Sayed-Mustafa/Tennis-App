@@ -62,7 +62,7 @@ class RoleCubit extends Cubit<RoleCreationStatus> {
 
             if (playerData != null) {
               final String createdClubId = (playerData
-                  as Map<String, dynamic>)['createdClubId'] as String;
+                  as Map<String, dynamic>)['participatedClubId'] as String;
               print(createdClubId);
 
               final clubId =

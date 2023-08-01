@@ -1244,16 +1244,6 @@ class S {
     );
   }
 
-  /// `Rules and regulations`
-  String get Rules_and_regulations {
-    return Intl.message(
-      'Rules and regulations',
-      name: 'Rules_and_regulations',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Set the rules for members`
   String get Set_the_rules_for_members {
     return Intl.message(
@@ -1496,21 +1486,21 @@ class S {
     );
   }
 
-  /// `Briefly describe your club’s rule and regulations`
-  String get Briefly_describe_your_clubs_rule_and_regulations {
+  /// `Rules and regulations`
+  String get Rules_and_regulations {
     return Intl.message(
-      'Briefly describe your club’s rule and regulations',
-      name: 'Briefly_describe_your_clubs_rule_and_regulations',
+      'Rules and regulations',
+      name: 'Rules_and_regulations',
       desc: '',
       args: [],
     );
   }
 
-  /// `Create`
-  String get Create {
+  /// `Briefly describe your club’s rule and regulations`
+  String get Briefly_describe_your_clubs_rule_and_regulations {
     return Intl.message(
-      'Create',
-      name: 'Create',
+      'Briefly describe your club’s rule and regulations',
+      name: 'Briefly_describe_your_clubs_rule_and_regulations',
       desc: '',
       args: [],
     );
@@ -1651,6 +1641,16 @@ class S {
     return Intl.message(
       'Court Address',
       name: 'Court_Address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create`
+  String get Create {
+    return Intl.message(
+      'Create',
+      name: 'Create',
       desc: '',
       args: [],
     );
