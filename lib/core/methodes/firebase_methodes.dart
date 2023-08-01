@@ -94,4 +94,41 @@ class Method {
       return [];
     }
   }
+
+  Future<bool> doesPlayerHaveRight(String requiredRight) async {
+    final String playerId = FirebaseAuth.instance.currentUser!.uid;
+
+    try {
+      final playerSnapshot = await FirebaseFirestore.instance
+          .collection('players')
+          .doc(playerId)
+          .get();
+      final playerData = playerSnapshot.data();
+      if (playerData == null) {
+        // Handle the case if player data not found
+        return false;
+      }
+
+      final Map<String, dynamic> clubRolesMap = playerData['clubRoles'] ?? {};
+      final List<String> roleIds = (clubRolesMap.values).join(',').split(',');
+
+      final rolesSnapshot = await FirebaseFirestore.instance
+          .collection('roles')
+          .where(FieldPath.documentId, whereIn: roleIds)
+          .get();
+      final rolesData = rolesSnapshot.docs;
+      for (final roleDoc in rolesData) {
+        final roleData = roleDoc.data();
+        final List<String> rights = List<String>.from(roleData['rights'] ?? []);
+        if (rights.contains(requiredRight)) {
+          return true;
+        }
+      }
+      return false;
+    } catch (e) {
+      // Handle errors if necessary
+      print('Error checking player rights: $e');
+      return false;
+    }
+  }
 }
