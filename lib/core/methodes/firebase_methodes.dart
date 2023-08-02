@@ -8,18 +8,14 @@ import '../../models/player.dart';
 class Method {
   Future<Player> getCurrentUser() async {
     // Get the current user from Firebase Authentication
-    User? user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      // Fetch additional user data from Firestore based on the uid
-      DocumentSnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
-          .instance
-          .collection('players')
-          .doc(user.uid)
-          .get();
+    final String playerId = FirebaseAuth.instance.currentUser!.uid;
+    DocumentSnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
+        .instance
+        .collection('players')
+        .doc(playerId)
+        .get();
 
-      return Player.fromSnapshot(snapshot);
-    }
-    throw Exception("User not found");
+    return Player.fromSnapshot(snapshot);
   }
 
   Future<Club> fetchClubData(String clubId) async {

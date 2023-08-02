@@ -93,7 +93,9 @@ class ProfileScreen extends StatelessWidget {
                     ProfileBody(player: player),
                     BottomSheetContainer(
                       buttonText: S.of(context).edit,
-                      onPressed: () {},
+                      onPressed: () {
+                        GoRouter.of(context).push('/editProfile');
+                      },
                       color: const Color(0xFFF8F8F8),
                     )
                   ],

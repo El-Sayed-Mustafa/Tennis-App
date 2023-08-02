@@ -12,6 +12,14 @@ import '../../../../club/widgets/club_info.dart';
 class ProfileBody extends StatelessWidget {
   const ProfileBody({super.key, required this.player});
   final Player player;
+  double parseSkillLevel(String skillLevel) {
+    try {
+      return double.parse(skillLevel);
+    } catch (e) {
+      // Return a default value (e.g., 0.0) in case parsing fails
+      return 1.0;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +93,7 @@ class ProfileBody extends StatelessWidget {
                 ),
               ),
               PlayerStrength(
-                value: double.parse(player.skillLevel),
+                value: parseSkillLevel(player.skillLevel),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),

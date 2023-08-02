@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tennis_app/core/methodes/firebase_methodes.dart';
 
 import '../../../models/player.dart';
@@ -69,40 +70,45 @@ class AppBarWaveHome extends StatelessWidget {
                             ),
                           )
                         else // Show ClipRRect with player.photoURL otherwise
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: SizedBox(
-                              width: screenHeight * 0.065,
-                              height: screenHeight * 0.065,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                    color: Colors.grey,
-                                    width: 1.0,
+                          GestureDetector(
+                            onTap: () {
+                              GoRouter.of(context).go('/profileScreen');
+                            },
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: SizedBox(
+                                width: screenHeight * 0.065,
+                                height: screenHeight * 0.065,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: Colors.grey,
+                                      width: 1.0,
+                                    ),
                                   ),
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(50),
-                                  child: (player.photoURL != null
-                                      ? FadeInImage.assetNetwork(
-                                          placeholder:
-                                              'assets/images/loadin.gif',
-                                          image: player.photoURL!,
-                                          fit: BoxFit.cover,
-                                          imageErrorBuilder:
-                                              (context, error, stackTrace) {
-                                            return Image.asset(
-                                              'assets/images/profile-event.jpg',
-                                              fit: BoxFit.cover,
-                                            );
-                                          },
-                                        )
-                                      : Image.asset(
-                                          'assets/images/internet.png',
-                                          fit: BoxFit.cover,
-                                        )),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(50),
+                                    child: (player.photoURL != null
+                                        ? FadeInImage.assetNetwork(
+                                            placeholder:
+                                                'assets/images/loadin.gif',
+                                            image: player.photoURL!,
+                                            fit: BoxFit.cover,
+                                            imageErrorBuilder:
+                                                (context, error, stackTrace) {
+                                              return Image.asset(
+                                                'assets/images/profile-event.jpg',
+                                                fit: BoxFit.cover,
+                                              );
+                                            },
+                                          )
+                                        : Image.asset(
+                                            'assets/images/internet.png',
+                                            fit: BoxFit.cover,
+                                          )),
+                                  ),
                                 ),
                               ),
                             ),
