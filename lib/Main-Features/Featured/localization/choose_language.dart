@@ -177,7 +177,6 @@ class _ChooseLanguageState extends State<ChooseLanguage> {
                 }
                 GoRouter.of(context).push('/onboarding');
               },
-              color: Colors.white,
             ),
           ],
         ),

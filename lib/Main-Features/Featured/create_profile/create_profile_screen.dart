@@ -121,7 +121,6 @@ class CreateProfile extends StatelessWidget {
                                 );
                           }
                         },
-                        color: const Color(0xFFF8F8F8),
                       ),
                     ],
                   ),

@@ -151,7 +151,6 @@ class SetReminder extends StatelessWidget {
             }
           }
         },
-        color: Colors.transparent,
       ),
     );
   }

@@ -169,7 +169,6 @@ class _CreateRoleState extends State<CreateRole> {
                                     context: context,
                                   );
                             },
-                            color: const Color(0xFFF8F8F8),
                           ),
                         ),
                       ),

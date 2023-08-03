@@ -159,7 +159,6 @@ class _AssignRightsState extends State<AssignRights> {
                       AssignRightsService.updateRoleOnFirestore(
                           context, widget.role, selectedRights);
                     },
-                    color: const Color(0xFFF8F8F8),
                   ),
                 ),
               ),

@@ -222,7 +222,6 @@ class _ManagementScreenState extends State<ManagementScreen> {
                         // Refetch the club data to update the UI with the latest changes
                         clubManagementCubit.fetchClubData(createdClubId);
                       },
-                      color: const Color(0xFFF8F8F8),
                     ),
                   ],
                 ),

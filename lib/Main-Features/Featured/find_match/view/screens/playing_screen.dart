@@ -98,7 +98,6 @@ class PlayingScreen extends StatelessWidget {
                           playingCubit.fetchPlayersDataAndSaveMatchId(
                               match, opponent, context);
                         },
-                        color: const Color(0xFFF8F8F8),
                       ),
                   ],
                 ),

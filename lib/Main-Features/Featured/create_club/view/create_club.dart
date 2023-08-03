@@ -143,23 +143,23 @@ class CreateClub extends StatelessWidget {
                       AgeRestrictionWidget(),
                       SizedBox(height: screenHeight * .015),
                       BottomSheetContainer(
-                          buttonText: S.of(context).Create,
-                          onPressed: () {
-                            if (formKey.currentState!.validate()) {
-                              context.read<CreateClubCubit>().saveClubData(
-                                    selectedImageBytes: _selectedImageBytes,
-                                    adminNameController: adminNameController,
-                                    clubNameController: clubNameController,
-                                    emailController: emailController,
-                                    nationalIDController: nationalIDController,
-                                    phoneController: phoneController,
-                                    rulesController: rulesController,
-                                    addressController: addressController,
-                                    courtsNumController: courtsNumController,
-                                  );
-                            }
-                          },
-                          color: const Color(0xFFF8F8F8))
+                        buttonText: S.of(context).Create,
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            context.read<CreateClubCubit>().saveClubData(
+                                  selectedImageBytes: _selectedImageBytes,
+                                  adminNameController: adminNameController,
+                                  clubNameController: clubNameController,
+                                  emailController: emailController,
+                                  nationalIDController: nationalIDController,
+                                  phoneController: phoneController,
+                                  rulesController: rulesController,
+                                  addressController: addressController,
+                                  courtsNumController: courtsNumController,
+                                );
+                          }
+                        },
+                      )
                     ],
                   ),
                 ),

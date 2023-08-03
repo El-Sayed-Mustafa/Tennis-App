@@ -229,7 +229,6 @@ class _AssignPersonState extends State<AssignPerson> {
                   return BottomSheetContainer(
                     buttonText: S.of(context).Assign_Role,
                     onPressed: _assignRole,
-                    color: const Color(0xFFF8F8F8),
                   );
                 }
               },

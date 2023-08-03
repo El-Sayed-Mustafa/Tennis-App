@@ -5,18 +5,16 @@ class BottomSheetContainer extends StatelessWidget {
     Key? key,
     required this.buttonText,
     required this.onPressed,
-    required this.color,
   }) : super(key: key);
 
   final String buttonText;
   final VoidCallback onPressed;
-  final Color color;
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 60),
       height: 80,
-      color: color,
+      color: Colors.transparent,
       child: Center(
         child: SizedBox(
           height: 50,

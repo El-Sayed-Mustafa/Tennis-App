@@ -136,7 +136,6 @@ class SignIn extends StatelessWidget {
                   onPressed: () {
                     signUserIn();
                   },
-                  color: Colors.white,
                 )
               ],
             ),

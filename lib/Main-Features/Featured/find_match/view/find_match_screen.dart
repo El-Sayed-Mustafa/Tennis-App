@@ -207,7 +207,6 @@ class FindMatch extends StatelessWidget {
                                           }
                                         }
                                       },
-                                      color: Colors.white,
                                     ),
                                   )
                                 ],

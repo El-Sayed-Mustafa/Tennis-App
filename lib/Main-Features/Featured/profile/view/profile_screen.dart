@@ -96,7 +96,6 @@ class ProfileScreen extends StatelessWidget {
                       onPressed: () {
                         GoRouter.of(context).push('/editProfile');
                       },
-                      color: const Color(0xFFF8F8F8),
                     )
                   ],
                 );

@@ -604,7 +604,6 @@ class _PlayerScreenState extends State<PlayerScreen> {
                         return BottomSheetContainer(
                           buttonText: S.of(context).Update_Player,
                           onPressed: _assignRole,
-                          color: const Color(0xFFF8F8F8),
                         );
                       }
                     },

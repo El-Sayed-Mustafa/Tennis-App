@@ -126,7 +126,6 @@ class EditProfile extends StatelessWidget {
                                 currentPlayer: currentUser);
                           }
                         },
-                        color: const Color(0xFFF8F8F8),
                       ),
                     ],
                   ),

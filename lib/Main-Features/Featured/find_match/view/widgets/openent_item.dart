@@ -166,8 +166,8 @@ class _OpponentItemState extends State<OpponentItem> {
             children: [
               Spacer(),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 28.0),
-                child: BottomSheetContainer(
+                  padding: const EdgeInsets.symmetric(horizontal: 28.0),
+                  child: BottomSheetContainer(
                     buttonText: S.of(context).Play,
                     onPressed: () {
                       Navigator.push(
@@ -180,8 +180,7 @@ class _OpponentItemState extends State<OpponentItem> {
                         ),
                       );
                     },
-                    color: Colors.transparent),
-              )
+                  ))
             ],
           )
         ],

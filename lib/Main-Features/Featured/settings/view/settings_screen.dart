@@ -87,7 +87,6 @@ class SettingsScreen extends StatelessWidget {
               BottomSheetContainer(
                 buttonText: 'LogOut',
                 onPressed: () {},
-                color: const Color(0xFFF8F8F8),
               )
             ],
           ),

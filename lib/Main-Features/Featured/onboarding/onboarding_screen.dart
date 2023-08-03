@@ -58,7 +58,6 @@ class _OnboardingState extends State<Onboarding> {
         ),
       ),
       bottomSheet: BottomSheetContainer(
-        color: Colors.white,
         buttonText:
             currentPage == 3 ? S.of(context).getStarted : S.of(context).next,
         onPressed: () async {
