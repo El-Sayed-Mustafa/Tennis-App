@@ -11,8 +11,8 @@ import '../../cubit/playing_screen_cubit.dart';
 
 class PlayingScreen extends StatelessWidget {
   const PlayingScreen({super.key, required this.match, required this.opponent});
-  final Matches match;
-  final Matches opponent;
+  final FindMatch match;
+  final FindMatch opponent;
 
   @override
   Widget build(BuildContext context) {

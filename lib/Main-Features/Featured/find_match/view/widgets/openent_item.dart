@@ -11,8 +11,8 @@ import 'package:intl/intl.dart';
 
 class OpponentItem extends StatefulWidget {
   const OpponentItem({super.key, required this.match, required this.opponent});
-  final Matches match;
-  final Matches opponent;
+  final FindMatch match;
+  final FindMatch opponent;
 
   @override
   State<OpponentItem> createState() => _OpponentItemState();

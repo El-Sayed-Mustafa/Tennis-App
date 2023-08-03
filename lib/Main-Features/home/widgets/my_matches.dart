@@ -118,8 +118,8 @@ class _MyMatchesState extends State<MyMatches> {
                       }
 
                       // Create a Matches instance from the snapshot data
-                      final Matches match =
-                          Matches.fromSnapshot(snapshot.data!);
+                      final FindMatch match =
+                          FindMatch.fromSnapshot(snapshot.data!);
 
                       // Build the carousel item using the MatchItem widget
                       return MatchItem(match: match);

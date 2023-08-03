@@ -7,7 +7,7 @@ class FindMatchInitial extends FindMatchState {}
 class FindMatchLoading extends FindMatchState {}
 
 class FindMatchSuccess extends FindMatchState {
-  final Matches match; // Include the Matches object as a property
+  final FindMatch match; // Include the Matches object as a property
 
   FindMatchSuccess(this.match);
 }

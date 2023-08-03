@@ -66,7 +66,7 @@ class FirebaseAuthMethods {
   }
 
   // GOOGLE SIGN IN
-  Future<void> signInWithGoogle(BuildContext context) async {
+  void signInWithGoogle(BuildContext context) async {
     try {
       if (kIsWeb) {
         GoogleAuthProvider googleProvider = GoogleAuthProvider();
@@ -74,7 +74,7 @@ class FirebaseAuthMethods {
         googleProvider
             .addScope('https://www.googleapis.com/auth/contacts.readonly');
 
-        await _auth.signInWithPopup(googleProvider);
+        await FirebaseAuth.instance.signInWithPopup(googleProvider);
       } else {
         final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
@@ -85,20 +85,22 @@ class FirebaseAuthMethods {
 
         final GoogleSignInAuthentication googleAuth =
             await googleUser.authentication;
+        final credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+        await FirebaseAuth.instance.signInWithCredential(credential);
 
-        if (googleAuth == null) {
-          showSnackBar(context, S.of(context).google_signin_failed);
-
-          return;
-        }
-
+        // The routing code should be here after successful sign-in
         GoRouter.of(context).replace('/createProfile');
       }
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!); // Displaying the error message
     } catch (e) {
       showSnackBar(
-          context, '${S.of(context).google_signin_unexpected_error}$e');
+        context,
+        '${S.of(context).google_signin_unexpected_error}$e',
+      );
     }
   }
 

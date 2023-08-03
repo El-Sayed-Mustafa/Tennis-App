@@ -12,7 +12,7 @@ class PlayingCubit extends Cubit<PlayingStatus> {
   PlayingCubit() : super(PlayingStatus.initial);
 
   Future<void> fetchPlayersDataAndSaveMatchId(
-      Matches match, Matches opponent, BuildContext context) async {
+      FindMatch match, FindMatch opponent, BuildContext context) async {
     try {
       emit(PlayingStatus.loading);
       DocumentSnapshot<

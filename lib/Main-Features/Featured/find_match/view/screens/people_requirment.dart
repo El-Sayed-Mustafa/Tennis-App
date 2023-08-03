@@ -9,7 +9,7 @@ import '../widgets/openent_item.dart';
 
 class PeopleRequirement extends StatelessWidget {
   PeopleRequirement({super.key, required this.match});
-  final Matches match;
+  final FindMatch match;
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -68,7 +68,7 @@ class PeopleRequirement extends StatelessWidget {
                   }
 
                   final matches = snapshot.data!.docs
-                      .map((doc) => Matches.fromSnapshot(doc))
+                      .map((doc) => FindMatch.fromSnapshot(doc))
                       .toList();
 
                   // Sort matches based on your criteria here

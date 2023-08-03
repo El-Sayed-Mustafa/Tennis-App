@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Matches {
+class FindMatch {
   final String userId;
   final String? photoURL;
   final String playerName;
@@ -11,7 +11,7 @@ class Matches {
   final String clubName;
   final String matchId; // New property for match ID
 
-  Matches({
+  FindMatch({
     required this.userId,
     required this.playerName,
     required this.photoURL,
@@ -37,14 +37,14 @@ class Matches {
     };
   }
 
-  factory Matches.fromSnapshot(
+  factory FindMatch.fromSnapshot(
       DocumentSnapshot<Map<String, dynamic>> snapshot) {
     final data = snapshot.data();
     if (data == null) {
       throw ArgumentError("Invalid data for Match from DocumentSnapshot");
     }
 
-    return Matches(
+    return FindMatch(
       userId: data['userId'] as String? ?? '',
       playerName: data['playerName'] as String? ?? '',
       photoURL: data['photoURL'] as String?,
@@ -57,7 +57,7 @@ class Matches {
     );
   }
 
-  Matches copyWith({
+  FindMatch copyWith({
     String? userId,
     String? photoURL,
     String? playerName,
@@ -68,7 +68,7 @@ class Matches {
     String? clubName,
     String? matchId, // Add matchId to the copyWith method
   }) {
-    return Matches(
+    return FindMatch(
       userId: userId ?? this.userId,
       photoURL: photoURL ?? this.photoURL,
       playerName: playerName ?? this.playerName,

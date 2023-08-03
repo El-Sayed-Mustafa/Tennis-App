@@ -9,7 +9,7 @@ import 'package:intl/intl.dart';
 
 class MatchItem extends StatefulWidget {
   const MatchItem({super.key, required this.match});
-  final Matches match;
+  final FindMatch match;
 
   @override
   State<MatchItem> createState() => _MatchItemState();

@@ -69,8 +69,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> signInWithGoogle(BuildContext context) async {
     try {
       emit(GooglLoadingState());
-      await FirebaseAuthMethods(FirebaseAuth.instance)
-          .signInWithGoogle(context);
+      FirebaseAuthMethods(FirebaseAuth.instance).signInWithGoogle(context);
       emit(GooglSuccessState());
     } on FirebaseAuthException catch (e) {
       emit(GooglErrorState(e.message.toString()));

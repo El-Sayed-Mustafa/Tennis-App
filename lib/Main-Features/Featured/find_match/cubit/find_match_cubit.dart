@@ -10,13 +10,13 @@ import 'find_match_states.dart';
 
 class FindMatchCubit extends Cubit<FindMatchState> {
   FindMatchCubit() : super(FindMatchInitial());
-  Future<List<Matches>> getAllMatches() async {
+  Future<List<FindMatch>> getAllMatches() async {
     final CollectionReference matchesCollection =
         FirebaseFirestore.instance.collection('matches');
     final QuerySnapshot<Object?> snapshot = await matchesCollection.get();
-    final List<Matches> matchesList = snapshot.docs
-        .map((doc) =>
-            Matches.fromSnapshot(doc as DocumentSnapshot<Map<String, dynamic>>))
+    final List<FindMatch> matchesList = snapshot.docs
+        .map((doc) => FindMatch.fromSnapshot(
+            doc as DocumentSnapshot<Map<String, dynamic>>))
         .toList();
     return matchesList;
   }
@@ -50,7 +50,7 @@ class FindMatchCubit extends Cubit<FindMatchState> {
       }
 
       // Create a new Match object with the form data
-      Matches newMatch = Matches(
+      FindMatch newMatch = FindMatch(
         userId: userId,
         playerName: nameController.text,
         photoURL: selectedImageBytes != null ? imageUrl : null,
