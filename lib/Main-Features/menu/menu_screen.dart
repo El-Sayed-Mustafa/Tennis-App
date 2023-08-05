@@ -63,7 +63,7 @@ class MenuScreen extends StatelessWidget {
                                 },
                               )
                             : Image.asset(
-                                'assets/images/internet.png',
+                                'assets/images/profile-event.jpg',
                                 fit: BoxFit.cover,
                               )),
                       ),

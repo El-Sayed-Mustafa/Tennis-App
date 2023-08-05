@@ -127,13 +127,14 @@ class _MyMatchesState extends State<MyMatches> {
                   );
                 }).toList(),
               )
-            : Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  S.of(context).No_matches,
-                  style: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.bold),
-                ),
+            : NoData(
+                text: S.of(context).You_Dont_have_Matches,
+                buttonText: S.of(context).Click_to_Find_Your_Partner,
+                onPressed: () {
+                  GoRouter.of(context).push('/findPartner');
+                },
+                height: screenHeight * .15,
+                width: screenWidth * .8,
               ),
 
         buildPageIndicator(matches.length), // Add the smooth page indicator
