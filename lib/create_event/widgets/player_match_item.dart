@@ -51,101 +51,93 @@ class _PlayerMatchItemState extends State<PlayerMatchItem> {
             create: (context) => EndDateTimeCubit(),
           ),
         ],
-        child: Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                PoPAppBarWave(
-                  prefixIcon: IconButton(
-                    onPressed: () {
-                      GoRouter.of(context).pop();
-                    },
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      size: 30,
-                      color: Colors.white,
-                    ),
-                  ),
-                  text: 'Single Match',
-                  suffixIconPath: '',
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            PoPAppBarWave(
+              prefixIcon: IconButton(
+                onPressed: () {
+                  GoRouter.of(context).pop();
+                },
+                icon: const Icon(
+                  Icons.arrow_back,
+                  size: 30,
+                  color: Colors.white,
                 ),
-                SizedBox(height: screenHeight * .02),
-                const Text(
-                  'Click to choose a player',
-                  style: TextStyle(
-                    color: Color(0xFF313131),
-                    fontSize: 20,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0, vertical: 8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      PlayerInfoWidget(
-                        selectedPlayer: _selectedPlayer,
-                        onPlayerSelected: _onPlayerSelected,
-                      ),
-                      SizedBox(
-                        height: 50,
-                        width: 50,
-                        child: Image.asset('assets/images/versus.png'),
-                      ),
-                      PlayerInfoWidget(
-                        selectedPlayer: _selectedPlayer2,
-                        onPlayerSelected: _onPlayerSelected2,
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: screenHeight * .02),
-                const Text(
-                  'Schedule',
-                  style: TextStyle(
-                    color: Color(0xFF313131),
-                    fontSize: 20,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                SizedBox(height: screenHeight * .02),
-                InputDateAndTime(
-                  text: S.of(context).Event_Start,
-                  hint: S.of(context).Select_start_date_and_time,
-                  onDateTimeSelected: (DateTime dateTime) {},
-                ),
-                SizedBox(height: screenHeight * .03),
-                InputEndDateAndTime(
-                  text: S.of(context).Event_End,
-                  hint: S.of(context).Select_end_date_and_time,
-                  onDateTimeSelected: (DateTime dateTime) {},
-                ),
-                SizedBox(height: screenHeight * .03),
-                InputTextWithHint(
-                  hint: S.of(context).Type_Court_Address_here,
-                  text: S.of(context).Court_Name,
-                  controller: courtNameController,
-                ),
-                SizedBox(height: screenHeight * .03),
-                RulesInputText(
-                  header: S.of(context).Instructions,
-                  body: S
-                      .of(context)
-                      .Briefly_describe_your_clubs_rule_and_regulations,
-                  controller: rulesController,
-                ),
-                SizedBox(height: screenHeight * .015),
-                BottomSheetContainer(
-                  buttonText: 'Create',
-                  onPressed: () {},
-                )
-              ],
+              ),
+              text: 'Single Match',
+              suffixIconPath: '',
             ),
-          ),
+            SizedBox(height: screenHeight * .02),
+            const Text(
+              'Click to choose a player',
+              style: TextStyle(
+                color: Color(0xFF313131),
+                fontSize: 20,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  PlayerInfoWidget(
+                    selectedPlayer: _selectedPlayer,
+                    onPlayerSelected: _onPlayerSelected,
+                  ),
+                  SizedBox(
+                    height: 50,
+                    width: 50,
+                    child: Image.asset('assets/images/versus.png'),
+                  ),
+                  PlayerInfoWidget(
+                    selectedPlayer: _selectedPlayer2,
+                    onPlayerSelected: _onPlayerSelected2,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: screenHeight * .02),
+            const Text(
+              'Schedule',
+              style: TextStyle(
+                color: Color(0xFF313131),
+                fontSize: 20,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            SizedBox(height: screenHeight * .02),
+            InputDateAndTime(
+              text: S.of(context).Event_Start,
+              hint: S.of(context).Select_start_date_and_time,
+              onDateTimeSelected: (DateTime dateTime) {},
+            ),
+            SizedBox(height: screenHeight * .03),
+            InputEndDateAndTime(
+              text: S.of(context).Event_End,
+              hint: S.of(context).Select_end_date_and_time,
+              onDateTimeSelected: (DateTime dateTime) {},
+            ),
+            SizedBox(height: screenHeight * .03),
+            InputTextWithHint(
+              hint: S.of(context).Type_Court_Address_here,
+              text: S.of(context).Court_Name,
+              controller: courtNameController,
+            ),
+            SizedBox(height: screenHeight * .015),
+            Spacer(),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: BottomSheetContainer(
+                buttonText: 'Create',
+                onPressed: () {},
+              ),
+            )
+          ],
         ));
   }
 }
