@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/home/services/firebase_methods.dart';
 import 'package:tennis_app/Main-Features/home/widgets/avaliable_courts.dart';
