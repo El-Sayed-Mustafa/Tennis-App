@@ -1,10 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/chats/screens/player_search_screen.dart';
+import 'package:tennis_app/core/utils/widgets/custom_button.dart';
+import 'package:tennis_app/create_event/widgets/player_info_widget.dart';
 import 'package:tennis_app/create_event/widgets/player_search_match.dart';
 
+import '../../Main-Features/Featured/create_event/view/widgets/input_end_date.dart';
 import '../../Main-Features/chats/screens/private_chat.dart';
 import '../../Main-Features/chats/widgets/player_card.dart';
+import '../../core/utils/widgets/input_date_and_time.dart';
+import '../../core/utils/widgets/pop_app_bar.dart';
+import '../../core/utils/widgets/rules_text_field.dart';
+import '../../core/utils/widgets/text_field.dart';
 import '../../generated/l10n.dart';
 import '../../models/player.dart';
 
@@ -18,16 +27,15 @@ class PlayerMatchItem extends StatefulWidget {
 class _PlayerMatchItemState extends State<PlayerMatchItem> {
   Player? _selectedPlayer;
   Player? _selectedPlayer2;
-
+  final TextEditingController courtNameController = TextEditingController();
+  final TextEditingController rulesController = TextEditingController();
   void _onPlayerSelected(Player player) {
-    // Update the UI with the selected player's information
     setState(() {
       _selectedPlayer = player;
     });
   }
 
   void _onPlayerSelected2(Player player) {
-    // Update the UI with the selected player's information
     setState(() {
       _selectedPlayer2 = player;
     });
@@ -35,105 +43,109 @@ class _PlayerMatchItemState extends State<PlayerMatchItem> {
 
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
-    final double screenHeight = MediaQuery.of(context).size.height;
-    final double itemWidth = screenWidth * 0.3;
-    final double itemHeight = screenHeight * .2;
-    final double imageHeight = (screenHeight + screenWidth) * 0.05;
+    final screenHeight = MediaQuery.of(context).size.height;
 
-    return Row(
-      children: [
-        Container(
-          margin: EdgeInsets.only(top: 8),
-          padding: EdgeInsets.only(top: 8),
-          width: itemWidth,
-          height: itemHeight,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(30),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 6,
-                offset: Offset(0, 3),
-              ),
-            ],
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider<EndDateTimeCubit>(
+            create: (context) => EndDateTimeCubit(),
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              _selectedPlayer != null
-                  ? Column(
-                      children: [
-                        Text('Selected Player:'),
-                        Text('Name: ${_selectedPlayer!.playerName}'),
-                        Text('Club Name: ${_selectedPlayer!.gender}'),
-                      ],
-                    )
-                  : Container(),
-              ElevatedButton(
-                onPressed: () {
-                  // Navigate to the PlayerSearchMatch screen
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PlayerSearchMatch(
-                          onPlayerSelected: _onPlayerSelected),
+        ],
+        child: Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                PoPAppBarWave(
+                  prefixIcon: IconButton(
+                    onPressed: () {
+                      GoRouter.of(context).pop();
+                    },
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      size: 30,
+                      color: Colors.white,
                     ),
-                  );
-                },
-                child: Text('Select Player'),
-              ),
-            ],
+                  ),
+                  text: 'Single Match',
+                  suffixIconPath: '',
+                ),
+                SizedBox(height: screenHeight * .02),
+                const Text(
+                  'Click to choose a player',
+                  style: TextStyle(
+                    color: Color(0xFF313131),
+                    fontSize: 20,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0, vertical: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      PlayerInfoWidget(
+                        selectedPlayer: _selectedPlayer,
+                        onPlayerSelected: _onPlayerSelected,
+                      ),
+                      SizedBox(
+                        height: 50,
+                        width: 50,
+                        child: Image.asset('assets/images/versus.png'),
+                      ),
+                      PlayerInfoWidget(
+                        selectedPlayer: _selectedPlayer2,
+                        onPlayerSelected: _onPlayerSelected2,
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: screenHeight * .02),
+                const Text(
+                  'Schedule',
+                  style: TextStyle(
+                    color: Color(0xFF313131),
+                    fontSize: 20,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                SizedBox(height: screenHeight * .02),
+                InputDateAndTime(
+                  text: S.of(context).Event_Start,
+                  hint: S.of(context).Select_start_date_and_time,
+                  onDateTimeSelected: (DateTime dateTime) {},
+                ),
+                SizedBox(height: screenHeight * .03),
+                InputEndDateAndTime(
+                  text: S.of(context).Event_End,
+                  hint: S.of(context).Select_end_date_and_time,
+                  onDateTimeSelected: (DateTime dateTime) {},
+                ),
+                SizedBox(height: screenHeight * .03),
+                InputTextWithHint(
+                  hint: S.of(context).Type_Court_Address_here,
+                  text: S.of(context).Court_Name,
+                  controller: courtNameController,
+                ),
+                SizedBox(height: screenHeight * .03),
+                RulesInputText(
+                  header: S.of(context).Instructions,
+                  body: S
+                      .of(context)
+                      .Briefly_describe_your_clubs_rule_and_regulations,
+                  controller: rulesController,
+                ),
+                SizedBox(height: screenHeight * .015),
+                BottomSheetContainer(
+                  buttonText: 'Create',
+                  onPressed: () {},
+                )
+              ],
+            ),
           ),
-        ),
-        Container(
-          margin: EdgeInsets.only(top: 8),
-          padding: EdgeInsets.only(top: 8),
-          width: itemWidth,
-          height: itemHeight,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(30),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 6,
-                offset: Offset(0, 3),
-              ),
-            ],
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              _selectedPlayer != null
-                  ? Column(
-                      children: [
-                        Text('Selected Player:'),
-                        Text('Name: ${_selectedPlayer2!.playerName}'),
-                        Text('Club Name: ${_selectedPlayer2!.gender}'),
-                      ],
-                    )
-                  : Container(),
-              ElevatedButton(
-                onPressed: () {
-                  // Navigate to the PlayerSearchMatch screen
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PlayerSearchMatch(
-                          onPlayerSelected: _onPlayerSelected2),
-                    ),
-                  );
-                },
-                child: Text('Select Player'),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
+        ));
   }
 }

@@ -8,6 +8,7 @@ import 'package:tennis_app/Main-Features/Featured/create_event/cubit/create_even
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/club_names.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/input_end_date.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/player_level.dart';
+import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import 'package:tennis_app/core/utils/widgets/rules_text_field.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/event_types.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
@@ -78,7 +79,7 @@ class CreateEvent extends StatelessWidget {
                     key: formKey,
                     child: Column(
                       children: [
-                        AppBarWaveHome(
+                        PoPAppBarWave(
                           prefixIcon: IconButton(
                             onPressed: () {
                               GoRouter.of(context).replace('/home');
