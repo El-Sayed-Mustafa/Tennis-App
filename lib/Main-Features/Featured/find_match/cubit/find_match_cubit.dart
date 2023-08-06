@@ -28,7 +28,6 @@ class FindMatchCubit extends Cubit<FindMatchState> {
     DateTime? selectedDateTime,
     TimeOfDay? selectedTime,
     String? selectedPlayerType,
-    TextEditingController clubNameController,
     Uint8List? selectedImageBytes,
     BuildContext context,
   ) async {
@@ -58,7 +57,6 @@ class FindMatchCubit extends Cubit<FindMatchState> {
         dob: selectedDateTime!,
         preferredPlayingTime: selectedTime?.format(context) ?? '',
         playerType: selectedPlayerType!,
-        clubName: clubNameController.text,
         matchId: '', // Set matchId to an empty string for now
       );
 

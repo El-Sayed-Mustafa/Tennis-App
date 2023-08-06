@@ -8,7 +8,6 @@ class FindMatch {
   final DateTime dob;
   final String preferredPlayingTime;
   final String playerType;
-  final String clubName;
   final String matchId; // New property for match ID
 
   FindMatch({
@@ -19,7 +18,6 @@ class FindMatch {
     required this.dob,
     required this.preferredPlayingTime,
     required this.playerType,
-    required this.clubName,
     required this.matchId, // Initialize the match ID
   });
 
@@ -32,7 +30,6 @@ class FindMatch {
       'dob': dob,
       'preferredPlayingTime': preferredPlayingTime,
       'playerType': playerType,
-      'clubName': clubName,
       'matchId': matchId, // Serialize the match ID
     };
   }
@@ -52,7 +49,6 @@ class FindMatch {
       dob: (data['dob'] as Timestamp).toDate(),
       preferredPlayingTime: data['preferredPlayingTime'] as String? ?? '',
       playerType: data['playerType'] as String? ?? '',
-      clubName: data['clubName'] as String? ?? '',
       matchId: snapshot.id, // Deserialize the match ID
     );
   }
@@ -76,7 +72,6 @@ class FindMatch {
       dob: dob ?? this.dob,
       preferredPlayingTime: preferredPlayingTime ?? this.preferredPlayingTime,
       playerType: playerType ?? this.playerType,
-      clubName: clubName ?? this.clubName,
       matchId: matchId ??
           this.matchId, // Copy the match ID when creating a new instance
     );

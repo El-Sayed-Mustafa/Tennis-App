@@ -25,7 +25,6 @@ class FindMatch extends StatelessWidget {
   FindMatch({super.key});
   final TextEditingController nameController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
-  final TextEditingController clubNameController = TextEditingController();
   TimeOfDay? _selectedTime;
   var formKey = GlobalKey<FormState>();
   Uint8List? _selectedImageBytes;
@@ -156,13 +155,6 @@ class FindMatch extends StatelessWidget {
                                   SizedBox(height: screenHeight * .015),
                                   SizedBox(height: screenHeight * .03),
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20.0),
-                                    child: ClubComboBox(
-                                      controller: clubNameController,
-                                    ),
-                                  ),
-                                  Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: BottomSheetContainer(
                                       buttonText: S.of(context).Find,
@@ -180,31 +172,18 @@ class FindMatch extends StatelessWidget {
                                           User? user =
                                               FirebaseAuth.instance.currentUser;
 
-                                          // Check if the club name is empty
-                                          if (clubNameController.text.isEmpty) {
-                                            Fluttertoast.showToast(
-                                              msg: S
-                                                  .of(context)
-                                                  .Please_choose_a_club,
-                                              toastLength: Toast.LENGTH_SHORT,
-                                              gravity: ToastGravity.BOTTOM,
-                                            );
-                                          } else {
-                                            // Call the Cubit method to save data
-                                            context
-                                                .read<FindMatchCubit>()
-                                                .saveData(
-                                                  user!.uid.toString(),
-                                                  nameController,
-                                                  addressController,
-                                                  selectedDateTime,
-                                                  _selectedTime,
-                                                  selectedPlayerType,
-                                                  clubNameController,
-                                                  selectedImageBytes,
-                                                  context,
-                                                );
-                                          }
+                                          context
+                                              .read<FindMatchCubit>()
+                                              .saveData(
+                                                user!.uid.toString(),
+                                                nameController,
+                                                addressController,
+                                                selectedDateTime,
+                                                _selectedTime,
+                                                selectedPlayerType,
+                                                selectedImageBytes,
+                                                context,
+                                              );
                                         }
                                       },
                                     ),
