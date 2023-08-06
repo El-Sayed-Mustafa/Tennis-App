@@ -1,38 +1,35 @@
-import 'package:tennis_app/models/single_match.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SingleTournament {
   String id;
   String name;
   bool isDoubles;
-  List<SingleMatch> singleMatches;
+  List<String> singleMatchIds;
 
   SingleTournament({
     required this.id,
     required this.name,
     required this.isDoubles,
-    required this.singleMatches,
+    required this.singleMatchIds,
   });
 
   // Factory method to create a Tournament object from a Firestore document
-  factory SingleTournament.fromFirestore(Map<String, dynamic> doc) {
+  factory SingleTournament.fromFirestore(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>;
     return SingleTournament(
-      id: doc['id'],
-      name: doc['name'],
-      isDoubles: doc['isDoubles'],
-      singleMatches: List.from(doc['singleMatches'])
-          .map((match) => SingleMatch.fromFirestore(match))
-          .toList(),
+      id: doc.id,
+      name: data['name'],
+      isDoubles: data['isDoubles'],
+      singleMatchIds: List<String>.from(data['singleMatchIds']),
     );
   }
 
   // Method to convert a Tournament object to a Firestore document
   Map<String, dynamic> toFirestore() {
     return {
-      'id': id,
       'name': name,
       'isDoubles': isDoubles,
-      'singleMatches':
-          singleMatches.map((match) => match.toFirestore()).toList(),
+      'singleMatchIds': singleMatchIds,
     };
   }
 }

@@ -18,7 +18,6 @@ class PlayerInfoWidget extends StatelessWidget {
     final double screenHeight = MediaQuery.of(context).size.height;
     final double itemWidth = screenWidth * 0.3;
     final double itemHeight = screenHeight * .2;
-    final double imageHeight = (screenHeight + screenWidth) * 0.05;
 
     return Container(
       margin: EdgeInsets.only(top: 8),
