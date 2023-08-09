@@ -5,6 +5,7 @@ class BottomSheetContainer extends StatelessWidget {
     Key? key,
     required this.buttonText,
     required this.onPressed,
+    CircularProgressIndicator? child,
   }) : super(key: key);
 
   final String buttonText;
