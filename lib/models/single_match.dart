@@ -7,6 +7,7 @@ class SingleMatch {
   DateTime startTime;
   DateTime endTime;
   String winner;
+  String courtName;
 
   SingleMatch({
     required this.matchId,
@@ -15,8 +16,8 @@ class SingleMatch {
     required this.startTime,
     required this.endTime,
     required this.winner,
+    required this.courtName,
   });
-
   // Factory method to create a SingleMatch object from a Firestore document
   factory SingleMatch.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
@@ -27,9 +28,9 @@ class SingleMatch {
       startTime: (data['startTime'] as Timestamp).toDate(),
       endTime: (data['endTime'] as Timestamp).toDate(),
       winner: data['winner'],
+      courtName: data['courtName'],
     );
   }
-
   // Method to convert a SingleMatch object to a Firestore document
   Map<String, dynamic> toFirestore() {
     return {
@@ -38,6 +39,45 @@ class SingleMatch {
       'startTime': startTime,
       'endTime': endTime,
       'winner': winner,
+      'courtName': courtName,
     };
   }
+}
+
+// Example of creating a new match within a tournament
+Future<void> createMatchInTournament(
+    String tournamentId, SingleMatch match) async {
+  final tournamentRef = FirebaseFirestore.instance
+      .collection('singleTournaments')
+      .doc(tournamentId);
+
+  final newMatchRef = tournamentRef.collection('singleMatches').doc();
+  await newMatchRef.set(match.toFirestore());
+}
+
+// Example of updating match details within a tournament
+Future<void> updateMatchInTournament(
+    String tournamentId, String matchId, SingleMatch updatedMatch) async {
+  final matchRef = FirebaseFirestore.instance
+      .collection('singleTournaments')
+      .doc(tournamentId)
+      .collection('singleMatches')
+      .doc(matchId);
+
+  await matchRef.update(updatedMatch.toFirestore());
+}
+
+// Example of fetching and displaying matches within a tournament
+Future<List<SingleMatch>> getMatchesInTournament(String tournamentId) async {
+  final matchesSnapshot = await FirebaseFirestore.instance
+      .collection('singleTournaments')
+      .doc(tournamentId)
+      .collection('singleMatches')
+      .get();
+
+  final matchesList = matchesSnapshot.docs
+      .map((doc) => SingleMatch.fromFirestore(doc))
+      .toList();
+
+  return matchesList;
 }

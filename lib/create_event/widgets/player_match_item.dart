@@ -61,7 +61,8 @@ class _PlayerMatchItemState extends State<PlayerMatchItem> {
       player2Id: _selectedPlayer2!.playerId,
       startTime: startTime,
       endTime: endTime,
-      winner:
+      winner: '',
+      courtName:
           '', // You can leave this empty initially or set it when the match is completed
     );
 

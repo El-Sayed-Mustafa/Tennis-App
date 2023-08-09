@@ -37,6 +37,7 @@ import '../../Main-Features/Featured/settings/view/settings_screen.dart';
 import '../../Main-Features/chats/screens/chats_screen.dart';
 import '../../Main-Features/chats/screens/private_chat.dart';
 import '../../create_event/single_friendly_match/single_match_screen.dart';
+import '../../create_event/single_tournment/single_tournment_screen.dart';
 import '../../models/player.dart';
 
 abstract class AppRouter {
@@ -47,7 +48,7 @@ abstract class AppRouter {
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider(
             create: (context) => NavigationCubit(),
-            child: FindMatch(),
+            child: TournamentScreen(),
           );
         },
         routes: <RouteBase>[

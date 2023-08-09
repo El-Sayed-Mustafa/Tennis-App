@@ -18,6 +18,7 @@ import '../create_event/view/widgets/input_end_date.dart';
 import 'model/database_helper.dart';
 import 'model/evenet_data.dart';
 
+// ignore: must_be_immutable
 class SetReminder extends StatelessWidget {
   SetReminder({Key? key, required this.event}) : super(key: key);
 

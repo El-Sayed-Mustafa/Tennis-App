@@ -4,13 +4,11 @@ class SingleTournament {
   String id;
   String name;
   bool isDoubles;
-  List<String> singleMatchIds;
 
   SingleTournament({
     required this.id,
     required this.name,
     required this.isDoubles,
-    required this.singleMatchIds,
   });
 
   // Factory method to create a Tournament object from a Firestore document
@@ -20,7 +18,6 @@ class SingleTournament {
       id: doc.id,
       name: data['name'],
       isDoubles: data['isDoubles'],
-      singleMatchIds: List<String>.from(data['singleMatchIds']),
     );
   }
 
@@ -29,7 +26,6 @@ class SingleTournament {
     return {
       'name': name,
       'isDoubles': isDoubles,
-      'singleMatchIds': singleMatchIds,
     };
   }
 }
