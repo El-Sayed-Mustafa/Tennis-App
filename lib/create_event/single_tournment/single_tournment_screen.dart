@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-
+import 'package:go_router/go_router.dart';
+import 'package:tennis_app/create_event/single_tournment/single_tournment_item.dart';
+import '../../core/utils/widgets/match_card.dart';
+import '../../core/utils/widgets/pop_app_bar.dart';
 import '../../models/single_match.dart';
 import '../../models/single_tournment.dart';
 
-class TournamentScreen extends StatefulWidget {
+class SingleTournamentScreen extends StatefulWidget {
+  const SingleTournamentScreen({super.key});
+
   @override
-  _TournamentScreenState createState() => _TournamentScreenState();
+  _SingleTournamentScreenState createState() => _SingleTournamentScreenState();
 }
 
-class _TournamentScreenState extends State<TournamentScreen> {
+class _SingleTournamentScreenState extends State<SingleTournamentScreen> {
   String tournamentId = ''; // Updated to store the generated tournament ID
   List<SingleMatch> matches = [];
-  bool addingMatch = false; // Track whether the user is adding a match
 
   @override
   void initState() {
@@ -23,38 +27,50 @@ class _TournamentScreenState extends State<TournamentScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Tournament Matches'),
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: CarouselSlider.builder(
-              itemCount: matches.length,
-              itemBuilder: (context, index, realIndex) {
-                final match = matches[index];
-                return MatchCard(match: match);
-              },
-              options: CarouselOptions(
-                aspectRatio: 16 / 9,
-                viewportFraction: 0.8,
-                initialPage: 0,
-                enableInfiniteScroll: false,
-                enlargeCenterPage: true,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            PoPAppBarWave(
+              prefixIcon: IconButton(
+                onPressed: () {
+                  GoRouter.of(context).pop();
+                },
+                icon: const Icon(
+                  Icons.arrow_back,
+                  size: 30,
+                  color: Colors.white,
+                ),
+              ),
+              text: 'Tournament',
+              suffixIconPath: '',
+            ),
+            Visibility(
+              visible:
+                  matches.isNotEmpty, // Set visibility based on matches list
+              child: CarouselSlider.builder(
+                itemCount: matches.length,
+                itemBuilder: (context, index, realIndex) {
+                  final match = matches[index];
+                  return MatchCard(match: match);
+                },
+                options: CarouselOptions(
+                  height: matches.isNotEmpty
+                      ? screenHeight * .2
+                      : 0, // Set height based on matches list
+                  aspectRatio: 16 / 9,
+                  viewportFraction: 0.6,
+                  initialPage: 0,
+                  enableInfiniteScroll: false,
+                  enlargeCenterPage: true,
+                ),
               ),
             ),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                addingMatch = true; // Show match input form
-              });
-            },
-            child: Text('Add Match'),
-          ),
-          if (addingMatch) MatchInputForm(onSave: _saveMatch),
-        ],
+            MatchInputForm(onSave: _saveMatch),
+          ],
+        ),
       ),
     );
   }
@@ -85,81 +101,6 @@ class _TournamentScreenState extends State<TournamentScreen> {
 
     setState(() {
       matches.add(newMatch);
-      addingMatch = false; // Hide match input form
     });
-  }
-}
-
-class MatchCard extends StatelessWidget {
-  final SingleMatch match;
-
-  MatchCard({required this.match});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      // Customize card layout as needed
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Match ${match.matchId}'),
-          Text('Court: ${match.courtName}'),
-          // Display other match details as needed
-        ],
-      ),
-    );
-  }
-}
-
-class MatchInputForm extends StatefulWidget {
-  final void Function(SingleMatch newMatch) onSave;
-
-  MatchInputForm({required this.onSave});
-
-  @override
-  _MatchInputFormState createState() => _MatchInputFormState();
-}
-
-class _MatchInputFormState extends State<MatchInputForm> {
-  String player1Id = '';
-  String player2Id = '';
-  DateTime startTime = DateTime.now();
-  DateTime endTime = DateTime.now();
-  String winner = '';
-  String courtName = '';
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TextField(
-          decoration: InputDecoration(labelText: 'Player 1 ID'),
-          onChanged: (value) => player1Id = value,
-        ),
-        TextField(
-          decoration: InputDecoration(labelText: 'Player 2 ID'),
-          onChanged: (value) => player2Id = value,
-        ),
-        // Add more text fields for other match data
-        ElevatedButton(
-          onPressed: _saveMatch,
-          child: Text('Save Match'),
-        ),
-      ],
-    );
-  }
-
-  void _saveMatch() {
-    final newMatch = SingleMatch(
-      matchId: '', // Auto-generated ID will be assigned by Firestore
-      player1Id: player1Id,
-      player2Id: player2Id,
-      startTime: startTime,
-      endTime: endTime,
-      winner: winner,
-      courtName: courtName,
-    );
-
-    widget.onSave(newMatch); // Call the callback to save the match
   }
 }

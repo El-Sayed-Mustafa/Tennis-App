@@ -29,10 +29,9 @@ class PoPAppBarWave extends StatelessWidget {
             clipper: AppBarClipper(),
             child: Container(
               color: const Color.fromARGB(255, 34, 47, 53),
-              padding: const EdgeInsets.only(top: 12, right: 16, left: 16),
+              padding: const EdgeInsets.only(top: 12, right: 0, left: 16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),

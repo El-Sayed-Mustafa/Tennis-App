@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -6,13 +5,11 @@ import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import 'package:tennis_app/create_event/single_friendly_match/cubit/single_match_state.dart';
 import 'package:tennis_app/create_event/widgets/player_info_widget.dart';
 import '../../Main-Features/Featured/create_event/view/widgets/input_end_date.dart';
-import '../../core/utils/snackbar.dart';
 import '../../core/utils/widgets/input_date_and_time.dart';
 import '../../core/utils/widgets/pop_app_bar.dart';
 import '../../core/utils/widgets/text_field.dart';
 import '../../generated/l10n.dart';
 import '../../models/player.dart';
-import '../../models/single_match.dart';
 import 'cubit/single_match_cubit.dart';
 
 class PlayerMatchItem extends StatefulWidget {
@@ -38,12 +35,6 @@ class _PlayerMatchItemState extends State<PlayerMatchItem> {
       _selectedPlayer2 = player;
     });
   }
-
-  bool _areFieldsNotEmpty() {
-    return _selectedPlayer != null && _selectedPlayer2 != null;
-  }
-
-  Future<void> _saveSingleMatchToFirestore() async {}
 
   var formKey = GlobalKey<FormState>();
 
@@ -165,9 +156,6 @@ class _PlayerMatchItemState extends State<PlayerMatchItem> {
                 courtNameController: courtNameController,
                 selectedPlayer: _selectedPlayer!,
                 selectedPlayer2: _selectedPlayer2!);
-          } else if (!_areFieldsNotEmpty()) {
-            // Show an alert or snackbar that both players need to be selected
-            showSnackBar(context, 'You Must Fill this item');
           }
         },
       ),
