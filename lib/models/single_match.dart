@@ -34,6 +34,7 @@ class SingleMatch {
   // Method to convert a SingleMatch object to a Firestore document
   Map<String, dynamic> toFirestore() {
     return {
+      'matchId': matchId,
       'player1Id': player1Id,
       'player2Id': player2Id,
       'startTime': startTime,

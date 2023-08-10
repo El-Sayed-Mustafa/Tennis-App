@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tennis_app/create_event/single_tournment/single_tournment_item.dart';
 import '../../core/utils/widgets/match_card.dart';
 import '../../core/utils/widgets/pop_app_bar.dart';
+
 import '../../models/single_match.dart';
 import '../../models/single_tournment.dart';
 
@@ -99,6 +100,9 @@ class _SingleTournamentScreenState extends State<SingleTournamentScreen> {
     final newMatchRef = tournamentRef.collection('singleMatches').doc();
     await newMatchRef.set(newMatch.toFirestore());
 
+    // Update the newMatch object with the generated match ID
+    newMatch.matchId = newMatchRef.id;
+    await newMatchRef.update({'matchId': newMatch.matchId});
     setState(() {
       matches.add(newMatch);
     });
