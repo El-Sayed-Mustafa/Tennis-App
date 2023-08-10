@@ -5,10 +5,10 @@ import 'package:intl/intl.dart'; // Import the intl package
 import '../../../models/single_match.dart';
 import '../../../models/player.dart';
 
-class MatchCard extends StatelessWidget {
+class SingleMatchCard extends StatelessWidget {
   final SingleMatch match;
 
-  MatchCard({Key? key, required this.match}) : super(key: key);
+  SingleMatchCard({Key? key, required this.match}) : super(key: key);
 
   Future<Player?> fetchPlayer(String playerId) async {
     try {

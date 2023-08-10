@@ -13,12 +13,15 @@ Widget defaultFormField({
   IconData? suffix,
   Function? suffixPressed,
   bool isClickable = true,
+  bool autofocus = false, // Add this parameter with a default value of false
 }) =>
     TextFormField(
         controller: controller,
         keyboardType: type,
         obscureText: isPassword,
         enabled: isClickable,
+        autofocus: autofocus, // Set the autofocus property
+
         onFieldSubmitted: (value) {},
         onChanged: (value) {
           return onChange!(value);
@@ -103,7 +106,8 @@ class InputTextWithHint extends StatelessWidget {
             type: type, // Replace with the desired input type
             onSubmit: null,
             onChange: null,
-            onTap: null,
+            onTap: null, autofocus: false, // Set autofocus to false
+
             isPassword: false,
             validate: (value) {
               if (value!.isEmpty) {
