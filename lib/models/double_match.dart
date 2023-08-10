@@ -10,6 +10,7 @@ class DoubleMatch {
   DateTime endTime;
   String winner1;
   String winner2;
+  String courtName;
 
   DoubleMatch({
     required this.matchId,
@@ -21,6 +22,7 @@ class DoubleMatch {
     required this.endTime,
     required this.winner1,
     required this.winner2,
+    required this.courtName,
   });
 
   // Factory method to create a DoubleMatch object from a Firestore document
@@ -35,6 +37,7 @@ class DoubleMatch {
       endTime: (doc['endTime'] as Timestamp).toDate(),
       winner1: doc['winner1'],
       winner2: doc['winner2'],
+      courtName: doc['courtName'],
     );
   }
 
@@ -50,6 +53,7 @@ class DoubleMatch {
       'endTime': endTime,
       'winner1': winner1,
       'winner2': winner2,
+      'courtName': courtName,
     };
   }
 }
