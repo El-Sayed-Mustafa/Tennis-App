@@ -162,9 +162,7 @@ class _MatchInputFormState extends State<MatchInputForm> {
 
     // Call the onSave method with the newMatch object
     widget.onSave(newMatch);
-
+    print(newMatch.matchId);
     // Call the addMatchIdToPlayer method for both selected players
-    await selectedPlayer.addMatchIdToPlayer(newMatch);
-    await selectedPlayer2.addMatchIdToPlayer(newMatch);
   }
 }

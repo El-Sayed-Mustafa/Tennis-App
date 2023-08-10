@@ -6,6 +6,7 @@ import 'package:tennis_app/create_event/single_tournment/single_tournment_item.d
 import '../../core/utils/widgets/match_card.dart';
 import '../../core/utils/widgets/pop_app_bar.dart';
 
+import '../../models/player.dart';
 import '../../models/single_match.dart';
 import '../../models/single_tournment.dart';
 
@@ -102,7 +103,30 @@ class _SingleTournamentScreenState extends State<SingleTournamentScreen> {
 
     // Update the newMatch object with the generated match ID
     newMatch.matchId = newMatchRef.id;
-    await newMatchRef.update({'matchId': newMatch.matchId});
+
+    // Fetch the players based on their IDs
+    final player1Doc = await FirebaseFirestore.instance
+        .collection('players')
+        .doc(newMatch.player1Id)
+        .get();
+    final player2Doc = await FirebaseFirestore.instance
+        .collection('players')
+        .doc(newMatch.player2Id)
+        .get();
+
+    final player1 = Player.fromSnapshot(player1Doc);
+    final player2 = Player.fromSnapshot(player2Doc);
+
+    // Update the players' singleMatchesIds lists with the new match ID
+    player1.singleMatchesIds.add(newMatch.matchId);
+    player2.singleMatchesIds.add(newMatch.matchId);
+
+    // Update the players' documents with the updated lists
+    await player1Doc.reference
+        .update({'singleMatchesIds': player1.singleMatchesIds});
+    await player2Doc.reference
+        .update({'singleMatchesIds': player2.singleMatchesIds});
+
     setState(() {
       matches.add(newMatch);
     });

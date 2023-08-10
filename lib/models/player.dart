@@ -153,10 +153,10 @@ class Player {
       if (match.player1Id == playerId || match.player2Id == playerId) {
         final matchId = match.matchId; // Get the ID of the match
         final updatedMatches = [
-          ...singleTournamentsIds,
+          ...singleMatchesIds,
           matchId
         ]; // Add the match ID to the list
-
+        print("pls" + matchId);
         // Update the player's document with the updated matches list
         await playerRef.update({'singleMatchesIds': updatedMatches});
 
