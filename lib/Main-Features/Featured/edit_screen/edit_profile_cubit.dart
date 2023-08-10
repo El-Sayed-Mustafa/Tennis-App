@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,7 +6,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:go_router/go_router.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import '../../../../core/utils/widgets/input_date.dart';
 import '../../../../models/player.dart';
 import '../create_profile/cubits/Gender_Cubit.dart';
@@ -54,10 +52,10 @@ class EditProfileCubit extends Cubit<EditProfileState> {
       Player player = Player(
         playerId: playerId, // Use the UID as the player ID
         playerName: nameController.text.isEmpty
-            ? currentPlayer.playerName ?? ''
+            ? currentPlayer.playerName
             : nameController.text,
         phoneNumber: phoneNumberController.text.isEmpty
-            ? currentPlayer.phoneNumber ?? ''
+            ? currentPlayer.phoneNumber
             : phoneNumberController.text,
         photoURL: currentPlayer.photoURL,
         playerLevel: currentPlayer.playerLevel,
@@ -65,15 +63,13 @@ class EditProfileCubit extends Cubit<EditProfileState> {
         totalWins: currentPlayer.totalWins,
         skillLevel: currentPlayer.skillLevel,
         gender: context.read<GenderCubit>().state.isEmpty
-            ? currentPlayer.gender ?? ''
+            ? currentPlayer.gender
             : context.read<GenderCubit>().state,
-        birthDate: context.read<DateCubit>().state ?? currentPlayer.birthDate,
+        birthDate: context.read<DateCubit>().state,
         preferredPlayingTime: selectedTime != null
             ? '${selectedTime.hour}:${selectedTime.minute.toString().padLeft(2, '0')}'
             : '',
-        playerType: context.read<PlayerTypeCubit>().state ??
-            currentPlayer.playerType ??
-            '',
+        playerType: context.read<PlayerTypeCubit>().state,
         eventIds: currentPlayer.eventIds,
         clubRoles: currentPlayer.clubRoles,
         clubInvitationsIds: currentPlayer.clubInvitationsIds,
@@ -81,6 +77,10 @@ class EditProfileCubit extends Cubit<EditProfileState> {
         matches: currentPlayer.matches,
         reversedCourtsIds: currentPlayer.reversedCourtsIds,
         chatIds: currentPlayer.chatIds,
+        doubleMatchesIds: currentPlayer.doubleMatchesIds,
+        doubleTournamentsIds: currentPlayer.doubleTournamentsIds,
+        singleMatchesIds: currentPlayer.singleMatchesIds,
+        singleTournamentsIds: currentPlayer.singleTournamentsIds,
       );
 
       CollectionReference playersCollection =

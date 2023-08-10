@@ -130,7 +130,7 @@ class _ClubInvitationsPageState extends State<ClubInvitationsPage> {
                     final clubs = snapshot.data!;
                     if (clubs.isEmpty) {
                       // Trigger navigation to '/home' route from the parent widget
-                      WidgetsBinding.instance!.addPostFrameCallback((_) {
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
                         GoRouter.of(context).go('/home');
                       });
                       // Return an empty container since you need to return a Widget from the builder

@@ -20,7 +20,11 @@ class Player {
   final List<Map<String, dynamic>> matches;
   bool isInvitationSent = false;
   final List<String> reversedCourtsIds;
-  final List<String> chatIds; // New field to store chat conversation IDs.
+  final List<String> chatIds;
+  final List<String> singleMatchesIds;
+  final List<String> doubleMatchesIds;
+  final List<String> singleTournamentsIds;
+  final List<String> doubleTournamentsIds;
 
   Player({
     required this.playerId,
@@ -42,6 +46,10 @@ class Player {
     required this.chatIds,
     required this.reversedCourtsIds,
     required this.matches,
+    required this.singleMatchesIds,
+    required this.doubleMatchesIds,
+    required this.singleTournamentsIds,
+    required this.doubleTournamentsIds,
   });
 
   Map<String, dynamic> toJson() {
@@ -64,7 +72,11 @@ class Player {
       'reversedCourtsIds': reversedCourtsIds,
       'matchId': matches,
       'participatedClubId': participatedClubId,
-      'chatIds': chatIds, // Add the chatIds field to the JSON representation.
+      'chatIds': chatIds,
+      'singleMatchesIds': singleMatchesIds,
+      'doubleMatchesIds': doubleMatchesIds,
+      'singleTournamentsIds': singleTournamentsIds,
+      'doubleTournamentsIds': doubleTournamentsIds,
     };
   }
 
@@ -94,6 +106,12 @@ class Player {
       matches: List<Map<String, dynamic>>.from(data['matchId'] ?? []),
       reversedCourtsIds: List<String>.from(data['reversedCourtsIds'] ?? []),
       chatIds: List<String>.from(data['chatIds'] ?? []),
+      singleMatchesIds: List<String>.from(data['singleMatchesIds'] ?? []),
+      doubleMatchesIds: List<String>.from(data['doubleMatchesIds'] ?? []),
+      singleTournamentsIds:
+          List<String>.from(data['singleTournamentsIds'] ?? []),
+      doubleTournamentsIds:
+          List<String>.from(data['doubleTournamentsIds'] ?? []),
     );
   }
   factory Player.fromMap(Map<String, dynamic> map) {
@@ -117,6 +135,12 @@ class Player {
       chatIds: List<String>.from(map['chatIds'] ?? []),
       reversedCourtsIds: List<String>.from(map['reversedCourtsIds'] ?? []),
       matches: List<Map<String, dynamic>>.from(map['matchId'] ?? []),
+      singleMatchesIds: List<String>.from(map['singleMatchesIds'] ?? []),
+      doubleMatchesIds: List<String>.from(map['doubleMatchesIds'] ?? []),
+      singleTournamentsIds:
+          List<String>.from(map['singleTournamentsIds'] ?? []),
+      doubleTournamentsIds:
+          List<String>.from(map['doubleTournamentsIds'] ?? []),
     );
   }
 }

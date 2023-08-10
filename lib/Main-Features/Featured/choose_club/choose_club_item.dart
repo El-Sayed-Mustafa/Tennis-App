@@ -5,7 +5,6 @@ import 'package:tennis_app/Main-Features/Featured/choose_club/widgets/card_detai
 import 'package:tennis_app/Main-Features/Featured/choose_club/widgets/join_cancel_button.dart';
 import 'package:tennis_app/Main-Features/Featured/choose_club/widgets/static_rating_bar.dart';
 import 'package:tennis_app/Main-Features/Featured/choose_club/widgets/wave_clipper_widget.dart';
-import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import 'package:tennis_app/models/club.dart';
 
 import '../../../constants.dart';
