@@ -21,18 +21,30 @@ import '../../create_profile/widgets/profile_image.dart';
 import '../cubit/create_event_state.dart';
 
 // ignore: must_be_immutable
-class CreateEvent extends StatelessWidget {
+class CreateEvent extends StatefulWidget {
   CreateEvent({Key? key}) : super(key: key);
 
+  @override
+  State<CreateEvent> createState() => _CreateEventState();
+}
+
+class _CreateEventState extends State<CreateEvent> {
   // Declare controllers for input fields
   final TextEditingController eventNameController = TextEditingController();
+
   final TextEditingController eventAddressController = TextEditingController();
+
   final TextEditingController courtNameController = TextEditingController();
+
   final TextEditingController rulesController = TextEditingController();
+
   final TextEditingController clubNameController = TextEditingController();
 
   Uint8List? _selectedImageBytes;
+
   var formKey = GlobalKey<FormState>();
+
+  int? _radioValue = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -43,15 +55,9 @@ class CreateEvent extends StatelessWidget {
         BlocProvider<EventTypeCubit>(
           create: (context) => EventTypeCubit(),
         ),
-        BlocProvider<EndDateTimeCubit>(
-          create: (context) => EndDateTimeCubit(),
-        ),
         BlocProvider(
           create: (context) => SliderCubit(),
         ),
-        BlocProvider(
-          create: (context) => ClubNamesCubit(),
-        )
       ],
       child: BlocProvider(
         create: (context) => CreateEventCubit(context),
@@ -101,16 +107,12 @@ class CreateEvent extends StatelessWidget {
                         SizedBox(height: screenHeight * .01),
                         Text(
                           S.of(context).Set_Event_Picture,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 14,
                             fontFamily: 'Poppins',
                             fontWeight: FontWeight.w500,
                           ),
-                        ),
-                        SizedBox(height: screenHeight * .03),
-                        ClubComboBox(
-                          controller: clubNameController,
                         ),
                         SizedBox(height: screenHeight * .03),
                         InputTextWithHint(
@@ -144,6 +146,78 @@ class CreateEvent extends StatelessWidget {
                           text: S.of(context).Court_Name,
                           controller: courtNameController,
                         ),
+                        SizedBox(height: screenHeight * .03),
+                        //Create Radio Buttons here have two items Public and custom
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Row(
+                                children: [
+                                  Radio<int>(
+                                    value: 0,
+                                    groupValue: _radioValue,
+                                    onChanged: (int? value) {
+                                      setState(() {
+                                        _radioValue = value;
+                                      });
+                                    },
+                                  ),
+                                  const Text(
+                                    'Public',
+                                    style: const TextStyle(
+                                      color: Color(0xFF525252),
+                                      fontSize: 16,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Radio<int>(
+                                    value: 1,
+                                    groupValue: _radioValue,
+                                    onChanged: (int? value) {
+                                      setState(() {
+                                        _radioValue = value;
+                                      });
+                                    },
+                                  ),
+                                  const Text(
+                                    'Custom',
+                                    style: const TextStyle(
+                                      color: Color(0xFF525252),
+                                      fontSize: 16,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        if (_radioValue == 1)
+                          Container(
+                            width: 100,
+                            height: 100,
+                            color: Colors.blue,
+                            child:
+                                const Center(child: Text('Custom Container')),
+                          )
+                        else
+                          const SizedBox.shrink(),
+
+                        RulesInputText(
+                          header: S.of(context).Instructions,
+                          body: S
+                              .of(context)
+                              .Briefly_describe_your_clubs_rule_and_regulations,
+                          controller: rulesController,
+                        ), // and if public is slelected show nothing
                         SizedBox(height: screenHeight * .03),
                         RulesInputText(
                           header: S.of(context).Instructions,

@@ -4,18 +4,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../generated/l10n.dart';
 
 enum EventType {
-  Tournament,
-  OneDay,
-  Challenge,
-  Competition,
+  InternalClubEvent,
+  Party,
+  InternalTeamEvent,
   FriendlyMatch,
   DailyTraining,
   PartyEvent,
-  TrainingPlan,
+  Training,
 }
 
 class EventTypeCubit extends Cubit<EventType> {
-  EventTypeCubit() : super(EventType.Tournament);
+  EventTypeCubit() : super(EventType.Training);
 
   void setClubType(EventType clubType) {
     emit(clubType);
@@ -26,14 +25,13 @@ class EventTypeInput extends StatelessWidget {
   EventTypeInput({Key? key}) : super(key: key);
 
   final Map<EventType, String> displayTexts = {
-    EventType.Tournament: 'Tournament',
-    EventType.OneDay: 'One Day',
-    EventType.Challenge: 'Challenge',
-    EventType.Competition: 'Competition',
+    EventType.InternalClubEvent: 'One Day',
+    EventType.Party: 'Challenge',
+    EventType.InternalTeamEvent: 'Competition',
     EventType.FriendlyMatch: 'Friendly Match',
     EventType.DailyTraining: 'Daily Training',
     EventType.PartyEvent: 'Party Event',
-    EventType.TrainingPlan: 'Training Plan',
+    EventType.Training: 'Training Plan',
   };
 
   @override
@@ -60,7 +58,7 @@ class EventTypeInput extends StatelessWidget {
           builder: (context, state) {
             return Container(
               width: screenWidth * .83,
-              height: screenHeight * .045,
+              height: screenHeight * .057,
               decoration: ShapeDecoration(
                 color: Colors.white,
                 shape: RoundedRectangleBorder(
@@ -78,8 +76,8 @@ class EventTypeInput extends StatelessWidget {
                         Expanded(
                           child: TextFormField(
                             style: const TextStyle(
-                              color: Color(0xFF6D6D6D),
-                              fontSize: 14,
+                              color: Color.fromARGB(255, 53, 53, 53),
+                              fontSize: 16,
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.w400,
                             ),
@@ -88,6 +86,7 @@ class EventTypeInput extends StatelessWidget {
                               _showOptionsPopupMenu(context);
                             },
                             decoration: InputDecoration(
+                              isDense: true,
                               contentPadding: EdgeInsets.symmetric(
                                   vertical: screenHeight * .015),
                               border: InputBorder.none,
@@ -127,25 +126,23 @@ class EventTypeInput extends StatelessWidget {
       Offset.zero & overlay.size,
     );
     final Map<EventType, String> displayTexts = {
-      EventType.Tournament: S.of(context).Tournament,
-      EventType.OneDay: S.of(context).One_Day,
-      EventType.Challenge: S.of(context).Challenge,
-      EventType.Competition: S.of(context).Competition,
+      EventType.InternalClubEvent: S.of(context).One_Day,
+      EventType.Party: S.of(context).Challenge,
+      EventType.InternalTeamEvent: S.of(context).Competition,
       EventType.FriendlyMatch: S.of(context).Friendly_Match,
       EventType.DailyTraining: S.of(context).Daily_Training,
       EventType.PartyEvent: S.of(context).Party_Event,
-      EventType.TrainingPlan: S.of(context).Training_Plan,
+      EventType.Training: S.of(context).Training_Plan,
     };
 
     final List<EventType> options = [
-      EventType.Tournament,
-      EventType.OneDay,
-      EventType.Challenge,
-      EventType.Competition,
+      EventType.InternalClubEvent,
+      EventType.Party,
+      EventType.InternalTeamEvent,
       EventType.FriendlyMatch,
       EventType.DailyTraining,
       EventType.PartyEvent,
-      EventType.TrainingPlan,
+      EventType.Training,
     ];
 
     showMenu<EventType>(
