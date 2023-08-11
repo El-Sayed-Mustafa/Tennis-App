@@ -124,14 +124,23 @@ class _PlayerSearchInviteState extends State<PlayerSearchInvite> {
             return GestureDetector(
               // Inside _PlayerSearchInviteState
               onTap: () {
-                // Add player's name and ID to the lists
-                widget.playerNames.add(player.playerName);
-                widget.playerIds.add(player.playerId);
-
-                // Return the updated playerNames list to the parent widget
+                // Check if the name is already in the list
+                if (widget.playerNames.contains(player.playerName)) {
+                  // If it exists, remove it
+                  setState(() {
+                    widget.playerNames.remove(player.playerName);
+                    widget.playerIds.remove(player.playerId);
+                  });
+                } else {
+                  // If it doesn't exist, add it
+                  setState(() {
+                    widget.playerNames.add(player.playerName);
+                    widget.playerIds.add(player.playerId);
+                  });
+                }
                 Navigator.pop(context, widget.playerNames);
+                print(widget.playerIds);
               },
-
               child: PlayerCard(
                   player: player), // Use the custom PlayerCard widget
             );

@@ -231,6 +231,7 @@ class _CreateEventState extends State<CreateEvent> {
                         BottomSheetContainer(
                           buttonText: S.of(context).Create,
                           onPressed: () {
+                            print(playerIds);
                             if (formKey.currentState!.validate()) {
                               context.read<CreateEventCubit>().saveEventData(
                                     context: context,
