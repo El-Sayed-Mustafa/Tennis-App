@@ -49,6 +49,7 @@ class _RightSelectorState extends State<RightSelector> {
         SizedBox(
           width: double.infinity,
           child: Stack(
+            alignment: Alignment.centerRight,
             children: [
               LayoutBuilder(
                 builder: (context, constraints) {

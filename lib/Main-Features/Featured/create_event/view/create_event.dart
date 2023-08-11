@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/cubit/create_event_cubit.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/club_names.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/input_end_date.dart';
+import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/invited_members.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/player_level.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import 'package:tennis_app/core/utils/widgets/rules_text_field.dart';
@@ -43,12 +44,13 @@ class _CreateEventState extends State<CreateEvent> {
   Uint8List? _selectedImageBytes;
 
   var formKey = GlobalKey<FormState>();
-
+  List<String> playerIds = [];
   int? _radioValue = 0;
 
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
 
     return MultiBlocProvider(
       providers: [
@@ -146,7 +148,7 @@ class _CreateEventState extends State<CreateEvent> {
                           text: S.of(context).Court_Name,
                           controller: courtNameController,
                         ),
-                        SizedBox(height: screenHeight * .03),
+                        SizedBox(height: screenHeight * .015),
                         //Create Radio Buttons here have two items Public and custom
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -166,7 +168,7 @@ class _CreateEventState extends State<CreateEvent> {
                                   ),
                                   const Text(
                                     'Public',
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       color: Color(0xFF525252),
                                       fontSize: 16,
                                       fontFamily: 'Poppins',
@@ -188,7 +190,7 @@ class _CreateEventState extends State<CreateEvent> {
                                   ),
                                   const Text(
                                     'Custom',
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       color: Color(0xFF525252),
                                       fontSize: 16,
                                       fontFamily: 'Poppins',
@@ -202,23 +204,13 @@ class _CreateEventState extends State<CreateEvent> {
                         ),
                         if (_radioValue == 1)
                           Container(
-                            width: 100,
-                            height: 100,
-                            color: Colors.blue,
-                            child:
-                                const Center(child: Text('Custom Container')),
+                            child: MemberInvites(
+                              playerIds: playerIds,
+                            ),
                           )
                         else
                           const SizedBox.shrink(),
-
-                        RulesInputText(
-                          header: S.of(context).Instructions,
-                          body: S
-                              .of(context)
-                              .Briefly_describe_your_clubs_rule_and_regulations,
-                          controller: rulesController,
-                        ), // and if public is slelected show nothing
-                        SizedBox(height: screenHeight * .03),
+                        SizedBox(height: screenHeight * .015),
                         RulesInputText(
                           header: S.of(context).Instructions,
                           body: S
