@@ -60,7 +60,12 @@ class CreateClubCubit extends Cubit<CreateClubState> {
         eventIds: eventIds,
         memberIds: memberIds, roleIds: [], address: address, rate: 0,
         courtsNum: int.parse(courtsNumController.text), matchPlayed: 0,
-        totalWins: 0, clubChatId: '',
+        totalWins: 0,
+        clubChatId: '',
+        doubleMatchesIds: [],
+        doubleTournamentsIds: [],
+        singleMatchesIds: [],
+        singleTournamentsIds: [],
       );
 
       CollectionReference clubsCollection =

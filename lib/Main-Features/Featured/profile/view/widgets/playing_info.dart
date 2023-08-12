@@ -37,7 +37,9 @@ class PlayingInfo extends StatelessWidget {
               color: Color(0x3094B6D3),
               label: S.of(context).Skill_level,
               svgPath: 'assets/images/matches.svg',
-              value: player.skillLevel.toString(),
+              value: player.skillLevel.isNotEmpty
+                  ? player.skillLevel.toString()
+                  : "0",
             ),
             CardDetails(
               color: Color.fromARGB(108, 252, 179, 140),

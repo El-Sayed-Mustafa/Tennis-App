@@ -20,26 +20,36 @@ class Club {
   final int courtsNum;
   final List<String> roleIds; // Added property for role IDs
   final String clubChatId;
-  Club(
-      {required this.clubChatId,
-      required this.clubId,
-      required this.clubName,
-      required this.clubType,
-      required this.clubAdmin,
-      required this.nationalIdNumber,
-      required this.phoneNumber,
-      required this.email,
-      required this.matchPlayed,
-      required this.totalWins,
-      required this.rulesAndRegulations,
-      required this.ageRestriction,
-      required this.address,
-      required this.rate,
-      required this.eventIds,
-      required this.memberIds,
-      this.photoURL,
-      required this.roleIds,
-      required this.courtsNum});
+  final List<String> singleMatchesIds;
+  final List<String> doubleMatchesIds;
+  final List<String> singleTournamentsIds;
+  final List<String> doubleTournamentsIds;
+
+  Club({
+    required this.clubChatId,
+    required this.clubId,
+    required this.clubName,
+    required this.clubType,
+    required this.clubAdmin,
+    required this.nationalIdNumber,
+    required this.phoneNumber,
+    required this.email,
+    required this.matchPlayed,
+    required this.totalWins,
+    required this.rulesAndRegulations,
+    required this.ageRestriction,
+    required this.address,
+    required this.rate,
+    required this.eventIds,
+    required this.memberIds,
+    this.photoURL,
+    required this.roleIds,
+    required this.courtsNum,
+    required this.singleMatchesIds,
+    required this.doubleMatchesIds,
+    required this.singleTournamentsIds,
+    required this.doubleTournamentsIds,
+  });
 
   Map<String, dynamic> toJson() {
     return {
@@ -60,7 +70,10 @@ class Club {
       'clubImageURL': photoURL,
       'roleIds': roleIds, // Include role IDs in the JSON
       'courtsNum': courtsNum,
-      'clubChatId': clubChatId,
+      'clubChatId': clubChatId, 'singleMatchesIds': singleMatchesIds,
+      'doubleMatchesIds': doubleMatchesIds,
+      'singleTournamentsIds': singleTournamentsIds,
+      'doubleTournamentsIds': doubleTournamentsIds,
     };
   }
 
@@ -89,6 +102,12 @@ class Club {
       photoURL: data['clubImageURL'] as String?,
       roleIds: List<String>.from(data['roleIds'] ?? []),
       clubChatId: data['clubChatId'] as String? ?? '',
+      singleMatchesIds: List<String>.from(data['singleMatchesIds'] ?? []),
+      doubleMatchesIds: List<String>.from(data['doubleMatchesIds'] ?? []),
+      singleTournamentsIds:
+          List<String>.from(data['singleTournamentsIds'] ?? []),
+      doubleTournamentsIds:
+          List<String>.from(data['doubleTournamentsIds'] ?? []),
     );
   }
 }

@@ -66,7 +66,7 @@ class ProfileScreen extends StatelessWidget {
                               height: screenHeight * 0.07,
                               child: IconButton(
                                 onPressed: () {
-                                  GoRouter.of(context).push('/menu');
+                                  GoRouter.of(context).pop();
                                 },
                                 icon: const Icon(
                                   Icons.arrow_back,
