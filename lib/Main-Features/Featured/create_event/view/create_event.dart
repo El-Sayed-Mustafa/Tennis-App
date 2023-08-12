@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/cubit/create_event_cubit.dart';
-import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/club_names.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/input_end_date.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/invited_members.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/player_level.dart';
@@ -13,8 +12,6 @@ import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import 'package:tennis_app/core/utils/widgets/rules_text_field.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/event_types.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
-
-import '../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../core/utils/widgets/input_date_and_time.dart';
 import '../../../../core/utils/widgets/text_field.dart';
 import '../../../../generated/l10n.dart';
@@ -39,8 +36,6 @@ class _CreateEventState extends State<CreateEvent> {
 
   final TextEditingController rulesController = TextEditingController();
 
-  final TextEditingController clubNameController = TextEditingController();
-
   Uint8List? _selectedImageBytes;
 
   var formKey = GlobalKey<FormState>();
@@ -50,7 +45,6 @@ class _CreateEventState extends State<CreateEvent> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
 
     return MultiBlocProvider(
       providers: [
@@ -231,7 +225,7 @@ class _CreateEventState extends State<CreateEvent> {
                         BottomSheetContainer(
                           buttonText: S.of(context).Create,
                           onPressed: () {
-                            print(playerIds);
+                            print("HI " + _radioValue.toString());
                             if (formKey.currentState!.validate()) {
                               context.read<CreateEventCubit>().saveEventData(
                                     context: context,
@@ -240,7 +234,7 @@ class _CreateEventState extends State<CreateEvent> {
                                     courtNameController: courtNameController,
                                     eventNameController: eventNameController,
                                     instructionsController: rulesController,
-                                    clubNameController: clubNameController,
+                                    selected: playerIds,
                                   );
                             }
                           },

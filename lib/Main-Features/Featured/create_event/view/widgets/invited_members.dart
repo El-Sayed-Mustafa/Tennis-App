@@ -47,6 +47,7 @@ class _MemberInvitesState extends State<MemberInvites> {
             LayoutBuilder(builder: (context, constraints) {
               final containerHeight = playerNames.isNotEmpty ? null : 50.0;
               return Container(
+                height: containerHeight,
                 padding: const EdgeInsets.only(
                     left: 8.0, top: 4, bottom: 4, right: 35),
                 child: Wrap(

@@ -13,7 +13,7 @@ void navigateToCreateEvent(BuildContext context) async {
 
   if (playerSnapshot.exists) {
     final playerData = playerSnapshot.data()!;
-    final List<String> clubIds = List<String>.from(playerData['clubIds'] ?? []);
+    final String clubIds = (playerData['participatedClubId'] ?? '').trim();
 
     if (clubIds.isNotEmpty) {
       GoRouter.of(context).push('/createEvent');

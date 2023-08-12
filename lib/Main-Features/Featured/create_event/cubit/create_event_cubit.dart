@@ -9,6 +9,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/core/utils/widgets/input_date_and_time.dart';
 
+import '../../../../models/club.dart';
 import '../../../../models/event.dart';
 import '../../create_event/cubit/create_event_state.dart';
 import '../../create_event/view/widgets/event_types.dart';
@@ -19,15 +20,14 @@ class CreateEventCubit extends Cubit<CreateEventState> {
   CreateEventCubit(this.context) : super(CreateEventInitialState());
   final BuildContext context;
 
-  void saveEventData({
-    required TextEditingController eventNameController,
-    required TextEditingController addressController,
-    required TextEditingController courtNameController,
-    required TextEditingController instructionsController,
-    required TextEditingController clubNameController,
-    Uint8List? selectedImageBytes,
-    required BuildContext context,
-  }) async {
+  void saveEventData(
+      {required TextEditingController eventNameController,
+      required TextEditingController addressController,
+      required TextEditingController courtNameController,
+      required TextEditingController instructionsController,
+      Uint8List? selectedImageBytes,
+      required BuildContext context,
+      required List<String>? selected}) async {
     try {
       emit(CreateEventLoadingState());
 
@@ -39,9 +39,6 @@ class CreateEventCubit extends Cubit<CreateEventState> {
       DateTime? selectedEndDateTime = context.read<EndDateTimeCubit>().state;
       final EventType selectedEventType = context.read<EventTypeCubit>().state;
       final double level = context.read<SliderCubit>().state;
-
-      final String clubName = clubNameController.text;
-      final String clubId = await getClubIdFromName(clubName);
 
       final CollectionReference eventsCollection =
           FirebaseFirestore.instance.collection('events');
@@ -60,13 +57,16 @@ class CreateEventCubit extends Cubit<CreateEventState> {
         instructions: instructions,
         playerIds: [],
         playerLevel: level,
-        clubId: clubId,
+        clubId: '',
       );
 
       await saveEventDocument(eventDocRef, event);
       await uploadEventImage(eventDocRef, selectedImageBytes);
-      await updateClubWithEvent(clubId, eventDocRef.id);
-      await updatePlayerWithEvent(eventDocRef.id);
+      if (selected!.isNotEmpty) {
+        await updatePlayersWithEvent(eventDocRef.id, selected!);
+      } else {
+        await updateClubWithEvent(eventDocRef.id);
+      }
 
       emit(CreateEventSuccessState());
 
@@ -100,35 +100,56 @@ class CreateEventCubit extends Cubit<CreateEventState> {
     }
   }
 
-  Future<void> updateClubWithEvent(String clubId, String eventId) async {
-    final DocumentSnapshot clubSnapshot =
-        await FirebaseFirestore.instance.collection('clubs').doc(clubId).get();
-
-    if (clubSnapshot.exists) {
-      final DocumentReference clubDocRef = clubSnapshot.reference;
-      await clubDocRef.update({
-        'eventIds': FieldValue.arrayUnion([eventId]),
-      });
-    } else {
-      throw Exception('Club not found with the given ID.');
-    }
-  }
-
-  Future<void> updatePlayerWithEvent(String eventId) async {
+  Future<void> updateClubWithEvent(String eventId) async {
     final String playerId = FirebaseAuth.instance.currentUser!.uid;
-    print('player Id:' + playerId);
     final DocumentSnapshot playerSnapshot = await FirebaseFirestore.instance
         .collection('players')
         .doc(playerId)
         .get();
 
-    if (playerSnapshot.exists) {
-      final DocumentReference playerDocRef = playerSnapshot.reference;
-      await playerDocRef.update({
-        'eventIds': FieldValue.arrayUnion([eventId]),
-      });
-    } else {
-      throw Exception('Player not found with the given ID.');
+    final String participatedClubId = playerSnapshot['participatedClubId'];
+
+    if (participatedClubId.isNotEmpty) {
+      // Fetch the club data using the participatedClubId
+      final clubSnapshot = await FirebaseFirestore.instance
+          .collection('clubs')
+          .doc(participatedClubId)
+          .get();
+
+      if (clubSnapshot.exists) {
+        final Club club = Club.fromSnapshot(clubSnapshot);
+
+        // Now you have the club data with the participated event and can perform further updates.
+        // For example, you can update the eventIds list in the club document.
+        final updatedEventIds = [...club.eventIds, eventId];
+
+        await FirebaseFirestore.instance
+            .collection('clubs')
+            .doc(participatedClubId)
+            .update({'eventIds': updatedEventIds});
+      }
+    }
+  }
+
+  Future<void> updatePlayersWithEvent(
+      String eventId, List<String> playersId) async {
+    final String playerId = FirebaseAuth.instance.currentUser!.uid;
+    playersId.add(playerId);
+    for (String playerId in playersId) {
+      final DocumentSnapshot playerSnapshot = await FirebaseFirestore.instance
+          .collection('players')
+          .doc(playerId)
+          .get();
+
+      if (playerSnapshot.exists) {
+        final DocumentReference playerDocRef = playerSnapshot.reference;
+        await playerDocRef.update({
+          'eventIds': FieldValue.arrayUnion([eventId]),
+        });
+      } else {
+        // Handle the case when the player is not found with the given ID.
+        print('Player not found with the ID: $playerId');
+      }
     }
   }
 
