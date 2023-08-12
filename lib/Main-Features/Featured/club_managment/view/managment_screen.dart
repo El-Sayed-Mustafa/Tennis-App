@@ -47,8 +47,8 @@ class _ManagementScreenState extends State<ManagementScreen> {
           .get();
       if (userSnapshot.exists) {
         final userData = userSnapshot.data();
-        if (userData != null && userData.containsKey('createdClubId')) {
-          createdClubId = userData['createdClubId'] as String?;
+        if (userData != null && userData.containsKey('participatedClubId')) {
+          createdClubId = userData['participatedClubId'] as String?;
           clubManagementCubit.fetchClubData(createdClubId);
         }
       }

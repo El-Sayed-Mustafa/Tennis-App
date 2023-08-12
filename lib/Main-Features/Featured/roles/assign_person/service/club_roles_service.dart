@@ -88,7 +88,7 @@ class ClubRolesService {
           .doc(playerId)
           .get();
       final String createdClubId =
-          playerSnapshot['createdClubId'] as String? ?? '';
+          playerSnapshot['participatedClubId'] as String? ?? '';
       final clubSnapshot = await FirebaseFirestore.instance
           .collection('clubs')
           .doc(createdClubId)

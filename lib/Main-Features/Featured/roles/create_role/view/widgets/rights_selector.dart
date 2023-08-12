@@ -49,7 +49,6 @@ class _RightSelectorState extends State<RightSelector> {
         SizedBox(
           width: double.infinity,
           child: Stack(
-            alignment: Alignment.centerRight,
             children: [
               LayoutBuilder(
                 builder: (context, constraints) {
@@ -102,6 +101,7 @@ class _RightSelectorState extends State<RightSelector> {
                   child: DropdownButton<String>(
                     value: null,
                     onChanged: (String? newValue) {
+                      print("HI" + widget.selectedWords.toString());
                       setState(() {
                         if (newValue != null) {
                           if (widget.selectedWords.contains(newValue)) {

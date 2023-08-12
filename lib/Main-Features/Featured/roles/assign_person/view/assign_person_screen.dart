@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tennis_app/Main-Features/Featured/roles/assign_person/view/widgets/member_name.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
+import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 
 import '../../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../../generated/l10n.dart';
@@ -81,7 +82,8 @@ class _AssignPersonState extends State<AssignPerson> {
                 .get();
         final data = admin.data();
         if (data != null) {
-          final String createdClubId = data['createdClubId'] as String? ?? '';
+          final String createdClubId =
+              data['participatedClubId'] as String? ?? '';
           final List<String> roleIds =
               await clubRolesService.fetchRoleIdsByNames(selectedRole);
 
@@ -167,7 +169,7 @@ class _AssignPersonState extends State<AssignPerson> {
         color: const Color(0xFFF8F8F8),
         child: Column(
           children: [
-            AppBarWaveHome(
+            PoPAppBarWave(
               prefixIcon: IconButton(
                 onPressed: () {
                   GoRouter.of(context).pop();

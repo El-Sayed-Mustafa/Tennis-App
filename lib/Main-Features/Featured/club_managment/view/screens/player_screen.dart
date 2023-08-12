@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/club_managment/view/managment_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/roles/create_role/view/widgets/rights_selector.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
+import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import '../../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../../models/player.dart';
@@ -112,7 +113,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                 .doc(currentUser.uid)
                 .get();
         final data = admin.data();
-        final String clubId = data!['createdClubId'] as String? ?? '';
+        final String clubId = data!['participatedClubId'] as String? ?? '';
 
         final DocumentReference<Map<String, dynamic>> clubReference =
             FirebaseFirestore.instance.collection('clubs').doc(clubId);
@@ -202,7 +203,8 @@ class _PlayerScreenState extends State<PlayerScreen> {
 
         final data = admin.data();
         if (data != null) {
-          final String createdClubId = data['createdClubId'] as String? ?? '';
+          final String participatedClubId =
+              data['participatedClubId'] as String? ?? '';
           final List<String> roleIds =
               await clubRolesService.fetchRoleIdsByNames(selectedRole);
 
@@ -215,7 +217,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
           } else {
             final String roleIdsString = roleIds.join(',');
             final Map<String, String> clubRoles = {
-              createdClubId: roleIdsString
+              participatedClubId: roleIdsString
             };
 
             final Map<String, dynamic> updatedPlayerData = {
@@ -294,7 +296,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
             color: const Color(0xFFF8F8F8),
             child: Column(
               children: [
-                AppBarWaveHome(
+                PoPAppBarWave(
                   prefixIcon: IconButton(
                     onPressed: () {
                       GoRouter.of(context).pop();
@@ -462,10 +464,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                               widget.player.clubRoles)
                                           : Future.value([]),
                                       builder: (context, snapshot) {
-                                        if (snapshot.connectionState ==
-                                            ConnectionState.waiting) {
-                                          return CircularProgressIndicator(); // Show a loading indicator while fetching data.
-                                        } else if (snapshot.hasError) {
+                                        if (snapshot.hasError) {
                                           return Text(
                                               'Error: ${snapshot.error}');
                                         } else {
@@ -565,8 +564,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                   onSkillLevelChanged: (newValue) {
                     setState(() {
                       _currentSkillLevel = newValue;
-                      sliderCubit.setSliderValue(
-                          newValue); // Update the sliderCubit state
+                      sliderCubit.setSliderValue(newValue);
                     });
                   },
                 ),

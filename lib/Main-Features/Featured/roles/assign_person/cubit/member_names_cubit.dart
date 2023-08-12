@@ -11,7 +11,7 @@ class PlayerNamesCubit extends Cubit<List<String>> {
               .collection('players')
               .doc(playerId)
               .get();
-      final createdClubId = snapshot.data()?['createdClubId'] as String?;
+      final createdClubId = snapshot.data()?['participatedClubId'] as String?;
 
       if (createdClubId != null) {
         fetchClubMemberIds(createdClubId);

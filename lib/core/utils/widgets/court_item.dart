@@ -172,7 +172,7 @@ class _CourtItemState extends State<CourtItem> {
                   children: [
                     const MyDivider(),
                     Text(
-                      '${S.of(context).From_}: $formattedStartDate',
+                      '${S.of(context).From_} $formattedStartDate',
                       style: TextStyle(
                         color: const Color(0xFF6D6D6D),
                         fontSize: subtitleFontSize,
@@ -182,7 +182,7 @@ class _CourtItemState extends State<CourtItem> {
                     ),
                     SizedBox(height: screenWidth * .015),
                     Text(
-                      '${S.of(context).To_}: $formattedEndDate',
+                      '${S.of(context).To_} $formattedEndDate',
                       style: TextStyle(
                         color: const Color(0xFF6D6D6D),
                         fontSize: subtitleFontSize,
@@ -192,7 +192,7 @@ class _CourtItemState extends State<CourtItem> {
                     ),
                     SizedBox(height: screenWidth * .015),
                     Text(
-                      '${S.of(context).Address_}:${widget.court.courtAddress}',
+                      '${S.of(context).Address_} ${widget.court.courtAddress}',
                       style: TextStyle(
                         color: const Color(0xFF6D6D6D),
                         fontSize: subtitleFontSize,
