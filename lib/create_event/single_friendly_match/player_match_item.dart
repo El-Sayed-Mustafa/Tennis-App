@@ -141,23 +141,23 @@ class _PlayerMatchItemState extends State<PlayerMatchItem> {
                       controller: courtNameController,
                     ),
                     SizedBox(height: screenHeight * .015),
+                    BottomSheetContainer(
+                      buttonText: 'Create',
+                      onPressed: () {
+                        if (formKey.currentState!.validate()) {
+                          context.read<SaveMatchCubit>().saveMatch(
+                              courtNameController: courtNameController,
+                              selectedPlayer: _selectedPlayer!,
+                              selectedPlayer2: _selectedPlayer2!);
+                        }
+                      },
+                    )
                   ],
                 ),
               ),
             );
           },
         ),
-      ),
-      bottomSheet: BottomSheetContainer(
-        buttonText: 'Create',
-        onPressed: () {
-          if (formKey.currentState!.validate()) {
-            context.read<SaveMatchCubit>().saveMatch(
-                courtNameController: courtNameController,
-                selectedPlayer: _selectedPlayer!,
-                selectedPlayer2: _selectedPlayer2!);
-          }
-        },
       ),
     );
   }

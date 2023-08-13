@@ -3,9 +3,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/create_event/double_tournment/double_tournment_item.dart';
+import '../../core/methodes/firebase_methodes.dart';
 import '../../core/utils/widgets/double_match_card.dart';
 import '../../core/utils/widgets/pop_app_bar.dart';
 
+import '../../models/club.dart';
 import '../../models/double_match.dart';
 import '../../models/player.dart';
 import '../../models/single_tournment.dart';
@@ -141,6 +143,18 @@ class _DoubleTournamentScreenState extends State<DoubleTournamentScreen> {
         .update({'doubleMatchesIds': player3.doubleMatchesIds});
     await player4Doc.reference
         .update({'doubleMatchesIds': player4.doubleMatchesIds});
+
+    Method method = Method();
+    Player currentUser = await method.getCurrentUser();
+    Club clubData = await method.fetchClubData(currentUser.participatedClubId);
+    clubData.doubleTournamentsIds.add(tournamentRef.id);
+    await FirebaseFirestore.instance
+        .collection('clubs')
+        .doc(currentUser.participatedClubId)
+        .update({
+      'doubleTournamentsIds': clubData.doubleTournamentsIds,
+    });
+
     setState(() {
       matches.add(doubleMatch);
     });

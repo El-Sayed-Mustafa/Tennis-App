@@ -5,8 +5,10 @@ import 'package:tennis_app/create_event/single_friendly_match/cubit/single_match
 import 'package:tennis_app/models/player.dart';
 
 import '../../../Main-Features/Featured/create_event/view/widgets/input_end_date.dart';
+import '../../../core/methodes/firebase_methodes.dart';
 import '../../../core/utils/snackbar.dart';
 import '../../../core/utils/widgets/input_date_and_time.dart';
+import '../../../models/club.dart';
 import '../../../models/single_match.dart';
 
 class SaveMatchCubit extends Cubit<SaveMatchState> {
@@ -51,10 +53,44 @@ class SaveMatchCubit extends Cubit<SaveMatchState> {
       );
 
       // Save the SingleMatch object to Firestore
-      await FirebaseFirestore.instance
+      final newMatchRef = await FirebaseFirestore.instance
           .collection('single_matches')
           .add(singleMatch.toFirestore());
 
+      singleMatch.matchId = newMatchRef.id;
+      // Fetch the players based on their IDs
+      final player1Doc = await FirebaseFirestore.instance
+          .collection('players')
+          .doc(singleMatch.player1Id)
+          .get();
+      final player2Doc = await FirebaseFirestore.instance
+          .collection('players')
+          .doc(singleMatch.player2Id)
+          .get();
+
+      final player1 = Player.fromSnapshot(player1Doc);
+      final player2 = Player.fromSnapshot(player2Doc);
+
+      player1.singleMatchesIds.add(singleMatch.matchId);
+      player2.singleMatchesIds.add(singleMatch.matchId);
+
+      // Update the players' documents with the updated lists
+      await player1Doc.reference
+          .update({'singleMatchesIds': player1.singleMatchesIds});
+      await player2Doc.reference
+          .update({'singleMatchesIds': player2.singleMatchesIds});
+
+      Method method = Method();
+      Player currentUser = await method.getCurrentUser();
+      Club clubData =
+          await method.fetchClubData(currentUser.participatedClubId);
+      clubData.singleMatchesIds.add(newMatchRef.id);
+      await FirebaseFirestore.instance
+          .collection('clubs')
+          .doc(currentUser.participatedClubId)
+          .update({
+        'singleMatchesIds': clubData.singleMatchesIds,
+      });
       // Display a success message or navigate to a new screen after saving successfully
       // Handle any errors that occur during the save process
       emit(SaveMatchSuccess());

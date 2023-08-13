@@ -5,8 +5,10 @@ import 'package:tennis_app/create_event/single_friendly_match/cubit/single_match
 import 'package:tennis_app/models/player.dart';
 
 import '../../../Main-Features/Featured/create_event/view/widgets/input_end_date.dart';
+import '../../../core/methodes/firebase_methodes.dart';
 import '../../../core/utils/snackbar.dart';
 import '../../../core/utils/widgets/input_date_and_time.dart';
+import '../../../models/club.dart';
 import '../../../models/double_match.dart';
 import '../../../models/single_match.dart';
 import 'double_match_state.dart';
@@ -104,6 +106,18 @@ class DoubleMatchCubit extends Cubit<DoubleMatchState> {
           .update({'doubleMatchesIds': player3.doubleMatchesIds});
       await player4Doc.reference
           .update({'doubleMatchesIds': player4.doubleMatchesIds});
+
+      Method method = Method();
+      Player currentUser = await method.getCurrentUser();
+      Club clubData =
+          await method.fetchClubData(currentUser.participatedClubId);
+      clubData.doubleMatchesIds.add(newMatchRef.id);
+      await FirebaseFirestore.instance
+          .collection('clubs')
+          .doc(currentUser.participatedClubId)
+          .update({
+        'doubleMatchesIds': clubData.doubleMatchesIds,
+      });
 
       emit(DoubleMatchSuccess());
     } catch (e) {

@@ -1,12 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/core/utils/widgets/single_match_card%20copy.dart';
 import 'package:tennis_app/create_event/single_tournment/single_tournment_item.dart';
+import '../../core/methodes/firebase_methodes.dart';
 import '../../core/utils/widgets/double_match_card.dart';
 import '../../core/utils/widgets/pop_app_bar.dart';
 
+import '../../models/club.dart';
 import '../../models/player.dart';
 import '../../models/single_match.dart';
 import '../../models/single_tournment.dart';
@@ -127,6 +130,17 @@ class _SingleTournamentScreenState extends State<SingleTournamentScreen> {
         .update({'singleMatchesIds': player1.singleMatchesIds});
     await player2Doc.reference
         .update({'singleMatchesIds': player2.singleMatchesIds});
+
+    Method method = Method();
+    Player currentUser = await method.getCurrentUser();
+    Club clubData = await method.fetchClubData(currentUser.participatedClubId);
+    clubData.singleTournamentsIds.add(tournamentRef.id);
+    await FirebaseFirestore.instance
+        .collection('clubs')
+        .doc(currentUser.participatedClubId)
+        .update({
+      'singleTournamentsIds': clubData.singleTournamentsIds,
+    });
 
     setState(() {
       matches.add(newMatch);
