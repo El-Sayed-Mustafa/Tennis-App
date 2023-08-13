@@ -10,7 +10,7 @@ class Club {
   final String email;
   final String rulesAndRegulations;
   final String ageRestriction;
-  final String address; // Added property for address
+  final String address;
   final double rate; // Added property for rate
   final List<String> eventIds;
   final List<String> memberIds;

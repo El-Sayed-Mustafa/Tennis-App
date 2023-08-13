@@ -9,6 +9,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/find_match/view/screens/people_requirment.dart';
 import 'package:tennis_app/core/utils/widgets/app_bar_wave.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
+import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import '../../../../core/utils/widgets/input_date.dart';
 import '../../../../core/utils/widgets/text_field.dart';
 import '../../../../generated/l10n.dart';
@@ -66,7 +67,7 @@ class FindMatch extends StatelessWidget {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        AppBarWaveHome(
+                        PoPAppBarWave(
                           prefixIcon: IconButton(
                             onPressed: () {
                               GoRouter.of(context).pop();

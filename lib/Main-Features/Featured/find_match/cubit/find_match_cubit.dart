@@ -57,7 +57,7 @@ class FindMatchCubit extends Cubit<FindMatchState> {
         dob: selectedDateTime!,
         preferredPlayingTime: selectedTime?.format(context) ?? '',
         playerType: selectedPlayerType!,
-        matchId: '', // Set matchId to an empty string for now
+        matchId: '', isActive: true, // Set matchId to an empty string for now
       );
 
       // Save the new match to Firestore

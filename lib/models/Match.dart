@@ -9,6 +9,7 @@ class FindMatch {
   final String preferredPlayingTime;
   final String playerType;
   final String matchId; // New property for match ID
+  final bool isActive; // Add isActive field
 
   FindMatch({
     required this.userId,
@@ -18,7 +19,9 @@ class FindMatch {
     required this.dob,
     required this.preferredPlayingTime,
     required this.playerType,
-    required this.matchId, // Initialize the match ID
+    required this.matchId,
+    required this.isActive, // Initialize the isActive field
+// Initialize the match ID
   });
 
   Map<String, dynamic> toJson() {
@@ -31,6 +34,7 @@ class FindMatch {
       'preferredPlayingTime': preferredPlayingTime,
       'playerType': playerType,
       'matchId': matchId, // Serialize the match ID
+      'isActive': isActive
     };
   }
 
@@ -50,6 +54,8 @@ class FindMatch {
       preferredPlayingTime: data['preferredPlayingTime'] as String? ?? '',
       playerType: data['playerType'] as String? ?? '',
       matchId: snapshot.id, // Deserialize the match ID
+      isActive:
+          data['isActive'] as bool? ?? true, // Deserialize the isActive field
     );
   }
 
@@ -74,6 +80,8 @@ class FindMatch {
       playerType: playerType ?? this.playerType,
       matchId: matchId ??
           this.matchId, // Copy the match ID when creating a new instance
+      isActive: isActive ??
+          this.isActive, // Copy the isActive field when creating a new instance
     );
   }
 }

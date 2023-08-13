@@ -60,6 +60,15 @@ class PlayingCubit extends Cubit<PlayingStatus> {
           .doc(opponent.userId)
           .update(opponentPlayer.toJson());
 
+      await FirebaseFirestore.instance
+          .collection('matches')
+          .doc(match.matchId)
+          .update({'isActive': false});
+      await FirebaseFirestore.instance
+          .collection('matches')
+          .doc(opponent.matchId)
+          .update({'isActive': false});
+
       // Show a success message to the user (optional)
       showSnackbar(context, "Match data saved successfully!");
       emit(PlayingStatus.success);

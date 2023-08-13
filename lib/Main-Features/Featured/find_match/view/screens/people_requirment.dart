@@ -69,6 +69,8 @@ class PeopleRequirement extends StatelessWidget {
 
                   final matches = snapshot.data!.docs
                       .map((doc) => FindMatch.fromSnapshot(doc))
+                      .where((match) =>
+                          match.isActive) // Filter only active matches
                       .toList();
 
                   // Sort matches based on your criteria here
