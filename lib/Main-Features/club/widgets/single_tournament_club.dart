@@ -1,66 +1,101 @@
-import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
+import 'package:tennis_app/models/single_match.dart'; // Replace with your model
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tennis_app/models/single_match.dart'; // Replace with your model
 
-class NestedCarouselSlider extends StatelessWidget {
-  final List<List<String>> nestedItems = [
-    ['Item 1', 'Item 2', 'Item 3'],
-    ['Item A', 'Item B', 'Item C', 'Item D'],
-    ['Item X', 'Item Y']
-  ];
+class VerticalCarouselSlider extends StatelessWidget {
+  final List<SingleMatch> matches;
+
+  VerticalCarouselSlider({required this.matches});
 
   @override
   Widget build(BuildContext context) {
-    return CarouselSlider.builder(
-      itemCount: nestedItems.length,
+    return CarouselSlider(
       options: CarouselOptions(
-        aspectRatio: 16 / 9,
-        viewportFraction: 0.8,
+        height: 200, // Adjust the height as needed
         enableInfiniteScroll: false,
-        onPageChanged: (index, reason) {
-          // Handle page change if needed
-        },
+        viewportFraction: 1.0, scrollDirection: Axis.vertical,
       ),
-      itemBuilder: (context, index, realIndex) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Horizontal Item $index',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10),
-            CarouselSlider.builder(
-              itemCount: nestedItems[index].length,
-              options: CarouselOptions(
-                aspectRatio: 1,
-                viewportFraction: 0.6,
-                enableInfiniteScroll: false,
-                scrollDirection: Axis.vertical,
-              ),
-              itemBuilder: (context, innerIndex, realInnerIndex) {
-                return Container(
-                  height: 100,
-                  color: Colors.blue,
-                  alignment: Alignment.center,
-                  child: Text(
-                    nestedItems[index][innerIndex],
-                    style: TextStyle(fontSize: 18, color: Colors.white),
-                  ),
-                );
-              },
-            ),
-          ],
+      items: matches.map((match) {
+        return Container(
+          padding: EdgeInsets.symmetric(vertical: 8.0),
+          child: Column(
+            children: [
+              SizedBox(
+                  height: 200,
+                  width: 200,
+                  child: Text("Match ID: ${match.matchId}")),
+              // Add more match details here
+            ],
+          ),
         );
-      },
+      }).toList(),
     );
   }
 }
 
-void main() {
-  runApp(MaterialApp(
-    home: Scaffold(
-      appBar: AppBar(title: Text('Nested Carousel Slider')),
-      body: Center(child: NestedCarouselSlider()),
-    ),
-  ));
+class NestedCarouselSlider extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+      stream: FirebaseFirestore.instance
+          .collection('singleTournaments')
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return CircularProgressIndicator();
+        }
+
+        final tournamentDocs = snapshot.data!.docs;
+
+        return CarouselSlider(
+          options: CarouselOptions(
+            height: 300, // Adjust the height as needed
+            enableInfiniteScroll: false,
+            viewportFraction: 1.0,
+          ),
+          items: tournamentDocs.map((tournamentDoc) {
+            final tournamentData = tournamentDoc.data();
+            if (tournamentData == null) {
+              // Handle missing data
+              return Container(
+                child: Text('sss'),
+              ); // Return an empty container or a placeholder widget
+            }
+
+            // Fetch the subcollection data for 'singleMatches'
+            return FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
+              future: tournamentDoc.reference.collection('singleMatches').get(),
+              builder: (context, matchesSnapshot) {
+                if (!matchesSnapshot.hasData) {
+                  return CircularProgressIndicator();
+                }
+
+                final tournamentMatches = matchesSnapshot.data!.docs
+                    .map((matchDoc) => SingleMatch.fromFirestore(matchDoc))
+                    .toList();
+
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Display tournament details here
+                    Text("Tournament ID: ${tournamentDoc.id}"),
+                    // Add more tournament details here
+
+                    SizedBox(height: 8.0),
+
+                    // Use the VerticalCarouselSlider to display matches
+                    VerticalCarouselSlider(matches: tournamentMatches),
+                  ],
+                );
+              },
+            );
+          }).toList(),
+        );
+      },
+    );
+  }
 }

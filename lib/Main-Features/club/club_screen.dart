@@ -9,6 +9,7 @@ import 'package:tennis_app/Main-Features/club/widgets/header_text.dart';
 import 'package:tennis_app/Main-Features/club/widgets/num_members.dart';
 import 'package:tennis_app/Main-Features/club/widgets/players_ranking.dart';
 import 'package:tennis_app/Main-Features/club/widgets/single_matches_club.dart';
+import 'package:tennis_app/Main-Features/club/widgets/single_tournament_club.dart';
 
 import '../../core/utils/widgets/app_bar_wave.dart';
 import '../../generated/l10n.dart';
@@ -84,6 +85,7 @@ class ClubScreen extends StatelessWidget {
                                 clubData: clubData,
                               ),
                               SizedBox(height: spacing * 1.5),
+                              NestedCarouselSlider(),
                               NumMembers(
                                 num: clubData.memberIds.length.toString(),
                               ),
