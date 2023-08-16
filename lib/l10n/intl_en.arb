@@ -284,5 +284,7 @@
     "Error_fetching_data": "Error fetching data",
     "No_data_available": "No data available",
     "Get_Reserved": "Get Reserved",
-    "Occupied": "Occupied"
+    "Occupied": "Occupied",
+    "Your_Upcoming_Single_Matches_Club": "Your Single Matches",
+    "Your_Upcoming_Double_Matches_Club": "Your Double Matches"
 }

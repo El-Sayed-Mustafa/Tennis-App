@@ -311,10 +311,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "Your_Reversed_Courts":
             MessageLookupByLibrary.simpleMessage("Your Reversed Courts"),
         "Your_Strength": MessageLookupByLibrary.simpleMessage("Your Strength"),
+        "Your_Upcoming_Double_Matches_Club":
+            MessageLookupByLibrary.simpleMessage("Your Double Matches"),
         "Your_Upcoming_Events":
             MessageLookupByLibrary.simpleMessage("Your Upcoming Events"),
         "Your_Upcoming_Matches":
             MessageLookupByLibrary.simpleMessage("Your Upcoming Matches"),
+        "Your_Upcoming_Single_Matches_Club":
+            MessageLookupByLibrary.simpleMessage("Your Single Matches"),
         "Your_strength_will_be_determined_based_on_your_playing_record_and_your_performance_may_impact_your_strength_rating":
             MessageLookupByLibrary.simpleMessage(
                 "Your strength will be determined based on your playing record,\nand your performance may impact your strength rating."),

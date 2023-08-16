@@ -5,34 +5,31 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/core/utils/widgets/no_data_text.dart';
-
-import '../../../core/utils/widgets/app_bar_wave.dart';
-import '../../../core/utils/widgets/button_home.dart';
-import '../../../core/utils/widgets/court_item.dart';
+import 'package:tennis_app/models/single_match.dart';
+import '../../../core/utils/widgets/single_match_card copy.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/player.dart';
-import '../../../models/court.dart'; // Import the Court class
 
-class ReversedCourts extends StatefulWidget {
-  const ReversedCourts({Key? key}) : super(key: key);
+class MySingleMatches extends StatefulWidget {
+  const MySingleMatches({Key? key}) : super(key: key);
 
   @override
-  State<ReversedCourts> createState() => _ReversedCourtsState();
+  State<MySingleMatches> createState() => _MySingleMatchesState();
 }
 
-class _ReversedCourtsState extends State<ReversedCourts> {
+class _MySingleMatchesState extends State<MySingleMatches> {
   int selectedPageIndex = 0;
   final CarouselController _carouselController = CarouselController();
-  List<String> reversedCourtsIds = []; // List to store reversed court IDs
+  List<String> matches = []; // List to store matches data
 
   @override
   void initState() {
     super.initState();
-    _fetchReversedCourts(); // Fetch reversed courts when the widget initializes
+    _fetchMatches(); // Fetch matches data when the widget initializes
   }
 
-  // Fetch the player data from Firestore and extract reversedCourtsIds
-  void _fetchReversedCourts() async {
+  // Fetch the player data from Firestore and extract matches data
+  void _fetchMatches() async {
     try {
       // Fetch the current user's player data from Firestore
       User? currentUser = FirebaseAuth.instance.currentUser;
@@ -57,13 +54,13 @@ class _ReversedCourtsState extends State<ReversedCourts> {
       // Create a Player instance from the snapshot data
       Player currentPlayer = Player.fromSnapshot(playerSnapshot);
 
-      // Get the reversedCourtsIds from the Player instance
-      reversedCourtsIds = currentPlayer.reversedCourtsIds;
+      // Get the matches data from the Player instance
+      matches = currentPlayer.singleMatchesIds;
 
       // Update the carousel with the fetched data
       setState(() {});
     } catch (error) {
-      print('Error fetching reversed courts: $error');
+      print('Error fetching matches data: $error');
     }
   }
 
@@ -72,33 +69,32 @@ class _ReversedCourtsState extends State<ReversedCourts> {
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
 
-    final double carouselHeight = (screenHeight + screenWidth) * 0.15;
+    final double carouselHeight = (screenHeight + screenWidth) * 0.16;
 
     return Column(
       children: [
-        // Conditionally render the CarouselSlider or "No courts" message
-        reversedCourtsIds.isNotEmpty
+        matches.isNotEmpty
             ? CarouselSlider(
                 options: CarouselOptions(
-                  height: carouselHeight,
+                  height: matches.isNotEmpty
+                      ? carouselHeight
+                      : 0, // Set height based on matches list
+                  aspectRatio: 16 / 9,
+                  viewportFraction: 0.7,
+                  initialPage: 0,
                   enableInfiniteScroll: false,
-                  viewportFraction: 1,
-                  onPageChanged: (index, _) {
-                    setState(() {
-                      selectedPageIndex = index;
-                    });
-                  },
+                  enlargeCenterPage: true,
                 ),
                 carouselController: _carouselController,
-                items: reversedCourtsIds.map((courtId) {
+                items: matches.map((matchData) {
                   return StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
                     stream: FirebaseFirestore.instance
-                        .collection('courts')
-                        .doc(courtId)
+                        .collection('single_matches')
+                        .doc(matchData)
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
-                        return const Text('Error fetching court data');
+                        return Text(S.of(context).Error_fetching_match_data);
                       }
 
                       if (!snapshot.hasData) {
@@ -107,32 +103,43 @@ class _ReversedCourtsState extends State<ReversedCourts> {
 
                       final courtData = snapshot.data?.data();
                       if (courtData == null) {
-                        return const Text('No court data available');
+                        return Center(
+                          child: NoData(
+                            text: S.of(context).You_Dont_have_Matches,
+                            buttonText:
+                                S.of(context).Click_to_Find_Your_Partner,
+                            onPressed: () {
+                              GoRouter.of(context).push('/findPartner');
+                            },
+                            height: screenHeight * .15,
+                            width: screenWidth * .8,
+                          ),
+                        );
                       }
 
-                      // Create a Court instance from the snapshot data
-                      final Court court = Court.fromSnapshot(snapshot.data!);
+                      // Create a Matches instance from the snapshot data
+                      final match = SingleMatch.fromFirestore(snapshot.data!);
 
-                      // Build the carousel item using the CourtItem widget
-                      return CourtItem(court: court);
+                      // Build the carousel item using the MatchItem widget
+                      return SingleMatchCard(match: match);
                     },
                   );
                 }).toList(),
               )
-            : Center(
-                child: NoData(
-                  text: S.of(context).No_Reversed_Courts,
-                  height: screenHeight * .15,
-                  width: screenWidth * .8,
-                  buttonText: S.of(context).Click_to_Reverse_Court,
-                  onPressed: () {
-                    GoRouter.of(context).push('/findCourt');
-                  },
-                ),
+            : NoData(
+                text: S.of(context).You_Dont_have_Matches,
+                buttonText: S.of(context).Click_to_Find_Your_Partner,
+                onPressed: () {
+                  GoRouter.of(context).push('/findPartner');
+                },
+                height: screenHeight * .2,
+                width: screenWidth * .8,
               ),
 
-        buildPageIndicator(
-            reversedCourtsIds.length), // Add the smooth page indicator
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: buildPageIndicator(matches.length),
+        ), // Add the smooth page indicator
       ],
     );
   }

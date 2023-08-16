@@ -33,7 +33,7 @@ class SingleMatchCard extends StatelessWidget {
           [fetchPlayer(match.player1Id), fetchPlayer(match.player2Id)]),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
+          return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError ||
             snapshot.data == null ||
             snapshot.data!.length < 2) {

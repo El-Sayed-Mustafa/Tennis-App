@@ -2873,6 +2873,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Your Single Matches`
+  String get Your_Upcoming_Single_Matches_Club {
+    return Intl.message(
+      'Your Single Matches',
+      name: 'Your_Upcoming_Single_Matches_Club',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Double Matches`
+  String get Your_Upcoming_Double_Matches_Club {
+    return Intl.message(
+      'Your Double Matches',
+      name: 'Your_Upcoming_Double_Matches_Club',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

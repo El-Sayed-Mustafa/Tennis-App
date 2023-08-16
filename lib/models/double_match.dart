@@ -26,18 +26,20 @@ class DoubleMatch {
   });
 
   // Factory method to create a DoubleMatch object from a Firestore document
-  factory DoubleMatch.fromFirestore(Map<String, dynamic> doc) {
+  factory DoubleMatch.fromFirestore(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>;
+
     return DoubleMatch(
-      matchId: doc['matchId'],
-      player1Id: doc['player1Id'],
-      player2Id: doc['player2Id'],
-      player3Id: doc['player3Id'],
-      player4Id: doc['player4Id'],
-      startTime: (doc['startTime'] as Timestamp).toDate(),
-      endTime: (doc['endTime'] as Timestamp).toDate(),
-      winner1: doc['winner1'],
-      winner2: doc['winner2'],
-      courtName: doc['courtName'],
+      matchId: doc.id,
+      player1Id: data['player1Id'],
+      player2Id: data['player2Id'],
+      player3Id: data['player3Id'],
+      player4Id: data['player4Id'],
+      startTime: (data['startTime'] as Timestamp).toDate(),
+      endTime: (data['endTime'] as Timestamp).toDate(),
+      winner1: data['winner1'],
+      winner2: data['winner2'],
+      courtName: data['courtName'],
     );
   }
 

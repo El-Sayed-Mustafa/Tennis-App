@@ -57,7 +57,7 @@ class DoubleMatchCard extends StatelessWidget {
 
           return Container(
             decoration: ShapeDecoration(
-              color: const Color(0xFFF3ADAB),
+              color: const Color(0xFFFCCBB1),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(31),
               ),

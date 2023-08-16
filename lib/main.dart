@@ -20,6 +20,7 @@ import 'core/utils/widgets/input_date_and_time.dart';
 import 'firebase_options.dart';
 import 'generated/l10n.dart';
 import 'package:timezone/data/latest.dart' as tz;
+import 'package:device_preview/device_preview.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,7 +30,11 @@ void main() async {
   );
   tz.initializeTimeZones();
 
-  runApp(const MyApp());
+  runApp(
+    DevicePreview(
+      builder: (context) => MyApp(), // Wrap your app
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -91,6 +96,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: MaterialApp.router(
         routerConfig: AppRouter.router,
+        builder: DevicePreview.appBuilder,
         locale: _locale,
         localizationsDelegates: const [
           S.delegate,
