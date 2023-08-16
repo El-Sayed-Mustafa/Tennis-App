@@ -2893,6 +2893,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Club’s Single Matches`
+  String get available_single_matches {
+    return Intl.message(
+      'Club’s Single Matches',
+      name: 'available_single_matches',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Club’s Double Matches`
+  String get available_double_matches {
+    return Intl.message(
+      'Club’s Double Matches',
+      name: 'available_double_matches',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

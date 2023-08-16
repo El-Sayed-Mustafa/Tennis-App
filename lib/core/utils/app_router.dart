@@ -11,36 +11,26 @@ import 'package:tennis_app/Main-Features/Featured/roles/roles_list/view/widgets/
 import 'package:tennis_app/Main-Features/Featured/set_reminder/set_reminder_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/splash/splash_screen.dart';
 import 'package:tennis_app/Main-Features/chats/screens/player_search_screen.dart';
-import 'package:tennis_app/Main-Features/home/home_screen.dart';
 import 'package:tennis_app/Main-Features/menu/menu_screen.dart';
-import 'package:provider/provider.dart';
 
 import '../../Auth/screens/forget_password.dart';
-import '../../Main-Features/Featured/choose_club/choose_club_item.dart';
 import '../../Main-Features/Featured/choose_club/choose_club_screen.dart';
 import '../../Main-Features/Featured/club_managment/view/managment_screen.dart';
-import '../../Main-Features/Featured/club_managment/view/screens/player_screen.dart';
 import '../../Main-Features/Featured/create_club/view/create_club.dart';
 import '../../Main-Features/Featured/create_court/view/court_search.dart';
-import '../../Main-Features/Featured/create_court/view/create_court_screen.dart';
 import '../../Main-Features/Featured/create_event/view/create_event.dart';
 import '../../Main-Features/Featured/event_calender/event_calender_screen.dart';
 import '../../Main-Features/Featured/find_match/view/find_match_screen.dart';
-import '../../Main-Features/Featured/find_match/view/screens/people_requirment.dart';
 import '../../Main-Features/Featured/localization/choose_language.dart';
 import '../../Main-Features/Featured/profile/view/profile_screen.dart';
 import '../../Main-Features/Featured/roles/assign_person/view/assign_person_screen.dart';
 import '../../Main-Features/Featured/roles/create_role/view/create_role_screen.dart';
 import '../../Main-Features/Featured/roles/roles_list/view/roles_list_screen.dart';
-import '../../Main-Features/Featured/set_reminder/model/evenet_data.dart';
-import '../../Main-Features/Featured/settings/view/settings_screen.dart';
-import '../../Main-Features/chats/screens/chats_screen.dart';
-import '../../Main-Features/chats/screens/private_chat.dart';
+
 import '../../create_event/double_friendly_match/double_match_screen.dart';
 import '../../create_event/double_tournment/double_tournment_screen.dart';
 import '../../create_event/single_friendly_match/single_match_screen.dart';
 import '../../create_event/single_tournment/single_tournment_screen.dart';
-import '../../models/player.dart';
 
 abstract class AppRouter {
   static final GoRouter router = GoRouter(
@@ -50,7 +40,7 @@ abstract class AppRouter {
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider(
             create: (context) => NavigationCubit(),
-            child: NavigationBarScreen(),
+            child: const NavigationBarScreen(),
           );
         },
         routes: <RouteBase>[
@@ -138,7 +128,7 @@ abstract class AppRouter {
           GoRoute(
             path: 'rolesList',
             builder: (BuildContext context, GoRouterState state) {
-              return RolesScreen();
+              return const RolesScreen();
             },
           ),
           GoRoute(
@@ -150,7 +140,7 @@ abstract class AppRouter {
           GoRoute(
             path: 'findCourt',
             builder: (BuildContext context, GoRouterState state) {
-              return CourtSearchScreen();
+              return const CourtSearchScreen();
             },
           ),
           GoRoute(
@@ -174,7 +164,31 @@ abstract class AppRouter {
           GoRoute(
             path: 'profileScreen',
             builder: (BuildContext context, GoRouterState state) {
-              return ProfileScreen();
+              return const ProfileScreen();
+            },
+          ),
+          GoRoute(
+            path: 'singleMatches',
+            builder: (BuildContext context, GoRouterState state) {
+              return const SingleMatchScreen();
+            },
+          ),
+          GoRoute(
+            path: 'doubleMatches',
+            builder: (BuildContext context, GoRouterState state) {
+              return const DoubleMatchScreen();
+            },
+          ),
+          GoRoute(
+            path: 'singleTournament',
+            builder: (BuildContext context, GoRouterState state) {
+              return const SingleTournamentScreen();
+            },
+          ),
+          GoRoute(
+            path: 'doubleTournament',
+            builder: (BuildContext context, GoRouterState state) {
+              return const DoubleTournamentScreen();
             },
           ),
         ],

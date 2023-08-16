@@ -6,18 +6,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/core/utils/widgets/double_match_card.dart';
 import 'package:tennis_app/core/utils/widgets/no_data_text.dart';
+import '../../../core/methodes/firebase_methodes.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/double_match.dart';
 import '../../../models/player.dart';
 
-class MyDoubleMatches extends StatefulWidget {
-  const MyDoubleMatches({Key? key}) : super(key: key);
+class ClubDoubleMatches extends StatefulWidget {
+  const ClubDoubleMatches({Key? key}) : super(key: key);
 
   @override
-  State<MyDoubleMatches> createState() => _MyDoubleMatchesState();
+  State<ClubDoubleMatches> createState() => _ClubDoubleMatchesState();
 }
 
-class _MyDoubleMatchesState extends State<MyDoubleMatches> {
+class _ClubDoubleMatchesState extends State<ClubDoubleMatches> {
   int selectedPageIndex = 0;
   final CarouselController _carouselController = CarouselController();
   List<String> matches = []; // List to store matches data
@@ -54,8 +55,12 @@ class _MyDoubleMatchesState extends State<MyDoubleMatches> {
       // Create a Player instance from the snapshot data
       Player currentPlayer = Player.fromSnapshot(playerSnapshot);
 
-      // Get the matches data from the Player instance
-      matches = currentPlayer.doubleMatchesIds;
+      Method methodes = Method();
+      final clubData =
+          await methodes.fetchClubData(currentPlayer.participatedClubId);
+
+      // Get the matches data from the Club instance
+      matches = clubData.doubleMatchesIds;
 
       // Update the carousel with the fetched data
       setState(() {});
@@ -74,57 +79,65 @@ class _MyDoubleMatchesState extends State<MyDoubleMatches> {
     return Column(
       children: [
         matches.isNotEmpty
-            ? CarouselSlider(
-                options: CarouselOptions(
-                  height: matches.isNotEmpty
-                      ? carouselHeight
-                      : 0, // Set height based on matches list
-                  aspectRatio: 16 / 9,
-                  viewportFraction: 0.7,
-                  initialPage: 0,
-                  enableInfiniteScroll: false,
-                  enlargeCenterPage: true,
-                ),
-                carouselController: _carouselController,
-                items: matches.map((matchData) {
-                  return StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-                    stream: FirebaseFirestore.instance
-                        .collection('double_matches')
-                        .doc(matchData)
-                        .snapshots(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasError) {
-                        return Text(S.of(context).Error_fetching_match_data);
-                      }
+            ? Column(
+                children: [
+                  CarouselSlider(
+                    options: CarouselOptions(
+                      height: matches.isNotEmpty
+                          ? carouselHeight
+                          : 0, // Set height based on matches list
+                      aspectRatio: 16 / 9,
+                      viewportFraction: 0.7,
+                      initialPage: 0,
+                      enableInfiniteScroll: false,
+                      enlargeCenterPage: true,
+                    ),
+                    carouselController: _carouselController,
+                    items: matches.map((matchData) {
+                      return StreamBuilder<
+                          DocumentSnapshot<Map<String, dynamic>>>(
+                        stream: FirebaseFirestore.instance
+                            .collection('double_matches')
+                            .doc(matchData)
+                            .snapshots(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasError) {
+                            return Text(
+                                S.of(context).Error_fetching_match_data);
+                          }
 
-                      if (!snapshot.hasData) {
-                        return Center(child: const CircularProgressIndicator());
-                      }
+                          if (!snapshot.hasData) {
+                            return Center(
+                                child: const CircularProgressIndicator());
+                          }
 
-                      final courtData = snapshot.data?.data();
-                      if (courtData == null) {
-                        return Center(
-                          child: NoData(
-                            text: S.of(context).You_Dont_have_Matches,
-                            buttonText:
-                                S.of(context).Click_to_Find_Your_Partner,
-                            onPressed: () {
-                              GoRouter.of(context).push('/findPartner');
-                            },
-                            height: screenHeight * .15,
-                            width: screenWidth * .8,
-                          ),
-                        );
-                      }
+                          final courtData = snapshot.data?.data();
+                          if (courtData == null) {
+                            return Center(
+                              child: NoData(
+                                text: S.of(context).You_Dont_have_Matches,
+                                buttonText:
+                                    S.of(context).Click_to_Find_Your_Partner,
+                                onPressed: () {
+                                  GoRouter.of(context).push('/doubleMatches');
+                                },
+                                height: screenHeight * .15,
+                                width: screenWidth * .8,
+                              ),
+                            );
+                          }
 
-                      // Create a Matches instance from the snapshot data
-                      final match = DoubleMatch.fromFirestore(snapshot.data!);
+                          // Create a Matches instance from the snapshot data
+                          final match =
+                              DoubleMatch.fromFirestore(snapshot.data!);
 
-                      // Build the carousel item using the MatchItem widget
-                      return DoubleMatchCard(match: match);
-                    },
-                  );
-                }).toList(),
+                          // Build the carousel item using the MatchItem widget
+                          return DoubleMatchCard(match: match);
+                        },
+                      );
+                    }).toList(),
+                  ),
+                ],
               )
             : NoData(
                 text: S.of(context).You_Dont_have_Matches,

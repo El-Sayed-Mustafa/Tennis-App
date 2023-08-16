@@ -133,7 +133,7 @@ class HomeScreen extends StatelessWidget {
                     imagePath: 'assets/images/Make-offers.svg',
                     onPressed: () async {
                       bool hasRight =
-                          await method.doesPlayerHaveRight('Create offefrs');
+                          await method.doesPlayerHaveRight('Create offers');
                       if (hasRight) {
                         GoRouter.of(context).push('/createClub');
                       } else {

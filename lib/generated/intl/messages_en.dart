@@ -329,6 +329,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "at": MessageLookupByLibrary.simpleMessage("At"),
         "available_courts":
             MessageLookupByLibrary.simpleMessage("Available Courts"),
+        "available_double_matches":
+            MessageLookupByLibrary.simpleMessage("Club’s Double Matches"),
+        "available_single_matches":
+            MessageLookupByLibrary.simpleMessage("Club’s Single Matches"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "chat": MessageLookupByLibrary.simpleMessage("Chat"),
         "chats": MessageLookupByLibrary.simpleMessage("Chats"),

@@ -4,9 +4,11 @@ import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/club/widgets/avaliable_courts.dart';
 import 'package:tennis_app/Main-Features/club/widgets/club_events.dart';
 import 'package:tennis_app/Main-Features/club/widgets/club_info.dart';
+import 'package:tennis_app/Main-Features/club/widgets/double_matches_club.dart';
 import 'package:tennis_app/Main-Features/club/widgets/header_text.dart';
 import 'package:tennis_app/Main-Features/club/widgets/num_members.dart';
 import 'package:tennis_app/Main-Features/club/widgets/players_ranking.dart';
+import 'package:tennis_app/Main-Features/club/widgets/single_matches_club.dart';
 
 import '../../core/utils/widgets/app_bar_wave.dart';
 import '../../generated/l10n.dart';
@@ -111,7 +113,18 @@ class ClubScreen extends StatelessWidget {
                               ),
                               SizedBox(height: spacing * 2),
                               HeaderText(text: S.of(context).available_courts),
+                              SizedBox(height: spacing / 3),
                               const AvailableCourts(),
+                              SizedBox(height: spacing * 2),
+                              HeaderText(
+                                  text: S.of(context).available_single_matches),
+                              SizedBox(height: spacing),
+                              const ClubSingleMatches(),
+                              SizedBox(height: spacing * 2),
+                              HeaderText(
+                                  text: S.of(context).available_single_matches),
+                              SizedBox(height: spacing),
+                              const ClubDoubleMatches(),
                               SizedBox(height: spacing * 2),
                               Padding(
                                 padding: EdgeInsets.symmetric(
