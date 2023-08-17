@@ -5,6 +5,7 @@ import 'package:tennis_app/Main-Features/club/widgets/avaliable_courts.dart';
 import 'package:tennis_app/Main-Features/club/widgets/club_events.dart';
 import 'package:tennis_app/Main-Features/club/widgets/club_info.dart';
 import 'package:tennis_app/Main-Features/club/widgets/double_matches_club.dart';
+import 'package:tennis_app/Main-Features/club/widgets/double_tournaments_club.dart';
 import 'package:tennis_app/Main-Features/club/widgets/header_text.dart';
 import 'package:tennis_app/Main-Features/club/widgets/num_members.dart';
 import 'package:tennis_app/Main-Features/club/widgets/players_ranking.dart';
@@ -126,7 +127,8 @@ class ClubScreen extends StatelessWidget {
                                   text: S.of(context).available_single_matches),
                               SizedBox(height: spacing),
                               const ClubDoubleMatches(),
-                              NestedCarouselSlider(),
+                              const SingleTournamentsClub(),
+                              const DoubleTournamentsClub(),
                               Padding(
                                 padding: EdgeInsets.symmetric(
                                     horizontal: screenWidth * 0.05),
