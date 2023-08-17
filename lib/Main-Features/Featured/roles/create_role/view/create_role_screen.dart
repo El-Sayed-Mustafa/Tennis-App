@@ -35,6 +35,7 @@ class _CreateRoleState extends State<CreateRole> {
       S.of(context).Create_Training,
       S.of(context).Set_up_leagues,
       S.of(context).Create_Roles,
+      S.of(context).Enter_Results
     ];
     return BlocProvider(
       create: (context) => RoleCubit(),

@@ -12,8 +12,9 @@ import '../../../generated/l10n.dart'; // Replace with your model
 
 class VerticalCarouselSlider extends StatelessWidget {
   final List<DoubleMatch> matches;
-
-  const VerticalCarouselSlider({required this.matches});
+  final String tournamentId;
+  const VerticalCarouselSlider(
+      {required this.matches, required this.tournamentId});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class VerticalCarouselSlider extends StatelessWidget {
     final double screenWidth = MediaQuery.of(context).size.width;
 
     final double carouselHeight = (screenHeight + screenWidth) * 0.21;
-
+    print(tournamentId);
     return CarouselSlider(
       options: CarouselOptions(
         height: matches.isNotEmpty ? carouselHeight * 1.1 : 0,
@@ -36,6 +37,7 @@ class VerticalCarouselSlider extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: DoubleMatchCard(
+            tournamentId: tournamentId,
             match: match,
           ),
         );
@@ -153,12 +155,15 @@ class DoubleTournamentsClub extends StatelessWidget {
                                 .map((matchDoc) =>
                                     DoubleMatch.fromFirestore(matchDoc))
                                 .toList();
-
+                            print('object ' + tournamentDoc.id);
+                            print('object ' +
+                                tournamentMatches.length.toString());
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 // Use the VerticalCarouselSlider to display matches
                                 VerticalCarouselSlider(
+                                    tournamentId: tournamentDoc.id,
                                     matches: tournamentMatches),
                               ],
                             );

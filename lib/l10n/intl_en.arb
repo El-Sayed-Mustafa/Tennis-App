@@ -290,5 +290,6 @@
     "available_single_matches":"Club’s Single Matches",
     "available_double_matches":"Club’s Double Matches",
     "SingleTournaments": "Single Tournaments",
-    "DoubleTournaments": "Double Tournaments"
+    "DoubleTournaments": "Double Tournaments",
+    "Enter_Results": "Enter Results"
 }

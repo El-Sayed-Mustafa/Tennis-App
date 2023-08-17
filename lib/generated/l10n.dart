@@ -2933,6 +2933,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Enter Results`
+  String get Enter_Results {
+    return Intl.message(
+      'Enter Results',
+      name: 'Enter_Results',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

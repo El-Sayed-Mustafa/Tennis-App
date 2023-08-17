@@ -93,6 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Edit_members": MessageLookupByLibrary.simpleMessage("Edit members"),
         "End_Date_and_time":
             MessageLookupByLibrary.simpleMessage("End Date and time"),
+        "Enter_Results": MessageLookupByLibrary.simpleMessage("Enter Results"),
         "Error_assigning_roles_Please_try_again_later":
             MessageLookupByLibrary.simpleMessage(
                 "Error assigning roles. Please try again later."),
