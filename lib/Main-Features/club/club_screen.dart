@@ -85,7 +85,6 @@ class ClubScreen extends StatelessWidget {
                                 clubData: clubData,
                               ),
                               SizedBox(height: spacing * 1.5),
-                              NestedCarouselSlider(),
                               NumMembers(
                                 num: clubData.memberIds.length.toString(),
                               ),
@@ -127,7 +126,7 @@ class ClubScreen extends StatelessWidget {
                                   text: S.of(context).available_single_matches),
                               SizedBox(height: spacing),
                               const ClubDoubleMatches(),
-                              SizedBox(height: spacing * 2),
+                              NestedCarouselSlider(),
                               Padding(
                                 padding: EdgeInsets.symmetric(
                                     horizontal: screenWidth * 0.05),

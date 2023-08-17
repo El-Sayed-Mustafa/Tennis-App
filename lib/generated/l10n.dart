@@ -2913,6 +2913,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Single Tournaments`
+  String get SingleTournaments {
+    return Intl.message(
+      'Single Tournaments',
+      name: 'SingleTournaments',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Double Tournaments`
+  String get DoubleTournaments {
+    return Intl.message(
+      'Double Tournaments',
+      name: 'DoubleTournaments',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

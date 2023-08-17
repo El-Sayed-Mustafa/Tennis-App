@@ -87,6 +87,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Describe Rights"),
         "Describe_Role_type_here":
             MessageLookupByLibrary.simpleMessage("Describe Role type here"),
+        "DoubleTournaments":
+            MessageLookupByLibrary.simpleMessage("Double Tournaments"),
         "Edit_club": MessageLookupByLibrary.simpleMessage("Edit club"),
         "Edit_members": MessageLookupByLibrary.simpleMessage("Edit members"),
         "End_Date_and_time":
@@ -246,6 +248,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Set the rules for members"),
         "Set_up_leagues":
             MessageLookupByLibrary.simpleMessage("Set up leagues"),
+        "SingleTournaments":
+            MessageLookupByLibrary.simpleMessage("Single Tournaments"),
         "Skill_level": MessageLookupByLibrary.simpleMessage("Skill level"),
         "Start_Date_and_Time":
             MessageLookupByLibrary.simpleMessage("Start Date and Time"),
