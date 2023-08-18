@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tennis_app/create_event/widgets/player_search_match.dart';
+import 'package:tennis_app/create_event_match/widgets/player_search_match.dart';
 
 import '../../models/player.dart';
 

@@ -155,6 +155,33 @@ class ClubScreen extends StatelessWidget {
                                   ],
                                 ),
                               ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: screenWidth * 0.05),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    HomeButton(
+                                        buttonText: S.of(context).create_event,
+                                        imagePath:
+                                            'assets/images/Create-Event.svg',
+                                        onPressed: () async {
+                                          GoRouter.of(context)
+                                              .push('/createCourt');
+                                        }),
+                                    HomeButton(
+                                      buttonText: S.of(context).find_partner,
+                                      imagePath:
+                                          'assets/images/Make-offers.svg',
+                                      onPressed: () {
+                                        GoRouter.of(context)
+                                            .push('/findPartner');
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
                               SizedBox(height: spacing * 2),
                             ],
                           );

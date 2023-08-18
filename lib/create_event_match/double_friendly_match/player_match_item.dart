@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
-import 'package:tennis_app/create_event/single_friendly_match/cubit/single_match_state.dart';
-import 'package:tennis_app/create_event/widgets/player_info_widget.dart';
+import 'package:tennis_app/create_event_match/single_friendly_match/cubit/single_match_state.dart';
+import 'package:tennis_app/create_event_match/widgets/player_info_widget.dart';
 import '../../Main-Features/Featured/create_event/view/widgets/input_end_date.dart';
 import '../../core/utils/widgets/input_date_and_time.dart';
 import '../../core/utils/widgets/pop_app_bar.dart';
 import '../../core/utils/widgets/text_field.dart';
 import '../../generated/l10n.dart';
 import '../../models/player.dart';
-import 'cubit/single_match_cubit.dart';
+import 'cubit/double_match_cubit.dart';
+import 'cubit/double_match_state.dart';
 
 class PlayerMatchItem extends StatefulWidget {
   const PlayerMatchItem({super.key});
@@ -22,6 +23,8 @@ class PlayerMatchItem extends StatefulWidget {
 class _PlayerMatchItemState extends State<PlayerMatchItem> {
   Player? _selectedPlayer;
   Player? _selectedPlayer2;
+  Player? _selectedPlayer3;
+  Player? _selectedPlayer4;
   final TextEditingController courtNameController = TextEditingController();
   final TextEditingController rulesController = TextEditingController();
   void _onPlayerSelected(Player player) {
@@ -36,6 +39,18 @@ class _PlayerMatchItemState extends State<PlayerMatchItem> {
     });
   }
 
+  void _onPlayerSelected3(Player player) {
+    setState(() {
+      _selectedPlayer3 = player;
+    });
+  }
+
+  void _onPlayerSelected4(Player player) {
+    setState(() {
+      _selectedPlayer4 = player;
+    });
+  }
+
   var formKey = GlobalKey<FormState>();
 
   @override
@@ -44,16 +59,16 @@ class _PlayerMatchItemState extends State<PlayerMatchItem> {
 
     return Scaffold(
       body: BlocProvider(
-        create: (context) => SaveMatchCubit(context),
-        child: BlocBuilder<SaveMatchCubit, SaveMatchState>(
+        create: (context) => DoubleMatchCubit(context),
+        child: BlocBuilder<DoubleMatchCubit, DoubleMatchState>(
           builder: (context, state) {
-            if (state is SaveMatchInProgress) {
+            if (state is DoubleMatchInProgress) {
               return const Dialog.fullscreen(
                 child: Center(
                   child: CircularProgressIndicator(),
                 ),
               );
-            } else if (state is SaveMatchFailure) {
+            } else if (state is DoubleMatchFailure) {
               return Scaffold(
                 body: Center(
                   child: Text(state.error),
@@ -77,7 +92,7 @@ class _PlayerMatchItemState extends State<PlayerMatchItem> {
                           color: Colors.white,
                         ),
                       ),
-                      text: 'Single Match',
+                      text: 'Double Match',
                       suffixIconPath: '',
                     ),
                     SizedBox(height: screenHeight * .02),
@@ -90,27 +105,47 @@ class _PlayerMatchItemState extends State<PlayerMatchItem> {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          PlayerInfoWidget(
-                            selectedPlayer: _selectedPlayer,
-                            onPlayerSelected: _onPlayerSelected,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16.0, vertical: 8.0),
+                          child: Column(
+                            children: [
+                              PlayerInfoWidget(
+                                selectedPlayer: _selectedPlayer,
+                                onPlayerSelected: _onPlayerSelected,
+                              ),
+                              PlayerInfoWidget(
+                                selectedPlayer: _selectedPlayer2,
+                                onPlayerSelected: _onPlayerSelected2,
+                              ),
+                            ],
                           ),
-                          SizedBox(
-                            height: 50,
-                            width: 50,
-                            child: Image.asset('assets/images/versus.png'),
+                        ),
+                        SizedBox(
+                          height: 50,
+                          width: 50,
+                          child: Image.asset('assets/images/versus.png'),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16.0, vertical: 8.0),
+                          child: Column(
+                            children: [
+                              PlayerInfoWidget(
+                                selectedPlayer: _selectedPlayer3,
+                                onPlayerSelected: _onPlayerSelected3,
+                              ),
+                              PlayerInfoWidget(
+                                selectedPlayer: _selectedPlayer4,
+                                onPlayerSelected: _onPlayerSelected4,
+                              ),
+                            ],
                           ),
-                          PlayerInfoWidget(
-                            selectedPlayer: _selectedPlayer2,
-                            onPlayerSelected: _onPlayerSelected2,
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                     SizedBox(height: screenHeight * .02),
                     const Text(
@@ -145,13 +180,15 @@ class _PlayerMatchItemState extends State<PlayerMatchItem> {
                       buttonText: 'Create',
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
-                          context.read<SaveMatchCubit>().saveMatch(
+                          context.read<DoubleMatchCubit>().saveDoubleMatch(
                               courtNameController: courtNameController,
                               selectedPlayer: _selectedPlayer!,
-                              selectedPlayer2: _selectedPlayer2!);
+                              selectedPlayer2: _selectedPlayer2!,
+                              selectedPlayer3: _selectedPlayer3!,
+                              selectedPlayer4: _selectedPlayer4!);
                         }
                       },
-                    )
+                    ),
                   ],
                 ),
               ),

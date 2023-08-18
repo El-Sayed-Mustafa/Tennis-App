@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/core/utils/widgets/single_match_card%20copy.dart';
-import 'package:tennis_app/create_event/single_tournment/single_tournment_item.dart';
+import 'package:tennis_app/create_event_match/single_tournment/single_tournment_item.dart';
 import '../../core/methodes/firebase_methodes.dart';
 import '../../core/utils/widgets/double_match_card.dart';
 import '../../core/utils/widgets/pop_app_bar.dart';

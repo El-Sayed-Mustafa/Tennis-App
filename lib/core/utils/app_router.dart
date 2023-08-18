@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Auth/screens/auth_screen.dart';
+import 'package:tennis_app/Main-Features/Featured/create_court/view/create_court_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/create_profile/create_profile_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/edit_screen/edit_profile_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/navigation_bar/cubit/navigation_cubit.dart';
@@ -27,10 +28,11 @@ import '../../Main-Features/Featured/roles/assign_person/view/assign_person_scre
 import '../../Main-Features/Featured/roles/create_role/view/create_role_screen.dart';
 import '../../Main-Features/Featured/roles/roles_list/view/roles_list_screen.dart';
 
-import '../../create_event/double_friendly_match/double_match_screen.dart';
-import '../../create_event/double_tournment/double_tournment_screen.dart';
-import '../../create_event/single_friendly_match/single_match_screen.dart';
-import '../../create_event/single_tournment/single_tournment_screen.dart';
+import '../../create_event_match/create_event_match_screen.dart';
+import '../../create_event_match/double_friendly_match/double_match_screen.dart';
+import '../../create_event_match/double_tournment/double_tournment_screen.dart';
+import '../../create_event_match/single_friendly_match/single_match_screen.dart';
+import '../../create_event_match/single_tournment/single_tournment_screen.dart';
 
 abstract class AppRouter {
   static final GoRouter router = GoRouter(
@@ -40,7 +42,7 @@ abstract class AppRouter {
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider(
             create: (context) => NavigationCubit(),
-            child: const NavigationBarScreen(),
+            child: const CreateEventMatchesScreen(),
           );
         },
         routes: <RouteBase>[
@@ -141,6 +143,12 @@ abstract class AppRouter {
             path: 'findCourt',
             builder: (BuildContext context, GoRouterState state) {
               return const CourtSearchScreen();
+            },
+          ),
+          GoRoute(
+            path: 'createCourt',
+            builder: (BuildContext context, GoRouterState state) {
+              return CreateCourt();
             },
           ),
           GoRoute(

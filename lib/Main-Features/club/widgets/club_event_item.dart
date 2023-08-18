@@ -12,7 +12,6 @@ import '../../../models/player.dart';
 import '../../Featured/create_event/view/widgets/input_end_date.dart';
 import '../../home/widgets/divider.dart';
 import '../../../models/event.dart';
-import 'header_text.dart'; // Import the Event model
 
 class ClubEventItem extends StatelessWidget {
   final Event event;

@@ -1,5 +1,6 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tennis_app/core/utils/widgets/double_match_card.dart';
 import 'package:tennis_app/models/double_match.dart'; // Replace with your model
@@ -89,8 +90,7 @@ class DoubleTournamentsClub extends StatelessWidget {
                 final clubData = clubSnapshot.data!;
                 final doubleTournamentsIds = clubData.doubleTournamentsIds;
                 print(doubleTournamentsIds);
-                if (doubleTournamentsIds == null ||
-                    doubleTournamentsIds.isEmpty) {
+                if (doubleTournamentsIds.isEmpty) {
                   return Container(
                     child: const Text(
                         'No Double Tournaments available for this club.'),
