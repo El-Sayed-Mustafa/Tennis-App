@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart'; // Import the intl package
 import 'package:tennis_app/core/utils/widgets/photot_player.dart';
 import 'package:tennis_app/models/double_match.dart';
@@ -92,7 +93,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                   await method.updateMatchPlayedAndTotalWins(
                       widget.match.player4Id, false);
 
-                  Navigator.of(context).pop();
+                  GoRouter.of(context).pop();
                 },
               ),
               ListTile(
@@ -128,7 +129,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                   await method.updateMatchPlayedAndTotalWins(
                       widget.match.player2Id, false);
 
-                  Navigator.of(context).pop();
+                  GoRouter.of(context).pop();
                 },
               ),
               ListTile(
@@ -155,7 +156,15 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                       'winner1': 'Draw',
                     });
                   }
-                  Navigator.of(context).pop();
+                  await method.updateMatchPlayedAndTotalWins(
+                      widget.match.player1Id, false);
+                  await method.updateMatchPlayedAndTotalWins(
+                      widget.match.player2Id, false);
+                  await method.updateMatchPlayedAndTotalWins(
+                      widget.match.player3Id, false);
+                  await method.updateMatchPlayedAndTotalWins(
+                      widget.match.player4Id, false);
+                  GoRouter.of(context).pop();
                 },
               ),
             ],
@@ -223,9 +232,8 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                                   fontSize: 16,
                                   fontFamily: 'Poppins',
                                   fontWeight: FontWeight.w600,
-                                )), // Customize as needed
+                                )),
                             const SizedBox(height: 10),
-
                             PhotoPlayer(url: player1!.photoURL!),
                             const SizedBox(height: 5),
                             Text(

@@ -10,20 +10,22 @@ import '../../../models/player.dart'; // Replace with your model
 
 class VerticalCarouselSlider extends StatelessWidget {
   final List<SingleMatch> matches;
+  final String tournamentId;
 
-  VerticalCarouselSlider({super.key, required this.matches});
+  VerticalCarouselSlider(
+      {super.key, required this.matches, required this.tournamentId});
 
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
 
-    final double carouselHeight = (screenHeight + screenWidth) * 0.18;
+    final double carouselHeight = (screenHeight + screenWidth) * 0.2;
 
     return CarouselSlider(
       options: CarouselOptions(
         height: matches.isNotEmpty
-            ? carouselHeight
+            ? carouselHeight * 1
             : 0, // Set height based on matches list
         aspectRatio: 16 / 9,
         viewportFraction: .85,
@@ -35,6 +37,7 @@ class VerticalCarouselSlider extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: SingleMatchCard(
+            tournamentId: tournamentId,
             match: match,
           ),
         );
@@ -117,7 +120,7 @@ class SingleTournamentsClub extends StatelessWidget {
                     CarouselSlider(
                       options: CarouselOptions(
                         height: filteredTournamentDocs.isNotEmpty
-                            ? carouselHeight * 1.15
+                            ? carouselHeight * 1.3
                             : 0,
                         aspectRatio: 1,
                         viewportFraction: 0.75,
@@ -149,11 +152,14 @@ class SingleTournamentsClub extends StatelessWidget {
                                 .map((matchDoc) =>
                                     SingleMatch.fromFirestore(matchDoc))
                                 .toList();
-
+                            print('object ' + tournamentDoc.id);
+                            print('object ' +
+                                tournamentMatches.length.toString());
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 VerticalCarouselSlider(
+                                    tournamentId: tournamentDoc.id,
                                     matches: tournamentMatches),
                               ],
                             );

@@ -22,7 +22,6 @@ class VerticalCarouselSlider extends StatelessWidget {
     final double screenWidth = MediaQuery.of(context).size.width;
 
     final double carouselHeight = (screenHeight + screenWidth) * 0.21;
-    print(tournamentId);
     return CarouselSlider(
       options: CarouselOptions(
         height: matches.isNotEmpty ? carouselHeight * 1.1 : 0,
@@ -155,9 +154,7 @@ class DoubleTournamentsClub extends StatelessWidget {
                                 .map((matchDoc) =>
                                     DoubleMatch.fromFirestore(matchDoc))
                                 .toList();
-                            print('object ' + tournamentDoc.id);
-                            print('object ' +
-                                tournamentMatches.length.toString());
+
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

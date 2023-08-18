@@ -124,7 +124,7 @@ class ClubScreen extends StatelessWidget {
                               const ClubSingleMatches(),
                               SizedBox(height: spacing * 2),
                               HeaderText(
-                                  text: S.of(context).available_single_matches),
+                                  text: S.of(context).available_double_matches),
                               SizedBox(height: spacing),
                               const ClubDoubleMatches(),
                               const SingleTournamentsClub(),
