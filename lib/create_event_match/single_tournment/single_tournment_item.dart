@@ -27,6 +27,7 @@ class _MatchInputFormState extends State<MatchInputForm> {
   Player? _selectedPlayer;
   Player? _selectedPlayer2;
   final TextEditingController courtNameController = TextEditingController();
+  bool isSaving = false; // Track the saving state
 
   void _onPlayerSelected(Player player) {
     setState(() {
@@ -44,90 +45,101 @@ class _MatchInputFormState extends State<MatchInputForm> {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
 
-    return Form(
-      key: formKey,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          SizedBox(height: screenHeight * .02),
-          const Text(
-            'Click to choose a player',
-            style: TextStyle(
-              color: Color(0xFF313131),
-              fontSize: 20,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.w500,
+    return Stack(
+      children: [
+        Form(
+          key: formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(height: screenHeight * .02),
+              const Text(
+                'Click to choose a player',
+                style: TextStyle(
+                  color: Color(0xFF313131),
+                  fontSize: 20,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    PlayerInfoWidget(
+                      selectedPlayer: _selectedPlayer,
+                      onPlayerSelected: _onPlayerSelected,
+                    ),
+                    SizedBox(
+                      height: 50,
+                      width: 50,
+                      child: Image.asset('assets/images/versus.png'),
+                    ),
+                    PlayerInfoWidget(
+                      selectedPlayer: _selectedPlayer2,
+                      onPlayerSelected: _onPlayerSelected2,
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: screenHeight * .02),
+              const Text(
+                'Schedule',
+                style: TextStyle(
+                  color: Color(0xFF313131),
+                  fontSize: 20,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              SizedBox(height: screenHeight * .02),
+              InputDateAndTime(
+                text: S.of(context).Event_Start,
+                hint: S.of(context).Select_start_date_and_time,
+                onDateTimeSelected: (DateTime dateTime) {},
+              ),
+              SizedBox(height: screenHeight * .03),
+              InputEndDateAndTime(
+                text: S.of(context).Event_End,
+                hint: S.of(context).Select_end_date_and_time,
+                onDateTimeSelected: (DateTime dateTime) {},
+              ),
+              SizedBox(height: screenHeight * .03),
+              InputTextWithHint(
+                hint: S.of(context).Type_Court_Address_here,
+                text: S.of(context).Court_Name,
+                controller: courtNameController,
+              ),
+              SizedBox(height: screenHeight * .015),
+              ButtonTournament(
+                finish: () {
+                  GoRouter.of(context).go('/home');
+                },
+                addMatch: () {
+                  if (formKey.currentState!.validate()) {
+                    _saveMatch(
+                        courtNameController: courtNameController,
+                        selectedPlayer: _selectedPlayer!,
+                        selectedPlayer2: _selectedPlayer2!);
+                  }
+                  _selectedPlayer = null;
+                  _selectedPlayer2 = null;
+                  courtNameController.text = '';
+                },
+              ),
+            ],
+          ),
+        ),
+        if (isSaving)
+          Container(
+            color: Colors.black.withOpacity(0.5),
+            child: Center(
+              child: CircularProgressIndicator(),
             ),
           ),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                PlayerInfoWidget(
-                  selectedPlayer: _selectedPlayer,
-                  onPlayerSelected: _onPlayerSelected,
-                ),
-                SizedBox(
-                  height: 50,
-                  width: 50,
-                  child: Image.asset('assets/images/versus.png'),
-                ),
-                PlayerInfoWidget(
-                  selectedPlayer: _selectedPlayer2,
-                  onPlayerSelected: _onPlayerSelected2,
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: screenHeight * .02),
-          const Text(
-            'Schedule',
-            style: TextStyle(
-              color: Color(0xFF313131),
-              fontSize: 20,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          SizedBox(height: screenHeight * .02),
-          InputDateAndTime(
-            text: S.of(context).Event_Start,
-            hint: S.of(context).Select_start_date_and_time,
-            onDateTimeSelected: (DateTime dateTime) {},
-          ),
-          SizedBox(height: screenHeight * .03),
-          InputEndDateAndTime(
-            text: S.of(context).Event_End,
-            hint: S.of(context).Select_end_date_and_time,
-            onDateTimeSelected: (DateTime dateTime) {},
-          ),
-          SizedBox(height: screenHeight * .03),
-          InputTextWithHint(
-            hint: S.of(context).Type_Court_Address_here,
-            text: S.of(context).Court_Name,
-            controller: courtNameController,
-          ),
-          SizedBox(height: screenHeight * .015),
-          ButtonTournament(
-            finish: () {
-              GoRouter.of(context).go('/home');
-            },
-            addMatch: () {
-              if (formKey.currentState!.validate()) {
-                _saveMatch(
-                    courtNameController: courtNameController,
-                    selectedPlayer: _selectedPlayer!,
-                    selectedPlayer2: _selectedPlayer2!);
-              }
-              _selectedPlayer = null;
-              _selectedPlayer2 = null;
-              courtNameController.text = '';
-            },
-          ),
-        ],
-      ),
+      ],
     );
   }
 
@@ -136,10 +148,19 @@ class _MatchInputFormState extends State<MatchInputForm> {
     required Player selectedPlayer2,
     required TextEditingController courtNameController,
   }) async {
-    // Check if all required data is available
+    setState(() {
+      print('true');
+      isSaving = true;
+    });
+
     if (selectedPlayer == null || selectedPlayer2 == null) {
-      // Display a message or alert to inform the user that both players need to be selected
-      return showSnackBar(context, 'You Must Choose Two Players');
+      showSnackBar(context, 'You Must Choose Two Players');
+      setState(() {
+        print('false');
+
+        isSaving = false;
+      });
+      return;
     }
 
     DateTime? selectedStartDateTime = context.read<DateTimeCubit>().state;
@@ -162,7 +183,10 @@ class _MatchInputFormState extends State<MatchInputForm> {
 
     // Call the onSave method with the newMatch object
     widget.onSave(newMatch);
-    print(newMatch.matchId);
-    // Call the addMatchIdToPlayer method for both selected players
+    setState(() {
+      print('false');
+
+      isSaving = false;
+    }); // Call the addMatchIdToPlayer method for both selected players
   }
 }

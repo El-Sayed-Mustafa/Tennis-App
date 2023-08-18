@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/club/widgets/avaliable_courts.dart';
 import 'package:tennis_app/Main-Features/club/widgets/club_events.dart';
@@ -155,15 +154,18 @@ class ClubScreen extends StatelessWidget {
                                   ],
                                 ),
                               ),
+                              SizedBox(
+                                height: 20,
+                              ),
                               Padding(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: screenWidth * 0.05),
+                                    horizontal: screenWidth * 0.04),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     HomeButton(
-                                        buttonText: S.of(context).create_event,
+                                        buttonText: S.of(context).Create_Court,
                                         imagePath:
                                             'assets/images/Create-Event.svg',
                                         onPressed: () async {
@@ -171,12 +173,12 @@ class ClubScreen extends StatelessWidget {
                                               .push('/createCourt');
                                         }),
                                     HomeButton(
-                                      buttonText: S.of(context).find_partner,
+                                      buttonText: 'Create Match',
                                       imagePath:
                                           'assets/images/Make-offers.svg',
                                       onPressed: () {
                                         GoRouter.of(context)
-                                            .push('/findPartner');
+                                            .push('/createMatch');
                                       },
                                     ),
                                   ],

@@ -104,8 +104,12 @@ class _DoubleTournamentScreenState extends State<DoubleTournamentScreen> {
     await newMatchRef.set(doubleMatch.toFirestore());
 
     // Update the newMatch object with the generated match ID
-    doubleMatch.matchId = newMatchRef.id;
 
+    final newMatchRef2 = await FirebaseFirestore.instance
+        .collection('double_matches')
+        .add(doubleMatch.toFirestore());
+
+    doubleMatch.matchId = newMatchRef2.id;
     final player1Doc = await FirebaseFirestore.instance
         .collection('players')
         .doc(doubleMatch.player1Id)

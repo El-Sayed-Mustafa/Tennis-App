@@ -53,8 +53,8 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
                   setState(() {
                     _selectedWinner1 = 'A Winner';
                   });
-                  print("fff " + widget.tournamentId.toString());
-                  print(widget.match.matchId);
+                  Navigator.of(context).pop();
+
                   if (widget.tournamentId != null) {
                     await FirebaseFirestore.instance
                         .collection('singleTournaments')
@@ -76,8 +76,6 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
                       widget.match.player1Id, true);
                   await method.updateMatchPlayedAndTotalWins(
                       widget.match.player2Id, false);
-
-                  Navigator.of(context).pop();
                 },
               ),
               ListTile(
@@ -86,6 +84,7 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
                   setState(() {
                     _selectedWinner1 = 'B Winner';
                   });
+                  Navigator.of(context).pop();
 
                   if (widget.tournamentId != null) {
                     await FirebaseFirestore.instance
@@ -109,8 +108,6 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
                       widget.match.player1Id, true);
                   await method.updateMatchPlayedAndTotalWins(
                       widget.match.player2Id, false);
-
-                  Navigator.of(context).pop();
                 },
               ),
               ListTile(
@@ -119,6 +116,7 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
                   setState(() {
                     _selectedWinner1 = 'Draw';
                   });
+                  Navigator.of(context).pop();
 
                   if (widget.tournamentId != null) {
                     await FirebaseFirestore.instance
@@ -141,7 +139,6 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
                       widget.match.player1Id, true);
                   await method.updateMatchPlayedAndTotalWins(
                       widget.match.player2Id, true);
-                  Navigator.of(context).pop();
                 },
               ),
             ],

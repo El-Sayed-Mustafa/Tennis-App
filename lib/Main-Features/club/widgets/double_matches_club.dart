@@ -107,8 +107,8 @@ class _ClubDoubleMatchesState extends State<ClubDoubleMatches> {
                           }
 
                           if (!snapshot.hasData) {
-                            return Center(
-                                child: const CircularProgressIndicator());
+                            return const Center(
+                                child: CircularProgressIndicator());
                           }
 
                           final courtData = snapshot.data?.data();
@@ -148,36 +148,7 @@ class _ClubDoubleMatchesState extends State<ClubDoubleMatches> {
                 height: screenHeight * .15,
                 width: screenWidth * .8,
               ),
-
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: buildPageIndicator(matches.length),
-        ), // Add the smooth page indicator
       ],
-    );
-  }
-
-  Widget buildPageIndicator(int itemCount) {
-    final double screenWidth = MediaQuery.of(context).size.width;
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(
-        itemCount,
-        (index) {
-          final bool isSelected = selectedPageIndex == index;
-          return AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            width: isSelected ? 11 : 9,
-            height: isSelected ? 11 : 9,
-            margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.011),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: isSelected ? Colors.black : Colors.grey,
-            ),
-          );
-        },
-      ),
     );
   }
 }

@@ -105,8 +105,11 @@ class _SingleTournamentScreenState extends State<SingleTournamentScreen> {
     final newMatchRef = tournamentRef.collection('singleMatches').doc();
     await newMatchRef.set(newMatch.toFirestore());
 
-    // Update the newMatch object with the generated match ID
-    newMatch.matchId = newMatchRef.id;
+    final newMatchRef2 = await FirebaseFirestore.instance
+        .collection('single_matches')
+        .add(newMatch.toFirestore());
+
+    newMatch.matchId = newMatchRef2.id;
 
     // Fetch the players based on their IDs
     final player1Doc = await FirebaseFirestore.instance

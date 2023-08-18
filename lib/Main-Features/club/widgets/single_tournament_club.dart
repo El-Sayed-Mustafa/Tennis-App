@@ -154,9 +154,7 @@ class SingleTournamentsClub extends StatelessWidget {
                                 .map((matchDoc) =>
                                     SingleMatch.fromFirestore(matchDoc))
                                 .toList();
-                            print('object ' + tournamentDoc.id);
-                            print('object ' +
-                                tournamentMatches.length.toString());
+
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

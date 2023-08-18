@@ -67,6 +67,8 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                   setState(() {
                     _selectedWinner1 = 'Team A Winner';
                   });
+                  GoRouter.of(context).pop();
+
                   if (widget.tournamentId != null) {
                     await FirebaseFirestore.instance
                         .collection('doubleTournaments')
@@ -92,8 +94,6 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                       widget.match.player3Id, false);
                   await method.updateMatchPlayedAndTotalWins(
                       widget.match.player4Id, false);
-
-                  GoRouter.of(context).pop();
                 },
               ),
               ListTile(
@@ -102,6 +102,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                   setState(() {
                     _selectedWinner1 = 'Team B Winner';
                   });
+                  GoRouter.of(context).pop();
 
                   if (widget.tournamentId != null) {
                     await FirebaseFirestore.instance
@@ -128,8 +129,6 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                       widget.match.player1Id, false);
                   await method.updateMatchPlayedAndTotalWins(
                       widget.match.player2Id, false);
-
-                  GoRouter.of(context).pop();
                 },
               ),
               ListTile(
@@ -138,6 +137,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                   setState(() {
                     _selectedWinner1 = 'Draw';
                   });
+                  GoRouter.of(context).pop();
 
                   if (widget.tournamentId != null) {
                     await FirebaseFirestore.instance
@@ -164,7 +164,6 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                       widget.match.player3Id, false);
                   await method.updateMatchPlayedAndTotalWins(
                       widget.match.player4Id, false);
-                  GoRouter.of(context).pop();
                 },
               ),
             ],
