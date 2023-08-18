@@ -1,11 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tennis_app/Main-Features/Featured/set_reminder/set_reminder_screen.dart';
 import 'package:tennis_app/Main-Features/club/widgets/text_rich.dart';
 
+import '../../../core/methodes/firebase_methodes.dart';
 import '../../../core/methodes/global_method.dart';
 import '../../../generated/l10n.dart';
+import '../../../models/player.dart';
 import '../../Featured/create_event/view/widgets/input_end_date.dart';
 import '../../home/widgets/divider.dart';
 import '../../../models/event.dart';
@@ -139,16 +142,43 @@ class ClubEventItem extends StatelessWidget {
                             ),
                           ),
                           child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => BlocProvider(
-                                    create: (context) => EndDateTimeCubit(),
-                                    child: SetReminder(event: event),
+                            onTap: () async {
+                              // Fetch player data and add the eventId for eventIds property
+                              Method method = Method();
+                              Player currentPlayer =
+                                  await method.getCurrentUser();
+
+                              // Check if the eventId already exists in the eventIds list
+                              if (currentPlayer.eventIds
+                                  .contains(event.eventId)) {
+                                // Show a message to the user that they are already registered
+                                // ignore: use_build_context_synchronously
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content: Text(
+                                          'You are already registered for this event.')),
+                                );
+                              } else {
+                                // Add the eventId to the eventIds list
+                                currentPlayer.eventIds.add(event.eventId);
+
+                                // ignore: use_build_context_synchronously
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => BlocProvider(
+                                      create: (context) => EndDateTimeCubit(),
+                                      child: SetReminder(event: event),
+                                    ),
                                   ),
-                                ),
-                              );
+                                );
+                                // Update the player document in Firestore
+                                await FirebaseFirestore.instance
+                                    .collection('players')
+                                    .doc(currentPlayer.playerId)
+                                    .update(
+                                        {'eventIds': currentPlayer.eventIds});
+                              }
                             },
                             child: Center(
                               child: Text(
@@ -161,9 +191,8 @@ class ClubEventItem extends StatelessWidget {
                                 ),
                               ),
                             ),
-                          )
-                          // Empty SizedBox to hide the button
-                          )
+                          ),
+                        )
                       : SizedBox(),
                 ],
               ),
