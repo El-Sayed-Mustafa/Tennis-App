@@ -127,4 +127,37 @@ class Method {
       return false;
     }
   }
+
+  Future<void> updateMatchPlayedAndTotalWins(
+      String playerId, bool isWinner) async {
+    try {
+      final playerRef =
+          FirebaseFirestore.instance.collection('players').doc(playerId);
+      final playerDoc = await playerRef.get();
+
+      if (playerDoc.exists) {
+        final data = playerDoc.data() as Map<String, dynamic>;
+        final int currentMatchPlayed = data['matchPlayed'] ?? 0;
+        final int currentTotalWins = data['totalWins'] ?? 0;
+
+        final updatedData;
+        if (isWinner) {
+          updatedData = {
+            'matchPlayed': currentMatchPlayed + 1,
+            'totalWins': currentTotalWins + 1,
+          };
+        } else {
+          updatedData = {
+            'matchPlayed': currentMatchPlayed + 1,
+          };
+        }
+
+        await playerRef.update(updatedData);
+      } else {
+        print('Player document not found');
+      }
+    } catch (e) {
+      print('Error updating player data: $e');
+    }
+  }
 }

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; // Import the intl package
+import 'package:tennis_app/core/utils/widgets/photot_player.dart';
 import 'package:tennis_app/models/double_match.dart';
 import '../../../models/player.dart';
 import '../../methodes/firebase_methodes.dart';
@@ -16,6 +17,8 @@ class DoubleMatchCard extends StatefulWidget {
 }
 
 class _DoubleMatchCardState extends State<DoubleMatchCard> {
+  Method method = Method();
+
   Future<List<Player?>> fetchPlayers(List<String> playerIds) async {
     List<Player?> players = [];
     Stream<DocumentSnapshot<Map<String, dynamic>>> getMatchStream() {
@@ -71,6 +74,15 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                       .update({
                     'winner1': 'Team A Winner',
                   });
+                  await method.updateMatchPlayedAndTotalWins(
+                      widget.match.player1Id, true);
+                  await method.updateMatchPlayedAndTotalWins(
+                      widget.match.player2Id, true);
+                  await method.updateMatchPlayedAndTotalWins(
+                      widget.match.player3Id, false);
+                  await method.updateMatchPlayedAndTotalWins(
+                      widget.match.player4Id, false);
+
                   Navigator.of(context).pop();
                 },
               ),
@@ -88,6 +100,15 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                       .update({
                     'winner1': 'Team B Winner',
                   });
+                  await method.updateMatchPlayedAndTotalWins(
+                      widget.match.player3Id, true);
+                  await method.updateMatchPlayedAndTotalWins(
+                      widget.match.player4Id, true);
+                  await method.updateMatchPlayedAndTotalWins(
+                      widget.match.player1Id, false);
+                  await method.updateMatchPlayedAndTotalWins(
+                      widget.match.player2Id, false);
+
                   Navigator.of(context).pop();
                 },
               ),
@@ -145,8 +166,6 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
 
           return GestureDetector(
             onTap: () async {
-              Method method = Method();
-
               bool hasRight = await method.doesPlayerHaveRight('Enter Results');
               if (hasRight) {
                 _showWinnerDialog();
@@ -276,49 +295,6 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
           );
         }
       },
-    );
-  }
-}
-
-class PhotoPlayer extends StatelessWidget {
-  final String url;
-
-  const PhotoPlayer({super.key, required this.url});
-
-  @override
-  Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-
-    return Container(
-      width: screenHeight * 0.065,
-      height: screenHeight * 0.065,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(
-          color: Colors.grey,
-          width: 1.0,
-        ),
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(50),
-        // ignore: unnecessary_null_comparison
-        child: (url != null
-            ? FadeInImage.assetNetwork(
-                placeholder: 'assets/images/loadin.gif',
-                image: url,
-                fit: BoxFit.cover,
-                imageErrorBuilder: (context, error, stackTrace) {
-                  return Image.asset(
-                    'assets/images/profile-event.jpg',
-                    fit: BoxFit.cover,
-                  );
-                },
-              )
-            : Image.asset(
-                'assets/images/internet.png',
-                fit: BoxFit.cover,
-              )),
-      ),
     );
   }
 }
