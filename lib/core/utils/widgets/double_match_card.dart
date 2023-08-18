@@ -66,14 +66,23 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                   setState(() {
                     _selectedWinner1 = 'Team A Winner';
                   });
-                  await FirebaseFirestore.instance
-                      .collection('doubleTournaments')
-                      .doc(widget.tournamentId)
-                      .collection('doubleMatches')
-                      .doc(widget.match.matchId)
-                      .update({
-                    'winner1': 'Team A Winner',
-                  });
+                  if (widget.tournamentId != null) {
+                    await FirebaseFirestore.instance
+                        .collection('doubleTournaments')
+                        .doc(widget.tournamentId)
+                        .collection('doubleMatches')
+                        .doc(widget.match.matchId)
+                        .update({
+                      'winner1': 'Team A Winner',
+                    });
+                  } else {
+                    await FirebaseFirestore.instance
+                        .collection('double_matches')
+                        .doc(widget.match.matchId)
+                        .update({
+                      'winner1': 'Team A Winner',
+                    });
+                  }
                   await method.updateMatchPlayedAndTotalWins(
                       widget.match.player1Id, true);
                   await method.updateMatchPlayedAndTotalWins(
@@ -92,14 +101,24 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                   setState(() {
                     _selectedWinner1 = 'Team B Winner';
                   });
-                  await FirebaseFirestore.instance
-                      .collection('doubleTournaments')
-                      .doc(widget.tournamentId)
-                      .collection('doubleMatches')
-                      .doc(widget.match.matchId)
-                      .update({
-                    'winner1': 'Team B Winner',
-                  });
+
+                  if (widget.tournamentId != null) {
+                    await FirebaseFirestore.instance
+                        .collection('doubleTournaments')
+                        .doc(widget.tournamentId)
+                        .collection('doubleMatches')
+                        .doc(widget.match.matchId)
+                        .update({
+                      'winner1': 'Team B Winner',
+                    });
+                  } else {
+                    await FirebaseFirestore.instance
+                        .collection('double_matches')
+                        .doc(widget.match.matchId)
+                        .update({
+                      'winner1': 'Team B Winner',
+                    });
+                  }
                   await method.updateMatchPlayedAndTotalWins(
                       widget.match.player3Id, true);
                   await method.updateMatchPlayedAndTotalWins(
@@ -118,14 +137,24 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                   setState(() {
                     _selectedWinner1 = 'Draw';
                   });
-                  await FirebaseFirestore.instance
-                      .collection('doubleTournaments')
-                      .doc(widget.tournamentId)
-                      .collection('doubleMatches')
-                      .doc(widget.match.matchId)
-                      .update({
-                    'winner1': 'Draw',
-                  });
+
+                  if (widget.tournamentId != null) {
+                    await FirebaseFirestore.instance
+                        .collection('doubleTournaments')
+                        .doc(widget.tournamentId)
+                        .collection('doubleMatches')
+                        .doc(widget.match.matchId)
+                        .update({
+                      'winner1': 'Draw',
+                    });
+                  } else {
+                    await FirebaseFirestore.instance
+                        .collection('double_matches')
+                        .doc(widget.match.matchId)
+                        .update({
+                      'winner1': 'Draw',
+                    });
+                  }
                   Navigator.of(context).pop();
                 },
               ),
