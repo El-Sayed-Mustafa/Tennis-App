@@ -2,9 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; // Import the intl package
 import 'package:tennis_app/models/double_match.dart';
-
-import '../../../models/single_match.dart';
 import '../../../models/player.dart';
+import '../../methodes/firebase_methodes.dart';
 
 class DoubleMatchCard extends StatefulWidget {
   final DoubleMatch match;
@@ -48,7 +47,6 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
   }
 
   String? _selectedWinner1;
-  String? _selectedWinner2;
 
   Future<void> _showWinnerDialog() async {
     await showDialog(
@@ -119,10 +117,6 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
 
   @override
   Widget build(BuildContext context) {
-    final isTeamAWinner = _selectedWinner1 == 'Team A Winner';
-
-    final isTeamBWinner = _selectedWinner1 == 'Team B Winner';
-
     return FutureBuilder<List<Player?>>(
       future: fetchPlayers([
         widget.match.player1Id,
@@ -150,8 +144,13 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
               DateFormat('dd/MM/yyyy').format(widget.match.startTime);
 
           return GestureDetector(
-            onTap: () {
-              _showWinnerDialog();
+            onTap: () async {
+              Method method = Method();
+
+              bool hasRight = await method.doesPlayerHaveRight('Enter Results');
+              if (hasRight) {
+                _showWinnerDialog();
+              }
             },
             child: Container(
               decoration: ShapeDecoration(
@@ -170,14 +169,17 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                       children: [
                         Column(
                           children: [
-                            if (isTeamAWinner)
-                              const Text("Winner",
-                                  style: TextStyle(
-                                      color:
-                                          Colors.green)), // Customize as needed
+                            const Text("Team A",
+                                style: TextStyle(
+                                  color: Color(0xFF2A2A2A),
+                                  fontSize: 16,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w600,
+                                )), // Customize as needed
+                            const SizedBox(height: 10),
 
                             PhotoPlayer(url: player1!.photoURL!),
-                            const SizedBox(height: 10),
+                            const SizedBox(height: 5),
                             Text(
                               player1.playerName,
                               style: const TextStyle(
@@ -189,7 +191,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                             ),
                             const SizedBox(height: 15),
                             PhotoPlayer(url: player2!.photoURL!),
-                            const SizedBox(height: 10),
+                            const SizedBox(height: 5),
                             Text(
                               player2.playerName,
                               style: const TextStyle(
@@ -203,7 +205,15 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                         ), // Display player1's name
                         Column(
                           children: [
-                            Text(_selectedWinner1 ?? widget.match.winner1),
+                            Text(
+                              _selectedWinner1 ?? widget.match.winner1,
+                              style: const TextStyle(
+                                color: Color(0xFF00344E),
+                                fontSize: 14,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
                             SizedBox(
                               height: 40,
                               width: 40,
@@ -224,14 +234,16 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                         ),
                         Column(
                           children: [
-                            if (isTeamBWinner)
-                              const Text("Winner",
-                                  style: TextStyle(
-                                      color:
-                                          Colors.green)), // Customize as needed
-
-                            PhotoPlayer(url: player3!.photoURL!),
+                            const Text("Team B",
+                                style: TextStyle(
+                                  color: Color(0xFF2A2A2A),
+                                  fontSize: 16,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w600,
+                                )),
                             const SizedBox(height: 10),
+                            PhotoPlayer(url: player3!.photoURL!),
+                            const SizedBox(height: 5),
                             Text(
                               player3.playerName,
                               style: const TextStyle(
@@ -243,7 +255,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                             ),
                             const SizedBox(height: 15),
                             PhotoPlayer(url: player4!.photoURL!),
-                            const SizedBox(height: 10),
+                            const SizedBox(height: 5),
                             Text(
                               player4.playerName,
                               style: const TextStyle(
@@ -289,6 +301,7 @@ class PhotoPlayer extends StatelessWidget {
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(50),
+        // ignore: unnecessary_null_comparison
         child: (url != null
             ? FadeInImage.assetNetwork(
                 placeholder: 'assets/images/loadin.gif',
