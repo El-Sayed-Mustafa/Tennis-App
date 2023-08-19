@@ -44,7 +44,7 @@ class _PlayersRankingState extends State<PlayersRanking> {
                   } else if (index == 1) {
                     svgImagePath = 'assets/images/second.svg';
                   } else {
-                    svgImagePath = 'assets/images/default.svg';
+                    svgImagePath = '';
                   }
 
                   return Padding(

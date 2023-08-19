@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tennis_app/Main-Features/Featured/localization/widgets/waveClipperScreen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -156,7 +157,7 @@ class _ChooseLanguageState extends State<ChooseLanguage> {
             SizedBox(height: screenHeight * 0.005),
             BottomSheetContainer(
               buttonText: S.of(context).next,
-              onPressed: () {
+              onPressed: () async {
                 // Perform the desired action with the selected flag
                 switch (selectedFlagIndex) {
                   case 0:
@@ -169,7 +170,16 @@ class _ChooseLanguageState extends State<ChooseLanguage> {
                     MyApp.setLocale(context, const Locale('es'));
                     break;
                 }
-                GoRouter.of(context).push('/onboarding');
+                final prefs = await SharedPreferences.getInstance();
+                final showHome = prefs.getBool('showHome') ?? false;
+
+                if (showHome) {
+                  // Navigate to the home view
+                  GoRouter.of(context).replace('/home');
+                } else {
+                  // Navigate to the onboarding screen
+                  GoRouter.of(context).replace('/onboarding');
+                }
               },
             ),
           ],

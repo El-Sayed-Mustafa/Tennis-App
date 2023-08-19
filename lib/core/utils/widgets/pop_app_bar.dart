@@ -45,13 +45,13 @@ class PoPAppBarWave extends StatelessWidget {
                     text,
                     style: const TextStyle(
                       color: Colors.white,
-                      fontSize: 26,
+                      fontSize: 20,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   SizedBox(
-                    width: screenWidth * 0.22,
+                    width: screenWidth * 0.20,
                     height: screenHeight * 0.22,
                     child: SvgPicture.asset(
                       suffixIconPath,

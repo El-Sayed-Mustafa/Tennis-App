@@ -117,7 +117,7 @@ class AppBarWaveHome extends StatelessWidget {
                           text,
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 26,
+                            fontSize: 24,
                             fontFamily: 'Poppins',
                             fontWeight: FontWeight.w500,
                           ),

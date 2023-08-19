@@ -94,10 +94,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Describir Derechos"),
         "Describe_Role_type_here": MessageLookupByLibrary.simpleMessage(
             "Describe aquí el tipo de rol"),
+        "DoubleTournaments":
+            MessageLookupByLibrary.simpleMessage("Torneos Dobles"),
         "Edit_club": MessageLookupByLibrary.simpleMessage("Editar Club"),
         "Edit_members": MessageLookupByLibrary.simpleMessage("Editar miembros"),
         "End_Date_and_time": MessageLookupByLibrary.simpleMessage(
             "Fecha y Hora de Finalización"),
+        "Enter_Results":
+            MessageLookupByLibrary.simpleMessage("Ingresar Resultados"),
         "Error_assigning_roles_Please_try_again_later":
             MessageLookupByLibrary.simpleMessage(
                 "Error al asignar roles. Por favor, intenta de nuevo más tarde."),
@@ -268,6 +272,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Establecer las reglas para los miembros"),
         "Set_up_leagues":
             MessageLookupByLibrary.simpleMessage("Configurar Ligas"),
+        "SingleTournaments":
+            MessageLookupByLibrary.simpleMessage("Torneos Individuales"),
         "Skill_level":
             MessageLookupByLibrary.simpleMessage("Nivel de Habilidad"),
         "Start_Date_and_Time":
@@ -338,10 +344,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "Your_Reversed_Courts":
             MessageLookupByLibrary.simpleMessage("Tus Canchas Reservadas"),
         "Your_Strength": MessageLookupByLibrary.simpleMessage("Tu Fortaleza"),
+        "Your_Upcoming_Double_Matches_Club":
+            MessageLookupByLibrary.simpleMessage("Tus Partidos Dobles"),
         "Your_Upcoming_Events":
             MessageLookupByLibrary.simpleMessage("Tus Próximos Eventos"),
         "Your_Upcoming_Matches":
             MessageLookupByLibrary.simpleMessage("Tus Próximos Partidos"),
+        "Your_Upcoming_Single_Matches_Club":
+            MessageLookupByLibrary.simpleMessage("Tus Partidos Individuales"),
         "Your_strength_will_be_determined_based_on_your_playing_record_and_your_performance_may_impact_your_strength_rating":
             MessageLookupByLibrary.simpleMessage(
                 "Tu fortaleza se determinará según tu historial de juego, y tu rendimiento puede afectar tu calificación de fortaleza."),
@@ -352,6 +362,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "at": MessageLookupByLibrary.simpleMessage("A las"),
         "available_courts":
             MessageLookupByLibrary.simpleMessage("Canchas Disponibles"),
+        "available_double_matches":
+            MessageLookupByLibrary.simpleMessage("Partidos Dobles del Club"),
+        "available_single_matches": MessageLookupByLibrary.simpleMessage(
+            "Partidos Individuales del Club"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancelar"),
         "chat": MessageLookupByLibrary.simpleMessage("Chat"),
         "chats": MessageLookupByLibrary.simpleMessage("Chats"),
@@ -375,6 +389,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Dirección de Correo Electrónico"),
         "email_verification_sent": MessageLookupByLibrary.simpleMessage(
             "¡Verificación de correo electrónico enviada!"),
+        "email_verified":
+            MessageLookupByLibrary.simpleMessage("Correo Verificado"),
         "end": MessageLookupByLibrary.simpleMessage("Fin"),
         "enter_email": MessageLookupByLibrary.simpleMessage(
             "Ingresa tu Correo Electrónico"),
@@ -405,6 +421,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Has sido invitado(a) a unirte\na este club a través de un\nenlace de invitación."),
         "join": MessageLookupByLibrary.simpleMessage("Unirse"),
         "joinClub": MessageLookupByLibrary.simpleMessage("Unirse al Club"),
+        "logout": MessageLookupByLibrary.simpleMessage("Cerrar Sesión"),
         "male": MessageLookupByLibrary.simpleMessage("Masculino"),
         "matchPlayed": MessageLookupByLibrary.simpleMessage("Partidos Jugados"),
         "messages": MessageLookupByLibrary.simpleMessage("Mensajes"),

@@ -284,5 +284,14 @@
     "Error_fetching_data": "Fehler beim Abrufen der Daten",
     "No_data_available": "Keine Daten verfügbar",
     "Get_Reserved": "Reservieren",
-    "Occupied": "Belegt"
+    "Occupied": "Belegt",
+    "Your_Upcoming_Single_Matches_Club": "Deine Einzelspiele",
+    "Your_Upcoming_Double_Matches_Club": "Deine Doppelspiele",
+    "available_single_matches": "Einzelspiele des Clubs",
+    "available_double_matches": "Doppelspiele des Clubs",
+    "SingleTournaments": "Einzelturniere",
+    "DoubleTournaments": "Doppelturniere",
+    "Enter_Results": "Ergebnisse Eingeben",
+    "email_verified": "E-Mail Verifiziert",
+    "logout": "Ausloggen"
 }

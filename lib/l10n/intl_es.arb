@@ -284,5 +284,14 @@
     "Error_fetching_data": "Error al obtener datos",
     "No_data_available": "No hay datos disponibles",
     "Get_Reserved": "Obtener Reservado",
-    "Occupied": "Ocupado"
+    "Occupied": "Ocupado",
+    "Your_Upcoming_Single_Matches_Club": "Tus Partidos Individuales",
+    "Your_Upcoming_Double_Matches_Club": "Tus Partidos Dobles",
+    "available_single_matches": "Partidos Individuales del Club",
+    "available_double_matches": "Partidos Dobles del Club",
+    "SingleTournaments": "Torneos Individuales",
+    "DoubleTournaments": "Torneos Dobles",
+    "Enter_Results": "Ingresar Resultados",
+    "email_verified": "Correo Verificado",
+    "logout": "Cerrar Sesión"
 }
