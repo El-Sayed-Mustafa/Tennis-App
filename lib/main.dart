@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tennis_app/Auth/cubit/auth_cubit.dart';
 import 'package:tennis_app/core/utils/app_router.dart';
 import 'package:tennis_app/core/utils/widgets/input_date.dart';
@@ -46,12 +47,35 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Locale _locale = const Locale('en'); // Default locale
+  Locale _locale = const Locale('en');
+  // Add this method to load the selected locale from shared preferences
+  Future<void> _loadLocale() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? localeCode = prefs.getString('selected_locale');
+    if (localeCode != null) {
+      setState(() {
+        _locale = Locale(localeCode);
+      });
+    }
+  }
+
+  // Add this method to save the selected locale to shared preferences
+  Future<void> _saveLocale(String localeCode) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selected_locale', localeCode);
+  }
 
   void setLocale(Locale newLocale) {
+    _saveLocale(newLocale.languageCode); // Save the selected locale
     setState(() {
       _locale = newLocale;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadLocale(); // Load the selected locale when the app starts
   }
 
   @override

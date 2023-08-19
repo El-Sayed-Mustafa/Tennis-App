@@ -98,7 +98,7 @@ class _MyMatchesState extends State<MyMatches> {
                       }
 
                       if (!snapshot.hasData) {
-                        return const CircularProgressIndicator();
+                        return const Center(child: CircularProgressIndicator());
                       }
 
                       final courtData = snapshot.data?.data();

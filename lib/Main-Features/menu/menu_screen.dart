@@ -118,6 +118,13 @@ class MenuScreen extends StatelessWidget {
                       },
                     ),
                     ButtonMenu(
+                      imagePath: 'assets/images/languages.svg',
+                      buttonText: 'Language',
+                      onPressed: () {
+                        GoRouter.of(context).push('/languages');
+                      },
+                    ),
+                    ButtonMenu(
                       imagePath: 'assets/images/logout.svg',
                       buttonText: S.of(context).logout,
                       onPressed: () async {

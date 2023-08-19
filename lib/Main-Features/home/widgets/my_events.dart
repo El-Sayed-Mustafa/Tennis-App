@@ -199,7 +199,6 @@ class CarouselItem extends StatelessWidget {
           SizedBox(height: itemHeight * 0.03),
           Container(
             width: itemWidth * 0.7 * scaleFactor,
-            height: itemHeight * 0.125 * scaleFactor,
             decoration: ShapeDecoration(
               color: const Color(0xFF1B262C),
               shape: RoundedRectangleBorder(
@@ -207,13 +206,17 @@ class CarouselItem extends StatelessWidget {
               ),
             ),
             child: Center(
-              child: Text(
-                S.of(context).Register_Done,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: itemHeight * 0.056 * scaleFactor,
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w400,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4.0),
+                child: Text(
+                  S.of(context).Register_Done,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: itemHeight * 0.056 * scaleFactor,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w400,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
               ),
             ),

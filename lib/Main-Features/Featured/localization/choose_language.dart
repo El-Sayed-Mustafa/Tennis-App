@@ -160,19 +160,13 @@ class _ChooseLanguageState extends State<ChooseLanguage> {
                 // Perform the desired action with the selected flag
                 switch (selectedFlagIndex) {
                   case 0:
-                    // UK flag selected
-                    MyApp.setLocale(context,
-                        const Locale('de')); // Set English localization
+                    MyApp.setLocale(context, const Locale('de'));
                     break;
                   case 1:
-                    // Germany flag selected
-                    MyApp.setLocale(
-                        context, const Locale('en')); // Set German localization
+                    MyApp.setLocale(context, const Locale('en'));
                     break;
                   case 2:
-                    // Spain flag selected
-                    MyApp.setLocale(context,
-                        const Locale('es')); // Set Spanish localization
+                    MyApp.setLocale(context, const Locale('es'));
                     break;
                 }
                 GoRouter.of(context).push('/onboarding');
