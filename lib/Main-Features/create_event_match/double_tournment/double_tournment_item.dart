@@ -3,13 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/models/double_match.dart';
 
-import '../../Main-Features/Featured/create_event/view/widgets/input_end_date.dart';
-import '../../core/utils/snackbar.dart';
-import '../../core/utils/widgets/input_date_and_time.dart';
-import '../../core/utils/widgets/text_field.dart';
-import '../../generated/l10n.dart';
-import '../../models/player.dart';
-import '../../models/single_match.dart';
+import '../../Featured/create_event/view/widgets/input_end_date.dart';
+import '../../../core/utils/snackbar.dart';
+import '../../../core/utils/widgets/input_date_and_time.dart';
+import '../../../core/utils/widgets/text_field.dart';
+import '../../../generated/l10n.dart';
+import '../../../models/player.dart';
+import '../../../models/single_match.dart';
 import '../widgets/button_tournament.dart';
 import '../widgets/player_info_widget.dart';
 
