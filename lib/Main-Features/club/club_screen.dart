@@ -128,61 +128,43 @@ class ClubScreen extends StatelessWidget {
                               const ClubDoubleMatches(),
                               const SingleTournamentsClub(),
                               const DoubleTournamentsClub(),
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: screenWidth * 0.05),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    HomeButton(
-                                        buttonText: S.of(context).create_event,
-                                        imagePath:
-                                            'assets/images/Create-Event.svg',
-                                        onPressed: () async {
-                                          navigateToCreateEvent(context);
-                                        }),
-                                    HomeButton(
-                                      buttonText: S.of(context).find_partner,
-                                      imagePath:
-                                          'assets/images/Make-offers.svg',
-                                      onPressed: () {
-                                        GoRouter.of(context)
-                                            .push('/findPartner');
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: screenWidth * 0.04),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    HomeButton(
-                                        buttonText: S.of(context).Create_Court,
-                                        imagePath:
-                                            'assets/images/Create-Event.svg',
-                                        onPressed: () async {
-                                          GoRouter.of(context)
-                                              .push('/createCourt');
-                                        }),
-                                    HomeButton(
-                                      buttonText: 'Create Match',
-                                      imagePath:
-                                          'assets/images/Make-offers.svg',
-                                      onPressed: () {
-                                        GoRouter.of(context)
-                                            .push('/createMatch');
-                                      },
-                                    ),
-                                  ],
-                                ),
+                              HomeButton(
+                                  buttonText: S.of(context).create_event,
+                                  imagePath: 'assets/images/Create-Event.svg',
+                                  onPressed: () async {
+                                    navigateToCreateEvent(context);
+                                  }),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              HomeButton(
+                                buttonText: S.of(context).find_partner,
+                                imagePath: 'assets/images/Make-offers.svg',
+                                onPressed: () {
+                                  GoRouter.of(context).push('/findPartner');
+                                },
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              HomeButton(
+                                  buttonText: S.of(context).Create_Court,
+                                  imagePath: 'assets/images/Create-Event.svg',
+                                  onPressed: () async {
+                                    GoRouter.of(context).push('/createCourt');
+                                  }),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              HomeButton(
+                                buttonText: 'Create Match',
+                                imagePath: 'assets/images/Make-offers.svg',
+                                onPressed: () {
+                                  GoRouter.of(context).push('/createMatch');
+                                },
                               ),
                               SizedBox(height: spacing * 2),
                             ],

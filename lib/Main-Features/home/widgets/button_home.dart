@@ -18,7 +18,7 @@ class HomeButton extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
-    final containerWidth = screenWidth * 0.4;
+    final containerWidth = screenWidth * 0.7;
     final containerHeight = screenHeight * 0.06;
 
     final iconSize = containerHeight * 0.5;

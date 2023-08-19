@@ -94,60 +94,46 @@ class HomeScreen extends StatelessWidget {
             SizedBox(height: spacing * 1),
             const MyDoubleMatches(),
             SizedBox(height: spacing * 2),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  HomeButton(
-                    buttonText: S.of(context).Find_Court,
-                    imagePath: 'assets/images/Find-Court.svg',
-                    onPressed: () {
-                      GoRouter.of(context).push('/findCourt');
-                    },
-                  ),
-                  HomeButton(
-                    buttonText: S.of(context).Find_Partner,
-                    imagePath: 'assets/images/Find-Partner.svg',
-                    onPressed: () {
-                      GoRouter.of(context).push('/findPartner');
-                    },
-                  ),
-                ],
-              ),
+            HomeButton(
+              buttonText: S.of(context).Find_Court,
+              imagePath: 'assets/images/Find-Court.svg',
+              onPressed: () {
+                GoRouter.of(context).push('/findCourt');
+              },
             ),
             SizedBox(height: spacing),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  HomeButton(
-                      buttonText: S.of(context).Create_Event,
-                      imagePath: 'assets/images/Create-Event.svg',
-                      onPressed: () async {
-                        bool hasRight =
-                            await method.doesPlayerHaveRight('Create Event');
-                        if (hasRight) {
-                          navigateToCreateEvent(context);
-                        } else {
-                          showDialog(
-                            context: context,
-                            builder: (context) => CustomDialog(
-                              text: 'You don\'t have the right to create Event',
-                            ),
-                          );
-                        }
-                      }),
-                  HomeButton(
-                    buttonText: S.of(context).Create_Club,
-                    imagePath: 'assets/images/Make-offers.svg',
-                    onPressed: () async {
-                      GoRouter.of(context).push('/createClub');
-                    },
-                  ),
-                ],
-              ),
+            HomeButton(
+              buttonText: S.of(context).Find_Partner,
+              imagePath: 'assets/images/Find-Partner.svg',
+              onPressed: () {
+                GoRouter.of(context).push('/findPartner');
+              },
+            ),
+            SizedBox(height: spacing),
+            HomeButton(
+                buttonText: S.of(context).Create_Event,
+                imagePath: 'assets/images/Create-Event.svg',
+                onPressed: () async {
+                  bool hasRight =
+                      await method.doesPlayerHaveRight('Create Event');
+                  if (hasRight) {
+                    navigateToCreateEvent(context);
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (context) => CustomDialog(
+                        text: 'You don\'t have the right to create Event',
+                      ),
+                    );
+                  }
+                }),
+            SizedBox(height: spacing),
+            HomeButton(
+              buttonText: S.of(context).Create_Club,
+              imagePath: 'assets/images/Make-offers.svg',
+              onPressed: () async {
+                GoRouter.of(context).push('/createClub');
+              },
             ),
             SizedBox(height: spacing * 2),
           ],

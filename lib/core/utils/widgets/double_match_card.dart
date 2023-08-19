@@ -321,7 +321,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                               ),
                             ),
                           ],
-                        ), // Display player2's name
+                        ),
                       ],
                     ),
                   ),
