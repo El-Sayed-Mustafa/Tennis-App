@@ -360,6 +360,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "email_address": MessageLookupByLibrary.simpleMessage("Email Address"),
         "email_verification_sent":
             MessageLookupByLibrary.simpleMessage("Email verification sent!"),
+        "email_verified":
+            MessageLookupByLibrary.simpleMessage("Email verified"),
         "end": MessageLookupByLibrary.simpleMessage("End"),
         "enter_email": MessageLookupByLibrary.simpleMessage("Enter Your Email"),
         "enter_your_message":

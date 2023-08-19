@@ -30,11 +30,7 @@ void main() async {
   );
   tz.initializeTimeZones();
 
-  runApp(
-    DevicePreview(
-      builder: (context) => MyApp(), // Wrap your app
-    ),
-  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -107,7 +103,7 @@ class _MyAppState extends State<MyApp> {
         supportedLocales: S.delegate.supportedLocales,
         debugShowCheckedModeBanner: false,
         theme: ThemeData().copyWith(
-          scaffoldBackgroundColor: Color(0xFFF8F8F8),
+          scaffoldBackgroundColor: const Color(0xFFF8F8F8),
         ),
       ),
     );

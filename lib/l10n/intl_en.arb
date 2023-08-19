@@ -291,5 +291,6 @@
     "available_double_matches":"Club’s Double Matches",
     "SingleTournaments": "Single Tournaments",
     "DoubleTournaments": "Double Tournaments",
-    "Enter_Results": "Enter Results"
+    "Enter_Results": "Enter Results",
+    "email_verified": "Email verified"
 }

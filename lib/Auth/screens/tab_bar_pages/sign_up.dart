@@ -117,7 +117,7 @@ class SignUp extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            GoRouter.of(context).replace('/forgetPassword');
+                            GoRouter.of(context).push('/forgetPassword');
                           },
                           child: Text(
                             S.of(context).forgot_password,

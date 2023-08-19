@@ -19,13 +19,14 @@ class FirebaseAuthMethods {
     required BuildContext context,
   }) async {
     try {
-      // await sendEmailVerification(context);
+      await sendEmailVerification(context);
+      await waitForEmailVerification(context);
 
       await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      GoRouter.of(context).replace('/createProfile');
+      GoRouter.of(context).push('/createProfile');
     } on FirebaseAuthException catch (e) {
       // if you want to display your own custom error message
       if (e.code == 'weak-password') {
@@ -35,6 +36,17 @@ class FirebaseAuthMethods {
       }
       showSnackBar(
           context, e.message!); // Displaying the usual firebase error message
+    }
+  }
+
+  Future<void> waitForEmailVerification(BuildContext context) async {
+    final currentUser = _auth.currentUser;
+    if (currentUser != null) {
+      while (!currentUser.emailVerified) {
+        await Future.delayed(Duration(seconds: 2)); // Wait for 2 seconds
+        await currentUser.reload(); // Refresh user data
+      }
+      showSnackBar(context, S.of(context).email_verified);
     }
   }
 
@@ -89,10 +101,18 @@ class FirebaseAuthMethods {
           accessToken: googleAuth.accessToken,
           idToken: googleAuth.idToken,
         );
-        await FirebaseAuth.instance.signInWithCredential(credential);
+        // Sign in to Firebase Authentication
+        final UserCredential userCredential =
+            await _auth.signInWithCredential(credential);
 
+        // Check if the user is new or existing
+        if (userCredential.additionalUserInfo!.isNewUser) {
+          print('New user signed in with Google.');
+        } else {
+          print('Existing user signed in with Google.');
+        }
         // The routing code should be here after successful sign-in
-        GoRouter.of(context).replace('/createProfile');
+        GoRouter.of(context).push('/createProfile');
       }
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!); // Displaying the error message

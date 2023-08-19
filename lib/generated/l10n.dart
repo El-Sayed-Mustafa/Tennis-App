@@ -2943,6 +2943,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Email verified`
+  String get email_verified {
+    return Intl.message(
+      'Email verified',
+      name: 'email_verified',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

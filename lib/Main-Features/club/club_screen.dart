@@ -128,9 +128,6 @@ class ClubScreen extends StatelessWidget {
                               const ClubDoubleMatches(),
                               const SingleTournamentsClub(),
                               const DoubleTournamentsClub(),
-                              const SizedBox(
-                                height: 20,
-                              ),
                               HomeButton(
                                   buttonText: S.of(context).create_event,
                                   imagePath: 'assets/images/Create-Event.svg',
