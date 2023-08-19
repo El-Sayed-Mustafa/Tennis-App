@@ -25,7 +25,7 @@ class ButtonMenu extends StatelessWidget {
         onPressed();
       },
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(12.0),
         child: Container(
           width: screenWidth * .85,
           height: screenHeight * .06,

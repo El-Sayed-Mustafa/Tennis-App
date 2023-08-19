@@ -37,6 +37,9 @@ class MenuScreen extends StatelessWidget {
                       text: S.of(context).Menu,
                       suffixIconPath: 'assets/images/app-bar-icon.svg',
                     ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Container(
                       height: screenHeight * 0.13,
                       width: screenHeight * 0.13,
@@ -70,7 +73,7 @@ class MenuScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 20,
                     ),
                     ButtonMenu(
                       imagePath: 'assets/images/setting1.svg',
@@ -113,16 +116,6 @@ class MenuScreen extends StatelessWidget {
                       onPressed: () {
                         GoRouter.of(context).push('/rolesList');
                       },
-                    ),
-                    ButtonMenu(
-                      imagePath: 'assets/images/Tournament-management.svg',
-                      buttonText: S.of(context).Tournament_management,
-                      onPressed: () {},
-                    ),
-                    ButtonMenu(
-                      imagePath: 'assets/images/Your-Membership.svg',
-                      buttonText: S.of(context).Your_Membership,
-                      onPressed: () {},
                     ),
                     ButtonMenu(
                       imagePath: 'assets/images/logout.svg',
