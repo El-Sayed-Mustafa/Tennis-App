@@ -198,7 +198,7 @@ class CarouselItem extends StatelessWidget {
           ),
           SizedBox(height: itemHeight * 0.03),
           Container(
-            width: itemWidth * 0.55 * scaleFactor,
+            width: itemWidth * 0.7 * scaleFactor,
             height: itemHeight * 0.125 * scaleFactor,
             decoration: ShapeDecoration(
               color: const Color(0xFF1B262C),

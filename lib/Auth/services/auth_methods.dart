@@ -9,8 +9,7 @@ import '../../core/utils/snackbar.dart';
 import '../../generated/l10n.dart';
 
 class FirebaseAuthMethods {
-  final FirebaseAuth _auth;
-  FirebaseAuthMethods(this._auth);
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   // EMAIL SIGN UP
   Future<void> signUpWithEmail({
@@ -141,6 +140,14 @@ class FirebaseAuthMethods {
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
       );
+    }
+  }
+
+  Future<void> signOut() async {
+    try {
+      await _auth.signOut();
+    } catch (error) {
+      print('Error during sign out: $error');
     }
   }
 }

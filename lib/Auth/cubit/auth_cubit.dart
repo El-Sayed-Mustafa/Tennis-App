@@ -16,7 +16,7 @@ class AuthCubit extends Cubit<AuthState> {
   }) async {
     try {
       emit(AuthLoadingState());
-      await FirebaseAuthMethods(FirebaseAuth.instance).loginWithEmail(
+      await FirebaseAuthMethods().loginWithEmail(
         email: email,
         password: password,
         context: context,
@@ -38,7 +38,7 @@ class AuthCubit extends Cubit<AuthState> {
 
       // await sendEmailVerification(context);
 
-      await FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmail(
+      await FirebaseAuthMethods().signUpWithEmail(
         email: email,
         password: password,
         context: context,
@@ -56,7 +56,7 @@ class AuthCubit extends Cubit<AuthState> {
   }) async {
     try {
       emit(AuthLoadingState());
-      await FirebaseAuthMethods(FirebaseAuth.instance).sendPasswordResetEmail(
+      await FirebaseAuthMethods().sendPasswordResetEmail(
         email: email,
         context: context,
       );
@@ -69,7 +69,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> signInWithGoogle(BuildContext context) async {
     try {
       emit(GooglLoadingState());
-      FirebaseAuthMethods(FirebaseAuth.instance).signInWithGoogle(context);
+      FirebaseAuthMethods().signInWithGoogle(context);
       emit(GooglSuccessState());
     } on FirebaseAuthException catch (e) {
       emit(GooglErrorState(e.message.toString()));

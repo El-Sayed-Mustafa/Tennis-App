@@ -391,6 +391,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "You have been invited to join\nthis club through an\ninvitation link."),
         "join": MessageLookupByLibrary.simpleMessage("Join"),
         "joinClub": MessageLookupByLibrary.simpleMessage("Join Club"),
+        "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "male": MessageLookupByLibrary.simpleMessage("Male"),
         "matchPlayed": MessageLookupByLibrary.simpleMessage("Match Played"),
         "messages": MessageLookupByLibrary.simpleMessage("Messages"),

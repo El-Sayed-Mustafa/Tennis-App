@@ -6,6 +6,16 @@ import '../../models/club.dart';
 import '../../models/player.dart';
 
 class Method {
+  late final FirebaseAuth _auth;
+
+  Future<void> signOut() async {
+    try {
+      await _auth.signOut();
+    } catch (error) {
+      print('Error during sign out: $error');
+    }
+  }
+
   Future<Player> getCurrentUser() async {
     // Get the current user from Firebase Authentication
     final String playerId = FirebaseAuth.instance.currentUser!.uid;

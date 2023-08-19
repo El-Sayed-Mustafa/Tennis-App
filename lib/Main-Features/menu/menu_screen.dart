@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/menu/widgets/button_menu.dart';
 
+import '../../Auth/services/auth_methods.dart';
 import '../../core/methodes/firebase_methodes.dart';
 import '../../core/utils/widgets/app_bar_wave.dart';
 import '../../generated/l10n.dart';
@@ -122,6 +123,17 @@ class MenuScreen extends StatelessWidget {
                       imagePath: 'assets/images/Your-Membership.svg',
                       buttonText: S.of(context).Your_Membership,
                       onPressed: () {},
+                    ),
+                    ButtonMenu(
+                      imagePath: 'assets/images/logout.svg',
+                      buttonText: S.of(context).logout,
+                      onPressed: () async {
+                        final FirebaseAuthMethods _authService =
+                            FirebaseAuthMethods();
+
+                        await _authService.signOut();
+                        GoRouter.of(context).go('/auth');
+                      },
                     ),
                   ],
                 ),

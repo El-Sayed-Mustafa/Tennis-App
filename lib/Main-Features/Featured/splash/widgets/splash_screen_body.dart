@@ -38,10 +38,10 @@ class _SplashScreenBodyState extends State<SplashScreenBody>
 
     if (showHome) {
       // Navigate to the home view
-      GoRouter.of(context).push('/home');
+      GoRouter.of(context).replace('/home');
     } else {
       // Navigate to the onboarding screen
-      GoRouter.of(context).push('/languages');
+      GoRouter.of(context).replace('/languages');
     }
   }
 

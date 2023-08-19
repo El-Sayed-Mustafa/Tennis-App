@@ -32,7 +32,14 @@ class ClubListScreen extends StatelessWidget {
       height: screenHeight,
       child: Column(
         children: [
-          Text('data'),
+          Text(
+            'Choose a club',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           Expanded(
             child: FutureBuilder<List<Club>>(
               future: fetchClubs(), // Fetch club data
@@ -61,8 +68,33 @@ class ClubListScreen extends StatelessWidget {
                                 .update({
                               'participatedClubId': snapshot.data![index].clubId
                             });
+                            final clubId = snapshot.data![index].clubId;
+
+                            final clubRef = FirebaseFirestore.instance
+                                .collection('clubs')
+                                .doc(clubId);
+
+                            FirebaseFirestore.instance
+                                .runTransaction((transaction) async {
+                              DocumentSnapshot<Map<String, dynamic>>
+                                  clubSnapshot = await transaction.get(clubRef);
+
+                              if (clubSnapshot.exists) {
+                                List<String> memberIds = List<String>.from(
+                                    clubSnapshot.data()?['memberIds'] ?? []);
+                                if (!memberIds
+                                    .contains(currentPlayer.playerId)) {
+                                  memberIds.add(currentPlayer.playerId);
+                                  transaction.update(
+                                      clubRef, {'memberIds': memberIds});
+                                }
+                              }
+                            });
                           },
-                          child: ClubInfo(clubData: snapshot.data![index]));
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ClubInfo(clubData: snapshot.data![index]),
+                          ));
                     },
                   );
                 }
