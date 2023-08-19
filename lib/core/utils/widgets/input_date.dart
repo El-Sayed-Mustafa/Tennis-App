@@ -62,7 +62,7 @@ class _InputDateState extends State<InputDate> {
               ),
             ),
             Container(
-              width: screenWidth * .8,
+              width: screenWidth * .83,
               height: screenHeight * .055,
               decoration: ShapeDecoration(
                 color: Colors.white,

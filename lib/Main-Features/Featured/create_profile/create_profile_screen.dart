@@ -30,6 +30,7 @@ class CreateProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
 
     return BlocProvider(
       create: (context) => CreateProfileCubit(context),

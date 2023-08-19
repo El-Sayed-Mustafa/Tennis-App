@@ -37,8 +37,8 @@ class _InputTimeFieldState extends State<InputTimeField> {
 
     return BlocBuilder<TimeCubit, TimeOfDay?>(
       builder: (context, selectedTime) {
-        return Padding(
-          padding: EdgeInsets.symmetric(horizontal: screenWidth * .055),
+        return SizedBox(
+          width: screenWidth * .83,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
