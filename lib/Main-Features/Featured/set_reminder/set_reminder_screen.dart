@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/set_reminder/service/notification_service.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
+import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 
 import '../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../core/utils/widgets/input_date_and_time.dart';
@@ -50,7 +51,7 @@ class SetReminder extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            AppBarWaveHome(
+            PoPAppBarWave(
               prefixIcon: IconButton(
                 onPressed: () {
                   GoRouter.of(context).pop();
@@ -75,7 +76,7 @@ class SetReminder extends StatelessWidget {
                 alignment: AlignmentDirectional.centerStart,
                 child: Text(
                   S.of(context).set_reminder,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Color(0xB2313131),
                     fontSize: 16,
                     fontFamily: 'Poppins',
@@ -86,11 +87,11 @@ class SetReminder extends StatelessWidget {
             ),
             Container(
               width: screenWidth * .8,
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               decoration: ShapeDecoration(
                 color: Colors.white,
                 shape: RoundedRectangleBorder(
-                  side: BorderSide(width: 0.50, color: Color(0x440D5FC3)),
+                  side: const BorderSide(width: 0.50, color: Color(0x440D5FC3)),
                   borderRadius: BorderRadius.circular(31),
                 ),
               ),

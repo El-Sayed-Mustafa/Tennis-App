@@ -91,7 +91,7 @@ class ClubEventItem extends StatelessWidget {
                   Text(
                     S.of(context).sunny,
                     style: TextStyle(
-                      color: Color(0xFF00344E),
+                      color: const Color(0xFF00344E),
                       fontSize: screenHeight * .017,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w400,
@@ -147,13 +147,11 @@ class ClubEventItem extends StatelessWidget {
                               Player currentPlayer =
                                   await method.getCurrentUser();
 
-                              // Check if the eventId already exists in the eventIds list
                               if (currentPlayer.eventIds
                                   .contains(event.eventId)) {
-                                // Show a message to the user that they are already registered
                                 // ignore: use_build_context_synchronously
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
+                                  const SnackBar(
                                       content: Text(
                                           'You are already registered for this event.')),
                                 );
@@ -192,7 +190,7 @@ class ClubEventItem extends StatelessWidget {
                             ),
                           ),
                         )
-                      : SizedBox(),
+                      : const SizedBox(),
                 ],
               ),
             ],

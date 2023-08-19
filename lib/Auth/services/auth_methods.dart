@@ -107,12 +107,11 @@ class FirebaseAuthMethods {
 
         // Check if the user is new or existing
         if (userCredential.additionalUserInfo!.isNewUser) {
-          print('New user signed in with Google.');
+          GoRouter.of(context).push('/createProfile');
         } else {
-          print('Existing user signed in with Google.');
+          GoRouter.of(context).push('/home');
         }
         // The routing code should be here after successful sign-in
-        GoRouter.of(context).push('/createProfile');
       }
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!); // Displaying the error message
