@@ -95,8 +95,19 @@ class _CreateGroupState extends State<CreateGroup> {
         'participants': participantIds,
         'createdBy': currentUser.playerId,
         'timestamp': FieldValue.serverTimestamp(),
-        'groupName': groupNameController.text
+        'groupName': groupNameController.text,
       });
+
+      // Update all participated players with the new group ID
+      for (String playerId in participantIds) {
+        await FirebaseFirestore.instance
+            .collection('players')
+            .doc(playerId)
+            .update({
+          'groupIds': FieldValue.arrayUnion([groupChatRef.id]),
+        });
+      }
+
       firebase_storage.Reference storageReference = firebase_storage
           .FirebaseStorage.instance
           .ref()
@@ -109,14 +120,13 @@ class _CreateGroupState extends State<CreateGroup> {
       firebase_storage.TaskSnapshot taskSnapshot = await uploadTask;
       String imageUrl = await taskSnapshot.ref.getDownloadURL();
 
-      // Update the club document with the image URL
+      // Update the group chat document with the image URL
       await groupChatRef.update({'groupImageURL': imageUrl});
 
       setState(() {
         isLoading = false;
       });
 
-      // ignore: use_build_context_synchronously
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -202,7 +212,7 @@ class _CreateGroupState extends State<CreateGroup> {
         backgroundColor: const Color.fromARGB(255, 34, 47, 53),
         onPressed: () {
           if (formKey.currentState!.validate()) {
-            _createGroupChat;
+            _createGroupChat();
           }
         },
         child: const Icon(
