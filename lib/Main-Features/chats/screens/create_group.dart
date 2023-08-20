@@ -1,11 +1,17 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:tennis_app/core/methodes/firebase_methodes.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 import '../../../core/utils/widgets/pop_app_bar.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/player.dart';
+import '../../Featured/create_profile/widgets/profile_image.dart';
 import '../widgets/group_player_card.dart';
 import 'groups_screen.dart';
 
@@ -19,6 +25,8 @@ class CreateGroup extends StatefulWidget {
 class _CreateGroupState extends State<CreateGroup> {
   List<String> selectedMemberIds = [];
   List<Player> members = [];
+  String groupName = '';
+  Uint8List? _selectedImageBytes;
 
   @override
   void initState() {
@@ -80,9 +88,20 @@ class _CreateGroupState extends State<CreateGroup> {
         'createdBy': currentUser.playerId,
         'timestamp': FieldValue.serverTimestamp(),
       });
+      firebase_storage.Reference storageReference = firebase_storage
+          .FirebaseStorage.instance
+          .ref()
+          .child('group_chats')
+          .child(groupChatRef.id)
+          .child('group-image.jpg');
 
-      // Navigate to the group chat screen or perform any other action
-      // For example, you can use the GoRouter package to navigate
+      firebase_storage.UploadTask uploadTask =
+          storageReference.putData(_selectedImageBytes!);
+      firebase_storage.TaskSnapshot taskSnapshot = await uploadTask;
+      String imageUrl = await taskSnapshot.ref.getDownloadURL();
+
+      // Update the club document with the image URL
+      await groupChatRef.update({'group': imageUrl});
       // ignore: use_build_context_synchronously
       Navigator.push(
         context,
@@ -111,6 +130,11 @@ class _CreateGroupState extends State<CreateGroup> {
             ),
             text: S.of(context).select_players,
             suffixIconPath: '',
+          ),
+          ProfileImage(
+            onImageSelected: (File imageFile) {
+              _selectedImageBytes = imageFile.readAsBytesSync();
+            },
           ),
           Expanded(
             child: ListView.builder(
