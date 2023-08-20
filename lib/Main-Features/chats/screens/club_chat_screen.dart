@@ -76,7 +76,7 @@ class _ClubChatScreenState extends State<ClubChatScreen> {
               final List<ChatMessage> messages = snapshot.data!;
               return ListView.builder(
                 padding: const EdgeInsets.only(bottom: 70.0),
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 reverse: true,
                 itemCount: messages.length,
                 itemBuilder: (context, index) {
@@ -87,7 +87,7 @@ class _ClubChatScreenState extends State<ClubChatScreen> {
                     builder: (context, playerSnapshot) {
                       if (playerSnapshot.connectionState ==
                           ConnectionState.waiting) {
-                        return Center(
+                        return const Center(
                           child: CircularProgressIndicator(),
                         );
                       } else if (playerSnapshot.hasData) {
@@ -107,7 +107,7 @@ class _ClubChatScreenState extends State<ClubChatScreen> {
                 },
               );
             } else {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }
@@ -120,12 +120,12 @@ class _ClubChatScreenState extends State<ClubChatScreen> {
 
   Widget _buildMessageInput() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Row(
         children: [
           Expanded(
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               decoration: ShapeDecoration(
                 color: Colors.white,
                 shape: RoundedRectangleBorder(
@@ -153,18 +153,18 @@ class _ClubChatScreenState extends State<ClubChatScreen> {
             height: 60,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Color(0xFF00344E),
+              color: const Color(0xFF00344E),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.1),
                   blurRadius: 6,
-                  offset: Offset(0, 3),
+                  offset: const Offset(0, 3),
                 ),
               ],
             ),
             child: IconButton(
               onPressed: _sendMessage,
-              icon: Icon(Icons.send),
+              icon: const Icon(Icons.send),
               color: Colors.white,
               iconSize: 23,
             ),

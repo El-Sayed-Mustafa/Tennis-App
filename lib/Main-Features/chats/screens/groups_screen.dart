@@ -1,97 +1,100 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:tennis_app/core/methodes/firebase_methodes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../../models/player.dart';
-import '../widgets/group_player_card.dart';
-import '../widgets/player_card.dart';
-
-class CreateGroup extends StatefulWidget {
-  const CreateGroup({super.key});
+class GroupChatScreen extends StatefulWidget {
+  const GroupChatScreen({super.key, required this.groupId});
+  final String groupId;
 
   @override
-  State<CreateGroup> createState() => _CreateGroupState();
+  State<GroupChatScreen> createState() => _GroupChatScreenState();
 }
 
-class _CreateGroupState extends State<CreateGroup> {
-  List<String> selectedMemberIds = [];
-  List<Player> members = []; // Change the type to List<Player>
+class _GroupChatScreenState extends State<GroupChatScreen> {
+  TextEditingController _messageController = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-    fetchClubMembers(); // Rename the function
-  }
+  void _sendMessage() async {
+    String message = _messageController.text.trim();
+    if (message.isNotEmpty) {
+      FirebaseAuth auth = FirebaseAuth.instance;
+      User? user = auth.currentUser;
 
-  void fetchClubMembers() async {
-    // Rename the function
-    Method method = Method();
-    Player player = await method.getCurrentUser();
-    DocumentSnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
-        .instance
-        .collection('clubs')
-        .doc(player.participatedClubId)
-        .get();
-    if (snapshot.exists) {
-      List<String> memberIds = List<String>.from(snapshot.data()!['memberIds']);
+      if (user != null) {
+        await FirebaseFirestore.instance
+            .collection('group_chats')
+            .doc(widget.groupId)
+            .collection('messages')
+            .add({
+          'text': message,
+          'senderId': user.uid,
+          'timestamp': FieldValue.serverTimestamp(),
+        });
 
-      // Fetch players for each member ID
-      List<Player> fetchedMembers =
-          await Future.wait(memberIds.map((memberId) async {
-        DocumentSnapshot<Map<String, dynamic>> playerSnapshot =
-            await FirebaseFirestore.instance
-                .collection('players')
-                .doc(memberId)
-                .get();
-        return Player.fromSnapshot(playerSnapshot);
-      }));
-
-      setState(() {
-        members = fetchedMembers;
-      });
-    }
-  }
-
-  void _toggleMemberSelection(String memberId) {
-    setState(() {
-      if (selectedMemberIds.contains(memberId)) {
-        selectedMemberIds.remove(memberId);
-      } else {
-        selectedMemberIds.add(memberId);
+        _messageController.clear();
       }
-    });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Select Members'),
+        title: Text('Group Chat'),
       ),
-      body: ListView.builder(
-        itemCount: members.length,
-        itemBuilder: (context, index) {
-          final member = members[index];
-          final isSelected = selectedMemberIds.contains(member.playerId);
+      body: Column(
+        children: [
+          Expanded(
+            child: StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection('group_chats')
+                  .doc(widget.groupId)
+                  .collection('messages')
+                  .orderBy('timestamp', descending: true)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return Center(child: CircularProgressIndicator());
+                }
 
-          return ListTile(
-            subtitle: GroupPlayerCard(
-              player: member,
+                List<QueryDocumentSnapshot> messages = snapshot.data!.docs;
+                return ListView.builder(
+                  reverse: true,
+                  itemCount: messages.length,
+                  itemBuilder: (context, index) {
+                    Map<String, dynamic> messageData =
+                        messages[index].data() as Map<String, dynamic>;
+                    String senderId = messageData['senderId'];
+                    String messageText = messageData['text'];
+
+                    // You can customize the message display based on the sender
+                    return ListTile(
+                      title: Text(messageText),
+                      subtitle: Text(senderId),
+                    );
+                  },
+                );
+              },
             ),
-            leading: Checkbox(
-              value: isSelected,
-              onChanged: (value) => _toggleMemberSelection(member.playerId),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: _messageController,
+                    decoration:
+                        InputDecoration(hintText: 'Type your message...'),
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(Icons.send),
+                  onPressed: _sendMessage,
+                ),
+              ],
             ),
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Perform the desired action with selectedMemberIds
-          // For example, update the club's member list in Firebase
-          // You can call a function to update the Firebase collection here
-        },
-        child: Icon(Icons.check),
+          ),
+        ],
       ),
     );
   }

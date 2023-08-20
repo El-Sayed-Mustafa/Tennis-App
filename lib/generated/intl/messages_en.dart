@@ -436,6 +436,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Reset Password"),
         "search_players":
             MessageLookupByLibrary.simpleMessage("Search players..."),
+        "select_players":
+            MessageLookupByLibrary.simpleMessage("Select Players"),
         "setProfilePicture":
             MessageLookupByLibrary.simpleMessage("Set Profile Picture"),
         "set_reminder": MessageLookupByLibrary.simpleMessage("Set Reminder"),

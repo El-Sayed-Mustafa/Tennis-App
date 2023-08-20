@@ -2963,6 +2963,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Select Players`
+  String get select_players {
+    return Intl.message(
+      'Select Players',
+      name: 'select_players',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
