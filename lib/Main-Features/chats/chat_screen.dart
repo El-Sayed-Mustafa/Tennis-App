@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:tennis_app/Main-Features/chats/screens/chats_screen.dart';
 import 'package:tennis_app/Main-Features/chats/screens/community_screen.dart';
 import 'package:tennis_app/Main-Features/chats/screens/club_chat_screen.dart';
@@ -112,7 +111,7 @@ class _ChatScreenState extends State<ChatScreen>
               children: [
                 CommunityScreen(),
                 ClubChatScreen(),
-                ChatsScreen(),
+                PrivateChats(),
               ],
             ))
           ],

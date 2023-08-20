@@ -10,8 +10,8 @@ import '../../../generated/l10n.dart';
 import '../../../models/chats.dart';
 import '../../../models/player.dart'; // Import the ChatMessage model class
 
-class ChatsScreen extends StatelessWidget {
-  const ChatsScreen({
+class PrivateChats extends StatelessWidget {
+  const PrivateChats({
     super.key,
   });
 

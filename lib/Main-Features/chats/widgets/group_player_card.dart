@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../../../models/player.dart';
 
-class PlayerCard extends StatelessWidget {
+class GroupPlayerCard extends StatelessWidget {
   final Player player;
 
-  const PlayerCard({required this.player});
+  const GroupPlayerCard({required this.player});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(15),
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
