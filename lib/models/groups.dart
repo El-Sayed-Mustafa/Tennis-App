@@ -6,6 +6,8 @@ class GroupChats {
   final String content;
   final Timestamp timestamp;
   final List<String> participatedUserIds;
+  final String? photoURL;
+  final String groupName; // New field for group name
 
   GroupChats({
     required this.messageId,
@@ -13,6 +15,8 @@ class GroupChats {
     required this.content,
     required this.timestamp,
     required this.participatedUserIds,
+    this.photoURL,
+    required this.groupName, // Initialize the group name
   });
 
   // Convert message to JSON
@@ -21,8 +25,10 @@ class GroupChats {
       'messageId': messageId,
       'senderId': senderId,
       'content': content,
+      'groupImageURL': photoURL,
       'timestamp': timestamp,
       'participatedUserIds': participatedUserIds,
+      'groupName': groupName, // Include group name in JSON
     };
   }
 
@@ -40,6 +46,8 @@ class GroupChats {
       content: data['content'] as String? ?? '',
       timestamp: data['timestamp'] as Timestamp? ?? Timestamp.now(),
       participatedUserIds: List<String>.from(data['participatedUserIds'] ?? []),
+      photoURL: data['groupImageURL'] as String?,
+      groupName: data['groupName'] as String? ?? '', // Get group name from data
     );
   }
 
@@ -51,6 +59,8 @@ class GroupChats {
       content: map['content'] as String? ?? '',
       timestamp: map['timestamp'] as Timestamp? ?? Timestamp.now(),
       participatedUserIds: List<String>.from(map['participatedUserIds'] ?? []),
+      photoURL: map['groupImageURL'] as String?,
+      groupName: map['groupName'] as String? ?? '', // Get group name from map
     );
   }
 }

@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tennis_app/core/methodes/firebase_methodes.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:tennis_app/core/utils/widgets/text_field.dart';
 
 import '../../../core/utils/widgets/pop_app_bar.dart';
 import '../../../generated/l10n.dart';
@@ -23,10 +24,14 @@ class CreateGroup extends StatefulWidget {
 }
 
 class _CreateGroupState extends State<CreateGroup> {
+  bool isLoading = false;
+
   List<String> selectedMemberIds = [];
   List<Player> members = [];
   String groupName = '';
   Uint8List? _selectedImageBytes;
+  final TextEditingController groupNameController = TextEditingController();
+  var formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -72,7 +77,10 @@ class _CreateGroupState extends State<CreateGroup> {
   }
 
   void _createGroupChat() async {
-    // Implement the logic to create a group chat
+    setState(() {
+      isLoading = true; // Add this line to show loading indicator
+    });
+
     if (selectedMemberIds.isNotEmpty) {
       Method method = Method();
       Player currentUser = await method.getCurrentUser();
@@ -87,6 +95,7 @@ class _CreateGroupState extends State<CreateGroup> {
         'participants': participantIds,
         'createdBy': currentUser.playerId,
         'timestamp': FieldValue.serverTimestamp(),
+        'groupName': groupNameController.text
       });
       firebase_storage.Reference storageReference = firebase_storage
           .FirebaseStorage.instance
@@ -101,7 +110,12 @@ class _CreateGroupState extends State<CreateGroup> {
       String imageUrl = await taskSnapshot.ref.getDownloadURL();
 
       // Update the club document with the image URL
-      await groupChatRef.update({'group': imageUrl});
+      await groupChatRef.update({'groupImageURL': imageUrl});
+
+      setState(() {
+        isLoading = false;
+      });
+
       // ignore: use_build_context_synchronously
       Navigator.push(
         context,
@@ -114,55 +128,84 @@ class _CreateGroupState extends State<CreateGroup> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          PoPAppBarWave(
-            prefixIcon: IconButton(
-              onPressed: () {
-                GoRouter.of(context).pop();
-              },
-              icon: const Icon(
-                Icons.arrow_back,
-                size: 30,
-                color: Colors.white,
-              ),
-            ),
-            text: S.of(context).select_players,
-            suffixIconPath: '',
-          ),
-          ProfileImage(
-            onImageSelected: (File imageFile) {
-              _selectedImageBytes = imageFile.readAsBytesSync();
-            },
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: members.length,
-              itemBuilder: (context, index) {
-                final member = members[index];
-                final isSelected = selectedMemberIds.contains(member.playerId);
+    final screenHeight = MediaQuery.of(context).size.height;
 
-                return ListTile(
-                  subtitle: GroupPlayerCard(
-                    player: member,
+    return Scaffold(
+      body: Form(
+        key: formKey,
+        child: isLoading
+            ? const Center(
+                child: CircularProgressIndicator()) // Show loading indicator
+            : Column(
+                children: [
+                  PoPAppBarWave(
+                    prefixIcon: IconButton(
+                      onPressed: () {
+                        GoRouter.of(context).pop();
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        size: 30,
+                        color: Colors.white,
+                      ),
+                    ),
+                    text: S.of(context).select_players,
+                    suffixIconPath: '',
                   ),
-                  leading: Checkbox(
-                    activeColor: const Color.fromARGB(255, 34, 47, 53),
-                    value: isSelected,
-                    onChanged: (value) =>
-                        _toggleMemberSelection(member.playerId),
+                  ProfileImage(
+                    onImageSelected: (File imageFile) {
+                      _selectedImageBytes = imageFile.readAsBytesSync();
+                    },
                   ),
-                );
-              },
-            ),
-          ),
-        ],
+                  SizedBox(height: screenHeight * .01),
+                  Text(
+                    S.of(context).setProfilePicture,
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  SizedBox(height: screenHeight * .03),
+                  InputTextWithHint(
+                    hint: S.of(context).Type_club_name_here,
+                    text: S.of(context).Club_Name,
+                    controller: groupNameController,
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: members.length,
+                      itemBuilder: (context, index) {
+                        final member = members[index];
+                        final isSelected =
+                            selectedMemberIds.contains(member.playerId);
+
+                        return ListTile(
+                          subtitle: GroupPlayerCard(
+                            player: member,
+                          ),
+                          leading: Checkbox(
+                            activeColor: const Color.fromARGB(255, 34, 47, 53),
+                            value: isSelected,
+                            onChanged: (value) =>
+                                _toggleMemberSelection(member.playerId),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color.fromARGB(255, 34, 47, 53),
-        onPressed: _createGroupChat,
-        child: Icon(
+        onPressed: () {
+          if (formKey.currentState!.validate()) {
+            _createGroupChat;
+          }
+        },
+        child: const Icon(
           Icons.check,
         ),
       ),
