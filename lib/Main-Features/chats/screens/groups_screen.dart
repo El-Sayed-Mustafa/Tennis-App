@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:go_router/go_router.dart';
+import 'package:tennis_app/Main-Features/chats/widgets/community_message.dart';
+import 'package:tennis_app/Main-Features/chats/widgets/my_reply.dart';
+import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
+import 'package:tennis_app/models/chats.dart';
+import 'package:tennis_app/models/player.dart'; // Import the ChatMessage model
 
 class GroupChatScreen extends StatefulWidget {
-  const GroupChatScreen({super.key, required this.groupId});
+  const GroupChatScreen({Key? key, required this.groupId}) : super(key: key);
   final String groupId;
 
   @override
@@ -11,7 +17,33 @@ class GroupChatScreen extends StatefulWidget {
 }
 
 class _GroupChatScreenState extends State<GroupChatScreen> {
+  String _groupName = ''; // Store group name
+  String _groupImageURL = ''; // Store group image URL
   TextEditingController _messageController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    _fetchGroupDetails(); // Fetch group details when the screen initializes
+  }
+
+  void _fetchGroupDetails() async {
+    try {
+      DocumentSnapshot<Map<String, dynamic>> groupSnapshot =
+          await FirebaseFirestore.instance
+              .collection('group_chats')
+              .doc(widget.groupId)
+              .get();
+
+      if (groupSnapshot.exists) {
+        setState(() {
+          _groupName = groupSnapshot.data()!['groupName'];
+          _groupImageURL = groupSnapshot.data()!['groupImageURL'];
+        });
+      }
+    } catch (error) {
+      print('Error fetching group details: $error');
+    }
+  }
 
   void _sendMessage() async {
     String message = _messageController.text.trim();
@@ -25,7 +57,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
             .doc(widget.groupId)
             .collection('messages')
             .add({
-          'text': message,
+          'content': message, // Use 'content' instead of 'text'
           'senderId': user.uid,
           'timestamp': FieldValue.serverTimestamp(),
         });
@@ -35,14 +67,42 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
     }
   }
 
+  Future<Player?> _fetchPlayerData(String playerId) async {
+    try {
+      DocumentSnapshot<Map<String, dynamic>> playerSnapshot =
+          await FirebaseFirestore.instance
+              .collection('players')
+              .doc(playerId)
+              .get();
+      if (playerSnapshot.exists) {
+        return Player.fromSnapshot(playerSnapshot);
+      }
+      return null; // Return null if the player does not exist.
+    } catch (error) {
+      print('Error fetching player data: $error');
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Group Chat'),
-      ),
       body: Column(
         children: [
+          PoPAppBarWave(
+            prefixIcon: IconButton(
+              onPressed: () {
+                GoRouter.of(context).pop();
+              },
+              icon: const Icon(
+                Icons.arrow_back,
+                size: 30,
+                color: Colors.white,
+              ),
+            ),
+            text: _groupName,
+            suffixIconPath: '',
+          ),
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
@@ -57,19 +117,36 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                 }
 
                 List<QueryDocumentSnapshot> messages = snapshot.data!.docs;
+
                 return ListView.builder(
                   reverse: true,
                   itemCount: messages.length,
                   itemBuilder: (context, index) {
-                    Map<String, dynamic> messageData =
-                        messages[index].data() as Map<String, dynamic>;
-                    String senderId = messageData['senderId'];
-                    String messageText = messageData['text'];
+                    ChatMessage chatMessage = ChatMessage.fromSnapshot(
+                        messages[index]
+                            as DocumentSnapshot<Map<String, dynamic>>);
 
-                    // You can customize the message display based on the sender
-                    return ListTile(
-                      title: Text(messageText),
-                      subtitle: Text(senderId),
+                    return FutureBuilder<Player?>(
+                      future: _fetchPlayerData(chatMessage.senderId),
+                      builder: (context, playerSnapshot) {
+                        if (playerSnapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else if (playerSnapshot.hasData) {
+                          final Player? player = playerSnapshot.data;
+                          if (player != null) {
+                            return chatMessage.senderId == player.playerId
+                                ? MyReply(message: chatMessage)
+                                : SenderMessage(
+                                    message: chatMessage,
+                                    player: player,
+                                  );
+                          }
+                        }
+                        return Container();
+                      },
                     );
                   },
                 );

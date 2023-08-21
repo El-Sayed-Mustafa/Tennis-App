@@ -23,6 +23,7 @@ class PrivateChats extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.only(top: 8, left: 8.0, right: 8.0),
         child: Container(
+          padding: const EdgeInsets.only(top: 8),
           width: double.infinity,
           decoration: const ShapeDecoration(
             color: kPrimaryColor,
@@ -72,6 +73,7 @@ class PrivateChats extends StatelessWidget {
 
                   return ListView.builder(
                     itemCount: chatItems.length,
+                    padding: EdgeInsets.zero,
                     itemBuilder: (context, index) {
                       final chatItem = chatItems[index];
 

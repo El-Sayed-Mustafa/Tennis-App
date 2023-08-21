@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tennis_app/Main-Features/chats/screens/chats_screen.dart';
 import 'package:tennis_app/Main-Features/chats/screens/community_screen.dart';
 import 'package:tennis_app/Main-Features/chats/screens/club_chat_screen.dart';
+import 'package:tennis_app/Main-Features/chats/screens/group_private_chats.dart';
 
 import '../../core/utils/widgets/app_bar_wave.dart';
 import '../../generated/l10n.dart';
@@ -111,7 +112,7 @@ class _ChatScreenState extends State<ChatScreen>
               children: [
                 CommunityScreen(),
                 ClubChatScreen(),
-                PrivateChats(),
+                GroupPrivateChats(),
               ],
             ))
           ],

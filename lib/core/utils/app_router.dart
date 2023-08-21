@@ -45,7 +45,7 @@ abstract class AppRouter {
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider(
             create: (context) => NavigationCubit(),
-            child: UserGroupsScreen(),
+            child: NavigationBarScreen(),
           );
         },
         routes: <RouteBase>[
@@ -206,6 +206,12 @@ abstract class AppRouter {
             path: 'createMatch',
             builder: (BuildContext context, GoRouterState state) {
               return const CreateEventMatchesScreen();
+            },
+          ),
+          GoRoute(
+            path: 'createGroup',
+            builder: (BuildContext context, GoRouterState state) {
+              return const CreateGroup();
             },
           ),
         ],

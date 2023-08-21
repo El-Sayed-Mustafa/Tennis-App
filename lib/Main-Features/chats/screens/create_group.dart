@@ -77,7 +77,7 @@ class _CreateGroupState extends State<CreateGroup> {
 
   void _createGroupChat() async {
     setState(() {
-      isLoading = true; // Add this line to show loading indicator
+      isLoading = true; // Show loading indicator
     });
 
     if (selectedMemberIds.isNotEmpty) {
@@ -106,24 +106,25 @@ class _CreateGroupState extends State<CreateGroup> {
           'groupIds': FieldValue.arrayUnion([groupChatRef.id]),
         });
       }
+      if (_selectedImageBytes != null) {
+        firebase_storage.Reference storageReference = firebase_storage
+            .FirebaseStorage.instance
+            .ref()
+            .child('group_chats')
+            .child(groupChatRef.id)
+            .child('group-image.jpg');
 
-      firebase_storage.Reference storageReference = firebase_storage
-          .FirebaseStorage.instance
-          .ref()
-          .child('group_chats')
-          .child(groupChatRef.id)
-          .child('group-image.jpg');
+        firebase_storage.UploadTask uploadTask =
+            storageReference.putData(_selectedImageBytes!);
+        firebase_storage.TaskSnapshot taskSnapshot = await uploadTask;
+        String imageUrl = await taskSnapshot.ref.getDownloadURL();
 
-      firebase_storage.UploadTask uploadTask =
-          storageReference.putData(_selectedImageBytes!);
-      firebase_storage.TaskSnapshot taskSnapshot = await uploadTask;
-      String imageUrl = await taskSnapshot.ref.getDownloadURL();
-
-      // Update the group chat document with the image URL
-      await groupChatRef.update({'groupImageURL': imageUrl});
+        // Update the group chat document with the image URL
+        await groupChatRef.update({'groupImageURL': imageUrl});
+      }
 
       setState(() {
-        isLoading = false;
+        isLoading = false; // Hide loading indicator
       });
 
       Navigator.push(
@@ -132,6 +133,10 @@ class _CreateGroupState extends State<CreateGroup> {
           builder: (context) => GroupChatScreen(groupId: groupChatRef.id),
         ),
       );
+    } else {
+      setState(() {
+        isLoading = false; // Hide loading indicator
+      });
     }
   }
 
