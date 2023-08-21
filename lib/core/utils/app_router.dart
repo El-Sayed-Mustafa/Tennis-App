@@ -12,6 +12,7 @@ import 'package:tennis_app/Main-Features/Featured/roles/roles_list/view/widgets/
 import 'package:tennis_app/Main-Features/Featured/set_reminder/set_reminder_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/splash/splash_screen.dart';
 import 'package:tennis_app/Main-Features/chats/screens/player_search_screen.dart';
+import 'package:tennis_app/Main-Features/chats/screens/user_groups_screen.dart';
 import 'package:tennis_app/Main-Features/menu/menu_screen.dart';
 import 'package:tennis_app/Main-Features/create_event_match/create_event_match_screen.dart';
 
@@ -44,7 +45,7 @@ abstract class AppRouter {
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider(
             create: (context) => NavigationCubit(),
-            child: NavigationBarScreen(),
+            child: UserGroupsScreen(),
           );
         },
         routes: <RouteBase>[
