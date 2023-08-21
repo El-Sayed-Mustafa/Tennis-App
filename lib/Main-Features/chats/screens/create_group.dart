@@ -4,7 +4,6 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:go_router/go_router.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:tennis_app/core/methodes/firebase_methodes.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:tennis_app/core/utils/widgets/text_field.dart';
@@ -169,7 +168,7 @@ class _CreateGroupState extends State<CreateGroup> {
                   ),
                   SizedBox(height: screenHeight * .01),
                   Text(
-                    S.of(context).setProfilePicture,
+                    S.of(context).set_group_image,
                     style: const TextStyle(
                       color: Colors.black,
                       fontSize: 14,

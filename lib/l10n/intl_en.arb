@@ -296,5 +296,7 @@
     "logout": "Logout",
     "select_players": "Select Players",
     "set_group_image": "Set Group Image",
-    "create_group": "Create Group"
+    "create_group": "Create Group",
+    "group_name": "Group Name",
+    "type_group_name": "Type Group Name"
 }

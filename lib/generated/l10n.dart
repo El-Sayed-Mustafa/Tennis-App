@@ -2973,6 +2973,15 @@ class S {
       args: [],
     );
   }
+
+  String get set_group_image {
+    return Intl.message(
+      'Set Group Image',
+      name: 'set_group_image',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
