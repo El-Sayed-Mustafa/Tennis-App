@@ -293,5 +293,7 @@
     "DoubleTournaments": "Torneos Dobles",
     "Enter_Results": "Ingresar Resultados",
     "email_verified": "Correo Verificado",
-    "logout": "Cerrar Sesión"
+    "logout": "Cerrar Sesión",
+    "group_name": "Group Name",
+    "set_group_image": "Set Group es"
 }

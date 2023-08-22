@@ -148,7 +148,7 @@ class PrivateChats extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          GoRouter.of(context).go('/searchChat');
+          GoRouter.of(context).push('/searchChat');
         },
         child: Icon(
           Icons.search,

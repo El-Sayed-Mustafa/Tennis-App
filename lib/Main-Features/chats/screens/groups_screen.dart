@@ -18,7 +18,6 @@ class GroupChatScreen extends StatefulWidget {
 
 class _GroupChatScreenState extends State<GroupChatScreen> {
   String _groupName = ''; // Store group name
-  String _groupImageURL = ''; // Store group image URL
   TextEditingController _messageController = TextEditingController();
   @override
   void initState() {
@@ -37,7 +36,6 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
       if (groupSnapshot.exists) {
         setState(() {
           _groupName = groupSnapshot.data()!['groupName'];
-          _groupImageURL = groupSnapshot.data()!['groupImageURL'];
         });
       }
     } catch (error) {
@@ -154,7 +152,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
             child: Row(
               children: [
                 Expanded(

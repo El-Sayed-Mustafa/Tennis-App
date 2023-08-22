@@ -24,11 +24,13 @@ class Club {
   final List<String> doubleMatchesIds;
   final List<String> singleTournamentsIds;
   final List<String> doubleTournamentsIds;
+  final int numberOfRatings; // New property for the number of ratings
 
   Club({
     required this.clubChatId,
     required this.clubId,
     required this.clubName,
+    required this.numberOfRatings,
     required this.clubType,
     required this.clubAdmin,
     required this.nationalIdNumber,
@@ -58,7 +60,8 @@ class Club {
       'clubType': clubType,
       'clubAdmin': clubAdmin,
       'nationalIdNumber': nationalIdNumber,
-      'phoneNumber': phoneNumber,
+      'phoneNumber': phoneNumber, 'numberOfRatings': numberOfRatings,
+
       'email': email,
       'rulesAndRegulations': rulesAndRegulations,
       'ageRestriction': ageRestriction,
@@ -92,6 +95,7 @@ class Club {
       email: data['email'] as String? ?? '',
       matchPlayed: data['matchPlayed'] as int? ?? 0,
       courtsNum: data['courtsNum'] as int? ?? 0,
+      numberOfRatings: data['numberOfRatings'] as int? ?? 0,
       totalWins: data['totalWins'] as int? ?? 0,
       rulesAndRegulations: data['rulesAndRegulations'] as String? ?? '',
       ageRestriction: data['ageRestriction'] as String? ?? '',

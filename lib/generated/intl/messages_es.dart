@@ -502,6 +502,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcome": MessageLookupByLibrary.simpleMessage("Bienvenido"),
         "your_club": MessageLookupByLibrary.simpleMessage("Tu Club"),
         "your_event_will_start_now":
-            MessageLookupByLibrary.simpleMessage("Tu evento comenzará ahora")
+            MessageLookupByLibrary.simpleMessage("Tu evento comenzará ahora"),
       };
 }

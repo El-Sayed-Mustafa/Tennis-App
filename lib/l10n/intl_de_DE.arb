@@ -293,5 +293,6 @@
     "DoubleTournaments": "Doppelturniere",
     "Enter_Results": "Ergebnisse Eingeben",
     "email_verified": "E-Mail Verifiziert",
-    "logout": "Ausloggen"
+    "logout": "Ausloggen",
+    "group_name": "Group Name"
 }
