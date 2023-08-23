@@ -40,6 +40,7 @@ class CreateClubCubit extends Cubit<CreateClubState> {
       String rulesAndRegulations = rulesController.text;
       String ageRestriction = getAgeRestrictionLabel(selectedChoice);
       String address = addressController.text;
+      String currentUserID = FirebaseAuth.instance.currentUser!.uid;
 
       List<String> eventIds = []; // Add the event IDs if needed
       List<String> memberIds = []; // Add the member IDs if needed
@@ -51,7 +52,7 @@ class CreateClubCubit extends Cubit<CreateClubState> {
             .toString()
             .split('.')
             .last, // Convert the enum value to string
-        clubAdmin: clubAdmin,
+        clubAdmin: currentUserID,
         nationalIdNumber: nationalID,
         phoneNumber: phoneNumber,
         email: email,
@@ -101,7 +102,6 @@ class CreateClubCubit extends Cubit<CreateClubState> {
       }
 
       // Save the club ID in the current user's data
-      String currentUserID = FirebaseAuth.instance.currentUser!.uid;
       DocumentReference userDocRef =
           FirebaseFirestore.instance.collection('players').doc(currentUserID);
       await userDocRef.update({

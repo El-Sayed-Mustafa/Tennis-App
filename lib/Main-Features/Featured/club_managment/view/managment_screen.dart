@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tennis_app/Main-Features/Featured/club_managment/view/screens/invite_members.dart';
 import 'package:tennis_app/Main-Features/Featured/club_managment/view/screens/members_list.dart';
 import 'package:tennis_app/core/utils/widgets/app_bar_wave.dart';
+import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import 'package:tennis_app/core/utils/widgets/rules_text_field.dart';
 import 'package:tennis_app/models/player.dart';
 
@@ -90,10 +91,10 @@ class _ManagementScreenState extends State<ManagementScreen> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    AppBarWaveHome(
+                    PoPAppBarWave(
                       prefixIcon: IconButton(
                         onPressed: () {
-                          GoRouter.of(context).replace('/menu');
+                          GoRouter.of(context).pop();
                         },
                         icon: const Icon(
                           Icons.arrow_back,
@@ -126,7 +127,7 @@ class _ManagementScreenState extends State<ManagementScreen> {
                         children: [
                           Text(
                             S.of(context).Manage_Members,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.black,
                               fontSize: 18,
                               fontFamily: 'Poppins',
@@ -145,7 +146,7 @@ class _ManagementScreenState extends State<ManagementScreen> {
                             },
                             child: Text(
                               S.of(context).Invite_Members,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Color(0xFF0D5FC3),
                                 fontSize: 12,
                                 fontFamily: 'Poppins',
@@ -160,7 +161,7 @@ class _ManagementScreenState extends State<ManagementScreen> {
                     SizedBox(height: screenHeight * .03),
                     Text(
                       S.of(context).Rules_and_regulations,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.black,
                         fontSize: 18,
                         fontFamily: 'Poppins',
@@ -176,7 +177,7 @@ class _ManagementScreenState extends State<ManagementScreen> {
                     SizedBox(height: screenHeight * .03),
                     Text(
                       S.of(context).Age_restriction,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.black,
                         fontSize: 18,
                         fontFamily: 'Poppins',

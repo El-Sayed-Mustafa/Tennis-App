@@ -37,6 +37,7 @@ dependencies:
   curved_navigation_bar: ^1.0.3
   device_preview: null
   dots_indicator: ^2.1.1
+  easy_localization: ^3.0.2
   equatable: ^2.0.5
   firebase_auth: null
   firebase_core: null

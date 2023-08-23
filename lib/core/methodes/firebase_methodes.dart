@@ -37,36 +37,6 @@ class Method {
     return clubData;
   }
 
-// // Function to get chat messages for the current player
-//   Future<List<ChatMessage>> getChatMessagesForCurrentPlayer(
-//       String currentPlayerId) async {
-//     try {
-//       // Perform a query to get messages where the senderId or receiverId matches the currentPlayerId
-//       final querySnapshot = await FirebaseFirestore.instance
-//           .collection('chats')
-//           .where('messages', arrayContains: {
-//         'senderId': currentPlayerId,
-//       }).get();
-
-//       // Extract the messages from the query result
-//       final messages = querySnapshot.docs
-//           .map((doc) {
-//             final chatData = doc.data();
-//             final messagesData = chatData['messages'] as List<dynamic>;
-//             return messagesData
-//                 .map((messageData) => ChatMessage.fromMap(messageData))
-//                 .toList();
-//           })
-//           .expand((element) => element)
-//           .toList();
-
-//       return messages;
-//     } catch (e) {
-//       print('Error getting chat messages: $e');
-//       return [];
-//     }
-//   }
-
 //Function to get all chats for the current player sorted from newest to oldest
   Future<List<ChatMessage>> getAllChatsForCurrentPlayer(
       String currentPlayerId) async {
@@ -114,7 +84,10 @@ class Method {
         // Handle the case if player data not found
         return false;
       }
-
+      final clubdata = await fetchClubData(playerData['participatedClubId']);
+      if (clubdata.clubAdmin == playerId) {
+        return true;
+      }
       final Map<String, dynamic> clubRolesMap = playerData['clubRoles'] ?? {};
       final List<String> roleIds = (clubRolesMap.values).join(',').split(',');
 

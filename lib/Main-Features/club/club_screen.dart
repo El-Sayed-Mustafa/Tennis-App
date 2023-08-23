@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/club/widgets/avaliable_courts.dart';
@@ -11,6 +13,7 @@ import 'package:tennis_app/Main-Features/club/widgets/num_members.dart';
 import 'package:tennis_app/Main-Features/club/widgets/players_ranking.dart';
 import 'package:tennis_app/Main-Features/club/widgets/single_matches_club.dart';
 import 'package:tennis_app/Main-Features/club/widgets/single_tournament_club.dart';
+import 'package:tennis_app/core/utils/widgets/custom_dialouge.dart';
 
 import '../../core/utils/widgets/app_bar_wave.dart';
 import '../../generated/l10n.dart';
@@ -150,7 +153,19 @@ class ClubScreen extends StatelessWidget {
                                   buttonText: S.of(context).Create_Court,
                                   imagePath: 'assets/images/Create-Event.svg',
                                   onPressed: () async {
-                                    GoRouter.of(context).push('/createCourt');
+                                    bool hasRight =
+                                        await method.doesPlayerHaveRight(
+                                            'Create tennis courts');
+                                    if (hasRight) {
+                                      GoRouter.of(context).push('/createCourt');
+                                    } else {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) => CustomDialog(
+                                          text: 'You don\'t have the right',
+                                        ),
+                                      );
+                                    }
                                   }),
                               const SizedBox(
                                 height: 20,
@@ -158,8 +173,19 @@ class ClubScreen extends StatelessWidget {
                               HomeButton(
                                 buttonText: 'Create Match',
                                 imagePath: 'assets/images/Make-offers.svg',
-                                onPressed: () {
-                                  GoRouter.of(context).push('/createMatch');
+                                onPressed: () async {
+                                  bool hasRight = await method
+                                      .doesPlayerHaveRight('Create Match');
+                                  if (hasRight) {
+                                    GoRouter.of(context).push('/createMatch');
+                                  } else {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => CustomDialog(
+                                        text: 'You don\'t have the right',
+                                      ),
+                                    );
+                                  }
                                 },
                               ),
                               SizedBox(height: spacing * 2),

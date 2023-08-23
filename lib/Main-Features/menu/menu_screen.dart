@@ -1,7 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/menu/widgets/button_menu.dart';
+import 'package:tennis_app/core/utils/widgets/custom_dialouge.dart';
 
 import '../../Auth/services/auth_methods.dart';
 import '../../core/methodes/firebase_methodes.dart';
@@ -92,29 +95,73 @@ class MenuScreen extends StatelessWidget {
                     ButtonMenu(
                       imagePath: 'assets/images/Member-administration.svg',
                       buttonText: S.of(context).Member_administration,
-                      onPressed: () {
-                        GoRouter.of(context).push('/management');
+                      onPressed: () async {
+                        bool hasRight =
+                            await method.doesPlayerHaveRight('Edit Club');
+                        if (hasRight) {
+                          GoRouter.of(context).push('/management');
+                        } else {
+                          showDialog(
+                            context: context,
+                            builder: (context) => CustomDialog(
+                              text: 'You don\'t have the right',
+                            ),
+                          );
+                        }
                       },
                     ),
                     ButtonMenu(
                       imagePath: 'assets/images/Create-role.svg',
                       buttonText: S.of(context).Create_Role,
-                      onPressed: () {
-                        GoRouter.of(context).push('/createRole');
+                      onPressed: () async {
+                        bool hasRight =
+                            await method.doesPlayerHaveRight('Create Roles');
+                        if (hasRight) {
+                          GoRouter.of(context).push('/createRole');
+                        } else {
+                          showDialog(
+                            context: context,
+                            builder: (context) => CustomDialog(
+                              text: 'You don\'t have the right',
+                            ),
+                          );
+                        }
                       },
                     ),
                     ButtonMenu(
                       imagePath: 'assets/images/Create-role.svg',
                       buttonText: S.of(context).Assign_Person,
-                      onPressed: () {
-                        GoRouter.of(context).push('/assignPerson');
+                      onPressed: () async {
+                        bool hasRight =
+                            await method.doesPlayerHaveRight('Create Roles');
+                        if (hasRight) {
+                          GoRouter.of(context).push('/assignPerson');
+                        } else {
+                          showDialog(
+                            context: context,
+                            builder: (context) => CustomDialog(
+                              text: 'You don\'t have the right',
+                            ),
+                          );
+                        }
                       },
                     ),
                     ButtonMenu(
                       imagePath: 'assets/images/Create-role.svg',
                       buttonText: S.of(context).Roles_list,
-                      onPressed: () {
-                        GoRouter.of(context).push('/rolesList');
+                      onPressed: () async {
+                        bool hasRight =
+                            await method.doesPlayerHaveRight('Create Roles');
+                        if (hasRight) {
+                          GoRouter.of(context).push('/rolesList');
+                        } else {
+                          showDialog(
+                            context: context,
+                            builder: (context) => CustomDialog(
+                              text: 'You don\'t have the right',
+                            ),
+                          );
+                        }
                       },
                     ),
                     ButtonMenu(

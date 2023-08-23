@@ -11,6 +11,7 @@ import '../../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../../models/player.dart';
 import 'package:intl/intl.dart';
+import 'package:easy_localization/easy_localization.dart' as localized;
 
 import '../../../../../models/roles.dart';
 import '../../../create_event/view/widgets/player_level.dart';
@@ -470,17 +471,29 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                         } else {
                                           final List<String> roleNames =
                                               snapshot.data ?? [];
-                                          return Text(
-                                            roleNames.isNotEmpty
-                                                ? roleNames.join(', ')
-                                                : S
-                                                    .of(context)
-                                                    .No_Role_Assigned,
-                                            style: const TextStyle(
-                                              color: Color(0xFF6D6D6D),
-                                              fontSize: 18,
-                                              fontFamily: 'Roboto',
-                                              fontWeight: FontWeight.w400,
+                                          return SizedBox(
+                                            width: screenWidth * .5,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                Text(
+                                                  roleNames.isNotEmpty
+                                                      ? roleNames.join(', ')
+                                                      : S
+                                                          .of(context)
+                                                          .No_Role_Assigned,
+                                                  style: const TextStyle(
+                                                    color: Color(0xFF6D6D6D),
+                                                    fontSize: 18,
+                                                    fontFamily: 'Roboto',
+                                                    fontWeight: FontWeight.w400,
+                                                  ),
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                              ],
                                             ),
                                           );
                                         }
@@ -581,7 +594,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                   },
                   child: Text(
                     S.of(context).Remove_Member,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color(0xFF0D5FC3),
                       fontSize: 14,
                       fontFamily: 'Poppins',

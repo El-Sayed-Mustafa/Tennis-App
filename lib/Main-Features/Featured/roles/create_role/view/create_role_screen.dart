@@ -35,7 +35,8 @@ class _CreateRoleState extends State<CreateRole> {
       S.of(context).Create_Training,
       S.of(context).Set_up_leagues,
       S.of(context).Create_Roles,
-      S.of(context).Enter_Results
+      S.of(context).Enter_Results,
+      "Create Match",
     ];
     return BlocProvider(
       create: (context) => RoleCubit(),
@@ -93,7 +94,7 @@ class _CreateRoleState extends State<CreateRole> {
                       PoPAppBarWave(
                         prefixIcon: IconButton(
                           onPressed: () {
-                            GoRouter.of(context).replace('/menu');
+                            GoRouter.of(context).pop();
                           },
                           icon: const Icon(
                             Icons.arrow_back,

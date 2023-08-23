@@ -23,7 +23,7 @@ class RolesScreen extends StatelessWidget {
           PoPAppBarWave(
             prefixIcon: IconButton(
               onPressed: () {
-                GoRouter.of(context).replace('/menu');
+                GoRouter.of(context).pop();
               },
               icon: const Icon(
                 Icons.arrow_back,
