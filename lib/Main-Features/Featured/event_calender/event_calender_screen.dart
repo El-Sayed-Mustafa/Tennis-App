@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:go_router/go_router.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
-import 'package:intl/intl.dart';
 import 'package:tennis_app/Main-Features/Featured/event_calender/widgets/daily_calendar.dart';
 import 'package:tennis_app/Main-Features/Featured/event_calender/widgets/day_crausal.dart';
 import 'package:tennis_app/Main-Features/Featured/event_calender/widgets/weekly_calendar.dart';

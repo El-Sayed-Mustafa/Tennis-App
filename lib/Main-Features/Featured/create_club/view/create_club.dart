@@ -11,8 +11,6 @@ import 'package:tennis_app/Main-Features/Featured/create_club/view/widgets/club_
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import 'package:tennis_app/core/utils/widgets/rules_text_field.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
-
-import '../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../core/utils/widgets/text_field.dart';
 import '../../../../generated/l10n.dart';
 import '../../create_profile/widgets/profile_image.dart';

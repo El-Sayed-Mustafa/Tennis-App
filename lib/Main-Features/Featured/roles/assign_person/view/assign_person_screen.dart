@@ -10,9 +10,7 @@ import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import 'package:tennis_app/core/utils/widgets/no_data_text.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 
-import '../../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../../generated/l10n.dart';
-import '../../../../../models/roles.dart';
 import '../../create_role/view/widgets/rights_selector.dart';
 import '../service/club_roles_service.dart';
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
 import '../../../generated/l10n.dart';
@@ -117,7 +116,11 @@ class _ClubInvitationsPageState extends State<ClubInvitationsPage> {
 
                 clubInvitationsIds =
                     List<String>.from(playerData['clubInvitationsIds'] ?? []);
-
+                if (clubInvitationsIds.length == 0) {
+                  return const Center(
+                      child: Text(
+                          'You do not have any club invitations available'));
+                }
                 return FutureBuilder<List<Club>>(
                   future: fetchClubs(clubInvitationsIds),
                   builder: (context, snapshot) {
@@ -132,12 +135,10 @@ class _ClubInvitationsPageState extends State<ClubInvitationsPage> {
 
                     final clubs = snapshot.data!;
                     if (clubs.isEmpty) {
-                      // Trigger navigation to '/home' route from the parent widget
-                      WidgetsBinding.instance.addPostFrameCallback((_) {
-                        GoRouter.of(context).go('/home');
-                      });
-                      // Return an empty container since you need to return a Widget from the builder
-                      return Container();
+                      return const Center(
+                        child: Text(
+                            'You do not have any club invitations available'),
+                      );
                     }
 
                     return Stack(

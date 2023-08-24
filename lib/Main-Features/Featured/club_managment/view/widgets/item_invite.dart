@@ -32,7 +32,6 @@ class _ItemInviteState extends State<ItemInvite> {
     checkInternetConnectivity();
   }
 
-  @override
   Future<void> checkInternetConnectivity() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.none) {

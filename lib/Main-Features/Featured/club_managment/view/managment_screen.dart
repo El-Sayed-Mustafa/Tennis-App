@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tennis_app/Main-Features/Featured/club_managment/view/screens/invite_members.dart';
 import 'package:tennis_app/Main-Features/Featured/club_managment/view/screens/members_list.dart';
-import 'package:tennis_app/core/utils/widgets/app_bar_wave.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import 'package:tennis_app/core/utils/widgets/rules_text_field.dart';
 import 'package:tennis_app/models/player.dart';

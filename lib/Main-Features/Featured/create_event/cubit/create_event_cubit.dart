@@ -66,7 +66,7 @@ class CreateEventCubit extends Cubit<CreateEventState> {
       await saveEventDocument(eventDocRef, event);
       await uploadEventImage(eventDocRef, selectedImageBytes);
       if (selected!.isNotEmpty) {
-        await updatePlayersWithEvent(eventDocRef.id, selected!);
+        await updatePlayersWithEvent(eventDocRef.id, selected);
       } else {
         await updateClubWithEvent(eventDocRef.id);
       }
