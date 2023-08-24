@@ -6,7 +6,6 @@ import 'package:tennis_app/Main-Features/Featured/choose_club/widgets/card_detai
 import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/generated/l10n.dart';
 import 'package:tennis_app/models/player.dart';
-import 'package:tennis_app/models/groups.dart'; // Import your GroupChats model
 
 class PlayingInfo extends StatefulWidget {
   const PlayingInfo({super.key, required this.player});

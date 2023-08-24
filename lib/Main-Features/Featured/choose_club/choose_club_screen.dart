@@ -9,6 +9,8 @@ import '../../../models/club.dart';
 import 'choose_club_item.dart';
 
 class ClubInvitationsPage extends StatefulWidget {
+  const ClubInvitationsPage({super.key});
+
   @override
   _ClubInvitationsPageState createState() => _ClubInvitationsPageState();
 }

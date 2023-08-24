@@ -61,12 +61,12 @@ class ProfileBody extends StatelessWidget {
           future: method.fetchClubData(player.participatedClubId),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return CircularProgressIndicator();
+              return const CircularProgressIndicator();
             } else if (snapshot.hasError) {
               return SizedBox(
                 width: screenWidth * .8,
                 height: screenHeight * .2,
-                child: NoData(
+                child: const NoData(
                   buttonText: 'Click here to join',
                   text: 'You not participated in any class',
                 ),
@@ -83,7 +83,7 @@ class ProfileBody extends StatelessWidget {
                     ? ClubInfo(
                         clubData: clubData,
                       )
-                    : NoData(
+                    : const NoData(
                         buttonText: 'Click here to join',
                         text: 'You not participated in any class',
                       ), // Show the NoData widget when clubData is null

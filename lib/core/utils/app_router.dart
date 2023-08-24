@@ -79,7 +79,7 @@ abstract class AppRouter {
           GoRoute(
             path: 'chooseClub',
             builder: (BuildContext context, GoRouterState state) {
-              return ClubInvitationsPage();
+              return const ClubInvitationsPage();
             },
           ),
           GoRoute(

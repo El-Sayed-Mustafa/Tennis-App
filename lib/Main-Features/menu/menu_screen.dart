@@ -171,6 +171,13 @@ class MenuScreen extends StatelessWidget {
                       },
                     ),
                     ButtonMenu(
+                      imagePath: 'assets/images/members.svg',
+                      buttonText: 'Club Invitations',
+                      onPressed: () {
+                        GoRouter.of(context).push('/chooseClub');
+                      },
+                    ),
+                    ButtonMenu(
                       imagePath: 'assets/images/logout.svg',
                       buttonText: S.of(context).logout,
                       onPressed: () async {

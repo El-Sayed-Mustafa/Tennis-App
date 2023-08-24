@@ -1,8 +1,5 @@
-import 'dart:js';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tennis_app/core/utils/snackbar.dart';
 
 import '../../../../models/club.dart';
 import '../../../../models/player.dart';
