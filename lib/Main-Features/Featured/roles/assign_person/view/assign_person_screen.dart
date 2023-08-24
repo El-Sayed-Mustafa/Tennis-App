@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tennis_app/Main-Features/Featured/roles/assign_person/view/widgets/member_name.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
+import 'package:tennis_app/core/utils/widgets/no_data_text.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 
 import '../../../../../core/utils/widgets/app_bar_wave.dart';
@@ -163,6 +164,7 @@ class _AssignPersonState extends State<AssignPerson> {
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       body: Container(
@@ -206,19 +208,31 @@ class _AssignPersonState extends State<AssignPerson> {
                 fontWeight: FontWeight.w400,
               ),
             ),
-            Expanded(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
-                child: RightSelector(
-                  selectedWords: selectedRole,
-                  onSelectedWordsChanged: (words) {
-                    updateRoleWithSelectedRole(words);
-                  },
-                  words: roleNames, // Use the fetched role names here
-                ),
-              ),
-            ),
+            roleNames.isEmpty
+                ? SizedBox(
+                    height: 150,
+                    width: screenWidth * .8,
+                    child: NoData(
+                      text: 'You don\'t have Roles',
+                      buttonText: 'Click here to create a new role',
+                      onPressed: () {
+                        GoRouter.of(context).push('/createRole');
+                      },
+                    ),
+                  )
+                : Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 20),
+                      child: RightSelector(
+                        selectedWords: selectedRole,
+                        onSelectedWordsChanged: (words) {
+                          updateRoleWithSelectedRole(words);
+                        },
+                        words: roleNames, // Use the fetched role names here
+                      ),
+                    ),
+                  ),
             // Use FutureBuilder to show the circular progress indicator
             FutureBuilder(
               future: Future.delayed(Duration.zero), // Create a delayed Future

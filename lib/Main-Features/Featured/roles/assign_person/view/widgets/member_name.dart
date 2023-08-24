@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:go_router/go_router.dart';
+import 'package:tennis_app/core/utils/widgets/no_data_text.dart';
 
 import '../../../../../../generated/l10n.dart';
 import '../../cubit/member_names_cubit.dart';
@@ -35,7 +37,13 @@ class _MembersNameState extends State<MembersName> {
         bloc: clubNamesCubit,
         builder: (context, playerNames) {
           if (playerNames.isEmpty) {
-            return const Center(child: CircularProgressIndicator());
+            return const SizedBox(
+              height: 150,
+              child: NoData(
+                text: 'No players found in you club',
+                buttonText: '',
+              ),
+            );
           } else {
             return _buildTypeAhead(playerNames);
           }
@@ -65,9 +73,10 @@ class _MembersNameState extends State<MembersName> {
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
           // Add prefix icon with a search icon
-          prefixIcon: Icon(Icons.search),
+          prefixIcon: const Icon(Icons.search),
           // You can adjust the padding between the icon and the text if needed
-          prefixIconConstraints: BoxConstraints(minWidth: 50, minHeight: 40),
+          prefixIconConstraints:
+              const BoxConstraints(minWidth: 50, minHeight: 40),
         ),
       ),
       suggestionsCallback: (pattern) {

@@ -38,10 +38,11 @@ class _CourtItemState extends State<CourtItem> {
       'reversed': true,
     }).then((_) {
       // Successfully updated the 'reversed' property in Firestore
-      print('Court reversed status updated successfully');
+      const SnackBar(
+          content: Text('Court reversed status updated successfully'));
     }).catchError((error) {
       // Handle the error if updating fails
-      print('Error updating court reversed status: $error');
+      SnackBar(content: Text('Error updating court reversed status: $error'));
     });
   }
 
@@ -50,7 +51,7 @@ class _CourtItemState extends State<CourtItem> {
       // Step 1: Get the current user ID from Firebase Authentication
       User? currentUser = FirebaseAuth.instance.currentUser;
       if (currentUser == null) {
-        print('No user is currently signed in.');
+        const SnackBar(content: Text('No user is currently signed in.'));
         return;
       }
 
@@ -64,7 +65,8 @@ class _CourtItemState extends State<CourtItem> {
               .get();
 
       if (!playerSnapshot.exists) {
-        print('Player document does not exist for current user.');
+        const SnackBar(
+            content: Text('Player document does not exist for current user.'));
         return;
       }
 
@@ -81,11 +83,12 @@ class _CourtItemState extends State<CourtItem> {
         'reversedCourtsIds': updatedReversedCourtsIds,
       });
 
-      // Print a success message
-      print('Court reversed status updated successfully for the current user.');
+      const SnackBar(
+          content: Text(
+              'Court reversed status updated successfully for the current user.'));
     } catch (error) {
       // Handle any errors that occur during the process
-      print('Error updating court reversed status: $error');
+      SnackBar(content: Text('Error updating court reversed status: $error'));
     }
   }
 

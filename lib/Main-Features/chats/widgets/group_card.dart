@@ -2,8 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tennis_app/models/groups.dart';
 
-import '../../../models/player.dart';
-
 class GroupCard extends StatelessWidget {
   final GroupChats groupChats;
 

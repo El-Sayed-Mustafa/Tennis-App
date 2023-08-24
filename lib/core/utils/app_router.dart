@@ -8,11 +8,8 @@ import 'package:tennis_app/Main-Features/Featured/edit_screen/edit_profile_scree
 import 'package:tennis_app/Main-Features/Featured/navigation_bar/cubit/navigation_cubit.dart';
 import 'package:tennis_app/Main-Features/Featured/navigation_bar/navigation_bar_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/onboarding/onboarding_screen.dart';
-import 'package:tennis_app/Main-Features/Featured/roles/roles_list/view/widgets/list_roles.dart';
-import 'package:tennis_app/Main-Features/Featured/set_reminder/set_reminder_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/splash/splash_screen.dart';
 import 'package:tennis_app/Main-Features/chats/screens/player_search_screen.dart';
-import 'package:tennis_app/Main-Features/chats/screens/user_groups_screen.dart';
 import 'package:tennis_app/Main-Features/menu/menu_screen.dart';
 import 'package:tennis_app/Main-Features/create_event_match/create_event_match_screen.dart';
 import '../../Auth/screens/forget_password.dart';
@@ -28,9 +25,7 @@ import '../../Main-Features/Featured/profile/view/profile_screen.dart';
 import '../../Main-Features/Featured/roles/assign_person/view/assign_person_screen.dart';
 import '../../Main-Features/Featured/roles/create_role/view/create_role_screen.dart';
 import '../../Main-Features/Featured/roles/roles_list/view/roles_list_screen.dart';
-
 import '../../Main-Features/chats/screens/create_group.dart';
-import '../../Main-Features/chats/screens/groups_screen.dart';
 import '../../Main-Features/create_event_match/double_friendly_match/double_match_screen.dart';
 import '../../Main-Features/create_event_match/double_tournment/double_tournment_screen.dart';
 import '../../Main-Features/create_event_match/single_friendly_match/single_match_screen.dart';
@@ -44,7 +39,7 @@ abstract class AppRouter {
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider(
             create: (context) => NavigationCubit(),
-            child: SplashScreen(),
+            child: const SplashScreen(),
           );
         },
         routes: <RouteBase>[

@@ -29,10 +29,21 @@ class _PlayersRankingState extends State<PlayersRanking> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 // Display a loading indicator while fetching data
-                return CircularProgressIndicator();
+                return const Center(child: CircularProgressIndicator());
               } else if (snapshot.hasError) {
                 // Handle the error
-                return Text('Error: ${snapshot.error}');
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: const Text(
+                    'There is no Players available',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                );
               } else {
                 // Use the fetched sorted players to build the list
                 final List<Player> sortedPlayers = snapshot.data ?? [];

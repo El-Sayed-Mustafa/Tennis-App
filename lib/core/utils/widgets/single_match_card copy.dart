@@ -33,7 +33,7 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
         return Player.fromSnapshot(playerSnapshot);
       }
     } catch (e) {
-      print('Error fetching player: $e');
+      SnackBar(content: Text('Error fetching player: $e'));
     }
     return null;
   }

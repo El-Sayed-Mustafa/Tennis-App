@@ -22,6 +22,8 @@ class ButtonMenu extends StatelessWidget {
     final textFontSize = screenWidth * 0.04;
     return GestureDetector(
       onTap: () {
+        SnackBar(content: Text('hi'));
+
         onPressed();
       },
       child: Padding(

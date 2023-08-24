@@ -89,12 +89,8 @@ class DoubleTournamentsClub extends StatelessWidget {
 
                 final clubData = clubSnapshot.data!;
                 final doubleTournamentsIds = clubData.doubleTournamentsIds;
-                print(doubleTournamentsIds);
                 if (doubleTournamentsIds.isEmpty) {
-                  return Container(
-                    child: const Text(
-                        'No Double Tournaments available for this club.'),
-                  );
+                  return Container();
                 }
 
                 final filteredTournamentDocs = tournamentDocs.where((doc) {

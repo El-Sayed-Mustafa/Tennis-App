@@ -23,7 +23,6 @@ class AppBarIcon extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     final double imageHeight = screenHeight * 0.13;
-    print(player.photoURL);
     return Stack(
       children: [
         SizedBox(

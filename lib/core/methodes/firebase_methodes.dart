@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 import '../../models/chats.dart';
 import '../../models/club.dart';
@@ -12,7 +13,7 @@ class Method {
     try {
       await _auth.signOut();
     } catch (error) {
-      print('Error during sign out: $error');
+      SnackBar(content: Text('Error during sign out: $error'));
     }
   }
 
@@ -66,7 +67,7 @@ class Method {
 
       return chats;
     } catch (e) {
-      print('Error getting chats: $e');
+      SnackBar(content: Text('Error getting chats: $e'));
       return [];
     }
   }
@@ -106,7 +107,7 @@ class Method {
       return false;
     } catch (e) {
       // Handle errors if necessary
-      print('Error checking player rights: $e');
+      SnackBar(content: Text('Error checking player rights: $e'));
       return false;
     }
   }
@@ -137,10 +138,10 @@ class Method {
 
         await playerRef.update(updatedData);
       } else {
-        print('Player document not found');
+        const SnackBar(content: Text('Player document not found'));
       }
     } catch (e) {
-      print('Error updating player data: $e');
+      SnackBar(content: Text('Error updating player data: $e'));
     }
   }
 }

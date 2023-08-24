@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:tennis_app/Auth/screens/tab_bar_pages/sign_in.dart';
-import 'package:tennis_app/Auth/screens/tab_bar_pages/sign_up.dart';
-import 'package:tennis_app/Auth/widgets/waveClipperScreen.dart';
 import 'package:tennis_app/Main-Features/chats/screens/chats_screen.dart';
 import 'package:tennis_app/Main-Features/chats/screens/user_groups_screen.dart';
-import 'package:tennis_app/core/utils/widgets/opacity_wave.dart';
-import 'package:tennis_app/generated/l10n.dart';
 
 class GroupPrivateChats extends StatefulWidget {
   const GroupPrivateChats({Key? key}) : super(key: key);
@@ -34,7 +28,6 @@ class _GroupPrivateChatsState extends State<GroupPrivateChats>
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: Column(
@@ -79,7 +72,7 @@ class _GroupPrivateChatsState extends State<GroupPrivateChats>
                 child: TabBar(
                   physics: const BouncingScrollPhysics(),
                   controller: tabController,
-                  tabs: [
+                  tabs: const [
                     Tab(
                       text: "Private",
                     ),

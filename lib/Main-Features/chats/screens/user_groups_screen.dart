@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:go_router/go_router.dart';
@@ -7,7 +6,6 @@ import 'package:tennis_app/Main-Features/chats/widgets/group_card.dart';
 import 'package:tennis_app/constants.dart';
 import 'package:tennis_app/core/methodes/firebase_methodes.dart';
 import 'package:tennis_app/models/groups.dart';
-import 'package:tennis_app/models/player.dart'; // Import your Player model
 
 class UserGroupsScreen extends StatefulWidget {
   const UserGroupsScreen({
@@ -49,33 +47,43 @@ class _UserGroupsScreenState extends State<UserGroupsScreen> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(
-                    child:
-                        CircularProgressIndicator()); // Show loading indicator
+                  child: CircularProgressIndicator(),
+                );
               } else if (snapshot.hasError) {
                 return Text('Error loading groups: ${snapshot.error}');
               } else if (snapshot.hasData) {
                 List<GroupChats> userGroups = snapshot.data as List<GroupChats>;
 
-                // Build your UI using userGroups
-                return ListView.builder(
-                  padding: EdgeInsets.zero,
-                  itemCount: userGroups.length,
-                  itemBuilder: (context, index) {
-                    GroupChats groupChats = userGroups[index];
-                    return ListTile(
-                      title: GroupCard(groupChats: groupChats),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                GroupChatScreen(groupId: groupChats.messageId),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                );
+                if (userGroups.isEmpty) {
+                  // Show "No groups found" message
+                  return const Center(
+                    child: Text(
+                      'No groups found.',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  );
+                } else {
+                  // Build your UI using userGroups
+                  return ListView.builder(
+                    padding: EdgeInsets.zero,
+                    itemCount: userGroups.length,
+                    itemBuilder: (context, index) {
+                      GroupChats groupChats = userGroups[index];
+                      return ListTile(
+                        title: GroupCard(groupChats: groupChats),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => GroupChatScreen(
+                                  groupId: groupChats.messageId),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  );
+                }
               } else {
                 return const Center(child: Text('No groups found.'));
               }

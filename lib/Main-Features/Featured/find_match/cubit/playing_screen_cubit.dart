@@ -38,16 +38,10 @@ class PlayingCubit extends Cubit<PlayingStatus> {
       Player opponentPlayer = Player.fromSnapshot(opponentPlayerSnapshot);
 
       // Add match.matchId for opponentPlayer in matches
-      opponentPlayer.matches.add({
-        'matchId': opponent.matchId,
-        // Add any other relevant match data you want to store in the player's matches list
-      });
+      opponentPlayer.matches.add(opponent.matchId);
 
       // Add opponent.matchId for matchPlayer in matches
-      matchPlayer.matches.add({
-        'matchId': match.matchId,
-        // Add any other relevant match data you want to store in the player's matches list
-      });
+      matchPlayer.matches.add(match.matchId);
 
       // Save the updated player data
       await FirebaseFirestore.instance

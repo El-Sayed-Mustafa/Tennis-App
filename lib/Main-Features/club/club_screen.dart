@@ -32,7 +32,6 @@ class ClubScreen extends StatelessWidget {
     final double screenHeight = MediaQuery.of(context).size.height;
     final double spacing = screenHeight * 0.01;
     final Method method = Method();
-    final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       body: Container(

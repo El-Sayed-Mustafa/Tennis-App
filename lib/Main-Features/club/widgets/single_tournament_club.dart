@@ -92,10 +92,7 @@ class SingleTournamentsClub extends StatelessWidget {
 
                 if (singleTournamentsIds == null ||
                     singleTournamentsIds.isEmpty) {
-                  return Container(
-                    child: const Text(
-                        'No Single Tournaments available for this club.'),
-                  );
+                  return Container();
                 }
 
                 final filteredTournamentDocs = tournamentDocs.where((doc) {

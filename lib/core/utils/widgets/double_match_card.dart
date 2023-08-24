@@ -45,7 +45,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
         }
       }
     } catch (e) {
-      print('Error fetching players: $e');
+      SnackBar(content: Text('Error fetching players: $e'));
     }
     return players;
   }

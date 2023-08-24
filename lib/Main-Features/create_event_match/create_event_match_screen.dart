@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/create_event_match/widgets/button_match_item.dart';
 
 import '../../core/utils/widgets/pop_app_bar.dart';
-import '../../generated/l10n.dart';
 
 class CreateEventMatchesScreen extends StatelessWidget {
   const CreateEventMatchesScreen({super.key});

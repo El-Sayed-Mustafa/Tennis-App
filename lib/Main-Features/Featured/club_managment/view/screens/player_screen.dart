@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,12 +9,9 @@ import 'package:tennis_app/Main-Features/Featured/club_managment/view/managment_
 import 'package:tennis_app/Main-Features/Featured/roles/create_role/view/widgets/rights_selector.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
-import '../../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../../models/player.dart';
 import 'package:intl/intl.dart';
-import 'package:easy_localization/easy_localization.dart' as localized;
-
 import '../../../../../models/roles.dart';
 import '../../../create_event/view/widgets/player_level.dart';
 import '../../../roles/assign_person/service/club_roles_service.dart';
@@ -290,8 +289,6 @@ class _PlayerScreenState extends State<PlayerScreen> {
 
     return BlocBuilder<SliderCubit, double>(
       builder: (context, state) {
-        double currentSkillLevel = state;
-
         return Scaffold(
           body: Container(
             color: const Color(0xFFF8F8F8),

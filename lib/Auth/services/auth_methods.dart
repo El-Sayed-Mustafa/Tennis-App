@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +20,8 @@ class FirebaseAuthMethods {
     required BuildContext context,
   }) async {
     try {
-      await sendEmailVerification(context);
-      await waitForEmailVerification(context);
+      // await sendEmailVerification(context);
+      // await waitForEmailVerification(context);
 
       await _auth.createUserWithEmailAndPassword(
         email: email,
@@ -147,7 +149,7 @@ class FirebaseAuthMethods {
     try {
       await _auth.signOut();
     } catch (error) {
-      print('Error during sign out: $error');
+      SnackBar(content: Text('Error during sign out: $error'));
     }
   }
 }

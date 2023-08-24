@@ -18,7 +18,7 @@ class GroupChatScreen extends StatefulWidget {
 
 class _GroupChatScreenState extends State<GroupChatScreen> {
   String _groupName = ''; // Store group name
-  TextEditingController _messageController = TextEditingController();
+  final TextEditingController _messageController = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -75,6 +75,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
       if (playerSnapshot.exists) {
         return Player.fromSnapshot(playerSnapshot);
       }
+
       return null; // Return null if the player does not exist.
     } catch (error) {
       print('Error fetching player data: $error');
@@ -111,7 +112,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                   .snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
 
                 List<QueryDocumentSnapshot> messages = snapshot.data!.docs;
@@ -152,18 +153,18 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
             child: Row(
               children: [
                 Expanded(
                   child: TextField(
                     controller: _messageController,
                     decoration:
-                        InputDecoration(hintText: 'Type your message...'),
+                        const InputDecoration(hintText: 'Type your message...'),
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.send),
+                  icon: const Icon(Icons.send),
                   onPressed: _sendMessage,
                 ),
               ],

@@ -6,8 +6,6 @@ import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/chats/widgets/community_message.dart';
 import 'package:tennis_app/Main-Features/chats/widgets/my_reply.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
-
-import '../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/chats.dart';
 import '../../../models/player.dart';
@@ -99,7 +97,7 @@ class PrivateChat extends StatelessWidget {
                 SizedBox(height: screenHeight * .005),
                 Text(
                   player.playerName,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                     fontSize: 16,
                     fontFamily: 'Poppins',
@@ -130,7 +128,7 @@ class PrivateChat extends StatelessWidget {
                     stream: getChatMessages(user!.uid, player.playerId),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(
+                        return const Center(
                           child: CircularProgressIndicator(),
                         );
                       } else if (snapshot.hasError) {
@@ -143,7 +141,7 @@ class PrivateChat extends StatelessWidget {
                         return Container(
                           padding: const EdgeInsets.only(bottom: 70.0),
                           child: ListView.builder(
-                            physics: BouncingScrollPhysics(),
+                            physics: const BouncingScrollPhysics(),
                             itemCount: chatMessages.length,
                             reverse: true,
                             itemBuilder: (context, index) {

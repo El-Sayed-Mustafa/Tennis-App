@@ -1,7 +1,10 @@
+// ignore_for_file: invalid_return_type_for_catch_error
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../../../core/utils/snackbar.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/chats.dart';
 import '../../../models/player.dart';
@@ -9,6 +12,8 @@ import '../widgets/community_message.dart';
 import '../widgets/my_reply.dart';
 
 class ClubChatScreen extends StatefulWidget {
+  const ClubChatScreen({super.key});
+
   @override
   _ClubChatScreenState createState() => _ClubChatScreenState();
 }
@@ -60,7 +65,7 @@ class _ClubChatScreenState extends State<ClubChatScreen> {
       }
       return null; // Return null if the player does not exist.
     } catch (error) {
-      print('Error fetching player data: $error');
+      SnackBar(content: Text('Error fetching player data: $error'));
       return null;
     }
   }
@@ -81,7 +86,6 @@ class _ClubChatScreenState extends State<ClubChatScreen> {
                 itemCount: messages.length,
                 itemBuilder: (context, index) {
                   final ChatMessage message = messages[index];
-                  print(messages.length);
                   return FutureBuilder<Player?>(
                     future: _fetchPlayerData(message.senderId),
                     builder: (context, playerSnapshot) {
@@ -199,15 +203,20 @@ class _ClubChatScreenState extends State<ClubChatScreen> {
                 'timestamp': FieldValue.serverTimestamp(),
               }).then((_) {
                 // Message sent successfully, clear the text
-              }).catchError((error) => print('Error sending message: $error'));
+              }).catchError((error) =>
+                  showSnackBar(context, 'Error sending message: $error'));
             } else {
-              print('No clubChatId found for the current user\'s club.');
+              const SnackBar(
+                  content: Text(
+                      'No clubChatId found for the current user\'s club.'));
             }
-          }).catchError((error) => print('Error fetching club data: $error'));
+          }).catchError((error) =>
+              showSnackBar(context, 'Error fetching club data: $error'));
         } else {
-          print('No clubId found for the current user.');
+          showSnackBar(context, 'No clubId found for the current user.');
         }
-      }).catchError((error) => print('Error fetching user data: $error'));
+      }).catchError(
+          (error) => showSnackBar(context, 'Error fetching user data: $error'));
     }
   }
 

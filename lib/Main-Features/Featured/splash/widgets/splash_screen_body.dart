@@ -47,8 +47,9 @@ class _SplashScreenBodyState extends State<SplashScreenBody>
 
   @override
   void dispose() {
-    super.dispose();
     animationController.dispose();
+
+    super.dispose();
   }
 
   @override

@@ -18,7 +18,7 @@ class Player {
   final Map<String, String> clubRoles;
   final String participatedClubId;
   final List<String> clubInvitationsIds;
-  final List<Map<String, dynamic>> matches;
+  final List<String> matches;
   bool isInvitationSent = false;
   final List<String> reversedCourtsIds;
   final List<String> chatIds;
@@ -104,7 +104,7 @@ class Player {
       clubRoles: Map<String, String>.from(data['clubRoles'] ?? {}),
       participatedClubId: data['participatedClubId'] as String? ?? '',
       clubInvitationsIds: List<String>.from(data['clubInvitationsIds'] ?? []),
-      matches: List<Map<String, dynamic>>.from(data['matchId'] ?? []),
+      matches: List<String>.from(data['matchId'] ?? []),
       reversedCourtsIds: List<String>.from(data['reversedCourtsIds'] ?? []),
       chatIds: List<String>.from(data['chatIds'] ?? []),
       singleMatchesIds: List<String>.from(data['singleMatchesIds'] ?? []),
@@ -135,7 +135,7 @@ class Player {
       clubInvitationsIds: List<String>.from(map['clubInvitationsIds'] ?? []),
       chatIds: List<String>.from(map['chatIds'] ?? []),
       reversedCourtsIds: List<String>.from(map['reversedCourtsIds'] ?? []),
-      matches: List<Map<String, dynamic>>.from(map['matchId'] ?? []),
+      matches: List<String>.from(map['matchId'] ?? []),
       singleMatchesIds: List<String>.from(map['singleMatchesIds'] ?? []),
       doubleMatchesIds: List<String>.from(map['doubleMatchesIds'] ?? []),
       singleTournamentsIds:

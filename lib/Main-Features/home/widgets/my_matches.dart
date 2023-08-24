@@ -20,7 +20,7 @@ class MyMatches extends StatefulWidget {
 class _MyMatchesState extends State<MyMatches> {
   int selectedPageIndex = 0;
   final CarouselController _carouselController = CarouselController();
-  List<Map<String, dynamic>> matches = []; // List to store matches data
+  List<String> matches = []; // List to store matches data
 
   @override
   void initState() {
@@ -90,7 +90,7 @@ class _MyMatchesState extends State<MyMatches> {
                   return StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
                     stream: FirebaseFirestore.instance
                         .collection('matches')
-                        .doc(matchData['matchId'])
+                        .doc(matchData)
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {

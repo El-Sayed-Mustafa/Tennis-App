@@ -1,6 +1,9 @@
+// ignore_for_file: invalid_return_type_for_catch_error
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:tennis_app/core/utils/snackbar.dart';
 
 import '../../../generated/l10n.dart';
 import '../../../models/chats.dart';
@@ -60,47 +63,39 @@ class _CommunityScreenState extends State<CommunityScreen> {
               .map((doc) => ChatMessage.fromSnapshot(doc))
               .toList();
           return ListView.builder(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             reverse: true,
             itemCount: messages.length,
             itemBuilder: (context, index) {
               final ChatMessage message = messages[index];
 
               // Fetch player data for the sender
-              Future<Player?> playerFuture = _fetchPlayerData(message.senderId);
-
               return FutureBuilder<Player?>(
-                future: playerFuture,
+                future: _fetchPlayerData(message.senderId.toString()),
                 builder: (context, playerSnapshot) {
                   if (playerSnapshot.connectionState ==
                       ConnectionState.waiting) {
-                    // While player data is loading, show a loading indicator
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   } else if (playerSnapshot.hasData) {
-                    final Player senderPlayer = playerSnapshot.data!;
-
-                    return message.senderId == currentUserID
-                        ? MyReply(message: message)
-                        : SenderMessage(
-                            message: message,
-                            player: senderPlayer,
-                          );
-                  } else {
-                    // Handle the case when player data is not available or an error occurs
-                    return ListTile(
-                      title: Text(message.content),
-                      subtitle: Text('Sent by: ${message.senderId}'),
-                      // Add more details or custom UI elements as needed
-                    );
+                    final Player? player = playerSnapshot.data;
+                    if (player != null) {
+                      return message.senderId == currentUserID
+                          ? MyReply(message: message)
+                          : SenderMessage(
+                              message: message,
+                              player: player,
+                            );
+                    }
                   }
+                  return Container();
                 },
               );
             },
           );
         } else {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         }
@@ -110,12 +105,12 @@ class _CommunityScreenState extends State<CommunityScreen> {
 
   Widget _buildMessageInput() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Row(
         children: [
           Expanded(
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               decoration: ShapeDecoration(
                 color: Colors.white,
                 shape: RoundedRectangleBorder(
@@ -143,18 +138,18 @@ class _CommunityScreenState extends State<CommunityScreen> {
             height: 60,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Color(0xFF00344E),
+              color: const Color(0xFF00344E),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.1),
                   blurRadius: 6,
-                  offset: Offset(0, 3),
+                  offset: const Offset(0, 3),
                 ),
               ],
             ),
             child: IconButton(
               onPressed: _sendMessage,
-              icon: Icon(Icons.send),
+              icon: const Icon(Icons.send),
               color: Colors.white,
               iconSize: 23,
             ),
@@ -179,7 +174,9 @@ class _CommunityScreenState extends State<CommunityScreen> {
         'timestamp': FieldValue.serverTimestamp(),
       }).then((_) {
         // Message sent successfully, do any additional actions if needed
-      }).catchError((error) => print('Error sending message: $error'));
+      }).catchError(
+          (error) => showSnackBar(context, 'Error sending Message : $error'));
+      ;
     }
   }
 

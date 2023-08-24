@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tennis_app/core/utils/app_router.dart';
 import 'package:tennis_app/models/club.dart'; // Import the Club class
 import 'package:connectivity_plus/connectivity_plus.dart'; // Import the connectivity_plus plugin
 import '../../Featured/choose_club/widgets/static_rating_bar.dart';
@@ -110,93 +109,91 @@ class _ClubInfoState extends State<ClubInfo> {
     final double imageHeight = screenHeight * 0.13;
     final combine = (screenHeight + screenWidth);
 
-    return GestureDetector(
-      onTap: showRating,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.041),
-        child: PhysicalModel(
-          color: Colors.transparent,
-          elevation: 4, // Adjust the shadow elevation as desired
-          shadowColor: Colors.grey, // Set the shadow color
-          borderRadius: BorderRadius.circular(screenWidth * 0.079),
-          child: Container(
-            padding: EdgeInsets.symmetric(
-                horizontal: screenWidth * 0.051,
-                vertical: screenHeight * 0.015),
-            width: itemWidth,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(screenWidth * 0.079),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(imageHeight / 5),
-                  child: Container(
-                    height: imageHeight,
-                    width: imageHeight,
-                    child: hasInternet // Check if there's internet connection
-                        ? (widget.clubData.photoURL != null &&
-                                widget.clubData.photoURL!.isNotEmpty
-                            ? FadeInImage.assetNetwork(
-                                placeholder: 'assets/images/loadin.gif',
-                                image: widget.clubData.photoURL!,
-                                fit: BoxFit.cover,
-                                imageErrorBuilder:
-                                    (context, error, stackTrace) {
-                                  // Show the placeholder image on error
-                                  return Image.asset(
-                                    'assets/images/internet.png',
-                                    fit: BoxFit.cover,
-                                  );
-                                },
-                              )
-                            : Image.asset(
-                                'assets/images/profile-event.jpg',
-                                fit: BoxFit.cover,
-                              ))
-                        : Image.asset(
-                            'assets/images/internet.png',
-                            fit: BoxFit.cover,
-                          ),
-                  ),
-                ),
-                SizedBox(
-                  width: screenWidth * .4,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        widget.clubData.clubName, // Use clubData's clubName
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: combine * .02,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w700,
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.041),
+      child: PhysicalModel(
+        color: Colors.transparent,
+        elevation: 4, // Adjust the shadow elevation as desired
+        shadowColor: Colors.grey, // Set the shadow color
+        borderRadius: BorderRadius.circular(screenWidth * 0.079),
+        child: Container(
+          padding: EdgeInsets.symmetric(
+              horizontal: screenWidth * 0.051, vertical: screenHeight * 0.015),
+          width: itemWidth,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(screenWidth * 0.079),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(imageHeight / 5),
+                child: Container(
+                  height: imageHeight,
+                  width: imageHeight,
+                  child: hasInternet // Check if there's internet connection
+                      ? (widget.clubData.photoURL != null &&
+                              widget.clubData.photoURL!.isNotEmpty
+                          ? FadeInImage.assetNetwork(
+                              placeholder: 'assets/images/loadin.gif',
+                              image: widget.clubData.photoURL!,
+                              fit: BoxFit.cover,
+                              imageErrorBuilder: (context, error, stackTrace) {
+                                // Show the placeholder image on error
+                                return Image.asset(
+                                  'assets/images/internet.png',
+                                  fit: BoxFit.cover,
+                                );
+                              },
+                            )
+                          : Image.asset(
+                              'assets/images/profile-event.jpg',
+                              fit: BoxFit.cover,
+                            ))
+                      : Image.asset(
+                          'assets/images/internet.png',
+                          fit: BoxFit.cover,
                         ),
+                ),
+              ),
+              SizedBox(
+                width: screenWidth * .4,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      widget.clubData.clubName, // Use clubData's clubName
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: combine * .02,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w700,
                       ),
-                      const MyDivider(),
-                      Text(
-                        widget.clubData.address, // Use clubData's clubLocation
-                        style: TextStyle(
-                            color: const Color(0xFF6D6D6D),
-                            fontSize: combine * .01,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w500,
-                            overflow: TextOverflow.ellipsis),
-                        maxLines: 1,
-                      ),
-                      SizedBox(height: screenHeight * .01),
-                      StaticRatingBar(
+                    ),
+                    const MyDivider(),
+                    Text(
+                      widget.clubData.address, // Use clubData's clubLocation
+                      style: TextStyle(
+                          color: const Color(0xFF6D6D6D),
+                          fontSize: combine * .01,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500,
+                          overflow: TextOverflow.ellipsis),
+                      maxLines: 1,
+                    ),
+                    SizedBox(height: screenHeight * .01),
+                    GestureDetector(
+                      onTap: showRating,
+                      child: StaticRatingBar(
                         rating: updatedAverageRating,
                         iconSize: (screenHeight + screenWidth) * .02,
-                      )
-                    ],
-                  ),
+                      ),
+                    )
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

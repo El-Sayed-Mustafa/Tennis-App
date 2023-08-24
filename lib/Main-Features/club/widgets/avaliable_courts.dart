@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:go_router/go_router.dart';
+import 'package:tennis_app/core/utils/widgets/no_data_text.dart';
+import 'package:tennis_app/generated/l10n.dart';
 import '../../../../core/utils/widgets/court_item.dart';
 import '../../../../models/court.dart';
 
@@ -58,25 +61,37 @@ class _AvailableCourtsState extends State<AvailableCourts> {
 
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
+
     final screenHeight = MediaQuery.of(context).size.height;
-    return SizedBox(
-      height: screenHeight * .24, // Set a fixed height for the container
-      child: Expanded(
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          padding: EdgeInsets.zero,
-          itemCount: filteredCourts.length,
-          itemBuilder: (context, index) {
-            Court court = filteredCourts[index];
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: CourtItem(
-                court: court,
+    return filteredCourts.isNotEmpty
+        ? SizedBox(
+            height: screenHeight * .24, // Set a fixed height for the container
+            child: Expanded(
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                padding: EdgeInsets.zero,
+                itemCount: filteredCourts.length,
+                itemBuilder: (context, index) {
+                  Court court = filteredCourts[index];
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: CourtItem(
+                      court: court,
+                    ),
+                  );
+                },
               ),
-            );
-          },
-        ),
-      ),
-    );
+            ),
+          )
+        : NoData(
+            text: S.of(context).You_Dont_have_Matches,
+            buttonText: S.of(context).Click_to_Find_Your_Partner,
+            onPressed: () {
+              GoRouter.of(context).push('/createCourt');
+            },
+            height: screenHeight * .15,
+            width: screenWidth * .8,
+          );
   }
 }

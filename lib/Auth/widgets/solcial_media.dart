@@ -28,21 +28,12 @@ class SocialMedia extends StatelessWidget {
         children: [
           IconButton(
               iconSize: 70,
-              onPressed: () {},
-              icon: const Icon(
-                Icons.facebook_rounded,
-                color: Colors.blue,
-              )),
-          IconButton(
-              iconSize: 70,
               onPressed: () async {
                 signGooglIn();
               },
-              icon: Container(
-                child: SvgPicture.asset(
-                  'assets/images/google.svg',
-                  height: 55,
-                ),
+              icon: SvgPicture.asset(
+                'assets/images/google.svg',
+                height: 55,
               ))
         ],
       );
