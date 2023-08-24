@@ -1,7 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:tennis_app/Main-Features/Featured/club_managment/view/screens/player_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/club_managment/view/widgets/text_rich.dart';
+import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/models/club.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../../models/player.dart';
@@ -56,14 +58,14 @@ class _ItemInviteState extends State<ItemInvite> {
         FirebaseFirestore firestore = FirebaseFirestore.instance;
         CollectionReference playersCollection = firestore.collection('players');
         await playersCollection.doc(player.playerId).update(player.toJson());
-        print('Successfully updated player data');
+        showSnackBar(context, 'Successfully updated player data');
       } catch (e) {
         // Handle any errors while saving data to Firebase
-        print('Error saving player data to Firebase: $e');
+        showSnackBar(context, 'Error saving player data to Firebase: $e');
       }
     } else {
       // Invitation already sent, show a message or perform any action as needed
-      print('Invitation has already been sent to this player.');
+      showSnackBar(context, 'Invitation has already been sent to this player.');
     }
   }
 

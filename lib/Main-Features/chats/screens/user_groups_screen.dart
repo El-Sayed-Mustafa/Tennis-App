@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:go_router/go_router.dart';
@@ -5,6 +7,7 @@ import 'package:tennis_app/Main-Features/chats/screens/groups_screen.dart';
 import 'package:tennis_app/Main-Features/chats/widgets/group_card.dart';
 import 'package:tennis_app/constants.dart';
 import 'package:tennis_app/core/methodes/firebase_methodes.dart';
+import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/models/groups.dart';
 
 class UserGroupsScreen extends StatefulWidget {
@@ -120,7 +123,7 @@ class _UserGroupsScreenState extends State<UserGroupsScreen> {
         userGroups.add(groupChats);
       }
     } catch (error) {
-      print('Error fetching user groups: $error');
+      showSnackBar(context, 'Error fetching user groups: $error');
     }
 
     return userGroups;

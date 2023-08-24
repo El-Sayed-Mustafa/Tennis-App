@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/models/single_match.dart';
 
 class Player {
@@ -156,15 +157,13 @@ class Player {
           ...singleMatchesIds,
           matchId
         ]; // Add the match ID to the list
-        print("pls" + matchId);
         // Update the player's document with the updated matches list
         await playerRef.update({'singleMatchesIds': updatedMatches});
 
         // You can also update the specific list (e.g., singleMatchesIds or doubleMatchesIds)
         // based on the match type or other criteria if needed.
       }
-    } catch (e) {
-      print('Error adding match ID to player: $e');
-    }
+      // ignore: empty_catches
+    } catch (e) {}
   }
 }

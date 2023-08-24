@@ -1,6 +1,9 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/club_managment/view/widgets/item_invite.dart';
+import 'package:tennis_app/core/utils/snackbar.dart';
 import '../../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../../models/club.dart';
@@ -89,7 +92,6 @@ class InviteMember extends StatelessWidget {
       return firstTenPlayers;
     } catch (e) {
       // Handle any errors that occur during the process
-      print('Error getting eligible players: $e');
       return [];
     }
   }

@@ -139,7 +139,6 @@ class _PlayerSearchInviteState extends State<PlayerSearchInvite> {
                   });
                 }
                 Navigator.pop(context, widget.playerNames);
-                print(widget.playerIds);
               },
               child: PlayerCard(
                   player: player), // Use the custom PlayerCard widget

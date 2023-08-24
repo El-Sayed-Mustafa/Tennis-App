@@ -37,7 +37,6 @@ class SettingsScreen extends StatelessWidget {
                         height: screenHeight * 0.07,
                         child: IconButton(
                           onPressed: () {
-                            print("Press");
                             GoRouter.of(context).push('/menu');
                           },
                           icon: const Icon(

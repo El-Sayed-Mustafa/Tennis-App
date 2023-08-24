@@ -1,5 +1,8 @@
+import 'dart:js';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tennis_app/core/utils/snackbar.dart';
 
 import '../../../../models/club.dart';
 import '../../../../models/player.dart';
@@ -24,13 +27,10 @@ class ClubManagementCubit extends Cubit<ClubManagementState> {
 
           try {
             List<Player> members = await fetchMembersData(memberIds);
-            print(memberIds.length);
             // Create the club object using the Club class
             Club club = Club.fromSnapshot(clubSnapshot);
-            print(club.clubId);
             emit(ClubManagementLoaded(club: club, members: members));
           } catch (error) {
-            print("Error fetching members data: $error"); // Add debug print
             emit(ClubManagementError('Error fetching members data'));
           }
         } else {
@@ -58,9 +58,7 @@ class ClubManagementCubit extends Cubit<ClubManagementState> {
       if (memberSnapshot.exists) {
         Player member = Player.fromSnapshot(memberSnapshot);
         members.add(member);
-      } else {
-        print("Member not found for memberId: $memberId"); // Add debug print
-      }
+      } else {}
     }
     return members;
   }

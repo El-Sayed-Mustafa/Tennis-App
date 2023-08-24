@@ -1,7 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/models/club.dart'; // Import the Club class
 import 'package:connectivity_plus/connectivity_plus.dart'; // Import the connectivity_plus plugin
 import '../../Featured/choose_club/widgets/static_rating_bar.dart';
@@ -58,7 +61,7 @@ class _ClubInfoState extends State<ClubInfo> {
       });
       GoRouter.of(context).pop();
     } catch (error) {
-      print('Error updating club rating: $error');
+      showSnackBar(context, 'Error updating club rating: $error');
     }
   }
 

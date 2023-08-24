@@ -1,7 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:tennis_app/core/utils/snackbar.dart';
 
 import '../../../../../models/club.dart';
 import '../../../../../models/roles.dart';
@@ -63,7 +66,6 @@ class RoleCubit extends Cubit<RoleCreationStatus> {
             if (playerData != null) {
               final String createdClubId = (playerData
                   as Map<String, dynamic>)['participatedClubId'] as String;
-              print(createdClubId);
 
               final clubId =
                   createdClubId; // Replace this with the actual clubId
@@ -82,16 +84,18 @@ class RoleCubit extends Cubit<RoleCreationStatus> {
                 // Update the club document with the new roleIds
                 await clubRef.update({'roleIds': updatedRoleIds});
 
-                print('Successfully added roleId to the club document');
+                showSnackBar(
+                    context, 'Successfully added roleId to the club document');
               } else {
-                print('Club document with clubId $clubId does not exist');
+                showSnackBar(context,
+                    'Club document with clubId $clubId does not exist');
               }
             }
 
             emit(RoleCreationStatus.success);
           } catch (error) {
             // Error creating the role
-            print('Error creating role: ${error.toString()}');
+            showSnackBar(context, 'Error creating role: ${error.toString()}');
             emit(RoleCreationStatus.error);
           }
         } else {

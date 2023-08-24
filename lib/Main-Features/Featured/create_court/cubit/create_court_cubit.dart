@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:typed_data';
 
 import 'package:bloc/bloc.dart';
@@ -7,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:tennis_app/Main-Features/Featured/create_court/cubit/create_court_states.dart';
+import 'package:tennis_app/core/utils/snackbar.dart';
 
 import '../../../../core/utils/widgets/input_date_and_time.dart';
 import '../../../../models/court.dart';
@@ -75,7 +78,7 @@ class CreateCourtCubit extends Cubit<CreateCourtState> {
     } catch (error) {
       // Handle the error if needed
       emit(CreateCourtErrorState(error: error.toString()));
-      print('Error: $error');
+      showSnackBar(context, 'Error: $error');
     }
   }
 }

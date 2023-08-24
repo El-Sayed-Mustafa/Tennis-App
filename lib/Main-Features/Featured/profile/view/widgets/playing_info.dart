@@ -1,6 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tennis_app/Main-Features/Featured/choose_club/widgets/card_details.dart';
+import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/generated/l10n.dart';
 import 'package:tennis_app/models/player.dart';
 import 'package:tennis_app/models/groups.dart'; // Import your GroupChats model
@@ -71,7 +74,7 @@ class _PlayingInfoState extends State<PlayingInfo> {
 
       return playerOrder;
     } catch (error) {
-      print('Error fetching club data: $error');
+      showSnackBar(context, 'Error fetching club data: $error');
       return -1; // Return -1 to indicate an error
     }
   }

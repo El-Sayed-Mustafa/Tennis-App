@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:typed_data';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:go_router/go_router.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:tennis_app/core/utils/snackbar.dart';
 import '../../../../core/utils/widgets/input_date.dart';
 import '../../../../models/player.dart';
 import '../create_profile/cubits/Gender_Cubit.dart';
@@ -107,7 +110,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
       }
 
       // Data saved successfully
-      print('User data saved successfully.');
+      showSnackBar(context, 'User data saved successfully.');
 
       emit(EditProfileSuccessState());
       GoRouter.of(context).push('/chooseClub');

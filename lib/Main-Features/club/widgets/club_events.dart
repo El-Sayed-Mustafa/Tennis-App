@@ -32,7 +32,6 @@ class _ClubEventsState extends State<ClubEvents> {
       final eventSnapshot = await eventsCollection.doc(eventId).get();
       final event = Event.fromSnapshot(eventSnapshot);
       fetchedEvents.add(event);
-      print(event.clubId);
     }
     setState(() {
       clubEvents = fetchedEvents;

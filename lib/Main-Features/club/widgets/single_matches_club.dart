@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/core/methodes/firebase_methodes.dart';
+import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/no_data_text.dart';
 import 'package:tennis_app/models/single_match.dart';
 import '../../../core/utils/widgets/single_match_card copy.dart';
@@ -35,7 +38,7 @@ class _ClubSingleMatchesState extends State<ClubSingleMatches> {
       // Fetch the current user's player data from Firestore
       User? currentUser = FirebaseAuth.instance.currentUser;
       if (currentUser == null) {
-        print('No user is currently signed in.');
+        showSnackBar(context, 'No user is currently signed in.');
         return;
       }
 
@@ -48,7 +51,8 @@ class _ClubSingleMatchesState extends State<ClubSingleMatches> {
               .get();
 
       if (!playerSnapshot.exists) {
-        print('Player document does not exist for current user.');
+        showSnackBar(
+            context, 'Player document does not exist for current user.');
         return;
       }
 
@@ -64,7 +68,7 @@ class _ClubSingleMatchesState extends State<ClubSingleMatches> {
       // Update the carousel with the fetched data
       setState(() {});
     } catch (error) {
-      print('Error fetching matches data: $error');
+      showSnackBar(context, 'Error fetching matches data: $error');
     }
   }
 

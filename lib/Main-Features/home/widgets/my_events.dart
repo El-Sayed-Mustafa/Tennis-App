@@ -148,7 +148,6 @@ class CarouselItem extends StatelessWidget {
 
     final Color backgroundColor =
         selected ? const Color(0xFFFCCBB1) : const Color(0xFFF3ADAB);
-    print(event.photoURL);
     return Container(
       width: 500,
       decoration: ShapeDecoration(

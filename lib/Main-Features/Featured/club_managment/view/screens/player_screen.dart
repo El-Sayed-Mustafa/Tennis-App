@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/club_managment/view/managment_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/roles/create_role/view/widgets/rights_selector.dart';
+import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import '../../../../../generated/l10n.dart';
@@ -81,7 +82,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
       }
     } catch (e) {
       // Handle errors if necessary
-      print('Error loading club roles: $e');
+      showSnackBar(context, 'Error loading club roles: $e');
     }
   }
 
@@ -93,7 +94,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
       });
     } catch (e) {
       // Handle errors if necessary
-      print('Error fetching role names: $e');
+      showSnackBar(context, 'Error fetching role names: $e');
     }
   }
 
@@ -148,7 +149,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
         );
       }
     } catch (e) {
-      print('Error removing player from club: $e');
+      showSnackBar(context, 'Error removing player from club: $e');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content:
@@ -248,7 +249,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
         );
       }
     } catch (e) {
-      print('Error assigning roles: $e');
+      showSnackBar(context, 'Error assigning roles: $e');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
             content: Text(

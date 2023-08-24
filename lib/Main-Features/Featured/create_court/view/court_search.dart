@@ -1,6 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tennis_app/core/utils/snackbar.dart';
 import '../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../core/utils/widgets/court_item.dart';
 import '../../../../generated/l10n.dart';
@@ -39,7 +42,7 @@ class _CourtSearchScreenState extends State<CourtSearchScreen> {
       });
     } catch (error) {
       // Handle the error if needed
-      print('Error fetching courts: $error');
+      showSnackBar(context, 'Error fetching courts: $error');
     }
   }
 

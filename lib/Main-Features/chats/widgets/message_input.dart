@@ -1,6 +1,9 @@
 // message_input.dart
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tennis_app/core/utils/snackbar.dart';
 
 import '../../../generated/l10n.dart';
 import '../../../models/chats.dart';
@@ -59,7 +62,7 @@ class _MessageInputState extends State<MessageInput> {
         });
       } else {
         // Chat already exists, do something (e.g., display a message to the user).
-        print('Chat already exists with ID: $chatId');
+        showSnackBar(context, 'Chat already exists with ID: $chatId');
       }
 
       // Clear the text input field after sending the message

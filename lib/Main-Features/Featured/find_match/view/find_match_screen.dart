@@ -4,10 +4,9 @@ import 'dart:typed_data';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/find_match/view/screens/people_requirment.dart';
-import 'package:tennis_app/core/utils/widgets/app_bar_wave.dart';
+import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import '../../../../core/utils/widgets/input_date.dart';
@@ -46,7 +45,7 @@ class FindMatch extends StatelessWidget {
             );
           } else if (state is FindMatchError) {
             // Handle errors that occurred during data saving
-            print(state.errorMessage);
+            showSnackBar(context, state.errorMessage);
           }
         },
         builder: (context, state) {
@@ -54,7 +53,7 @@ class FindMatch extends StatelessWidget {
             // Show a loading indicator here if needed
             return Container(
               color: Colors.white,
-              child: Center(
+              child: const Center(
                 child: CircularProgressIndicator(),
               ),
             );
@@ -83,7 +82,7 @@ class FindMatch extends StatelessWidget {
                         ),
                         Text(
                           S.of(context).set_requirements,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Color(0xFF313131),
                             fontSize: 20,
                             fontFamily: 'Roboto',

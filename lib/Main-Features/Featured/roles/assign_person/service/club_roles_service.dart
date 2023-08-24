@@ -1,5 +1,8 @@
+import 'dart:js';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:tennis_app/core/utils/snackbar.dart';
 
 import '../../../../../models/roles.dart';
 
@@ -20,7 +23,6 @@ class ClubRolesService {
         return null;
       }
     } catch (e) {
-      print('Error fetching player ID: $e');
       return null;
     }
   }
@@ -38,7 +40,6 @@ class ClubRolesService {
       return rolesList;
     } catch (e) {
       // Handle errors if necessary
-      print('Error fetching roles data: $e');
       return [];
     }
   }
@@ -56,7 +57,6 @@ class ClubRolesService {
       return [];
     } catch (e) {
       // Handle errors if necessary
-      print('Error fetching club roles: $e');
       return [];
     }
   }
@@ -71,7 +71,6 @@ class ClubRolesService {
       return roleIds;
     } catch (e) {
       // Handle errors if necessary
-      print('Error fetching role IDs: $e');
       return [];
     }
   }
@@ -116,7 +115,6 @@ class ClubRolesService {
       return roleNamesList;
     } catch (e) {
       // Handle errors if necessary
-      print('Error fetching role names for club: $e');
       return [];
     }
   }
@@ -134,7 +132,6 @@ class ClubRolesService {
       return roleIdsList;
     } catch (e) {
       // Handle errors if necessary
-      print('Error fetching role IDs: $e');
       return [];
     }
   }

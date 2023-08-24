@@ -45,7 +45,6 @@ Future<void> updateClubWithEvent(String clubId, String eventId) async {
 
 Future<void> updatePlayerWithEvent(String eventId) async {
   final String playerId = FirebaseAuth.instance.currentUser!.uid;
-  print('player Id:' + playerId);
   final DocumentSnapshot playerSnapshot = await FirebaseFirestore.instance
       .collection('players')
       .doc(playerId)

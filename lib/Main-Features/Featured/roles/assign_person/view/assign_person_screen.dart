@@ -1,8 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tennis_app/Main-Features/Featured/roles/assign_person/view/widgets/member_name.dart';
+import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import 'package:tennis_app/core/utils/widgets/no_data_text.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
@@ -111,7 +114,7 @@ class _AssignPersonState extends State<AssignPerson> {
         );
       }
     } catch (e) {
-      print('Error assigning roles: $e');
+      showSnackBar(context, 'Error assigning roles: $e');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content:
@@ -139,7 +142,7 @@ class _AssignPersonState extends State<AssignPerson> {
       }
     } catch (e) {
       // Handle errors if necessary
-      print('Error loading club roles: $e');
+      showSnackBar(context, 'Error loading club roles: $e');
     }
   }
 
@@ -151,7 +154,7 @@ class _AssignPersonState extends State<AssignPerson> {
       });
     } catch (e) {
       // Handle errors if necessary
-      print('Error fetching role names: $e');
+      showSnackBar(context, 'Error fetching role names: $e');
     }
   }
 

@@ -68,11 +68,7 @@ class HomeScreen extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            GestureDetector(
-                onTap: () {
-                  SnackBar(content: Text('hi'));
-                },
-                child: const MyMatches()),
+            const MyMatches(),
             SizedBox(height: spacing * 2),
             Text(
               S.of(context).Your_Upcoming_Single_Matches_Club,

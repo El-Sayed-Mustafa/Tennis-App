@@ -1,9 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/chats/widgets/community_message.dart';
 import 'package:tennis_app/Main-Features/chats/widgets/my_reply.dart';
+import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import 'package:tennis_app/models/chats.dart';
 import 'package:tennis_app/models/player.dart'; // Import the ChatMessage model
@@ -39,7 +42,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
         });
       }
     } catch (error) {
-      print('Error fetching group details: $error');
+      showSnackBar(context, 'Error fetching group details: $error');
     }
   }
 
@@ -78,7 +81,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
 
       return null; // Return null if the player does not exist.
     } catch (error) {
-      print('Error fetching player data: $error');
+      showSnackBar(context, 'Error fetching player data: $error');
       return null;
     }
   }

@@ -225,7 +225,6 @@ class _CreateEventState extends State<CreateEvent> {
                         BottomSheetContainer(
                           buttonText: S.of(context).Create,
                           onPressed: () {
-                            print("HI " + _radioValue.toString());
                             if (formKey.currentState!.validate()) {
                               context.read<CreateEventCubit>().saveEventData(
                                     context: context,

@@ -30,7 +30,8 @@ class _CommunityScreenState extends State<CommunityScreen> {
       }
       return null; // Return null if the player does not exist.
     } catch (error) {
-      print('Error fetching player data: $error');
+      // ignore: use_build_context_synchronously
+      showSnackBar(context, 'Error fetching player data: $error');
       return null;
     }
   }

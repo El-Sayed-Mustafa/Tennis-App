@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:typed_data';
 
 import 'package:bloc/bloc.dart';
@@ -7,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:tennis_app/core/utils/snackbar.dart';
 
 import '../../../../models/club.dart';
 import '../view/widgets/Age_restriction.dart';
@@ -33,7 +36,6 @@ class CreateClubCubit extends Cubit<CreateClubState> {
     emit(CreateClubLoadingState());
     try {
       String clubName = clubNameController.text;
-      String clubAdmin = adminNameController.text;
       String nationalID = nationalIDController.text;
       String phoneNumber = phoneController.text;
       String email = emailController.text;
@@ -107,7 +109,7 @@ class CreateClubCubit extends Cubit<CreateClubState> {
       await userDocRef.update({'participatedClubId': clubDocRef.id});
 
       // Data saved successfully
-      print('Club data saved successfully.');
+      showSnackBar(context, 'Club data saved successfully.');
 
       // You can emit a success state if needed
       emit(CreateClubSuccessState());
@@ -117,7 +119,7 @@ class CreateClubCubit extends Cubit<CreateClubState> {
     } catch (error) {
       // Handle the error if needed
       emit(CreateClubErrorState(error: error.toString()));
-      print('Error: $error');
+      showSnackBar(context, 'Error: $error');
     }
   }
 

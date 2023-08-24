@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:typed_data';
 
 import 'package:bloc/bloc.dart';
@@ -7,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:go_router/go_router.dart';
+import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/input_date_and_time.dart';
 
 import '../../../../models/club.dart';
@@ -73,7 +76,7 @@ class CreateEventCubit extends Cubit<CreateEventState> {
       GoRouter.of(context).push('/home');
     } catch (error) {
       emit(CreateEventErrorState(error: error.toString()));
-      print('Error: $error');
+      showSnackBar(context, 'Error: $error');
     }
   }
 
@@ -148,7 +151,7 @@ class CreateEventCubit extends Cubit<CreateEventState> {
         });
       } else {
         // Handle the case when the player is not found with the given ID.
-        print('Player not found with the ID: $playerId');
+        showSnackBar(context, 'Player not found with the ID: $playerId');
       }
     }
   }

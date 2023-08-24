@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -7,6 +9,7 @@ import 'package:tennis_app/Main-Features/Featured/set_reminder/service/notificat
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 
+import '../../../core/utils/snackbar.dart';
 import '../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../core/utils/widgets/input_date_and_time.dart';
 import '../../../core/utils/widgets/text_field.dart';
@@ -148,7 +151,7 @@ class SetReminder extends StatelessWidget {
               GoRouter.of(context).push('/calendar');
             } catch (e) {
               // Handle any exceptions that occurred during event saving
-              print('Error saving event: $e');
+              showSnackBar(context, 'Error saving event: $e');
               // You can show a snackbar, dialog, or any other error message to the user.
             }
           }

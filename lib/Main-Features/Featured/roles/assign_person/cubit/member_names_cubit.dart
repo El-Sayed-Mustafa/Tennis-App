@@ -39,8 +39,6 @@ class PlayerNamesCubit extends Cubit<List<String>> {
       final List<dynamic>? clubMemberIdsRaw = clubData?['memberIds'];
       final List<String> clubMemberIds =
           List<String>.from(clubMemberIdsRaw ?? []);
-      print(clubData);
-      print(clubMemberIdsRaw);
 
       fetchPlayerNames(clubMemberIds);
     } catch (error) {
@@ -59,7 +57,6 @@ class PlayerNamesCubit extends Cubit<List<String>> {
                   .doc(playerId)
                   .get())
               .toList();
-      print(playerSnapshotsFutures);
       // Step 2: Wait for all the playerSnapshots to complete
       final List<DocumentSnapshot<Map<String, dynamic>>> playerSnapshots =
           await Future.wait(playerSnapshotsFutures);
@@ -69,7 +66,6 @@ class PlayerNamesCubit extends Cubit<List<String>> {
           .map((snapshot) => snapshot.data()?['playerName'] as String?)
           .whereType<String>()
           .toList();
-      print(playerNames);
 
       emit(playerNames); // Emit the player names to the UI
     } catch (error) {

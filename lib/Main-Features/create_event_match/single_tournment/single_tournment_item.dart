@@ -149,15 +149,12 @@ class _MatchInputFormState extends State<MatchInputForm> {
     required TextEditingController courtNameController,
   }) async {
     setState(() {
-      print('true');
       isSaving = true;
     });
 
     if (selectedPlayer == null || selectedPlayer2 == null) {
       showSnackBar(context, 'You Must Choose Two Players');
       setState(() {
-        print('false');
-
         isSaving = false;
       });
       return;
@@ -184,8 +181,6 @@ class _MatchInputFormState extends State<MatchInputForm> {
     // Call the onSave method with the newMatch object
     widget.onSave(newMatch);
     setState(() {
-      print('false');
-
       isSaving = false;
     }); // Call the addMatchIdToPlayer method for both selected players
   }

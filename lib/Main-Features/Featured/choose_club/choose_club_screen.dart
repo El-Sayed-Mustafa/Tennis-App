@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:tennis_app/core/utils/snackbar.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/club.dart';
 import 'choose_club_item.dart';
@@ -46,7 +47,7 @@ class _ClubInvitationsPageState extends State<ClubInvitationsPage> {
       if (playerSnapshot.exists) {
         // Update the player's document with the new clubId in the participatedClubId field
         playerRef.update({'participatedClubId': clubId}).then((_) {
-          print('Joined club successfully!');
+          showSnackBar(context, 'Joined club successfully!');
 
           // Add the current userId to the clubMembersIds list in the club document
           final clubRef =
@@ -54,17 +55,17 @@ class _ClubInvitationsPageState extends State<ClubInvitationsPage> {
           clubRef.update({
             'memberIds': FieldValue.arrayUnion([currentUserId])
           }).then((_) {
-            print('Updated clubMembersIds successfully!');
+            showSnackBar(context, 'Updated clubMembersIds successfully!');
           }).catchError((error) {
-            print('Error updating clubMembersIds: $error');
+            showSnackBar(context, 'Error updating clubMembersIds: $error');
           });
         }).catchError((error) {
-          print('Error updating player document: $error');
+          showSnackBar(context, 'Error updating player document: $error');
         });
       }
       _removeInvitation(clubId);
     }).catchError((error) {
-      print('Error fetching player document: $error');
+      showSnackBar(context, 'Error fetching player document: $error');
     });
   }
 
