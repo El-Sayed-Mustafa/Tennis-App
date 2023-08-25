@@ -469,6 +469,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
         "your_club": MessageLookupByLibrary.simpleMessage("Your Club"),
         "your_event_will_start_now":
-            MessageLookupByLibrary.simpleMessage("Your event will start now")
+            MessageLookupByLibrary.simpleMessage("Your event will start now"),
+        "no_players_available": MessageLookupByLibrary.simpleMessage(
+            "There is No Players Available"),
+        "noCourtsAvailable":
+            MessageLookupByLibrary.simpleMessage("You don't have any Courts"),
+        "clickToCreateMatch":
+            MessageLookupByLibrary.simpleMessage("Click to Create Match"),
+        "noRightMessage":
+            MessageLookupByLibrary.simpleMessage("You don't have the right")
       };
 }

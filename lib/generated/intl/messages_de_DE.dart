@@ -496,6 +496,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcome": MessageLookupByLibrary.simpleMessage("Willkommen"),
         "your_club": MessageLookupByLibrary.simpleMessage("Dein Club"),
         "your_event_will_start_now": MessageLookupByLibrary.simpleMessage(
-            "Deine Veranstaltung beginnt jetzt")
+            "Deine Veranstaltung beginnt jetzt"),
+        "noPlayersAvailable": MessageLookupByLibrary.simpleMessage(
+            "Es sind keine Spieler verfügbar"),
+        "noCourtsAvailable":
+            MessageLookupByLibrary.simpleMessage("Du hast keine Plätze"),
+        "clickToCreateMatch": MessageLookupByLibrary.simpleMessage(
+            "Klicken Sie, um das Spiel zu erstellen"),
+        "noRightMessage": MessageLookupByLibrary.simpleMessage(
+            "Sie haben nicht die Berechtigung")
       };
 }

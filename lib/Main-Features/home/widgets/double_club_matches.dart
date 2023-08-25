@@ -133,7 +133,7 @@ class _MyDoubleMatchesState extends State<MyDoubleMatches> {
                 text: S.of(context).You_Dont_have_Matches,
                 buttonText: S.of(context).clickToCreateMatch,
                 onPressed: () {
-                  GoRouter.of(context).push('/doubleMatches');
+                  GoRouter.of(context).push('/findPartner');
                 },
                 height: screenHeight * .15,
                 width: screenWidth * .8,

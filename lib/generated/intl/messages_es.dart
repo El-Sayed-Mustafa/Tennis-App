@@ -505,5 +505,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tu evento comenzará ahora"),
         "noPlayersAvailable": MessageLookupByLibrary.simpleMessage(
             "No hay jugadores disponibles"),
+        "noCourtsAvailable":
+            MessageLookupByLibrary.simpleMessage("No tienes ninguna Cancha"),
+        "clickToCreateMatch": MessageLookupByLibrary.simpleMessage(
+            "Haz clic para crear el partido"),
+        "noRightMessage": MessageLookupByLibrary.simpleMessage(
+            "No tienes el permiso necesario"),
       };
 }

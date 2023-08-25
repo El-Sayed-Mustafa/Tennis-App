@@ -133,7 +133,7 @@ class _MySingleMatchesState extends State<MySingleMatches> {
                 text: S.of(context).You_Dont_have_Matches,
                 buttonText: S.of(context).clickToCreateMatch,
                 onPressed: () {
-                  GoRouter.of(context).push('/singleMatches');
+                  GoRouter.of(context).push('/findPartner');
                 },
                 height: screenHeight * .15,
                 width: screenWidth * .8,
