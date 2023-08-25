@@ -298,5 +298,9 @@
     "set_group_image": "Set Group Image",
     "create_group": "Create Group",
     "group_name": "Group Name",
-    "type_group_name": "Type Group Name"
+    "type_group_name": "Type Group Name",
+    "no_players_available": "There is No Players Available",
+    "noCourtsAvailable": "You don't have any Courts",
+    "clickToCreateMatch": "Click to Create Match"
+
 }

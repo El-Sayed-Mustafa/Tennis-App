@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tennis_app/Main-Features/club/widgets/player_info.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tennis_app/core/utils/widgets/no_data_text.dart';
+import 'package:tennis_app/generated/l10n.dart';
 
 import '../../../models/club.dart';
 import '../../../models/player.dart';
@@ -32,18 +34,8 @@ class _PlayersRankingState extends State<PlayersRanking> {
                 return const Center(child: CircularProgressIndicator());
               } else if (snapshot.hasError) {
                 // Handle the error
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: const Text(
-                    'There is no Players available',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                );
+                return NoData(
+                    text: S.of(context).no_players_found, buttonText: '');
               } else {
                 // Use the fetched sorted players to build the list
                 final List<Player> sortedPlayers = snapshot.data ?? [];
