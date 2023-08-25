@@ -103,7 +103,7 @@ class MenuScreen extends StatelessWidget {
                           showDialog(
                             context: context,
                             builder: (context) => CustomDialog(
-                              text: 'You don\'t have the right',
+                              text: S.of(context).noRightMessage,
                             ),
                           );
                         }
@@ -121,7 +121,7 @@ class MenuScreen extends StatelessWidget {
                           showDialog(
                             context: context,
                             builder: (context) => CustomDialog(
-                              text: 'You don\'t have the right',
+                              text: S.of(context).noRightMessage,
                             ),
                           );
                         }
@@ -139,7 +139,7 @@ class MenuScreen extends StatelessWidget {
                           showDialog(
                             context: context,
                             builder: (context) => CustomDialog(
-                              text: 'You don\'t have the right',
+                              text: S.of(context).noRightMessage,
                             ),
                           );
                         }
@@ -157,7 +157,7 @@ class MenuScreen extends StatelessWidget {
                           showDialog(
                             context: context,
                             builder: (context) => CustomDialog(
-                              text: 'You don\'t have the right',
+                              text: S.of(context).noRightMessage,
                             ),
                           );
                         }

@@ -110,8 +110,7 @@ class _MyDoubleMatchesState extends State<MyDoubleMatches> {
                         return Center(
                           child: NoData(
                             text: S.of(context).You_Dont_have_Matches,
-                            buttonText:
-                                S.of(context).Click_to_Find_Your_Partner,
+                            buttonText: S.of(context).clickToCreateMatch,
                             onPressed: () {
                               GoRouter.of(context).push('/findPartner');
                             },
@@ -132,7 +131,7 @@ class _MyDoubleMatchesState extends State<MyDoubleMatches> {
               )
             : NoData(
                 text: S.of(context).You_Dont_have_Matches,
-                buttonText: S.of(context).Click_to_Find_Your_Partner,
+                buttonText: S.of(context).clickToCreateMatch,
                 onPressed: () {
                   GoRouter.of(context).push('/doubleMatches');
                 },

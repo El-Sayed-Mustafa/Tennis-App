@@ -503,5 +503,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "your_club": MessageLookupByLibrary.simpleMessage("Tu Club"),
         "your_event_will_start_now":
             MessageLookupByLibrary.simpleMessage("Tu evento comenzará ahora"),
+        "noPlayersAvailable": MessageLookupByLibrary.simpleMessage(
+            "No hay jugadores disponibles"),
       };
 }

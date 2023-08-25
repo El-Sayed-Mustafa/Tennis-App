@@ -122,7 +122,7 @@ class HomeScreen extends StatelessWidget {
                     showDialog(
                       context: context,
                       builder: (context) => CustomDialog(
-                        text: 'You don\'t have the right to create Event',
+                        text: S.of(context).noRightMessage,
                       ),
                     );
                   }

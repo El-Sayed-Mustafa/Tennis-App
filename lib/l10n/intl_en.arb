@@ -287,8 +287,8 @@
     "Occupied": "Occupied",
     "Your_Upcoming_Single_Matches_Club": "Your Single Matches",
     "Your_Upcoming_Double_Matches_Club": "Your Double Matches",
-    "available_single_matches":"Club’s Single Matches",
-    "available_double_matches":"Club’s Double Matches",
+    "available_single_matches": "Club’s Single Matches",
+    "available_double_matches": "Club’s Double Matches",
     "SingleTournaments": "Single Tournaments",
     "DoubleTournaments": "Double Tournaments",
     "Enter_Results": "Enter Results",
@@ -301,6 +301,6 @@
     "type_group_name": "Type Group Name",
     "no_players_available": "There is No Players Available",
     "noCourtsAvailable": "You don't have any Courts",
-    "clickToCreateMatch": "Click to Create Match"
-
+    "clickToCreateMatch": "Click to Create Match",
+    "noRightMessage": "You don't have the right"
 }

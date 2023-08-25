@@ -88,7 +88,7 @@ class _AvailableCourtsState extends State<AvailableCourts> {
             ),
           )
         : NoData(
-            text: S.of(context).You_Dont_have_Matches,
+            text: S.of(context).noCourtsAvailable,
             buttonText: S.of(context).Click_to_Find_Your_Partner,
             onPressed: () {
               GoRouter.of(context).push('/createCourt');

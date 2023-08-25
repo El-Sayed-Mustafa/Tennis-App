@@ -34,8 +34,12 @@ class _PlayersRankingState extends State<PlayersRanking> {
                 return const Center(child: CircularProgressIndicator());
               } else if (snapshot.hasError) {
                 // Handle the error
-                return NoData(
-                    text: S.of(context).no_players_found, buttonText: '');
+                return SizedBox(
+                  width: screenWidth * .8,
+                  height: 150,
+                  child: NoData(
+                      text: S.of(context).noPlayersAvailable, buttonText: ''),
+                );
               } else {
                 // Use the fetched sorted players to build the list
                 final List<Player> sortedPlayers = snapshot.data ?? [];

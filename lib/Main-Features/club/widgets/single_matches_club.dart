@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/core/methodes/firebase_methodes.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
+import 'package:tennis_app/core/utils/widgets/custom_dialouge.dart';
 import 'package:tennis_app/core/utils/widgets/no_data_text.dart';
 import 'package:tennis_app/models/single_match.dart';
 import '../../../core/utils/widgets/single_match_card copy.dart';
@@ -120,10 +121,22 @@ class _ClubSingleMatchesState extends State<ClubSingleMatches> {
                               child: SizedBox(
                                 child: NoData(
                                   text: S.of(context).You_Dont_have_Matches,
-                                  buttonText:
-                                      S.of(context).Click_to_Find_Your_Partner,
-                                  onPressed: () {
-                                    GoRouter.of(context).push('/singleMatches');
+                                  buttonText: S.of(context).clickToCreateMatch,
+                                  onPressed: () async {
+                                    final Method method = Method();
+
+                                    bool hasRight = await method
+                                        .doesPlayerHaveRight('Create Match');
+                                    if (hasRight) {
+                                      GoRouter.of(context).push('/createMatch');
+                                    } else {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) => CustomDialog(
+                                          text: S.of(context).noRightMessage,
+                                        ),
+                                      );
+                                    }
                                   },
                                   height: screenHeight * .15,
                                   width: screenWidth * .8,
@@ -146,9 +159,22 @@ class _ClubSingleMatchesState extends State<ClubSingleMatches> {
               )
             : NoData(
                 text: S.of(context).You_Dont_have_Matches,
-                buttonText: S.of(context).Click_to_Find_Your_Partner,
-                onPressed: () {
-                  GoRouter.of(context).push('/singleMatches');
+                buttonText: S.of(context).clickToCreateMatch,
+                onPressed: () async {
+                  final Method method = Method();
+
+                  bool hasRight =
+                      await method.doesPlayerHaveRight('Create Match');
+                  if (hasRight) {
+                    GoRouter.of(context).push('/createMatch');
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (context) => CustomDialog(
+                        text: S.of(context).noRightMessage,
+                      ),
+                    );
+                  }
                 },
                 height: screenHeight * .15,
                 width: screenWidth * .8,

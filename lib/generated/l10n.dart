@@ -2982,6 +2982,42 @@ class S {
       args: [],
     );
   }
+
+  String get noPlayersAvailable {
+    return Intl.message(
+      'There is no Players available',
+      name: 'noPlayersAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get noCourtsAvailable {
+    return Intl.message(
+      "You don't have any Courts",
+      name: 'noCourtsAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get clickToCreateMatch {
+    return Intl.message(
+      'Click to Create Match',
+      name: 'clickToCreateMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get noRightMessage {
+    return Intl.message(
+      "You don't have the right",
+      name: 'noRightMessage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

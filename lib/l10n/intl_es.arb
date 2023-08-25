@@ -295,5 +295,10 @@
     "email_verified": "Correo Verificado",
     "logout": "Cerrar Sesión",
     "group_name": "Group Name",
-    "set_group_image": "Set Group es"
+    "set_group_image": "Set Group es",
+    "noPlayersAvailable": "No hay jugadores disponibles",
+    "noCourtsAvailable": "No tienes ninguna Cancha",
+    "clickToCreateMatch": "Haz clic para crear el partido",
+    "noRightMessage": "No tienes el permiso necesario"
+
 }

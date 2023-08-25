@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
+import 'package:tennis_app/core/utils/widgets/custom_dialouge.dart';
 import 'package:tennis_app/core/utils/widgets/double_match_card.dart';
 import 'package:tennis_app/core/utils/widgets/no_data_text.dart';
 import '../../../core/methodes/firebase_methodes.dart';
@@ -120,10 +121,22 @@ class _ClubDoubleMatchesState extends State<ClubDoubleMatches> {
                             return Center(
                               child: NoData(
                                 text: S.of(context).You_Dont_have_Matches,
-                                buttonText:
-                                    S.of(context).Click_to_Find_Your_Partner,
-                                onPressed: () {
-                                  GoRouter.of(context).push('/doubleMatches');
+                                buttonText: S.of(context).clickToCreateMatch,
+                                onPressed: () async {
+                                  final Method method = Method();
+
+                                  bool hasRight = await method
+                                      .doesPlayerHaveRight('Create Match');
+                                  if (hasRight) {
+                                    GoRouter.of(context).push('/createMatch');
+                                  } else {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => CustomDialog(
+                                        text: S.of(context).noRightMessage,
+                                      ),
+                                    );
+                                  }
                                 },
                                 height: screenHeight * .15,
                                 width: screenWidth * .8,
@@ -145,9 +158,22 @@ class _ClubDoubleMatchesState extends State<ClubDoubleMatches> {
               )
             : NoData(
                 text: S.of(context).You_Dont_have_Matches,
-                buttonText: S.of(context).Click_to_Find_Your_Partner,
-                onPressed: () {
-                  GoRouter.of(context).push('/doubleMatches');
+                buttonText: S.of(context).clickToCreateMatch,
+                onPressed: () async {
+                  final Method method = Method();
+
+                  bool hasRight =
+                      await method.doesPlayerHaveRight('Create Match');
+                  if (hasRight) {
+                    GoRouter.of(context).push('/createMatch');
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (context) => CustomDialog(
+                        text: S.of(context).noRightMessage,
+                      ),
+                    );
+                  }
                 },
                 height: screenHeight * .15,
                 width: screenWidth * .8,
