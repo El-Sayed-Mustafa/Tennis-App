@@ -44,33 +44,33 @@ class PrivateChat extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      body: Stack(
+      body: Column(
         children: [
-          SingleChildScrollView(
+          PoPAppBarWave(
+            prefixIcon: IconButton(
+              onPressed: () {
+                GoRouter.of(context).pop();
+              },
+              icon: const Icon(
+                Icons.arrow_back,
+                size: 30,
+                color: Colors.white,
+              ),
+            ),
+            text: S.of(context).chat,
+            suffixIconPath: '',
+          ),
+          Expanded(
             child: Column(
               children: [
-                PoPAppBarWave(
-                  prefixIcon: IconButton(
-                    onPressed: () {
-                      GoRouter.of(context).pop();
-                    },
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      size: 30,
-                      color: Colors.white,
-                    ),
-                  ),
-                  text: S.of(context).chat,
-                  suffixIconPath: '',
-                ),
                 Container(
                   height: screenHeight * 0.13,
                   width: screenHeight * 0.13,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
-                      color: Colors.grey, // Customize the border color here
-                      width: 2.0, // Customize the border width here
+                      color: Colors.grey,
+                      width: 2.0,
                     ),
                   ),
                   child: ClipRRect(
@@ -81,7 +81,6 @@ class PrivateChat extends StatelessWidget {
                             image: player.photoURL!,
                             fit: BoxFit.cover,
                             imageErrorBuilder: (context, error, stackTrace) {
-                              // Show the placeholder image on error
                               return Image.asset(
                                 'assets/images/profileimage.png',
                                 fit: BoxFit.cover,
@@ -105,45 +104,44 @@ class PrivateChat extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: screenHeight * .02),
-                Container(
-                  height: 600,
-                  width: double.infinity,
-                  decoration: const ShapeDecoration(
-                    color: Color(0xF8F8F8F8),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(30),
+                Flexible(
+                  child: Container(
+                    height: double.infinity,
+                    width: double.infinity,
+                    decoration: const ShapeDecoration(
+                      color: Color(0xF8F8F8F8),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(30),
+                        ),
                       ),
+                      shadows: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 5,
+                          offset: Offset(0, -4),
+                          spreadRadius: 0,
+                        )
+                      ],
                     ),
-                    shadows: [
-                      BoxShadow(
-                        color: Colors.grey,
-                        blurRadius: 5,
-                        offset: Offset(0, -4),
-                        spreadRadius: 0,
-                      )
-                    ],
-                  ),
-                  child: StreamBuilder<List<ChatMessage>>(
-                    stream: getChatMessages(user!.uid, player.playerId),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      } else if (snapshot.hasError) {
-                        return Center(
-                          child:
-                              Text('${S.of(context).error}: ${snapshot.error}'),
-                        );
-                      } else {
-                        final chatMessages = snapshot.data?.toList() ?? [];
-                        return Container(
-                          padding: const EdgeInsets.only(bottom: 70.0),
-                          child: ListView.builder(
-                            physics: const BouncingScrollPhysics(),
-                            itemCount: chatMessages.length,
+                    child: StreamBuilder<List<ChatMessage>>(
+                      stream: getChatMessages(user!.uid, player.playerId),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else if (snapshot.hasError) {
+                          return Center(
+                            child: Text(
+                                '${S.of(context).error}: ${snapshot.error}'),
+                          );
+                        } else {
+                          final chatMessages = snapshot.data?.toList() ?? [];
+                          return ListView.builder(
                             reverse: true,
+                            itemCount: chatMessages.length,
                             itemBuilder: (context, index) {
                               final message = chatMessages[index];
                               return message.senderId == user.uid
@@ -153,10 +151,10 @@ class PrivateChat extends StatelessWidget {
                                       player: player,
                                     );
                             },
-                          ),
-                        );
-                      }
-                    },
+                          );
+                        }
+                      },
+                    ),
                   ),
                 ),
               ],
