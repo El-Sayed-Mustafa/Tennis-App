@@ -13,54 +13,54 @@ Widget defaultFormField({
   IconData? suffix,
   Function? suffixPressed,
   bool isClickable = true,
-  bool autofocus = false, // Add this parameter with a default value of false
+  bool autofocus = false,
+  TextInputType? keyboardType, // Add this parameter
 }) =>
     TextFormField(
-        controller: controller,
-        keyboardType: type,
-        obscureText: isPassword,
-        enabled: isClickable,
-        autofocus: autofocus, // Set the autofocus property
-
-        onFieldSubmitted: (value) {},
-        onChanged: (value) {
-          return onChange!(value);
-        },
-        onTap: () {
-          onTap!();
-        },
-        validator: (value) {
-          return validate(value);
-        },
-        decoration: InputDecoration(
-          isDense: true,
-          hintText: label,
-          prefixIcon: prefix != null ? Icon(prefix) : null,
-          hintStyle: const TextStyle(
-            color: Color(0xFFA8A8A8),
-            fontSize: 14,
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.w400,
-          ),
-          suffixIcon: suffix != null
-              ? IconButton(
-                  onPressed: () {
-                    suffixPressed!();
-                  },
-                  icon: Icon(
-                    suffix,
-                  ),
-                )
-              : null,
-          contentPadding: const EdgeInsets.symmetric(
-              horizontal: 20, vertical: 15), // Remove the padding
-
-          filled: true, // Enable background fill
-          fillColor: Colors.white, // Set the background color
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
-          ),
-        ));
+      controller: controller,
+      keyboardType: keyboardType ?? type,
+      obscureText: isPassword,
+      enabled: isClickable,
+      autofocus: autofocus,
+      onFieldSubmitted: (value) {},
+      onChanged: (value) {
+        return onChange!(value);
+      },
+      onTap: () {
+        onTap!();
+      },
+      validator: (value) {
+        return validate(value);
+      },
+      decoration: InputDecoration(
+        isDense: true,
+        hintText: label,
+        prefixIcon: prefix != null ? Icon(prefix) : null,
+        hintStyle: const TextStyle(
+          color: Color(0xFFA8A8A8),
+          fontSize: 14,
+          fontFamily: 'Poppins',
+          fontWeight: FontWeight.w400,
+        ),
+        suffixIcon: suffix != null
+            ? IconButton(
+                onPressed: () {
+                  suffixPressed!();
+                },
+                icon: Icon(
+                  suffix,
+                ),
+              )
+            : null,
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        filled: true,
+        fillColor: Colors.white,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+        ),
+      ),
+    );
 
 class InputTextWithHint extends StatelessWidget {
   final String text;
@@ -69,6 +69,7 @@ class InputTextWithHint extends StatelessWidget {
   final IconData? prefixIcon;
   final TextEditingController controller;
   final TextInputType? type;
+  final TextInputType? keyboardType; // Add this property
 
   const InputTextWithHint({
     Key? key,
@@ -78,6 +79,7 @@ class InputTextWithHint extends StatelessWidget {
     this.suffixIcon,
     this.prefixIcon,
     required this.controller,
+    this.keyboardType, // Initialize the property
   }) : super(key: key);
 
   @override
@@ -103,11 +105,12 @@ class InputTextWithHint extends StatelessWidget {
           ),
           defaultFormField(
             controller: controller,
-            type: type, // Replace with the desired input type
+            type: type,
+            keyboardType: keyboardType, // Pass keyboardType to defaultFormField
             onSubmit: null,
             onChange: null,
-            onTap: null, autofocus: false, // Set autofocus to false
-
+            onTap: null,
+            autofocus: false,
             isPassword: false,
             validate: (value) {
               if (value!.isEmpty) {
@@ -115,7 +118,7 @@ class InputTextWithHint extends StatelessWidget {
               }
               return null;
             },
-            label: hint, // Use the hint as the label
+            label: hint,
             suffix: suffixIcon,
             prefix: prefixIcon,
             suffixPressed: null,
