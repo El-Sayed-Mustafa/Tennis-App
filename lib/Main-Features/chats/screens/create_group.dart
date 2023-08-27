@@ -188,26 +188,39 @@ class _CreateGroupState extends State<CreateGroup> {
                     controller: groupNameController,
                   ),
                   Expanded(
-                    child: ListView.builder(
-                      itemCount: members.length,
-                      itemBuilder: (context, index) {
-                        final member = members[index];
-                        final isSelected =
-                            selectedMemberIds.contains(member.playerId);
+                    child: members.isEmpty
+                        ? Center(
+                            child: Text(
+                              S.of(context).no_players_found,
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          )
+                        : ListView.builder(
+                            itemCount: members.length,
+                            itemBuilder: (context, index) {
+                              final member = members[index];
+                              final isSelected =
+                                  selectedMemberIds.contains(member.playerId);
 
-                        return ListTile(
-                          subtitle: GroupPlayerCard(
-                            player: member,
+                              return ListTile(
+                                subtitle: GroupPlayerCard(
+                                  player: member,
+                                ),
+                                leading: Checkbox(
+                                  activeColor:
+                                      const Color.fromARGB(255, 34, 47, 53),
+                                  value: isSelected,
+                                  onChanged: (value) =>
+                                      _toggleMemberSelection(member.playerId),
+                                ),
+                              );
+                            },
                           ),
-                          leading: Checkbox(
-                            activeColor: const Color.fromARGB(255, 34, 47, 53),
-                            value: isSelected,
-                            onChanged: (value) =>
-                                _toggleMemberSelection(member.playerId),
-                          ),
-                        );
-                      },
-                    ),
                   ),
                 ],
               ),
