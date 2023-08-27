@@ -5,9 +5,7 @@ class Club {
   final String clubName;
   final String clubType;
   final String clubAdmin;
-  final String nationalIdNumber;
   final String phoneNumber;
-  final String email;
   final String rulesAndRegulations;
   final String ageRestriction;
   final String address;
@@ -17,7 +15,6 @@ class Club {
   final String? photoURL;
   final int matchPlayed;
   final int totalWins;
-  final int courtsNum;
   final List<String> roleIds; // Added property for role IDs
   final String clubChatId;
   final List<String> singleMatchesIds;
@@ -33,9 +30,7 @@ class Club {
     required this.numberOfRatings,
     required this.clubType,
     required this.clubAdmin,
-    required this.nationalIdNumber,
     required this.phoneNumber,
-    required this.email,
     required this.matchPlayed,
     required this.totalWins,
     required this.rulesAndRegulations,
@@ -46,7 +41,6 @@ class Club {
     required this.memberIds,
     this.photoURL,
     required this.roleIds,
-    required this.courtsNum,
     required this.singleMatchesIds,
     required this.doubleMatchesIds,
     required this.singleTournamentsIds,
@@ -59,10 +53,8 @@ class Club {
       'clubName': clubName,
       'clubType': clubType,
       'clubAdmin': clubAdmin,
-      'nationalIdNumber': nationalIdNumber,
       'phoneNumber': phoneNumber, 'numberOfRatings': numberOfRatings,
 
-      'email': email,
       'rulesAndRegulations': rulesAndRegulations,
       'ageRestriction': ageRestriction,
       'address': address, // Include address in the JSON
@@ -72,7 +64,6 @@ class Club {
       'memberIds': memberIds,
       'clubImageURL': photoURL,
       'roleIds': roleIds, // Include role IDs in the JSON
-      'courtsNum': courtsNum,
       'clubChatId': clubChatId, 'singleMatchesIds': singleMatchesIds,
       'doubleMatchesIds': doubleMatchesIds,
       'singleTournamentsIds': singleTournamentsIds,
@@ -90,11 +81,8 @@ class Club {
       clubName: data['clubName'] as String? ?? '',
       clubType: data['clubType'] as String? ?? '',
       clubAdmin: data['clubAdmin'] as String? ?? '',
-      nationalIdNumber: data['nationalIdNumber'] as String? ?? '',
       phoneNumber: data['phoneNumber'] as String? ?? '',
-      email: data['email'] as String? ?? '',
       matchPlayed: data['matchPlayed'] as int? ?? 0,
-      courtsNum: data['courtsNum'] as int? ?? 0,
       numberOfRatings: data['numberOfRatings'] as int? ?? 0,
       totalWins: data['totalWins'] as int? ?? 0,
       rulesAndRegulations: data['rulesAndRegulations'] as String? ?? '',

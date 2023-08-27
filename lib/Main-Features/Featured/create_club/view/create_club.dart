@@ -125,14 +125,10 @@ class CreateClub extends StatelessWidget {
                           if (formKey.currentState!.validate()) {
                             context.read<CreateClubCubit>().saveClubData(
                                   selectedImageBytes: _selectedImageBytes,
-                                  adminNameController: adminNameController,
                                   clubNameController: clubNameController,
-                                  emailController: emailController,
-                                  nationalIDController: nationalIDController,
                                   phoneController: phoneController,
                                   rulesController: rulesController,
                                   addressController: addressController,
-                                  courtsNumController: courtsNumController,
                                 );
                           }
                         },

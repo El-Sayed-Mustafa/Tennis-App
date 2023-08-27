@@ -22,13 +22,9 @@ class CreateClubCubit extends Cubit<CreateClubState> {
 
   void saveClubData({
     required TextEditingController clubNameController,
-    required TextEditingController adminNameController,
-    required TextEditingController nationalIDController,
     required TextEditingController phoneController,
-    required TextEditingController emailController,
     required TextEditingController rulesController,
     required TextEditingController addressController,
-    required TextEditingController courtsNumController,
     Uint8List? selectedImageBytes,
   }) async {
     ClubType selectedClubType = context.read<ClubTypeCubit>().state;
@@ -36,9 +32,7 @@ class CreateClubCubit extends Cubit<CreateClubState> {
     emit(CreateClubLoadingState());
     try {
       String clubName = clubNameController.text;
-      String nationalID = nationalIDController.text;
       String phoneNumber = phoneController.text;
-      String email = emailController.text;
       String rulesAndRegulations = rulesController.text;
       String ageRestriction = getAgeRestrictionLabel(selectedChoice);
       String address = addressController.text;
@@ -55,14 +49,13 @@ class CreateClubCubit extends Cubit<CreateClubState> {
             .split('.')
             .last, // Convert the enum value to string
         clubAdmin: currentUserID,
-        nationalIdNumber: nationalID,
         phoneNumber: phoneNumber,
-        email: email,
+
         rulesAndRegulations: rulesAndRegulations,
         ageRestriction: ageRestriction,
         eventIds: eventIds,
         memberIds: memberIds, roleIds: [], address: address, rate: 0,
-        courtsNum: int.parse(courtsNumController.text), matchPlayed: 0,
+        matchPlayed: 0,
         totalWins: 0,
         clubChatId: '',
         doubleMatchesIds: [],

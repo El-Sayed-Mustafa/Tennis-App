@@ -119,8 +119,8 @@ class ChooseClubItem extends StatelessWidget {
                     ),
                     CardDetails(
                       svgPath: 'assets/images/courts.svg',
-                      value: club.courtsNum.toString(),
-                      label: S.of(context).courtsOwn,
+                      value: club.address.toString(),
+                      label: S.of(context).Address,
                       color: const Color(0x8294B6D3),
                     ),
                   ],
