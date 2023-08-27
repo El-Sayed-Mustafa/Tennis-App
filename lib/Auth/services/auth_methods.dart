@@ -20,8 +20,8 @@ class FirebaseAuthMethods {
     required BuildContext context,
   }) async {
     try {
-      // await sendEmailVerification(context);
-      // await waitForEmailVerification(context);
+      await sendEmailVerification(context);
+      await waitForEmailVerification(context);
 
       await _auth.createUserWithEmailAndPassword(
         email: email,
@@ -54,8 +54,12 @@ class FirebaseAuthMethods {
   // EMAIL VERIFICATION
   Future<void> sendEmailVerification(BuildContext context) async {
     try {
-      _auth.currentUser!.sendEmailVerification();
-      showSnackBar(context, S.of(context).email_verification_sent);
+      User? user = _auth.currentUser;
+
+      if (user != null && !user.emailVerified) {
+        await user.sendEmailVerification();
+        showSnackBar(context, S.of(context).email_verification_sent);
+      }
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!); // Display error message
     }
