@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
+import 'package:tennis_app/core/utils/widgets/no_data_text.dart';
+import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/club.dart';
 import 'choose_club_item.dart';
@@ -90,6 +93,9 @@ class _ClubInvitationsPageState extends State<ClubInvitationsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: currentUserId == null
           ? const Center(child: CircularProgressIndicator())
@@ -117,9 +123,35 @@ class _ClubInvitationsPageState extends State<ClubInvitationsPage> {
                 clubInvitationsIds =
                     List<String>.from(playerData['clubInvitationsIds'] ?? []);
                 if (clubInvitationsIds.length == 0) {
-                  return const Center(
-                      child: Text(
-                          'You do not have any club invitations available'));
+                  return Column(
+                    children: [
+                      PoPAppBarWave(
+                        prefixIcon: IconButton(
+                          onPressed: () {
+                            GoRouter.of(context).pop();
+                          },
+                          icon: const Icon(
+                            Icons.arrow_back,
+                            size: 30,
+                            color: Colors.white,
+                          ),
+                        ),
+                        text: 'Club Invitations',
+                        suffixIconPath: '',
+                      ),
+                      SizedBox(
+                        height: screenHeight * .35,
+                      ),
+                      SizedBox(
+                        height: 150,
+                        width: screenWidth * .8,
+                        child: const NoData(
+                          text:
+                              'You do not have any club invitations available',
+                        ),
+                      )
+                    ],
+                  );
                 }
                 return FutureBuilder<List<Club>>(
                   future: fetchClubs(clubInvitationsIds),

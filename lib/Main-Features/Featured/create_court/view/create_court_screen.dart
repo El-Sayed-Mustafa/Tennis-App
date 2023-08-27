@@ -9,6 +9,7 @@ import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/inpu
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/player_level.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/event_types.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
+import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import '../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../core/utils/widgets/input_date_and_time.dart';
 import '../../../../core/utils/widgets/text_field.dart';
@@ -71,10 +72,10 @@ class CreateCourt extends StatelessWidget {
                   key: formKey,
                   child: Column(
                     children: [
-                      AppBarWaveHome(
+                      PoPAppBarWave(
                         prefixIcon: IconButton(
                           onPressed: () {
-                            GoRouter.of(context).replace('/home');
+                            GoRouter.of(context).pop();
                           },
                           icon: const Icon(
                             Icons.arrow_back,
