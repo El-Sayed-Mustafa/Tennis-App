@@ -8,6 +8,7 @@ import 'package:tennis_app/Main-Features/home/widgets/my_events.dart';
 import 'package:tennis_app/Main-Features/home/widgets/my_matches.dart';
 import 'package:tennis_app/Main-Features/home/widgets/single_club_matches.dart';
 import 'package:tennis_app/core/methodes/firebase_methodes.dart';
+import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/app_bar_wave.dart';
 import 'package:tennis_app/core/utils/widgets/custom_dialouge.dart';
 
@@ -132,7 +133,13 @@ class HomeScreen extends StatelessWidget {
               buttonText: S.of(context).Create_Club,
               imagePath: 'assets/images/Make-offers.svg',
               onPressed: () async {
-                GoRouter.of(context).push('/createClub');
+                bool hasParticipated = await checkParticipatedClub();
+                if (hasParticipated) {
+                  showSnackBar(
+                      context, 'You have already participated in a club');
+                } else {
+                  GoRouter.of(context).push('/createClub');
+                }
               },
             ),
             SizedBox(height: spacing * 2),
@@ -140,5 +147,17 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  static Future<bool> checkParticipatedClub() async {
+    try {
+      Method method = Method();
+      final player = await method.getCurrentUser();
+      final String participatedClubId = player.participatedClubId;
+      return participatedClubId.isNotEmpty;
+    } catch (e) {
+      print("Error fetching player data: $e");
+      return false;
+    }
   }
 }
