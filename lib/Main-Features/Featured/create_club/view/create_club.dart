@@ -79,7 +79,7 @@ class CreateClub extends StatelessWidget {
                       SizedBox(height: screenHeight * .01),
                       Text(
                         S.of(context).Set_Club_Picture,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 14,
                           fontFamily: 'Poppins',
@@ -91,18 +91,6 @@ class CreateClub extends StatelessWidget {
                         hint: S.of(context).Type_club_name_here,
                         text: S.of(context).Club_Name,
                         controller: clubNameController,
-                      ),
-                      SizedBox(height: screenHeight * .03),
-                      InputTextWithHint(
-                        hint: S.of(context).Type_your_name_here,
-                        text: S.of(context).Club_admin,
-                        controller: adminNameController,
-                      ),
-                      SizedBox(height: screenHeight * .03),
-                      InputTextWithHint(
-                        hint: S.of(context).Type_id_here,
-                        text: S.of(context).National_Id_number,
-                        controller: nationalIDController,
                       ),
                       SizedBox(height: screenHeight * .03),
                       InputTextWithHint(
@@ -118,18 +106,13 @@ class CreateClub extends StatelessWidget {
                       ),
                       SizedBox(height: screenHeight * .03),
                       InputTextWithHint(
-                        hint: S.of(context).Type_Your_Email_here,
-                        text: S.of(context).Your_Email,
-                        controller: emailController,
-                      ),
-                      SizedBox(height: screenHeight * .03),
-                      InputTextWithHint(
                         hint: S.of(context).Type_Court_Name_here,
                         text: S.of(context).Your_Courts_Own,
                         controller: courtsNumController,
+                        keyboardType: TextInputType.number,
                       ),
                       SizedBox(height: screenHeight * .03),
-                      ClubTypeInput(),
+                      const ClubTypeInput(),
                       SizedBox(height: screenHeight * .03),
                       RulesInputText(
                         header: S.of(context).Rules_and_regulations,
@@ -139,7 +122,7 @@ class CreateClub extends StatelessWidget {
                         controller: rulesController,
                       ),
                       SizedBox(height: screenHeight * .03),
-                      AgeRestrictionWidget(),
+                      const AgeRestrictionWidget(),
                       SizedBox(height: screenHeight * .015),
                       BottomSheetContainer(
                         buttonText: S.of(context).Create,

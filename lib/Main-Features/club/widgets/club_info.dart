@@ -24,21 +24,47 @@ class _ClubInfoState extends State<ClubInfo> {
       true; // Add a boolean variable to track internet connectivity
   double userRating = 0.0; // Default user rating value
   double updatedAverageRating = 0.0;
+  bool hasRated = false;
+
   @override
   void initState() {
     super.initState();
     checkInternetConnectivity();
     updatedAverageRating = widget.clubData.rate;
+    checkUserRating();
+  }
+
+  void checkUserRating() async {
+    try {
+      DocumentSnapshot<Map<String, dynamic>> userRatingSnapshot =
+          await FirebaseFirestore.instance
+              .collection('user_ratings')
+              .doc(widget.clubData.clubId)
+              .get();
+
+      Map<String, dynamic> userRatingData = userRatingSnapshot.data() ?? {};
+      double userRatedValue = userRatingData['rating'] ?? 0.0;
+
+      setState(() {
+        hasRated = userRatedValue > 0.0;
+      });
+
+      print('User has rated: $hasRated');
+      print('User rating: $userRatedValue');
+    } catch (error) {
+      print('Error checking user rating: $error');
+    }
   }
 
   void updateClubRatingInFirestore(double newRating) async {
     try {
+      GoRouter.of(context).pop();
+
       // Fetch the existing club data
       DocumentSnapshot<Map<String, dynamic>> clubSnapshot =
           await FirebaseFirestore.instance
               .collection('clubs')
-              .doc(widget
-                  .clubData.clubId) // Replace with the correct document ID
+              .doc(widget.clubData.clubId)
               .get();
 
       Map<String, dynamic> clubData = clubSnapshot.data() ?? {};
@@ -48,24 +74,56 @@ class _ClubInfoState extends State<ClubInfo> {
       // Calculate the new average rating
       double newAverageRating = (existingRating * numberOfRatings + newRating) /
           (numberOfRatings + 1);
+
       setState(() {
-        updatedAverageRating = newAverageRating; // Update the variable
+        updatedAverageRating = newAverageRating;
       });
+
       // Update the club document in Firestore
       await FirebaseFirestore.instance
           .collection('clubs')
-          .doc(widget.clubData.clubId) // Replace with the correct document ID
+          .doc(widget.clubData.clubId)
           .update({
         'rate': newAverageRating,
         'numberOfRatings': numberOfRatings + 1,
       });
-      GoRouter.of(context).pop();
+
+      // Create a new document in user_ratings collection for the user's rating
+      await FirebaseFirestore.instance
+          .collection('user_ratings')
+          .doc(widget.clubData.clubId)
+          .set({
+        'rating': newRating,
+      });
+
+      // Update the hasRated flag
+      setState(() {
+        hasRated = true;
+      });
     } catch (error) {
       showSnackBar(context, 'Error updating club rating: $error');
     }
   }
 
-  void showRating() => showDialog(
+  void showRating() {
+    if (hasRated) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('You have already rated this club'),
+          content: const Text('Thank you for your rating!'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Ok'),
+            )
+          ],
+        ),
+      );
+    } else {
+      showDialog(
         context: context,
         builder: (context) => AlertDialog(
           title: const Text('Rate This Club'),
@@ -80,15 +138,15 @@ class _ClubInfoState extends State<ClubInfo> {
           actions: [
             TextButton(
               onPressed: () {
-                updateClubRatingInFirestore(
-                    userRating); // Call the function to update the rating
-                Navigator.of(context).pop(); // Close the dialog
+                updateClubRatingInFirestore(userRating);
               },
               child: const Text('Ok'),
             )
           ],
         ),
       );
+    }
+  }
 
   Future<void> checkInternetConnectivity() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
