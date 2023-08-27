@@ -41,36 +41,24 @@ class _ClubInvitationsPageState extends State<ClubInvitationsPage> {
     }
   }
 
-// Method to join a club and add the clubId to the participatedClubId field for the player
-  void _joinClub(String clubId) {
+  void _joinClub(String clubId) async {
     final playerRef =
         FirebaseFirestore.instance.collection('players').doc(currentUserId);
+    try {
+      final playerSnapshot = await playerRef.get();
 
-    // Fetch the player document to get the current data
-    playerRef.get().then((playerSnapshot) {
       if (playerSnapshot.exists) {
-        // Update the player's document with the new clubId in the participatedClubId field
-        playerRef.update({'participatedClubId': clubId}).then((_) {
-          showSnackBar(context, 'Joined club successfully!');
+        await playerRef.update({'participatedClubId': clubId});
 
-          // Add the current userId to the clubMembersIds list in the club document
-          final clubRef =
-              FirebaseFirestore.instance.collection('clubs').doc(clubId);
-          clubRef.update({
-            'memberIds': FieldValue.arrayUnion([currentUserId])
-          }).then((_) {
-            showSnackBar(context, 'Updated clubMembersIds successfully!');
-          }).catchError((error) {
-            showSnackBar(context, 'Error updating clubMembersIds: $error');
-          });
-        }).catchError((error) {
-          showSnackBar(context, 'Error updating player document: $error');
+        // Add the current userId to the clubMembersIds list in the club document
+        final clubRef =
+            FirebaseFirestore.instance.collection('clubs').doc(clubId);
+        await clubRef.update({
+          'memberIds': FieldValue.arrayUnion([currentUserId])
         });
       }
       _removeInvitation(clubId);
-    }).catchError((error) {
-      showSnackBar(context, 'Error fetching player document: $error');
-    });
+    } catch (error) {}
   }
 
   // Method to handle the removal of the club invitation ID
@@ -83,12 +71,6 @@ class _ClubInvitationsPageState extends State<ClubInvitationsPage> {
 
     // Update the clubInvitationsIds field in Firestore
     playerRef.update({'clubInvitationsIds': clubInvitationsIds});
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
   }
 
   @override
