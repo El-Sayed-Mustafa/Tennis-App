@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/create_event_match/single_friendly_match/cubit/single_match_state.dart';
+import 'package:tennis_app/core/utils/app_router.dart';
 import 'package:tennis_app/models/player.dart';
 
 import '../../../Featured/create_event/view/widgets/input_end_date.dart';
@@ -94,6 +96,10 @@ class SaveMatchCubit extends Cubit<SaveMatchState> {
       // Display a success message or navigate to a new screen after saving successfully
       // Handle any errors that occur during the save process
       emit(SaveMatchSuccess());
+      GoRouter.of(context).pop();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Match Created successfully')),
+      );
     } catch (e) {
       emit(SaveMatchFailure(error: e.toString()));
     }

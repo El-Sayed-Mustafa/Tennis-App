@@ -48,20 +48,46 @@ class FirebaseAuthMethods {
         await currentUser.reload(); // Refresh user data
       }
       showSnackBar(context, S.of(context).email_verified);
+
+      // Check if the user is new or existing
+      final userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: currentUser.email!,
+        password: "", // Empty password as we're already verifying email
+      );
+
+      if (userCredential.additionalUserInfo!.isNewUser) {
+        GoRouter.of(context).push('/createProfile');
+      } else {
+        GoRouter.of(context).push('/home');
+      }
     }
   }
 
   // EMAIL VERIFICATION
   Future<void> sendEmailVerification(BuildContext context) async {
     try {
-      User? user = _auth.currentUser;
+      final user = FirebaseAuth.instance.currentUser;
 
       if (user != null && !user.emailVerified) {
+        String email = user.email ??
+            "Unknown Email"; // Get the user's email or use "Unknown Email"
+
+        print('Sending email verification to: $email');
         await user.sendEmailVerification();
-        showSnackBar(context, S.of(context).email_verification_sent);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Email verification sent!')),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Email is already verified.')),
+        );
+        GoRouter.of(context).push('/createProfile');
       }
-    } on FirebaseAuthException catch (e) {
-      showSnackBar(context, e.message!); // Display error message
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error sending email verification: $e')),
+      );
     }
   }
 
