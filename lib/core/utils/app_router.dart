@@ -39,7 +39,7 @@ abstract class AppRouter {
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider(
             create: (context) => NavigationCubit(),
-            child: const AuthScreen(),
+            child: const SplashScreen(),
           );
         },
         routes: <RouteBase>[

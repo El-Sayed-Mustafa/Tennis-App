@@ -27,10 +27,7 @@ class SaveMatchCubit extends Cubit<SaveMatchState> {
 
     try {
       // Check if all required data is available
-      if (selectedPlayer == null || selectedPlayer2 == null) {
-        // Display a message or alert to inform the user that both players need to be selected
-        return showSnackBar(context, 'You Must Choose Two Players');
-      }
+
       DateTime? selectedStartDateTime = context.read<DateTimeCubit>().state;
       DateTime? selectedEndDateTime = context.read<EndDateTimeCubit>().state;
       // Get the selected date and time from InputDateAndTime widget and convert it to DateTime object

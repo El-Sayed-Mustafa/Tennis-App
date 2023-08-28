@@ -82,7 +82,7 @@ class CreateCourtCubit extends Cubit<CreateCourtState> {
       emit(CreateCourtSuccessState());
 
       // Redirect to the next screen using GoRouter
-      GoRouter.of(context).push('/home');
+      GoRouter.of(context).pop();
     } catch (error) {
       // Handle the error if needed
       emit(CreateCourtErrorState(error: error.toString()));

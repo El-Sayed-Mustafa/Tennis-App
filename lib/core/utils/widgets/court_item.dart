@@ -10,8 +10,10 @@ import 'package:intl/intl.dart';
 import '../../../models/player.dart';
 
 class CourtItem extends StatefulWidget {
-  CourtItem({Key? key, required this.court}) : super(key: key);
+  CourtItem({Key? key, required this.court, this.courtNameController})
+      : super(key: key);
   final Court court;
+  final TextEditingController? courtNameController; // Optional parameter
 
   @override
   State<CourtItem> createState() => _CourtItemState();
@@ -222,6 +224,9 @@ class _CourtItemState extends State<CourtItem> {
                           _currentPlayerCourts(widget.court.courtId);
                           _updateCourtReservedStatus(widget.court.courtId);
                           canTap = false;
+                          widget.courtNameController!.text =
+                              widget.court.courtName;
+                          setState(() {});
                         }
                       },
                       child:

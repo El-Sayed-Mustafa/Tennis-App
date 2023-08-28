@@ -12,7 +12,10 @@ import '../../../../models/court.dart';
 
 class AvailableCourts extends StatefulWidget {
   final Club clubData;
-  const AvailableCourts({super.key, required this.clubData});
+  final TextEditingController? courtNameController; // Optional parameter
+
+  const AvailableCourts(
+      {super.key, required this.clubData, this.courtNameController});
 
   @override
   _AvailableCourtsState createState() => _AvailableCourtsState();
@@ -91,6 +94,7 @@ class _AvailableCourtsState extends State<AvailableCourts> {
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: CourtItem(
                       court: court,
+                      courtNameController: widget.courtNameController,
                     ),
                   );
                 },
@@ -99,7 +103,7 @@ class _AvailableCourtsState extends State<AvailableCourts> {
           )
         : NoData(
             text: S.of(context).noCourtsAvailable,
-            buttonText: S.of(context).Click_to_Find_Your_Partner,
+            buttonText: S.of(context).Create_Court,
             onPressed: () {
               GoRouter.of(context).push('/createCourt');
             },
