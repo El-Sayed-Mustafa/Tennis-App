@@ -61,7 +61,7 @@ class CreateClubCubit extends Cubit<CreateClubState> {
         doubleMatchesIds: [],
         doubleTournamentsIds: [],
         singleMatchesIds: [],
-        singleTournamentsIds: [], numberOfRatings: 0,
+        singleTournamentsIds: [], numberOfRatings: 0, courtIds: [],
       );
 
       CollectionReference clubsCollection =

@@ -15,19 +15,21 @@ class Club {
   final String? photoURL;
   final int matchPlayed;
   final int totalWins;
-  final List<String> roleIds; // Added property for role IDs
+  final List<String> roleIds;
   final String clubChatId;
   final List<String> singleMatchesIds;
   final List<String> doubleMatchesIds;
   final List<String> singleTournamentsIds;
   final List<String> doubleTournamentsIds;
   final int numberOfRatings; // New property for the number of ratings
+  final List<String> courtIds; // New property for the list of court IDs
 
   Club({
     required this.clubChatId,
     required this.clubId,
     required this.clubName,
     required this.numberOfRatings,
+    required this.courtIds,
     required this.clubType,
     required this.clubAdmin,
     required this.phoneNumber,
@@ -53,8 +55,9 @@ class Club {
       'clubName': clubName,
       'clubType': clubType,
       'clubAdmin': clubAdmin,
-      'phoneNumber': phoneNumber, 'numberOfRatings': numberOfRatings,
-
+      'phoneNumber': phoneNumber,
+      'numberOfRatings': numberOfRatings,
+      'courtIds': courtIds,
       'rulesAndRegulations': rulesAndRegulations,
       'ageRestriction': ageRestriction,
       'address': address, // Include address in the JSON
@@ -64,7 +67,8 @@ class Club {
       'memberIds': memberIds,
       'clubImageURL': photoURL,
       'roleIds': roleIds, // Include role IDs in the JSON
-      'clubChatId': clubChatId, 'singleMatchesIds': singleMatchesIds,
+      'clubChatId': clubChatId,
+      'singleMatchesIds': singleMatchesIds,
       'doubleMatchesIds': doubleMatchesIds,
       'singleTournamentsIds': singleTournamentsIds,
       'doubleTournamentsIds': doubleTournamentsIds,
@@ -90,6 +94,7 @@ class Club {
       address: data['address'] as String? ?? '',
       rate: (data['rate'] as num?)?.toDouble() ?? 0.0,
       eventIds: List<String>.from(data['eventIds'] ?? []),
+      courtIds: List<String>.from(data['courtIds'] ?? []),
       memberIds: List<String>.from(data['memberIds'] ?? []),
       photoURL: data['clubImageURL'] as String?,
       roleIds: List<String>.from(data['roleIds'] ?? []),

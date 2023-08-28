@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:tennis_app/Main-Features/Featured/create_court/cubit/create_court_states.dart';
+import 'package:tennis_app/core/methodes/firebase_methodes.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
 
 import '../../../../core/utils/widgets/input_date_and_time.dart';
@@ -69,8 +70,15 @@ class CreateCourtCubit extends Cubit<CreateCourtState> {
         // Update the court document with the image URL
         await courtDocRef.update({'photoURL': imageUrl});
       }
+      Method method = Method();
+      final player = await method.getCurrentUser();
 
-      // You can emit a success state if needed
+      final clubRef = FirebaseFirestore.instance
+          .collection('clubs')
+          .doc(player.participatedClubId);
+      await clubRef.update({
+        'courtIds': FieldValue.arrayUnion([newCourtId])
+      }); // You can emit a success state if needed
       emit(CreateCourtSuccessState());
 
       // Redirect to the next screen using GoRouter

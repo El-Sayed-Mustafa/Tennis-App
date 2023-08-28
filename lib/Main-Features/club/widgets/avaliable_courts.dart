@@ -6,11 +6,13 @@ import 'package:go_router/go_router.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/no_data_text.dart';
 import 'package:tennis_app/generated/l10n.dart';
+import 'package:tennis_app/models/club.dart';
 import '../../../../core/utils/widgets/court_item.dart';
 import '../../../../models/court.dart';
 
 class AvailableCourts extends StatefulWidget {
-  const AvailableCourts({super.key});
+  final Club clubData;
+  const AvailableCourts({super.key, required this.clubData});
 
   @override
   _AvailableCourtsState createState() => _AvailableCourtsState();
@@ -29,8 +31,15 @@ class _AvailableCourtsState extends State<AvailableCourts> {
 
   void fetchCourts() async {
     try {
+      List<String> courtIds =
+          widget.clubData.courtIds; // Fetch courtIds from clubData
+
+      // Fetch courts using courtIds
       QuerySnapshot<Map<String, dynamic>> querySnapshot =
-          await FirebaseFirestore.instance.collection('courts').get();
+          await FirebaseFirestore.instance
+              .collection('courts')
+              .where('courtId', whereIn: courtIds)
+              .get();
 
       List<Court> courts =
           querySnapshot.docs.map((doc) => Court.fromSnapshot(doc)).toList();

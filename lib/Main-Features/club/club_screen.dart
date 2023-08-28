@@ -116,7 +116,9 @@ class ClubScreen extends StatelessWidget {
                               SizedBox(height: spacing * 2),
                               HeaderText(text: S.of(context).available_courts),
                               SizedBox(height: spacing / 3),
-                              const AvailableCourts(),
+                              AvailableCourts(
+                                clubData: clubData,
+                              ),
                               SizedBox(height: spacing * 2),
                               HeaderText(
                                   text: S.of(context).available_single_matches),
