@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tennis_app/Main-Features/club/widgets/available_courts_widget.dart';
 
 import '../../Featured/create_event/view/widgets/input_end_date.dart';
 import '../../../core/utils/snackbar.dart';
@@ -107,17 +108,20 @@ class _MatchInputFormState extends State<MatchInputForm> {
                 onDateTimeSelected: (DateTime dateTime) {},
               ),
               SizedBox(height: screenHeight * .03),
-              InputTextWithHint(
-                hint: S.of(context).Type_Court_Address_here,
-                text: S.of(context).Court_Name,
-                controller: courtNameController,
-              ),
+              AvailableCourtsWidget(courtNameController: courtNameController),
               SizedBox(height: screenHeight * .015),
               ButtonTournament(
                 finish: () {
                   GoRouter.of(context).go('/home');
                 },
                 addMatch: () {
+                  if (_selectedPlayer == null ||
+                      _selectedPlayer2 == null ||
+                      courtNameController.text.isEmpty) {
+                    // Display a message or alert to inform the user that both players need to be selected
+                    return showSnackBar(
+                        context, 'You Must Choose Two Players and court ');
+                  }
                   if (formKey.currentState!.validate()) {
                     _saveMatch(
                         courtNameController: courtNameController,

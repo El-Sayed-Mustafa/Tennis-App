@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tennis_app/Main-Features/club/widgets/avaliable_courts.dart';
+import 'package:tennis_app/Main-Features/club/widgets/available_courts_widget.dart';
 import 'package:tennis_app/core/methodes/firebase_methodes.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import 'package:tennis_app/Main-Features/create_event_match/single_friendly_match/cubit/single_match_state.dart';
 import 'package:tennis_app/Main-Features/create_event_match/widgets/player_info_widget.dart';
-import 'package:tennis_app/models/club.dart';
 import '../../Featured/create_event/view/widgets/input_end_date.dart';
 import '../../../core/utils/widgets/input_date_and_time.dart';
 import '../../../core/utils/widgets/pop_app_bar.dart';
-import '../../../core/utils/widgets/text_field.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/player.dart';
 import 'cubit/single_match_cubit.dart';
@@ -140,8 +138,7 @@ class _PlayerMatchItemState extends State<PlayerMatchItem> {
                       onDateTimeSelected: (DateTime dateTime) {},
                     ),
                     SizedBox(height: screenHeight * .03),
-                    PlayerAndClubDataSection(
-                        method: method,
+                    AvailableCourtsWidget(
                         courtNameController: courtNameController),
                     SizedBox(height: screenHeight * .015),
                     BottomSheetContainer(
@@ -149,7 +146,7 @@ class _PlayerMatchItemState extends State<PlayerMatchItem> {
                       onPressed: () {
                         if (_selectedPlayer == null ||
                             _selectedPlayer2 == null ||
-                            courtNameController!.text.isEmpty) {
+                            courtNameController.text.isEmpty) {
                           // Display a message or alert to inform the user that both players need to be selected
                           return showSnackBar(context,
                               'You Must Choose Two Players and court ');
@@ -169,66 +166,6 @@ class _PlayerMatchItemState extends State<PlayerMatchItem> {
           },
         ),
       ),
-    );
-  }
-}
-
-class PlayerAndClubDataSection extends StatelessWidget {
-  final Method method;
-  final TextEditingController? courtNameController; // Optional parameter
-
-  PlayerAndClubDataSection({required this.method, this.courtNameController});
-
-  @override
-  Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-
-    return Column(
-      children: [
-        FutureBuilder<Player>(
-          future: method.getCurrentUser(),
-          builder: (context, playerSnapshot) {
-            if (playerSnapshot.connectionState == ConnectionState.waiting) {
-              return Container(
-                height: screenHeight,
-                child: const Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
-            } else if (playerSnapshot.hasError) {
-              return Center(
-                child: Text(S.of(context).error_fetching_club_data),
-              );
-            } else {
-              final player = playerSnapshot.data!;
-
-              return FutureBuilder<Club>(
-                future: method.fetchClubData(player.participatedClubId),
-                builder: (context, clubSnapshot) {
-                  if (clubSnapshot.connectionState == ConnectionState.waiting) {
-                    return Container(
-                      height: screenHeight,
-                      child: const Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    );
-                  } else if (clubSnapshot.hasError) {
-                    return Text(
-                        'No available data'); // Show appropriate error UI
-                  } else {
-                    final clubData = clubSnapshot.data!;
-
-                    return AvailableCourts(
-                      clubData: clubData,
-                      courtNameController: courtNameController,
-                    );
-                  }
-                },
-              );
-            }
-          },
-        ),
-      ],
     );
   }
 }

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tennis_app/Main-Features/club/widgets/available_courts_widget.dart';
+import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import 'package:tennis_app/Main-Features/create_event_match/widgets/player_info_widget.dart';
 import '../../Featured/create_event/view/widgets/input_end_date.dart';
 import '../../../core/utils/widgets/input_date_and_time.dart';
 import '../../../core/utils/widgets/pop_app_bar.dart';
-import '../../../core/utils/widgets/text_field.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/player.dart';
 import 'cubit/double_match_cubit.dart';
@@ -169,15 +170,21 @@ class _PlayerMatchItemState extends State<PlayerMatchItem> {
                       onDateTimeSelected: (DateTime dateTime) {},
                     ),
                     SizedBox(height: screenHeight * .03),
-                    InputTextWithHint(
-                      hint: S.of(context).Type_Court_Address_here,
-                      text: S.of(context).Court_Name,
-                      controller: courtNameController,
-                    ),
+                    AvailableCourtsWidget(
+                        courtNameController: courtNameController),
                     SizedBox(height: screenHeight * .015),
                     BottomSheetContainer(
                       buttonText: 'Create',
                       onPressed: () {
+                        if (_selectedPlayer == null ||
+                            _selectedPlayer2 == null ||
+                            _selectedPlayer3 == null ||
+                            _selectedPlayer4 == null ||
+                            courtNameController.text.isEmpty) {
+                          // Display a message or alert to inform the user that both players need to be selected
+                          return showSnackBar(context,
+                              'You Must Choose Two Players and court ');
+                        }
                         if (formKey.currentState!.validate()) {
                           context.read<DoubleMatchCubit>().saveDoubleMatch(
                               courtNameController: courtNameController,

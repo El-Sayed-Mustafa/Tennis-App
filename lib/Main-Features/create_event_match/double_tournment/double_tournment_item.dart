@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tennis_app/Main-Features/club/widgets/available_courts_widget.dart';
+import 'package:tennis_app/core/methodes/firebase_methodes.dart';
 import 'package:tennis_app/models/double_match.dart';
 
 import '../../Featured/create_event/view/widgets/input_end_date.dart';
@@ -99,6 +101,8 @@ class _MatchInputFormState extends State<MatchInputForm> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
+    final Method method = Method();
+
     return Form(
       key: formKey,
       child: Column(
@@ -167,11 +171,7 @@ class _MatchInputFormState extends State<MatchInputForm> {
             ),
           ),
           SizedBox(height: screenHeight * .02),
-          InputTextWithHint(
-            hint: S.of(context).Type_Court_Address_here,
-            text: S.of(context).Court_Name,
-            controller: courtNameController,
-          ),
+          AvailableCourtsWidget(courtNameController: courtNameController),
           SizedBox(height: screenHeight * .03),
           InputDateAndTime(
             text: S.of(context).Event_Start,
@@ -190,6 +190,15 @@ class _MatchInputFormState extends State<MatchInputForm> {
               GoRouter.of(context).go('/home');
             },
             addMatch: () {
+              if (_selectedPlayer == null ||
+                  _selectedPlayer2 == null ||
+                  _selectedPlayer3 == null ||
+                  _selectedPlayer4 == null ||
+                  courtNameController.text.isEmpty) {
+                // Display a message or alert to inform the user that both players need to be selected
+                return showSnackBar(
+                    context, 'You Must Choose Two Players and court ');
+              }
               if (formKey.currentState!.validate()) {
                 setState(() {
                   isSaving = true; // Start saving
