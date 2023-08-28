@@ -39,11 +39,12 @@ class _AvailableCourtsState extends State<AvailableCourts> {
           await FirebaseFirestore.instance
               .collection('courts')
               .where('courtId', whereIn: courtIds)
+              .where('reversed', isEqualTo: false) // Add this filter condition
+
               .get();
 
       List<Court> courts =
           querySnapshot.docs.map((doc) => Court.fromSnapshot(doc)).toList();
-
       setState(() {
         allCourts = courts;
         filteredCourts =
