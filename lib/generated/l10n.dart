@@ -3010,6 +3010,15 @@ class S {
     );
   }
 
+  String get createParty {
+    return Intl.message(
+      'Create Party',
+      name: 'create_party',
+      desc: '',
+      args: [],
+    );
+  }
+
   String get noRightMessage {
     return Intl.message(
       "You don't have the right",

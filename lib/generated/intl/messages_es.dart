@@ -511,5 +511,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Haz clic para crear el partido"),
         "noRightMessage": MessageLookupByLibrary.simpleMessage(
             "No tienes el permiso necesario"),
+        "createParty": MessageLookupByLibrary.simpleMessage("Crear Fiesta"),
       };
 }

@@ -504,6 +504,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "clickToCreateMatch": MessageLookupByLibrary.simpleMessage(
             "Klicken Sie, um das Spiel zu erstellen"),
         "noRightMessage": MessageLookupByLibrary.simpleMessage(
-            "Sie haben nicht die Berechtigung")
+            "Sie haben nicht die Berechtigung"),
+        "createParty": MessageLookupByLibrary.simpleMessage("Party erstellen")
       };
 }

@@ -477,6 +477,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "clickToCreateMatch":
             MessageLookupByLibrary.simpleMessage("Click to Create Match"),
         "noRightMessage":
-            MessageLookupByLibrary.simpleMessage("You don't have the right")
+            MessageLookupByLibrary.simpleMessage("You don't have the right"),
+        "createParty": MessageLookupByLibrary.simpleMessage("Create Party")
       };
 }

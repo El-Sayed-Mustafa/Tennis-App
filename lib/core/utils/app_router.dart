@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Auth/screens/auth_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/create_court/view/create_court_screen.dart';
+import 'package:tennis_app/Main-Features/Featured/create_party/view/create_party.dart';
 import 'package:tennis_app/Main-Features/Featured/create_profile/create_profile_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/edit_screen/edit_profile_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/navigation_bar/cubit/navigation_cubit.dart';
@@ -104,6 +105,12 @@ abstract class AppRouter {
             path: 'createEvent',
             builder: (BuildContext context, GoRouterState state) {
               return CreateEvent();
+            },
+          ),
+          GoRoute(
+            path: 'createParty',
+            builder: (BuildContext context, GoRouterState state) {
+              return CreateParty();
             },
           ),
           GoRoute(

@@ -132,10 +132,41 @@ class ClubScreen extends StatelessWidget {
                               const SingleTournamentsClub(),
                               const DoubleTournamentsClub(),
                               HomeButton(
-                                  buttonText: S.of(context).create_event,
+                                  buttonText: S.of(context).Create_Event,
                                   imagePath: 'assets/images/Create-Event.svg',
                                   onPressed: () async {
-                                    navigateToCreateEvent(context);
+                                    bool hasRight = await method
+                                        .doesPlayerHaveRight('Create Event');
+                                    if (hasRight) {
+                                      navigateToCreateEvent(context);
+                                    } else {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) => CustomDialog(
+                                          text: S.of(context).noRightMessage,
+                                        ),
+                                      );
+                                    }
+                                  }),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              HomeButton(
+                                  buttonText: S.of(context).createParty,
+                                  imagePath: 'assets/images/Create-Event.svg',
+                                  onPressed: () async {
+                                    bool hasRight = await method
+                                        .doesPlayerHaveRight('Create Event');
+                                    if (hasRight) {
+                                      GoRouter.of(context).push('/createParty');
+                                    } else {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) => CustomDialog(
+                                          text: S.of(context).noRightMessage,
+                                        ),
+                                      );
+                                    }
                                   }),
                               const SizedBox(
                                 height: 20,

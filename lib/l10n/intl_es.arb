@@ -299,6 +299,8 @@
     "noPlayersAvailable": "No hay jugadores disponibles",
     "noCourtsAvailable": "No tienes ninguna Cancha",
     "clickToCreateMatch": "Haz clic para crear el partido",
-    "noRightMessage": "No tienes el permiso necesario"
+    "noRightMessage": "No tienes el permiso necesario",
+    "createParty": "Crear Fiesta"
+
 
 }

@@ -30,7 +30,6 @@ class EventTypeInput extends StatelessWidget {
     EventType.InternalTeamEvent: 'Competition',
     EventType.FriendlyMatch: 'Friendly Match',
     EventType.DailyTraining: 'Daily Training',
-    EventType.PartyEvent: 'Party Event',
     EventType.Training: 'Training Plan',
   };
 
@@ -131,7 +130,6 @@ class EventTypeInput extends StatelessWidget {
       EventType.InternalTeamEvent: S.of(context).Competition,
       EventType.FriendlyMatch: S.of(context).Friendly_Match,
       EventType.DailyTraining: S.of(context).Daily_Training,
-      EventType.PartyEvent: S.of(context).Party_Event,
       EventType.Training: S.of(context).Training_Plan,
     };
 
@@ -141,7 +139,6 @@ class EventTypeInput extends StatelessWidget {
       EventType.InternalTeamEvent,
       EventType.FriendlyMatch,
       EventType.DailyTraining,
-      EventType.PartyEvent,
       EventType.Training,
     ];
 

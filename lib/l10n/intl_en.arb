@@ -302,5 +302,6 @@
     "no_players_available": "There is No Players Available",
     "noCourtsAvailable": "You don't have any Courts",
     "clickToCreateMatch": "Click to Create Match",
-    "noRightMessage": "You don't have the right"
+    "noRightMessage": "You don't have the right",
+    "createParty": "Create Party"
 }
