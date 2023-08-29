@@ -71,7 +71,7 @@ class AppBarWaveHome extends StatelessWidget {
                         else // Show ClipRRect with player.photoURL otherwise
                           GestureDetector(
                             onTap: () {
-                              GoRouter.of(context).go('/profileScreen');
+                              GoRouter.of(context).push('/profileScreen');
                             },
                             child: Padding(
                               padding:
