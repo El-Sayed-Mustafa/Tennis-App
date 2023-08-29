@@ -129,16 +129,28 @@ class HomeScreen extends StatelessWidget {
                   }
                 }),
             SizedBox(height: spacing),
-            HomeButton(
-              buttonText: S.of(context).Create_Club,
-              imagePath: 'assets/images/Make-offers.svg',
-              onPressed: () async {
-                bool hasParticipated = await checkParticipatedClub();
-                if (hasParticipated) {
-                  showSnackBar(
-                      context, 'You have already participated in a club');
+            FutureBuilder<bool>(
+              future: checkParticipatedClub(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  // Display a loading indicator while checking participation
+                  return CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  // Handle error state
+                  return Text('Error: ${snapshot.error}');
                 } else {
-                  GoRouter.of(context).push('/createClub');
+                  final hasParticipated = snapshot.data ?? false;
+                  if (hasParticipated) {
+                    return Container();
+                  } else {
+                    return HomeButton(
+                      buttonText: S.of(context).Create_Club,
+                      imagePath: 'assets/images/Make-offers.svg',
+                      onPressed: () {
+                        GoRouter.of(context).push('/createClub');
+                      },
+                    );
+                  }
                 }
               },
             ),
