@@ -150,6 +150,8 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
 
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
+
     return FutureBuilder<List<Player?>>(
       future: Future.wait([
         fetchPlayer(widget.match.player1Id),
@@ -206,13 +208,21 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
                             const SizedBox(height: 10),
                             PhotoPlayer(url: player1.photoURL!),
                             const SizedBox(height: 7),
-                            Text(
-                              player1.playerName,
-                              style: const TextStyle(
-                                color: Color(0xFF2A2A2A),
-                                fontSize: 14,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w500,
+                            SizedBox(
+                              width: screenWidth * 0.18,
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  player1.playerName,
+                                  style: const TextStyle(
+                                    color: Color(0xFF2A2A2A),
+                                    fontSize: 13,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
                             ),
                           ],
@@ -248,13 +258,21 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
                             const SizedBox(height: 10),
                             PhotoPlayer(url: player2.photoURL!),
                             const SizedBox(height: 7),
-                            Text(
-                              player2.playerName,
-                              style: const TextStyle(
-                                color: Color(0xFF2A2A2A),
-                                fontSize: 14,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w500,
+                            SizedBox(
+                              width: screenWidth * 0.18,
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  player2.playerName,
+                                  style: const TextStyle(
+                                    color: Color(0xFF2A2A2A),
+                                    fontSize: 13,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
                             ),
                           ],

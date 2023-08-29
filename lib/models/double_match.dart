@@ -9,7 +9,7 @@ class DoubleMatch {
   DateTime startTime;
   DateTime endTime;
   String winner1;
-  String winner2;
+  String result;
   String courtName;
 
   DoubleMatch({
@@ -21,7 +21,7 @@ class DoubleMatch {
     required this.startTime,
     required this.endTime,
     required this.winner1,
-    required this.winner2,
+    required this.result,
     required this.courtName,
   });
 
@@ -38,7 +38,7 @@ class DoubleMatch {
       startTime: (data['startTime'] as Timestamp).toDate(),
       endTime: (data['endTime'] as Timestamp).toDate(),
       winner1: data['winner1'],
-      winner2: data['winner2'],
+      result: data['result'],
       courtName: data['courtName'],
     );
   }
@@ -54,7 +54,7 @@ class DoubleMatch {
       'startTime': startTime,
       'endTime': endTime,
       'winner1': winner1,
-      'winner2': winner2,
+      'result': result,
       'courtName': courtName,
     };
   }

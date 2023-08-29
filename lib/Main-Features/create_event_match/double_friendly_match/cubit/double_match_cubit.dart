@@ -57,7 +57,7 @@ class DoubleMatchCubit extends Cubit<DoubleMatchState> {
         player3Id: selectedPlayer3.playerId,
         player4Id: selectedPlayer4.playerId,
         winner1: '',
-        winner2: '',
+        result: '',
       );
 
       // Save the DoubleMatch object to Firestore

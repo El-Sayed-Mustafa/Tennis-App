@@ -87,7 +87,7 @@ class _MatchInputFormState extends State<MatchInputForm> {
       endTime: endTime,
       courtName: courtNameController.text, matchId: '',
       player3Id: selectedPlayer3.playerId,
-      player4Id: selectedPlayer4.playerId, winner1: '', winner2: '',
+      player4Id: selectedPlayer4.playerId, winner1: '', result: '',
     );
 
     // Call the onSave method with the newMatch object
