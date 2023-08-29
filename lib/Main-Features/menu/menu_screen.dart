@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tennis_app/Auth/screens/auth_screen.dart';
 import 'package:tennis_app/Main-Features/menu/widgets/button_menu.dart';
 import 'package:tennis_app/core/utils/widgets/custom_dialouge.dart';
 
@@ -185,7 +187,12 @@ class MenuScreen extends StatelessWidget {
                             FirebaseAuthMethods();
 
                         await _authService.signOut();
-                        GoRouter.of(context).push('/auth');
+                        final prefs = await SharedPreferences.getInstance();
+                        prefs.setBool('showHome', false);
+                        while (GoRouter.of(context).canPop() == true) {
+                          GoRouter.of(context).pop();
+                        }
+                        GoRouter.of(context).pushReplacement('/auth');
                       },
                     ),
                   ],

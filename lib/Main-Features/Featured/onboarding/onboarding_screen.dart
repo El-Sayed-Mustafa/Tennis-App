@@ -67,8 +67,6 @@ class _OnboardingState extends State<Onboarding> {
               curve: Curves.easeInOut,
             );
           } else {
-            final prefs = await SharedPreferences.getInstance();
-            prefs.setBool('showHome', true);
             GoRouter.of(context).push('/auth');
           }
         },

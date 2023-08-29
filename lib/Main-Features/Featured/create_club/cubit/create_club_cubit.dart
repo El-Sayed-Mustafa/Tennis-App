@@ -39,7 +39,7 @@ class CreateClubCubit extends Cubit<CreateClubState> {
       String currentUserID = FirebaseAuth.instance.currentUser!.uid;
 
       List<String> eventIds = []; // Add the event IDs if needed
-      List<String> memberIds = []; // Add the member IDs if needed
+      List<String> memberIds = [currentUserID]; // Add the member IDs if needed
 
       Club club = Club(
         clubId: '', // Assign a club ID here if applicable
@@ -108,7 +108,7 @@ class CreateClubCubit extends Cubit<CreateClubState> {
       emit(CreateClubSuccessState());
 
       // Redirect to the next screen using GoRouter
-      GoRouter.of(context).push('/home');
+      GoRouter.of(context).pop();
     } catch (error) {
       // Handle the error if needed
       emit(CreateClubErrorState(error: error.toString()));

@@ -1,11 +1,13 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/utils/snackbar.dart';
 import '../../generated/l10n.dart';
@@ -13,30 +15,53 @@ import '../../generated/l10n.dart';
 class FirebaseAuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  // EMAIL SIGN UP
   Future<void> signUpWithEmail({
     required String email,
     required String password,
     required BuildContext context,
   }) async {
     try {
+      final user = FirebaseAuth.instance.currentUser;
+
+      if (user != null && user.emailVerified) {
+        showSnackBar(context, S.of(context).email_verified);
+        return;
+      }
+
       await sendEmailVerification(context);
-      await waitForEmailVerification(context);
 
       await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      GoRouter.of(context).push('/createProfile');
+      // GoRouter.of(context).push('/createProfile');
     } on FirebaseAuthException catch (e) {
-      // if you want to display your own custom error message
       if (e.code == 'weak-password') {
         showSnackBar(context, S.of(context).weak_password);
       } else if (e.code == 'email-already-in-use') {
         showSnackBar(context, S.of(context).account_already_exists);
       }
-      showSnackBar(
-          context, e.message!); // Displaying the usual firebase error message
+      showSnackBar(context, e.message!);
+    }
+  }
+
+  Future<void> sendEmailVerification(BuildContext context) async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+
+      if (!user!.emailVerified) {
+        await _auth.currentUser!.sendEmailVerification();
+        showSnackBar(context, S.of(context).email_verification_sent);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Email is already verified.')),
+        );
+        GoRouter.of(context).push('/createProfile');
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error sending email verification: $e')),
+      );
     }
   }
 
@@ -59,37 +84,43 @@ class FirebaseAuthMethods {
       if (userCredential.additionalUserInfo!.isNewUser) {
         GoRouter.of(context).push('/createProfile');
       } else {
+        final prefs = await SharedPreferences.getInstance();
+        prefs.setBool('showHome', true);
         GoRouter.of(context).push('/home');
       }
     }
   }
 
+// // EMAIL VERIFICATION
+//   Future<void> sendEmailVerification(BuildContext context) async {
+//     try {
+//       final user = FirebaseAuth.instance.currentUser;
+
+//       if (!user!.emailVerified) {
+//         _auth.currentUser!.sendEmailVerification();
+//         showSnackBar(context, S.of(context).email_verification_sent);
+//       } else {
+//         ScaffoldMessenger.of(context).showSnackBar(
+//           SnackBar(content: Text('Email is already verified.')),
+//         );
+//         GoRouter.of(context).push('/createProfile');
+//       }
+//     } catch (e) {
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         SnackBar(content: Text('Error sending email verification: $e')),
+//       );
+//     }
+//   }
+
   // EMAIL VERIFICATION
-  Future<void> sendEmailVerification(BuildContext context) async {
-    try {
-      final user = FirebaseAuth.instance.currentUser;
-
-      if (user != null && !user.emailVerified) {
-        String email = user.email ??
-            "Unknown Email"; // Get the user's email or use "Unknown Email"
-
-        print('Sending email verification to: $email');
-        await user.sendEmailVerification();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Email verification sent!')),
-        );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Email is already verified.')),
-        );
-        GoRouter.of(context).push('/createProfile');
-      }
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error sending email verification: $e')),
-      );
-    }
-  }
+  // Future<void> sendEmailVerification(BuildContext context) async {
+  //   try {
+  //     _auth.currentUser!.sendEmailVerification();
+  //     showSnackBar(context, S.of(context).email_verification_sent);
+  //   } on FirebaseAuthException catch (e) {
+  //     showSnackBar(context, e.message!); // Display error message
+  //   }
+  // }
 
   // EMAIL LOGIN
   Future<void> loginWithEmail({
@@ -102,7 +133,27 @@ class FirebaseAuthMethods {
         email: email,
         password: password,
       );
-      GoRouter.of(context).replace('/home');
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setBool('showHome', true);
+
+      // Check if the user is new or existing
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        final userDoc = await FirebaseFirestore.instance
+            .collection('players')
+            .doc(user.uid)
+            .get();
+
+        if (userDoc.exists) {
+          final prefs = await SharedPreferences.getInstance();
+          prefs.setBool('showHome', true);
+          // User profile already exists
+          GoRouter.of(context).push('/home');
+        } else {
+          // User profile doesn't exist
+          GoRouter.of(context).push('/createProfile');
+        }
+      }
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!); // Displaying the error message
     }
@@ -137,10 +188,22 @@ class FirebaseAuthMethods {
             await _auth.signInWithCredential(credential);
 
         // Check if the user is new or existing
-        if (userCredential.additionalUserInfo!.isNewUser) {
-          GoRouter.of(context).push('/createProfile');
-        } else {
-          GoRouter.of(context).push('/home');
+        final user = userCredential.user;
+        if (user != null) {
+          final userDoc = await FirebaseFirestore.instance
+              .collection('players')
+              .doc(user.uid)
+              .get();
+
+          if (userDoc.exists) {
+            final prefs = await SharedPreferences.getInstance();
+            prefs.setBool('showHome', true);
+            // User profile already exists
+            GoRouter.of(context).push('/home');
+          } else {
+            // User profile doesn't exist
+            GoRouter.of(context).push('/createProfile');
+          }
         }
         // The routing code should be here after successful sign-in
       }

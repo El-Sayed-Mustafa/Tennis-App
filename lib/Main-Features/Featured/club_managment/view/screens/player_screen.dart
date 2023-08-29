@@ -106,6 +106,18 @@ class _PlayerScreenState extends State<PlayerScreen> {
 
   Future<void> removePlayerFromClub(String playerId) async {
     try {
+      final playerRef =
+          FirebaseFirestore.instance.collection('players').doc(playerId);
+      final updatedData = {
+        'matchPlayed': 0,
+        'totalWins': 0,
+        'playerLevel': '0',
+        'skillLevel': '0',
+        'clubRoles': '',
+        'participatedClubId': '',
+      };
+      await playerRef.update(updatedData);
+
       final User? currentUser = FirebaseAuth.instance.currentUser;
       if (currentUser != null) {
         final DocumentSnapshot<Map<String, dynamic>> admin =

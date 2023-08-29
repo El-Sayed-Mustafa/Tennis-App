@@ -64,6 +64,8 @@ class InviteMember extends StatelessWidget {
 
   Future<List<Player>> getEligiblePlayers() async {
     try {
+      List<Player> eligiblePlayers = []; // Initialize an empty list
+
       // Get all players from the Firestore "players" collection
       final playersSnapshot =
           await FirebaseFirestore.instance.collection('players').get();
@@ -72,23 +74,30 @@ class InviteMember extends StatelessWidget {
       // and players who have the club's invitation ID in clubInvitationsIds
       final existingMembers = club.memberIds;
       final clubInvitationId = club.clubId;
-      final eligiblePlayers = playersSnapshot.docs
-          .map((doc) => Player.fromSnapshot(doc))
-          .where((player) =>
-              !existingMembers.contains(player.playerId) &&
-              !player.clubInvitationsIds.contains(clubInvitationId))
-          .toList();
 
-      // Sort players based on the number of clubs involved in ascending order
-      eligiblePlayers.sort((a, b) =>
-          a.participatedClubId.length.compareTo(b.participatedClubId.length));
+      if (existingMembers.isEmpty) {
+        // If existingMembers is empty, fill eligiblePlayers with all player IDs
+        eligiblePlayers = playersSnapshot.docs
+            .map((doc) => Player.fromSnapshot(doc))
+            .toList();
+        print('empty');
+      } else {
+        // If existingMembers is not empty, filter out ineligible players
+        eligiblePlayers = playersSnapshot.docs
+            .map((doc) => Player.fromSnapshot(doc))
+            .where((player) =>
+                !existingMembers.contains(player.playerId) &&
+                !player.clubInvitationsIds.contains(clubInvitationId))
+            .toList();
+        print('not empty ');
+      }
 
       // Take the first ten players (or less if the list is smaller)
       final firstTenPlayers = eligiblePlayers.take(10).toList();
-
+      print(firstTenPlayers);
       return firstTenPlayers;
     } catch (e) {
-      // Handle any errors that occur during the process
+      print('error: $e');
       return [];
     }
   }
