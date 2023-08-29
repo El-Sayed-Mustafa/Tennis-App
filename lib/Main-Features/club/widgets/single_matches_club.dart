@@ -138,7 +138,7 @@ class _ClubSingleMatchesState extends State<ClubSingleMatches> {
                                       );
                                     }
                                   },
-                                  height: screenHeight * .15,
+                                  height: screenHeight * .2,
                                   width: screenWidth * .8,
                                 ),
                               ),
@@ -176,7 +176,7 @@ class _ClubSingleMatchesState extends State<ClubSingleMatches> {
                     );
                   }
                 },
-                height: screenHeight * .15,
+                height: screenHeight * .2,
                 width: screenWidth * .8,
               ),
 

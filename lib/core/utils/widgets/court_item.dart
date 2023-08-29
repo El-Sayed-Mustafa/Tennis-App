@@ -264,88 +264,51 @@ class _CourtItemState extends State<CourtItem> {
                     SizedBox(height: screenWidth * .03),
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // New "Cancel Reservation" Button
-                    Container(
-                      width: buttonWidth / 2,
-                      height: buttonHeight,
-                      decoration: ShapeDecoration(
-                        color: Colors.red, // You can customize the color
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(buttonHeight / 2),
-                        ),
-                      ),
-                      child: Center(
-                        child: GestureDetector(
-                          onTap: () {
-                            if (!canTap) {
-                              _cancelReservation(widget.court.courtId);
-                              canTap = true; // Reset the tap status
-                            } else {
-                              const SnackBar(
-                                  content:
-                                      Text('This Court did\'t reversed yet.'));
-                            }
-                          },
-                          child: Text(
-                            'Cancel',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: buttonTextFontSize,
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w500,
+                StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                  stream: _courtStream,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Text(S.of(context).Error_fetching_data);
+                    }
+
+                    if (!snapshot.hasData) {
+                      return const CircularProgressIndicator();
+                    }
+
+                    final courtData = snapshot.data?.data();
+                    if (courtData == null) {
+                      return Text(S.of(context).No_data_available);
+                    }
+
+                    final bool isReversed = courtData['reversed'] ?? false;
+
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Container(
+                          width: buttonWidth / 1.4,
+                          height: buttonHeight,
+                          decoration: ShapeDecoration(
+                            color: const Color(0xFF1B262C),
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(buttonHeight / 2),
                             ),
                           ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Container(
-                      width: buttonWidth / 1.4,
-                      height: buttonHeight,
-                      decoration: ShapeDecoration(
-                        color: const Color(0xFF1B262C),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(buttonHeight / 2),
-                        ),
-                      ),
-                      child: Center(
-                        child: GestureDetector(
-                          onTap: () {
-                            if (canTap) {
-                              _currentPlayerCourts(widget.court.courtId);
-                              _updateCourtReservedStatus(widget.court.courtId);
-                              canTap = false;
-                              widget.courtNameController!.text =
-                                  widget.court.courtName;
-                              setState(() {});
-                            }
-                          },
-                          child: StreamBuilder<
-                              DocumentSnapshot<Map<String, dynamic>>>(
-                            stream: _courtStream,
-                            builder: (context, snapshot) {
-                              if (snapshot.hasError) {
-                                return Text(S.of(context).Error_fetching_data);
-                              }
-
-                              if (!snapshot.hasData) {
-                                return const CircularProgressIndicator();
-                              }
-
-                              final courtData = snapshot.data?.data();
-                              if (courtData == null) {
-                                return Text(S.of(context).No_data_available);
-                              }
-
-                              final bool isReversed =
-                                  courtData['reversed'] ?? false;
-
-                              return Text(
+                          child: Center(
+                            child: GestureDetector(
+                              onTap: () {
+                                if (canTap) {
+                                  _currentPlayerCourts(widget.court.courtId);
+                                  _updateCourtReservedStatus(
+                                      widget.court.courtId);
+                                  canTap = false;
+                                  widget.courtNameController!.text =
+                                      widget.court.courtName;
+                                  setState(() {});
+                                }
+                              },
+                              child: Text(
                                 isReversed
                                     ? S.of(context).Occupied
                                     : S.of(context).Get_Reserved,
@@ -355,13 +318,60 @@ class _CourtItemState extends State<CourtItem> {
                                   fontFamily: 'Roboto',
                                   fontWeight: FontWeight.w500,
                                 ),
-                              );
-                            },
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  ],
+                        SizedBox(height: 10), // Adjust the spacing as needed
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            // New "Cancel Reservation" Button
+                            Container(
+                              width: buttonWidth / 2,
+                              height: buttonHeight,
+                              decoration: ShapeDecoration(
+                                color:
+                                    Colors.red, // You can customize the color
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(buttonHeight / 2),
+                                ),
+                              ),
+                              child: Center(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    if (!canTap) {
+                                      _cancelReservation(widget.court.courtId);
+                                      canTap = true; // Reset the tap status
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                            content: Text(
+                                                'This Court didn\'t reverse yet.')),
+                                      );
+                                    }
+                                  },
+                                  child: Text(
+                                    'Cancel',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: buttonTextFontSize,
+                                      fontFamily: 'Roboto',
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 5),
+                            // Rest of the Row content
+                          ],
+                        ),
+                      ],
+                    );
+                  },
                 ),
                 SizedBox(height: screenHeight * .01),
               ],

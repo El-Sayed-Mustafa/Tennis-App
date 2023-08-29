@@ -107,7 +107,7 @@ class _AvailableCourtsState extends State<AvailableCourts> {
             onPressed: () {
               GoRouter.of(context).push('/createCourt');
             },
-            height: screenHeight * .15,
+            height: screenHeight * .2,
             width: screenWidth * .8,
           );
   }
