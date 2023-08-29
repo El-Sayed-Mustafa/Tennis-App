@@ -139,19 +139,25 @@ class FirebaseAuthMethods {
       // Check if the user is new or existing
       final user = FirebaseAuth.instance.currentUser;
       if (user != null) {
-        final userDoc = await FirebaseFirestore.instance
-            .collection('players')
-            .doc(user.uid)
-            .get();
+        if (user.emailVerified) {
+          final userDoc = await FirebaseFirestore.instance
+              .collection('players')
+              .doc(user.uid)
+              .get();
 
-        if (userDoc.exists) {
-          final prefs = await SharedPreferences.getInstance();
-          prefs.setBool('showHome', true);
-          // User profile already exists
-          GoRouter.of(context).push('/home');
+          if (userDoc.exists) {
+            final prefs = await SharedPreferences.getInstance();
+            prefs.setBool('showHome', true);
+            // User profile already exists
+            GoRouter.of(context).push('/home');
+          } else {
+            // User profile doesn't exist
+            GoRouter.of(context).push('/createProfile');
+          }
         } else {
-          // User profile doesn't exist
-          GoRouter.of(context).push('/createProfile');
+          // User's email is not verified
+          showSnackBar(context, 'Please verify your email before logging in.');
+          await _auth.signOut(); // Sign out the user
         }
       }
     } on FirebaseAuthException catch (e) {

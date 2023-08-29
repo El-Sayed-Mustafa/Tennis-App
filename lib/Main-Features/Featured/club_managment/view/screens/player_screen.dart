@@ -115,6 +115,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
         'skillLevel': '0',
         'clubRoles': '',
         'participatedClubId': '',
+        'isRated': false
       };
       await playerRef.update(updatedData);
 
