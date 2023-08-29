@@ -84,6 +84,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
         doubleTournamentsIds: currentPlayer.doubleTournamentsIds,
         singleMatchesIds: currentPlayer.singleMatchesIds,
         singleTournamentsIds: currentPlayer.singleTournamentsIds,
+        isRated: currentPlayer.isRated,
       );
 
       CollectionReference playersCollection =

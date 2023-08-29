@@ -3,7 +3,6 @@ import 'package:tennis_app/Main-Features/club/widgets/avaliable_courts.dart';
 import 'package:tennis_app/core/methodes/firebase_methodes.dart';
 import 'package:tennis_app/generated/l10n.dart';
 import 'package:tennis_app/models/club.dart';
-
 import '../../../models/player.dart';
 
 class AvailableCourtsWidget extends StatelessWidget {
@@ -22,7 +21,7 @@ class AvailableCourtsWidget extends StatelessWidget {
           future: method.getCurrentUser(),
           builder: (context, playerSnapshot) {
             if (playerSnapshot.connectionState == ConnectionState.waiting) {
-              return Container(
+              return SizedBox(
                 height: screenHeight,
                 child: const Center(
                   child: CircularProgressIndicator(),
@@ -39,7 +38,7 @@ class AvailableCourtsWidget extends StatelessWidget {
                 future: method.fetchClubData(player.participatedClubId),
                 builder: (context, clubSnapshot) {
                   if (clubSnapshot.connectionState == ConnectionState.waiting) {
-                    return Container(
+                    return SizedBox(
                       height: screenHeight,
                       child: const Center(
                         child: CircularProgressIndicator(),

@@ -1,12 +1,14 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/models/club.dart'; // Import the Club class
 import 'package:connectivity_plus/connectivity_plus.dart'; // Import the connectivity_plus plugin
+import 'package:tennis_app/models/player.dart';
 import '../../Featured/choose_club/widgets/static_rating_bar.dart';
 import '../../home/widgets/divider.dart';
 
@@ -36,29 +38,67 @@ class _ClubInfoState extends State<ClubInfo> {
 
   void checkUserRating() async {
     try {
-      DocumentSnapshot<Map<String, dynamic>> userRatingSnapshot =
+      // Get the current player
+      User? currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser == null) {
+        // Handle the case when no user is signed in.
+        return;
+      }
+
+      String currentUserId = currentUser.uid;
+
+      DocumentSnapshot<Map<String, dynamic>> playerSnapshot =
           await FirebaseFirestore.instance
-              .collection('user_ratings')
-              .doc(widget.clubData.clubId)
+              .collection('players')
+              .doc(currentUserId)
               .get();
 
-      Map<String, dynamic> userRatingData = userRatingSnapshot.data() ?? {};
-      double userRatedValue = userRatingData['rating'] ?? 0.0;
+      Player currentPlayer = Player.fromSnapshot(playerSnapshot);
 
       setState(() {
-        hasRated = userRatedValue > 0.0;
+        hasRated = currentPlayer.isRated;
       });
-
-      print('User has rated: $hasRated');
-      print('User rating: $userRatedValue');
     } catch (error) {
-      print('Error checking user rating: $error');
+      SnackBar(content: Text('Error checking user rating: $error'));
     }
   }
 
   void updateClubRatingInFirestore(double newRating) async {
     try {
       GoRouter.of(context).pop();
+
+      // Get the current player
+      User? currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser == null) {
+        // Handle the case when no user is signed in.
+        return;
+      }
+
+      String currentUserId = currentUser.uid;
+
+      // Fetch the existing player data
+      DocumentSnapshot<Map<String, dynamic>> playerSnapshot =
+          await FirebaseFirestore.instance
+              .collection('players')
+              .doc(currentUserId)
+              .get();
+
+      Map<String, dynamic> playerData = playerSnapshot.data() ?? {};
+      bool isPlayerRated = playerData['isRated'] ?? false;
+
+      if (isPlayerRated) {
+        // Player has already rated the club
+        showSnackBar(context, 'You have already rated this club.');
+        return;
+      }
+
+      // Update the isRated field of the player
+      await FirebaseFirestore.instance
+          .collection('players')
+          .doc(currentUserId)
+          .update({
+        'isRated': true,
+      });
 
       // Fetch the existing club data
       DocumentSnapshot<Map<String, dynamic>> clubSnapshot =

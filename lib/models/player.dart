@@ -27,12 +27,14 @@ class Player {
   final List<String> doubleMatchesIds;
   final List<String> singleTournamentsIds;
   final List<String> doubleTournamentsIds;
+  final bool isRated;
 
   Player({
     required this.playerId,
     required this.playerName,
     required this.photoURL,
     required this.playerLevel,
+    required this.isRated,
     required this.matchPlayed,
     required this.totalWins,
     required this.skillLevel,
@@ -66,6 +68,7 @@ class Player {
       'eventIds': eventIds,
       'gender': gender,
       'birthDate': birthDate,
+      'isRated': isRated,
       'preferredPlayingTime': preferredPlayingTime,
       'playerType': playerType,
       'clubInvitationsIds': clubInvitationsIds,
@@ -108,6 +111,8 @@ class Player {
       matches: List<String>.from(data['matchId'] ?? []),
       reversedCourtsIds: List<String>.from(data['reversedCourtsIds'] ?? []),
       chatIds: List<String>.from(data['chatIds'] ?? []),
+      isRated: data['isRated'] as bool? ?? false, // Add this line
+
       singleMatchesIds: List<String>.from(data['singleMatchesIds'] ?? []),
       doubleMatchesIds: List<String>.from(data['doubleMatchesIds'] ?? []),
       singleTournamentsIds:
@@ -135,6 +140,8 @@ class Player {
       participatedClubId: map['participatedClubId'] as String? ?? '',
       clubInvitationsIds: List<String>.from(map['clubInvitationsIds'] ?? []),
       chatIds: List<String>.from(map['chatIds'] ?? []),
+      isRated: map['isRated'] as bool? ?? false, // Add this line
+
       reversedCourtsIds: List<String>.from(map['reversedCourtsIds'] ?? []),
       matches: List<String>.from(map['matchId'] ?? []),
       singleMatchesIds: List<String>.from(map['singleMatchesIds'] ?? []),
