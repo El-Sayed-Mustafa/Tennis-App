@@ -13,22 +13,9 @@ class SplashScreenBody extends StatefulWidget {
 
 class _SplashScreenBodyState extends State<SplashScreenBody>
     with SingleTickerProviderStateMixin {
-  late AnimationController animationController;
-  late Animation<Offset> slidingAnimation;
-
   @override
   void initState() {
     super.initState();
-    animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 1),
-    );
-    animationController.forward();
-
-    slidingAnimation =
-        Tween<Offset>(begin: const Offset(0, 5), end: const Offset(0, 0))
-            .animate(animationController);
-
     navigateToHomeOrOnboarding();
   }
 
@@ -47,8 +34,6 @@ class _SplashScreenBodyState extends State<SplashScreenBody>
 
   @override
   void dispose() {
-    animationController.dispose();
-
     super.dispose();
   }
 
@@ -84,23 +69,15 @@ class _SplashScreenBodyState extends State<SplashScreenBody>
               SizedBox(
                 height: screenHeight * 0.02,
               ),
-              AnimatedBuilder(
-                animation: slidingAnimation,
-                builder: (context, _) {
-                  return SlideTransition(
-                    position: slidingAnimation,
-                    child: Text(
-                      'Match Point',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: fontSize,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w400,
-                        decoration: TextDecoration.none,
-                      ),
-                    ),
-                  );
-                },
+              Text(
+                'Match Point',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: fontSize,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w400,
+                  decoration: TextDecoration.none,
+                ),
               ),
             ],
           );

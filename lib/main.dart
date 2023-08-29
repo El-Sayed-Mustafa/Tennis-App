@@ -29,7 +29,11 @@ void main() async {
   );
   tz.initializeTimeZones();
 
-  runApp(const MyApp());
+  runApp(
+    DevicePreview(
+      builder: (context) => MyApp(), // Wrap your app
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {

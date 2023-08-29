@@ -123,23 +123,25 @@ class FirebaseAuthMethods {
   // }
 
   // EMAIL LOGIN
+
   Future<void> loginWithEmail({
     required String email,
     required String password,
     required BuildContext context,
   }) async {
     try {
-      await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      final prefs = await SharedPreferences.getInstance();
-      prefs.setBool('showHome', true);
-
-      // Check if the user is new or existing
       final user = FirebaseAuth.instance.currentUser;
       if (user != null) {
         if (user.emailVerified) {
+          await _auth.signInWithEmailAndPassword(
+            email: email,
+            password: password,
+          );
+          final prefs = await SharedPreferences.getInstance();
+          prefs.setBool('showHome', true);
+
+          // Check if the user is new or existing
+
           final userDoc = await FirebaseFirestore.instance
               .collection('players')
               .doc(user.uid)
@@ -159,6 +161,10 @@ class FirebaseAuthMethods {
           showSnackBar(context, 'Please verify your email before logging in.');
           await _auth.signOut(); // Sign out the user
         }
+      } else {
+        // User is not registered
+        showSnackBar(
+            context, 'User is not registered. Swap Right to register.');
       }
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!); // Displaying the error message

@@ -113,7 +113,7 @@ class _AuthScreenState extends State<AuthScreen>
             ),
             SizedBox(
               height:
-                  screenHeight * 0.55, // Set the height as per your requirement
+                  screenHeight * 0.6, // Set the height as per your requirement
 
               child: TabBarView(
                 controller: tabController,

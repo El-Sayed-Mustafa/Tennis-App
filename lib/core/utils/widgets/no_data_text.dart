@@ -12,7 +12,7 @@ class NoData extends StatelessWidget {
     required this.text,
     this.buttonText,
     this.onPressed,
-    this.height = 100,
+    this.height = 150,
     this.width = 200,
   }) : super(key: key);
 

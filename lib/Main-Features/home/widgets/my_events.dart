@@ -40,7 +40,7 @@ class _MyEventsState extends State<MyEvents> {
             // Show the NoData widget when the eventIds list is empty
             return NoData(
               text: S.of(context).You_Dont_have_Events,
-              height: MediaQuery.of(context).size.height * .15,
+              height: MediaQuery.of(context).size.height * .2,
               width: MediaQuery.of(context).size.width * .8,
               buttonText: S.of(context).Register_for_events_on_the_Club_page,
             );

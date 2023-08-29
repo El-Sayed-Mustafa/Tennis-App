@@ -122,7 +122,7 @@ class _ReversedCourtsState extends State<ReversedCourts> {
             : Center(
                 child: NoData(
                   text: S.of(context).No_Reversed_Courts,
-                  height: screenHeight * .15,
+                  height: screenHeight * .2,
                   width: screenWidth * .8,
                   buttonText: S.of(context).Click_to_Reverse_Court,
                   onPressed: () {

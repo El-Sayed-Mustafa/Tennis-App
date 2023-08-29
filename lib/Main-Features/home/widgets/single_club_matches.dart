@@ -114,7 +114,7 @@ class _MySingleMatchesState extends State<MySingleMatches> {
                             onPressed: () {
                               GoRouter.of(context).push('/findPartner');
                             },
-                            height: screenHeight * .15,
+                            height: screenHeight * .2,
                             width: screenWidth * .8,
                           ),
                         );
@@ -135,7 +135,7 @@ class _MySingleMatchesState extends State<MySingleMatches> {
                 onPressed: () {
                   GoRouter.of(context).push('/findPartner');
                 },
-                height: screenHeight * .15,
+                height: screenHeight * .2,
                 width: screenWidth * .8,
               ),
       ],
