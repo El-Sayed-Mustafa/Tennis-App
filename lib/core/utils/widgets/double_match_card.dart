@@ -1,7 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart'; // Import the intl package
+import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/photot_player.dart';
 import 'package:tennis_app/models/double_match.dart';
 import '../../../models/player.dart';
@@ -238,6 +241,9 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
             onTap: () async {
               bool hasRight = await method.doesPlayerHaveRight('Enter Results');
               if (hasRight) {
+                if (widget.match.result.isNotEmpty) {
+                  return showSnackBar(context, 'The Result is already entered');
+                }
                 _showWinnerDialog();
               }
             },
@@ -313,11 +319,12 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                               _selectedWinner1 ?? widget.match.winner1,
                               style: const TextStyle(
                                 color: Color(0xFF00344E),
-                                fontSize: 14,
+                                fontSize: 16,
                                 fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.w700,
                               ),
                             ),
+                            const SizedBox(height: 10),
                             SizedBox(
                               height: 40,
                               width: 40,

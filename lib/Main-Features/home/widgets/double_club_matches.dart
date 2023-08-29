@@ -84,7 +84,7 @@ class _MyDoubleMatchesState extends State<MyDoubleMatches> {
                       ? carouselHeight
                       : 0, // Set height based on matches list
                   aspectRatio: 16 / 9,
-                  viewportFraction: 0.7,
+                  viewportFraction: 0.75,
                   initialPage: 0,
                   enableInfiniteScroll: false,
                   enlargeCenterPage: true,

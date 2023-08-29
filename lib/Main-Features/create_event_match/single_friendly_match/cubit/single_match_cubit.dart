@@ -48,7 +48,7 @@ class SaveMatchCubit extends Cubit<SaveMatchState> {
         startTime: startTime,
         endTime: endTime,
         winner: '',
-        courtName: courtName,
+        courtName: courtName, result: '',
       );
 
       // Save the SingleMatch object to Firestore

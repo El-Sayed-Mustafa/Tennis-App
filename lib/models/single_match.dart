@@ -8,6 +8,7 @@ class SingleMatch {
   DateTime endTime;
   String winner;
   String courtName;
+  String result; // New result field
 
   SingleMatch({
     required this.matchId,
@@ -17,7 +18,9 @@ class SingleMatch {
     required this.endTime,
     required this.winner,
     required this.courtName,
+    required this.result, // Initialize the result field
   });
+
   // Factory method to create a SingleMatch object from a Firestore document
   factory SingleMatch.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
@@ -29,8 +32,10 @@ class SingleMatch {
       endTime: (data['endTime'] as Timestamp).toDate(),
       winner: data['winner'],
       courtName: data['courtName'],
+      result: data['result'], // Initialize the result field
     );
   }
+
   // Method to convert a SingleMatch object to a Firestore document
   Map<String, dynamic> toFirestore() {
     return {
@@ -41,6 +46,7 @@ class SingleMatch {
       'endTime': endTime,
       'winner': winner,
       'courtName': courtName,
+      'result': result, // Include the result field
     };
   }
 }

@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart'; // Import the intl package
+import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/photot_player.dart';
 
 import '../../../models/single_match.dart';
@@ -39,6 +41,9 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
   }
 
   Future<void> _showWinnerDialog() async {
+    TextEditingController teamAScoreController = TextEditingController();
+    TextEditingController teamBScoreController = TextEditingController();
+
     await showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -47,99 +52,126 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              ListTile(
-                title: const Text('Player A Winner'),
-                onTap: () async {
-                  setState(() {
-                    _selectedWinner1 = 'A Winner';
-                  });
-                  Navigator.of(context).pop();
-
-                  if (widget.tournamentId != null) {
-                    await FirebaseFirestore.instance
-                        .collection('singleTournaments')
-                        .doc(widget.tournamentId)
-                        .collection('singleMatches')
-                        .doc(widget.match.matchId)
-                        .update({
-                      'winner': 'A Winner',
-                    });
-                  } else {
-                    await FirebaseFirestore.instance
-                        .collection('single_matches')
-                        .doc(widget.match.matchId)
-                        .update({
-                      'winner': 'A Winner',
-                    });
-                  }
-                  await method.updateMatchPlayedAndTotalWins(
-                      widget.match.player1Id, true);
-                  await method.updateMatchPlayedAndTotalWins(
-                      widget.match.player2Id, false);
-                },
+              Row(
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      controller: teamAScoreController,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        labelText: 'Team A',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 16), // Add spacing between text fields
+                  Expanded(
+                    child: TextFormField(
+                      controller: teamBScoreController,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        labelText: 'Team B',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              ListTile(
-                title: const Text('Player B Winner'),
-                onTap: () async {
-                  setState(() {
-                    _selectedWinner1 = 'B Winner';
-                  });
-                  Navigator.of(context).pop();
-
-                  if (widget.tournamentId != null) {
-                    await FirebaseFirestore.instance
-                        .collection('singleTournaments')
-                        .doc(widget.tournamentId)
-                        .collection('singleMatches')
-                        .doc(widget.match.matchId)
-                        .update({
-                      'winner': 'B Winner',
-                    });
-                  } else {
-                    await FirebaseFirestore.instance
-                        .collection('single_matches')
-                        .doc(widget.match.matchId)
-                        .update({
-                      'winner': 'B Winner',
-                    });
-                  }
-
-                  await method.updateMatchPlayedAndTotalWins(
-                      widget.match.player1Id, true);
-                  await method.updateMatchPlayedAndTotalWins(
-                      widget.match.player2Id, false);
-                },
+              const SizedBox(
+                height: 10,
               ),
-              ListTile(
-                title: const Text('Draw'),
-                onTap: () async {
-                  setState(() {
-                    _selectedWinner1 = 'Draw';
-                  });
-                  Navigator.of(context).pop();
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color.fromARGB(
+                      255, 34, 47, 53), // Set the background color
+                ),
+                onPressed: () async {
+                  GoRouter.of(context).pop();
 
-                  if (widget.tournamentId != null) {
-                    await FirebaseFirestore.instance
-                        .collection('singleTournaments')
-                        .doc(widget.tournamentId)
-                        .collection('singleMatches')
-                        .doc(widget.match.matchId)
-                        .update({
-                      'winner': 'Draw',
-                    });
+                  int teamAScore = int.tryParse(teamAScoreController.text) ?? 0;
+                  int teamBScore = int.tryParse(teamBScoreController.text) ?? 0;
+                  String winner;
+                  String result;
+                  result = '$teamAScore : $teamBScore';
+                  if (teamAScore > teamBScore) {
+                    winner = 'Team A Winner';
+                    if (widget.tournamentId != null) {
+                      await FirebaseFirestore.instance
+                          .collection('singleTournaments')
+                          .doc(widget.tournamentId)
+                          .collection('singleMatches')
+                          .doc(widget.match.matchId)
+                          .update({
+                        'winner': 'A Winner',
+                        'result': result,
+                      });
+                    } else {
+                      await FirebaseFirestore.instance
+                          .collection('single_matches')
+                          .doc(widget.match.matchId)
+                          .update({
+                        'winner': 'A Winner',
+                        'result': result,
+                      });
+                    }
+                    await method.updateMatchPlayedAndTotalWins(
+                        widget.match.player1Id, true);
+                    await method.updateMatchPlayedAndTotalWins(
+                        widget.match.player2Id, false);
+                  } else if (teamBScore > teamAScore) {
+                    if (widget.tournamentId != null) {
+                      await FirebaseFirestore.instance
+                          .collection('singleTournaments')
+                          .doc(widget.tournamentId)
+                          .collection('singleMatches')
+                          .doc(widget.match.matchId)
+                          .update({
+                        'winner': 'B Winner',
+                        'result': result,
+                      });
+                    } else {
+                      await FirebaseFirestore.instance
+                          .collection('single_matches')
+                          .doc(widget.match.matchId)
+                          .update({
+                        'winner': 'B Winner',
+                        'result': result,
+                      });
+                    }
+
+                    await method.updateMatchPlayedAndTotalWins(
+                        widget.match.player1Id, true);
+                    await method.updateMatchPlayedAndTotalWins(
+                        widget.match.player2Id, false);
                   } else {
-                    await FirebaseFirestore.instance
-                        .collection('single_matches')
-                        .doc(widget.match.matchId)
-                        .update({
-                      'winner': 'Draw',
-                    });
+                    winner = 'Draw';
+
+                    if (widget.tournamentId != null) {
+                      await FirebaseFirestore.instance
+                          .collection('singleTournaments')
+                          .doc(widget.tournamentId)
+                          .collection('singleMatches')
+                          .doc(widget.match.matchId)
+                          .update({
+                        'winner': 'Draw',
+                        'result': result,
+                      });
+                    } else {
+                      await FirebaseFirestore.instance
+                          .collection('single_matches')
+                          .doc(widget.match.matchId)
+                          .update({
+                        'winner': 'Draw',
+                        'result': result,
+                      });
+                    }
+                    await method.updateMatchPlayedAndTotalWins(
+                        widget.match.player1Id, true);
+                    await method.updateMatchPlayedAndTotalWins(
+                        widget.match.player2Id, true);
                   }
-                  await method.updateMatchPlayedAndTotalWins(
-                      widget.match.player1Id, true);
-                  await method.updateMatchPlayedAndTotalWins(
-                      widget.match.player2Id, true);
                 },
+                child: const Text('Submit'),
               ),
             ],
           ),
@@ -178,6 +210,9 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
             onTap: () async {
               bool hasRight = await method.doesPlayerHaveRight('Enter Results');
               if (hasRight) {
+                if (widget.match.result.isNotEmpty) {
+                  return showSnackBar(context, 'The Result is already entered');
+                }
                 _showWinnerDialog();
               }
             },
@@ -243,6 +278,23 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
                               height: 40,
                               width: 40,
                               child: Image.asset('assets/images/versus.png'),
+                            ),
+                            const SizedBox(height: 15),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Container(
+                                padding: EdgeInsets.all(8),
+                                color: Color.fromARGB(255, 34, 47, 53),
+                                child: Text(
+                                  _selectedWinner1 ?? widget.match.result,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
                             ),
                           ],
                         ),

@@ -179,7 +179,7 @@ class _MatchInputFormState extends State<MatchInputForm> {
       startTime: startTime,
       endTime: endTime,
       winner: winner,
-      courtName: courtNameController.text, matchId: '',
+      courtName: courtNameController.text, matchId: '', result: '',
     );
 
     // Call the onSave method with the newMatch object
