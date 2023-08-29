@@ -31,7 +31,10 @@ class ClubScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
     final double spacing = screenHeight * 0.01;
+    final screenWidth = MediaQuery.of(context).size.width;
+
     final Method method = Method();
+    final sectionTitleSize = screenWidth * 0.052;
 
     return Scaffold(
       body: Container(
@@ -120,17 +123,25 @@ class ClubScreen extends StatelessWidget {
                                 clubData: clubData,
                               ),
                               SizedBox(height: spacing * 2),
-                              HeaderText(
-                                  text: S.of(context).available_single_matches),
-                              SizedBox(height: spacing),
-                              const ClubSingleMatches(),
                               SizedBox(height: spacing * 2),
-                              HeaderText(
-                                  text: S.of(context).available_double_matches),
+                              Text(
+                                "Club Upcoming Matches",
+                                style: TextStyle(
+                                  color: const Color(0xFF313131),
+                                  fontSize: sectionTitleSize,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              SizedBox(height: spacing * 2),
+                              const ClubSingleMatches(),
                               SizedBox(height: spacing),
                               const ClubDoubleMatches(),
+                              SizedBox(height: spacing),
                               const SingleTournamentsClub(),
+                              SizedBox(height: spacing),
                               const DoubleTournamentsClub(),
+                              SizedBox(height: spacing),
                               HomeButton(
                                   buttonText: S.of(context).Create_Event,
                                   imagePath: 'assets/images/Create-Event.svg',

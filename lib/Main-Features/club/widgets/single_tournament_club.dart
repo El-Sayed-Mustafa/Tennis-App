@@ -104,67 +104,52 @@ class SingleTournamentsClub extends StatelessWidget {
                   return singleTournamentsIds.contains(tournamentId);
                 }).toList();
 
-                return Column(
-                  children: [
-                    const SizedBox(height: 10),
-                    Text(
-                      S.of(context).SingleTournaments,
-                      style: const TextStyle(
-                        color: Color(0xFF313131),
-                        fontSize: 19,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    CarouselSlider(
-                      options: CarouselOptions(
-                        height: filteredTournamentDocs.isNotEmpty
-                            ? carouselHeight * 1.3
-                            : 0,
-                        aspectRatio: 1,
-                        viewportFraction: 0.75,
-                        initialPage: 0,
-                        enableInfiniteScroll: false,
-                        enlargeCenterPage: true,
-                        autoPlayCurve: Curves.linear,
-                      ),
-                      items: filteredTournamentDocs.map((tournamentDoc) {
-                        final tournamentData = tournamentDoc.data();
-                        if (tournamentData == null) {
-                          return Container(
-                            child: const Text('sss'),
-                          );
+                return CarouselSlider(
+                  options: CarouselOptions(
+                    height: filteredTournamentDocs.isNotEmpty
+                        ? carouselHeight * 1.3
+                        : 0,
+                    aspectRatio: 1,
+                    viewportFraction: 0.75,
+                    initialPage: 0,
+                    enableInfiniteScroll: false,
+                    enlargeCenterPage: true,
+                    autoPlayCurve: Curves.linear,
+                  ),
+                  items: filteredTournamentDocs.map((tournamentDoc) {
+                    final tournamentData = tournamentDoc.data();
+                    if (tournamentData == null) {
+                      return Container(
+                        child: const Text('sss'),
+                      );
+                    }
+
+                    return FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                      future: tournamentDoc.reference
+                          .collection('singleMatches')
+                          .get(),
+                      builder: (context, matchesSnapshot) {
+                        if (!matchesSnapshot.hasData) {
+                          return const Center(
+                              child: CircularProgressIndicator());
                         }
 
-                        return FutureBuilder<
-                            QuerySnapshot<Map<String, dynamic>>>(
-                          future: tournamentDoc.reference
-                              .collection('singleMatches')
-                              .get(),
-                          builder: (context, matchesSnapshot) {
-                            if (!matchesSnapshot.hasData) {
-                              return const Center(
-                                  child: CircularProgressIndicator());
-                            }
+                        final tournamentMatches = matchesSnapshot.data!.docs
+                            .map((matchDoc) =>
+                                SingleMatch.fromFirestore(matchDoc))
+                            .toList();
 
-                            final tournamentMatches = matchesSnapshot.data!.docs
-                                .map((matchDoc) =>
-                                    SingleMatch.fromFirestore(matchDoc))
-                                .toList();
-
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                VerticalCarouselSlider(
-                                    tournamentId: tournamentDoc.id,
-                                    matches: tournamentMatches),
-                              ],
-                            );
-                          },
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            VerticalCarouselSlider(
+                                tournamentId: tournamentDoc.id,
+                                matches: tournamentMatches),
+                          ],
                         );
-                      }).toList(),
-                    ),
-                  ],
+                      },
+                    );
+                  }).toList(),
                 );
               },
             );

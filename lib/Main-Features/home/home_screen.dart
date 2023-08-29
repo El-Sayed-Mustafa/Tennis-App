@@ -70,28 +70,8 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             const MyMatches(),
-            SizedBox(height: spacing * 2),
-            Text(
-              S.of(context).Your_Upcoming_Single_Matches_Club,
-              style: TextStyle(
-                color: const Color(0xFF313131),
-                fontSize: sectionTitleSize,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w500,
-              ),
-            ),
             SizedBox(height: spacing * 1),
             const MySingleMatches(),
-            SizedBox(height: spacing * 2),
-            Text(
-              S.of(context).Your_Upcoming_Double_Matches_Club,
-              style: TextStyle(
-                color: const Color(0xFF313131),
-                fontSize: sectionTitleSize,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w500,
-              ),
-            ),
             SizedBox(height: spacing * 1),
             const MyDoubleMatches(),
             SizedBox(height: spacing * 2),

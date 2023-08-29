@@ -156,28 +156,7 @@ class _ClubDoubleMatchesState extends State<ClubDoubleMatches> {
                   ),
                 ],
               )
-            : NoData(
-                text: S.of(context).You_Dont_have_Matches,
-                buttonText: S.of(context).clickToCreateMatch,
-                onPressed: () async {
-                  final Method method = Method();
-
-                  bool hasRight =
-                      await method.doesPlayerHaveRight('Create Match');
-                  if (hasRight) {
-                    GoRouter.of(context).push('/createMatch');
-                  } else {
-                    showDialog(
-                      context: context,
-                      builder: (context) => CustomDialog(
-                        text: S.of(context).noRightMessage,
-                      ),
-                    );
-                  }
-                },
-                height: screenHeight * .2,
-                width: screenWidth * .8,
-              ),
+            : Container()
       ],
     );
   }

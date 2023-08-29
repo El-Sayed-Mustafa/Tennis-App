@@ -103,68 +103,53 @@ class DoubleTournamentsClub extends StatelessWidget {
                   return doubleTournamentsIds.contains(tournamentId);
                 }).toList();
 
-                return Column(
-                  children: [
-                    const SizedBox(height: 10),
-                    Text(
-                      S.of(context).DoubleTournaments,
-                      style: const TextStyle(
-                        color: Color(0xFF313131),
-                        fontSize: 19,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    CarouselSlider(
-                      options: CarouselOptions(
-                        height: filteredTournamentDocs.isNotEmpty
-                            ? carouselHeight * 1.255
-                            : 0, // Set height based on matches list
-                        aspectRatio: 1,
-                        viewportFraction: 0.75,
-                        initialPage: 0,
-                        enableInfiniteScroll: false,
-                        enlargeCenterPage: true, autoPlayCurve: Curves.linear,
-                      ),
-                      items: filteredTournamentDocs.map((tournamentDoc) {
-                        final tournamentData = tournamentDoc.data();
-                        if (tournamentData == null) {
-                          return Container(
-                            child: const Text('sss'),
-                          );
+                return CarouselSlider(
+                  options: CarouselOptions(
+                    height: filteredTournamentDocs.isNotEmpty
+                        ? carouselHeight * 1.255
+                        : 0, // Set height based on matches list
+                    aspectRatio: 1,
+                    viewportFraction: 0.75,
+                    initialPage: 0,
+                    enableInfiniteScroll: false,
+                    enlargeCenterPage: true, autoPlayCurve: Curves.linear,
+                  ),
+                  items: filteredTournamentDocs.map((tournamentDoc) {
+                    final tournamentData = tournamentDoc.data();
+                    if (tournamentData == null) {
+                      return Container(
+                        child: const Text('sss'),
+                      );
+                    }
+
+                    // Fetch the subcollection data for 'doubleMatches'
+                    return FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                      future: tournamentDoc.reference
+                          .collection('doubleMatches')
+                          .get(),
+                      builder: (context, matchesSnapshot) {
+                        if (!matchesSnapshot.hasData) {
+                          return const Center(
+                              child: CircularProgressIndicator());
                         }
 
-                        // Fetch the subcollection data for 'doubleMatches'
-                        return FutureBuilder<
-                            QuerySnapshot<Map<String, dynamic>>>(
-                          future: tournamentDoc.reference
-                              .collection('doubleMatches')
-                              .get(),
-                          builder: (context, matchesSnapshot) {
-                            if (!matchesSnapshot.hasData) {
-                              return const Center(
-                                  child: CircularProgressIndicator());
-                            }
+                        final tournamentMatches = matchesSnapshot.data!.docs
+                            .map((matchDoc) =>
+                                DoubleMatch.fromFirestore(matchDoc))
+                            .toList();
 
-                            final tournamentMatches = matchesSnapshot.data!.docs
-                                .map((matchDoc) =>
-                                    DoubleMatch.fromFirestore(matchDoc))
-                                .toList();
-
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // Use the VerticalCarouselSlider to display matches
-                                VerticalCarouselSlider(
-                                    tournamentId: tournamentDoc.id,
-                                    matches: tournamentMatches),
-                              ],
-                            );
-                          },
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Use the VerticalCarouselSlider to display matches
+                            VerticalCarouselSlider(
+                                tournamentId: tournamentDoc.id,
+                                matches: tournamentMatches),
+                          ],
                         );
-                      }).toList(),
-                    ),
-                  ],
+                      },
+                    );
+                  }).toList(),
                 );
               },
             );
