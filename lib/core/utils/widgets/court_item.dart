@@ -34,6 +34,62 @@ class _CourtItemState extends State<CourtItem> {
         .snapshots();
   }
 
+  void _cancelReservation(String courtId) async {
+    try {
+      // Step 1: Get the current user ID from Firebase Authentication
+      User? currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser == null) {
+        // Handle the case when no user is signed in
+        return;
+      }
+
+      String currentUserId = currentUser.uid;
+
+      // Step 2: Fetch the player document for the current user
+      DocumentSnapshot<Map<String, dynamic>> playerSnapshot =
+          await FirebaseFirestore.instance
+              .collection('players')
+              .doc(currentUserId)
+              .get();
+
+      if (!playerSnapshot.exists) {
+        // Handle the case when player document does not exist
+        return;
+      }
+
+      // Step 3: Update the player's reversedCourtsIds to remove the courtId
+      Player currentPlayer = Player.fromSnapshot(playerSnapshot);
+      List<String> updatedReversedCourtsIds = currentPlayer.reversedCourtsIds;
+      updatedReversedCourtsIds.remove(courtId);
+
+      // Step 4: Save the updated player document back to Firestore
+      await FirebaseFirestore.instance
+          .collection('players')
+          .doc(currentUserId)
+          .update({
+        'reversedCourtsIds': updatedReversedCourtsIds,
+      });
+
+      // Step 5: Update the 'reversed' property of the court document
+      await FirebaseFirestore.instance
+          .collection('courts')
+          .doc(courtId)
+          .update({
+        'reversed': false, // Set 'reversed' back to false
+      });
+
+      // Show a success message
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Reservation canceled successfully')),
+      );
+    } catch (error) {
+      // Handle any errors that occur during the process
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error canceling reservation: $error')),
+      );
+    }
+  }
+
   void _currentPlayerCourts(String courtId) async {
     // Update the 'reversed' property to true for the corresponding court document in Firestore
     FirebaseFirestore.instance.collection('courts').doc(courtId).update({
@@ -208,62 +264,104 @@ class _CourtItemState extends State<CourtItem> {
                     SizedBox(height: screenWidth * .03),
                   ],
                 ),
-                Container(
-                  width: buttonWidth,
-                  height: buttonHeight,
-                  decoration: ShapeDecoration(
-                    color: const Color(0xFF1B262C),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(buttonHeight / 2),
-                    ),
-                  ),
-                  child: Center(
-                    child: GestureDetector(
-                      onTap: () {
-                        if (canTap) {
-                          _currentPlayerCourts(widget.court.courtId);
-                          _updateCourtReservedStatus(widget.court.courtId);
-                          canTap = false;
-                          widget.courtNameController!.text =
-                              widget.court.courtName;
-                          setState(() {});
-                        }
-                      },
-                      child:
-                          StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-                        stream: _courtStream,
-                        builder: (context, snapshot) {
-                          if (snapshot.hasError) {
-                            return Text(S.of(context).Error_fetching_data);
-                          }
-
-                          if (!snapshot.hasData) {
-                            return const CircularProgressIndicator();
-                          }
-
-                          final courtData = snapshot.data?.data();
-                          if (courtData == null) {
-                            return Text(S.of(context).No_data_available);
-                          }
-
-                          final bool isReversed =
-                              courtData['reversed'] ?? false;
-
-                          return Text(
-                            isReversed
-                                ? S.of(context).Occupied
-                                : S.of(context).Get_Reserved,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // New "Cancel Reservation" Button
+                    Container(
+                      width: buttonWidth / 2,
+                      height: buttonHeight,
+                      decoration: ShapeDecoration(
+                        color: Colors.red, // You can customize the color
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(buttonHeight / 2),
+                        ),
+                      ),
+                      child: Center(
+                        child: GestureDetector(
+                          onTap: () {
+                            if (!canTap) {
+                              _cancelReservation(widget.court.courtId);
+                              canTap = true; // Reset the tap status
+                            } else {
+                              const SnackBar(
+                                  content:
+                                      Text('This Court did\'t reversed yet.'));
+                            }
+                          },
+                          child: Text(
+                            'Cancel',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: buttonTextFontSize,
                               fontFamily: 'Roboto',
                               fontWeight: FontWeight.w500,
                             ),
-                          );
-                        },
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Container(
+                      width: buttonWidth / 1.4,
+                      height: buttonHeight,
+                      decoration: ShapeDecoration(
+                        color: const Color(0xFF1B262C),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(buttonHeight / 2),
+                        ),
+                      ),
+                      child: Center(
+                        child: GestureDetector(
+                          onTap: () {
+                            if (canTap) {
+                              _currentPlayerCourts(widget.court.courtId);
+                              _updateCourtReservedStatus(widget.court.courtId);
+                              canTap = false;
+                              widget.courtNameController!.text =
+                                  widget.court.courtName;
+                              setState(() {});
+                            }
+                          },
+                          child: StreamBuilder<
+                              DocumentSnapshot<Map<String, dynamic>>>(
+                            stream: _courtStream,
+                            builder: (context, snapshot) {
+                              if (snapshot.hasError) {
+                                return Text(S.of(context).Error_fetching_data);
+                              }
+
+                              if (!snapshot.hasData) {
+                                return const CircularProgressIndicator();
+                              }
+
+                              final courtData = snapshot.data?.data();
+                              if (courtData == null) {
+                                return Text(S.of(context).No_data_available);
+                              }
+
+                              final bool isReversed =
+                                  courtData['reversed'] ?? false;
+
+                              return Text(
+                                isReversed
+                                    ? S.of(context).Occupied
+                                    : S.of(context).Get_Reserved,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: buttonTextFontSize,
+                                  fontFamily: 'Roboto',
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(height: screenHeight * .01),
               ],
