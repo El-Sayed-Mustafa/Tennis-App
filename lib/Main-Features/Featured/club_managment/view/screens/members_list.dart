@@ -44,7 +44,7 @@ class _HorizontalListViewState extends State<HorizontalListView> {
             ),
           ), // Show only if there are members
           child: Container(
-            height: screenHeight * 0.3, // Adjust the height as needed
+            height: screenHeight * 0.325, // Adjust the height as needed
             child: PageView.builder(
               controller: _pageController,
               scrollDirection: Axis.horizontal,

@@ -140,9 +140,7 @@ class _CreateEventState extends State<CreateEvent> {
                         SizedBox(height: screenHeight * .03),
                         EventTypeInput(),
                         SizedBox(height: screenHeight * .03),
-                        AvailableCourtsWidget(
-                            courtNameController: courtNameController),
-                        SizedBox(height: screenHeight * .015),
+
                         //Create Radio Buttons here have two items Public and custom
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -221,6 +219,9 @@ class _CreateEventState extends State<CreateEvent> {
                               .of(context)
                               .You_can_set_a_skill_level_requirement_for_players_allowing_only_those_whose_skill_level_matches_the_requirement_you_have_set_to_participate, // Replace with your desired text for text2
                         ),
+                        SizedBox(height: screenHeight * .015),
+                        AvailableCourtsWidget(
+                            courtNameController: courtNameController),
                         SizedBox(height: screenHeight * .015),
                         BottomSheetContainer(
                           buttonText: S.of(context).Create,

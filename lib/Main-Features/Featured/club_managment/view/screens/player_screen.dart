@@ -306,315 +306,317 @@ class _PlayerScreenState extends State<PlayerScreen> {
         return Scaffold(
           body: Container(
             color: const Color(0xFFF8F8F8),
-            child: Column(
-              children: [
-                PoPAppBarWave(
-                  prefixIcon: IconButton(
-                    onPressed: () {
-                      GoRouter.of(context).pop();
-                    },
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      size: 30,
-                      color: Colors.white,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  PoPAppBarWave(
+                    prefixIcon: IconButton(
+                      onPressed: () {
+                        GoRouter.of(context).pop();
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        size: 30,
+                        color: Colors.white,
+                      ),
                     ),
+                    text: S.of(context).Management,
+                    suffixIconPath: '',
                   ),
-                  text: S.of(context).Management,
-                  suffixIconPath: '',
-                ),
-                Stack(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: (screenHeight + screenWidth) * 0.025,
-                          right: (screenHeight + screenWidth) * 0.025,
-                          top: (screenHeight + screenWidth) * 0.05),
-                      child: Center(
-                        child: Container(
-                          padding: EdgeInsets.only(
-                            top: (screenHeight + screenWidth) * 0.06,
-                          ),
-                          decoration: ShapeDecoration(
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              side: const BorderSide(
-                                  width: 0.50, color: Color(0x440D5FC3)),
-                              borderRadius: BorderRadius.circular(31),
+                  Stack(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: (screenHeight + screenWidth) * 0.025,
+                            right: (screenHeight + screenWidth) * 0.025,
+                            top: (screenHeight + screenWidth) * 0.05),
+                        child: Center(
+                          child: Container(
+                            padding: EdgeInsets.only(
+                              top: (screenHeight + screenWidth) * 0.06,
                             ),
-                          ),
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 20.0),
-                            child: Column(
-                              children: [
-                                Text(
-                                  widget.player.playerName,
-                                  style: const TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w500,
+                            decoration: ShapeDecoration(
+                              color: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                side: const BorderSide(
+                                    width: 0.50, color: Color(0x440D5FC3)),
+                                borderRadius: BorderRadius.circular(31),
+                              ),
+                            ),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20.0),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    widget.player.playerName,
+                                    style: const TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(height: 18),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      S.of(context).Skill_level,
-                                      style: const TextStyle(
-                                        color: Color(0xFF15324F),
-                                        fontSize: 18,
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w400,
+                                  const SizedBox(height: 18),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        S.of(context).Skill_level,
+                                        style: const TextStyle(
+                                          color: Color(0xFF15324F),
+                                          fontSize: 18,
+                                          fontFamily: 'Roboto',
+                                          fontWeight: FontWeight.w400,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      widget.player.skillLevel,
-                                      style: const TextStyle(
-                                        color: Color(0xFF6D6D6D),
-                                        fontSize: 18,
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w400,
+                                      Text(
+                                        widget.player.skillLevel,
+                                        style: const TextStyle(
+                                          color: Color(0xFF6D6D6D),
+                                          fontSize: 18,
+                                          fontFamily: 'Roboto',
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  const SizedBox(height: 18),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        S.of(context).Membership,
+                                        style: const TextStyle(
+                                          color: Color(0xFF15324F),
+                                          fontSize: 18,
+                                          fontFamily: 'Roboto',
+                                          fontWeight: FontWeight.w400,
+                                        ),
                                       ),
-                                    )
-                                  ],
-                                ),
-                                const SizedBox(height: 18),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      S.of(context).Membership,
-                                      style: const TextStyle(
-                                        color: Color(0xFF15324F),
-                                        fontSize: 18,
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w400,
+                                      Text(
+                                        widget.player.clubRoles['membership'] ??
+                                            S.of(context).Clear,
+                                        style: const TextStyle(
+                                          color: Color(0xFF6D6D6D),
+                                          fontSize: 16,
+                                          fontFamily: 'Roboto',
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  const SizedBox(height: 18),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        S.of(context).Player_Type,
+                                        style: const TextStyle(
+                                          color: Color(0xFF15324F),
+                                          fontSize: 18,
+                                          fontFamily: 'Roboto',
+                                          fontWeight: FontWeight.w400,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      widget.player.clubRoles['membership'] ??
-                                          S.of(context).Clear,
-                                      style: const TextStyle(
-                                        color: Color(0xFF6D6D6D),
-                                        fontSize: 16,
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w400,
+                                      Text(
+                                        widget.player.playerType,
+                                        style: const TextStyle(
+                                          color: Color(0xFF6D6D6D),
+                                          fontSize: 18,
+                                          fontFamily: 'Roboto',
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  const SizedBox(height: 18),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        S.of(context).Date,
+                                        style: const TextStyle(
+                                          color: Color(0xFF15324F),
+                                          fontSize: 18,
+                                          fontFamily: 'Roboto',
+                                          fontWeight: FontWeight.w400,
+                                        ),
                                       ),
-                                    )
-                                  ],
-                                ),
-                                const SizedBox(height: 18),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      S.of(context).Player_Type,
-                                      style: const TextStyle(
-                                        color: Color(0xFF15324F),
-                                        fontSize: 18,
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w400,
+                                      Text(
+                                        DateFormat('MMM d, yyyy')
+                                            .format(widget.player.birthDate),
+                                        style: const TextStyle(
+                                          color: Color(0xFF6D6D6D),
+                                          fontSize: 18,
+                                          fontFamily: 'Roboto',
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  const SizedBox(height: 18),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        S.of(context).Role,
+                                        style: const TextStyle(
+                                          color: Color(0xFF15324F),
+                                          fontSize: 18,
+                                          fontFamily: 'Roboto',
+                                          fontWeight: FontWeight.w400,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      widget.player.playerType,
-                                      style: const TextStyle(
-                                        color: Color(0xFF6D6D6D),
-                                        fontSize: 18,
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                const SizedBox(height: 18),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      S.of(context).Date,
-                                      style: const TextStyle(
-                                        color: Color(0xFF15324F),
-                                        fontSize: 18,
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                    Text(
-                                      DateFormat('MMM d, yyyy')
-                                          .format(widget.player.birthDate),
-                                      style: const TextStyle(
-                                        color: Color(0xFF6D6D6D),
-                                        fontSize: 18,
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                const SizedBox(height: 18),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      S.of(context).Role,
-                                      style: const TextStyle(
-                                        color: Color(0xFF15324F),
-                                        fontSize: 18,
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                    FutureBuilder<List<String>>(
-                                      future: widget.player.clubRoles.isNotEmpty
-                                          ? getRolesFromClubRoles(
-                                              widget.player.clubRoles)
-                                          : Future.value([]),
-                                      builder: (context, snapshot) {
-                                        if (snapshot.hasError) {
-                                          return Text(
-                                              'Error: ${snapshot.error}');
-                                        } else {
-                                          final List<String> roleNames =
-                                              snapshot.data ?? [];
-                                          return SizedBox(
-                                            width: screenWidth * .5,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              children: [
-                                                Text(
-                                                  roleNames.isNotEmpty
-                                                      ? roleNames.join(', ')
-                                                      : S
-                                                          .of(context)
-                                                          .No_Role_Assigned,
-                                                  style: const TextStyle(
-                                                    color: Color(0xFF6D6D6D),
-                                                    fontSize: 18,
-                                                    fontFamily: 'Roboto',
-                                                    fontWeight: FontWeight.w400,
+                                      FutureBuilder<List<String>>(
+                                        future:
+                                            widget.player.clubRoles.isNotEmpty
+                                                ? getRolesFromClubRoles(
+                                                    widget.player.clubRoles)
+                                                : Future.value([]),
+                                        builder: (context, snapshot) {
+                                          if (snapshot.hasError) {
+                                            return Text(
+                                                'Error: ${snapshot.error}');
+                                          } else {
+                                            final List<String> roleNames =
+                                                snapshot.data ?? [];
+                                            return SizedBox(
+                                              width: screenWidth * .5,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                children: [
+                                                  Text(
+                                                    roleNames.isNotEmpty
+                                                        ? roleNames.join(', ')
+                                                        : S
+                                                            .of(context)
+                                                            .No_Role_Assigned,
+                                                    style: const TextStyle(
+                                                      color: Color(0xFF6D6D6D),
+                                                      fontSize: 18,
+                                                      fontFamily: 'Roboto',
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                    maxLines: 1,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
                                                   ),
-                                                  maxLines: 1,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                ),
-                                              ],
-                                            ),
-                                          );
-                                        }
-                                      },
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 20),
-                              ],
+                                                ],
+                                              ),
+                                            );
+                                          }
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 20),
+                                ],
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    Column(
-                      children: [
-                        Align(
-                          alignment: Alignment.center, // Center the photo
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(
-                                (screenHeight + screenWidth) * 0.08 / 3),
-                            child: Container(
-                              height: (screenHeight + screenWidth) * 0.1,
-                              width: (screenHeight + screenWidth) * 0.08,
-                              child: widget.player.photoURL != ''
-                                  ? Image.network(
-                                      widget.player.photoURL!,
-                                      fit: BoxFit.cover,
-                                    )
-                                  : Image.asset(
-                                      'assets/images/profileimage.png',
-                                      fit: BoxFit.cover,
-                                    ),
+                      Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.center, // Center the photo
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(
+                                  (screenHeight + screenWidth) * 0.08 / 3),
+                              child: Container(
+                                height: (screenHeight + screenWidth) * 0.1,
+                                width: (screenHeight + screenWidth) * 0.08,
+                                child: widget.player.photoURL != ''
+                                    ? Image.network(
+                                        widget.player.photoURL!,
+                                        fit: BoxFit.cover,
+                                      )
+                                    : Image.asset(
+                                        'assets/images/profileimage.png',
+                                        fit: BoxFit.cover,
+                                      ),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: screenHeight * .025,
-                ),
-                Text(
-                  S.of(context).Assign_Role,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w400,
-                  ),
-                ), //call the function here
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
-                  child: RightSelector(
-                    selectedWords: selectedRole,
-                    onSelectedWordsChanged: (words) {
-                      updateRoleWithSelectedRole(words);
-                    },
-                    words: roleNames, // Use the fetched role names here
-                  ),
-                ),
-                SizedBox(
-                  height: screenHeight * .025,
-                ),
-                Text(
-                  S.of(context).Assign_Player_Skill_Level,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-
-                RangeSliderWithTooltip(
-                  text1: '',
-                  text2: '',
-                  skillLevel: double.tryParse(widget.player.skillLevel),
-                  onSkillLevelChanged: (newValue) {
-                    setState(() {
-                      _currentSkillLevel = newValue;
-                      sliderCubit.setSliderValue(newValue);
-                    });
-                  },
-                ),
-
-                GestureDetector(
-                  onTap: () async {
-                    await removePlayerFromClub(widget.player.playerId);
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ManagementScreen(),
+                        ],
                       ),
-                    );
-                  },
-                  child: Text(
-                    S.of(context).Remove_Member,
+                    ],
+                  ),
+                  SizedBox(
+                    height: screenHeight * .025,
+                  ),
+                  Text(
+                    S.of(context).Assign_Role,
                     style: const TextStyle(
-                      color: Color(0xFF0D5FC3),
-                      fontSize: 14,
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ), //call the function here
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 8.0, horizontal: 20),
+                    child: RightSelector(
+                      selectedWords: selectedRole,
+                      onSelectedWordsChanged: (words) {
+                        updateRoleWithSelectedRole(words);
+                      },
+                      words: roleNames, // Use the fetched role names here
+                    ),
+                  ),
+                  SizedBox(
+                    height: screenHeight * .025,
+                  ),
+                  Text(
+                    S.of(context).Assign_Player_Skill_Level,
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                ),
-                Expanded(
-                  child: FutureBuilder(
+
+                  RangeSliderWithTooltip(
+                    text1: '',
+                    text2: '',
+                    skillLevel: double.tryParse(widget.player.skillLevel),
+                    onSkillLevelChanged: (newValue) {
+                      setState(() {
+                        _currentSkillLevel = newValue;
+                        sliderCubit.setSliderValue(newValue);
+                      });
+                    },
+                  ),
+
+                  GestureDetector(
+                    onTap: () async {
+                      await removePlayerFromClub(widget.player.playerId);
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ManagementScreen(),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      S.of(context).Remove_Member,
+                      style: const TextStyle(
+                        color: Color(0xFF0D5FC3),
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                  FutureBuilder(
                     future: Future.delayed(
                         Duration.zero), // Create a delayed Future
                     builder: (context, snapshot) {
@@ -630,8 +632,8 @@ class _PlayerScreenState extends State<PlayerScreen> {
                       }
                     },
                   ),
-                )
-              ],
+                ],
+              ),
             ),
           ),
         );

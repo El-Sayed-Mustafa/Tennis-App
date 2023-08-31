@@ -13,9 +13,7 @@ import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import 'package:tennis_app/models/club.dart';
 import 'package:tennis_app/models/player.dart';
 import '../../../../core/utils/widgets/input_date.dart';
-import '../../../../core/utils/widgets/text_field.dart';
 import '../../../../generated/l10n.dart';
-import '../../create_event/view/widgets/club_names.dart';
 import '../../create_profile/cubits/player_type_cubit.dart';
 import '../../create_profile/widgets/input_time.dart';
 import '../../create_profile/widgets/player_type.dart';
@@ -158,22 +156,6 @@ class FindMatch extends StatelessWidget {
                                                 _selectedImageBytes =
                                                     imageFile.readAsBytesSync();
                                               },
-                                            ),
-                                            SizedBox(
-                                                height: screenHeight * .025),
-                                            InputTextWithHint(
-                                              hint: S.of(context).typeYourName,
-                                              text: S.of(context).playerName,
-                                              controller: nameController,
-                                            ),
-                                            SizedBox(
-                                                height: screenHeight * .025),
-                                            InputTextWithHint(
-                                              hint: S
-                                                  .of(context)
-                                                  .Type_Club_Address_here,
-                                              text: S.of(context).Club_Address,
-                                              controller: addressController,
                                             ),
                                             SizedBox(
                                                 height: screenHeight * .025),

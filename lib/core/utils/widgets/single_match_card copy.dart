@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart'; // Import the intl package
 import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/photot_player.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../models/single_match.dart';
 import '../../../models/player.dart';
@@ -199,8 +200,9 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
 
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
+    ScreenUtil.init(context, designSize: const Size(360, 690));
 
+    final double screenWidth = MediaQuery.of(context).size.width;
     return FutureBuilder<List<Player?>>(
       future: Future.wait([
         fetchPlayer(widget.match.player1Id),
@@ -247,10 +249,10 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
                       children: [
                         Column(
                           children: [
-                            const Text("Player A",
+                            Text("Player A",
                                 style: TextStyle(
                                   color: Color(0xFF2A2A2A),
-                                  fontSize: 16,
+                                  fontSize: 16.sp,
                                   fontFamily: 'Poppins',
                                   fontWeight: FontWeight.w600,
                                 )),
@@ -277,23 +279,25 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
                           ],
                         ), // Display player1's name
                         Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
                               _selectedWinner1 ?? widget.match.winner,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Color(0xFF00344E),
-                                fontSize: 14,
+                                fontSize: 14.sp,
                                 fontFamily: 'Poppins',
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            const SizedBox(height: 10),
-                            SizedBox(
-                              height: 40,
-                              width: 40,
-                              child: Image.asset('assets/images/versus.png'),
+                            Padding(
+                              padding: EdgeInsets.all(6.0.h),
+                              child: SizedBox(
+                                height: 40,
+                                width: 40,
+                                child: Image.asset('assets/images/versus.png'),
+                              ),
                             ),
-                            const SizedBox(height: 15),
                             ClipRRect(
                               borderRadius: BorderRadius.circular(10),
                               child: Container(
@@ -301,9 +305,9 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
                                 color: Color.fromARGB(255, 34, 47, 53),
                                 child: Text(
                                   _selectedWinner1 ?? widget.match.result,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 20,
+                                    fontSize: 17.sp,
                                     fontFamily: 'Poppins',
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -346,7 +350,7 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  SizedBox(height: 8.h),
 
                   Text(
                     '$formattedTime\n$formattedDate',

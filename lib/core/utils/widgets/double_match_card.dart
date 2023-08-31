@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart'; // Import the intl package
 import 'package:tennis_app/core/utils/snackbar.dart';
@@ -210,6 +211,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
+    ScreenUtil.init(context, designSize: const Size(360, 690));
 
     return FutureBuilder<List<Player?>>(
       future: fetchPlayers([
@@ -314,23 +316,25 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                           ],
                         ), // Display player1's name
                         Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
                               _selectedWinner1 ?? widget.match.winner1,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Color(0xFF00344E),
-                                fontSize: 16,
+                                fontSize: 14.sp,
                                 fontFamily: 'Poppins',
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
-                            const SizedBox(height: 10),
-                            SizedBox(
-                              height: 40,
-                              width: 40,
-                              child: Image.asset('assets/images/versus.png'),
+                            Padding(
+                              padding: const EdgeInsets.all(6.0),
+                              child: SizedBox(
+                                height: 40,
+                                width: 40,
+                                child: Image.asset('assets/images/versus.png'),
+                              ),
                             ),
-                            const SizedBox(height: 10),
                             Text(
                               '$formattedTime\n$formattedDate',
                               textAlign: TextAlign.center,

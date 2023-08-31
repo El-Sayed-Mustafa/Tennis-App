@@ -10,14 +10,11 @@ import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 
 import '../../../core/utils/snackbar.dart';
-import '../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../core/utils/widgets/input_date_and_time.dart';
 import '../../../core/utils/widgets/text_field.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/event.dart';
 import '../../club/widgets/club_event_item.dart';
-import '../../club/widgets/header_text.dart';
-import '../create_event/view/widgets/event_types.dart';
 import '../create_event/view/widgets/input_end_date.dart';
 import 'model/database_helper.dart';
 import 'model/evenet_data.dart';
@@ -102,25 +99,13 @@ class SetReminder extends StatelessWidget {
                 key: formKey,
                 child: Column(
                   children: [
-                    SizedBox(height: screenHeight * .01),
-                    InputTextWithHint(
-                      hint: S.of(context).Type_event_name_here,
-                      text: S.of(context).Event_Name,
-                      controller: eventNameController,
-                    ),
                     SizedBox(height: screenHeight * .03),
                     InputDateAndTime(
-                      text: S.of(context).Event_Start,
-                      hint: S.of(context).Select_start_date_and_time,
+                      text: S.of(context).set_reminder,
+                      hint: 'Select the reminder time ',
                       onDateTimeSelected: (DateTime dateTime) {},
                     ),
                     SizedBox(height: screenHeight * .03),
-                    InputEndDateAndTime(
-                      text: S.of(context).Event_End,
-                      hint: S.of(context).Select_end_date_and_time,
-                      onDateTimeSelected: (DateTime dateTime) {},
-                    ),
-                    SizedBox(height: screenHeight * .01),
                   ],
                 ),
               ),
@@ -135,16 +120,15 @@ class SetReminder extends StatelessWidget {
             try {
               DateTime? endDate = context.read<EndDateTimeCubit>().state;
               DateTime? startDate = context.read<DateTimeCubit>().state;
-              String name = eventNameController.text;
 
               // Get a random color from the Google Calendar-like colors
               Color color = GoogleCalendarColors.getRandomEventColor();
 
               // Save the event to the database
-              await saveEvent(startDate!, endDate!, name, color);
+              await saveEvent(startDate, endDate, event.eventName, color);
 
               NotificationApi.showSchaduleNotification(
-                title: name,
+                title: event.eventName,
                 body: S.of(context).your_event_will_start_now,
                 scheduleDate: startDate,
               );

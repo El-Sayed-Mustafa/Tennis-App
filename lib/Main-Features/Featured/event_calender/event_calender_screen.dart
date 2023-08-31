@@ -86,7 +86,7 @@ class _CalendarScreenState extends State<CalendarScreen>
             tabs: [
               S.of(context).Daily,
               S.of(context).Schedule,
-              S.of(context).Schedule
+              S.of(context).Monthly
             ],
           ),
           Expanded(

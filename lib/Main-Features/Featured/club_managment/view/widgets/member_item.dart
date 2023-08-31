@@ -151,7 +151,8 @@ class _MemberItemState extends State<MemberItem> {
                       shape: OvalBorder(),
                     ),
                     child: IconButton(
-                      icon: const Icon(Icons.ads_click, color: Colors.white),
+                      icon: Icon(Icons.ads_click,
+                          color: Colors.white, size: imageHeight * .3),
                       onPressed: () {
                         Navigator.push(
                           context,
