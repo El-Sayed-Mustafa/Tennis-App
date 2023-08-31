@@ -87,7 +87,15 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
                 ),
                 onPressed: () async {
                   GoRouter.of(context).pop();
+                  if (widget.match.result.isNotEmpty) {
+                    List<String> scores = widget.match.result.split(':');
 
+// Trim and parse the extracted scores as integers
+                    int teamAScore = int.tryParse(scores[0].trim()) ?? 0;
+                    int teamBScore = int.tryParse(scores[1].trim()) ?? 0;
+
+                    if (teamAScore > teamBScore) {}
+                  }
                   int teamAScore = int.tryParse(teamAScoreController.text) ?? 0;
                   int teamBScore = int.tryParse(teamBScoreController.text) ?? 0;
                   String winner;
@@ -140,9 +148,9 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
                     }
 
                     await method.updateMatchPlayedAndTotalWins(
-                        widget.match.player1Id, true);
+                        widget.match.player2Id, true);
                     await method.updateMatchPlayedAndTotalWins(
-                        widget.match.player2Id, false);
+                        widget.match.player1Id, false);
                   } else {
                     winner = 'Draw';
 
@@ -166,9 +174,9 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
                       });
                     }
                     await method.updateMatchPlayedAndTotalWins(
-                        widget.match.player1Id, true);
+                        widget.match.player1Id, false);
                     await method.updateMatchPlayedAndTotalWins(
-                        widget.match.player2Id, true);
+                        widget.match.player2Id, false);
                   }
                 },
                 child: const Text('Submit'),
@@ -210,9 +218,6 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
             onTap: () async {
               bool hasRight = await method.doesPlayerHaveRight('Enter Results');
               if (hasRight) {
-                if (widget.match.result.isNotEmpty) {
-                  return showSnackBar(context, 'The Result is already entered');
-                }
                 _showWinnerDialog();
               }
             },
