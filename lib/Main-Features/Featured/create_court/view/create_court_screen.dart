@@ -109,12 +109,6 @@ class CreateCourt extends StatelessWidget {
                         controller: courtNameController,
                       ),
                       SizedBox(height: screenHeight * .03),
-                      InputTextWithHint(
-                        hint: S.of(context).Type_your_Phone_number_here,
-                        text: S.of(context).Your_Phone,
-                        controller: phoneController,
-                      ),
-                      SizedBox(height: screenHeight * .03),
                       InputDateAndTime(
                         text: S.of(context).Start_Date_and_Time,
                         hint: S.of(context).Select_start_date_and_time,

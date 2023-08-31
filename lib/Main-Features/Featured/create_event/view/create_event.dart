@@ -8,6 +8,9 @@ import 'package:tennis_app/Main-Features/Featured/create_event/cubit/create_even
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/input_end_date.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/invited_members.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/player_level.dart';
+import 'package:tennis_app/Main-Features/club/widgets/available_courts_widget.dart';
+import 'package:tennis_app/Main-Features/club/widgets/avaliable_courts.dart';
+import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import 'package:tennis_app/core/utils/widgets/rules_text_field.dart';
 import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/event_types.dart';
@@ -137,11 +140,8 @@ class _CreateEventState extends State<CreateEvent> {
                         SizedBox(height: screenHeight * .03),
                         EventTypeInput(),
                         SizedBox(height: screenHeight * .03),
-                        InputTextWithHint(
-                          hint: S.of(context).Type_Court_Address_here,
-                          text: S.of(context).Court_Name,
-                          controller: courtNameController,
-                        ),
+                        AvailableCourtsWidget(
+                            courtNameController: courtNameController),
                         SizedBox(height: screenHeight * .015),
                         //Create Radio Buttons here have two items Public and custom
                         Padding(
@@ -225,6 +225,11 @@ class _CreateEventState extends State<CreateEvent> {
                         BottomSheetContainer(
                           buttonText: S.of(context).Create,
                           onPressed: () {
+                            if (courtNameController.text.isEmpty) {
+                              // Display a message or alert to inform the user that both players need to be selected
+                              return showSnackBar(
+                                  context, 'You Must Choose court ');
+                            }
                             if (formKey.currentState!.validate()) {
                               context.read<CreateEventCubit>().saveEventData(
                                     context: context,
