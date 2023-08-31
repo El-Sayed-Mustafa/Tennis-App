@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../generated/l10n.dart';
 
@@ -25,10 +26,11 @@ class AgeRestrictionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    ScreenUtil.init(context, designSize: const Size(360, 690));
 
     return Container(
       width: screenWidth * .8,
-      height: screenHeight * .2,
+      height: screenHeight * .23,
       decoration: BoxDecoration(
         color: Colors.white,
         shape: BoxShape.rectangle,
@@ -54,7 +56,7 @@ class AgeRestrictionWidget extends StatelessWidget {
               S.of(context).Age_restriction,
               style: TextStyle(
                 color: Color(0xFF525252),
-                fontSize: 17,
+                fontSize: 17.sp,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w500,
               ),
@@ -124,6 +126,8 @@ class AgeOptionRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    ScreenUtil.init(context, designSize: const Size(360, 690));
+
     return Padding(
       padding: EdgeInsets.symmetric(
           horizontal: screenWidth * .1, vertical: screenHeight * .005),
@@ -148,9 +152,9 @@ class AgeOptionRow extends StatelessWidget {
           ),
           Text(
             label,
-            style: const TextStyle(
+            style: TextStyle(
               color: Color(0xFF00344E),
-              fontSize: 15,
+              fontSize: 15.sp,
               fontFamily: 'Poppins',
               fontWeight: FontWeight.w500,
             ),
