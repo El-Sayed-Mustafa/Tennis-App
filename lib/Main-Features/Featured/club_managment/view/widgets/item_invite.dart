@@ -78,7 +78,7 @@ class _ItemInviteState extends State<ItemInvite> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    final double imageHeight = (screenHeight + screenWidth) * 0.08;
+    final double imageHeight = (screenHeight + screenWidth) * 0.072;
 
     List<String> getRolesFromClubRoles(Map<String, String> clubRoles) {
       List<String> roles = [];
@@ -190,6 +190,8 @@ class _ItemInviteState extends State<ItemInvite> {
                     height: screenHeight * .005,
                   ),
                   Container(
+                    height: screenHeight * .05,
+                    width: screenHeight * .05,
                     decoration: const ShapeDecoration(
                       color: Color.fromARGB(212, 15, 32, 42),
                       shape: OvalBorder(),
@@ -198,6 +200,7 @@ class _ItemInviteState extends State<ItemInvite> {
                       icon: Icon(
                         getIconForPlayer(widget.member),
                         color: Colors.white,
+                        size: imageHeight * .2,
                       ),
                       onPressed: () {
                         // Call the function to handle sending the invitation

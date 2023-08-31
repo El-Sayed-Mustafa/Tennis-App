@@ -112,13 +112,16 @@ class AppBarWaveHome extends StatelessWidget {
                               ),
                             ),
                           ),
-                        Text(
-                          text,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w500,
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 6.0),
+                          child: Text(
+                            text,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ),
                         SizedBox(
