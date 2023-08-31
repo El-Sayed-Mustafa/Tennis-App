@@ -94,7 +94,16 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
                     int teamAScore = int.tryParse(scores[0].trim()) ?? 0;
                     int teamBScore = int.tryParse(scores[1].trim()) ?? 0;
 
-                    if (teamAScore > teamBScore) {}
+                    if (teamAScore > teamBScore) {
+                      await method.reEnterResult(widget.match.player1Id, true);
+                      await method.reEnterResult(widget.match.player2Id, false);
+                    } else if (teamBScore > teamAScore) {
+                      await method.reEnterResult(widget.match.player1Id, false);
+                      await method.reEnterResult(widget.match.player2Id, true);
+                    } else {
+                      await method.reEnterResult(widget.match.player1Id, false);
+                      await method.reEnterResult(widget.match.player2Id, false);
+                    }
                   }
                   int teamAScore = int.tryParse(teamAScoreController.text) ?? 0;
                   int teamBScore = int.tryParse(teamBScoreController.text) ?? 0;

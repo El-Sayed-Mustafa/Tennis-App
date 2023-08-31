@@ -338,6 +338,7 @@ class _CourtItemState extends State<CourtItem> {
                                       if (!canTap) {
                                         _cancelReservation(
                                             widget.court.courtId);
+                                        widget.courtNameController!.text = '';
                                         canTap = true; // Reset the tap status
                                         setState(() {});
                                       } else {

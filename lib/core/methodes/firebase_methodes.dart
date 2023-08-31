@@ -159,12 +159,12 @@ class Method {
         final updatedData;
         if (isWinner) {
           updatedData = {
-            'matchPlayed': currentMatchPlayed + 1,
-            'totalWins': currentTotalWins + 1,
+            'matchPlayed': currentMatchPlayed - 1,
+            'totalWins': currentTotalWins - 1,
           };
         } else {
           updatedData = {
-            'matchPlayed': currentMatchPlayed + 1,
+            'matchPlayed': currentMatchPlayed - 1,
           };
         }
 
