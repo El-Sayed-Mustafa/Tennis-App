@@ -5,16 +5,18 @@ class BottomSheetContainer extends StatelessWidget {
     Key? key,
     required this.buttonText,
     required this.onPressed,
-    CircularProgressIndicator? child,
+    this.backgroundColor = Colors.black, // Default background color is black
   }) : super(key: key);
 
   final String buttonText;
   final VoidCallback onPressed;
+  final Color backgroundColor; // Background color parameter
+
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 60),
-      height: 80,
+      height: 70,
       color: Colors.transparent,
       child: Center(
         child: SizedBox(
@@ -22,7 +24,8 @@ class BottomSheetContainer extends StatelessWidget {
           width: double.infinity,
           child: TextButton(
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
+              backgroundColor:
+                  MaterialStateProperty.all<Color>(backgroundColor),
               foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(

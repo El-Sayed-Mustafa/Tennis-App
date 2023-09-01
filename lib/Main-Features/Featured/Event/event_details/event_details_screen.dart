@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/core/utils/widgets/chosen_court.dart';
+import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import 'package:tennis_app/generated/l10n.dart';
 import 'package:tennis_app/models/event.dart';
@@ -207,9 +210,37 @@ class EventDetailsScreen extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(height: 15),
+            BottomSheetContainer(
+              buttonText: "Edit Event",
+              onPressed: () {},
+            ),
+            BottomSheetContainer(
+              buttonText: "Delete Event",
+              onPressed: () {
+                deleteEvent(event.eventId);
+              },
+              backgroundColor: Colors.red,
+            )
           ],
         ),
       ),
     );
+  }
+
+  Future<void> deleteEvent(String eventId) async {
+    try {
+      // Get a reference to the Firestore collection
+      final collection = FirebaseFirestore.instance.collection('events');
+
+      // Delete the document with the specified eventId
+      await collection.doc(eventId).delete();
+
+      // Successfully deleted the event
+      print('Event deleted successfully');
+    } catch (e) {
+      // Handle any errors that occur during deletion
+      print('Error deleting event: $e');
+    }
   }
 }

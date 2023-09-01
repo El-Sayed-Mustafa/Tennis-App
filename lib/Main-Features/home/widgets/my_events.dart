@@ -67,13 +67,20 @@ class _MyEventsState extends State<MyEvents> {
                         as Future<DocumentSnapshot<Map<String, dynamic>>>,
                     builder: (context, eventSnapshot) {
                       if (eventSnapshot.hasData) {
-                        final event = Event.fromSnapshot(eventSnapshot.data!);
+                        final eventData = eventSnapshot.data!.data();
 
-                        return CarouselItem(
-                          selected:
-                              selectedPageIndex == eventIds.indexOf(eventId),
-                          event: event, // Pass the event object here
-                        );
+                        if (eventData != null) {
+                          final event = Event.fromMap(eventData);
+
+                          return CarouselItem(
+                            selected:
+                                selectedPageIndex == eventIds.indexOf(eventId),
+                            event: event,
+                          );
+                        }
+                        return const NoData(text: 'This event deleted');
+
+                        // Handle the case where the event data is invalid
                       } else if (eventSnapshot.hasError) {
                         return Center(
                           child: Text(S.of(context).error_fetching_club_data),

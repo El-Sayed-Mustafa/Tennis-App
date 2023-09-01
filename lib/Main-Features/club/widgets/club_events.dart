@@ -30,11 +30,20 @@ class _ClubEventsState extends State<ClubEvents> {
     // Fetch events from Firestore using eventIds in the club collection
     final eventsCollection = FirebaseFirestore.instance.collection('events');
     final List<Event> fetchedEvents = [];
+
     for (String eventId in widget.eventsId) {
       final eventSnapshot = await eventsCollection.doc(eventId).get();
-      final event = Event.fromSnapshot(eventSnapshot);
-      fetchedEvents.add(event);
+
+      // Check if the event exists in Firestore before adding it
+      if (eventSnapshot.exists) {
+        final event = Event.fromSnapshot(eventSnapshot);
+        fetchedEvents.add(event);
+      } else {
+        // Handle the case where the event doesn't exist
+        print('Event with ID $eventId does not exist in Firestore.');
+      }
     }
+
     setState(() {
       clubEvents = fetchedEvents;
     });

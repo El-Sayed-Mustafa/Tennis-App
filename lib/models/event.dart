@@ -63,4 +63,21 @@ class Event {
       photoURL: data['photoURL'] as String?, // New photo field
     );
   }
+
+  static Event fromMap(Map<String, dynamic> data) {
+    return Event(
+      eventId: data['eventId'] as String,
+      eventName: data['eventName'] as String,
+      eventStartAt: (data['eventStartAt'] as Timestamp).toDate(),
+      eventEndsAt: (data['eventEndsAt'] as Timestamp).toDate(),
+      eventAddress: data['eventAddress'] as String,
+      eventType: data['eventType'] as String,
+      courtName: data['courtName'] as String,
+      instructions: data['instructions'] as String,
+      playerIds: List<String>.from(data['playerIds'] ?? []),
+      playerLevel: (data['playerLevel'] as num).toDouble(),
+      clubId: data['clubId'] as String,
+      photoURL: data['photoURL'] as String?,
+    );
+  }
 }
