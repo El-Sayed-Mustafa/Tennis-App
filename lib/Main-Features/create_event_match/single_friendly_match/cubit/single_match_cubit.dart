@@ -6,7 +6,7 @@ import 'package:tennis_app/Main-Features/create_event_match/single_friendly_matc
 import 'package:tennis_app/core/utils/app_router.dart';
 import 'package:tennis_app/models/player.dart';
 
-import '../../../Featured/create_event/view/widgets/input_end_date.dart';
+import '../../../Featured/Event/create_event/view/widgets/input_end_date.dart';
 import '../../../../core/methodes/firebase_methodes.dart';
 import '../../../../core/utils/snackbar.dart';
 import '../../../../core/utils/widgets/input_date_and_time.dart';

@@ -304,7 +304,7 @@ class _CourtItemState extends State<CourtItem> {
                                             widget.court.courtId);
                                         canTap = false;
                                         widget.courtNameController!.text =
-                                            widget.court.courtName;
+                                            widget.court.courtId;
                                         setState(() {});
                                       }
                                     },

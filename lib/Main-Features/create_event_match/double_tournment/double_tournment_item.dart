@@ -5,7 +5,7 @@ import 'package:tennis_app/Main-Features/club/widgets/available_courts_widget.da
 import 'package:tennis_app/core/methodes/firebase_methodes.dart';
 import 'package:tennis_app/models/double_match.dart';
 
-import '../../Featured/create_event/view/widgets/input_end_date.dart';
+import '../../Featured/Event/create_event/view/widgets/input_end_date.dart';
 import '../../../core/utils/snackbar.dart';
 import '../../../core/utils/widgets/input_date_and_time.dart';
 import '../../../core/utils/widgets/text_field.dart';

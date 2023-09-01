@@ -15,7 +15,7 @@ import '../../../core/utils/widgets/text_field.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/event.dart';
 import '../../club/widgets/club_event_item.dart';
-import '../create_event/view/widgets/input_end_date.dart';
+import '../Event/create_event/view/widgets/input_end_date.dart';
 import 'model/database_helper.dart';
 import 'model/evenet_data.dart';
 

@@ -29,7 +29,7 @@ class _UserGroupsScreenState extends State<UserGroupsScreen> {
           padding: const EdgeInsets.only(top: 8),
           width: double.infinity,
           decoration: const ShapeDecoration(
-            color: kPrimaryColor,
+            color: kBackgroundColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(30),

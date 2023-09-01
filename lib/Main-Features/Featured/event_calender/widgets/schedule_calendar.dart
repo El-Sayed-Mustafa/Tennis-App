@@ -47,7 +47,7 @@ class ScheduleCalendar extends StatelessWidget {
           monthFormat: 'MMMM, yyyy',
           height: 100,
           textAlign: TextAlign.left,
-          backgroundColor: kPrimaryColor,
+          backgroundColor: kBackgroundColor,
           monthTextStyle: TextStyle(
             color: Color(0xFF00344E),
             fontSize: 25,

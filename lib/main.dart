@@ -9,9 +9,9 @@ import 'package:tennis_app/core/utils/widgets/input_date.dart';
 
 import 'Main-Features/Featured/create_club/view/widgets/Age_restriction.dart';
 import 'Main-Features/Featured/create_club/view/widgets/club_type.dart';
-import 'Main-Features/Featured/create_event/cubit/create_event_cubit.dart';
-import 'Main-Features/Featured/create_event/view/widgets/input_end_date.dart';
-import 'Main-Features/Featured/create_event/view/widgets/player_level.dart';
+import 'Main-Features/Featured/Event/create_event/cubit/create_event_cubit.dart';
+import 'Main-Features/Featured/Event/create_event/view/widgets/input_end_date.dart';
+import 'Main-Features/Featured/Event/create_event/view/widgets/player_level.dart';
 import 'Main-Features/Featured/create_profile/cubits/Gender_Cubit.dart';
 import 'Main-Features/Featured/create_profile/cubits/player_type_cubit.dart';
 import 'Main-Features/Featured/create_profile/cubits/time_cubit.dart';

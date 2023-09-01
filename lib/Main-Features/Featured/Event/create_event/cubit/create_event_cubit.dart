@@ -12,8 +12,8 @@ import 'package:go_router/go_router.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/input_date_and_time.dart';
 
-import '../../../../models/club.dart';
-import '../../../../models/event.dart';
+import '../../../../../models/club.dart';
+import '../../../../../models/event.dart';
 import '../../create_event/cubit/create_event_state.dart';
 import '../../create_event/view/widgets/event_types.dart';
 import '../view/widgets/input_end_date.dart';

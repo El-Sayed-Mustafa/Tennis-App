@@ -7,7 +7,7 @@ import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import 'package:tennis_app/Main-Features/create_event_match/single_friendly_match/cubit/single_match_state.dart';
 import 'package:tennis_app/Main-Features/create_event_match/widgets/player_info_widget.dart';
-import '../../Featured/create_event/view/widgets/input_end_date.dart';
+import '../../Featured/Event/create_event/view/widgets/input_end_date.dart';
 import '../../../core/utils/widgets/input_date_and_time.dart';
 import '../../../core/utils/widgets/pop_app_bar.dart';
 import '../../../generated/l10n.dart';

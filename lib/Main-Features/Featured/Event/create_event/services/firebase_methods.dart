@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
-import '../../../../models/event.dart';
+import '../../../../../models/event.dart';
 
 Future<void> saveEventDocument(
     DocumentReference eventDocRef, Event event) async {

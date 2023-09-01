@@ -132,7 +132,7 @@ class ChooseClubItem extends StatelessWidget {
                   onJoinPressed!();
                   GoRouter.of(context).replace('/home');
                 },
-                color: kPrimaryColor,
+                color: kBackgroundColor,
                 cancel: () {
                   onCancelPressed!();
                 },

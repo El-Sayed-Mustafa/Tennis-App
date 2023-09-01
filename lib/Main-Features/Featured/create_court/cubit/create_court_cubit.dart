@@ -14,7 +14,7 @@ import 'package:tennis_app/core/utils/snackbar.dart';
 
 import '../../../../core/utils/widgets/input_date_and_time.dart';
 import '../../../../models/court.dart';
-import '../../create_event/view/widgets/input_end_date.dart';
+import '../../Event/create_event/view/widgets/input_end_date.dart';
 
 class CreateCourtCubit extends Cubit<CreateCourtState> {
   CreateCourtCubit(this.context) : super(CreateCourtInitialState());

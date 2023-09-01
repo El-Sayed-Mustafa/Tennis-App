@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../../../../generated/l10n.dart';
+import '../../../../../../generated/l10n.dart';
 
 class ClubNamesCubit extends Cubit<List<String>> {
   ClubNamesCubit() : super([]);

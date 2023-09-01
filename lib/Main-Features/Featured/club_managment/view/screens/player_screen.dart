@@ -14,7 +14,7 @@ import '../../../../../generated/l10n.dart';
 import '../../../../../models/player.dart';
 import 'package:intl/intl.dart';
 import '../../../../../models/roles.dart';
-import '../../../create_event/view/widgets/player_level.dart';
+import '../../../Event/create_event/view/widgets/player_level.dart';
 import '../../../roles/assign_person/service/club_roles_service.dart';
 import 'package:connectivity_plus/connectivity_plus.dart'; // Import the connectivity_plus plugin
 

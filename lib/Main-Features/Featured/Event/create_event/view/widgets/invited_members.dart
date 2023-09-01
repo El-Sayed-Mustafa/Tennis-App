@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tennis_app/Main-Features/Featured/create_event/view/widgets/player_search_match.dart';
+import 'package:tennis_app/Main-Features/Featured/Event/create_event/view/widgets/player_search_match.dart';
 
 class MemberInvites extends StatefulWidget {
   final List<String> playerIds;

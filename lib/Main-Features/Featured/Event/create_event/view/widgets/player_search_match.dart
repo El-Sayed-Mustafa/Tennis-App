@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../core/utils/widgets/pop_app_bar.dart';
-import '../../../../../generated/l10n.dart';
-import '../../../../../models/player.dart';
-import '../../../../chats/widgets/player_card.dart';
+import '../../../../../../core/utils/widgets/pop_app_bar.dart';
+import '../../../../../../generated/l10n.dart';
+import '../../../../../../models/player.dart';
+import '../../../../../chats/widgets/player_card.dart';
 
 class PlayerSearchInvite extends StatefulWidget {
   final List<String> playerNames;
