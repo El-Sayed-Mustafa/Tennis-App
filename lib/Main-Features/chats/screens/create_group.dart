@@ -49,6 +49,9 @@ class _CreateGroupState extends State<CreateGroup> {
     if (snapshot.exists) {
       List<String> memberIds = List<String>.from(snapshot.data()!['memberIds']);
 
+      // Remove the current player's ID from the memberIds list
+      memberIds.remove(player.playerId);
+
       List<Player> fetchedMembers =
           await Future.wait(memberIds.map((memberId) async {
         DocumentSnapshot<Map<String, dynamic>> playerSnapshot =
