@@ -7,7 +7,7 @@ import 'package:tennis_app/Main-Features/chats/widgets/community_message.dart';
 import 'package:tennis_app/Main-Features/chats/widgets/my_reply.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import '../../../generated/l10n.dart';
-import '../../../models/chats.dart';
+import '../../../models/message.dart';
 import '../../../models/player.dart';
 import '../widgets/message_input.dart';
 
@@ -33,10 +33,47 @@ String generateChatId(String currentUserId, String otherPlayerId) {
   return ids.join('_');
 }
 
-class PrivateChat extends StatelessWidget {
+class PrivateChat extends StatefulWidget {
   final Player player;
 
   PrivateChat({required this.player});
+
+  @override
+  State<PrivateChat> createState() => _PrivateChatState();
+}
+
+class _PrivateChatState extends State<PrivateChat> {
+  @override
+  void initState() {
+    super.initState();
+    markMessagesAsRead();
+  }
+
+// Function to mark the unread messages as read
+  Future<void> markMessagesAsRead() async {
+    final user = FirebaseAuth.instance.currentUser;
+    final chatId = generateChatId(user!.uid, widget.player.playerId);
+
+    try {
+      // Fetch the chat document
+      final chatDoc = await FirebaseFirestore.instance
+          .collection('chats')
+          .doc(chatId)
+          .get();
+
+      if (chatDoc.exists) {
+        // Update the chat document to set unreadCount for the current user to 0
+        await chatDoc.reference.update({
+          user.uid == chatDoc['user1Id']
+              ? 'unreadCountUser1'
+              : 'unreadCountUser2': 0,
+        });
+      }
+    } catch (e) {
+      // Handle any errors here
+      print('Error marking messages as read: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +86,7 @@ class PrivateChat extends StatelessWidget {
           PoPAppBarWave(
             prefixIcon: IconButton(
               onPressed: () {
-                GoRouter.of(context).pop();
+                GoRouter.of(context).push('/chat');
               },
               icon: const Icon(
                 Icons.arrow_back,
@@ -75,10 +112,10 @@ class PrivateChat extends StatelessWidget {
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(18),
-                    child: (player.photoURL != ''
+                    child: (widget.player.photoURL != ''
                         ? FadeInImage.assetNetwork(
                             placeholder: 'assets/images/loadin.gif',
-                            image: player.photoURL!,
+                            image: widget.player.photoURL!,
                             fit: BoxFit.cover,
                             imageErrorBuilder: (context, error, stackTrace) {
                               return Image.asset(
@@ -95,7 +132,7 @@ class PrivateChat extends StatelessWidget {
                 ),
                 SizedBox(height: screenHeight * .005),
                 Text(
-                  player.playerName,
+                  widget.player.playerName,
                   style: const TextStyle(
                     color: Colors.black,
                     fontSize: 16,
@@ -125,7 +162,8 @@ class PrivateChat extends StatelessWidget {
                       ],
                     ),
                     child: StreamBuilder<List<ChatMessage>>(
-                      stream: getChatMessages(user!.uid, player.playerId),
+                      stream:
+                          getChatMessages(user!.uid, widget.player.playerId),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
@@ -148,7 +186,7 @@ class PrivateChat extends StatelessWidget {
                                   ? MyReply(message: message)
                                   : SenderMessage(
                                       message: message,
-                                      player: player,
+                                      player: widget.player,
                                     );
                             },
                           );
@@ -162,7 +200,7 @@ class PrivateChat extends StatelessWidget {
           ),
           MessageInput(
             currentUserId: user.uid,
-            otherPlayerId: player.playerId,
+            otherPlayerId: widget.player.playerId,
           ),
         ],
       ),

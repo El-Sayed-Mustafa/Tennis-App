@@ -72,7 +72,7 @@ class _ReversedCourtsState extends State<ReversedCourts> {
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
 
-    final double carouselHeight = (screenHeight + screenWidth) * 0.15;
+    final double carouselHeight = (screenHeight + screenWidth) * 0.17;
 
     return Column(
       children: [

@@ -38,17 +38,23 @@ abstract class AppRouter {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return BlocProvider(
-            create: (context) => NavigationCubit(),
-            child: const SplashScreen(),
-          );
+          return const SplashScreen();
         },
         routes: <RouteBase>[
           GoRoute(
             path: 'home',
             builder: (BuildContext context, GoRouterState state) {
               return BlocProvider(
-                create: (context) => NavigationCubit(),
+                create: (context) => NavigationCubit(0),
+                child: const NavigationBarScreen(),
+              );
+            },
+          ),
+          GoRoute(
+            path: 'chat',
+            builder: (BuildContext context, GoRouterState state) {
+              return BlocProvider(
+                create: (context) => NavigationCubit(2),
                 child: const NavigationBarScreen(),
               );
             },

@@ -2,6 +2,8 @@ import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:tennis_app/core/utils/widgets/no_data_text.dart';
+import 'package:tennis_app/generated/l10n.dart';
 
 import '../../../models/event.dart';
 import 'club_event_item.dart';
@@ -66,25 +68,8 @@ class _ClubEventsState extends State<ClubEvents> {
             }).toList(),
           )
         else
-          CarouselSlider(
-            options: CarouselOptions(
-              height: carouselHeight,
-              enableInfiniteScroll: false,
-              viewportFraction: 1,
-              onPageChanged: (index, _) {
-                setState(() {
-                  selectedPageIndex = index;
-                });
-              },
-            ),
-            carouselController: _carouselController,
-            // Show a single dummy CarouselItem with dummy data
-            items: [
-              ClubEventItem(
-                event: _createDummyEvent(),
-                showSetReminder: false,
-              )
-            ],
+          NoData(
+            text: S.of(context).You_Dont_have_Events,
           ),
         SizedBox(height: 8),
         buildPageIndicator(clubEvents.isNotEmpty ? clubEvents.length : 1),
@@ -113,19 +98,6 @@ class _ClubEventsState extends State<ClubEvents> {
           );
         },
       ),
-    );
-  }
-
-  // Create a dummy event for the single CarouselItem
-  Event _createDummyEvent() {
-    return Event(
-      eventId: 'dummy_event_id',
-      eventType: 'Dummy Event',
-      eventStartAt: DateTime.now(),
-      eventEndsAt: DateTime.now().add(Duration(hours: 2)),
-      eventAddress: 'Dummy Address', clubId: '', courtName: '', eventName: '',
-      instructions: '', playerIds: [], playerLevel: 0,
-      // Add other properties as needed
     );
   }
 }

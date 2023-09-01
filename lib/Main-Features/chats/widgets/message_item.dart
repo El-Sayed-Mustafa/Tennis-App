@@ -7,6 +7,7 @@ class MessageItem extends StatelessWidget {
   final String? photoUrl;
   final String name;
   final String message;
+  final int unreadCount;
   final Timestamp time;
   final void Function() onTap; // Update the type of onTap
 
@@ -18,6 +19,7 @@ class MessageItem extends StatelessWidget {
     required this.message,
     required this.time,
     required this.onTap,
+    required this.unreadCount,
   }) : super(key: key);
   String formatTime(Timestamp timestamp) {
     final dateTime = DateTime.fromMillisecondsSinceEpoch(
@@ -90,7 +92,7 @@ class MessageItem extends StatelessWidget {
                             )),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Expanded(
@@ -131,6 +133,24 @@ class MessageItem extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 4),
+                        Visibility(
+                          visible: unreadCount >
+                              0, // Only show the container when unreadCount is greater than 0
+                          child: Container(
+                            padding: const EdgeInsets.all(6),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: const Color(0xFF1B262C),
+                            ),
+                            child: Text(
+                              unreadCount.toString(),
+                              style: const TextStyle(
+                                fontSize: 13,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        )
                       ],
                     ),
                   ),

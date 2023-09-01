@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../../models/chats.dart';
+import '../../../models/message.dart';
 import '../../../models/player.dart';
 
 class SenderMessage extends StatelessWidget {

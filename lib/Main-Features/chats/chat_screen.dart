@@ -19,7 +19,10 @@ class _ChatScreenState extends State<ChatScreen>
 
   @override
   void initState() {
-    tabController = TabController(length: 3, vsync: this);
+    tabController = TabController(
+        length: 3,
+        vsync: this,
+        initialIndex: 2); // Set initialIndex to 2 for "Group/Private" tab
     super.initState();
   }
 

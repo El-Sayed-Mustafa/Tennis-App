@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
 
 import '../../../generated/l10n.dart';
-import '../../../models/chats.dart';
+import '../../../models/message.dart';
 import '../screens/private_chat.dart';
 
 class MessageInput extends StatefulWidget {
@@ -33,39 +33,57 @@ class _MessageInputState extends State<MessageInput> {
       final chatRef =
           FirebaseFirestore.instance.collection('chats').doc(chatId);
 
+      final newMessage = ChatMessage(
+        messageId: '',
+        senderId: widget.currentUserId,
+        receiverId: widget.otherPlayerId,
+        content: content,
+        timestamp: Timestamp.now(),
+      );
+
       // Check if the chat with the given chatId already exists
       final chatSnapshot = await chatRef.get();
+
       if (!chatSnapshot.exists) {
-        final newMessage = ChatMessage(
-          messageId: '',
-          senderId: widget.currentUserId,
-          receiverId: widget.otherPlayerId,
-          content: content,
-          timestamp: Timestamp.now(),
-        );
-
-        await chatRef.collection('messages').add(newMessage.toJson());
-
-        // Update the chatIds list for both players
-        await FirebaseFirestore.instance
-            .collection('players')
-            .doc(widget.currentUserId)
-            .update({
-          'chatIds': FieldValue.arrayUnion([chatId]),
+        // Create a new chat document with initial data
+        await chatRef.set({
+          'chatId': chatId,
+          'user1Id': widget.currentUserId,
+          'user2Id': widget.otherPlayerId,
+          'unreadCountUser1':
+              widget.currentUserId == chatSnapshot['user1Id'] ? 0 : 1,
+          'unreadCountUser2':
+              widget.currentUserId == chatSnapshot['user2Id'] ? 0 : 1,
         });
-
-        await FirebaseFirestore.instance
-            .collection('players')
-            .doc(widget.otherPlayerId)
-            .update({
-          'chatIds': FieldValue.arrayUnion([chatId]),
-        });
-      } else {
-        // Chat already exists, do something (e.g., display a message to the user).
-        showSnackBar(context, 'Chat already exists with ID: $chatId');
       }
 
-      // Clear the text input field after sending the message
+      // Add the new message to the chat's messages subcollection
+      await chatRef.collection('messages').add(newMessage.toJson());
+
+      // Increment the unread message count for the recipient
+      final recipientUnreadCountField =
+          widget.currentUserId == chatSnapshot['user1Id']
+              ? 'unreadCountUser2'
+              : 'unreadCountUser1';
+
+      await chatRef.update({
+        recipientUnreadCountField: FieldValue.increment(1),
+      });
+
+      // Update the chatIds list for both players (no need to check if chat exists)
+      await FirebaseFirestore.instance
+          .collection('players')
+          .doc(widget.currentUserId)
+          .update({
+        'chatIds': FieldValue.arrayUnion([chatId]),
+      });
+
+      await FirebaseFirestore.instance
+          .collection('players')
+          .doc(widget.otherPlayerId)
+          .update({
+        'chatIds': FieldValue.arrayUnion([chatId]),
+      });
     }
   }
 

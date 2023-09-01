@@ -8,7 +8,7 @@ import 'package:tennis_app/Main-Features/chats/widgets/community_message.dart';
 import 'package:tennis_app/Main-Features/chats/widgets/my_reply.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
-import 'package:tennis_app/models/chats.dart';
+import 'package:tennis_app/models/message.dart';
 import 'package:tennis_app/models/player.dart'; // Import the ChatMessage model
 
 class GroupChatScreen extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 
 class NavigationCubit extends Cubit<int> {
-  NavigationCubit() : super(0);
+  NavigationCubit(int initialIndex) : super(initialIndex);
 
   void selectPage(int index) {
     emit(index);

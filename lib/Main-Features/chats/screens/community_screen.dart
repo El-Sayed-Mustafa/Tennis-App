@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
 
 import '../../../generated/l10n.dart';
-import '../../../models/chats.dart';
+import '../../../models/message.dart';
 import '../../../models/player.dart';
 import '../widgets/community_message.dart';
 import '../widgets/my_reply.dart';

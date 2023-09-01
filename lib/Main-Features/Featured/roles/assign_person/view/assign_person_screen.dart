@@ -170,59 +170,59 @@ class _AssignPersonState extends State<AssignPerson> {
     return Scaffold(
       body: Container(
         color: const Color(0xFFF8F8F8),
-        child: Column(
-          children: [
-            PoPAppBarWave(
-              prefixIcon: IconButton(
-                onPressed: () {
-                  GoRouter.of(context).pop();
-                },
-                icon: const Icon(
-                  Icons.arrow_back,
-                  size: 30,
-                  color: Colors.white,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              PoPAppBarWave(
+                prefixIcon: IconButton(
+                  onPressed: () {
+                    GoRouter.of(context).pop();
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    size: 30,
+                    color: Colors.white,
+                  ),
+                ),
+                text: S.of(context).Assign_Person,
+                suffixIconPath: '',
+              ),
+              Text(
+                S.of(context).Select_Person,
+                style: const TextStyle(
+                  color: Color(0xFF616161),
+                  fontSize: 20,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w400,
                 ),
               ),
-              text: S.of(context).Assign_Person,
-              suffixIconPath: '',
-            ),
-            Text(
-              S.of(context).Select_Person,
-              style: const TextStyle(
-                color: Color(0xFF616161),
-                fontSize: 20,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w400,
+              SizedBox(height: screenHeight * .03),
+              MembersName(
+                controller: memberNameController,
               ),
-            ),
-            SizedBox(height: screenHeight * .03),
-            MembersName(
-              controller: memberNameController,
-            ),
-            SizedBox(height: screenHeight * .05),
-            Text(
-              S.of(context).Assign_Roles,
-              style: const TextStyle(
-                color: Color(0xFF616161),
-                fontSize: 18,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w400,
+              SizedBox(height: screenHeight * .05),
+              Text(
+                S.of(context).Assign_Roles,
+                style: const TextStyle(
+                  color: Color(0xFF616161),
+                  fontSize: 18,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w400,
+                ),
               ),
-            ),
-            roleNames.isEmpty
-                ? SizedBox(
-                    height: 150,
-                    width: screenWidth * .8,
-                    child: NoData(
-                      text: 'You don\'t have Roles',
-                      buttonText: 'Click here to create a new role',
-                      onPressed: () {
-                        GoRouter.of(context).push('/createRole');
-                      },
-                    ),
-                  )
-                : Expanded(
-                    child: Padding(
+              roleNames.isEmpty
+                  ? SizedBox(
+                      height: 150,
+                      width: screenWidth * .8,
+                      child: NoData(
+                        text: 'You don\'t have Roles',
+                        buttonText: 'Click here to create a new role',
+                        onPressed: () {
+                          GoRouter.of(context).push('/createRole');
+                        },
+                      ),
+                    )
+                  : Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 8.0, horizontal: 20),
                       child: RightSelector(
@@ -233,25 +233,25 @@ class _AssignPersonState extends State<AssignPerson> {
                         words: roleNames, // Use the fetched role names here
                       ),
                     ),
-                  ),
-            // Use FutureBuilder to show the circular progress indicator
-            FutureBuilder(
-              future: Future.delayed(Duration.zero), // Create a delayed Future
-              builder: (context, snapshot) {
-                // Show the circular progress indicator if _isLoading is true
-                if (_isLoading) {
-                  return const CircularProgressIndicator();
-                } else {
-                  // Show the "Assign Role" button otherwise
-                  return BottomSheetContainer(
-                    buttonText: S.of(context).Assign_Role,
-                    onPressed: _assignRole,
-                  );
-                }
-              },
-            )
-          ],
+              // Use FutureBuilder to show the circular progress indicator
+            ],
+          ),
         ),
+      ),
+      bottomNavigationBar: FutureBuilder(
+        future: Future.delayed(Duration.zero), // Create a delayed Future
+        builder: (context, snapshot) {
+          // Show the circular progress indicator if _isLoading is true
+          if (_isLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else {
+            // Show the "Assign Role" button otherwise
+            return BottomSheetContainer(
+              buttonText: S.of(context).Assign_Role,
+              onPressed: _assignRole,
+            );
+          }
+        },
       ),
     );
   }

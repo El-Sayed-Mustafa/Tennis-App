@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../../models/chats.dart';
+import '../../../models/message.dart';
 
 class MyReply extends StatelessWidget {
   const MyReply({Key? key, required this.message}) : super(key: key);
