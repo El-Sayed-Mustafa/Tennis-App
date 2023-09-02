@@ -21,6 +21,7 @@ class CreateClubCubit extends Cubit<CreateClubState> {
   final BuildContext context;
 
   void saveClubData({
+    Club? club, // Optional club parameter
     required TextEditingController clubNameController,
     required TextEditingController phoneController,
     required TextEditingController rulesController,
@@ -41,65 +42,83 @@ class CreateClubCubit extends Cubit<CreateClubState> {
       List<String> eventIds = []; // Add the event IDs if needed
       List<String> memberIds = [currentUserID]; // Add the member IDs if needed
 
-      Club club = Club(
-        clubId: '', // Assign a club ID here if applicable
-        clubName: clubName,
-        clubType: selectedClubType
-            .toString()
-            .split('.')
-            .last, // Convert the enum value to string
-        clubAdmin: currentUserID,
-        phoneNumber: phoneNumber,
+      // Check if club is not null and clubId is not empty
+      if (club?.clubId.isNotEmpty == true) {
+        // Update the existing club with the provided clubId
+        club = club!.copyWith(
+          clubName: clubName,
+          clubType: selectedClubType.toString().split('.').last,
+          clubAdmin: currentUserID,
+          phoneNumber: phoneNumber,
+          rulesAndRegulations: rulesAndRegulations,
+          ageRestriction: ageRestriction,
+          address: address,
+        );
+        await FirebaseFirestore.instance
+            .collection('clubs')
+            .doc(club.clubId)
+            .update(club.toJson());
+      } else {
+        club = Club(
+          clubId: '', // Assign a club ID here if applicable
+          clubName: clubName,
+          clubType: selectedClubType.toString().split('.').last,
+          clubAdmin: currentUserID,
+          phoneNumber: phoneNumber,
+          rulesAndRegulations: rulesAndRegulations,
+          ageRestriction: ageRestriction,
+          eventIds: eventIds,
+          memberIds: memberIds,
+          roleIds: [],
+          address: address,
+          rate: 0,
+          matchPlayed: 0,
+          totalWins: 0,
+          clubChatId: '',
+          doubleMatchesIds: [],
+          doubleTournamentsIds: [],
+          singleMatchesIds: [],
+          singleTournamentsIds: [],
+          numberOfRatings: 0,
+          courtIds: [],
+        );
+        DocumentReference clubDocRef = await FirebaseFirestore.instance
+            .collection('clubs')
+            .add(club.toJson());
 
-        rulesAndRegulations: rulesAndRegulations,
-        ageRestriction: ageRestriction,
-        eventIds: eventIds,
-        memberIds: memberIds, roleIds: [], address: address, rate: 0,
-        matchPlayed: 0,
-        totalWins: 0,
-        clubChatId: '',
-        doubleMatchesIds: [],
-        doubleTournamentsIds: [],
-        singleMatchesIds: [],
-        singleTournamentsIds: [], numberOfRatings: 0, courtIds: [],
-      );
+        // Create a new chat document in the 'Chat' collection
+        CollectionReference chatCollection =
+            FirebaseFirestore.instance.collection('Chats');
+        DocumentReference chatDocRef = await chatCollection.add({
+          'clubId': clubDocRef.id, // Store the reference to the club
+          'messages': [], // Initialize with an empty array of messages
+        });
 
-      CollectionReference clubsCollection =
-          FirebaseFirestore.instance.collection('clubs');
-      DocumentReference clubDocRef = await clubsCollection.add(club.toJson());
+        // Update the club document with the chat ID
+        await clubDocRef.update({'clubChatId': chatDocRef.id});
 
-      // Create a new chat document in the 'Chat' collection
-      CollectionReference chatCollection =
-          FirebaseFirestore.instance.collection('Chats');
-      DocumentReference chatDocRef = await chatCollection.add({
-        'clubId': clubDocRef.id, // Store the reference to the club
-        'messages': [], // Initialize with an empty array of messages
-      });
+        // Upload the selected image to Firebase Storage
+        if (selectedImageBytes != null) {
+          firebase_storage.Reference storageReference = firebase_storage
+              .FirebaseStorage.instance
+              .ref()
+              .child('clubs')
+              .child(clubDocRef.id)
+              .child('club-image.jpg');
+          firebase_storage.UploadTask uploadTask =
+              storageReference.putData(selectedImageBytes);
+          firebase_storage.TaskSnapshot taskSnapshot = await uploadTask;
+          String imageUrl = await taskSnapshot.ref.getDownloadURL();
 
-      // Update the club document with the chat ID
-      await clubDocRef.update({'clubChatId': chatDocRef.id});
+          // Update the club document with the image URL
+          await clubDocRef.update({'clubImageURL': imageUrl});
+        }
 
-      // Upload the selected image to Firebase Storage
-      if (selectedImageBytes != null) {
-        firebase_storage.Reference storageReference = firebase_storage
-            .FirebaseStorage.instance
-            .ref()
-            .child('clubs')
-            .child(clubDocRef.id)
-            .child('club-image.jpg');
-        firebase_storage.UploadTask uploadTask =
-            storageReference.putData(selectedImageBytes);
-        firebase_storage.TaskSnapshot taskSnapshot = await uploadTask;
-        String imageUrl = await taskSnapshot.ref.getDownloadURL();
-
-        // Update the club document with the image URL
-        await clubDocRef.update({'clubImageURL': imageUrl});
+        // Save the club ID in the current user's data
+        DocumentReference userDocRef =
+            FirebaseFirestore.instance.collection('players').doc(currentUserID);
+        await userDocRef.update({'participatedClubId': clubDocRef.id});
       }
-
-      // Save the club ID in the current user's data
-      DocumentReference userDocRef =
-          FirebaseFirestore.instance.collection('players').doc(currentUserID);
-      await userDocRef.update({'participatedClubId': clubDocRef.id});
 
       // Data saved successfully
       showSnackBar(context, 'Club data saved successfully.');
@@ -108,7 +127,7 @@ class CreateClubCubit extends Cubit<CreateClubState> {
       emit(CreateClubSuccessState());
 
       // Redirect to the next screen using GoRouter
-      GoRouter.of(context).pop();
+      GoRouter.of(context).push('/club');
     } catch (error) {
       // Handle the error if needed
       emit(CreateClubErrorState(error: error.toString()));

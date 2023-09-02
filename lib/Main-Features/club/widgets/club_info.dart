@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tennis_app/Main-Features/Featured/club_details/club_details_scree.dart';
+import 'package:tennis_app/Main-Features/club/club_details/club_details_scree.dart';
 import 'package:tennis_app/constants.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/models/club.dart'; // Import the Club class

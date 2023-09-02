@@ -1,16 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tennis_app/Main-Features/Featured/Event/edit_event/edit_event_screen.dart';
+import 'package:tennis_app/Main-Features/club/edit_club/edit_club_screen.dart';
 import 'package:tennis_app/core/methodes/firebase_methodes.dart';
-import 'package:tennis_app/core/utils/widgets/chosen_court.dart';
 import 'package:tennis_app/core/utils/widgets/confirmation_dialog.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import 'package:tennis_app/generated/l10n.dart';
 import 'package:tennis_app/models/club.dart';
-import 'package:tennis_app/models/event.dart';
-import 'package:intl/intl.dart';
 
 class ClubDetailsScreen extends StatelessWidget {
   const ClubDetailsScreen({super.key, required this.club});
@@ -258,14 +254,14 @@ class ClubDetailsScreen extends StatelessWidget {
             BottomSheetContainer(
               buttonText: "Edit Club",
               onPressed: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => EditEvent(
-                //       event: club,
-                //     ),
-                //   ),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EditClub(
+                      club: club,
+                    ),
+                  ),
+                );
               },
             ),
             BottomSheetContainer(
