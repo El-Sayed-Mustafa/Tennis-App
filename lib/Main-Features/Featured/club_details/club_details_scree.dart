@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/Event/edit_event/edit_event_screen.dart';
+import 'package:tennis_app/core/methodes/firebase_methodes.dart';
 import 'package:tennis_app/core/utils/widgets/chosen_court.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
@@ -269,8 +270,9 @@ class ClubDetailsScreen extends StatelessWidget {
             BottomSheetContainer(
               buttonText: "Delete Club",
               onPressed: () {
-                // GoRouter.of(context).push('/club');
-                // deleteEvent(club.eventId);
+                GoRouter.of(context).push('/club');
+                Method method = Method();
+                method.deleteClub(club.clubId);
               },
               backgroundColor: Colors.red,
             )
@@ -280,17 +282,7 @@ class ClubDetailsScreen extends StatelessWidget {
     );
   }
 
-  Future<void> deleteEvent(String eventId) async {
-    try {
-      // Get a reference to the Firestore collection
-      final collection = FirebaseFirestore.instance.collection('events');
-
-      // Delete the document with the specified eventId
-      await collection.doc(eventId).delete();
-
-      // Successfully deleted the event
-    } catch (e) {
-      // Handle any errors that occur during deletion
-    }
-  }
+// Usage example:
+// final clubIdToDelete = 'your-club-id';
+// await deleteClub(clubIdToDelete);
 }

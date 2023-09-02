@@ -112,6 +112,159 @@ class Method {
     }
   }
 
+  Future<void> deleteClub(String clubId) async {
+    try {
+      final clubsCollection = FirebaseFirestore.instance.collection('clubs');
+      final clubDoc = clubsCollection.doc(clubId);
+
+      // Step 1: Fetch the club data to access the associated data
+      final DocumentSnapshot<Map<String, dynamic>> clubSnapshot =
+          await clubDoc.get();
+      final Club club = Club.fromSnapshot(clubSnapshot);
+
+      if (club != null) {
+        final List<String> eventIds = List<String>.from(club.eventIds ?? []);
+        final List<String> courtIds = List<String>.from(club.courtIds ?? []);
+        final String clubChatId = club.clubChatId;
+        final List<String> singleMatchesIds =
+            List<String>.from(club.singleMatchesIds ?? []);
+        final List<String> doubleMatchesIds =
+            List<String>.from(club.doubleMatchesIds ?? []);
+        final List<String> singleTournamentsIds =
+            List<String>.from(club.singleTournamentsIds ?? []);
+        final List<String> doubleTournamentsIds =
+            List<String>.from(club.doubleTournamentsIds ?? []);
+
+        // Check if these fields are not empty before proceeding
+        if (eventIds.isNotEmpty) {
+          // Step 2: Delete events associated with the club
+          final eventsCollection =
+              FirebaseFirestore.instance.collection('events');
+          for (final eventId in eventIds) {
+            final DocumentSnapshot<Map<String, dynamic>> eventSnapshot =
+                await eventsCollection.doc(eventId).get();
+            if (eventSnapshot.exists) {
+              await eventsCollection.doc(eventId).delete();
+            }
+          }
+        }
+
+        if (courtIds.isNotEmpty) {
+          // Step 3: Delete courts associated with the club
+          final courtsCollection =
+              FirebaseFirestore.instance.collection('courts');
+          for (final courtId in courtIds) {
+            final DocumentSnapshot<Map<String, dynamic>> courtSnapshot =
+                await courtsCollection.doc(courtId).get();
+            if (courtSnapshot.exists) {
+              await courtsCollection.doc(courtId).delete();
+            }
+          }
+        }
+
+        if (!clubChatId.isEmpty) {
+          // Step 4: Delete club chat
+          final chatsCollection =
+              FirebaseFirestore.instance.collection('Chats');
+          final DocumentSnapshot<Map<String, dynamic>> clubChatSnapshot =
+              await chatsCollection.doc(clubChatId).get();
+          if (clubChatSnapshot.exists) {
+            await chatsCollection.doc(clubChatId).delete();
+          }
+        }
+
+        if (singleMatchesIds.isNotEmpty) {
+          // Step 5: Delete single matches associated with the club
+          final singleMatchesCollection =
+              FirebaseFirestore.instance.collection('single_matches');
+          for (final match in singleMatchesIds) {
+            final DocumentSnapshot<Map<String, dynamic>> matchSnapshot =
+                await singleMatchesCollection.doc(match).get();
+            if (matchSnapshot.exists) {
+              await singleMatchesCollection.doc(match).delete();
+            }
+          }
+        }
+
+        if (doubleMatchesIds.isNotEmpty) {
+          // Step 6: Delete double matches associated with the club
+          final doubleMatchesCollection =
+              FirebaseFirestore.instance.collection('double_matches');
+          for (final match in doubleMatchesIds) {
+            final DocumentSnapshot<Map<String, dynamic>> matchSnapshot =
+                await doubleMatchesCollection.doc(match).get();
+            if (matchSnapshot.exists) {
+              await doubleMatchesCollection.doc(match).delete();
+            }
+          }
+        }
+
+        if (singleTournamentsIds.isNotEmpty) {
+          // Step 7: Delete single tournaments associated with the club
+          final singleTournamentCollection =
+              FirebaseFirestore.instance.collection('singleTournaments');
+          for (final match in singleTournamentsIds) {
+            final DocumentSnapshot<Map<String, dynamic>> matchSnapshot =
+                await singleTournamentCollection.doc(match).get();
+            if (matchSnapshot.exists) {
+              await singleTournamentCollection.doc(match).delete();
+            }
+          }
+        }
+
+        if (doubleTournamentsIds.isNotEmpty) {
+          // Step 8: Delete double tournaments associated with the club
+          final doubleTournamentsCollection =
+              FirebaseFirestore.instance.collection('doubleTournaments');
+          for (final match in doubleTournamentsIds) {
+            final DocumentSnapshot<Map<String, dynamic>> matchSnapshot =
+                await doubleTournamentsCollection.doc(match).get();
+            if (matchSnapshot.exists) {
+              await doubleTournamentsCollection.doc(match).delete();
+            }
+          }
+        }
+
+        // Additional steps to remove references from other collections
+        // Step 9: Fetch the list of member IDs from the club you're deleting
+        final List<String> memberIds = List<String>.from(club.memberIds ?? []);
+
+        for (final memberId in memberIds) {
+          final playerRef =
+              FirebaseFirestore.instance.collection('players').doc(memberId);
+          // Clear the 'eventsId' list for the player
+          final updatedData = {
+            'playerLevel': '0',
+            'skillLevel': '0',
+            'clubRoles': {},
+            'participatedClubId': '',
+            'isRated': false,
+            'eventIds': [],
+            'reversedCourtsIds': [],
+            'matchId': [],
+            'singleMatchesIds': [],
+            'doubleMatchesIds': [],
+            'singleTournamentsIds': [],
+            'doubleTournamentsIds': [],
+          };
+          await playerRef.update(updatedData);
+        }
+
+        // Step 11: Delete the club
+        final DocumentSnapshot<Map<String, dynamic>> clubSnapshot =
+            await clubDoc.get();
+        if (clubSnapshot.exists) {
+          await clubDoc.delete();
+        }
+
+        print('Club with ID $clubId deleted successfully.');
+      }
+    } catch (error) {
+      print('Error deleting club: $error');
+      // Handle any errors that occur during the deletion process.
+    }
+  }
+
   Future<void> updateMatchPlayedAndTotalWins(
       String playerId, bool isWinner) async {
     try {
