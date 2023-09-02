@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/Event/edit_event/edit_event_screen.dart';
 import 'package:tennis_app/core/methodes/firebase_methodes.dart';
 import 'package:tennis_app/core/utils/widgets/chosen_court.dart';
+import 'package:tennis_app/core/utils/widgets/confirmation_dialog.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import 'package:tennis_app/generated/l10n.dart';
@@ -270,9 +271,22 @@ class ClubDetailsScreen extends StatelessWidget {
             BottomSheetContainer(
               buttonText: "Delete Club",
               onPressed: () {
-                GoRouter.of(context).push('/club');
                 Method method = Method();
-                method.deleteClub(club.clubId);
+                showDialog(
+                  context: context,
+                  builder: (BuildContext dialogContext) {
+                    return ConfirmationDialog(
+                      title: "Confirm Delete",
+                      content: "Are you sure you want to delete this Club?",
+                      confirmText: "Delete",
+                      cancelText: "Cancel",
+                      onConfirm: () {
+                        GoRouter.of(context).push('/club');
+                        method.deleteClub(club.clubId);
+                      },
+                    );
+                  },
+                );
               },
               backgroundColor: Colors.red,
             )
@@ -281,8 +295,4 @@ class ClubDetailsScreen extends StatelessWidget {
       ),
     );
   }
-
-// Usage example:
-// final clubIdToDelete = 'your-club-id';
-// await deleteClub(clubIdToDelete);
 }

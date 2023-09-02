@@ -14,132 +14,10 @@ import 'package:tennis_app/core/utils/widgets/custom_dialouge.dart';
 
 import '../../generated/l10n.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key});
   @override
-  Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-
-    final sectionTitleSize = screenWidth * 0.052;
-
-    final spacing = screenHeight * 0.015;
-    Method method = Method();
-
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            AppBarWaveHome(
-              text: S.of(context).Home,
-              suffixIconPath: 'assets/images/app-bar-icon.svg',
-            ),
-            SizedBox(
-              height: spacing,
-            ),
-            Text(
-              S.of(context).Your_Upcoming_Events,
-              style: TextStyle(
-                color: const Color(0xFF313131),
-                fontSize: sectionTitleSize,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            SizedBox(height: spacing),
-            const MyEvents(),
-            SizedBox(height: spacing * 2),
-            Text(
-              S.of(context).Your_Reversed_Courts,
-              style: TextStyle(
-                color: const Color(0xFF313131),
-                fontSize: sectionTitleSize,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            const ReversedCourts(),
-            SizedBox(height: spacing * 2),
-            Text(
-              S.of(context).Your_Upcoming_Matches,
-              style: TextStyle(
-                color: const Color(0xFF313131),
-                fontSize: sectionTitleSize,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            const MyMatches(),
-            SizedBox(height: spacing * 1),
-            const MySingleMatches(),
-            SizedBox(height: spacing * 1),
-            const MyDoubleMatches(),
-            SizedBox(height: spacing * 2),
-            HomeButton(
-              buttonText: S.of(context).Find_Court,
-              imagePath: 'assets/images/Find-Court.svg',
-              onPressed: () {
-                GoRouter.of(context).push('/findCourt');
-              },
-            ),
-            SizedBox(height: spacing),
-            HomeButton(
-              buttonText: S.of(context).Find_Partner,
-              imagePath: 'assets/images/Find-Partner.svg',
-              onPressed: () {
-                GoRouter.of(context).push('/findPartner');
-              },
-            ),
-            SizedBox(height: spacing),
-            HomeButton(
-                buttonText: S.of(context).Create_Event,
-                imagePath: 'assets/images/Create-Event.svg',
-                onPressed: () async {
-                  bool hasRight =
-                      await method.doesPlayerHaveRight('Create Event');
-                  if (hasRight) {
-                    navigateToCreateEvent(context);
-                  } else {
-                    showDialog(
-                      context: context,
-                      builder: (context) => CustomDialog(
-                        text: S.of(context).noRightMessage,
-                      ),
-                    );
-                  }
-                }),
-            SizedBox(height: spacing),
-            FutureBuilder<bool>(
-              future: checkParticipatedClub(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  // Display a loading indicator while checking participation
-                  return CircularProgressIndicator();
-                } else if (snapshot.hasError) {
-                  // Handle error state
-                  return Text('Error: ${snapshot.error}');
-                } else {
-                  final hasParticipated = snapshot.data ?? false;
-                  if (hasParticipated) {
-                    return Container();
-                  } else {
-                    return HomeButton(
-                      buttonText: S.of(context).Create_Club,
-                      imagePath: 'assets/images/Make-offers.svg',
-                      onPressed: () {
-                        GoRouter.of(context).push('/createClub');
-                      },
-                    );
-                  }
-                }
-              },
-            ),
-            SizedBox(height: spacing * 2),
-          ],
-        ),
-      ),
-    );
-  }
+  State<HomeScreen> createState() => _HomeScreenState();
 
   static Future<bool> checkParticipatedClub() async {
     try {
@@ -151,5 +29,140 @@ class HomeScreen extends StatelessWidget {
       print("Error fetching player data: $e");
       return false;
     }
+  }
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+        GlobalKey<RefreshIndicatorState>();
+
+    final sectionTitleSize = screenWidth * 0.052;
+
+    final spacing = screenHeight * 0.015;
+    Method method = Method();
+
+    return Scaffold(
+      body: RefreshIndicator(
+        key: _refreshIndicatorKey,
+        onRefresh: () async {
+          setState(() {});
+        },
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              AppBarWaveHome(
+                text: S.of(context).Home,
+                suffixIconPath: 'assets/images/app-bar-icon.svg',
+              ),
+              SizedBox(
+                height: spacing,
+              ),
+              Text(
+                S.of(context).Your_Upcoming_Events,
+                style: TextStyle(
+                  color: const Color(0xFF313131),
+                  fontSize: sectionTitleSize,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              SizedBox(height: spacing),
+              const MyEvents(),
+              SizedBox(height: spacing * 2),
+              Text(
+                S.of(context).Your_Reversed_Courts,
+                style: TextStyle(
+                  color: const Color(0xFF313131),
+                  fontSize: sectionTitleSize,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const ReversedCourts(),
+              SizedBox(height: spacing * 2),
+              Text(
+                S.of(context).Your_Upcoming_Matches,
+                style: TextStyle(
+                  color: const Color(0xFF313131),
+                  fontSize: sectionTitleSize,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const MyMatches(),
+              SizedBox(height: spacing * 1),
+              const MySingleMatches(),
+              SizedBox(height: spacing * 1),
+              const MyDoubleMatches(),
+              SizedBox(height: spacing * 2),
+              HomeButton(
+                buttonText: S.of(context).Find_Court,
+                imagePath: 'assets/images/Find-Court.svg',
+                onPressed: () {
+                  GoRouter.of(context).push('/findCourt');
+                },
+              ),
+              SizedBox(height: spacing),
+              HomeButton(
+                buttonText: S.of(context).Find_Partner,
+                imagePath: 'assets/images/Find-Partner.svg',
+                onPressed: () {
+                  GoRouter.of(context).push('/findPartner');
+                },
+              ),
+              SizedBox(height: spacing),
+              HomeButton(
+                  buttonText: S.of(context).Create_Event,
+                  imagePath: 'assets/images/Create-Event.svg',
+                  onPressed: () async {
+                    bool hasRight =
+                        await method.doesPlayerHaveRight('Create Event');
+                    if (hasRight) {
+                      navigateToCreateEvent(context);
+                    } else {
+                      showDialog(
+                        context: context,
+                        builder: (context) => CustomDialog(
+                          text: S.of(context).noRightMessage,
+                        ),
+                      );
+                    }
+                  }),
+              SizedBox(height: spacing),
+              FutureBuilder<bool>(
+                future: HomeScreen.checkParticipatedClub(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    // Display a loading indicator while checking participation
+                    return CircularProgressIndicator();
+                  } else if (snapshot.hasError) {
+                    // Handle error state
+                    return Text('Error: ${snapshot.error}');
+                  } else {
+                    final hasParticipated = snapshot.data ?? false;
+                    if (hasParticipated) {
+                      return Container();
+                    } else {
+                      return HomeButton(
+                        buttonText: S.of(context).Create_Club,
+                        imagePath: 'assets/images/Make-offers.svg',
+                        onPressed: () {
+                          GoRouter.of(context).push('/createClub');
+                        },
+                      );
+                    }
+                  }
+                },
+              ),
+              SizedBox(height: spacing * 2),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

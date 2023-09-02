@@ -53,6 +53,7 @@ class _ClubEventsState extends State<ClubEvents> {
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
     final double carouselHeight = screenHeight * 0.26;
+    final screenWidth = MediaQuery.of(context).size.width;
 
     return Column(
       children: [
@@ -79,6 +80,8 @@ class _ClubEventsState extends State<ClubEvents> {
         else
           NoData(
             text: S.of(context).You_Dont_have_Events,
+            height: screenHeight * .2,
+            width: screenWidth * .8,
           ),
         SizedBox(height: 8),
         buildPageIndicator(clubEvents.isNotEmpty ? clubEvents.length : 1),
