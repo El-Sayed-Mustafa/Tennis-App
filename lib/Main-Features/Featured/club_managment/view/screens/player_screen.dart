@@ -526,21 +526,31 @@ class _PlayerScreenState extends State<PlayerScreen> {
                         children: [
                           Align(
                             alignment: Alignment.center, // Center the photo
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(
-                                  (screenHeight + screenWidth) * 0.08 / 3),
-                              child: Container(
-                                height: (screenHeight + screenWidth) * 0.1,
-                                width: (screenHeight + screenWidth) * 0.08,
-                                child: widget.player.photoURL != ''
-                                    ? Image.network(
-                                        widget.player.photoURL!,
-                                        fit: BoxFit.cover,
-                                      )
-                                    : Image.asset(
-                                        'assets/images/profileimage.png',
-                                        fit: BoxFit.cover,
-                                      ),
+                            child: Container(
+                              decoration: ShapeDecoration(
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  side: const BorderSide(
+                                      width: 0.50, color: Color(0x440D5FC3)),
+                                  borderRadius: BorderRadius.circular(31),
+                                ),
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(
+                                    (screenHeight + screenWidth) * 0.08 / 3),
+                                child: Container(
+                                  height: (screenHeight + screenWidth) * 0.1,
+                                  width: (screenHeight + screenWidth) * 0.08,
+                                  child: widget.player.photoURL != ''
+                                      ? Image.network(
+                                          widget.player.photoURL!,
+                                          fit: BoxFit.cover,
+                                        )
+                                      : Image.asset(
+                                          'assets/images/profile-event.jpg',
+                                          fit: BoxFit.cover,
+                                        ),
+                                ),
                               ),
                             ),
                           ),

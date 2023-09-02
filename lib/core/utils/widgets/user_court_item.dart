@@ -55,13 +55,13 @@ class UserCourtItem extends StatelessWidget {
                         imageErrorBuilder: (context, error, stackTrace) {
                           // Show the placeholder image on error
                           return Image.asset(
-                            'assets/images/profileimage.png',
+                            'assets/images/profile-event.jpg',
                             fit: BoxFit.cover,
                           );
                         },
                       )
                     : Image.asset(
-                        'assets/images/profileimage.png',
+                        'assets/images/profile-event.jpg',
                         fit: BoxFit.cover,
                       ),
               ),

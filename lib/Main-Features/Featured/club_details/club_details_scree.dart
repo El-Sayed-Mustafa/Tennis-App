@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/Event/edit_event/edit_event_screen.dart';
 import 'package:tennis_app/core/utils/widgets/chosen_court.dart';
-import 'package:tennis_app/core/utils/widgets/confirmation_dialog.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import 'package:tennis_app/generated/l10n.dart';
+import 'package:tennis_app/models/club.dart';
 import 'package:tennis_app/models/event.dart';
 import 'package:intl/intl.dart';
 
-class EventDetailsScreen extends StatelessWidget {
-  const EventDetailsScreen({super.key, required this.event});
-  final Event event;
+class ClubDetailsScreen extends StatelessWidget {
+  const ClubDetailsScreen({super.key, required this.club});
+  final Club club;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class EventDetailsScreen extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-              text: "Event Details",
+              text: "Club Details",
               suffixIconPath: '',
             ),
             Stack(
@@ -61,7 +61,7 @@ class EventDetailsScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             Text(
-                              event.eventName,
+                              club.clubName,
                               style: const TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w500,
@@ -72,7 +72,7 @@ class EventDetailsScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  S.of(context).start,
+                                  S.of(context).Club_Type,
                                   style: const TextStyle(
                                     color: Color(0xFF15324F),
                                     fontSize: 18,
@@ -81,8 +81,7 @@ class EventDetailsScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  DateFormat('MMM d, yyyy HH:mm')
-                                      .format(event.eventEndsAt),
+                                  club.clubType,
                                   style: const TextStyle(
                                     color: Color(0xFF6D6D6D),
                                     fontSize: 18,
@@ -97,7 +96,7 @@ class EventDetailsScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  S.of(context).end,
+                                  S.of(context).Club_Address,
                                   style: const TextStyle(
                                     color: Color(0xFF15324F),
                                     fontSize: 18,
@@ -106,8 +105,7 @@ class EventDetailsScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  DateFormat('MMM d, yyyy HH:mm')
-                                      .format(event.eventEndsAt),
+                                  club.address,
                                   style: const TextStyle(
                                     color: Color(0xFF6D6D6D),
                                     fontSize: 16,
@@ -121,9 +119,9 @@ class EventDetailsScreen extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  S.of(context).Event_Type,
-                                  style: const TextStyle(
+                                const Text(
+                                  'Club Rate',
+                                  style: TextStyle(
                                     color: Color(0xFF15324F),
                                     fontSize: 18,
                                     fontFamily: 'Roboto',
@@ -131,7 +129,7 @@ class EventDetailsScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  event.eventType,
+                                  club.rate.toString(),
                                   style: const TextStyle(
                                     color: Color(0xFF6D6D6D),
                                     fontSize: 18,
@@ -146,7 +144,7 @@ class EventDetailsScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  S.of(context).Address,
+                                  S.of(context).Age_restriction,
                                   style: const TextStyle(
                                     color: Color(0xFF15324F),
                                     fontSize: 18,
@@ -155,7 +153,7 @@ class EventDetailsScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  event.eventAddress,
+                                  club.ageRestriction,
                                   style: const TextStyle(
                                     color: Color(0xFF6D6D6D),
                                     fontSize: 18,
@@ -166,43 +164,50 @@ class EventDetailsScreen extends StatelessWidget {
                               ],
                             ),
                             const SizedBox(height: 25),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  S.of(context).Player_level,
-                                  style: const TextStyle(
-                                    color: Color(0xFF15324F),
-                                    fontSize: 18,
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                Text(
-                                  event.playerLevel.toString(),
-                                  style: const TextStyle(
-                                    color: Color(0xFF6D6D6D),
-                                    fontSize: 18,
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                )
-                              ],
-                            ),
-                            const SizedBox(height: 25),
-                            const Text(
-                              "Court Reversed",
-                              style: TextStyle(
-                                fontSize: 18,
+                            Text(
+                              S.of(context).Rules_and_regulations,
+                              style: const TextStyle(
                                 color: Color(0xFF6D6D6D),
-                                fontWeight: FontWeight.w500,
+                                fontSize: 18,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                             const SizedBox(height: 10),
-                            ChosenCourt(
-                              courtId: event.courtName,
-                              isUser: true,
-                              isSaveUser: false,
+                            Container(
+                              width: screenWidth * .8,
+                              height: screenHeight * .2,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.rectangle,
+                                borderRadius: BorderRadius.circular(31),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Color(
+                                        0x440D5FC3), // Shadow color with opacity (adjust the alpha value)
+                                    blurRadius:
+                                        3.0, // Adjust the blur radius as per your preference
+                                    spreadRadius:
+                                        .5, // Adjust the spread radius as per your preference
+                                    offset: Offset(0,
+                                        0), // Adjust the offset to control the position of the shadow
+                                  ),
+                                ],
+                              ),
+                              child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 24, right: 24, bottom: 6, top: 6),
+                                  child: Text(
+                                    club.rulesAndRegulations.isEmpty
+                                        ? 'No rules and regulations'
+                                        : club.rulesAndRegulations,
+                                    style: const TextStyle(
+                                      color: Color.fromARGB(255, 152, 150, 150),
+                                      fontSize: 17,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  )),
                             ),
                             const SizedBox(height: 25),
                           ],
@@ -230,9 +235,9 @@ class EventDetailsScreen extends StatelessWidget {
                           child: Container(
                             height: (screenHeight + screenWidth) * 0.1,
                             width: (screenHeight + screenWidth) * 0.08,
-                            child: event.photoURL != null
+                            child: club.photoURL != null
                                 ? Image.network(
-                                    event.photoURL!,
+                                    club.photoURL!,
                                     fit: BoxFit.cover,
                                   )
                                 : Image.asset(
@@ -249,36 +254,23 @@ class EventDetailsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 15),
             BottomSheetContainer(
-              buttonText: "Edit Event",
+              buttonText: "Edit Club",
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => EditEvent(
-                      event: event,
-                    ),
-                  ),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => EditEvent(
+                //       event: club,
+                //     ),
+                //   ),
+                // );
               },
             ),
             BottomSheetContainer(
-              buttonText: "Delete Event",
+              buttonText: "Delete Club",
               onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext dialogContext) {
-                    return ConfirmationDialog(
-                      title: "Confirm Delete",
-                      content: "Are you sure you want to delete this event?",
-                      confirmText: "Delete",
-                      cancelText: "Cancel",
-                      onConfirm: () {
-                        GoRouter.of(context).push('/club');
-                        deleteEvent(event.eventId);
-                      },
-                    );
-                  },
-                );
+                // GoRouter.of(context).push('/club');
+                // deleteEvent(club.eventId);
               },
               backgroundColor: Colors.red,
             )
