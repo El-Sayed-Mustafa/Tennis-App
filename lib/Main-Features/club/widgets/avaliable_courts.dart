@@ -13,9 +13,12 @@ import '../../../../models/court.dart';
 class AvailableCourts extends StatefulWidget {
   final Club clubData;
   final TextEditingController? courtNameController; // Optional parameter
-
+  final bool isSaveUser;
   const AvailableCourts(
-      {super.key, required this.clubData, this.courtNameController});
+      {super.key,
+      required this.clubData,
+      this.courtNameController,
+      required this.isSaveUser});
 
   @override
   _AvailableCourtsState createState() => _AvailableCourtsState();
@@ -95,6 +98,7 @@ class _AvailableCourtsState extends State<AvailableCourts> {
                     child: CourtItem(
                       court: court,
                       courtNameController: widget.courtNameController,
+                      isSaveUser: widget.isSaveUser,
                     ),
                   );
                 },

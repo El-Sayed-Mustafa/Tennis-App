@@ -14,7 +14,8 @@ enum EventType {
 }
 
 class EventTypeCubit extends Cubit<EventType> {
-  EventTypeCubit() : super(EventType.Training);
+  EventTypeCubit([EventType? initialEventType])
+      : super(initialEventType ?? EventType.Training);
 
   void setClubType(EventType clubType) {
     emit(clubType);

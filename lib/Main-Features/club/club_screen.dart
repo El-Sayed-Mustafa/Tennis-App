@@ -121,6 +121,7 @@ class ClubScreen extends StatelessWidget {
                               SizedBox(height: spacing / 3),
                               AvailableCourts(
                                 clubData: clubData,
+                                isSaveUser: true,
                               ),
                               SizedBox(height: spacing * 2),
                               SizedBox(height: spacing * 2),

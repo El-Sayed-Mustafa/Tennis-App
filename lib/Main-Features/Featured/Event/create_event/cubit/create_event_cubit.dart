@@ -23,14 +23,16 @@ class CreateEventCubit extends Cubit<CreateEventState> {
   CreateEventCubit(this.context) : super(CreateEventInitialState());
   final BuildContext context;
 
-  void saveEventData(
-      {required TextEditingController eventNameController,
-      required TextEditingController addressController,
-      required TextEditingController courtNameController,
-      required TextEditingController instructionsController,
-      Uint8List? selectedImageBytes,
-      required BuildContext context,
-      required List<String>? selected}) async {
+  void saveEventData({
+    String? eventId, // Optional eventId parameter
+    required TextEditingController eventNameController,
+    required TextEditingController addressController,
+    required TextEditingController courtNameController,
+    required TextEditingController instructionsController,
+    Uint8List? selectedImageBytes,
+    required BuildContext context,
+    required List<String>? selected,
+  }) async {
     try {
       emit(CreateEventLoadingState());
 
@@ -45,30 +47,62 @@ class CreateEventCubit extends Cubit<CreateEventState> {
 
       final CollectionReference eventsCollection =
           FirebaseFirestore.instance.collection('events');
-      final DocumentReference eventDocRef = eventsCollection.doc();
 
-      final String eventId = eventDocRef.id;
+      if (eventId != null) {
+        // Update an existing event
+        final DocumentReference eventDocRef = eventsCollection.doc(eventId);
+        final Event? existingEvent = await fetchEvent(eventDocRef);
 
-      final Event event = Event(
-        eventId: eventId,
-        eventName: eventName,
-        eventStartAt: selectedStartDateTime,
-        eventEndsAt: selectedEndDateTime,
-        eventAddress: eventAddress,
-        eventType: selectedEventType.toString().split('.').last,
-        courtName: courtName,
-        instructions: instructions,
-        playerIds: [],
-        playerLevel: level,
-        clubId: '',
-      );
+        if (existingEvent != null) {
+          final Event updatedEvent = Event(
+            eventId: existingEvent.eventId,
+            eventName: eventName,
+            eventStartAt: selectedStartDateTime,
+            eventEndsAt: selectedEndDateTime,
+            eventAddress: eventAddress,
+            eventType: selectedEventType.toString().split('.').last,
+            courtName: courtName,
+            instructions: instructions,
+            playerIds: existingEvent.playerIds,
+            playerLevel: level,
+            clubId: existingEvent.clubId,
+            photoURL: existingEvent.photoURL,
+          );
 
-      await saveEventDocument(eventDocRef, event);
-      await uploadEventImage(eventDocRef, selectedImageBytes);
-      if (selected!.isNotEmpty) {
-        await updatePlayersWithEvent(eventDocRef.id, selected);
+          await saveEventDocument(eventDocRef, updatedEvent);
+          await uploadEventImage(eventDocRef, selectedImageBytes);
+          // You can update players or club here if needed
+        } else {
+          emit(
+              CreateEventErrorState(error: 'Event not found for ID: $eventId'));
+          return;
+        }
       } else {
-        await updateClubWithEvent(eventDocRef.id);
+        // Create a new event
+        final DocumentReference eventDocRef = eventsCollection.doc();
+        final String newEventId = eventDocRef.id;
+
+        final Event newEvent = Event(
+          eventId: newEventId,
+          eventName: eventName,
+          eventStartAt: selectedStartDateTime,
+          eventEndsAt: selectedEndDateTime,
+          eventAddress: eventAddress,
+          eventType: selectedEventType.toString().split('.').last,
+          courtName: courtName,
+          instructions: instructions,
+          playerIds: [],
+          playerLevel: level,
+          clubId: '',
+        );
+
+        await saveEventDocument(eventDocRef, newEvent);
+        await uploadEventImage(eventDocRef, selectedImageBytes);
+        if (selected != null && selected.isNotEmpty) {
+          await updatePlayersWithEvent(newEventId, selected);
+        } else {
+          await updateClubWithEvent(newEventId);
+        }
       }
 
       emit(CreateEventSuccessState());
@@ -134,6 +168,23 @@ class CreateEventCubit extends Cubit<CreateEventState> {
     }
   }
 
+  Future<Event?> fetchEvent(DocumentReference eventDocRef) async {
+    try {
+      final eventSnapshot = await eventDocRef.get();
+      if (eventSnapshot.exists) {
+        final event = Event.fromSnapshot(
+            eventSnapshot as DocumentSnapshot<Map<String, dynamic>>);
+        return event;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      // Handle any errors that occur during fetching
+      print('Error fetching event: $error');
+      return null;
+    }
+  }
+
   Future<void> updatePlayersWithEvent(
       String eventId, List<String> playersId) async {
     final String playerId = FirebaseAuth.instance.currentUser!.uid;
@@ -153,25 +204,6 @@ class CreateEventCubit extends Cubit<CreateEventState> {
         // Handle the case when the player is not found with the given ID.
         showSnackBar(context, 'Player not found with the ID: $playerId');
       }
-    }
-  }
-
-  Future<String> getClubIdFromName(String clubName) async {
-    try {
-      final QuerySnapshot<Map<String, dynamic>> snapshot =
-          await FirebaseFirestore.instance
-              .collection('clubs')
-              .where('clubName', isEqualTo: clubName)
-              .get();
-
-      if (snapshot.docs.isNotEmpty) {
-        final clubDoc = snapshot.docs.first;
-        return clubDoc.id;
-      } else {
-        throw Exception('Club not found with the given name.');
-      }
-    } catch (error) {
-      throw Exception('Failed to get club ID from name: $error');
     }
   }
 }

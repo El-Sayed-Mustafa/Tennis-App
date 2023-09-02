@@ -29,10 +29,14 @@ void main() async {
   );
   tz.initializeTimeZones();
 
+  // runApp(
+  //   DevicePreview(
+  //     builder: (context) => MyApp(), // Wrap your app
+  //   ),
+  // );
+
   runApp(
-    DevicePreview(
-      builder: (context) => MyApp(), // Wrap your app
-    ),
+    MyApp(),
   );
 }
 

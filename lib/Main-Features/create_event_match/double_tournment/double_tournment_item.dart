@@ -171,7 +171,10 @@ class _MatchInputFormState extends State<MatchInputForm> {
             ),
           ),
           SizedBox(height: screenHeight * .02),
-          AvailableCourtsWidget(courtNameController: courtNameController),
+          AvailableCourtsWidget(
+            courtNameController: courtNameController,
+            isSaveUser: false,
+          ),
           SizedBox(height: screenHeight * .03),
           InputDateAndTime(
             text: S.of(context).Event_Start,

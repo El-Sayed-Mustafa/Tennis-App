@@ -5,30 +5,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/Event/create_event/cubit/create_event_cubit.dart';
+import 'package:tennis_app/Main-Features/Featured/Event/create_event/cubit/create_event_state.dart';
+import 'package:tennis_app/Main-Features/Featured/Event/create_event/view/widgets/convert_string_to_EventType.dart';
 import 'package:tennis_app/Main-Features/Featured/Event/create_event/view/widgets/input_end_date.dart';
 import 'package:tennis_app/Main-Features/Featured/Event/create_event/view/widgets/invited_members.dart';
 import 'package:tennis_app/Main-Features/Featured/Event/create_event/view/widgets/player_level.dart';
+import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/profile_image.dart';
 import 'package:tennis_app/Main-Features/club/widgets/available_courts_widget.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
+import 'package:tennis_app/core/utils/widgets/chosen_court.dart';
+import 'package:tennis_app/core/utils/widgets/court_item.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import 'package:tennis_app/core/utils/widgets/rules_text_field.dart';
 import 'package:tennis_app/Main-Features/Featured/Event/create_event/view/widgets/event_types.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
+import 'package:tennis_app/models/event.dart';
 import '../../../../../core/utils/widgets/input_date_and_time.dart';
 import '../../../../../core/utils/widgets/text_field.dart';
 import '../../../../../generated/l10n.dart';
-import '../../../create_profile/widgets/profile_image.dart';
-import '../cubit/create_event_state.dart';
 
 // ignore: must_be_immutable
-class CreateEvent extends StatefulWidget {
-  CreateEvent({Key? key}) : super(key: key);
+class EditEvent extends StatefulWidget {
+  const EditEvent({Key? key, required this.event}) : super(key: key);
+  final Event event;
 
   @override
-  State<CreateEvent> createState() => _CreateEventState();
+  State<EditEvent> createState() => _EditEventState();
 }
 
-class _CreateEventState extends State<CreateEvent> {
+class _EditEventState extends State<EditEvent> {
   // Declare controllers for input fields
   final TextEditingController eventNameController = TextEditingController();
 
@@ -43,11 +48,19 @@ class _CreateEventState extends State<CreateEvent> {
   var formKey = GlobalKey<FormState>();
   List<String> playerIds = [];
   int? _radioValue = 0;
+  @override
+  void initState() {
+    eventNameController.text = widget.event.eventName;
+    eventAddressController.text = widget.event.eventAddress;
+    courtNameController.text = widget.event.courtName;
+    rulesController.text = widget.event.instructions;
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-
     return MultiBlocProvider(
       providers: [
         BlocProvider<EventTypeCubit>(
@@ -74,6 +87,20 @@ class _CreateEventState extends State<CreateEvent> {
                 ),
               );
             }
+            EventType savedEventType =
+                eventTypeFromString(widget.event.eventType);
+
+            final cubit = context.read<EventTypeCubit>();
+            cubit.setClubType(savedEventType);
+            context
+                .read<DateTimeCubit>()
+                .selectDateTime(widget.event.eventStartAt);
+            context
+                .read<EndDateTimeCubit>()
+                .selectDateTime(widget.event.eventEndsAt);
+            context
+                .read<SliderCubit>()
+                .setSliderValue(widget.event.playerLevel);
 
             return Scaffold(
               body: SingleChildScrollView(
@@ -86,7 +113,7 @@ class _CreateEventState extends State<CreateEvent> {
                         PoPAppBarWave(
                           prefixIcon: IconButton(
                             onPressed: () {
-                              GoRouter.of(context).replace('/home');
+                              GoRouter.of(context).push('/club');
                             },
                             icon: const Icon(
                               Icons.arrow_back,
@@ -209,7 +236,19 @@ class _CreateEventState extends State<CreateEvent> {
                               .Briefly_describe_your_clubs_rule_and_regulations,
                           controller: rulesController,
                         ),
+                        SizedBox(height: screenHeight * .015),
+                        ChosenCourt(
+                          courtId: widget.event.courtName,
+                          isUser: false,
+                          courtNameController: courtNameController,
+                          isSaveUser: false,
+                        ),
+                        AvailableCourtsWidget(
+                          courtNameController: courtNameController,
+                          isSaveUser: false,
+                        ),
                         SizedBox(height: screenHeight * .03),
+
                         RangeSliderWithTooltip(
                           text1: S
                               .of(context)
@@ -218,14 +257,10 @@ class _CreateEventState extends State<CreateEvent> {
                               .of(context)
                               .You_can_set_a_skill_level_requirement_for_players_allowing_only_those_whose_skill_level_matches_the_requirement_you_have_set_to_participate, // Replace with your desired text for text2
                         ),
-                        SizedBox(height: screenHeight * .015),
-                        AvailableCourtsWidget(
-                          courtNameController: courtNameController,
-                          isSaveUser: false,
-                        ),
+
                         SizedBox(height: screenHeight * .015),
                         BottomSheetContainer(
-                          buttonText: S.of(context).Create,
+                          buttonText: "Update",
                           onPressed: () {
                             if (courtNameController.text.isEmpty) {
                               // Display a message or alert to inform the user that both players need to be selected
@@ -234,6 +269,7 @@ class _CreateEventState extends State<CreateEvent> {
                             }
                             if (formKey.currentState!.validate()) {
                               context.read<CreateEventCubit>().saveEventData(
+                                    eventId: widget.event.eventId,
                                     context: context,
                                     selectedImageBytes: _selectedImageBytes,
                                     addressController: eventAddressController,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SliderCubit extends Cubit<double> {
-  SliderCubit({double defaultValue = 5.0}) : super(defaultValue);
+  SliderCubit({double? defaultValue}) : super(defaultValue ?? 5.0);
 
   void setSliderValue(double value) {
     emit(value);

@@ -30,7 +30,10 @@ class _CourtSearchScreenState extends State<CourtSearchScreen> {
   void fetchCourts() async {
     try {
       QuerySnapshot<Map<String, dynamic>> querySnapshot =
-          await FirebaseFirestore.instance.collection('courts').get();
+          await FirebaseFirestore.instance
+              .collection('courts')
+              .where('reversed', isEqualTo: false) // Add this filter condition
+              .get();
 
       List<Court> courts =
           querySnapshot.docs.map((doc) => Court.fromSnapshot(doc)).toList();
@@ -110,9 +113,9 @@ class _CourtSearchScreenState extends State<CourtSearchScreen> {
                   },
                   decoration: InputDecoration(
                     hintText: S.of(context).Find_Court,
-                    contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 16),
                     border: InputBorder.none,
-                    prefixIcon: Icon(Icons.search),
+                    prefixIcon: const Icon(Icons.search),
                   ),
                 ),
               ),
@@ -125,7 +128,7 @@ class _CourtSearchScreenState extends State<CourtSearchScreen> {
                 left: screenWidth * .07),
             child: Text(
               S.of(context).Courts,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Color(0xFF313131),
                 fontSize: 18,
                 fontFamily: 'Roboto',
@@ -142,6 +145,7 @@ class _CourtSearchScreenState extends State<CourtSearchScreen> {
                 return Container(
                   child: CourtItem(
                     court: court,
+                    isSaveUser: true,
                   ),
                 );
               },

@@ -114,7 +114,10 @@ class _ReversedCourtsState extends State<ReversedCourts> {
                       final Court court = Court.fromSnapshot(snapshot.data!);
 
                       // Build the carousel item using the CourtItem widget
-                      return CourtItem(court: court);
+                      return CourtItem(
+                        court: court,
+                        isSaveUser: true,
+                      );
                     },
                   );
                 }).toList(),

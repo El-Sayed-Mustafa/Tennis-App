@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 class DateTimeCubit extends Cubit<DateTime> {
-  DateTimeCubit() : super(DateTime.now());
+  DateTimeCubit([DateTime? initialDateTime])
+      : super(initialDateTime ?? DateTime.now());
 
   void selectDateTime(DateTime dateTime) {
     emit(dateTime);

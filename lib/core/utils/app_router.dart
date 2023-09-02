@@ -61,6 +61,15 @@ abstract class AppRouter {
             },
           ),
           GoRoute(
+            path: 'club',
+            builder: (BuildContext context, GoRouterState state) {
+              return BlocProvider(
+                create: (context) => NavigationCubit(1),
+                child: const NavigationBarScreen(),
+              );
+            },
+          ),
+          GoRoute(
             path: 'onboarding',
             builder: (BuildContext context, GoRouterState state) {
               return const Onboarding();

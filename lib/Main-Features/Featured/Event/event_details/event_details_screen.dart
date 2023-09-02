@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tennis_app/Main-Features/Featured/Event/edit_event/edit_event_screen.dart';
 import 'package:tennis_app/core/utils/widgets/chosen_court.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
@@ -165,6 +165,30 @@ class EventDetailsScreen extends StatelessWidget {
                               ],
                             ),
                             const SizedBox(height: 25),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  S.of(context).Player_level,
+                                  style: const TextStyle(
+                                    color: Color(0xFF15324F),
+                                    fontSize: 18,
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                Text(
+                                  event.playerLevel.toString(),
+                                  style: const TextStyle(
+                                    color: Color(0xFF6D6D6D),
+                                    fontSize: 18,
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                )
+                              ],
+                            ),
+                            const SizedBox(height: 25),
                             const Text(
                               "Court Reversed",
                               style: TextStyle(
@@ -176,6 +200,8 @@ class EventDetailsScreen extends StatelessWidget {
                             const SizedBox(height: 10),
                             ChosenCourt(
                               courtId: event.courtName,
+                              isUser: true,
+                              isSaveUser: false,
                             ),
                             const SizedBox(height: 25),
                           ],
@@ -213,11 +239,21 @@ class EventDetailsScreen extends StatelessWidget {
             const SizedBox(height: 15),
             BottomSheetContainer(
               buttonText: "Edit Event",
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EditEvent(
+                      event: event,
+                    ),
+                  ),
+                );
+              },
             ),
             BottomSheetContainer(
               buttonText: "Delete Event",
               onPressed: () {
+                GoRouter.of(context).push('/club');
                 deleteEvent(event.eventId);
               },
               backgroundColor: Colors.red,
@@ -237,10 +273,8 @@ class EventDetailsScreen extends StatelessWidget {
       await collection.doc(eventId).delete();
 
       // Successfully deleted the event
-      print('Event deleted successfully');
     } catch (e) {
       // Handle any errors that occur during deletion
-      print('Error deleting event: $e');
     }
   }
 }

@@ -108,7 +108,10 @@ class _MatchInputFormState extends State<MatchInputForm> {
                 onDateTimeSelected: (DateTime dateTime) {},
               ),
               SizedBox(height: screenHeight * .03),
-              AvailableCourtsWidget(courtNameController: courtNameController),
+              AvailableCourtsWidget(
+                courtNameController: courtNameController,
+                isSaveUser: false,
+              ),
               SizedBox(height: screenHeight * .015),
               ButtonTournament(
                 finish: () {

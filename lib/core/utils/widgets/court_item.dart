@@ -10,9 +10,14 @@ import 'package:intl/intl.dart';
 import '../../../models/player.dart';
 
 class CourtItem extends StatefulWidget {
-  CourtItem({Key? key, required this.court, this.courtNameController})
+  CourtItem(
+      {Key? key,
+      required this.court,
+      this.courtNameController,
+      required this.isSaveUser})
       : super(key: key);
   final Court court;
+  final bool isSaveUser;
   final TextEditingController? courtNameController; // Optional parameter
 
   @override
@@ -300,8 +305,10 @@ class _CourtItemState extends State<CourtItem> {
                                       if (canTap) {
                                         _currentPlayerCourts(
                                             widget.court.courtId);
-                                        _updateCourtReservedStatus(
-                                            widget.court.courtId);
+                                        if (widget.isSaveUser) {
+                                          _updateCourtReservedStatus(
+                                              widget.court.courtId);
+                                        }
                                         canTap = false;
                                         widget.courtNameController!.text =
                                             widget.court.courtId;
@@ -381,11 +388,13 @@ class _CourtItemState extends State<CourtItem> {
                                 onTap: () {
                                   if (canTap) {
                                     _currentPlayerCourts(widget.court.courtId);
-                                    _updateCourtReservedStatus(
-                                        widget.court.courtId);
+                                    if (widget.isSaveUser) {
+                                      _updateCourtReservedStatus(
+                                          widget.court.courtId);
+                                    }
                                     canTap = false;
                                     widget.courtNameController!.text =
-                                        widget.court.courtName;
+                                        widget.court.courtId;
                                     setState(() {});
                                   }
                                 },

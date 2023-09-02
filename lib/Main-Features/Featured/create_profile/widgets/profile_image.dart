@@ -5,8 +5,8 @@ import 'package:image_picker/image_picker.dart';
 
 class ProfileImage extends StatefulWidget {
   final void Function(File imageFile) onImageSelected;
-
-  const ProfileImage({required this.onImageSelected, Key? key})
+  final String? photoURL;
+  const ProfileImage({required this.onImageSelected, Key? key, this.photoURL})
       : super(key: key);
 
   @override
@@ -32,55 +32,105 @@ class _ProfileImageState extends State<ProfileImage> {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
-    return Container(
-      width: screenWidth * 0.28,
-      height: screenHeight * 0.13,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.7),
-            blurRadius: 4,
-            offset: const Offset(0, 1),
-          ),
-        ],
-        image: _imageFile != null
-            ? DecorationImage(
-                image: FileImage(_imageFile!),
-                fit: BoxFit.cover,
-              )
-            : const DecorationImage(
-                image: AssetImage('assets/images/profile-image.jpg'),
-                fit: BoxFit.cover,
-              ),
-      ),
-      child: Stack(
-        children: [
-          Positioned(
-            bottom: 0,
-            right: 0,
-            left: 0,
-            child: Container(
-              height: screenHeight * 0.047,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(30.0),
-                  bottomLeft: Radius.circular(30.0),
+    return _imageFile != null
+        ? Container(
+            width: screenWidth * 0.28,
+            height: screenHeight * 0.13,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.7),
+                    blurRadius: 4,
+                    offset: const Offset(0, 1),
+                  ),
+                ],
+                image: DecorationImage(
+                  image: FileImage(_imageFile!),
+                  fit: BoxFit.cover,
+                )),
+            child: Stack(
+              children: [
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  left: 0,
+                  child: Container(
+                    height: screenHeight * 0.047,
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(30.0),
+                        bottomLeft: Radius.circular(30.0),
+                      ),
+                      color: Colors.black45,
+                    ),
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.camera_alt_outlined,
+                        color: Colors.white,
+                        size: 28,
+                      ),
+                      onPressed: _selectImage,
+                    ),
+                  ),
                 ),
-                color: Colors.black45,
-              ),
-              child: IconButton(
-                icon: const Icon(
-                  Icons.camera_alt_outlined,
-                  color: Colors.white,
-                  size: 28,
-                ),
-                onPressed: _selectImage,
-              ),
+              ],
             ),
-          ),
-        ],
-      ),
-    );
+          )
+        : SizedBox(
+            width: screenWidth * 0.28,
+            height: screenHeight * 0.13,
+            child: Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(18),
+                  child: (widget.photoURL != null && widget.photoURL != ''
+                      ? FadeInImage.assetNetwork(
+                          placeholder: 'assets/images/loadin.gif',
+                          image: widget.photoURL!,
+                          fit: BoxFit.cover,
+                          imageErrorBuilder: (context, error, stackTrace) {
+                            // Show the placeholder image on error
+                            return Image.asset(
+                              'assets/images/profileimage.png',
+                              fit: BoxFit.cover,
+                            );
+                          },
+                        )
+                      : Image.asset(
+                          'assets/images/profile-event.jpg',
+                          fit: BoxFit.cover,
+                        )),
+                ),
+                Stack(
+                  children: [
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      left: 0,
+                      child: Container(
+                        height: screenHeight * 0.047,
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            bottomRight: Radius.circular(30.0),
+                            bottomLeft: Radius.circular(30.0),
+                          ),
+                          color: Colors.black45,
+                        ),
+                        child: IconButton(
+                          icon: const Icon(
+                            Icons.camera_alt_outlined,
+                            color: Colors.white,
+                            size: 28,
+                          ),
+                          onPressed: _selectImage,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
   }
 }

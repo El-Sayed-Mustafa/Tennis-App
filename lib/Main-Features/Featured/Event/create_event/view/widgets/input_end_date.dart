@@ -5,7 +5,8 @@ import 'package:intl/intl.dart';
 import '../../../../../../generated/l10n.dart';
 
 class EndDateTimeCubit extends Cubit<DateTime> {
-  EndDateTimeCubit() : super(DateTime.now());
+  EndDateTimeCubit([DateTime? initialDateTime])
+      : super(initialDateTime ?? DateTime.now());
 
   void selectDateTime(DateTime dateTime) {
     emit(dateTime);

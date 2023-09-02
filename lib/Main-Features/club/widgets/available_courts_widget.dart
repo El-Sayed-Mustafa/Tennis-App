@@ -7,8 +7,8 @@ import '../../../models/player.dart';
 
 class AvailableCourtsWidget extends StatelessWidget {
   final TextEditingController? courtNameController; // Optional parameter
-
-  AvailableCourtsWidget({this.courtNameController});
+  final bool isSaveUser;
+  AvailableCourtsWidget({this.courtNameController, required this.isSaveUser});
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +53,7 @@ class AvailableCourtsWidget extends StatelessWidget {
                     return AvailableCourts(
                       clubData: clubData,
                       courtNameController: courtNameController,
+                      isSaveUser: isSaveUser,
                     );
                   }
                 },

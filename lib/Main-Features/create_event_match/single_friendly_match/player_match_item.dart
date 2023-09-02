@@ -139,7 +139,9 @@ class _PlayerMatchItemState extends State<PlayerMatchItem> {
                     ),
                     SizedBox(height: screenHeight * .03),
                     AvailableCourtsWidget(
-                        courtNameController: courtNameController),
+                      courtNameController: courtNameController,
+                      isSaveUser: false,
+                    ),
                     SizedBox(height: screenHeight * .015),
                     BottomSheetContainer(
                       buttonText: 'Create',
