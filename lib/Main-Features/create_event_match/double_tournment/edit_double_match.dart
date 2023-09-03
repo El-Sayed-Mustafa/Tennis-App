@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tennis_app/Main-Features/create_event_match/double_tournment/edit_double_match_item.dart';
 import 'package:tennis_app/core/utils/widgets/double_match_card.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import 'package:tennis_app/models/double_match.dart';
@@ -60,11 +61,11 @@ class _EditDoubleMatchState extends State<EditDoubleMatch> {
             ),
           ),
           SizedBox(height: screenHeight * .01),
-          // Expanded(
-          //     child: EditDoubleMatchItem(
-          //   match: widget.match,
-          //   tournamentId: widget.tournamentId,
-          // ))
+          Expanded(
+              child: EditDoubleMatchItem(
+            match: widget.match,
+            tournamentId: widget.tournamentId,
+          ))
         ],
       ),
     );

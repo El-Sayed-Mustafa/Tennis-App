@@ -163,15 +163,26 @@ class DoubleTournamentsClub extends StatelessWidget {
                                 DoubleMatch.fromFirestore(matchDoc))
                             .toList();
 
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // Use the VerticalCarouselSlider to display matches
-                            VerticalCarouselSlider(
+                        if (tournamentMatches.isNotEmpty) {
+                          // If the tournament has matches, return the UI
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              VerticalCarouselSlider(
                                 tournamentId: tournamentDoc.id,
-                                matches: tournamentMatches),
-                          ],
-                        );
+                                matches: tournamentMatches,
+                              ),
+                            ],
+                          );
+                        } else {
+                          // If the tournament has no matches, delete it
+                          // Remove the tournament ID from the club's list
+                          clubData.singleTournamentsIds
+                              .remove(tournamentDoc.id);
+                          // Delete the tournament document from Firebase
+                          tournamentDoc.reference.delete();
+                          return Container();
+                        }
                       },
                     );
                   }).toList(),

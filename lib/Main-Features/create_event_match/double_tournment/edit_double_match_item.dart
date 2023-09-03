@@ -14,26 +14,26 @@ import 'package:tennis_app/core/utils/widgets/input_date_and_time.dart';
 import 'package:tennis_app/generated/l10n.dart';
 import 'package:tennis_app/models/double_match.dart';
 import 'package:tennis_app/models/player.dart';
-import 'package:tennis_app/models/single_match.dart';
 
-class EditSingleMatchItem extends StatefulWidget {
-  const EditSingleMatchItem({
+class EditDoubleMatchItem extends StatefulWidget {
+  const EditDoubleMatchItem({
     super.key,
     required this.match,
     required this.tournamentId,
   });
-  final SingleMatch match;
+  final DoubleMatch match;
   final String tournamentId;
   @override
-  State<EditSingleMatchItem> createState() => _EditSingleMatchItemState();
+  State<EditDoubleMatchItem> createState() => _EditDoubleMatchItemState();
 }
 
-class _EditSingleMatchItemState extends State<EditSingleMatchItem> {
+class _EditDoubleMatchItemState extends State<EditDoubleMatchItem> {
   Player? _selectedPlayer;
   Player? _selectedPlayer2;
   final TextEditingController courtNameController = TextEditingController();
   final TextEditingController rulesController = TextEditingController();
-
+  Player? _selectedPlayer3;
+  Player? _selectedPlayer4;
   @override
   void initState() {
     super.initState();
@@ -49,10 +49,14 @@ class _EditSingleMatchItemState extends State<EditSingleMatchItem> {
 
     final player1 = await method.getUserById(widget.match.player1Id);
     final player2 = await method.getUserById(widget.match.player2Id);
+    final player3 = await method.getUserById(widget.match.player3Id);
+    final player4 = await method.getUserById(widget.match.player4Id);
 
     setState(() {
       _selectedPlayer = player1;
       _selectedPlayer2 = player2;
+      _selectedPlayer3 = player3;
+      _selectedPlayer4 = player4;
     });
   }
 
@@ -65,6 +69,18 @@ class _EditSingleMatchItemState extends State<EditSingleMatchItem> {
   void _onPlayerSelected2(Player player) {
     setState(() {
       _selectedPlayer2 = player;
+    });
+  }
+
+  void _onPlayerSelected3(Player player) {
+    setState(() {
+      _selectedPlayer3 = player;
+    });
+  }
+
+  void _onPlayerSelected4(Player player) {
+    setState(() {
+      _selectedPlayer4 = player;
     });
   }
 
@@ -107,27 +123,47 @@ class _EditSingleMatchItemState extends State<EditSingleMatchItem> {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          PlayerInfoWidget(
-                            selectedPlayer: _selectedPlayer,
-                            onPlayerSelected: _onPlayerSelected,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16.0, vertical: 8.0),
+                          child: Column(
+                            children: [
+                              PlayerInfoWidget(
+                                selectedPlayer: _selectedPlayer,
+                                onPlayerSelected: _onPlayerSelected,
+                              ),
+                              PlayerInfoWidget(
+                                selectedPlayer: _selectedPlayer2,
+                                onPlayerSelected: _onPlayerSelected2,
+                              ),
+                            ],
                           ),
-                          SizedBox(
-                            height: 50,
-                            width: 50,
-                            child: Image.asset('assets/images/versus.png'),
+                        ),
+                        SizedBox(
+                          height: 50,
+                          width: 50,
+                          child: Image.asset('assets/images/versus.png'),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16.0, vertical: 8.0),
+                          child: Column(
+                            children: [
+                              PlayerInfoWidget(
+                                selectedPlayer: _selectedPlayer3,
+                                onPlayerSelected: _onPlayerSelected3,
+                              ),
+                              PlayerInfoWidget(
+                                selectedPlayer: _selectedPlayer4,
+                                onPlayerSelected: _onPlayerSelected4,
+                              ),
+                            ],
                           ),
-                          PlayerInfoWidget(
-                            selectedPlayer: _selectedPlayer2,
-                            onPlayerSelected: _onPlayerSelected2,
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                     SizedBox(height: screenHeight * .02),
                     const Text(
@@ -174,12 +210,14 @@ class _EditSingleMatchItemState extends State<EditSingleMatchItem> {
                               'You Must Choose Two Players and court ');
                         }
                         if (formKey.currentState!.validate()) {
-                          context.read<EditMatchCubit>().editMatch(
+                          context.read<EditMatchCubit>().editDoubleMatch(
                               courtNameController: courtNameController,
                               selectedPlayer: _selectedPlayer!,
                               selectedPlayer2: _selectedPlayer2!,
                               tournamentId: widget.tournamentId,
-                              match: widget.match);
+                              match: widget.match,
+                              selectedPlayer3: _selectedPlayer3!,
+                              selectedPlayer4: _selectedPlayer4!);
                           showSnackBar(context, 'Match Updated Successfully');
                         }
                         GoRouter.of(context).push('/club');
