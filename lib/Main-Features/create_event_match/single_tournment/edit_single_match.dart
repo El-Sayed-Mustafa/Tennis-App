@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tennis_app/Main-Features/create_event_match/single_tournment/widgets/edit_single_match_item.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import 'package:tennis_app/core/utils/widgets/single_match_card%20copy.dart';
 import 'package:tennis_app/models/single_match.dart';
 
 import '../single_friendly_match/player_match_item.dart';
 
-class EditSingleMatch extends StatelessWidget {
+class EditSingleMatch extends StatefulWidget {
   const EditSingleMatch(
       {super.key, required this.match, required this.tournamentId});
   final SingleMatch match;
   final String tournamentId;
+
+  @override
+  State<EditSingleMatch> createState() => _EditSingleMatchState();
+}
+
+class _EditSingleMatchState extends State<EditSingleMatch> {
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
@@ -50,13 +57,17 @@ class EditSingleMatch extends StatelessWidget {
             child: SizedBox(
               height: carouselHeight,
               child: SingleMatchCard(
-                match: match,
-                tournamentId: tournamentId,
+                match: widget.match,
+                tournamentId: widget.tournamentId,
               ),
             ),
           ),
           SizedBox(height: screenHeight * .01),
-          const Expanded(child: PlayerMatchItem())
+          Expanded(
+              child: EditSingleMatchItem(
+            match: widget.match,
+            tournamentId: widget.tournamentId,
+          ))
         ],
       ),
     );

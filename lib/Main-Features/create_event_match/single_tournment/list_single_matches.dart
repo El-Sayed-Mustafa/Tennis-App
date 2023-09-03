@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/create_event_match/services/firebase_method.dart';
-import 'package:tennis_app/Main-Features/create_event_match/widgets/edit_single_match.dart';
-import 'package:tennis_app/constants.dart';
+import 'package:tennis_app/Main-Features/create_event_match/single_tournment/edit_single_match.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import 'package:tennis_app/core/utils/widgets/single_match_card%20copy.dart';
 import 'package:tennis_app/models/single_match.dart';
@@ -40,8 +39,6 @@ class _ListSingleMatchesState extends State<ListSingleMatches> {
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
-    final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
-        GlobalKey<RefreshIndicatorState>();
 
     final double carouselHeight = (screenHeight + screenWidth) * 0.18;
 
@@ -64,7 +61,7 @@ class _ListSingleMatchesState extends State<ListSingleMatches> {
           ),
           Expanded(
             child: ListView.builder(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               padding: EdgeInsets.zero,
               itemCount: widget.matches.length,
               itemBuilder: (context, index) {

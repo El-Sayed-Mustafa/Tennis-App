@@ -29,6 +29,16 @@ class Method {
     return Player.fromSnapshot(snapshot);
   }
 
+  Future<Player> getUserById(String playerId) async {
+    DocumentSnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
+        .instance
+        .collection('players')
+        .doc(playerId)
+        .get();
+
+    return Player.fromSnapshot(snapshot);
+  }
+
   Future<Club> fetchClubData(String clubId) async {
     final clubSnapshot =
         await FirebaseFirestore.instance.collection('clubs').doc(clubId).get();
@@ -236,7 +246,7 @@ class Method {
           final updatedData = {
             'playerLevel': '0',
             'skillLevel': '0',
-            'clubRoles': {},
+            'clubRoles': [],
             'participatedClubId': '',
             'isRated': false,
             'eventIds': [],
