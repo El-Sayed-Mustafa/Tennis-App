@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tennis_app/Main-Features/create_event_match/services/firebase_method.dart';
+import 'package:tennis_app/Main-Features/create_event_match/single_tournment/edit_single_match.dart';
+import 'package:tennis_app/constants.dart';
 import 'package:tennis_app/core/methodes/firebase_methodes.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/custom_dialouge.dart';
@@ -150,7 +153,49 @@ class _ClubSingleMatchesState extends State<ClubSingleMatches> {
                               SingleMatch.fromFirestore(snapshot.data!);
 
                           // Build the carousel item using the MatchItem widget
-                          return SingleMatchCard(match: match);
+                          return Stack(
+                            children: [
+                              SingleMatchCard(match: match),
+                              Positioned(
+                                right: 0,
+                                bottom: 0,
+                                child: IconButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                EditSingleMatch(
+                                                  match: match,
+                                                  tournamentId: '',
+                                                )),
+                                      );
+                                    },
+                                    icon: const Icon(
+                                      Icons.edit,
+                                      size: 25,
+                                      color: Colors.black,
+                                    )),
+                              ),
+                              Positioned(
+                                left: 0,
+                                bottom: 0,
+                                child: IconButton(
+                                    onPressed: () async {
+                                      MatchesFirebaseMethod delete =
+                                          MatchesFirebaseMethod();
+                                      await delete
+                                          .deleteSingleMatch(match.matchId);
+                                      setState(() {});
+                                    },
+                                    icon: const Icon(
+                                      Icons.delete,
+                                      size: 25,
+                                      color: Colors.black,
+                                    )),
+                              ),
+                            ],
+                          );
                         },
                       );
                     }).toList(),
@@ -179,36 +224,7 @@ class _ClubSingleMatchesState extends State<ClubSingleMatches> {
                 height: screenHeight * .2,
                 width: screenWidth * .8,
               ),
-
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: buildPageIndicator(matches.length),
-        ), // Add the smooth page indicator
       ],
-    );
-  }
-
-  Widget buildPageIndicator(int itemCount) {
-    final double screenWidth = MediaQuery.of(context).size.width;
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(
-        itemCount,
-        (index) {
-          final bool isSelected = selectedPageIndex == index;
-          return AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            width: isSelected ? 11 : 9,
-            height: isSelected ? 11 : 9,
-            margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.011),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: isSelected ? Colors.black : Colors.grey,
-            ),
-          );
-        },
-      ),
     );
   }
 }

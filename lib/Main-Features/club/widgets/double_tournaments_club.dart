@@ -23,7 +23,7 @@ class VerticalCarouselSlider extends StatelessWidget {
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
 
-    final double carouselHeight = (screenHeight + screenWidth) * 0.21;
+    final double carouselHeight = (screenHeight + screenWidth) * 0.24;
     return CarouselSlider(
       options: CarouselOptions(
         height: matches.isNotEmpty ? carouselHeight * 1.1 : 0,
@@ -45,7 +45,7 @@ class VerticalCarouselSlider extends StatelessWidget {
               ),
               Positioned(
                 right: 0,
-                bottom: 0,
+                bottom: -5,
                 child: IconButton(
                     onPressed: () {
                       Navigator.push(

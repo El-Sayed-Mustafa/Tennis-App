@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tennis_app/Main-Features/create_event_match/double_tournment/edit_double_match.dart';
+import 'package:tennis_app/Main-Features/create_event_match/services/firebase_method.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/custom_dialouge.dart';
 import 'package:tennis_app/core/utils/widgets/double_match_card.dart';
@@ -79,7 +81,7 @@ class _ClubDoubleMatchesState extends State<ClubDoubleMatches> {
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
 
-    final double carouselHeight = (screenHeight + screenWidth) * 0.18;
+    final double carouselHeight = (screenHeight + screenWidth) * 0.21;
 
     return Column(
       children: [
@@ -149,7 +151,49 @@ class _ClubDoubleMatchesState extends State<ClubDoubleMatches> {
                               DoubleMatch.fromFirestore(snapshot.data!);
 
                           // Build the carousel item using the MatchItem widget
-                          return DoubleMatchCard(match: match);
+                          return Stack(
+                            children: [
+                              DoubleMatchCard(match: match),
+                              Positioned(
+                                right: 0,
+                                bottom: -5,
+                                child: IconButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                EditDoubleMatch(
+                                                  match: match,
+                                                  tournamentId: '',
+                                                )),
+                                      );
+                                    },
+                                    icon: const Icon(
+                                      Icons.mode_edit,
+                                      size: 25,
+                                      color: Colors.black,
+                                    )),
+                              ),
+                              Positioned(
+                                left: 0,
+                                bottom: 0,
+                                child: IconButton(
+                                    onPressed: () async {
+                                      MatchesFirebaseMethod delete =
+                                          MatchesFirebaseMethod();
+                                      await delete
+                                          .deleteDoubleMatch(match.matchId);
+                                      setState(() {});
+                                    },
+                                    icon: const Icon(
+                                      Icons.delete,
+                                      size: 25,
+                                      color: Colors.black,
+                                    )),
+                              )
+                            ],
+                          );
                         },
                       );
                     }).toList(),

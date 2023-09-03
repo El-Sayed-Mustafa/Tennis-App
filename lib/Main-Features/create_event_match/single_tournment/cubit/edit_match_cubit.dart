@@ -6,8 +6,6 @@ import 'package:tennis_app/Main-Features/create_event_match/single_friendly_matc
 import 'package:tennis_app/core/utils/widgets/input_date_and_time.dart';
 import 'package:tennis_app/models/double_match.dart';
 import 'package:tennis_app/models/player.dart';
-import '../../../../core/methodes/firebase_methodes.dart';
-import '../../../../models/club.dart';
 import '../../../../models/single_match.dart';
 
 class EditMatchCubit extends Cubit<SaveMatchState> {
@@ -25,13 +23,6 @@ class EditMatchCubit extends Cubit<SaveMatchState> {
     emit(SaveMatchInProgress());
 
     try {
-      final tournamentRef = FirebaseFirestore.instance
-          .collection('singleTournaments')
-          .doc(tournamentId);
-
-      // Update the existing match in the tournament collection
-      final existingMatchRef =
-          tournamentRef.collection('singleMatches').doc(match.matchId);
       DateTime? selectedStartDateTime = context.read<DateTimeCubit>().state;
       DateTime? selectedEndDateTime = context.read<EndDateTimeCubit>().state;
       // Get the selected date and time from InputDateAndTime widget and convert it to DateTime object
@@ -42,7 +33,6 @@ class EditMatchCubit extends Cubit<SaveMatchState> {
 
       // Get the court name from the text controller
       String courtName = courtNameController.text.trim();
-
       // Create a SingleMatch object
       SingleMatch updatedMatch = SingleMatch(
         matchId: match.matchId,
@@ -54,21 +44,22 @@ class EditMatchCubit extends Cubit<SaveMatchState> {
         courtName: courtName,
         result: match.result,
       );
-      await existingMatchRef.update(updatedMatch.toFirestore());
 
-      // Update the club's tournament list
-      Method method = Method();
-      Player currentUser = await method.getCurrentUser();
-      Club clubData =
-          await method.fetchClubData(currentUser.participatedClubId);
-      if (!clubData.singleTournamentsIds.contains(tournamentRef.id)) {
-        clubData.singleTournamentsIds.add(tournamentRef.id);
-        await FirebaseFirestore.instance
-            .collection('clubs')
-            .doc(currentUser.participatedClubId)
-            .update({
-          'singleTournamentsIds': clubData.singleTournamentsIds,
-        });
+      if (tournamentId == '') {
+        final matchRef = FirebaseFirestore.instance
+            .collection('single_matches')
+            .doc(match.matchId);
+        await matchRef.update(updatedMatch.toFirestore());
+      } else {
+        final tournamentRef = FirebaseFirestore.instance
+            .collection('singleTournaments')
+            .doc(tournamentId);
+
+        // Update the existing match in the tournament collection
+        final existingMatchRef =
+            tournamentRef.collection('singleMatches').doc(match.matchId);
+
+        await existingMatchRef.update(updatedMatch.toFirestore());
       }
       emit(SaveMatchSuccess());
     } on Exception catch (e) {
@@ -88,25 +79,12 @@ class EditMatchCubit extends Cubit<SaveMatchState> {
     emit(SaveMatchInProgress());
 
     try {
-      final tournamentRef = FirebaseFirestore.instance
-          .collection('doubleTournaments')
-          .doc(tournamentId);
-
-      // Update the existing match in the tournament collection
-      final existingMatchRef =
-          tournamentRef.collection('doubleMatches').doc(match.matchId);
       DateTime? selectedStartDateTime = context.read<DateTimeCubit>().state;
       DateTime? selectedEndDateTime = context.read<EndDateTimeCubit>().state;
-      // Get the selected date and time from InputDateAndTime widget and convert it to DateTime object
       DateTime startTime = selectedStartDateTime;
-
-      // Get the selected end date and time from InputEndDateAndTime widget and convert it to DateTime object
       DateTime endTime = selectedEndDateTime;
-
-      // Get the court name from the text controller
       String courtName = courtNameController.text.trim();
 
-      // Create a SingleMatch object
       DoubleMatch updatedMatch = DoubleMatch(
         matchId: match.matchId,
         player1Id: selectedPlayer.playerId,
@@ -119,21 +97,19 @@ class EditMatchCubit extends Cubit<SaveMatchState> {
         player3Id: selectedPlayer3.playerId,
         player4Id: selectedPlayer4.playerId,
       );
-      await existingMatchRef.update(updatedMatch.toFirestore());
+      if (tournamentId == '') {
+        final matchRef = FirebaseFirestore.instance
+            .collection('double_matches')
+            .doc(match.matchId);
+        await matchRef.update(updatedMatch.toFirestore());
+      } else {
+        final tournamentRef = FirebaseFirestore.instance
+            .collection('doubleTournaments')
+            .doc(tournamentId);
 
-      // Update the club's tournament list
-      Method method = Method();
-      Player currentUser = await method.getCurrentUser();
-      Club clubData =
-          await method.fetchClubData(currentUser.participatedClubId);
-      if (!clubData.singleTournamentsIds.contains(tournamentRef.id)) {
-        clubData.singleTournamentsIds.add(tournamentRef.id);
-        await FirebaseFirestore.instance
-            .collection('clubs')
-            .doc(currentUser.participatedClubId)
-            .update({
-          'doubleTournamentsIds': clubData.doubleTournamentsIds,
-        });
+        final existingMatchRef =
+            tournamentRef.collection('doubleMatches').doc(match.matchId);
+        await existingMatchRef.update(updatedMatch.toFirestore());
       }
       emit(SaveMatchSuccess());
     } on Exception catch (e) {

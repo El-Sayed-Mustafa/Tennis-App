@@ -1,6 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tennis_app/core/methodes/firebase_methodes.dart';
+import 'package:tennis_app/models/club.dart';
+import 'package:tennis_app/models/player.dart';
 
 class MatchesFirebaseMethod {
+  final Method method = Method();
+
   // Function to delete a match from Firestore
   Future<void> deleteSingleTournamentMatch(
       String matchId, String tournamentId) async {
@@ -13,12 +18,22 @@ class MatchesFirebaseMethod {
 
       // Delete the match document
       await matchesCollection.doc(matchId).delete();
-      print('sucess');
 
-      // You can also update the UI or show a confirmation message here.
+      Player currentUser = await method.getCurrentUser();
+
+      Club clubData =
+          await method.fetchClubData(currentUser.participatedClubId);
+
+      clubData.singleTournamentsIds.remove(matchId);
+      // Update the club's data in Firestore
+      await FirebaseFirestore.instance
+          .collection('clubs')
+          .doc(currentUser.participatedClubId)
+          .update({
+        'singleTournamentsIds': clubData.singleTournamentsIds,
+      });
     } catch (error) {
       // Handle any errors that occur during deletion
-      print('Error deleting match: $error');
     }
   }
 
@@ -33,12 +48,99 @@ class MatchesFirebaseMethod {
 
       // Delete the match document
       await matchesCollection.doc(matchId).delete();
-      print('sucess');
 
-      // You can also update the UI or show a confirmation message here.
+      Player currentUser = await method.getCurrentUser();
+
+      Club clubData =
+          await method.fetchClubData(currentUser.participatedClubId);
+
+      clubData.doubleTournamentsIds.remove(matchId);
+      // Update the club's data in Firestore
+      await FirebaseFirestore.instance
+          .collection('clubs')
+          .doc(currentUser.participatedClubId)
+          .update({
+        'doubleTournamentsIds': clubData.doubleTournamentsIds,
+      });
     } catch (error) {
       // Handle any errors that occur during deletion
-      print('Error deleting match: $error');
     }
+  }
+
+  Future<void> deleteSingleMatch(String matchId) async {
+    final CollectionReference matchesCollection =
+        FirebaseFirestore.instance.collection('single_matches');
+
+    try {
+      // Use the matchId to create a reference to the match document
+      final matchRef = matchesCollection.doc(matchId);
+
+      // Fetch the current user
+
+      // Delete the match document
+      await matchRef.delete();
+
+      Player currentUser = await method.getCurrentUser();
+
+      // Fetch the club data for the current user
+      Club clubData =
+          await method.fetchClubData(currentUser.participatedClubId);
+
+      clubData.singleMatchesIds.remove(matchId);
+      currentUser.singleMatchesIds.remove(matchId);
+
+      // Update the club's data in Firestore
+      await FirebaseFirestore.instance
+          .collection('clubs')
+          .doc(currentUser.participatedClubId)
+          .update({
+        'singleMatchesIds': clubData.singleMatchesIds,
+      });
+
+      await FirebaseFirestore.instance
+          .collection('players')
+          .doc(currentUser.participatedClubId)
+          .update({
+        'singleMatchesIds': currentUser.singleMatchesIds,
+      });
+    } catch (error) {
+      // Handle errors if necessary
+    }
+  }
+
+  Future<void> deleteDoubleMatch(String matchId) async {
+    final CollectionReference matchesCollection =
+        FirebaseFirestore.instance.collection('double_matches');
+    try {
+      // Use the matchId to create a reference to the match document
+      final matchRef = matchesCollection.doc(matchId);
+
+      // Delete the match document
+      await matchRef.delete();
+
+      Player currentUser = await method.getCurrentUser();
+
+      // Fetch the club data for the current user
+      Club clubData =
+          await method.fetchClubData(currentUser.participatedClubId);
+
+      clubData.doubleMatchesIds.remove(matchId);
+      currentUser.doubleMatchesIds.remove(matchId);
+
+      // Update the club's data in Firestore
+      await FirebaseFirestore.instance
+          .collection('clubs')
+          .doc(currentUser.participatedClubId)
+          .update({
+        'doubleMatchesIds': clubData.doubleMatchesIds,
+      });
+
+      await FirebaseFirestore.instance
+          .collection('players')
+          .doc(currentUser.participatedClubId)
+          .update({
+        'doubleMatchesIds': currentUser.doubleMatchesIds,
+      });
+    } catch (error) {}
   }
 }
