@@ -57,152 +57,135 @@ class _PlayerMatchItemState extends State<PlayerMatchItem> {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
 
-    return Scaffold(
-      body: BlocProvider(
-        create: (context) => DoubleMatchCubit(context),
-        child: BlocBuilder<DoubleMatchCubit, DoubleMatchState>(
-          builder: (context, state) {
-            if (state is DoubleMatchInProgress) {
-              return const Dialog.fullscreen(
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
-            } else if (state is DoubleMatchFailure) {
-              return Scaffold(
-                body: Center(
-                  child: Text(state.error),
-                ),
-              );
-            }
-            return SingleChildScrollView(
-              child: Form(
-                key: formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    PoPAppBarWave(
-                      prefixIcon: IconButton(
-                        onPressed: () {
-                          GoRouter.of(context).pop();
-                        },
-                        icon: const Icon(
-                          Icons.arrow_back,
-                          size: 30,
-                          color: Colors.white,
-                        ),
-                      ),
-                      text: 'Double Match',
-                      suffixIconPath: '',
-                    ),
-                    SizedBox(height: screenHeight * .02),
-                    const Text(
-                      'Click to choose a player',
-                      style: TextStyle(
-                        color: Color(0xFF313131),
-                        fontSize: 20,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16.0, vertical: 8.0),
-                          child: Column(
-                            children: [
-                              PlayerInfoWidget(
-                                selectedPlayer: _selectedPlayer,
-                                onPlayerSelected: _onPlayerSelected,
-                              ),
-                              PlayerInfoWidget(
-                                selectedPlayer: _selectedPlayer2,
-                                onPlayerSelected: _onPlayerSelected2,
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 50,
-                          width: 50,
-                          child: Image.asset('assets/images/versus.png'),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16.0, vertical: 8.0),
-                          child: Column(
-                            children: [
-                              PlayerInfoWidget(
-                                selectedPlayer: _selectedPlayer3,
-                                onPlayerSelected: _onPlayerSelected3,
-                              ),
-                              PlayerInfoWidget(
-                                selectedPlayer: _selectedPlayer4,
-                                onPlayerSelected: _onPlayerSelected4,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: screenHeight * .02),
-                    const Text(
-                      'Schedule',
-                      style: TextStyle(
-                        color: Color(0xFF313131),
-                        fontSize: 20,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    SizedBox(height: screenHeight * .02),
-                    InputDateAndTime(
-                      text: S.of(context).Event_Start,
-                      hint: S.of(context).Select_start_date_and_time,
-                      onDateTimeSelected: (DateTime dateTime) {},
-                    ),
-                    SizedBox(height: screenHeight * .03),
-                    InputEndDateAndTime(
-                      text: S.of(context).Event_End,
-                      hint: S.of(context).Select_end_date_and_time,
-                      onDateTimeSelected: (DateTime dateTime) {},
-                    ),
-                    SizedBox(height: screenHeight * .03),
-                    AvailableCourtsWidget(
-                      courtNameController: courtNameController,
-                      isSaveUser: false,
-                    ),
-                    SizedBox(height: screenHeight * .015),
-                    BottomSheetContainer(
-                      buttonText: 'Create',
-                      onPressed: () {
-                        if (_selectedPlayer == null ||
-                            _selectedPlayer2 == null ||
-                            _selectedPlayer3 == null ||
-                            _selectedPlayer4 == null ||
-                            courtNameController.text.isEmpty) {
-                          // Display a message or alert to inform the user that both players need to be selected
-                          return showSnackBar(context,
-                              'You Must Choose Two Players and court ');
-                        }
-                        if (formKey.currentState!.validate()) {
-                          context.read<DoubleMatchCubit>().saveDoubleMatch(
-                              courtNameController: courtNameController,
-                              selectedPlayer: _selectedPlayer!,
-                              selectedPlayer2: _selectedPlayer2!,
-                              selectedPlayer3: _selectedPlayer3!,
-                              selectedPlayer4: _selectedPlayer4!);
-                        }
-                      },
-                    ),
-                  ],
-                ),
+    return BlocProvider(
+      create: (context) => DoubleMatchCubit(context),
+      child: BlocBuilder<DoubleMatchCubit, DoubleMatchState>(
+        builder: (context, state) {
+          if (state is DoubleMatchInProgress) {
+            return const Dialog.fullscreen(
+              child: Center(
+                child: CircularProgressIndicator(),
               ),
             );
-          },
-        ),
+          } else if (state is DoubleMatchFailure) {
+            return Scaffold(
+              body: Center(
+                child: Text(state.error),
+              ),
+            );
+          }
+          return SingleChildScrollView(
+            child: Form(
+              key: formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Click to choose a player',
+                    style: TextStyle(
+                      color: Color(0xFF313131),
+                      fontSize: 20,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 8.0),
+                        child: Column(
+                          children: [
+                            PlayerInfoWidget(
+                              selectedPlayer: _selectedPlayer,
+                              onPlayerSelected: _onPlayerSelected,
+                            ),
+                            PlayerInfoWidget(
+                              selectedPlayer: _selectedPlayer2,
+                              onPlayerSelected: _onPlayerSelected2,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 50,
+                        width: 50,
+                        child: Image.asset('assets/images/versus.png'),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 8.0),
+                        child: Column(
+                          children: [
+                            PlayerInfoWidget(
+                              selectedPlayer: _selectedPlayer3,
+                              onPlayerSelected: _onPlayerSelected3,
+                            ),
+                            PlayerInfoWidget(
+                              selectedPlayer: _selectedPlayer4,
+                              onPlayerSelected: _onPlayerSelected4,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: screenHeight * .02),
+                  const Text(
+                    'Schedule',
+                    style: TextStyle(
+                      color: Color(0xFF313131),
+                      fontSize: 20,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  SizedBox(height: screenHeight * .02),
+                  InputDateAndTime(
+                    text: S.of(context).Event_Start,
+                    hint: S.of(context).Select_start_date_and_time,
+                    onDateTimeSelected: (DateTime dateTime) {},
+                  ),
+                  SizedBox(height: screenHeight * .03),
+                  InputEndDateAndTime(
+                    text: S.of(context).Event_End,
+                    hint: S.of(context).Select_end_date_and_time,
+                    onDateTimeSelected: (DateTime dateTime) {},
+                  ),
+                  SizedBox(height: screenHeight * .03),
+                  AvailableCourtsWidget(
+                    courtNameController: courtNameController,
+                    isSaveUser: false,
+                  ),
+                  SizedBox(height: screenHeight * .015),
+                  BottomSheetContainer(
+                    buttonText: 'Create',
+                    onPressed: () {
+                      if (_selectedPlayer == null ||
+                          _selectedPlayer2 == null ||
+                          _selectedPlayer3 == null ||
+                          _selectedPlayer4 == null ||
+                          courtNameController.text.isEmpty) {
+                        // Display a message or alert to inform the user that both players need to be selected
+                        return showSnackBar(
+                            context, 'You Must Choose Two Players and court ');
+                      }
+                      if (formKey.currentState!.validate()) {
+                        context.read<DoubleMatchCubit>().saveDoubleMatch(
+                            courtNameController: courtNameController,
+                            selectedPlayer: _selectedPlayer!,
+                            selectedPlayer2: _selectedPlayer2!,
+                            selectedPlayer3: _selectedPlayer3!,
+                            selectedPlayer4: _selectedPlayer4!);
+                      }
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }

@@ -2,7 +2,7 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:tennis_app/Main-Features/club/widgets/list_single_matches.dart';
+import 'package:tennis_app/Main-Features/create_event_match/single_tournment/list_single_matches.dart';
 import 'package:tennis_app/constants.dart';
 import 'package:tennis_app/models/single_match.dart'; // Replace with your model
 import 'package:cloud_firestore/cloud_firestore.dart';

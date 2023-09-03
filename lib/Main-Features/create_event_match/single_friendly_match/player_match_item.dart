@@ -69,21 +69,6 @@ class _PlayerMatchItemState extends State<PlayerMatchItem> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    PoPAppBarWave(
-                      prefixIcon: IconButton(
-                        onPressed: () {
-                          GoRouter.of(context).pop();
-                        },
-                        icon: const Icon(
-                          Icons.arrow_back,
-                          size: 30,
-                          color: Colors.white,
-                        ),
-                      ),
-                      text: 'Single Match',
-                      suffixIconPath: '',
-                    ),
-                    SizedBox(height: screenHeight * .02),
                     const Text(
                       'Click to choose a player',
                       style: TextStyle(
