@@ -8,7 +8,6 @@ import 'package:tennis_app/models/single_match.dart'; // Replace with your model
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../../core/methodes/firebase_methodes.dart';
 import '../../../core/utils/widgets/single_match_card copy.dart';
-import '../../../generated/l10n.dart';
 import '../../../models/club.dart';
 import '../../../models/player.dart'; // Replace with your model
 

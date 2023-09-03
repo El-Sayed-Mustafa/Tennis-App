@@ -164,7 +164,7 @@ class _EditSingleMatchItemState extends State<EditSingleMatchItem> {
                     ),
                     SizedBox(height: screenHeight * .015),
                     BottomSheetContainer(
-                      buttonText: 'Create',
+                      buttonText: 'Update',
                       onPressed: () {
                         if (_selectedPlayer == null ||
                             _selectedPlayer2 == null ||

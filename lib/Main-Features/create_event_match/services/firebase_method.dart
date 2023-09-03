@@ -21,4 +21,24 @@ class MatchesFirebaseMethod {
       print('Error deleting match: $error');
     }
   }
+
+  Future<void> deleteDoubleTournamentMatch(
+      String matchId, String tournamentId) async {
+    try {
+      // Get a reference to the tournament's matches collection
+      final tournamentRef = FirebaseFirestore.instance
+          .collection('doubleTournaments')
+          .doc(tournamentId);
+      final matchesCollection = tournamentRef.collection('doubleMatches');
+
+      // Delete the match document
+      await matchesCollection.doc(matchId).delete();
+      print('sucess');
+
+      // You can also update the UI or show a confirmation message here.
+    } catch (error) {
+      // Handle any errors that occur during deletion
+      print('Error deleting match: $error');
+    }
+  }
 }

@@ -2,6 +2,8 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:tennis_app/Main-Features/create_event_match/double_tournment/list_double_matches.dart';
+import 'package:tennis_app/constants.dart';
 import 'package:tennis_app/core/utils/widgets/double_match_card.dart';
 import 'package:tennis_app/models/double_match.dart'; // Replace with your model
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -9,7 +11,6 @@ import 'package:tennis_app/models/player.dart'; // Replace with your model
 import 'package:tennis_app/models/club.dart';
 
 import '../../../core/methodes/firebase_methodes.dart';
-import '../../../generated/l10n.dart'; // Replace with your model
 
 class VerticalCarouselSlider extends StatelessWidget {
   final List<DoubleMatch> matches;
@@ -36,9 +37,33 @@ class VerticalCarouselSlider extends StatelessWidget {
       items: matches.map((match) {
         return Padding(
           padding: const EdgeInsets.all(8.0),
-          child: DoubleMatchCard(
-            tournamentId: tournamentId,
-            match: match,
+          child: Stack(
+            children: [
+              DoubleMatchCard(
+                tournamentId: tournamentId,
+                match: match,
+              ),
+              Positioned(
+                right: 0,
+                bottom: 0,
+                child: IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ListDoubleMatches(
+                                  matches: matches,
+                                  tournamentId: tournamentId,
+                                )),
+                      );
+                    },
+                    icon: const Icon(
+                      Icons.info_outline,
+                      size: 30,
+                      color: kPrimaryColor,
+                    )),
+              ),
+            ],
           ),
         );
       }).toList(),

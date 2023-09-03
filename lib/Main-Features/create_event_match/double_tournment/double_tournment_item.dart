@@ -8,7 +8,6 @@ import 'package:tennis_app/models/double_match.dart';
 import '../../Featured/Event/create_event/view/widgets/input_end_date.dart';
 import '../../../core/utils/snackbar.dart';
 import '../../../core/utils/widgets/input_date_and_time.dart';
-import '../../../core/utils/widgets/text_field.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/player.dart';
 import '../widgets/button_tournament.dart';
@@ -65,12 +64,6 @@ class _MatchInputFormState extends State<MatchInputForm> {
     required Player selectedPlayer4,
     required TextEditingController courtNameController,
   }) async {
-    // Check if all required data is available
-    if (selectedPlayer == null || selectedPlayer2 == null) {
-      // Display a message or alert to inform the user that both players need to be selected
-      return showSnackBar(context, 'You Must Choose Two Players');
-    }
-
     DateTime? selectedStartDateTime = context.read<DateTimeCubit>().state;
     DateTime? selectedEndDateTime = context.read<EndDateTimeCubit>().state;
     // Get the selected date and time from InputDateAndTime widget and convert it to DateTime object
@@ -101,7 +94,6 @@ class _MatchInputFormState extends State<MatchInputForm> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    final Method method = Method();
 
     return Form(
       key: formKey,

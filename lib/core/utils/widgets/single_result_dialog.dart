@@ -69,11 +69,9 @@ Future<void> showWinnerDialog(method, context, match, tournamentId) async {
                 }
                 int teamAScore = int.tryParse(teamAScoreController.text) ?? 0;
                 int teamBScore = int.tryParse(teamBScoreController.text) ?? 0;
-                String winner;
                 String result;
                 result = '$teamAScore : $teamBScore';
                 if (teamAScore > teamBScore) {
-                  winner = 'Team A Winner';
                   if (tournamentId != null) {
                     await FirebaseFirestore.instance
                         .collection('singleTournaments')
@@ -123,8 +121,6 @@ Future<void> showWinnerDialog(method, context, match, tournamentId) async {
                   await method.updateMatchPlayedAndTotalWins(
                       match.player1Id, false);
                 } else {
-                  winner = 'Draw';
-
                   if (tournamentId != null) {
                     await FirebaseFirestore.instance
                         .collection('singleTournaments')

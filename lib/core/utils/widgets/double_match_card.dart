@@ -106,11 +106,9 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
 
                   int teamAScore = int.tryParse(teamAScoreController.text) ?? 0;
                   int teamBScore = int.tryParse(teamBScoreController.text) ?? 0;
-                  String winner;
                   String result;
                   result = '$teamAScore : $teamBScore';
                   if (teamAScore > teamBScore) {
-                    winner = 'Team A Winner';
                     if (widget.tournamentId != null) {
                       await FirebaseFirestore.instance
                           .collection('doubleTournaments')
@@ -139,7 +137,6 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                     await method.updateMatchPlayedAndTotalWins(
                         widget.match.player4Id, false);
                   } else if (teamBScore > teamAScore) {
-                    winner = 'Team B Winner';
                     if (widget.tournamentId != null) {
                       await FirebaseFirestore.instance
                           .collection('doubleTournaments')
@@ -168,8 +165,6 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                     await method.updateMatchPlayedAndTotalWins(
                         widget.match.player2Id, false);
                   } else {
-                    winner = 'Draw';
-
                     if (widget.tournamentId != null) {
                       await FirebaseFirestore.instance
                           .collection('doubleTournaments')
