@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -6,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:tennis_app/core/utils/widgets/single_match_card%20copy.dart';
 import 'package:tennis_app/Main-Features/create_event_match/single_tournment/single_tournment_item.dart';
 import '../../../core/methodes/firebase_methodes.dart';
-import '../../../core/utils/widgets/double_match_card.dart';
 import '../../../core/utils/widgets/pop_app_bar.dart';
 
 import '../../../models/club.dart';
@@ -111,28 +109,28 @@ class _SingleTournamentScreenState extends State<SingleTournamentScreen> {
 
     newMatch.matchId = newMatchRef2.id;
 
-    // Fetch the players based on their IDs
-    final player1Doc = await FirebaseFirestore.instance
-        .collection('players')
-        .doc(newMatch.player1Id)
-        .get();
-    final player2Doc = await FirebaseFirestore.instance
-        .collection('players')
-        .doc(newMatch.player2Id)
-        .get();
+    // // Fetch the players based on their IDs
+    // final player1Doc = await FirebaseFirestore.instance
+    //     .collection('players')
+    //     .doc(newMatch.player1Id)
+    //     .get();
+    // final player2Doc = await FirebaseFirestore.instance
+    //     .collection('players')
+    //     .doc(newMatch.player2Id)
+    //     .get();
 
-    final player1 = Player.fromSnapshot(player1Doc);
-    final player2 = Player.fromSnapshot(player2Doc);
+    // final player1 = Player.fromSnapshot(player1Doc);
+    // final player2 = Player.fromSnapshot(player2Doc);
 
-    // Update the players' singleMatchesIds lists with the new match ID
-    player1.singleMatchesIds.add(newMatch.matchId);
-    player2.singleMatchesIds.add(newMatch.matchId);
+    // // Update the players' singleMatchesIds lists with the new match ID
+    // player1.singleMatchesIds.add(newMatch.matchId);
+    // player2.singleMatchesIds.add(newMatch.matchId);
 
-    // Update the players' documents with the updated lists
-    await player1Doc.reference
-        .update({'singleMatchesIds': player1.singleMatchesIds});
-    await player2Doc.reference
-        .update({'singleMatchesIds': player2.singleMatchesIds});
+    // // Update the players' documents with the updated lists
+    // await player1Doc.reference
+    //     .update({'singleTournamentsIds': player1.singleMatchesIds});
+    // await player2Doc.reference
+    //     .update({'singleTournamentsIds': player2.singleMatchesIds});
 
     Method method = Method();
     Player currentUser = await method.getCurrentUser();

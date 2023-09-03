@@ -2,6 +2,8 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:tennis_app/Main-Features/club/widgets/list_single_matches.dart';
+import 'package:tennis_app/constants.dart';
 import 'package:tennis_app/models/single_match.dart'; // Replace with your model
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../../core/methodes/firebase_methodes.dart';
@@ -14,7 +16,7 @@ class VerticalCarouselSlider extends StatelessWidget {
   final List<SingleMatch> matches;
   final String tournamentId;
 
-  VerticalCarouselSlider(
+  const VerticalCarouselSlider(
       {super.key, required this.matches, required this.tournamentId});
 
   @override
@@ -38,9 +40,33 @@ class VerticalCarouselSlider extends StatelessWidget {
       items: matches.map((match) {
         return Padding(
           padding: const EdgeInsets.all(8.0),
-          child: SingleMatchCard(
-            tournamentId: tournamentId,
-            match: match,
+          child: Stack(
+            children: [
+              SingleMatchCard(
+                tournamentId: tournamentId,
+                match: match,
+              ),
+              Positioned(
+                right: 0,
+                bottom: 0,
+                child: IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ListSingleMatches(
+                                  matches: matches,
+                                  tournamentId: tournamentId,
+                                )),
+                      );
+                    },
+                    icon: const Icon(
+                      Icons.info_outline,
+                      size: 30,
+                      color: kPrimaryColor,
+                    )),
+              ),
+            ],
           ),
         );
       }).toList(),
@@ -120,7 +146,7 @@ class SingleTournamentsClub extends StatelessWidget {
                     final tournamentData = tournamentDoc.data();
                     if (tournamentData == null) {
                       return Container(
-                        child: const Text('sss'),
+                        child: const Text('No Data'),
                       );
                     }
 
