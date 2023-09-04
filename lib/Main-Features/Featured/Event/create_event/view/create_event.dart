@@ -232,6 +232,7 @@ class _CreateEventState extends State<CreateEvent> {
                               return showSnackBar(
                                   context, 'You Must Choose court ');
                             }
+
                             if (formKey.currentState!.validate()) {
                               context.read<CreateEventCubit>().saveEventData(
                                     context: context,

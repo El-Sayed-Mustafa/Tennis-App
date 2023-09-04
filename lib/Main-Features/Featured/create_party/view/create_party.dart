@@ -205,13 +205,13 @@ class _CreatePartyState extends State<CreateParty> {
                               .Briefly_describe_your_clubs_rule_and_regulations,
                           controller: rulesController,
                         ),
-
                         SizedBox(height: screenHeight * .015),
                         BottomSheetContainer(
                           buttonText: S.of(context).Create,
                           onPressed: () {
                             if (formKey.currentState!.validate()) {
-                              eventNameController.text = 'Party';
+                              final cubit = context.read<EventTypeCubit>();
+                              cubit.setClubType(EventType.Party);
                               context.read<CreateEventCubit>().saveEventData(
                                     context: context,
                                     selectedImageBytes: _selectedImageBytes,

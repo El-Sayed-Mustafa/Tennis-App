@@ -28,12 +28,12 @@ class FirebaseAuthMethods {
         return;
       }
 
-      await sendEmailVerification(context);
-
       await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+      await sendEmailVerification(context);
+
       // GoRouter.of(context).push('/createProfile');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -50,8 +50,9 @@ class FirebaseAuthMethods {
       final user = FirebaseAuth.instance.currentUser;
 
       if (!user!.emailVerified) {
-        await _auth.currentUser!.sendEmailVerification();
         showSnackBar(context, S.of(context).email_verification_sent);
+
+        await _auth.currentUser!.sendEmailVerification();
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Email is already verified.')),

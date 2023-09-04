@@ -58,7 +58,8 @@ class WaveClipperScreen extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: screenWidth * 0.32,
+            left: 0,
+            right: 0,
             top: screenHeight * 0.53,
             child: Align(
               child: SizedBox(
