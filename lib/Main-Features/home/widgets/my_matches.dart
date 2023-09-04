@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/find_match/view/widgets/match_item.dart';
+import 'package:tennis_app/Main-Features/create_event_match/services/firebase_method.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/no_data_text.dart';
 import '../../../generated/l10n.dart';
@@ -125,7 +126,27 @@ class _MyMatchesState extends State<MyMatches> {
                           FindMatch.fromSnapshot(snapshot.data!);
 
                       // Build the carousel item using the MatchItem widget
-                      return MatchItem(match: match);
+                      return Stack(
+                        children: [
+                          MatchItem(match: match),
+                          Positioned(
+                            left: 20,
+                            top: 10,
+                            child: IconButton(
+                                onPressed: () async {
+                                  MatchesFirebaseMethod delete =
+                                      MatchesFirebaseMethod();
+                                  await delete.deleteMyMatch(match.matchId);
+                                  GoRouter.of(context).push('/home');
+                                },
+                                icon: const Icon(
+                                  Icons.cancel_outlined,
+                                  size: 30,
+                                  color: Colors.black,
+                                )),
+                          )
+                        ],
+                      );
                     },
                   );
                 }).toList(),

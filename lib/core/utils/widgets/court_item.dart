@@ -161,7 +161,7 @@ class _CourtItemState extends State<CourtItem> {
     final double screenHeight = MediaQuery.of(context).size.height;
 
     final double itemWidth = screenWidth * 0.9;
-    final double imageHeight = screenHeight * 0.13;
+    final double imageHeight = screenHeight * 0.12;
     final double titleFontSize = screenHeight * 0.031;
     final double subtitleFontSize = screenHeight * 0.015;
     final double buttonTextFontSize = screenHeight * 0.015;
@@ -198,7 +198,7 @@ class _CourtItemState extends State<CourtItem> {
             ClipRRect(
               borderRadius: BorderRadius.circular(imageHeight / 3),
               child: Container(
-                height: imageHeight * 1.2,
+                height: imageHeight * 1.1,
                 width: imageHeight,
                 child: widget.court.photoURL != ''
                     ? FadeInImage.assetNetwork(

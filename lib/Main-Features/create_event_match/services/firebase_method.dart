@@ -6,6 +6,90 @@ import 'package:tennis_app/models/player.dart';
 class MatchesFirebaseMethod {
   final Method method = Method();
 
+  Future<void> deleteMyEvent(String eventId) async {
+    try {
+      Player currentUser = await method.getCurrentUser();
+      if (!currentUser.eventIds.contains(eventId)) {
+        return;
+      }
+      currentUser.eventIds.remove(eventId);
+
+      final userDoc = FirebaseFirestore.instance
+          .collection('players')
+          .doc(currentUser.playerId);
+
+      await userDoc.update({
+        'eventIds': currentUser.eventIds,
+      });
+    } catch (error) {
+      print(error);
+      // Handle other errors if necessary
+    }
+  }
+
+  Future<void> deleteMyMatch(String matchId) async {
+    try {
+      Player currentUser = await method.getCurrentUser();
+      if (!currentUser.matches.contains(matchId)) {
+        return;
+      }
+
+      currentUser.matches.remove(matchId);
+      final userDoc = FirebaseFirestore.instance
+          .collection('players')
+          .doc(currentUser.playerId);
+
+      await userDoc.update({
+        'matchId': currentUser.matches,
+      });
+    } catch (error) {
+      print(error);
+      // Handle other errors if necessary
+    }
+  }
+
+  Future<void> deleteMySingleMatch(String matchId) async {
+    try {
+      Player currentUser = await method.getCurrentUser();
+      if (!currentUser.singleMatchesIds.contains(matchId)) {
+        return;
+      }
+
+      currentUser.singleMatchesIds.remove(matchId);
+      final userDoc = FirebaseFirestore.instance
+          .collection('players')
+          .doc(currentUser.playerId);
+
+      await userDoc.update({
+        'singleMatchesIds': currentUser.singleMatchesIds,
+      });
+    } catch (error) {
+      print(error);
+      // Handle other errors if necessary
+    }
+  }
+
+  Future<void> deleteMyDoubleMatch(String matchId) async {
+    try {
+      Player currentUser = await method.getCurrentUser();
+      if (!currentUser.doubleMatchesIds.contains(matchId)) {
+        return;
+      }
+
+      currentUser.doubleMatchesIds.remove(matchId);
+      final userDoc = FirebaseFirestore.instance
+          .collection('players')
+          .doc(currentUser.playerId);
+
+      await userDoc.update({
+        'doubleMatchesIds': currentUser.doubleMatchesIds,
+      });
+    } catch (error) {
+      print(error);
+      // Handle other errors if necessary
+    }
+  }
+
   // Function to delete a match from Firestore
   Future<void> deleteSingleTournamentMatch(
       String matchId, String tournamentId) async {

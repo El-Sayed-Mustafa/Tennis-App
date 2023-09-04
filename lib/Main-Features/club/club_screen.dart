@@ -138,7 +138,6 @@ class _ClubScreenState extends State<ClubScreen> {
                                   isSaveUser: true,
                                 ),
                                 SizedBox(height: spacing * 2),
-                                SizedBox(height: spacing * 2),
                                 Text(
                                   "Club Upcoming Matches",
                                   style: TextStyle(

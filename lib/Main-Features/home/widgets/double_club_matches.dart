@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tennis_app/Main-Features/create_event_match/services/firebase_method.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/double_match_card.dart';
 import 'package:tennis_app/core/utils/widgets/no_data_text.dart';
@@ -124,7 +125,28 @@ class _MyDoubleMatchesState extends State<MyDoubleMatches> {
                       final match = DoubleMatch.fromFirestore(snapshot.data!);
 
                       // Build the carousel item using the MatchItem widget
-                      return DoubleMatchCard(match: match);
+                      return Stack(
+                        children: [
+                          DoubleMatchCard(match: match),
+                          Positioned(
+                            bottom: 0,
+                            left: 0,
+                            child: IconButton(
+                                onPressed: () async {
+                                  MatchesFirebaseMethod delete =
+                                      MatchesFirebaseMethod();
+                                  await delete
+                                      .deleteMyDoubleMatch(match.matchId);
+                                  GoRouter.of(context).push('/home');
+                                },
+                                icon: const Icon(
+                                  Icons.delete,
+                                  size: 25,
+                                  color: Colors.black,
+                                )),
+                          )
+                        ],
+                      );
                     },
                   );
                 }).toList(),

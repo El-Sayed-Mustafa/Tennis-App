@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tennis_app/Main-Features/create_event_match/services/firebase_method.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/no_data_text.dart';
 import 'package:tennis_app/models/single_match.dart';
@@ -108,14 +109,18 @@ class _MySingleMatchesState extends State<MySingleMatches> {
                       final courtData = snapshot.data?.data();
                       if (courtData == null) {
                         return Center(
-                          child: NoData(
-                            text: S.of(context).You_Dont_have_Matches,
-                            buttonText: S.of(context).clickToCreateMatch,
-                            onPressed: () {
-                              GoRouter.of(context).push('/findPartner');
-                            },
-                            height: screenHeight * .2,
-                            width: screenWidth * .8,
+                          child: Stack(
+                            children: [
+                              NoData(
+                                text: S.of(context).You_Dont_have_Matches,
+                                buttonText: S.of(context).clickToCreateMatch,
+                                onPressed: () {
+                                  GoRouter.of(context).push('/findPartner');
+                                },
+                                height: screenHeight * .2,
+                                width: screenWidth * .8,
+                              ),
+                            ],
                           ),
                         );
                       }
@@ -124,7 +129,28 @@ class _MySingleMatchesState extends State<MySingleMatches> {
                       final match = SingleMatch.fromFirestore(snapshot.data!);
 
                       // Build the carousel item using the MatchItem widget
-                      return SingleMatchCard(match: match);
+                      return Stack(
+                        children: [
+                          SingleMatchCard(match: match),
+                          Positioned(
+                            bottom: 10,
+                            left: 10,
+                            child: IconButton(
+                                onPressed: () async {
+                                  MatchesFirebaseMethod delete =
+                                      MatchesFirebaseMethod();
+                                  await delete
+                                      .deleteMySingleMatch(match.matchId);
+                                  GoRouter.of(context).push('/home');
+                                },
+                                icon: const Icon(
+                                  Icons.delete,
+                                  size: 25,
+                                  color: Colors.black,
+                                )),
+                          )
+                        ],
+                      );
                     },
                   );
                 }).toList(),

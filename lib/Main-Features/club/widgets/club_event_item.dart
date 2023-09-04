@@ -29,10 +29,10 @@ class ClubEventItem extends StatelessWidget {
     final double screenHeight = MediaQuery.of(context).size.height;
 
     final double itemWidth = screenWidth * 0.9;
-    final double imageHeight = (screenHeight + screenWidth) * 0.09;
-    final double titleFontSize = (screenHeight + screenWidth) * 0.02;
+    final double imageHeight = (screenHeight + screenWidth) * 0.08;
+    final double titleFontSize = (screenHeight + screenWidth) * 0.017;
     final double buttonTextFontSize = (screenHeight + screenWidth) * 0.01;
-    final double buttonWidth = itemWidth * 0.4;
+    final double buttonWidth = itemWidth * 0.5;
     final double buttonHeight = screenHeight * 0.035;
     GlobalMethod globalMethod = GlobalMethod();
 

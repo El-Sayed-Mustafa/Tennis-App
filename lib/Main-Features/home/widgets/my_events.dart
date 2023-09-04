@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:go_router/go_router.dart';
+import 'package:tennis_app/Main-Features/create_event_match/services/firebase_method.dart';
 
 import '../../../core/utils/widgets/no_data_text.dart';
 import '../../../generated/l10n.dart';
@@ -72,13 +74,54 @@ class _MyEventsState extends State<MyEvents> {
                         if (eventData != null) {
                           final event = Event.fromMap(eventData);
 
-                          return CarouselItem(
-                            selected:
-                                selectedPageIndex == eventIds.indexOf(eventId),
-                            event: event,
+                          return Stack(
+                            children: [
+                              CarouselItem(
+                                selected: selectedPageIndex ==
+                                    eventIds.indexOf(eventId),
+                                event: event,
+                              ),
+                              Positioned(
+                                left: 0,
+                                top: 0,
+                                child: IconButton(
+                                    onPressed: () async {
+                                      MatchesFirebaseMethod delete =
+                                          MatchesFirebaseMethod();
+                                      await delete.deleteMyEvent(eventId);
+                                      setState(() {});
+                                    },
+                                    icon: const Icon(
+                                      Icons.cancel_outlined,
+                                      size: 25,
+                                      color: Colors.black,
+                                    )),
+                              )
+                            ],
                           );
                         }
-                        return const NoData(text: 'This event deleted');
+                        return Stack(
+                          children: [
+                            const NoData(text: 'This event deleted'),
+                            Positioned(
+                              left: 0,
+                              top: 0,
+                              child: IconButton(
+                                  onPressed: () async {
+                                    MatchesFirebaseMethod delete =
+                                        MatchesFirebaseMethod();
+                                    await delete.deleteMyEvent(eventId);
+                                    // ignore: use_build_context_synchronously
+                                    GoRouter.of(context).push('/home');
+                                  },
+                                  icon: const Icon(
+                                    Icons.cancel_outlined,
+                                    size: 25,
+                                    color: Colors.black,
+                                  )),
+                            )
+                          ],
+                        );
 
                         // Handle the case where the event data is invalid
                       } else if (eventSnapshot.hasError) {
@@ -156,7 +199,6 @@ class CarouselItem extends StatelessWidget {
     final Color backgroundColor =
         selected ? const Color(0xFFFCCBB1) : const Color(0xFFF3ADAB);
     return Container(
-      width: 500,
       decoration: ShapeDecoration(
         color: backgroundColor,
         shape: RoundedRectangleBorder(
