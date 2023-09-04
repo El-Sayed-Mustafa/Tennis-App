@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/club/edit_club/edit_club_screen.dart';
 import 'package:tennis_app/core/methodes/firebase_methodes.dart';
+import 'package:tennis_app/core/methodes/roles_manager.dart';
 import 'package:tennis_app/core/utils/widgets/confirmation_dialog.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import 'package:tennis_app/core/utils/widgets/custom_dialouge.dart';
@@ -259,7 +260,9 @@ class ClubDetailsScreen extends StatelessWidget {
             BottomSheetContainer(
               buttonText: "Edit Club",
               onPressed: () async {
-                bool hasRight = await method.doesPlayerHaveRight('Edit Club');
+                bool hasRight = await RolesManager.instance
+                    .doesPlayerHaveRight('Edit Club');
+
                 if (hasRight) {
                   Navigator.push(
                     context,
@@ -282,7 +285,10 @@ class ClubDetailsScreen extends StatelessWidget {
             BottomSheetContainer(
               buttonText: "Delete Club",
               onPressed: () async {
-                bool hasRight = await method.doesPlayerHaveRight('Delete Club');
+                bool hasRight = await RolesManager.instance
+                    .doesPlayerHaveRight('Delete Club');
+
+                // bool hasRight = await RolesManager.instance.doesPlayerHaveRight('Delete Club');
                 if (hasRight) {
                   showDialog(
                     context: context,

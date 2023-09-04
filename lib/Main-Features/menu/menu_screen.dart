@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tennis_app/Auth/screens/auth_screen.dart';
 import 'package:tennis_app/Main-Features/menu/widgets/button_menu.dart';
+import 'package:tennis_app/core/methodes/roles_manager.dart';
 import 'package:tennis_app/core/utils/widgets/custom_dialouge.dart';
 
 import '../../Auth/services/auth_methods.dart';
@@ -97,8 +98,8 @@ class MenuScreen extends StatelessWidget {
                       imagePath: 'assets/images/Member-administration.svg',
                       buttonText: S.of(context).Member_administration,
                       onPressed: () async {
-                        bool hasRight =
-                            await method.doesPlayerHaveRight('Edit Club');
+                        bool hasRight = await RolesManager.instance
+                            .doesPlayerHaveRight('Edit Club');
                         if (hasRight) {
                           GoRouter.of(context).push('/management');
                         } else {
@@ -115,8 +116,11 @@ class MenuScreen extends StatelessWidget {
                       imagePath: 'assets/images/Create-role.svg',
                       buttonText: S.of(context).Create_Role,
                       onPressed: () async {
-                        bool hasRight =
-                            await method.doesPlayerHaveRight('Create Roles');
+                        bool hasRight = await RolesManager.instance
+                            .doesPlayerHaveRight('Create Roles');
+
+                        // bool hasRight =
+                        //     await RolesManager.instance.doesPlayerHaveRight('Create Roles');
                         if (hasRight) {
                           GoRouter.of(context).push('/createRole');
                         } else {
@@ -133,8 +137,8 @@ class MenuScreen extends StatelessWidget {
                       imagePath: 'assets/images/Create-role.svg',
                       buttonText: S.of(context).Assign_Person,
                       onPressed: () async {
-                        bool hasRight =
-                            await method.doesPlayerHaveRight('Create Roles');
+                        bool hasRight = await RolesManager.instance
+                            .doesPlayerHaveRight('Create Roles');
                         if (hasRight) {
                           GoRouter.of(context).push('/assignPerson');
                         } else {
@@ -151,8 +155,8 @@ class MenuScreen extends StatelessWidget {
                       imagePath: 'assets/images/Create-role.svg',
                       buttonText: S.of(context).Roles_list,
                       onPressed: () async {
-                        bool hasRight =
-                            await method.doesPlayerHaveRight('Create Roles');
+                        bool hasRight = await RolesManager.instance
+                            .doesPlayerHaveRight('Create Roles');
                         if (hasRight) {
                           GoRouter.of(context).push('/rolesList');
                         } else {

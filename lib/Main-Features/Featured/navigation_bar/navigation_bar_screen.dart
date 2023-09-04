@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tennis_app/Main-Features/Featured/navigation_bar/widgets/navigation_bar_item.dart';
+import 'package:tennis_app/core/methodes/roles_manager.dart';
 import '../../chats/chat_screen.dart';
 import '../../club/club_screen.dart';
 import '../../home/home_screen.dart';
@@ -13,50 +14,75 @@ class NavigationBarScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NavigationCubit, int>(
-      builder: (context, state) {
-        return Scaffold(
-          body: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 500),
-            child: _getPageByIndex(state),
-          ),
-          bottomNavigationBar: CurvedNavigationBar(
-            index: state,
-            height: 60.0,
-            items: const [
-              NavigationBarItem(
-                icon: Icons.home_outlined,
-                label: 'Home',
-                index: 0,
+    return FutureBuilder(
+      // Call fetchUserRoles here
+      future: RolesManager.instance.fetchUserRoles(),
+      builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          // Check if the data is successfully fetched
+          if (snapshot.hasData) {
+            return BlocBuilder<NavigationCubit, int>(
+              builder: (context, state) {
+                return Scaffold(
+                  body: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 500),
+                    child: _getPageByIndex(state),
+                  ),
+                  bottomNavigationBar: CurvedNavigationBar(
+                    index: state,
+                    height: 60.0,
+                    items: const [
+                      NavigationBarItem(
+                        icon: Icons.home_outlined,
+                        label: 'Home',
+                        index: 0,
+                      ),
+                      NavigationBarItem(
+                        icon: Icons.sports_tennis,
+                        label: 'Club',
+                        index: 1,
+                      ),
+                      NavigationBarItem(
+                        icon: Icons.messenger_outline_outlined,
+                        label: 'Chat',
+                        index: 2,
+                      ),
+                      NavigationBarItem(
+                        icon: Icons.menu,
+                        label: 'Menu',
+                        index: 3,
+                      ),
+                    ],
+                    color: Colors.white,
+                    buttonBackgroundColor: Color(0xFF15324F),
+                    backgroundColor: Colors.transparent,
+                    animationCurve: Curves.easeInOut,
+                    animationDuration: const Duration(milliseconds: 400),
+                    onTap: (index) {
+                      final navigationCubit = context.read<NavigationCubit>();
+                      navigationCubit.selectPage(index);
+                    },
+                    letIndexChange: (index) => true,
+                  ),
+                );
+              },
+            );
+          } else {
+            // Handle the case where fetchUserRoles didn't return valid data
+            return Scaffold(
+              body: Center(
+                child: Text('Failed to fetch user roles.'),
               ),
-              NavigationBarItem(
-                icon: Icons.sports_tennis,
-                label: 'Club',
-                index: 1,
-              ),
-              NavigationBarItem(
-                icon: Icons.messenger_outline_outlined,
-                label: 'Chat',
-                index: 2,
-              ),
-              NavigationBarItem(
-                icon: Icons.menu,
-                label: 'Menu',
-                index: 3,
-              ),
-            ],
-            color: Colors.white,
-            buttonBackgroundColor: Color(0xFF15324F),
-            backgroundColor: Colors.transparent,
-            animationCurve: Curves.easeInOut,
-            animationDuration: const Duration(milliseconds: 400),
-            onTap: (index) {
-              final navigationCubit = context.read<NavigationCubit>();
-              navigationCubit.selectPage(index);
-            },
-            letIndexChange: (index) => true,
-          ),
-        );
+            );
+          }
+        } else {
+          // Show a loading indicator while fetching data
+          return Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
       },
     );
   }

@@ -13,6 +13,7 @@ import 'package:tennis_app/Main-Features/club/widgets/num_members.dart';
 import 'package:tennis_app/Main-Features/club/widgets/players_ranking.dart';
 import 'package:tennis_app/Main-Features/club/widgets/single_matches_club.dart';
 import 'package:tennis_app/Main-Features/club/widgets/single_tournament_club.dart';
+import 'package:tennis_app/core/methodes/roles_manager.dart';
 import 'package:tennis_app/core/utils/widgets/custom_dialouge.dart';
 
 import '../../core/utils/widgets/app_bar_wave.dart';
@@ -160,10 +161,15 @@ class _ClubScreenState extends State<ClubScreen> {
                                     buttonText: S.of(context).Create_Event,
                                     imagePath: 'assets/images/Create-Event.svg',
                                     onPressed: () async {
-                                      bool hasRight = await method
+                                      bool hasRight = await RolesManager
+                                          .instance
                                           .doesPlayerHaveRight('Create Event');
+
+                                      // bool hasRight = await method
+                                      //     .doesPlayerHaveRight('Create Event');
                                       if (hasRight) {
-                                        navigateToCreateEvent(context);
+                                        GoRouter.of(context)
+                                            .push('/createEvent');
                                       } else {
                                         showDialog(
                                           context: context,
@@ -180,7 +186,8 @@ class _ClubScreenState extends State<ClubScreen> {
                                     buttonText: S.of(context).createParty,
                                     imagePath: 'assets/images/Create-Event.svg',
                                     onPressed: () async {
-                                      bool hasRight = await method
+                                      bool hasRight = await RolesManager
+                                          .instance
                                           .doesPlayerHaveRight('Create Event');
                                       if (hasRight) {
                                         GoRouter.of(context)
@@ -211,8 +218,9 @@ class _ClubScreenState extends State<ClubScreen> {
                                     buttonText: S.of(context).Create_Court,
                                     imagePath: 'assets/images/Create-Event.svg',
                                     onPressed: () async {
-                                      bool hasRight =
-                                          await method.doesPlayerHaveRight(
+                                      bool hasRight = await RolesManager
+                                          .instance
+                                          .doesPlayerHaveRight(
                                               'Create tennis courts');
                                       if (hasRight) {
                                         GoRouter.of(context)
@@ -233,7 +241,7 @@ class _ClubScreenState extends State<ClubScreen> {
                                   buttonText: 'Create Match',
                                   imagePath: 'assets/images/Make-offers.svg',
                                   onPressed: () async {
-                                    bool hasRight = await method
+                                    bool hasRight = await RolesManager.instance
                                         .doesPlayerHaveRight('Create Match');
                                     if (hasRight) {
                                       GoRouter.of(context).push('/createMatch');

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/Event/edit_event/edit_event_screen.dart';
 import 'package:tennis_app/core/methodes/firebase_methodes.dart';
+import 'package:tennis_app/core/methodes/roles_manager.dart';
 import 'package:tennis_app/core/utils/widgets/chosen_court.dart';
 import 'package:tennis_app/core/utils/widgets/confirmation_dialog.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
@@ -257,7 +258,8 @@ class EventDetailsScreen extends StatelessWidget {
             BottomSheetContainer(
               buttonText: "Edit Event",
               onPressed: () async {
-                bool hasRight = await method.doesPlayerHaveRight('Edit Event');
+                bool hasRight = await RolesManager.instance
+                    .doesPlayerHaveRight('Edit Event');
                 if (hasRight) {
                   Navigator.push(
                     context,
@@ -280,8 +282,8 @@ class EventDetailsScreen extends StatelessWidget {
             BottomSheetContainer(
               buttonText: "Delete Event",
               onPressed: () async {
-                bool hasRight =
-                    await method.doesPlayerHaveRight('Delete Event');
+                bool hasRight = await RolesManager.instance
+                    .doesPlayerHaveRight('Delete Event');
                 if (hasRight) {
                   showDialog(
                     context: context,

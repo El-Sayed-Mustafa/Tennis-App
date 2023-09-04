@@ -18,7 +18,6 @@ void navigateToCreateEvent(BuildContext context) async {
     final String clubIds = (playerData['participatedClubId'] ?? '').trim();
 
     if (clubIds.isNotEmpty) {
-      GoRouter.of(context).push('/createEvent');
     } else {
       showDialog(
         context: context,

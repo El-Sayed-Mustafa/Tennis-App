@@ -8,6 +8,7 @@ import 'package:tennis_app/Main-Features/home/widgets/my_events.dart';
 import 'package:tennis_app/Main-Features/home/widgets/my_matches.dart';
 import 'package:tennis_app/Main-Features/home/widgets/single_club_matches.dart';
 import 'package:tennis_app/core/methodes/firebase_methodes.dart';
+import 'package:tennis_app/core/methodes/roles_manager.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/app_bar_wave.dart';
 import 'package:tennis_app/core/utils/widgets/custom_dialouge.dart';
@@ -119,10 +120,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   buttonText: S.of(context).Create_Event,
                   imagePath: 'assets/images/Create-Event.svg',
                   onPressed: () async {
-                    bool hasRight =
-                        await method.doesPlayerHaveRight('Create Event');
+                    bool hasRight = await RolesManager.instance
+                        .doesPlayerHaveRight('Create Event');
+                    // bool hasRight =
+                    //     await RolesManager.instance.doesPlayerHaveRight('Create Event');
                     if (hasRight) {
-                      navigateToCreateEvent(context);
+                      GoRouter.of(context).push('/createEvent');
                     } else {
                       showDialog(
                         context: context,

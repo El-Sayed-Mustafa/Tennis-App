@@ -107,7 +107,7 @@ class CreateEventCubit extends Cubit<CreateEventState> {
 
       emit(CreateEventSuccessState());
 
-      GoRouter.of(context).push('/home');
+      GoRouter.of(context).push('/club');
     } catch (error) {
       emit(CreateEventErrorState(error: error.toString()));
       showSnackBar(context, 'Error: $error');

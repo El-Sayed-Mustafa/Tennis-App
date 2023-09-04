@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart'; // Import the intl package
+import 'package:tennis_app/core/methodes/roles_manager.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/photot_player.dart';
 import 'package:tennis_app/models/double_match.dart';
@@ -236,7 +237,8 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
 
           return GestureDetector(
             onTap: () async {
-              bool hasRight = await method.doesPlayerHaveRight('Enter Results');
+              bool hasRight = await RolesManager.instance
+                  .doesPlayerHaveRight('Enter Results');
               if (hasRight) {
                 if (widget.match.result.isNotEmpty) {
                   return showSnackBar(context, 'The Result is already entered');

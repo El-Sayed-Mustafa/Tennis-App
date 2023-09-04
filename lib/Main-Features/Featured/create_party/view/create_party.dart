@@ -84,7 +84,7 @@ class _CreatePartyState extends State<CreateParty> {
                         PoPAppBarWave(
                           prefixIcon: IconButton(
                             onPressed: () {
-                              GoRouter.of(context).replace('/home');
+                              GoRouter.of(context).pop();
                             },
                             icon: const Icon(
                               Icons.arrow_back,

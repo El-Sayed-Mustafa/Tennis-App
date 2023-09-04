@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; // Import the intl package
+import 'package:tennis_app/core/methodes/roles_manager.dart';
 import 'package:tennis_app/core/utils/widgets/photot_player.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tennis_app/core/utils/widgets/single_result_dialog.dart';
@@ -68,7 +69,8 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
 
           return GestureDetector(
             onTap: () async {
-              bool hasRight = await method.doesPlayerHaveRight('Enter Results');
+              bool hasRight = await RolesManager.instance
+                  .doesPlayerHaveRight('Enter Results');
               if (hasRight) {
                 // ignore: use_build_context_synchronously
                 showWinnerDialog(
