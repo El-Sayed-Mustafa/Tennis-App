@@ -46,15 +46,10 @@ class _AssignPersonState extends State<AssignPerson> {
 
   void _assignRole() async {
     final String memberName = memberNameController.text.trim();
+
     if (memberName.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(S.of(context).Please_enter_the_member_name)),
-      );
-      return;
-    }
-    if (selectedRole.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(S.of(context).Please_select_at_least_one_role)),
       );
       return;
     }
@@ -63,44 +58,55 @@ class _AssignPersonState extends State<AssignPerson> {
       setState(() {
         _isLoading = true; // Set loading state to true
       });
+
       final User? currentUser = FirebaseAuth.instance.currentUser;
       if (currentUser != null) {
         final ClubRolesService clubRolesService = ClubRolesService();
         final String? playerId =
             await clubRolesService.getPlayerIdByName(memberName);
         if (playerId == null) {
-          // Show error message if player not found with the given name
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+                content:
+                    Text(S.of(context).Player_not_found_with_the_given_name)),
+          );
           return;
         }
+
         final DocumentSnapshot<Map<String, dynamic>> playerSnapshot =
             await FirebaseFirestore.instance
                 .collection('players')
                 .doc(playerId)
                 .get();
+
         final DocumentSnapshot<Map<String, dynamic>> admin =
             await FirebaseFirestore.instance
                 .collection('players')
                 .doc(currentUser.uid)
                 .get();
+
         final data = admin.data();
         if (data != null) {
-          final String createdClubId =
+          final String participatedClubId =
               data['participatedClubId'] as String? ?? '';
           final List<String> roleIds =
               await clubRolesService.fetchRoleIdsByNames(selectedRole);
 
-          // Join the roleIds list into a single string using a delimiter (e.g., comma)
           final String roleIdsString = roleIds.join(',');
+          final Map<String, String> clubRoles = {
+            participatedClubId: roleIdsString
+          };
 
-          // Create a map of clubRoles with the joined roleIds string
-          final Map<String, String> clubRoles = {createdClubId: roleIdsString};
-
-          // Update the player document with the new roles
-          await playerSnapshot.reference.update({'clubRoles': clubRoles});
+          final Map<String, dynamic> updatedPlayerData = {
+            'clubRoles': clubRoles,
+          };
+          await playerSnapshot.reference.update(updatedPlayerData);
 
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(S.of(context).Roles_assigned_successfully)),
           );
+
+          GoRouter.of(context).pop();
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(S.of(context).Player_data_not_found)),
@@ -115,9 +121,8 @@ class _AssignPersonState extends State<AssignPerson> {
       showSnackBar(context, 'Error assigning roles: $e');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content:
-              Text(S.of(context).Error_assigning_roles_Please_try_again_later),
-        ),
+            content: Text(
+                S.of(context).Error_assigning_roles_Please_try_again_later)),
       );
     } finally {
       setState(() {

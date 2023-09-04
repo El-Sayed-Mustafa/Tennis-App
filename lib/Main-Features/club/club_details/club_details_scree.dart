@@ -1,9 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/club/edit_club/edit_club_screen.dart';
 import 'package:tennis_app/core/methodes/firebase_methodes.dart';
 import 'package:tennis_app/core/utils/widgets/confirmation_dialog.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
+import 'package:tennis_app/core/utils/widgets/custom_dialouge.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import 'package:tennis_app/generated/l10n.dart';
 import 'package:tennis_app/models/club.dart';
@@ -16,6 +19,8 @@ class ClubDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    Method method = Method();
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -253,36 +258,56 @@ class ClubDetailsScreen extends StatelessWidget {
             const SizedBox(height: 15),
             BottomSheetContainer(
               buttonText: "Edit Club",
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => EditClub(
-                      club: club,
+              onPressed: () async {
+                bool hasRight = await method.doesPlayerHaveRight('Edit Club');
+                if (hasRight) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EditClub(
+                        club: club,
+                      ),
                     ),
-                  ),
-                );
+                  );
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (context) => CustomDialog(
+                      text: S.of(context).noRightMessage,
+                    ),
+                  );
+                }
               },
             ),
             BottomSheetContainer(
               buttonText: "Delete Club",
-              onPressed: () {
-                Method method = Method();
-                showDialog(
-                  context: context,
-                  builder: (BuildContext dialogContext) {
-                    return ConfirmationDialog(
-                      title: "Confirm Delete",
-                      content: "Are you sure you want to delete this Club?",
-                      confirmText: "Delete",
-                      cancelText: "Cancel",
-                      onConfirm: () {
-                        GoRouter.of(context).push('/club');
-                        method.deleteClub(club.clubId);
-                      },
-                    );
-                  },
-                );
+              onPressed: () async {
+                bool hasRight = await method.doesPlayerHaveRight('Delete Club');
+                if (hasRight) {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext dialogContext) {
+                      return ConfirmationDialog(
+                        title: "Confirm Delete",
+                        content: "Are you sure you want to delete this Club?",
+                        confirmText: "Delete",
+                        cancelText: "Cancel",
+                        onConfirm: () {
+                          GoRouter.of(context).push('/club');
+
+                          method.deleteClub(club.clubId);
+                        },
+                      );
+                    },
+                  );
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (context) => CustomDialog(
+                      text: S.of(context).noRightMessage,
+                    ),
+                  );
+                }
               },
               backgroundColor: Colors.red,
             )

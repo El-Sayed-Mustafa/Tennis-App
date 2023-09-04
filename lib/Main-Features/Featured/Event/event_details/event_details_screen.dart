@@ -1,10 +1,14 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/Event/edit_event/edit_event_screen.dart';
+import 'package:tennis_app/core/methodes/firebase_methodes.dart';
 import 'package:tennis_app/core/utils/widgets/chosen_court.dart';
 import 'package:tennis_app/core/utils/widgets/confirmation_dialog.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
+import 'package:tennis_app/core/utils/widgets/custom_dialouge.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import 'package:tennis_app/generated/l10n.dart';
 import 'package:tennis_app/models/event.dart';
@@ -16,6 +20,8 @@ class EventDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Method method = Method();
+
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -250,35 +256,56 @@ class EventDetailsScreen extends StatelessWidget {
             const SizedBox(height: 15),
             BottomSheetContainer(
               buttonText: "Edit Event",
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => EditEvent(
-                      event: event,
+              onPressed: () async {
+                bool hasRight = await method.doesPlayerHaveRight('Edit Event');
+                if (hasRight) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EditEvent(
+                        event: event,
+                      ),
                     ),
-                  ),
-                );
+                  );
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (context) => CustomDialog(
+                      text: S.of(context).noRightMessage,
+                    ),
+                  );
+                }
               },
             ),
             BottomSheetContainer(
               buttonText: "Delete Event",
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext dialogContext) {
-                    return ConfirmationDialog(
-                      title: "Confirm Delete",
-                      content: "Are you sure you want to delete this event?",
-                      confirmText: "Delete",
-                      cancelText: "Cancel",
-                      onConfirm: () {
-                        GoRouter.of(context).push('/club');
-                        deleteEvent(event.eventId);
-                      },
-                    );
-                  },
-                );
+              onPressed: () async {
+                bool hasRight =
+                    await method.doesPlayerHaveRight('Delete Event');
+                if (hasRight) {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext dialogContext) {
+                      return ConfirmationDialog(
+                        title: "Confirm Delete",
+                        content: "Are you sure you want to delete this event?",
+                        confirmText: "Delete",
+                        cancelText: "Cancel",
+                        onConfirm: () {
+                          GoRouter.of(context).push('/club');
+                          deleteEvent(event.eventId);
+                        },
+                      );
+                    },
+                  );
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (context) => CustomDialog(
+                      text: S.of(context).noRightMessage,
+                    ),
+                  );
+                }
               },
               backgroundColor: Colors.red,
             )

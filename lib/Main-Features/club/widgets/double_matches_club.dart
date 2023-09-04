@@ -9,6 +9,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/create_event_match/double_tournment/edit_double_match.dart';
 import 'package:tennis_app/Main-Features/create_event_match/services/firebase_method.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
+import 'package:tennis_app/core/utils/widgets/confirmation_dialog.dart';
 import 'package:tennis_app/core/utils/widgets/custom_dialouge.dart';
 import 'package:tennis_app/core/utils/widgets/double_match_card.dart';
 import 'package:tennis_app/core/utils/widgets/no_data_text.dart';
@@ -82,6 +83,7 @@ class _ClubDoubleMatchesState extends State<ClubDoubleMatches> {
     final double screenWidth = MediaQuery.of(context).size.width;
 
     final double carouselHeight = (screenHeight + screenWidth) * 0.21;
+    Method method = Method();
 
     return Column(
       children: [
@@ -158,16 +160,27 @@ class _ClubDoubleMatchesState extends State<ClubDoubleMatches> {
                                 right: 0,
                                 bottom: -5,
                                 child: IconButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                EditDoubleMatch(
-                                                  match: match,
-                                                  tournamentId: '',
-                                                )),
-                                      );
+                                    onPressed: () async {
+                                      bool hasRight = await method
+                                          .doesPlayerHaveRight('Edit Match');
+                                      if (hasRight) {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  EditDoubleMatch(
+                                                    match: match,
+                                                    tournamentId: '',
+                                                  )),
+                                        );
+                                      } else {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) => CustomDialog(
+                                            text: S.of(context).noRightMessage,
+                                          ),
+                                        );
+                                      }
                                     },
                                     icon: const Icon(
                                       Icons.mode_edit,
@@ -180,11 +193,37 @@ class _ClubDoubleMatchesState extends State<ClubDoubleMatches> {
                                 bottom: 0,
                                 child: IconButton(
                                     onPressed: () async {
-                                      MatchesFirebaseMethod delete =
-                                          MatchesFirebaseMethod();
-                                      await delete
-                                          .deleteDoubleMatch(match.matchId);
-                                      setState(() {});
+                                      bool hasRight = await method
+                                          .doesPlayerHaveRight('Delete Match');
+                                      if (hasRight) {
+                                        showDialog(
+                                          context: context,
+                                          builder:
+                                              (BuildContext dialogContext) {
+                                            return ConfirmationDialog(
+                                              title: "Confirm Delete",
+                                              content:
+                                                  "Are you sure you want to delete this Match?",
+                                              confirmText: "Delete",
+                                              cancelText: "Cancel",
+                                              onConfirm: () async {
+                                                MatchesFirebaseMethod delete =
+                                                    MatchesFirebaseMethod();
+                                                await delete.deleteDoubleMatch(
+                                                    match.matchId);
+                                                setState(() {});
+                                              },
+                                            );
+                                          },
+                                        );
+                                      } else {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) => CustomDialog(
+                                            text: S.of(context).noRightMessage,
+                                          ),
+                                        );
+                                      }
                                     },
                                     icon: const Icon(
                                       Icons.delete,

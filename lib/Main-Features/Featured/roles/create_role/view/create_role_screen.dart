@@ -24,19 +24,21 @@ class _CreateRoleState extends State<CreateRole> {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     List<String> words = [
-      S.of(context).Send_Invitations,
-      S.of(context).Create_Event,
-      S.of(context).Create_tennis_courts,
-      S.of(context).Create_offers,
-      S.of(context).Edit_club,
-      S.of(context).Delete_club,
-      S.of(context).Edit_members,
-      S.of(context).Delete_members,
-      S.of(context).Create_Training,
-      S.of(context).Set_up_leagues,
-      S.of(context).Create_Roles,
-      S.of(context).Enter_Results,
       "Create Match",
+      "Create Event",
+      "Edit Club",
+      "Delete Club",
+      "Edit Member",
+      "Create Training",
+      "Edit Event",
+      "Delete Event",
+      "Edit Match",
+      "Enter Results",
+      "Create Roles",
+      "Create Offers",
+      "Create Court",
+      "Delete Match",
+      "Create tennis courts"
     ];
     return BlocProvider(
       create: (context) => RoleCubit(),
