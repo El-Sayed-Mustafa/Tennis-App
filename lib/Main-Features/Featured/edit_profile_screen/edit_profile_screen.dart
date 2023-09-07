@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tennis_app/Main-Features/Featured/create_profile/cubits/Gender_Cubit.dart';
+import 'package:tennis_app/Main-Features/Featured/create_profile/cubits/player_type_cubit.dart';
 import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/app_bar_wave.dart';
 import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/gender_selection.dart';
 import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/input_time.dart';
@@ -33,6 +34,7 @@ class _EditProfileState extends State<EditProfile> {
   Uint8List? _selectedImageBytes;
 
   TimeOfDay? _selectedTime;
+  final playerTypeCubit = PlayerTypeCubit();
 
   @override
   void initState() {
@@ -41,6 +43,7 @@ class _EditProfileState extends State<EditProfile> {
     phoneNumberController.text = widget.player.phoneNumber;
     GenderCubit(widget.player.gender);
     DateCubit(widget.player.birthDate);
+    PlayerTypeCubit(initialType: widget.player.playerType);
   }
 
   @override
@@ -90,7 +93,7 @@ class _EditProfileState extends State<EditProfile> {
                         ),
                       ),
                       SizedBox(height: screenHeight * .03),
-                      GenderSelection(),
+                      const GenderSelection(),
                       SizedBox(height: screenHeight * .03),
                       InputTextWithHint(
                         hint: S.of(context).typeYourName,
@@ -118,6 +121,7 @@ class _EditProfileState extends State<EditProfile> {
                         onTimeSelected: (TimeOfDay? time) {
                           _selectedTime = time;
                         },
+                        initialTime: widget.player.preferredPlayingTime,
                       ),
                       SizedBox(height: screenHeight * .025),
                       const PlayerType(),

@@ -9,6 +9,7 @@ class InputTimeField extends StatefulWidget {
   final String hint;
   final ValueChanged<TimeOfDay?> onTimeSelected;
   final IconData? suffix;
+  final String? initialTime; // Optional initial time as a string
 
   const InputTimeField({
     Key? key,
@@ -16,6 +17,7 @@ class InputTimeField extends StatefulWidget {
     required this.hint,
     required this.onTimeSelected,
     this.suffix,
+    this.initialTime, // Provide a default value or null
   }) : super(key: key);
 
   @override
@@ -28,7 +30,9 @@ class _InputTimeFieldState extends State<InputTimeField> {
   @override
   void initState() {
     super.initState();
-    _controller.text = context.read<TimeCubit>().state?.format(context) ?? '';
+
+    // Set the initial value from the optional initialTime parameter
+    _controller.text = widget.initialTime ?? '';
   }
 
   @override
