@@ -93,6 +93,9 @@ class CreateProfileCubit extends Cubit<CreateProfileState> {
       showSnackBar(context, 'User data saved successfully.');
 
       emit(CreateProfileSuccessState());
+      while (GoRouter.of(context).canPop() == true) {
+        GoRouter.of(context).pop();
+      }
       GoRouter.of(context).push('/home');
     } catch (error) {
       emit(CreateProfileErrorState(error: error.toString()));
