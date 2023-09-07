@@ -3027,6 +3027,70 @@ class S {
       args: [],
     );
   }
+
+  String get clubDetails {
+    return Intl.message(
+      'Club Details',
+      name: 'clubDetails',
+      desc: 'Label for Club Details',
+    );
+  }
+
+  String get clubRate {
+    return Intl.message(
+      'Club Rate',
+      name: 'clubRate',
+      desc: 'Label for Club Rate',
+    );
+  }
+
+  String get noRulesAndRegulations {
+    return Intl.message(
+      'No rules and regulations',
+      name: 'noRulesAndRegulations',
+      desc: 'Label for No rules and regulations',
+    );
+  }
+
+  String get editClub {
+    return Intl.message(
+      'Edit Club',
+      name: 'editClub',
+      desc: 'Label for Edit Club',
+    );
+  }
+
+  String get deleteClub {
+    return Intl.message(
+      'Delete Club',
+      name: 'deleteClub',
+      desc: 'Label for Delete Club',
+    );
+  }
+
+  String get confirmDelete {
+    return Intl.message(
+      'S.of(context).confirmDelete',
+      name: 'confirmDelete',
+      desc: 'Label for S.of(context).confirmDelete',
+    );
+  }
+
+  String get areYouSureToDeleteClub {
+    return Intl.message(
+      'Are you sure you want to delete this Club?',
+      name: 'areYouSureToDeleteClub',
+      desc: 'Confirmation message for deleting a Club',
+    );
+  }
+
+  String get delete {
+    return Intl.message(
+      'Delete',
+      name: 'delete',
+      desc: 'Label for Delete action',
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

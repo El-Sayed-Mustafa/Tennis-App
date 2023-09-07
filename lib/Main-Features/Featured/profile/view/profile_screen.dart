@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tennis_app/Main-Features/Featured/edit_profile_screen/edit_profile_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/profile/view/widgets/profile_body.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import '../../../../core/methodes/firebase_methodes.dart';
@@ -94,7 +95,14 @@ class ProfileScreen extends StatelessWidget {
                     BottomSheetContainer(
                       buttonText: S.of(context).edit,
                       onPressed: () {
-                        GoRouter.of(context).push('/editProfile');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EditProfile(
+                              player: player,
+                            ),
+                          ),
+                        );
                       },
                     )
                   ],

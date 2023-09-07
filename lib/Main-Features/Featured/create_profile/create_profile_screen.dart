@@ -83,12 +83,7 @@ class CreateProfile extends StatelessWidget {
                         text: S.of(context).playerName,
                         controller: nameController,
                       ),
-                      SizedBox(height: screenHeight * .025),
-                      InputTextWithHint(
-                        hint: S.of(context).typeYourPhoneNumber,
-                        text: S.of(context).phoneNumber,
-                        controller: phoneNumberController,
-                      ),
+
                       SizedBox(height: screenHeight * .025),
                       InputDate(
                         hint: S.of(context).Select_Date_of_Birth,

@@ -42,7 +42,7 @@ class _ClubDoubleMatchesState extends State<ClubDoubleMatches> {
       // Fetch the current user's player data from Firestore
       User? currentUser = FirebaseAuth.instance.currentUser;
       if (currentUser == null) {
-        showSnackBar(context, 'No user is currently signed in.');
+        showSnackBar(context, S.of(context).User_not_logged_in);
         return;
       }
 
@@ -55,8 +55,7 @@ class _ClubDoubleMatchesState extends State<ClubDoubleMatches> {
               .get();
 
       if (!playerSnapshot.exists) {
-        showSnackBar(
-            context, 'Player document does not exist for current user.');
+        showSnackBar(context, S.of(context).Player_data_not_found);
         return;
       }
 
@@ -73,7 +72,8 @@ class _ClubDoubleMatchesState extends State<ClubDoubleMatches> {
       // Update the carousel with the fetched data
       setState(() {});
     } catch (error) {
-      showSnackBar(context, 'Error fetching matches data: $error');
+      showSnackBar(
+          context, '${S.of(context).Error_fetching_match_data}: $error');
     }
   }
 
@@ -201,11 +201,12 @@ class _ClubDoubleMatchesState extends State<ClubDoubleMatches> {
                                           builder:
                                               (BuildContext dialogContext) {
                                             return ConfirmationDialog(
-                                              title: "Confirm Delete",
+                                              title:
+                                                  S.of(context).confirmDelete,
                                               content:
                                                   "Are you sure you want to delete this Match?",
-                                              confirmText: "Delete",
-                                              cancelText: "Cancel",
+                                              confirmText: S.of(context).delete,
+                                              cancelText: S.of(context).cancel,
                                               onConfirm: () async {
                                                 MatchesFirebaseMethod delete =
                                                     MatchesFirebaseMethod();

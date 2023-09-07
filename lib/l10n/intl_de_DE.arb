@@ -299,5 +299,13 @@
     "noCourtsAvailable": "Du hast keine Plätze",
     "clickToCreateMatch": "Klicken Sie, um das Spiel zu erstellen",
     "noRightMessage": "Sie haben nicht die Berechtigung",
-    "createParty": "Party erstellen"
+    "createParty": "Party erstellen",
+    "Club Details": "Clubdetails",
+    "Club Rate": "Clubgebühr",
+    "No rules and regulations": "Keine Regeln und Vorschriften",
+    "Edit Club": "Club bearbeiten",
+    "Delete Club": "Club löschen",
+    "Confirm Delete": "Löschen bestätigen",
+    "Are you sure you want to delete this Club?": "Sind Sie sicher, dass Sie diesen Club löschen möchten?",
+    "Delete": "Löschen"
 }

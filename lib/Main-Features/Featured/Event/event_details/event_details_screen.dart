@@ -153,30 +153,6 @@ class EventDetailsScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  S.of(context).Address,
-                                  style: const TextStyle(
-                                    color: Color(0xFF15324F),
-                                    fontSize: 18,
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                Text(
-                                  event.eventAddress,
-                                  style: const TextStyle(
-                                    color: Color(0xFF6D6D6D),
-                                    fontSize: 18,
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                )
-                              ],
-                            ),
-                            const SizedBox(height: 25),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
                                   S.of(context).Player_level,
                                   style: const TextStyle(
                                     color: Color(0xFF15324F),
@@ -289,7 +265,7 @@ class EventDetailsScreen extends StatelessWidget {
                     context: context,
                     builder: (BuildContext dialogContext) {
                       return ConfirmationDialog(
-                        title: "Confirm Delete",
+                        title: "S.of(context).confirmDelete",
                         content: "Are you sure you want to delete this event?",
                         confirmText: "Delete",
                         cancelText: "Cancel",

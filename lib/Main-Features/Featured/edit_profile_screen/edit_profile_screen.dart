@@ -17,16 +17,23 @@ import '../../../models/player.dart';
 import 'edit_profile_cubit.dart';
 import 'edit_profile_states.dart';
 
-class EditProfile extends StatelessWidget {
+class EditProfile extends StatefulWidget {
+  final Player player;
+  EditProfile({super.key, required this.player});
+
+  @override
+  State<EditProfile> createState() => _EditProfileState();
+}
+
+class _EditProfileState extends State<EditProfile> {
   final TextEditingController nameController = TextEditingController();
+
   final TextEditingController phoneNumberController = TextEditingController();
   var formKey = GlobalKey<FormState>();
 
   Uint8List? _selectedImageBytes;
+
   TimeOfDay? _selectedTime;
-
-  EditProfile({super.key});
-
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -48,122 +55,86 @@ class EditProfile extends StatelessWidget {
               ),
             );
           }
-
-          return FutureBuilder<Player>(
-            future: getCurrentUser(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Dialog.fullscreen(
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                );
-              } else if (snapshot.hasError) {
-                return Center(child: Text('Error: ${snapshot.error}'));
-              }
-
-              final player = snapshot.data;
-
-              // Set player's data in controllers
-              nameController.text = player?.playerName ?? '';
-              phoneNumberController.text = player?.phoneNumber ?? '';
-
-              return Scaffold(
-                body: SingleChildScrollView(
-                  child: Container(
-                    color: const Color(0xFFF8F8F8),
-                    child: Form(
-                      key: formKey,
-                      child: Column(
-                        children: [
-                          const AppBarWave(),
-                          ProfileImage(
-                            onImageSelected: (File imageFile) {
-                              _selectedImageBytes = imageFile.readAsBytesSync();
-                            },
-                          ),
-                          SizedBox(height: screenHeight * .01),
-                          Text(
-                            S.of(context).setProfilePicture,
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          SizedBox(height: screenHeight * .03),
-                          GenderSelection(),
-                          SizedBox(height: screenHeight * .03),
-                          InputTextWithHint(
-                            hint: S.of(context).typeYourName,
-                            text: S.of(context).playerName,
-                            controller: nameController,
-                          ),
-                          SizedBox(height: screenHeight * .025),
-                          InputTextWithHint(
-                            hint: S.of(context).typeYourPhoneNumber,
-                            text: S.of(context).phoneNumber,
-                            controller: phoneNumberController,
-                          ),
-                          SizedBox(height: screenHeight * .025),
-                          InputDate(
-                            hint: S.of(context).Select_Date_of_Birth,
-                            text: S.of(context).Your_Age,
-                            onDateTimeSelected: (DateTime dateTime) {
-                              // Handle date selection
-                            },
-                          ),
-                          SizedBox(height: screenHeight * .025),
-                          InputTimeField(
-                            hint: S.of(context).typeYourPreferredPlayingTime,
-                            text: S.of(context).preferredPlayingTime,
-                            onTimeSelected: (TimeOfDay? time) {
-                              _selectedTime = time;
-                            },
-                          ),
-                          SizedBox(height: screenHeight * .025),
-                          const PlayerType(),
-                          SizedBox(height: screenHeight * .01),
-                          BottomSheetContainer(
-                            buttonText: S.of(context).Update_Player,
-                            onPressed: () async {
-                              if (formKey.currentState!.validate()) {
-                                final currentUser = await getCurrentUser();
-
-                                context.read<EditProfileCubit>().saveUserData(
+          return Scaffold(
+            body: SingleChildScrollView(
+              child: Container(
+                color: const Color(0xFFF8F8F8),
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      const AppBarWave(),
+                      ProfileImage(
+                        onImageSelected: (File imageFile) {
+                          _selectedImageBytes = imageFile.readAsBytesSync();
+                        },
+                      ),
+                      SizedBox(height: screenHeight * .01),
+                      Text(
+                        S.of(context).setProfilePicture,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(height: screenHeight * .03),
+                      GenderSelection(),
+                      SizedBox(height: screenHeight * .03),
+                      InputTextWithHint(
+                        hint: S.of(context).typeYourName,
+                        text: S.of(context).playerName,
+                        controller: nameController,
+                      ),
+                      SizedBox(height: screenHeight * .025),
+                      InputTextWithHint(
+                        hint: S.of(context).typeYourPhoneNumber,
+                        text: S.of(context).phoneNumber,
+                        controller: phoneNumberController,
+                      ),
+                      SizedBox(height: screenHeight * .025),
+                      InputDate(
+                        hint: S.of(context).Select_Date_of_Birth,
+                        text: S.of(context).Your_Age,
+                        onDateTimeSelected: (DateTime dateTime) {
+                          // Handle date selection
+                        },
+                      ),
+                      SizedBox(height: screenHeight * .025),
+                      InputTimeField(
+                        hint: S.of(context).typeYourPreferredPlayingTime,
+                        text: S.of(context).preferredPlayingTime,
+                        onTimeSelected: (TimeOfDay? time) {
+                          _selectedTime = time;
+                        },
+                      ),
+                      SizedBox(height: screenHeight * .025),
+                      const PlayerType(),
+                      SizedBox(height: screenHeight * .01),
+                      BottomSheetContainer(
+                          buttonText: S.of(context).Update_Player,
+                          onPressed: () async {
+                            if (formKey.currentState!.validate()) {
+                              context.read<EditProfileCubit>().saveUserData(
                                     context: context,
                                     nameController: nameController,
                                     phoneNumberController:
                                         phoneNumberController,
                                     selectedImageBytes: _selectedImageBytes,
                                     selectedTime: _selectedTime,
-                                    currentPlayer: currentUser);
-                              }
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
+                                    currentPlayer: widget.player,
+                                  );
+                            }
+                          }),
+                    ],
                   ),
                 ),
-              );
-            },
+              ),
+            ),
           );
         },
       ),
     );
-  }
-
-  Future<Player> getCurrentUser() async {
-    // Get the current user from Firebase Authentication
-    final String playerId = FirebaseAuth.instance.currentUser!.uid;
-    DocumentSnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
-        .instance
-        .collection('players')
-        .doc(playerId)
-        .get();
-
-    return Player.fromSnapshot(snapshot);
   }
 }

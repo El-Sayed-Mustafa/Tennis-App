@@ -19,7 +19,7 @@ class PeopleRequirement extends StatelessWidget {
           color: const Color(0xF8F8F8F8),
           child: Column(
             children: [
-              AppBarWaveHome(
+              PoPBarWaveHome(
                 prefixIcon: IconButton(
                   onPressed: () {
                     GoRouter.of(context).pop();

@@ -300,7 +300,13 @@
     "noCourtsAvailable": "No tienes ninguna Cancha",
     "clickToCreateMatch": "Haz clic para crear el partido",
     "noRightMessage": "No tienes el permiso necesario",
-    "createParty": "Crear Fiesta"
-
-
+    "createParty": "Crear Fiesta",
+    "Club Details": "Detalles del Club",
+    "Club Rate": "Tarifa del Club",
+    "No rules and regulations": "Sin reglas ni regulaciones",
+    "Edit Club": "Editar Club",
+    "Delete Club": "Borrar Club",
+    "Confirm Delete": "Confirmar Borrar",
+    "Are you sure you want to delete this Club?": "¿Estás seguro de que quieres borrar este Club?",
+    "Delete": "Borrar"
 }

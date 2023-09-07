@@ -60,7 +60,7 @@ class _CalendarScreenState extends State<CalendarScreen>
     return Scaffold(
       body: Column(
         children: [
-          AppBarWaveHome(
+          PoPBarWaveHome(
             prefixIcon: IconButton(
               onPressed: () {
                 GoRouter.of(context).pop();

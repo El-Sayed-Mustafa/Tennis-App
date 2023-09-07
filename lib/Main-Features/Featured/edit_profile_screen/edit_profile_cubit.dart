@@ -26,7 +26,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     Uint8List? selectedImageBytes,
     TimeOfDay? selectedTime,
     required BuildContext context,
-    Player? currentPlayer,
+    required Player currentPlayer,
   }) async {
     emit(EditProfileLoadingState());
 
@@ -40,11 +40,6 @@ class EditProfileCubit extends Cubit<EditProfileState> {
           nameError: nameError,
           phoneNumberError: phoneNumberError,
         ));
-        return;
-      }
-      if (currentPlayer == null) {
-        // If there is no authenticated user, return and show an error
-        emit(EditProfileErrorState(error: "No authenticated user found."));
         return;
       }
 
@@ -114,7 +109,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
       showSnackBar(context, 'User data saved successfully.');
 
       emit(EditProfileSuccessState());
-      GoRouter.of(context).push('/chooseClub');
+      GoRouter.of(context).pop();
     } catch (error) {
       emit(EditProfileErrorState(error: error.toString()));
     }

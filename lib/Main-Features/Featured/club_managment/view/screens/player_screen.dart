@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/club_managment/view/managment_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/roles/create_role/view/widgets/rights_selector.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
+import 'package:tennis_app/core/utils/widgets/confirmation_dialog.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import '../../../../../generated/l10n.dart';
@@ -615,7 +616,22 @@ class _PlayerScreenState extends State<PlayerScreen> {
 
                   GestureDetector(
                     onTap: () async {
-                      await removePlayerFromClub(widget.player.playerId);
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext dialogContext) {
+                          return ConfirmationDialog(
+                            title: "S.of(context).confirmDelete",
+                            content:
+                                "Are you sure you want to delete this Club?",
+                            confirmText: "Delete",
+                            cancelText: "Cancel",
+                            onConfirm: () async {
+                              await removePlayerFromClub(
+                                  widget.player.playerId);
+                            },
+                          );
+                        },
+                      );
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(

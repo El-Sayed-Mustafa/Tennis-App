@@ -303,5 +303,13 @@
     "noCourtsAvailable": "You don't have any Courts",
     "clickToCreateMatch": "Click to Create Match",
     "noRightMessage": "You don't have the right",
-    "createParty": "Create Party"
+    "createParty": "Create Party",
+    "Club Details": "Club Details",
+    "Club Rate": "Club Rate",
+    "No rules and regulations": "No rules and regulations",
+    "Edit Club": "Edit Club",
+    "Delete Club": "Delete Club",
+    "Confirm Delete": "Confirm Delete",
+    "Are you sure you want to delete this Club?": "Are you sure you want to delete this Club?",
+    "Delete": "Delete"
 }

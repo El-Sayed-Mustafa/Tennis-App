@@ -478,6 +478,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Click to Create Match"),
         "noRightMessage":
             MessageLookupByLibrary.simpleMessage("You don't have the right"),
-        "createParty": MessageLookupByLibrary.simpleMessage("Create Party")
+        "createParty": MessageLookupByLibrary.simpleMessage("Create Party"),
+        "clubDetails": MessageLookupByLibrary.simpleMessage("Club Details"),
+        "clubRate": MessageLookupByLibrary.simpleMessage("Club Rate"),
+        "noRulesAndRegulations":
+            MessageLookupByLibrary.simpleMessage("No rules and regulations"),
+        "editClub": MessageLookupByLibrary.simpleMessage("Edit Club"),
+        "deleteClub": MessageLookupByLibrary.simpleMessage("Delete Club"),
+        "confirmDelete": MessageLookupByLibrary.simpleMessage("Confirm Delete"),
+        "areYouSureToDeleteClub": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to delete this Club?"),
+        "delete": MessageLookupByLibrary.simpleMessage("Delete"),
       };
 }

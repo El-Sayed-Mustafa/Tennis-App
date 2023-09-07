@@ -38,7 +38,7 @@ class MenuScreen extends StatelessWidget {
                 color: const Color(0xFFF8F8F8),
                 child: Column(
                   children: [
-                    AppBarWaveHome(
+                    PoPBarWaveHome(
                       text: S.of(context).Menu,
                       suffixIconPath: 'assets/images/app-bar-icon.svg',
                     ),

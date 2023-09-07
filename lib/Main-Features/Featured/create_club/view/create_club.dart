@@ -96,12 +96,6 @@ class CreateClub extends StatelessWidget {
                       ),
                       SizedBox(height: screenHeight * .03),
                       InputTextWithHint(
-                        hint: S.of(context).Type_your_Phone_number_here,
-                        text: S.of(context).Phone_number,
-                        controller: phoneController,
-                      ),
-                      SizedBox(height: screenHeight * .03),
-                      InputTextWithHint(
                         hint: S.of(context).Type_Club_Address_here,
                         text: S.of(context).Club_Address,
                         controller: addressController,

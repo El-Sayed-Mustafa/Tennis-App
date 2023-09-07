@@ -55,7 +55,7 @@ class _ClubScreenState extends State<ClubScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                AppBarWaveHome(
+                PoPBarWaveHome(
                   text: S.of(context).your_club,
                   suffixIconPath: 'assets/images/app-bar-icon.svg',
                 ),

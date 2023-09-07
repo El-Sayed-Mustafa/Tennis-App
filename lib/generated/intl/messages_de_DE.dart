@@ -505,6 +505,17 @@ class MessageLookup extends MessageLookupByLibrary {
             "Klicken Sie, um das Spiel zu erstellen"),
         "noRightMessage": MessageLookupByLibrary.simpleMessage(
             "Sie haben nicht die Berechtigung"),
-        "createParty": MessageLookupByLibrary.simpleMessage("Party erstellen")
+        "createParty": MessageLookupByLibrary.simpleMessage("Party erstellen"),
+        "clubDetails": MessageLookupByLibrary.simpleMessage("Clubdetails"),
+        "clubRate": MessageLookupByLibrary.simpleMessage("Clubgebühr"),
+        "noRulesAndRegulations": MessageLookupByLibrary.simpleMessage(
+            "Keine Regeln und Vorschriften"),
+        "editClub": MessageLookupByLibrary.simpleMessage("Club bearbeiten"),
+        "deleteClub": MessageLookupByLibrary.simpleMessage("Club löschen"),
+        "confirmDelete":
+            MessageLookupByLibrary.simpleMessage("Löschen bestätigen"),
+        "areYouSureToDeleteClub": MessageLookupByLibrary.simpleMessage(
+            "Sind Sie sicher, dass Sie diesen Club löschen möchten?"),
+        "delete": MessageLookupByLibrary.simpleMessage("Löschen"),
       };
 }

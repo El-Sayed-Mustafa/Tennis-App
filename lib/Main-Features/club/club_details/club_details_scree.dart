@@ -37,7 +37,7 @@ class ClubDetailsScreen extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-              text: "Club Details",
+              text: S.of(context).clubDetails,
               suffixIconPath: '',
             ),
             Stack(
@@ -203,7 +203,7 @@ class ClubDetailsScreen extends StatelessWidget {
                                       left: 24, right: 24, bottom: 6, top: 6),
                                   child: Text(
                                     club.rulesAndRegulations.isEmpty
-                                        ? 'No rules and regulations'
+                                        ? S.of(context).noRulesAndRegulations
                                         : club.rulesAndRegulations,
                                     style: const TextStyle(
                                       color: Color.fromARGB(255, 152, 150, 150),
@@ -258,7 +258,7 @@ class ClubDetailsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 15),
             BottomSheetContainer(
-              buttonText: "Edit Club",
+              buttonText: S.of(context).editClub,
               onPressed: () async {
                 bool hasRight = await RolesManager.instance
                     .doesPlayerHaveRight('Edit Club');
@@ -283,7 +283,7 @@ class ClubDetailsScreen extends StatelessWidget {
               },
             ),
             BottomSheetContainer(
-              buttonText: "Delete Club",
+              buttonText: S.of(context).deleteClub,
               onPressed: () async {
                 bool hasRight = await RolesManager.instance
                     .doesPlayerHaveRight('Delete Club');
@@ -294,10 +294,10 @@ class ClubDetailsScreen extends StatelessWidget {
                     context: context,
                     builder: (BuildContext dialogContext) {
                       return ConfirmationDialog(
-                        title: "Confirm Delete",
-                        content: "Are you sure you want to delete this Club?",
-                        confirmText: "Delete",
-                        cancelText: "Cancel",
+                        title: S.of(context).confirmDelete,
+                        content: S.of(context).areYouSureToDeleteClub,
+                        confirmText: S.of(context).delete,
+                        cancelText: S.of(context).cancel,
                         onConfirm: () {
                           GoRouter.of(context).push('/club');
 

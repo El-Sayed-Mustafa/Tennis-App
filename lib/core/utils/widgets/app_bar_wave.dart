@@ -6,13 +6,13 @@ import 'package:tennis_app/core/methodes/firebase_methodes.dart';
 import '../../../models/player.dart';
 import 'app_bar_clipper.dart';
 
-class AppBarWaveHome extends StatelessWidget {
+class PoPBarWaveHome extends StatelessWidget {
   final String text;
   final Widget? prefixIcon; // Make the prefixIcon nullable
 
   final String suffixIconPath;
 
-  const AppBarWaveHome({
+  const PoPBarWaveHome({
     Key? key,
     required this.text,
     required this.suffixIconPath,
@@ -42,6 +42,8 @@ class AppBarWaveHome extends StatelessWidget {
         } else {
           final player = snapshot.data!;
           final hasPrefixIcon = prefixIcon != null;
+          final shortenedText =
+              text.length > 16 ? '${text.substring(0, 16)}..' : text;
 
           return Stack(
             children: [
@@ -115,17 +117,19 @@ class AppBarWaveHome extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 6.0),
                           child: Text(
-                            text,
+                            shortenedText,
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 24,
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.w500,
                             ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                         SizedBox(
-                          width: screenWidth * 0.22,
+                          width: screenWidth * 0.2,
                           height: screenHeight * 0.22,
                           child: SvgPicture.asset(
                             suffixIconPath,

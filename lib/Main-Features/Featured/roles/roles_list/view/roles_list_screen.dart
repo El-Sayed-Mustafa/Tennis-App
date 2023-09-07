@@ -36,20 +36,20 @@ class RolesScreen extends StatelessWidget {
           ),
           Text(
             S.of(context).Roles_list,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color(0xFF616161),
               fontSize: 22,
               fontFamily: 'Poppins',
               fontWeight: FontWeight.w400,
             ),
           ),
-          ListRoles(),
+          const ListRoles(),
           GestureDetector(
             onTap: () => GoRouter.of(context).push('/assignPerson'),
             child: Padding(
               padding: const EdgeInsets.all(30.0),
               child: Container(
-                width: screenWidth * 0.4,
+                width: screenWidth * 0.5,
                 height: 50,
                 decoration: ShapeDecoration(
                   color: const Color(0x30FFA372),
@@ -62,7 +62,7 @@ class RolesScreen extends StatelessWidget {
                 child: Center(
                   child: Text(
                     S.of(context).Assign_Roles_to_a_Person,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color(0xFF00344E),
                       fontSize: 12,
                       fontFamily: 'Poppins',

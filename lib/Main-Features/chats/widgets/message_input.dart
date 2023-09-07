@@ -30,6 +30,7 @@ class _MessageInputState extends State<MessageInput> {
 
     if (content.isNotEmpty) {
       final chatId = generateChatId(widget.currentUserId, widget.otherPlayerId);
+      print(chatId);
       final chatRef =
           FirebaseFirestore.instance.collection('chats').doc(chatId);
 
@@ -40,37 +41,9 @@ class _MessageInputState extends State<MessageInput> {
         content: content,
         timestamp: Timestamp.now(),
       );
-
-      // Check if the chat with the given chatId already exists
-      final chatSnapshot = await chatRef.get();
-
-      if (!chatSnapshot.exists) {
-        // Create a new chat document with initial data
-        await chatRef.set({
-          'chatId': chatId,
-          'user1Id': widget.currentUserId,
-          'user2Id': widget.otherPlayerId,
-          'unreadCountUser1':
-              widget.currentUserId == chatSnapshot['user1Id'] ? 0 : 1,
-          'unreadCountUser2':
-              widget.currentUserId == chatSnapshot['user2Id'] ? 0 : 1,
-        });
-      }
-
       // Add the new message to the chat's messages subcollection
       await chatRef.collection('messages').add(newMessage.toJson());
-
-      // Increment the unread message count for the recipient
-      final recipientUnreadCountField =
-          widget.currentUserId == chatSnapshot['user1Id']
-              ? 'unreadCountUser2'
-              : 'unreadCountUser1';
-
-      await chatRef.update({
-        recipientUnreadCountField: FieldValue.increment(1),
-      });
-
-      // Update the chatIds list for both players (no need to check if chat exists)
+// Update the chatIds list for both players (no need to check if chat exists)
       await FirebaseFirestore.instance
           .collection('players')
           .doc(widget.currentUserId)
@@ -83,6 +56,28 @@ class _MessageInputState extends State<MessageInput> {
           .doc(widget.otherPlayerId)
           .update({
         'chatIds': FieldValue.arrayUnion([chatId]),
+      });
+      // Check if the chat with the given chatId already exists
+      final chatSnapshot = await chatRef.get();
+      if (!chatSnapshot.exists) {
+        // Create a new chat document with initial data
+        await chatRef.set({
+          'chatId': chatId,
+          'user1Id': widget.currentUserId,
+          'user2Id': widget.otherPlayerId,
+          'unreadCountUser1': 0,
+          'unreadCountUser2': 1,
+        });
+      }
+
+      // Increment the unread message count for the recipient
+      final recipientUnreadCountField =
+          widget.currentUserId == chatSnapshot['user1Id']
+              ? 'unreadCountUser2'
+              : 'unreadCountUser1';
+
+      await chatRef.update({
+        recipientUnreadCountField: FieldValue.increment(1),
       });
     }
   }

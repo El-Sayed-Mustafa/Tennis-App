@@ -74,7 +74,7 @@ class _CourtSearchScreenState extends State<CourtSearchScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AppBarWaveHome(
+          PoPBarWaveHome(
             prefixIcon: IconButton(
               onPressed: () {
                 GoRouter.of(context).replace('/home');

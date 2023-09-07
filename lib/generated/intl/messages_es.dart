@@ -512,5 +512,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "noRightMessage": MessageLookupByLibrary.simpleMessage(
             "No tienes el permiso necesario"),
         "createParty": MessageLookupByLibrary.simpleMessage("Crear Fiesta"),
+        "clubDetails":
+            MessageLookupByLibrary.simpleMessage("Detalles del Club"),
+        "clubRate": MessageLookupByLibrary.simpleMessage("Tarifa del Club"),
+        "noRulesAndRegulations":
+            MessageLookupByLibrary.simpleMessage("Sin reglas ni regulaciones"),
+        "editClub": MessageLookupByLibrary.simpleMessage("Editar Club"),
+        "deleteClub": MessageLookupByLibrary.simpleMessage("Borrar Club"),
+        "confirmDelete":
+            MessageLookupByLibrary.simpleMessage("Confirmar Borrar"),
+        "areYouSureToDeleteClub": MessageLookupByLibrary.simpleMessage(
+            "¿Estás seguro de que quieres borrar este Club?"),
+        "delete": MessageLookupByLibrary.simpleMessage("Borrar"),
       };
 }

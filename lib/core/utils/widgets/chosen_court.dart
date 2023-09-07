@@ -1,11 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:tennis_app/Main-Features/home/widgets/divider.dart';
 import 'package:tennis_app/core/utils/widgets/court_item.dart';
 import 'package:tennis_app/core/utils/widgets/user_court_item.dart';
 import 'package:tennis_app/generated/l10n.dart';
 import 'package:tennis_app/models/court.dart';
-import 'package:intl/intl.dart';
 
 class ChosenCourt extends StatelessWidget {
   final String courtId;
@@ -51,9 +49,9 @@ class ChosenCourt extends StatelessWidget {
           } else if (courtSnapshot.hasError) {
             return const Text('');
           } else if (!courtSnapshot.hasData) {
-            return const Text(
-              'No Reversed Court',
-              style: TextStyle(
+            return Text(
+              S.of(context).No_Reversed_Courts,
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 22,
                 fontFamily: 'Poppins',

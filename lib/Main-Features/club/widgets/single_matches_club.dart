@@ -204,7 +204,8 @@ class _ClubSingleMatchesState extends State<ClubSingleMatches> {
                                           builder:
                                               (BuildContext dialogContext) {
                                             return ConfirmationDialog(
-                                              title: "Confirm Delete",
+                                              title:
+                                                  "S.of(context).confirmDelete",
                                               content:
                                                   "Are you sure you want to delete this Match?",
                                               confirmText: "Delete",

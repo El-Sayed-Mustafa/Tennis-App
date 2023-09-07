@@ -130,12 +130,7 @@ class _CreateEventState extends State<CreateEvent> {
                           hint: S.of(context).Select_end_date_and_time,
                           onDateTimeSelected: (DateTime dateTime) {},
                         ),
-                        SizedBox(height: screenHeight * .03),
-                        InputTextWithHint(
-                          hint: S.of(context).Type_Event_address_here,
-                          text: S.of(context).Event_Address,
-                          controller: eventAddressController,
-                        ),
+
                         SizedBox(height: screenHeight * .03),
                         EventTypeInput(),
                         SizedBox(height: screenHeight * .03),

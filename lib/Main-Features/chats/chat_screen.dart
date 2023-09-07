@@ -42,7 +42,7 @@ class _ChatScreenState extends State<ChatScreen>
         padding: EdgeInsets.only(bottom: 8),
         child: Column(
           children: [
-            AppBarWaveHome(
+            PoPBarWaveHome(
               text: S.of(context).messages,
               suffixIconPath: 'assets/images/app-bar-icon.svg',
             ),

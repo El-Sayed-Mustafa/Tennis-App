@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              AppBarWaveHome(
+              PoPBarWaveHome(
                 text: S.of(context).Home,
                 suffixIconPath: 'assets/images/app-bar-icon.svg',
               ),

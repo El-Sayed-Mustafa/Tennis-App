@@ -7,7 +7,6 @@ class RolesManager {
   static RolesManager? _instance;
   List<String> _userRoles = [];
   Method method = Method();
-  // Private constructor to prevent direct instantiation
   RolesManager._();
 
   // Singleton instance getter
@@ -76,5 +75,31 @@ class RolesManager {
     } else {
       return false;
     }
+  }
+}
+
+class RightsManager {
+  static RightsManager? _instance;
+  List<String> _userRights = [];
+
+  // Private constructor to prevent direct instantiation
+  RightsManager._();
+
+  // Singleton instance getter
+  static RightsManager get instance {
+    // Create instance if it doesn't exist
+    _instance ??= RightsManager._();
+    return _instance!;
+  }
+
+  // Method to fetch and store the list of rights
+  Future<void> fetchUserRights() async {
+    // Implement the logic to fetch the rights from Firebase here.
+    // Example: Fetch rights from Firestore and set _userRights.
+  }
+
+  // Method to check if a user has a specific right
+  bool hasRight(String right) {
+    return _userRights.contains(right);
   }
 }

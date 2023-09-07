@@ -61,7 +61,7 @@ class _AssignRightsState extends State<AssignRights> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              AppBarWaveHome(
+              PoPBarWaveHome(
                 prefixIcon: IconButton(
                   onPressed: () {
                     GoRouter.of(context).pop();
