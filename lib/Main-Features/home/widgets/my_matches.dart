@@ -9,6 +9,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/find_match/view/widgets/match_item.dart';
 import 'package:tennis_app/Main-Features/create_event_match/services/firebase_method.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
+import 'package:tennis_app/core/utils/widgets/confirmation_dialog.dart';
 import 'package:tennis_app/core/utils/widgets/no_data_text.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/Match.dart';
@@ -136,8 +137,22 @@ class _MyMatchesState extends State<MyMatches> {
                                 onPressed: () async {
                                   MatchesFirebaseMethod delete =
                                       MatchesFirebaseMethod();
-                                  await delete.deleteMyMatch(match.matchId);
-                                  GoRouter.of(context).push('/home');
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext dialogContext) {
+                                      return ConfirmationDialog(
+                                        title: S.of(context).confirmDelete,
+                                        content: '',
+                                        confirmText: S.of(context).delete,
+                                        cancelText: S.of(context).cancel,
+                                        onConfirm: () async {
+                                          await delete
+                                              .deleteMyMatch(match.matchId);
+                                          GoRouter.of(context).push('/home');
+                                        },
+                                      );
+                                    },
+                                  );
                                 },
                                 icon: const Icon(
                                   Icons.cancel_outlined,

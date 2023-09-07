@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/create_event_match/services/firebase_method.dart';
+import 'package:tennis_app/core/utils/widgets/confirmation_dialog.dart';
 
 import '../../../core/utils/widgets/no_data_text.dart';
 import '../../../generated/l10n.dart';
@@ -88,8 +89,23 @@ class _MyEventsState extends State<MyEvents> {
                                     onPressed: () async {
                                       MatchesFirebaseMethod delete =
                                           MatchesFirebaseMethod();
-                                      await delete.deleteMyEvent(eventId);
-                                      setState(() {});
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext dialogContext) {
+                                          return ConfirmationDialog(
+                                            title: S.of(context).confirmDelete,
+                                            content: '',
+                                            confirmText: S.of(context).delete,
+                                            cancelText: S.of(context).cancel,
+                                            onConfirm: () async {
+                                              await delete
+                                                  .deleteMyEvent(eventId);
+                                              GoRouter.of(context)
+                                                  .push('/home');
+                                            },
+                                          );
+                                        },
+                                      );
                                     },
                                     icon: const Icon(
                                       Icons.cancel_outlined,
@@ -110,9 +126,23 @@ class _MyEventsState extends State<MyEvents> {
                                   onPressed: () async {
                                     MatchesFirebaseMethod delete =
                                         MatchesFirebaseMethod();
-                                    await delete.deleteMyEvent(eventId);
-                                    // ignore: use_build_context_synchronously
-                                    GoRouter.of(context).push('/home');
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext dialogContext) {
+                                        return ConfirmationDialog(
+                                          title: S.of(context).confirmDelete,
+                                          content: '',
+                                          confirmText: S.of(context).delete,
+                                          cancelText: S.of(context).cancel,
+                                          onConfirm: () async {
+                                            GoRouter.of(context).push('/home');
+
+                                            await delete.deleteMyEvent(eventId);
+                                            // ignore: use_build_context_synchronously
+                                          },
+                                        );
+                                      },
+                                    );
                                   },
                                   icon: const Icon(
                                     Icons.cancel_outlined,

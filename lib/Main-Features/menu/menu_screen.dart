@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tennis_app/Auth/screens/auth_screen.dart';
 import 'package:tennis_app/Main-Features/menu/widgets/button_menu.dart';
 import 'package:tennis_app/core/methodes/roles_manager.dart';
 import 'package:tennis_app/core/utils/widgets/custom_dialouge.dart';

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tennis_app/Main-Features/home/services/firebase_methods.dart';
 import 'package:tennis_app/Main-Features/home/widgets/avaliable_courts.dart';
 import 'package:tennis_app/Main-Features/home/widgets/button_home.dart';
 import 'package:tennis_app/Main-Features/home/widgets/double_club_matches.dart';
@@ -9,7 +8,6 @@ import 'package:tennis_app/Main-Features/home/widgets/my_matches.dart';
 import 'package:tennis_app/Main-Features/home/widgets/single_club_matches.dart';
 import 'package:tennis_app/core/methodes/firebase_methodes.dart';
 import 'package:tennis_app/core/methodes/roles_manager.dart';
-import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/app_bar_wave.dart';
 import 'package:tennis_app/core/utils/widgets/custom_dialouge.dart';
 
@@ -44,7 +42,6 @@ class _HomeScreenState extends State<HomeScreen> {
     final sectionTitleSize = screenWidth * 0.052;
 
     final spacing = screenHeight * 0.015;
-    Method method = Method();
 
     return Scaffold(
       body: RefreshIndicator(
