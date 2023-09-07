@@ -30,19 +30,9 @@ class CreateProfileCubit extends Cubit<CreateProfileState> {
     required BuildContext context,
   }) async {
     emit(CreateProfileLoadingState());
-
+    print("Create profile");
     try {
-      String? nameError = validateName(nameController.text);
-      String? phoneNumberError =
-          validatePhoneNumber(phoneNumberController.text);
-
-      if (nameError != null || phoneNumberError != null) {
-        emit(CreateProfileValidationErrorState(
-          nameError: nameError,
-          phoneNumberError: phoneNumberError,
-        ));
-        return;
-      }
+      print("test 2");
 
       String selectedGender = context.read<GenderCubit>().state;
       String playerName = nameController.text;
@@ -52,6 +42,7 @@ class CreateProfileCubit extends Cubit<CreateProfileState> {
 
       // Get the currently authenticated user ID
       String playerId = FirebaseAuth.instance.currentUser?.uid ?? '';
+      print("test 3");
 
       Player player = Player(
         playerId: playerId, // Use the UID as the player ID
@@ -78,12 +69,14 @@ class CreateProfileCubit extends Cubit<CreateProfileState> {
         singleMatchesIds: [],
         singleTournamentsIds: [], isRated: false,
       );
+      print("test 4");
 
       CollectionReference playersCollection =
           FirebaseFirestore.instance.collection('players');
       DocumentReference playerDocRef = playersCollection.doc(playerId);
 
       await playerDocRef.set(player.toJson());
+      print("test 5");
 
       // Upload the selected image to Firebase Storage
       if (selectedImageBytes != null) {
@@ -101,6 +94,7 @@ class CreateProfileCubit extends Cubit<CreateProfileState> {
         // Update the player document with the image URL
         await playerDocRef.update({'photoURL': imageUrl});
       }
+      print("test 6");
 
       // Data saved successfully
       showSnackBar(context, 'User data saved successfully.');
