@@ -65,7 +65,7 @@ class _ClubChatScreenState extends State<ClubChatScreen> {
       }
       return null; // Return null if the player does not exist.
     } catch (error) {
-      SnackBar(content: Text('Error fetching player data: $error'));
+      SnackBar(content: Text('${S.of(context).Player_data_not_found}: $error'));
       return null;
     }
   }

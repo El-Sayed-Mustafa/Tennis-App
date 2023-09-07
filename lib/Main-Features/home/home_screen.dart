@@ -144,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     return CircularProgressIndicator();
                   } else if (snapshot.hasError) {
                     // Handle error state
-                    return Text('Error: ${snapshot.error}');
+                    return Text('${S.of(context).error}: ${snapshot.error}');
                   } else {
                     final hasParticipated = snapshot.data ?? false;
                     if (hasParticipated) {

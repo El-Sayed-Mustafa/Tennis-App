@@ -8,6 +8,7 @@ import 'package:intl/intl.dart'; // Import the intl package
 import 'package:tennis_app/core/methodes/roles_manager.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/photot_player.dart';
+import 'package:tennis_app/generated/l10n.dart';
 import 'package:tennis_app/models/double_match.dart';
 import '../../../models/player.dart';
 import '../../methodes/firebase_methodes.dart';
@@ -50,7 +51,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
         }
       }
     } catch (e) {
-      SnackBar(content: Text('Error fetching players: $e'));
+      SnackBar(content: Text('${S.of(context).Player_data_not_found} $e'));
     }
     return players;
   }
@@ -65,7 +66,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Center(child: Text('Enter Results')),
+          title: Center(child: Text(S.of(context).enterResults)),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -195,7 +196,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                         widget.match.player4Id, false);
                   }
                 },
-                child: const Text('Submit'),
+                child: Text(S.of(context).submit),
               ),
             ],
           ),
@@ -222,7 +223,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
         } else if (snapshot.hasError ||
             snapshot.data == null ||
             snapshot.data!.length < 4) {
-          return const Text('Error loading player data');
+          return Text(S.of(context).errorLoadingPlayerData);
         } else {
           final player1 = snapshot.data![0];
           final player2 = snapshot.data![1];

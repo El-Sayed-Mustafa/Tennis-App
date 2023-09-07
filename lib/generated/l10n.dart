@@ -3091,6 +3091,258 @@ class S {
       desc: 'Label for Delete action',
     );
   }
+
+  String get orContinueWith {
+    return Intl.message(
+      'Or Continue With',
+      name: 'orContinueWith',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get reservationCanceledSuccessfully {
+    return Intl.message(
+      'Reservation canceled successfully',
+      name: 'reservationCanceledSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get errorCancelingReservation {
+    return Intl.message(
+      'Error canceling reservation',
+      name: 'errorCancelingReservation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get accessDenied {
+    return Intl.message(
+      'Access Denied',
+      name: 'accessDenied',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get enterResults {
+    return Intl.message(
+      'Enter Results',
+      name: 'enterResults',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get submit {
+    return Intl.message(
+      'Submit',
+      name: 'submit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get errorLoadingPlayerData {
+    return Intl.message(
+      'Error loading player data',
+      name: 'errorLoadingPlayerData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get confirm {
+    return Intl.message(
+      'Confirm',
+      name: 'confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get selectWinners {
+    return Intl.message(
+      'Select Winners',
+      name: 'selectWinners',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get errorLoadingGroups {
+    return Intl.message(
+      'Error loading groups',
+      name: 'errorLoadingGroups',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get noGroupsFound {
+    return Intl.message(
+      'No groups found',
+      name: 'noGroupsFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get errorLoadingMessages {
+    return Intl.message(
+      'Error loading messages',
+      name: 'errorLoadingMessages',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get noMessages {
+    return Intl.message(
+      'No messages',
+      name: 'noMessages',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get youHaveAlreadyRatedThisClub {
+    return Intl.message(
+      'You have already rated this club',
+      name: 'youHaveAlreadyRatedThisClub',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get thankYouForYourRating {
+    return Intl.message(
+      'Thank you for your rating',
+      name: 'thankYouForYourRating',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get rateThisClub {
+    return Intl.message(
+      'Rate This Club',
+      name: 'rateThisClub',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get pleaseLeaveYourRate {
+    return Intl.message(
+      'Please leave your rate',
+      name: 'pleaseLeaveYourRate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get failedToFetchUserRoles {
+    return Intl.message(
+      'Failed to fetch user roles',
+      name: 'failedToFetchUserRoles',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get roleUpdated {
+    return Intl.message(
+      'Role Updated',
+      name: 'roleUpdated',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get roleRightsUpdatedSuccessfully {
+    return Intl.message(
+      'Role rights have been updated successfully',
+      name: 'roleRightsUpdatedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get anErrorOccurredWhileUpdatingTheRole {
+    return Intl.message(
+      'An error occurred while updating the role',
+      name: 'anErrorOccurredWhileUpdatingTheRole',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get roleCreated {
+    return Intl.message(
+      'Role Created',
+      name: 'roleCreated',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get roleHasBeenCreatedSuccessfully {
+    return Intl.message(
+      'Role has been created successfully',
+      name: 'roleHasBeenCreatedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get noClubMembership {
+    return Intl.message(
+      'No Club Membership',
+      name: 'noClubMembership',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get youNeedToBeAMemberOfAClubToCreateAnEvent {
+    return Intl.message(
+      'You need to be a member of a club to create an event',
+      name: 'youNeedToBeAMemberOfAClubToCreateAnEvent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get playerNotFoundWithTheGivenID {
+    return Intl.message(
+      'Player not found with the given ID',
+      name: 'playerNotFoundWithTheGivenID',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get errorFetchingCourtData {
+    return Intl.message(
+      'Error fetching court data',
+      name: 'errorFetchingCourtData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get noCourtDataAvailable {
+    return Intl.message(
+      'No court data available',
+      name: 'noCourtDataAvailable',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

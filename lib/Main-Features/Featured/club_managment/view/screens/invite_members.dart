@@ -38,7 +38,7 @@ class InviteMember extends StatelessWidget {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return CircularProgressIndicator();
                 } else if (snapshot.hasError) {
-                  return Text('Error: ${snapshot.error}');
+                  return Text('${S.of(context).error}: ${snapshot.error}');
                 } else {
                   final players = snapshot.data ?? [];
                   return ListView.builder(

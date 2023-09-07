@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tennis_app/Main-Features/Featured/navigation_bar/widgets/navigation_bar_item.dart';
 import 'package:tennis_app/core/methodes/roles_manager.dart';
+import 'package:tennis_app/generated/l10n.dart';
 import '../../chats/chat_screen.dart';
 import '../../club/club_screen.dart';
 import '../../home/home_screen.dart';
@@ -71,7 +72,7 @@ class NavigationBarScreen extends StatelessWidget {
             // Handle the case where fetchUserRoles didn't return valid data
             return Scaffold(
               body: Center(
-                child: Text('Failed to fetch user roles.'),
+                child: Text(S.of(context).failedToFetchUserRoles),
               ),
             );
           }

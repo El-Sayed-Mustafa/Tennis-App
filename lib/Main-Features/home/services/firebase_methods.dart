@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tennis_app/generated/l10n.dart';
 
 void navigateToCreateEvent(BuildContext context) async {
   final String playerId = FirebaseAuth.instance.currentUser!.uid;
@@ -23,15 +24,15 @@ void navigateToCreateEvent(BuildContext context) async {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text('No Club Membership'),
-            content: const Text(
-                'You need to be a member of a club to create an event.'),
+            title: Text(S.of(context).noClubMembership),
+            content:
+                Text(S.of(context).youNeedToBeAMemberOfAClubToCreateAnEvent),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text('OK'),
+                child: Text(S.of(context).ok),
               ),
             ],
           );
@@ -43,14 +44,14 @@ void navigateToCreateEvent(BuildContext context) async {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Player Not Found'),
-          content: const Text('Player not found with the given ID.'),
+          title: Text(S.of(context).Player_data_not_found),
+          content: Text(S.of(context).playerNotFoundWithTheGivenID),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text('OK'),
+              child: Text(S.of(context).ok),
             ),
           ],
         );

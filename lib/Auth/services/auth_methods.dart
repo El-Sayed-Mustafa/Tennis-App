@@ -55,13 +55,13 @@ class FirebaseAuthMethods {
         await _auth.currentUser!.sendEmailVerification();
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Email is already verified.')),
+          SnackBar(content: Text(S.of(context).email_verified)),
         );
         GoRouter.of(context).push('/createProfile');
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error sending email verification: $e')),
+        SnackBar(content: Text('${S.of(context).error}: $e')),
       );
     }
   }
@@ -165,7 +165,7 @@ class FirebaseAuthMethods {
         // User is not registered
         showSnackBar(context, 'User is not registered. Please register.');
       }
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException {
       showSnackBar(context, 'User is not registered. Swap Right to register.');
     }
   }

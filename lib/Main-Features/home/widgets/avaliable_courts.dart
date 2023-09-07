@@ -98,7 +98,7 @@ class _ReversedCourtsState extends State<ReversedCourts> {
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
-                        return const Text('Error fetching court data');
+                        return Text(S.of(context).errorFetchingCourtData);
                       }
 
                       if (!snapshot.hasData) {
@@ -107,7 +107,7 @@ class _ReversedCourtsState extends State<ReversedCourts> {
 
                       final courtData = snapshot.data?.data();
                       if (courtData == null) {
-                        return const Text('No court data available');
+                        return Text(S.of(context).noCourtDataAvailable);
                       }
 
                       // Create a Court instance from the snapshot data

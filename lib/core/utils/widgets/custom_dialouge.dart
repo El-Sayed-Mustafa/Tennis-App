@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tennis_app/generated/l10n.dart';
 
 class CustomDialog extends StatelessWidget {
   final String text;
@@ -8,14 +9,14 @@ class CustomDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Access Denied'),
+      title: Text(S.of(context).accessDenied),
       content: Text(text),
       actions: [
         TextButton(
           onPressed: () {
             Navigator.pop(context); // Close the dialog
           },
-          child: Text('OK'),
+          child: Text(S.of(context).ok),
         ),
       ],
     );

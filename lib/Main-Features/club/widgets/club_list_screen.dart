@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tennis_app/core/utils/widgets/no_data_text.dart';
+import 'package:tennis_app/generated/l10n.dart';
 
 import '../../../core/methodes/firebase_methodes.dart';
 import '../../../models/club.dart';
@@ -47,9 +49,16 @@ class ClubListScreen extends StatelessWidget {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
-                  return Center(child: Text('Error fetching clubs.'));
+                  return Center(
+                      child: Text(S.of(context).error_fetching_club_data));
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return Center(child: Text('No clubs available.'));
+                  return NoData(
+                    text: 'No Clubs data available',
+                    buttonText: 'Click To Create Club',
+                    onPressed: () {
+                      GoRouter.of(context).push('/createClub');
+                    },
+                  );
                 } else {
                   // Display clubs using ListView.builder
                   return ListView.builder(

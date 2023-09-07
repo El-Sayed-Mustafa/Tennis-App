@@ -85,28 +85,28 @@ class _CourtItemState extends State<CourtItem> {
 
       // Show a success message
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Reservation canceled successfully')),
+        SnackBar(content: Text(S.of(context).Above_18)),
       );
     } catch (error) {
       // Handle any errors that occur during the process
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error canceling reservation: $error')),
+        SnackBar(
+            content:
+                Text('${S.of(context).errorCancelingReservation}: $error')),
       );
     }
   }
 
   void _currentPlayerCourts(String courtId) async {
     // Update the 'reversed' property to true for the corresponding court document in Firestore
-    FirebaseFirestore.instance.collection('courts').doc(courtId).update({
-      'reversed': true,
-    }).then((_) {
-      // Successfully updated the 'reversed' property in Firestore
-      const SnackBar(
-          content: Text('Court reversed status updated successfully'));
-    }).catchError((error) {
-      // Handle the error if updating fails
-      SnackBar(content: Text('Error updating court reversed status: $error'));
-    });
+    FirebaseFirestore.instance
+        .collection('courts')
+        .doc(courtId)
+        .update({
+          'reversed': true,
+        })
+        .then((_) {})
+        .catchError((error) {});
   }
 
   void _updateCourtReservedStatus(String courtId) async {
@@ -114,7 +114,6 @@ class _CourtItemState extends State<CourtItem> {
       // Step 1: Get the current user ID from Firebase Authentication
       User? currentUser = FirebaseAuth.instance.currentUser;
       if (currentUser == null) {
-        const SnackBar(content: Text('No user is currently signed in.'));
         return;
       }
 
@@ -128,8 +127,6 @@ class _CourtItemState extends State<CourtItem> {
               .get();
 
       if (!playerSnapshot.exists) {
-        const SnackBar(
-            content: Text('Player document does not exist for current user.'));
         return;
       }
 
@@ -145,14 +142,7 @@ class _CourtItemState extends State<CourtItem> {
           .update({
         'reversedCourtsIds': updatedReversedCourtsIds,
       });
-
-      const SnackBar(
-          content: Text(
-              'Court reversed status updated successfully for the current user.'));
-    } catch (error) {
-      // Handle any errors that occur during the process
-      SnackBar(content: Text('Error updating court reversed status: $error'));
-    }
+    } catch (error) {}
   }
 
   @override

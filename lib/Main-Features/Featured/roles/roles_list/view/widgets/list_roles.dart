@@ -21,7 +21,7 @@ class ListRoles extends StatelessWidget {
               child: Center(child: CircularProgressIndicator()));
         }
         if (snapshot.hasError) {
-          return Text('Error: ${snapshot.error}');
+          return Text('${S.of(context).error}: ${snapshot.error}');
         }
         if (!snapshot.hasData) {
           return Text(S.of(context).No_data_found);

@@ -524,5 +524,57 @@ class MessageLookup extends MessageLookupByLibrary {
         "areYouSureToDeleteClub": MessageLookupByLibrary.simpleMessage(
             "¿Estás seguro de que quieres borrar este Club?"),
         "delete": MessageLookupByLibrary.simpleMessage("Borrar"),
+        "OrContinueWith":
+            MessageLookupByLibrary.simpleMessage("O continuar con"),
+        "ReservationCanceledSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Reserva cancelada exitosamente"),
+        "ErrorCancelingReservation": MessageLookupByLibrary.simpleMessage(
+            "Error al cancelar la reserva"),
+        "AccessDenied": MessageLookupByLibrary.simpleMessage("Acceso denegado"),
+        "EnterResults":
+            MessageLookupByLibrary.simpleMessage("Ingresar resultados"),
+        "Submit": MessageLookupByLibrary.simpleMessage("Enviar"),
+        "ErrorLoadingPlayerData": MessageLookupByLibrary.simpleMessage(
+            "Error al cargar datos del jugador"),
+        "Confirm": MessageLookupByLibrary.simpleMessage("Confirmar"),
+        "SelectWinners":
+            MessageLookupByLibrary.simpleMessage("Seleccionar ganadores"),
+        "ErrorLoadingGroups":
+            MessageLookupByLibrary.simpleMessage("Error al cargar grupos"),
+        "NoGroupsFound":
+            MessageLookupByLibrary.simpleMessage("No se encontraron grupos"),
+        "ErrorLoadingMessages":
+            MessageLookupByLibrary.simpleMessage("Error al cargar mensajes"),
+        "NoMessages": MessageLookupByLibrary.simpleMessage("No hay mensajes"),
+        "YouHaveAlreadyRatedThisClub":
+            MessageLookupByLibrary.simpleMessage("Ya has calificado este club"),
+        "ThankYouForYourRating":
+            MessageLookupByLibrary.simpleMessage("Gracias por tu calificación"),
+        "RateThisClub":
+            MessageLookupByLibrary.simpleMessage("Califica este club"),
+        "PleaseLeaveYourRate": MessageLookupByLibrary.simpleMessage(
+            "Por favor, deja tu calificación"),
+        "FailedToFetchUserRoles": MessageLookupByLibrary.simpleMessage(
+            "Error al obtener roles de usuario"),
+        "RoleUpdated": MessageLookupByLibrary.simpleMessage("Rol actualizado"),
+        "RoleRightsUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Los derechos de rol se han actualizado correctamente"),
+        "AnErrorOccurredWhileUpdatingTheRole":
+            MessageLookupByLibrary.simpleMessage(
+                "Ocurrió un error al actualizar el rol"),
+        "RoleCreated": MessageLookupByLibrary.simpleMessage("Rol creado"),
+        "RoleHasBeenCreatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "El rol se ha creado correctamente"),
+        "NoClubMembership":
+            MessageLookupByLibrary.simpleMessage("Sin membresía en el club"),
+        "YouNeedToBeAMemberOfAClubToCreateAnEvent":
+            MessageLookupByLibrary.simpleMessage(
+                "Debes ser miembro de un club para crear un evento"),
+        "PlayerNotFoundWithTheGivenID": MessageLookupByLibrary.simpleMessage(
+            "Jugador no encontrado con el ID proporcionado"),
+        "ErrorFetchingCourtData": MessageLookupByLibrary.simpleMessage(
+            "Error al obtener datos de la cancha"),
+        "NoCourtDataAvailable": MessageLookupByLibrary.simpleMessage(
+            "No hay datos de la cancha disponibles"),
       };
 }

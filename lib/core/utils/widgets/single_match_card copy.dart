@@ -5,6 +5,7 @@ import 'package:tennis_app/core/methodes/roles_manager.dart';
 import 'package:tennis_app/core/utils/widgets/photot_player.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tennis_app/core/utils/widgets/single_result_dialog.dart';
+import 'package:tennis_app/generated/l10n.dart';
 import '../../../models/single_match.dart';
 import '../../../models/player.dart';
 import '../../methodes/firebase_methodes.dart';
@@ -35,7 +36,8 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
         return Player.fromSnapshot(playerSnapshot);
       }
     } catch (e) {
-      SnackBar(content: Text('Error fetching player: $e'));
+      SnackBar(
+          content: Text('${S.of(context).Error_fetching_player_data}: $e'));
     }
     return null;
   }
@@ -56,7 +58,7 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
         } else if (snapshot.hasError ||
             snapshot.data == null ||
             snapshot.data!.length < 2) {
-          return const Text('Error loading player data');
+          return Text(S.of(context).errorLoadingPlayerData);
         } else {
           final player1 = snapshot.data![0]!;
           final player2 = snapshot.data![1]!;

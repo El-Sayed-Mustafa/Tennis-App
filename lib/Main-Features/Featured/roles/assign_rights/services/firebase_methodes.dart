@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tennis_app/generated/l10n.dart';
 
 import '../../../../../models/roles.dart';
 
@@ -25,32 +26,33 @@ class AssignRightsService {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: const Text('Role Updated'),
-          content: const Text('Role rights have been updated successfully.'),
+          title: Text(S.of(context).roleUpdated),
+          content: Text(S.of(context).roleRightsUpdatedSuccessfully),
           actions: [
             ElevatedButton(
               onPressed: () {
                 // Navigate to the previous screen or any other desired screen
                 GoRouter.of(context).pop();
               },
-              child: const Text('OK'),
+              child: Text(S.of(context).ok),
             ),
           ],
         ),
       );
     } catch (e) {
       // Show an error message
+      // ignore: use_build_context_synchronously
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: const Text('Error'),
-          content: const Text('An error occurred while updating the role.'),
+          title: Text(S.of(context).error),
+          content: Text(S.of(context).Error_creating_role),
           actions: [
             ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text('OK'),
+              child: Text(S.of(context).ok),
             ),
           ],
         ),

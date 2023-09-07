@@ -30,7 +30,8 @@ class MenuScreen extends StatelessWidget {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
-              return Center(child: Text('Error: ${snapshot.error}'));
+              return Center(
+                  child: Text('${S.of(context).error}: ${snapshot.error}'));
             } else {
               final player = snapshot.data!;
 

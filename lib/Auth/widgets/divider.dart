@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tennis_app/generated/l10n.dart';
 
 class MyDivider extends StatelessWidget {
   const MyDivider({super.key});
@@ -16,7 +17,7 @@ class MyDivider extends StatelessWidget {
           )),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Text('Or Continue With',
+            child: Text(S.of(context).orContinueWith,
                 style: TextStyle(color: Colors.grey[700])),
           ),
           Expanded(

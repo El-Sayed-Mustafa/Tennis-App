@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:tennis_app/generated/l10n.dart';
 import 'package:tennis_app/models/groups.dart';
 
 class GroupCard extends StatelessWidget {
@@ -80,10 +81,11 @@ class GroupCard extends StatelessWidget {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return SizedBox.shrink();
                     } else if (snapshot.hasError) {
-                      return Text('Error loading messages: ${snapshot.error}');
+                      return Text(
+                          '${S.of(context).errorLoadingMessages}: ${snapshot.error}');
                     } else if (!snapshot.hasData ||
                         snapshot.data!.docs.isEmpty) {
-                      return Text('No messages');
+                      return Text(S.of(context).noMessages);
                     } else {
                       String lastMessage =
                           snapshot.data!.docs[0]['content'] as String;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/core/methodes/firebase_methodes.dart';
+import 'package:tennis_app/generated/l10n.dart';
 
 import '../../../models/player.dart';
 import 'app_bar_clipper.dart';
@@ -37,7 +38,8 @@ class PoPBarWaveHome extends StatelessWidget {
           return SizedBox(
             height: screenHeight * 0.14,
             width: screenWidth,
-            child: Center(child: Text('Error: ${snapshot.error}')),
+            child: Center(
+                child: Text('${S.of(context).error}: ${snapshot.error}')),
           );
         } else {
           final player = snapshot.data!;

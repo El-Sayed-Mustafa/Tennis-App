@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/club/club_details/club_details_scree.dart';
 import 'package:tennis_app/constants.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
+import 'package:tennis_app/generated/l10n.dart';
 import 'package:tennis_app/models/club.dart'; // Import the Club class
 import 'package:connectivity_plus/connectivity_plus.dart'; // Import the connectivity_plus plugin
 import 'package:tennis_app/models/player.dart';
@@ -60,9 +61,7 @@ class _ClubInfoState extends State<ClubInfo> {
       setState(() {
         hasRated = currentPlayer.isRated;
       });
-    } catch (error) {
-      SnackBar(content: Text('Error checking user rating: $error'));
-    }
+    } catch (error) {}
   }
 
   void updateClubRatingInFirestore(double newRating) async {
@@ -152,14 +151,14 @@ class _ClubInfoState extends State<ClubInfo> {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: const Text('You have already rated this club'),
-          content: const Text('Thank you for your rating!'),
+          title: Text(S.of(context).youHaveAlreadyRatedThisClub),
+          content: Text(S.of(context).thankYouForYourRating),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text('Ok'),
+              child: Text(S.of(context).ok),
             )
           ],
         ),
@@ -168,12 +167,12 @@ class _ClubInfoState extends State<ClubInfo> {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: const Text('Rate This Club'),
+          title: Text(S.of(context).rateThisClub),
           content: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('Please leave your rate'),
+              Text(S.of(context).pleaseLeaveYourRate),
               buildRating(),
             ],
           ),
@@ -182,7 +181,7 @@ class _ClubInfoState extends State<ClubInfo> {
               onPressed: () {
                 updateClubRatingInFirestore(userRating);
               },
-              child: const Text('Ok'),
+              child: Text(S.of(context).ok),
             )
           ],
         ),

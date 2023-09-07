@@ -58,7 +58,6 @@ class RolesManager {
         return allRights;
       } catch (e) {
         // Handle errors if necessary
-        SnackBar(content: Text('Error fetching user roles: $e'));
         return [];
       }
     }

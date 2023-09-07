@@ -146,7 +146,7 @@ class SingleTournamentsClub extends StatelessWidget {
                     final tournamentData = tournamentDoc.data();
                     if (tournamentData == null) {
                       return Container(
-                        child: const Text('No Data'),
+                        child: Text(S.of(context).No_data_available),
                       );
                     }
 

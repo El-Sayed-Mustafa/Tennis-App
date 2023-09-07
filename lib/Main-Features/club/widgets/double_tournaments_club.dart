@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:tennis_app/Main-Features/create_event_match/double_tournment/list_double_matches.dart';
 import 'package:tennis_app/constants.dart';
 import 'package:tennis_app/core/utils/widgets/double_match_card.dart';
+import 'package:tennis_app/generated/l10n.dart';
 import 'package:tennis_app/models/double_match.dart'; // Replace with your model
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tennis_app/models/player.dart'; // Replace with your model
@@ -143,7 +144,7 @@ class DoubleTournamentsClub extends StatelessWidget {
                     final tournamentData = tournamentDoc.data();
                     if (tournamentData == null) {
                       return Container(
-                        child: const Text('sss'),
+                        child: Text(S.of(context).Error_fetching_data),
                       );
                     }
 

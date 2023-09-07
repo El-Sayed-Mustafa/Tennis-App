@@ -70,7 +70,9 @@ class FindMatch extends StatelessWidget {
                       ),
                     );
                   } else if (snapshot.hasError) {
-                    return Center(child: Text('Error: ${snapshot.error}'));
+                    return Center(
+                        child:
+                            Text('${S.of(context).error}:${snapshot.error}'));
                   }
 
                   final player = snapshot.data;
@@ -90,7 +92,8 @@ class FindMatch extends StatelessWidget {
                           );
                         } else if (snapshot.hasError) {
                           return Center(
-                              child: Text('Error: ${snapshot.error}'));
+                              child: Text(
+                                  '${S.of(context).error}: ${snapshot.error}'));
                         }
 
                         final club = snapshot.data;

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/create_event_match/single_friendly_match/cubit/single_match_state.dart';
+import 'package:tennis_app/generated/l10n.dart';
 import 'package:tennis_app/models/player.dart';
 
 import '../../../Featured/Event/create_event/view/widgets/input_end_date.dart';
@@ -123,7 +124,7 @@ class DoubleMatchCubit extends Cubit<DoubleMatchState> {
       emit(DoubleMatchSuccess());
       GoRouter.of(context).pop();
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Match Created successfully')),
+        SnackBar(content: Text(S.of(context).Match_data_saved_successfully)),
       );
     } catch (e) {
       emit(DoubleMatchFailure(error: e.toString()));

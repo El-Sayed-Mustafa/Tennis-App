@@ -489,5 +489,54 @@ class MessageLookup extends MessageLookupByLibrary {
         "areYouSureToDeleteClub": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to delete this Club?"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+        "OrContinueWith":
+            MessageLookupByLibrary.simpleMessage("Or Continue With"),
+        "ReservationCanceledSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Reservation canceled successfully"),
+        "ErrorCancelingReservation":
+            MessageLookupByLibrary.simpleMessage("Error canceling reservation"),
+        "AccessDenied": MessageLookupByLibrary.simpleMessage("Access Denied"),
+        "EnterResults": MessageLookupByLibrary.simpleMessage("Enter Results"),
+        "Submit": MessageLookupByLibrary.simpleMessage("Submit"),
+        "ErrorLoadingPlayerData":
+            MessageLookupByLibrary.simpleMessage("Error loading player data"),
+        "Confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+        "SelectWinners": MessageLookupByLibrary.simpleMessage("Select Winners"),
+        "ErrorLoadingGroups":
+            MessageLookupByLibrary.simpleMessage("Error loading groups"),
+        "NoGroupsFound":
+            MessageLookupByLibrary.simpleMessage("No groups found"),
+        "ErrorLoadingMessages":
+            MessageLookupByLibrary.simpleMessage("Error loading messages"),
+        "NoMessages": MessageLookupByLibrary.simpleMessage("No messages"),
+        "YouHaveAlreadyRatedThisClub": MessageLookupByLibrary.simpleMessage(
+            "You have already rated this club"),
+        "ThankYouForYourRating":
+            MessageLookupByLibrary.simpleMessage("Thank you for your rating"),
+        "RateThisClub": MessageLookupByLibrary.simpleMessage("Rate This Club"),
+        "PleaseLeaveYourRate":
+            MessageLookupByLibrary.simpleMessage("Please leave your rate"),
+        "FailedToFetchUserRoles":
+            MessageLookupByLibrary.simpleMessage("Failed to fetch user roles"),
+        "RoleUpdated": MessageLookupByLibrary.simpleMessage("Role Updated"),
+        "RoleRightsUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Role rights have been updated successfully"),
+        "AnErrorOccurredWhileUpdatingTheRole":
+            MessageLookupByLibrary.simpleMessage(
+                "An error occurred while updating the role"),
+        "RoleCreated": MessageLookupByLibrary.simpleMessage("Role Created"),
+        "RoleHasBeenCreatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Role has been created successfully"),
+        "NoClubMembership":
+            MessageLookupByLibrary.simpleMessage("No Club Membership"),
+        "YouNeedToBeAMemberOfAClubToCreateAnEvent":
+            MessageLookupByLibrary.simpleMessage(
+                "You need to be a member of a club to create an event"),
+        "PlayerNotFoundWithTheGivenID": MessageLookupByLibrary.simpleMessage(
+            "Player not found with the given ID"),
+        "ErrorFetchingCourtData":
+            MessageLookupByLibrary.simpleMessage("Error fetching court data"),
+        "NoCourtDataAvailable":
+            MessageLookupByLibrary.simpleMessage("No court data available"),
       };
 }

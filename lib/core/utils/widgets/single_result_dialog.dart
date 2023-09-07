@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tennis_app/generated/l10n.dart';
 
 Future<void> showWinnerDialog(method, context, match, tournamentId) async {
   TextEditingController teamAScoreController = TextEditingController();
@@ -10,7 +11,7 @@ Future<void> showWinnerDialog(method, context, match, tournamentId) async {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: const Text('Select Winners'),
+        title: Text(S.of(context).selectWinners),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -146,7 +147,7 @@ Future<void> showWinnerDialog(method, context, match, tournamentId) async {
                       match.player2Id, false);
                 }
               },
-              child: const Text('Submit'),
+              child: Text(S.of(context).submit),
             ),
           ],
         ),

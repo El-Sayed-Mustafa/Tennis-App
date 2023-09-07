@@ -49,8 +49,8 @@ class _CreateRoleState extends State<CreateRole> {
             showDialog(
               context: context,
               builder: (context) => AlertDialog(
-                title: const Text('Role Created'),
-                content: const Text('Role has been created successfully.'),
+                title: Text(S.of(context).roleCreated),
+                content: Text(S.of(context).roleHasBeenCreatedSuccessfully),
                 actions: [
                   ElevatedButton(
                     onPressed: () {
@@ -60,7 +60,7 @@ class _CreateRoleState extends State<CreateRole> {
                       // Navigate to the Roles list page
                       Navigator.of(context).pop();
                     },
-                    child: const Text('OK'),
+                    child: Text(S.of(context).ok),
                   ),
                 ],
               ),
@@ -68,8 +68,8 @@ class _CreateRoleState extends State<CreateRole> {
           } else if (state == RoleCreationStatus.error) {
             // Show an error toast if role creation fails
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Error creating role'),
+              SnackBar(
+                content: Text(S.of(context).Error_creating_role),
                 duration: Duration(seconds: 2),
               ),
             );

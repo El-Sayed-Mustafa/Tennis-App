@@ -12,9 +12,7 @@ class Method {
   Future<void> signOut() async {
     try {
       await _auth.signOut();
-    } catch (error) {
-      SnackBar(content: Text('Error during sign out: $error'));
-    }
+    } catch (error) {}
   }
 
   Future<Player> getCurrentUser() async {
@@ -77,7 +75,6 @@ class Method {
 
       return chats;
     } catch (e) {
-      SnackBar(content: Text('Error getting chats: $e'));
       return [];
     }
   }
@@ -117,7 +114,6 @@ class Method {
       return false;
     } catch (e) {
       // Handle errors if necessary
-      SnackBar(content: Text('Error checking player rights: $e'));
       return false;
     }
   }
@@ -300,12 +296,8 @@ class Method {
         }
 
         await playerRef.update(updatedData);
-      } else {
-        const SnackBar(content: Text('Player document not found'));
-      }
-    } catch (e) {
-      SnackBar(content: Text('Error updating player data: $e'));
-    }
+      } else {}
+    } catch (e) {}
   }
 
   Future<void> reEnterResult(String playerId, bool isWinner) async {
@@ -332,11 +324,7 @@ class Method {
         }
 
         await playerRef.update(updatedData);
-      } else {
-        const SnackBar(content: Text('Player document not found'));
-      }
-    } catch (e) {
-      SnackBar(content: Text('Error updating player data: $e'));
-    }
+      } else {}
+    } catch (e) {}
   }
 }

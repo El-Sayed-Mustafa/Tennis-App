@@ -8,6 +8,7 @@ import 'package:tennis_app/Main-Features/chats/widgets/group_card.dart';
 import 'package:tennis_app/constants.dart';
 import 'package:tennis_app/core/methodes/firebase_methodes.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
+import 'package:tennis_app/generated/l10n.dart';
 import 'package:tennis_app/models/groups.dart';
 
 class UserGroupsScreen extends StatefulWidget {
@@ -53,7 +54,8 @@ class _UserGroupsScreenState extends State<UserGroupsScreen> {
                   child: CircularProgressIndicator(),
                 );
               } else if (snapshot.hasError) {
-                return Text('Error loading groups: ${snapshot.error}');
+                return Text(
+                    '${S.of(context).errorLoadingGroups}: ${snapshot.error}');
               } else if (snapshot.hasData) {
                 List<GroupChats> userGroups = snapshot.data as List<GroupChats>;
 
@@ -88,7 +90,7 @@ class _UserGroupsScreenState extends State<UserGroupsScreen> {
                   );
                 }
               } else {
-                return const Center(child: Text('No groups found.'));
+                return Center(child: Text(S.of(context).noGroupsFound));
               }
             },
           ),

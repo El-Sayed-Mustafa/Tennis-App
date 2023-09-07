@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tennis_app/generated/l10n.dart';
 
 import '../../../models/player.dart';
 
@@ -83,7 +84,7 @@ class _SelectDoubleWinnersState extends State<SelectDoubleWinners> {
               widget.onWinnersSelected(_selectedWinner1!, _selectedWinner2!);
             }
           },
-          child: Text('Confirm'),
+          child: Text(S.of(context).confirm),
         ),
       ],
     );

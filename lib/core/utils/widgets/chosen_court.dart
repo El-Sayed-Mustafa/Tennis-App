@@ -47,7 +47,7 @@ class ChosenCourt extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           } else if (courtSnapshot.hasError) {
-            return const Text('');
+            return Text(S.of(context).error);
           } else if (!courtSnapshot.hasData) {
             return Text(
               S.of(context).No_Reversed_Courts,
