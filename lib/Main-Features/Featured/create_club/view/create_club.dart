@@ -34,6 +34,7 @@ class CreateClub extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
+    addressController.text = ' ';
     return BlocProvider(
       create: (context) => CreateClubCubit(context),
       child: BlocBuilder<CreateClubCubit, CreateClubState>(

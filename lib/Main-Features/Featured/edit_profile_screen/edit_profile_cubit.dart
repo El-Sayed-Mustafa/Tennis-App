@@ -31,18 +31,6 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     emit(EditProfileLoadingState());
 
     try {
-      String? nameError = validateName(nameController.text);
-      String? phoneNumberError =
-          validatePhoneNumber(phoneNumberController.text);
-
-      if (nameError != null || phoneNumberError != null) {
-        emit(EditProfileValidationErrorState(
-          nameError: nameError,
-          phoneNumberError: phoneNumberError,
-        ));
-        return;
-      }
-
       // Get the currently authenticated user ID
       String playerId = FirebaseAuth.instance.currentUser?.uid ?? '';
 
@@ -109,24 +97,9 @@ class EditProfileCubit extends Cubit<EditProfileState> {
       showSnackBar(context, 'User data saved successfully.');
 
       emit(EditProfileSuccessState());
-      GoRouter.of(context).pop();
+      GoRouter.of(context).push('/profileScreen');
     } catch (error) {
       emit(EditProfileErrorState(error: error.toString()));
     }
-  }
-
-  String? validateName(String value) {
-    if (value.isEmpty) {
-      return 'Please enter your name';
-    }
-    return null;
-  }
-
-  String? validatePhoneNumber(String value) {
-    if (value.isEmpty) {
-      return 'Please enter your phone number';
-    }
-    // Add additional phone number validation if needed
-    return null;
   }
 }
