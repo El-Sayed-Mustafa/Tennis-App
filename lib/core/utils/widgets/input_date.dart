@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DateCubit extends Cubit<DateTime> {
-  DateCubit() : super(DateTime.now());
+  DateCubit(DateTime birthDate, {DateTime? initialDate})
+      : super(initialDate ?? DateTime.now());
 
   void selectDateTime(DateTime dateTime) {
     emit(dateTime);

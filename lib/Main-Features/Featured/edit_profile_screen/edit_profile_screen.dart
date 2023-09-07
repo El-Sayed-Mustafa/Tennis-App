@@ -1,9 +1,8 @@
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tennis_app/Main-Features/Featured/create_profile/cubits/Gender_Cubit.dart';
 import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/app_bar_wave.dart';
 import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/gender_selection.dart';
 import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/input_time.dart';
@@ -34,6 +33,16 @@ class _EditProfileState extends State<EditProfile> {
   Uint8List? _selectedImageBytes;
 
   TimeOfDay? _selectedTime;
+
+  @override
+  void initState() {
+    super.initState();
+    nameController.text = widget.player.playerName;
+    phoneNumberController.text = widget.player.phoneNumber;
+    GenderCubit(widget.player.gender);
+    DateCubit(widget.player.birthDate);
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -68,6 +77,7 @@ class _EditProfileState extends State<EditProfile> {
                         onImageSelected: (File imageFile) {
                           _selectedImageBytes = imageFile.readAsBytesSync();
                         },
+                        photoURL: widget.player.photoURL,
                       ),
                       SizedBox(height: screenHeight * .01),
                       Text(

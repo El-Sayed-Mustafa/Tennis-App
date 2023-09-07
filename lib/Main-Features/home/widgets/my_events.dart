@@ -191,7 +191,7 @@ class CarouselItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
-    final double itemWidth = screenWidth * 0.6;
+    final double itemWidth = screenWidth * 0.7;
     final double itemHeight = screenHeight * .3;
 
     final double scaleFactor = selected ? 1.0 : 0.72;
@@ -245,26 +245,29 @@ class CarouselItem extends StatelessWidget {
             ),
           ),
           SizedBox(height: itemHeight * 0.03),
-          Container(
-            width: itemWidth * 0.7 * scaleFactor,
-            decoration: ShapeDecoration(
-              color: const Color(0xFF1B262C),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(screenWidth * 0.089),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              width: itemWidth * 0.7 * scaleFactor,
+              decoration: ShapeDecoration(
+                color: const Color(0xFF1B262C),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(screenWidth * 0.089),
+                ),
               ),
-            ),
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4.0),
-                child: Text(
-                  S.of(context).Register_Done,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: itemHeight * 0.056 * scaleFactor,
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w400,
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4.0),
+                  child: Text(
+                    S.of(context).Register_Done,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: itemHeight * 0.056 * scaleFactor,
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w400,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
                 ),
               ),
             ),

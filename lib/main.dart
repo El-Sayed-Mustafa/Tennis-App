@@ -98,7 +98,7 @@ class _MyAppState extends State<MyApp> {
           create: (context) => TimeCubit(),
         ),
         BlocProvider(
-          create: (context) => DateCubit(),
+          create: (context) => DateCubit(DateTime.now()),
         ),
         BlocProvider(
           create: (context) => PlayerTypeCubit(),
