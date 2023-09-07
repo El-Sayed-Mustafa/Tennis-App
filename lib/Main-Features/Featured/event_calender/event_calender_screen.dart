@@ -74,13 +74,14 @@ class _CalendarScreenState extends State<CalendarScreen>
             text: S.of(context).Event_Calendar,
             suffixIconPath: '',
           ),
-          DayCarousel(
-            carouselController: _carouselController,
-            selectedDay: selectedDay.day,
-            onDayTap: (index) {
-              _carouselController.animateToPage(index);
-            },
-          ),
+          // DayCarousel(
+          //   carouselController: _carouselController,
+          //   selectedDay: selectedDay.day,
+          //   onDayTap: (index) {
+          //     _carouselController.animateToPage(index);
+          //   },
+          // ),
+
           TabBarWithIndicator(
             tabController: _tabController,
             tabs: [
