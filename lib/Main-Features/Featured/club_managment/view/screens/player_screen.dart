@@ -114,7 +114,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
         'totalWins': 0,
         'playerLevel': '0',
         'skillLevel': '0',
-        'clubRoles': '',
+        'clubRoles': {},
         'participatedClubId': '',
         'isRated': false,
         'eventIds': [],
