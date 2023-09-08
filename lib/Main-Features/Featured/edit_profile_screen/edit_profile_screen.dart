@@ -44,6 +44,17 @@ class _EditProfileState extends State<EditProfile> {
     GenderCubit(widget.player.gender);
     DateCubit(widget.player.birthDate);
     PlayerTypeCubit(initialType: widget.player.playerType);
+    String trimmedTime = widget.player.preferredPlayingTime
+        .trim(); // Remove leading/trailing spaces if any
+    List<String> timeParts = trimmedTime.split(':');
+    if (timeParts.length == 2) {
+      _selectedTime = TimeOfDay(
+          hour: int.tryParse(timeParts[0]) ?? 0,
+          minute: int.tryParse(timeParts[1]) ?? 0);
+    } else {
+      // Handle invalid input format gracefully (e.g., set default time)
+      _selectedTime = TimeOfDay(hour: 0, minute: 0); // Default to midnight
+    }
   }
 
   @override

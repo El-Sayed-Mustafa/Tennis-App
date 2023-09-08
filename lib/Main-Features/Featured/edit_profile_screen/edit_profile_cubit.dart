@@ -97,6 +97,8 @@ class EditProfileCubit extends Cubit<EditProfileState> {
       showSnackBar(context, 'User data saved successfully.');
 
       emit(EditProfileSuccessState());
+      GoRouter.of(context).pop();
+      GoRouter.of(context).pop();
       GoRouter.of(context).push('/profileScreen');
     } catch (error) {
       emit(EditProfileErrorState(error: error.toString()));
