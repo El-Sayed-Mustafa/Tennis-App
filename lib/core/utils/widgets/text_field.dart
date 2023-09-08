@@ -7,14 +7,14 @@ Widget defaultFormField({
   Function? onChange,
   Function? onTap,
   bool isPassword = false,
-  required Function validate,
+  Function? validate, // Make the validate function optional
   required String label,
   IconData? prefix,
   IconData? suffix,
   Function? suffixPressed,
   bool isClickable = true,
   bool autofocus = false,
-  TextInputType? keyboardType, // Add this parameter
+  TextInputType? keyboardType,
 }) =>
     TextFormField(
       controller: controller,
@@ -29,9 +29,9 @@ Widget defaultFormField({
       onTap: () {
         onTap!();
       },
-      validator: (value) {
-        return validate(value);
-      },
+      validator: validate != null
+          ? (value) => validate(value)
+          : null, // Check if validate is provided
       decoration: InputDecoration(
         isDense: true,
         hintText: label,
@@ -70,6 +70,7 @@ class InputTextWithHint extends StatelessWidget {
   final TextEditingController controller;
   final TextInputType? type;
   final TextInputType? keyboardType; // Add this property
+  final Function? validator; // Add this property
 
   const InputTextWithHint({
     Key? key,
@@ -80,6 +81,7 @@ class InputTextWithHint extends StatelessWidget {
     this.prefixIcon,
     required this.controller,
     this.keyboardType, // Initialize the property
+    this.validator, // Initialize the property
   }) : super(key: key);
 
   @override
@@ -112,12 +114,8 @@ class InputTextWithHint extends StatelessWidget {
             onTap: null,
             autofocus: false,
             isPassword: false,
-            validate: (value) {
-              if (value!.isEmpty) {
-                return 'Please this field is required';
-              }
-              return null;
-            },
+            validate:
+                validator, // Pass the validator function to defaultFormField
             label: hint,
             suffix: suffixIcon,
             prefix: prefixIcon,

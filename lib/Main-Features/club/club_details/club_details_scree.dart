@@ -299,9 +299,8 @@ class ClubDetailsScreen extends StatelessWidget {
                         confirmText: S.of(context).delete,
                         cancelText: S.of(context).cancel,
                         onConfirm: () {
-                          GoRouter.of(context).push('/club');
-
                           method.deleteClub(club.clubId);
+                          GoRouter.of(context).push('/home');
                         },
                       );
                     },

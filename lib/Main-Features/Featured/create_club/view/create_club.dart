@@ -34,7 +34,6 @@ class CreateClub extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    addressController.text = ' ';
     return BlocProvider(
       create: (context) => CreateClubCubit(context),
       child: BlocBuilder<CreateClubCubit, CreateClubState>(
@@ -100,6 +99,13 @@ class CreateClub extends StatelessWidget {
                         hint: S.of(context).Type_Club_Address_here,
                         text: S.of(context).Club_Address,
                         controller: addressController,
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return null; // Allow empty or blank values
+                          }
+
+                          return null; // Return null for valid input
+                        },
                       ),
                       SizedBox(height: screenHeight * .03),
                       const ClubTypeInput(),

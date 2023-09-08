@@ -10,7 +10,6 @@ import 'package:tennis_app/Main-Features/Featured/Event/create_event/view/widget
 import 'package:tennis_app/Main-Features/Featured/Event/create_event/view/widgets/event_types.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
-import '../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../core/utils/widgets/input_date_and_time.dart';
 import '../../../../core/utils/widgets/text_field.dart';
 import '../../../../generated/l10n.dart';
@@ -95,7 +94,7 @@ class CreateCourt extends StatelessWidget {
                       SizedBox(height: screenHeight * .015),
                       Text(
                         S.of(context).Set_Court_Picture,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 14,
                           fontFamily: 'Poppins',
@@ -125,6 +124,14 @@ class CreateCourt extends StatelessWidget {
                         hint: S.of(context).Type_Court_Address_here,
                         text: S.of(context).Court_Address,
                         controller: addressController,
+                        validator: (value) {
+                          // You can add additional validation logic here if needed.
+                          if (value.isEmpty) {
+                            return null; // Allow empty or blank values
+                          }
+
+                          return null; // Return null for valid input
+                        },
                       ),
                       SizedBox(height: screenHeight * .025),
                       BottomSheetContainer(

@@ -242,7 +242,7 @@ class Method {
           final updatedData = {
             'playerLevel': '0',
             'skillLevel': '0',
-            'clubRoles': [],
+            'clubRoles': {},
             'participatedClubId': '',
             'isRated': false,
             'eventIds': [],
@@ -262,11 +262,8 @@ class Method {
         if (clubSnapshot.exists) {
           await clubDoc.delete();
         }
-
-        print('Club with ID $clubId deleted successfully.');
       }
     } catch (error) {
-      print('Error deleting club: $error');
       // Handle any errors that occur during the deletion process.
     }
   }
