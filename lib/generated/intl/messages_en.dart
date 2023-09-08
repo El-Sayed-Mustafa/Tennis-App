@@ -538,5 +538,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Error fetching court data"),
         "NoCourtDataAvailable":
             MessageLookupByLibrary.simpleMessage("No court data available"),
+        "UserDataSavedSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "User data saved successfully"),
+        "ErrorDuringSignOut":
+            MessageLookupByLibrary.simpleMessage("Error during sign out"),
+        "PleaseVerifyYourEmailBeforeLoggingIn":
+            MessageLookupByLibrary.simpleMessage(
+                "Please verify your email before logging in"),
+        "UserIsNotRegistered": MessageLookupByLibrary.simpleMessage(
+            "User is not registered. Please register"),
+        "UserIsNotRegisteredSwapRightToRegister":
+            MessageLookupByLibrary.simpleMessage(
+                "User is not registered. Swap Right to register"),
       };
 }

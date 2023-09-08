@@ -158,15 +158,17 @@ class FirebaseAuthMethods {
           }
         } else {
           // User's email is not verified
-          showSnackBar(context, 'Please verify your email before logging in.');
+          showSnackBar(
+              context, S.of(context).pleaseVerifyYourEmailBeforeLoggingIn);
           await _auth.signOut(); // Sign out the user
         }
       } else {
         // User is not registered
-        showSnackBar(context, 'User is not registered. Please register.');
+        showSnackBar(context, S.of(context).userIsNotRegistered);
       }
     } on FirebaseAuthException {
-      showSnackBar(context, 'User is not registered. Swap Right to register.');
+      showSnackBar(
+          context, S.of(context).userIsNotRegisteredSwapRightToRegister);
     }
   }
 
@@ -252,8 +254,6 @@ class FirebaseAuthMethods {
   Future<void> signOut() async {
     try {
       await _auth.signOut();
-    } catch (error) {
-      SnackBar(content: Text('Error during sign out: $error'));
-    }
+    } catch (error) {}
   }
 }

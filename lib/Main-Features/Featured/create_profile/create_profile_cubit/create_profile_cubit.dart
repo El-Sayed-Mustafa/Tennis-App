@@ -10,6 +10,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:go_router/go_router.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
+import 'package:tennis_app/generated/l10n.dart';
 
 import '../../../../core/utils/widgets/input_date.dart';
 import '../../../../models/player.dart';
@@ -90,7 +91,7 @@ class CreateProfileCubit extends Cubit<CreateProfileState> {
       }
 
       // Data saved successfully
-      showSnackBar(context, 'User data saved successfully.');
+      showSnackBar(context, S.of(context).userDataSavedSuccessfully);
 
       emit(CreateProfileSuccessState());
       while (GoRouter.of(context).canPop() == true) {

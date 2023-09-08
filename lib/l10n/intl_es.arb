@@ -336,5 +336,10 @@
     "YouNeedToBeAMemberOfAClubToCreateAnEvent": "Debes ser miembro de un club para crear un evento",
     "PlayerNotFoundWithTheGivenID": "Jugador no encontrado con el ID proporcionado",
     "ErrorFetchingCourtData": "Error al obtener datos de la cancha",
-    "NoCourtDataAvailable": "No hay datos de la cancha disponibles"
+    "NoCourtDataAvailable": "No hay datos de la cancha disponibles",
+    "UserDataSavedSuccessfully": "Datos de usuario guardados con éxito.",
+    "ErrorDuringSignOut": "Error durante la sesión.",
+    "PleaseVerifyYourEmailBeforeLoggingIn": "Por favor, verifica tu correo electrónico antes de iniciar sesión.",
+    "UserIsNotRegistered": "El usuario no está registrado. Por favor, regístrate.",
+    "UserIsNotRegisteredSwapRightToRegister": "El usuario no está registrado. Desliza a la derecha para registrarte."
 }

@@ -3343,6 +3343,51 @@ class S {
       args: [],
     );
   }
+
+  String get userDataSavedSuccessfully {
+    return Intl.message(
+      'User data saved successfully.',
+      name: 'userDataSavedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get errorDuringSignOut {
+    return Intl.message(
+      'Error during sign out.',
+      name: 'errorDuringSignOut',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get pleaseVerifyYourEmailBeforeLoggingIn {
+    return Intl.message(
+      'Please verify your email before logging in.',
+      name: 'pleaseVerifyYourEmailBeforeLoggingIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get userIsNotRegistered {
+    return Intl.message(
+      'User is not registered. Please register.',
+      name: 'userIsNotRegistered',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get userIsNotRegisteredSwapRightToRegister {
+    return Intl.message(
+      'User is not registered. Swap Right to register.',
+      name: 'userIsNotRegisteredSwapRightToRegister',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

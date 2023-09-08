@@ -339,5 +339,10 @@
     "YouNeedToBeAMemberOfAClubToCreateAnEvent": "You need to be a member of a club to create an event",
     "PlayerNotFoundWithTheGivenID": "Player not found with the given ID",
     "ErrorFetchingCourtData": "Error fetching court data",
-    "NoCourtDataAvailable": "No court data available"
+    "NoCourtDataAvailable": "No court data available",
+    "UserDataSavedSuccessfully": "User data saved successfully.",
+    "ErrorDuringSignOut": "Error during sign out.",
+    "PleaseVerifyYourEmailBeforeLoggingIn": "Please verify your email before logging in.",
+    "UserIsNotRegistered": "User is not registered. Please register.",
+    "UserIsNotRegisteredSwapRightToRegister": "User is not registered. Swap Right to register."
 }

@@ -576,5 +576,17 @@ class MessageLookup extends MessageLookupByLibrary {
             "Error al obtener datos de la cancha"),
         "NoCourtDataAvailable": MessageLookupByLibrary.simpleMessage(
             "No hay datos de la cancha disponibles"),
+        "UserDataSavedSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Datos de usuario guardados con éxito"),
+        "ErrorDuringSignOut":
+            MessageLookupByLibrary.simpleMessage("Error durante la sesión"),
+        "PleaseVerifyYourEmailBeforeLoggingIn":
+            MessageLookupByLibrary.simpleMessage(
+                "Por favor, verifica tu correo electrónico antes de iniciar sesión"),
+        "UserIsNotRegistered": MessageLookupByLibrary.simpleMessage(
+            "El usuario no está registrado. Por favor, regístrate"),
+        "UserIsNotRegisteredSwapRightToRegister":
+            MessageLookupByLibrary.simpleMessage(
+                "El usuario no está registrado. Desliza a la derecha para registrarte"),
       };
 }

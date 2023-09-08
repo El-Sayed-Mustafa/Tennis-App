@@ -570,5 +570,17 @@ class MessageLookup extends MessageLookupByLibrary {
             "Fehler beim Abrufen von Platzdaten"),
         "NoCourtDataAvailable":
             MessageLookupByLibrary.simpleMessage("Keine Platzdaten verfügbar"),
+        "UserDataSavedSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Benutzerdaten erfolgreich gespeichert"),
+        "ErrorDuringSignOut":
+            MessageLookupByLibrary.simpleMessage("Fehler beim Abmelden"),
+        "PleaseVerifyYourEmailBeforeLoggingIn":
+            MessageLookupByLibrary.simpleMessage(
+                "Bitte überprüfen Sie Ihre E-Mail-Adresse, bevor Sie sich anmelden"),
+        "UserIsNotRegistered": MessageLookupByLibrary.simpleMessage(
+            "Benutzer ist nicht registriert. Bitte registrieren Sie sich"),
+        "UserIsNotRegisteredSwapRightToRegister":
+            MessageLookupByLibrary.simpleMessage(
+                "Benutzer ist nicht registriert. Wischen Sie nach rechts, um sich zu registrieren"),
       };
 }

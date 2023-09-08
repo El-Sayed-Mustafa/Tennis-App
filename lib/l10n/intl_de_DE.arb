@@ -335,5 +335,10 @@
     "YouNeedToBeAMemberOfAClubToCreateAnEvent": "Du musst Mitglied in einem Club sein, um eine Veranstaltung zu erstellen",
     "PlayerNotFoundWithTheGivenID": "Spieler mit der angegebenen ID nicht gefunden",
     "ErrorFetchingCourtData": "Fehler beim Abrufen von Platzdaten",
-    "NoCourtDataAvailable": "Keine Platzdaten verfügbar"
+    "NoCourtDataAvailable": "Keine Platzdaten verfügbar",
+    "UserDataSavedSuccessfully": "Benutzerdaten erfolgreich gespeichert.",
+    "ErrorDuringSignOut": "Fehler beim Abmelden.",
+    "PleaseVerifyYourEmailBeforeLoggingIn": "Bitte überprüfen Sie Ihre E-Mail-Adresse, bevor Sie sich anmelden.",
+    "UserIsNotRegistered": "Benutzer ist nicht registriert. Bitte registrieren Sie sich.",
+    "UserIsNotRegisteredSwapRightToRegister": "Benutzer ist nicht registriert. Wischen Sie nach rechts, um sich zu registrieren."
 }
