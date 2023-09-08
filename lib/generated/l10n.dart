@@ -3388,6 +3388,24 @@ class S {
       args: [],
     );
   }
+
+  String get noClubsDataAvailable {
+    return Intl.message(
+      'No Clubs data available',
+      name: 'noClubsDataAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get clickToCreateClub {
+    return Intl.message(
+      'Click To Create Club',
+      name: 'clickToCreateClub',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

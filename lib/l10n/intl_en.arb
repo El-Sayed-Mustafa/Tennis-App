@@ -344,5 +344,7 @@
     "ErrorDuringSignOut": "Error during sign out.",
     "PleaseVerifyYourEmailBeforeLoggingIn": "Please verify your email before logging in.",
     "UserIsNotRegistered": "User is not registered. Please register.",
-    "UserIsNotRegisteredSwapRightToRegister": "User is not registered. Swap Right to register."
+    "UserIsNotRegisteredSwapRightToRegister": "User is not registered. Swap Right to register.",
+    "noClubsDataAvailable": "No Clubs data available",
+    "clickToCreateClub": "Click To Create Club"
 }

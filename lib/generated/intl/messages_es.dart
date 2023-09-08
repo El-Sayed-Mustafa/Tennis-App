@@ -588,5 +588,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "UserIsNotRegisteredSwapRightToRegister":
             MessageLookupByLibrary.simpleMessage(
                 "El usuario no está registrado. Desliza a la derecha para registrarte"),
+        "noClubsDataAvailable": MessageLookupByLibrary.simpleMessage(
+            "No hay datos de clubes disponibles"),
+        "clickToCreateClub": MessageLookupByLibrary.simpleMessage(
+            "Haga clic para crear un club"),
       };
 }

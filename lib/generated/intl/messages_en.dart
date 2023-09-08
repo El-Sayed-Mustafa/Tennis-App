@@ -550,5 +550,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "UserIsNotRegisteredSwapRightToRegister":
             MessageLookupByLibrary.simpleMessage(
                 "User is not registered. Swap Right to register"),
+        "noClubsDataAvailable":
+            MessageLookupByLibrary.simpleMessage("No Clubs data available"),
+        "clickToCreateClub":
+            MessageLookupByLibrary.simpleMessage("Click To Create Club"),
       };
 }

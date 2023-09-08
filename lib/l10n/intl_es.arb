@@ -341,5 +341,7 @@
     "ErrorDuringSignOut": "Error durante la sesión.",
     "PleaseVerifyYourEmailBeforeLoggingIn": "Por favor, verifica tu correo electrónico antes de iniciar sesión.",
     "UserIsNotRegistered": "El usuario no está registrado. Por favor, regístrate.",
-    "UserIsNotRegisteredSwapRightToRegister": "El usuario no está registrado. Desliza a la derecha para registrarte."
+    "UserIsNotRegisteredSwapRightToRegister": "El usuario no está registrado. Desliza a la derecha para registrarte.",
+    "noClubsDataAvailable": "No hay datos de clubes disponibles",
+    "clickToCreateClub": "Haga clic para crear un club"
 }

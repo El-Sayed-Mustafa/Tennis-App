@@ -29,14 +29,15 @@ class ClubListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
+    final double screenWidth = MediaQuery.of(context).size.width;
 
     return SizedBox(
       height: screenHeight,
       child: Column(
         children: [
           Text(
-            'Choose a club',
-            style: TextStyle(
+            S.of(context).Please_choose_a_club,
+            style: const TextStyle(
               color: Colors.black,
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -47,17 +48,21 @@ class ClubListScreen extends StatelessWidget {
               future: fetchClubs(), // Fetch club data
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
                   return Center(
                       child: Text(S.of(context).error_fetching_club_data));
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return NoData(
-                    text: 'No Clubs data available',
-                    buttonText: 'Click To Create Club',
-                    onPressed: () {
-                      GoRouter.of(context).push('/createClub');
-                    },
+                  return SizedBox(
+                    height: screenHeight * .2,
+                    child: NoData(
+                      text: S.of(context).noClubsDataAvailable,
+                      buttonText: S.of(context).clickToCreateClub,
+                      onPressed: () {
+                        GoRouter.of(context).push('/createClub');
+                      },
+                      width: screenWidth * .9,
+                    ),
                   );
                 } else {
                   // Display clubs using ListView.builder

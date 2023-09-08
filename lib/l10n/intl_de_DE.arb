@@ -340,5 +340,7 @@
     "ErrorDuringSignOut": "Fehler beim Abmelden.",
     "PleaseVerifyYourEmailBeforeLoggingIn": "Bitte überprüfen Sie Ihre E-Mail-Adresse, bevor Sie sich anmelden.",
     "UserIsNotRegistered": "Benutzer ist nicht registriert. Bitte registrieren Sie sich.",
-    "UserIsNotRegisteredSwapRightToRegister": "Benutzer ist nicht registriert. Wischen Sie nach rechts, um sich zu registrieren."
+    "UserIsNotRegisteredSwapRightToRegister": "Benutzer ist nicht registriert. Wischen Sie nach rechts, um sich zu registrieren.",
+    "noClubsDataAvailable": "Keine Vereinsdaten verfügbar",
+    "clickToCreateClub": "Klicken Sie, um einen Verein zu erstellen"
 }
