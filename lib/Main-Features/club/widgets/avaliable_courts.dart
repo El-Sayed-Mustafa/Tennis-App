@@ -86,23 +86,21 @@ class _AvailableCourtsState extends State<AvailableCourts> {
     return filteredCourts.isNotEmpty
         ? SizedBox(
             height: screenHeight * .24, // Set a fixed height for the container
-            child: Expanded(
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                padding: EdgeInsets.zero,
-                itemCount: filteredCourts.length,
-                itemBuilder: (context, index) {
-                  Court court = filteredCourts[index];
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: CourtItem(
-                      court: court,
-                      courtNameController: widget.courtNameController,
-                      isSaveUser: widget.isSaveUser,
-                    ),
-                  );
-                },
-              ),
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              padding: EdgeInsets.zero,
+              itemCount: filteredCourts.length,
+              itemBuilder: (context, index) {
+                Court court = filteredCourts[index];
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: CourtItem(
+                    court: court,
+                    courtNameController: widget.courtNameController,
+                    isSaveUser: widget.isSaveUser,
+                  ),
+                );
+              },
             ),
           )
         : NoData(
