@@ -303,22 +303,25 @@ class _ClubInfoState extends State<ClubInfo> {
                 ],
               ),
             ),
-            IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ClubDetailsScreen(
-                        club: widget.clubData,
+            Positioned(
+              right: 0,
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ClubDetailsScreen(
+                          club: widget.clubData,
+                        ),
                       ),
-                    ),
-                  );
-                },
-                icon: const Icon(
-                  Icons.info_outline,
-                  size: 30,
-                  color: kPrimaryColor,
-                )),
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.info_outline,
+                    size: 30,
+                    color: Colors.black,
+                  )),
+            ),
           ],
         ),
       ),

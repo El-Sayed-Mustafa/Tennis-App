@@ -206,22 +206,25 @@ class ClubEventItem extends StatelessWidget {
             ),
           ),
         ),
-        IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => EventDetailsScreen(
-                    event: event,
+        Positioned(
+          right: 0,
+          child: IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EventDetailsScreen(
+                      event: event,
+                    ),
                   ),
-                ),
-              );
-            },
-            icon: const Icon(
-              Icons.info_outline,
-              size: 30,
-              color: kPrimaryColor,
-            )),
+                );
+              },
+              icon: const Icon(
+                Icons.info_outline,
+                size: 30,
+                color: Colors.black,
+              )),
+        ),
       ],
     );
   }
