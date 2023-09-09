@@ -41,6 +41,7 @@ class CreateClubCubit extends Cubit<CreateClubState> {
 
       List<String> eventIds = []; // Add the event IDs if needed
       List<String> memberIds = [currentUserID]; // Add the member IDs if needed
+      DocumentReference clubDocRef; // Declare clubDocRef at a higher scope
 
       // Check if club is not null and clubId is not empty
       if (club?.clubId.isNotEmpty == true) {
@@ -54,10 +55,9 @@ class CreateClubCubit extends Cubit<CreateClubState> {
           ageRestriction: ageRestriction,
           address: address,
         );
-        await FirebaseFirestore.instance
-            .collection('clubs')
-            .doc(club.clubId)
-            .update(club.toJson());
+        clubDocRef =
+            FirebaseFirestore.instance.collection('clubs').doc(club.clubId);
+        await clubDocRef.update(club.toJson());
       } else {
         club = Club(
           clubId: '', // Assign a club ID here if applicable
@@ -82,7 +82,7 @@ class CreateClubCubit extends Cubit<CreateClubState> {
           numberOfRatings: 0,
           courtIds: [],
         );
-        DocumentReference clubDocRef = await FirebaseFirestore.instance
+        clubDocRef = await FirebaseFirestore.instance
             .collection('clubs')
             .add(club.toJson());
 
@@ -98,27 +98,27 @@ class CreateClubCubit extends Cubit<CreateClubState> {
         await clubDocRef.update({'clubChatId': chatDocRef.id});
 
         // Upload the selected image to Firebase Storage
-        if (selectedImageBytes != null) {
-          firebase_storage.Reference storageReference = firebase_storage
-              .FirebaseStorage.instance
-              .ref()
-              .child('clubs')
-              .child(clubDocRef.id)
-              .child('club-image.jpg');
-          firebase_storage.UploadTask uploadTask =
-              storageReference.putData(selectedImageBytes);
-          firebase_storage.TaskSnapshot taskSnapshot = await uploadTask;
-          String imageUrl = await taskSnapshot.ref.getDownloadURL();
-
-          // Update the club document with the image URL
-          await clubDocRef.update({'clubImageURL': imageUrl});
-        }
-
-        // Save the club ID in the current user's data
-        DocumentReference userDocRef =
-            FirebaseFirestore.instance.collection('players').doc(currentUserID);
-        await userDocRef.update({'participatedClubId': clubDocRef.id});
       }
+      if (selectedImageBytes != null) {
+        firebase_storage.Reference storageReference = firebase_storage
+            .FirebaseStorage.instance
+            .ref()
+            .child('clubs')
+            .child(clubDocRef.id)
+            .child('club-image.jpg');
+        firebase_storage.UploadTask uploadTask =
+            storageReference.putData(selectedImageBytes);
+        firebase_storage.TaskSnapshot taskSnapshot = await uploadTask;
+        String imageUrl = await taskSnapshot.ref.getDownloadURL();
+
+        // Update the club document with the image URL
+        await clubDocRef.update({'clubImageURL': imageUrl});
+      }
+
+      // Save the club ID in the current user's data
+      DocumentReference userDocRef =
+          FirebaseFirestore.instance.collection('players').doc(currentUserID);
+      await userDocRef.update({'participatedClubId': clubDocRef.id});
 
       // Data saved successfully
       showSnackBar(context, 'Club data saved successfully.');
