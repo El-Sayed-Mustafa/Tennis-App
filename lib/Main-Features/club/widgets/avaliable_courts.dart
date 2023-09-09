@@ -41,24 +41,26 @@ class _AvailableCourtsState extends State<AvailableCourts> {
           widget.clubData.courtIds; // Fetch courtIds from clubData
 
       // Fetch courts using courtIds
-      QuerySnapshot<Map<String, dynamic>> querySnapshot =
-          await FirebaseFirestore.instance
-              .collection('courts')
-              .where('courtId', whereIn: courtIds)
-              .where('reversed', isEqualTo: false) // Add this filter condition
+      if (courtIds.isNotEmpty) {
+        QuerySnapshot<Map<String, dynamic>> querySnapshot =
+            await FirebaseFirestore.instance
+                .collection('courts')
+                .where('courtId', whereIn: courtIds)
+                .where('reversed',
+                    isEqualTo: false) // Add this filter condition
 
-              .get();
+                .get();
 
-      List<Court> courts =
-          querySnapshot.docs.map((doc) => Court.fromSnapshot(doc)).toList();
-      setState(() {
-        allCourts = courts;
-        filteredCourts =
-            List.from(allCourts); // Copy allCourts to filteredCourts initially
-      });
+        List<Court> courts =
+            querySnapshot.docs.map((doc) => Court.fromSnapshot(doc)).toList();
+        setState(() {
+          allCourts = courts;
+          filteredCourts = List.from(
+              allCourts); // Copy allCourts to filteredCourts initially
+        });
+      }
     } catch (error) {
       // Handle the error if needed
-      showSnackBar(context, 'Error fetching courts: $error');
     }
   }
 

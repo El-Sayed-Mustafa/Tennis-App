@@ -45,7 +45,6 @@ class _CourtSearchScreenState extends State<CourtSearchScreen> {
       });
     } catch (error) {
       // Handle the error if needed
-      showSnackBar(context, 'Error fetching courts: $error');
     }
   }
 
