@@ -620,7 +620,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                         context: context,
                         builder: (BuildContext dialogContext) {
                           return ConfirmationDialog(
-                            title: "S.of(context).confirmDelete",
+                            title: S.of(context).confirmDelete,
                             content:
                                 "Are you sure you want to delete this Club?",
                             confirmText: "Delete",
@@ -628,15 +628,15 @@ class _PlayerScreenState extends State<PlayerScreen> {
                             onConfirm: () async {
                               await removePlayerFromClub(
                                   widget.player.playerId);
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ManagementScreen(),
+                                ),
+                              );
                             },
                           );
                         },
-                      );
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ManagementScreen(),
-                        ),
                       );
                     },
                     child: Text(
