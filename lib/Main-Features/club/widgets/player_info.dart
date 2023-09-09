@@ -66,13 +66,18 @@ class PlayerInfo extends StatelessWidget {
             ),
           ),
           SizedBox(height: itemHeight * 0.03),
-          Text(
-            name,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: itemHeight * 0.09,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.w600,
+          SizedBox(
+            width: itemWidth * .8,
+            child: Text(
+              name,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: itemHeight * 0.09,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w600,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
           SizedBox(height: itemHeight * 0.03),
