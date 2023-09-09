@@ -40,7 +40,6 @@ class _ClubEventsState extends State<ClubEvents> {
         fetchedEvents.add(event);
       } else {
         // Handle the case where the event doesn't exist
-        print('Event with ID $eventId does not exist in Firestore.');
       }
     }
 

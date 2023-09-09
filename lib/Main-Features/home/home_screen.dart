@@ -25,7 +25,6 @@ class HomeScreen extends StatefulWidget {
       final String participatedClubId = player.participatedClubId;
       return participatedClubId.isNotEmpty;
     } catch (e) {
-      print("Error fetching player data: $e");
       return false;
     }
   }

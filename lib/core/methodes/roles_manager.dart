@@ -65,7 +65,6 @@ class RolesManager {
 
   Future<bool> doesPlayerHaveRight(String requiredRight) async {
     final List<String> userRoles = await RolesManager.instance.fetchUserRoles();
-    print(userRoles);
     if (userRoles.contains('admin')) {
       return true;
     }

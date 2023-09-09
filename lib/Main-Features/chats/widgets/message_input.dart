@@ -30,7 +30,6 @@ class _MessageInputState extends State<MessageInput> {
 
     if (content.isNotEmpty) {
       final chatId = generateChatId(widget.currentUserId, widget.otherPlayerId);
-      print(chatId);
       final chatRef =
           FirebaseFirestore.instance.collection('chats').doc(chatId);
 

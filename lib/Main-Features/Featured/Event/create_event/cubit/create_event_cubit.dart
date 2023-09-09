@@ -180,7 +180,6 @@ class CreateEventCubit extends Cubit<CreateEventState> {
       }
     } catch (error) {
       // Handle any errors that occur during fetching
-      print('Error fetching event: $error');
       return null;
     }
   }

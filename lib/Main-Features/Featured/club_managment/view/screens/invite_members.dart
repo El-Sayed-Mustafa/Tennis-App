@@ -81,7 +81,6 @@ class InviteMember extends StatelessWidget {
         eligiblePlayers = playersSnapshot.docs
             .map((doc) => Player.fromSnapshot(doc))
             .toList();
-        print('empty');
       } else {
         // If existingMembers is not empty, filter out ineligible players
         eligiblePlayers = playersSnapshot.docs
@@ -90,15 +89,12 @@ class InviteMember extends StatelessWidget {
                 !existingMembers.contains(player.playerId) &&
                 !player.clubInvitationsIds.contains(clubInvitationId))
             .toList();
-        print('not empty ');
       }
 
       // Take the first ten players (or less if the list is smaller)
       final firstTenPlayers = eligiblePlayers.take(10).toList();
-      print(firstTenPlayers);
       return firstTenPlayers;
     } catch (e) {
-      print('error: $e');
       return [];
     }
   }

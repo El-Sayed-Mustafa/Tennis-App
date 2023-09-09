@@ -36,9 +36,7 @@ class _ListSingleMatchesState extends State<ListSingleMatches> {
       setState(() {
         widget.matches.removeWhere((match) => match.matchId == matchId);
       });
-    } catch (error) {
-      print('Error deleting match: $error');
-    }
+    } catch (error) {}
   }
 
   @override

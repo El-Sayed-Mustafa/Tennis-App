@@ -22,7 +22,6 @@ class MatchesFirebaseMethod {
         'eventIds': currentUser.eventIds,
       });
     } catch (error) {
-      print(error);
       // Handle other errors if necessary
     }
   }
@@ -43,7 +42,6 @@ class MatchesFirebaseMethod {
         'matchId': currentUser.matches,
       });
     } catch (error) {
-      print(error);
       // Handle other errors if necessary
     }
   }
@@ -64,7 +62,6 @@ class MatchesFirebaseMethod {
         'singleMatchesIds': currentUser.singleMatchesIds,
       });
     } catch (error) {
-      print(error);
       // Handle other errors if necessary
     }
   }
@@ -85,7 +82,6 @@ class MatchesFirebaseMethod {
         'doubleMatchesIds': currentUser.doubleMatchesIds,
       });
     } catch (error) {
-      print(error);
       // Handle other errors if necessary
     }
   }

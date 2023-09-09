@@ -192,7 +192,6 @@ class _PrivateChatsState extends State<PrivateChats> {
         .asyncMap((snapshot) async {
       final playerData = snapshot.data();
       final chatIds = List<String>.from(playerData?['chatIds'] ?? []);
-      print('objecdddt');
       return _getChatsWithLastMessage(chatIds, currentUserId);
     });
   }
@@ -206,10 +205,7 @@ class _PrivateChatsState extends State<PrivateChats> {
           .collection('chats')
           .doc(chatId)
           .get();
-      print('test1');
       if (chatSnapshot.exists) {
-        print('test2');
-
         final unreadCount = currentUserId == chatSnapshot['user1Id']
             ? chatSnapshot['unreadCountUser1']
             : chatSnapshot['unreadCountUser2'];

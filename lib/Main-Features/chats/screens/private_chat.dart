@@ -71,7 +71,6 @@ class _PrivateChatState extends State<PrivateChat> {
       }
     } catch (e) {
       // Handle any errors here
-      print('Error marking messages as read: $e');
     }
   }
 
