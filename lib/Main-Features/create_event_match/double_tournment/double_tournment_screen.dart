@@ -32,48 +32,56 @@ class _DoubleTournamentScreenState extends State<DoubleTournamentScreen> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
+    final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+        GlobalKey<RefreshIndicatorState>();
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            PoPAppBarWave(
-              prefixIcon: IconButton(
-                onPressed: () {
-                  GoRouter.of(context).pop();
-                },
-                icon: const Icon(
-                  Icons.arrow_back,
-                  size: 30,
-                  color: Colors.white,
+      body: RefreshIndicator(
+        key: _refreshIndicatorKey,
+        onRefresh: () async {
+          setState(() {});
+        },
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              PoPAppBarWave(
+                prefixIcon: IconButton(
+                  onPressed: () {
+                    GoRouter.of(context).pop();
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    size: 30,
+                    color: Colors.white,
+                  ),
+                ),
+                text: 'Tournament',
+                suffixIconPath: '',
+              ),
+              Visibility(
+                visible:
+                    matches.isNotEmpty, // Set visibility based on matches list
+                child: CarouselSlider.builder(
+                  itemCount: matches.length,
+                  itemBuilder: (context, index, realIndex) {
+                    final match = matches[index];
+                    return DoubleMatchCard(match: match);
+                  },
+                  options: CarouselOptions(
+                    height: matches.isNotEmpty
+                        ? screenHeight * .28
+                        : 0, // Set height based on matches list
+                    aspectRatio: 16 / 9,
+                    viewportFraction: 0.75,
+                    initialPage: 0,
+                    enableInfiniteScroll: false,
+                    enlargeCenterPage: true,
+                  ),
                 ),
               ),
-              text: 'Tournament',
-              suffixIconPath: '',
-            ),
-            Visibility(
-              visible:
-                  matches.isNotEmpty, // Set visibility based on matches list
-              child: CarouselSlider.builder(
-                itemCount: matches.length,
-                itemBuilder: (context, index, realIndex) {
-                  final match = matches[index];
-                  return DoubleMatchCard(match: match);
-                },
-                options: CarouselOptions(
-                  height: matches.isNotEmpty
-                      ? screenHeight * .28
-                      : 0, // Set height based on matches list
-                  aspectRatio: 16 / 9,
-                  viewportFraction: 0.75,
-                  initialPage: 0,
-                  enableInfiniteScroll: false,
-                  enlargeCenterPage: true,
-                ),
-              ),
-            ),
-            MatchInputForm(onSave: _saveMatch),
-          ],
+              MatchInputForm(onSave: _saveMatch),
+            ],
+          ),
         ),
       ),
     );

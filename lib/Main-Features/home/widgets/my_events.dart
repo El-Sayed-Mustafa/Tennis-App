@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tennis_app/Main-Features/Featured/Event/event_details/event_details_screen.dart';
 import 'package:tennis_app/Main-Features/create_event_match/services/firebase_method.dart';
 import 'package:tennis_app/core/utils/widgets/confirmation_dialog.dart';
 
@@ -77,10 +78,22 @@ class _MyEventsState extends State<MyEvents> {
 
                           return Stack(
                             children: [
-                              CarouselItem(
-                                selected: selectedPageIndex ==
-                                    eventIds.indexOf(eventId),
-                                event: event,
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => EventDetailsScreen(
+                                        event: event,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: CarouselItem(
+                                  selected: selectedPageIndex ==
+                                      eventIds.indexOf(eventId),
+                                  event: event,
+                                ),
                               ),
                               Positioned(
                                 left: 0,

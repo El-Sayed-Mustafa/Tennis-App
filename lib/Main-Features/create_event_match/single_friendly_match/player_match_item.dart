@@ -43,7 +43,8 @@ class _PlayerMatchItemState extends State<PlayerMatchItem> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    final Method method = Method();
+    final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+        GlobalKey<RefreshIndicatorState>();
 
     return Scaffold(
       body: BlocProvider(
@@ -63,90 +64,96 @@ class _PlayerMatchItemState extends State<PlayerMatchItem> {
                 ),
               );
             }
-            return SingleChildScrollView(
-              child: Form(
-                key: formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Click to choose a player',
-                      style: TextStyle(
-                        color: Color(0xFF313131),
-                        fontSize: 20,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
+            return RefreshIndicator(
+              key: _refreshIndicatorKey,
+              onRefresh: () async {
+                setState(() {});
+              },
+              child: SingleChildScrollView(
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Click to choose a player',
+                        style: TextStyle(
+                          color: Color(0xFF313131),
+                          fontSize: 20,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          PlayerInfoWidget(
-                            selectedPlayer: _selectedPlayer,
-                            onPlayerSelected: _onPlayerSelected,
-                          ),
-                          SizedBox(
-                            height: 50,
-                            width: 50,
-                            child: Image.asset('assets/images/versus.png'),
-                          ),
-                          PlayerInfoWidget(
-                            selectedPlayer: _selectedPlayer2,
-                            onPlayerSelected: _onPlayerSelected2,
-                          ),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            PlayerInfoWidget(
+                              selectedPlayer: _selectedPlayer,
+                              onPlayerSelected: _onPlayerSelected,
+                            ),
+                            SizedBox(
+                              height: 50,
+                              width: 50,
+                              child: Image.asset('assets/images/versus.png'),
+                            ),
+                            PlayerInfoWidget(
+                              selectedPlayer: _selectedPlayer2,
+                              onPlayerSelected: _onPlayerSelected2,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(height: screenHeight * .02),
-                    const Text(
-                      'Schedule',
-                      style: TextStyle(
-                        color: Color(0xFF313131),
-                        fontSize: 20,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
+                      SizedBox(height: screenHeight * .02),
+                      const Text(
+                        'Schedule',
+                        style: TextStyle(
+                          color: Color(0xFF313131),
+                          fontSize: 20,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
-                    ),
-                    SizedBox(height: screenHeight * .02),
-                    InputDateAndTime(
-                      text: S.of(context).Event_Start,
-                      hint: S.of(context).Select_start_date_and_time,
-                      onDateTimeSelected: (DateTime dateTime) {},
-                    ),
-                    SizedBox(height: screenHeight * .03),
-                    InputEndDateAndTime(
-                      text: S.of(context).Event_End,
-                      hint: S.of(context).Select_end_date_and_time,
-                      onDateTimeSelected: (DateTime dateTime) {},
-                    ),
-                    SizedBox(height: screenHeight * .03),
-                    AvailableCourtsWidget(
-                      courtNameController: courtNameController,
-                      isSaveUser: false,
-                    ),
-                    SizedBox(height: screenHeight * .015),
-                    BottomSheetContainer(
-                      buttonText: 'Create',
-                      onPressed: () {
-                        if (_selectedPlayer == null ||
-                            _selectedPlayer2 == null ||
-                            courtNameController.text.isEmpty) {
-                          // Display a message or alert to inform the user that both players need to be selected
-                          return showSnackBar(context,
-                              'You Must Choose Two Players and court ');
-                        }
-                        if (formKey.currentState!.validate()) {
-                          context.read<SaveMatchCubit>().saveMatch(
-                              courtNameController: courtNameController,
-                              selectedPlayer: _selectedPlayer!,
-                              selectedPlayer2: _selectedPlayer2!);
-                        }
-                      },
-                    )
-                  ],
+                      SizedBox(height: screenHeight * .02),
+                      InputDateAndTime(
+                        text: S.of(context).Event_Start,
+                        hint: S.of(context).Select_start_date_and_time,
+                        onDateTimeSelected: (DateTime dateTime) {},
+                      ),
+                      SizedBox(height: screenHeight * .03),
+                      InputEndDateAndTime(
+                        text: S.of(context).Event_End,
+                        hint: S.of(context).Select_end_date_and_time,
+                        onDateTimeSelected: (DateTime dateTime) {},
+                      ),
+                      SizedBox(height: screenHeight * .03),
+                      AvailableCourtsWidget(
+                        courtNameController: courtNameController,
+                        isSaveUser: false,
+                      ),
+                      SizedBox(height: screenHeight * .015),
+                      BottomSheetContainer(
+                        buttonText: 'Create',
+                        onPressed: () {
+                          if (_selectedPlayer == null ||
+                              _selectedPlayer2 == null ||
+                              courtNameController.text.isEmpty) {
+                            // Display a message or alert to inform the user that both players need to be selected
+                            return showSnackBar(context,
+                                'You Must Choose Two Players and court ');
+                          }
+                          if (formKey.currentState!.validate()) {
+                            context.read<SaveMatchCubit>().saveMatch(
+                                courtNameController: courtNameController,
+                                selectedPlayer: _selectedPlayer!,
+                                selectedPlayer2: _selectedPlayer2!);
+                          }
+                        },
+                      )
+                    ],
+                  ),
                 ),
               ),
             );

@@ -138,8 +138,11 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                           );
                         } else if (playerSnapshot.hasData) {
                           final Player? player = playerSnapshot.data;
+                          String currentUserID =
+                              FirebaseAuth.instance.currentUser!.uid;
+
                           if (player != null) {
-                            return chatMessage.senderId == player.playerId
+                            return chatMessage.senderId == currentUserID
                                 ? MyReply(message: chatMessage)
                                 : SenderMessage(
                                     message: chatMessage,
