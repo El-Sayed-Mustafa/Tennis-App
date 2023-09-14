@@ -477,11 +477,10 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
               DateFormat('hh:mm a').format(widget.match.startTime);
           final formattedDate =
               DateFormat('dd/MM/yyyy').format(widget.match.startTime);
-          String result = widget.match.result ??
-              ''; // Use an empty string if result is null
+          String result =
+              widget.match.result; // Use an empty string if result is null
           List<String> lines = result.split('\n');
 
-// Initialize variables to store the score values
           List<String> teamAScores = ['', '', '', '', ''];
           List<String> teamBScores = ['', '', '', '', ''];
 

@@ -69,6 +69,7 @@ class _EditSingleMatchItemState extends State<EditSingleMatchItem> {
   }
 
   var formKey = GlobalKey<FormState>();
+  int? _radioValue = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -152,17 +153,82 @@ class _EditSingleMatchItemState extends State<EditSingleMatchItem> {
                       onDateTimeSelected: (DateTime dateTime) {},
                     ),
                     SizedBox(height: screenHeight * .03),
-                    ChosenCourt(
-                      courtId: widget.match.courtName,
-                      isUser: false,
-                      courtNameController: courtNameController,
-                      isSaveUser: false,
-                    ),
+                    if (widget.match.courtName != 'Your Court')
+                      ChosenCourt(
+                        courtId: widget.match.courtName,
+                        isUser: false,
+                        courtNameController: courtNameController,
+                        isSaveUser: false,
+                      )
+                    else
+                      const Text("Your Court",
+                          style: TextStyle(
+                            color: Color(0xFF2A2A2A),
+                            fontSize: 20,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w600,
+                          )),
                     SizedBox(height: screenHeight * .03),
-                    AvailableCourtsWidget(
-                      courtNameController: courtNameController,
-                      isSaveUser: false,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Row(
+                            children: [
+                              Radio<int>(
+                                value: 0,
+                                groupValue: _radioValue,
+                                onChanged: (int? value) {
+                                  setState(() {
+                                    _radioValue = value;
+                                    courtNameController.text = 'Your Court';
+                                  });
+                                },
+                              ),
+                              const Text(
+                                'Your Court',
+                                style: TextStyle(
+                                  color: Color(0xFF525252),
+                                  fontSize: 16,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Radio<int>(
+                                value: 1,
+                                groupValue: _radioValue,
+                                onChanged: (int? value) {
+                                  setState(() {
+                                    _radioValue = value;
+                                  });
+                                },
+                              ),
+                              const Text(
+                                'Reverse Court',
+                                style: TextStyle(
+                                  color: Color(0xFF525252),
+                                  fontSize: 16,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
+                    if (_radioValue == 1)
+                      AvailableCourtsWidget(
+                        courtNameController: courtNameController,
+                        isSaveUser: false,
+                      )
+                    else
+                      const SizedBox.shrink(),
                     SizedBox(height: screenHeight * .015),
                     BottomSheetContainer(
                       buttonText: 'Update',

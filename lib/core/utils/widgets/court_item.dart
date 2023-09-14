@@ -82,11 +82,6 @@ class _CourtItemState extends State<CourtItem> {
           .update({
         'reversed': false, // Set 'reversed' back to false
       });
-
-      // Show a success message
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(S.of(context).Above_18)),
-      );
     } catch (error) {
       // Handle any errors that occur during the process
       ScaffoldMessenger.of(context).showSnackBar(
