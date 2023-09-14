@@ -21,7 +21,7 @@ class _EditDoubleMatchState extends State<EditDoubleMatch> {
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
 
-    final double carouselHeight = (screenHeight + screenWidth) * 0.175;
+    final double carouselHeight = (screenHeight + screenWidth) * 0.24;
 
     return Scaffold(
       body: Column(

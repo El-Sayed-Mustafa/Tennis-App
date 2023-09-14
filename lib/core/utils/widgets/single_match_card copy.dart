@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; // Import the intl package
@@ -68,7 +69,21 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
               DateFormat('hh:mm a').format(widget.match.startTime);
           final formattedDate =
               DateFormat('dd/MM/yyyy').format(widget.match.startTime);
+          String result = widget.match.result ??
+              ''; // Use an empty string if result is null
+          List<String> lines = result.split('\n');
 
+// Initialize variables to store the score values
+          List<String> teamAScores = ['', '', '', '', ''];
+          List<String> teamBScores = ['', '', '', '', ''];
+
+          for (int i = 0; i < lines.length && i < 5; i++) {
+            List<String> parts = lines[i].trim().split(':');
+            if (parts.length == 2) {
+              teamAScores[i] = parts[0].trim();
+              teamBScores[i] = parts[1].trim();
+            }
+          }
           return GestureDetector(
             onTap: () async {
               bool hasRight = await RolesManager.instance
@@ -79,137 +94,201 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
                     method, context, widget.match, widget.tournamentId);
               }
             },
-            child: Container(
-              decoration: ShapeDecoration(
-                color: Color(0xFFF3ADAB),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(31),
+            child: SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.all(8),
+                decoration: ShapeDecoration(
+                  color: const Color(0xFFF3ADAB),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(31),
+                  ),
                 ),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Column(
-                          children: [
-                            Text("Player A",
-                                style: TextStyle(
-                                  color: Color(0xFF2A2A2A),
-                                  fontSize: 16.sp,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w600,
-                                )),
-                            const SizedBox(height: 10),
-                            PhotoPlayer(url: player1.photoURL!),
-                            const SizedBox(height: 7),
-                            SizedBox(
-                              width: screenWidth * 0.18,
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  player1.playerName,
-                                  style: const TextStyle(
-                                    color: Color(0xFF2A2A2A),
-                                    fontSize: 13,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ), // Display player1's name
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              _selectedWinner1 ?? widget.match.winner,
-                              style: TextStyle(
-                                color: Color(0xFF00344E),
-                                fontSize: 14.sp,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(6.0.h),
-                              child: SizedBox(
-                                height: 40,
-                                width: 40,
-                                child: Image.asset('assets/images/versus.png'),
-                              ),
-                            ),
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Container(
-                                padding: EdgeInsets.all(8),
-                                color: Color.fromARGB(255, 34, 47, 53),
-                                child: Text(
-                                  _selectedWinner1 ?? widget.match.result,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Column(
+                            children: [
+                              Text("Player A",
                                   style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 17.sp,
+                                    color: const Color(0xFF2A2A2A),
+                                    fontSize: 16.sp,
                                     fontFamily: 'Poppins',
                                     fontWeight: FontWeight.w600,
+                                  )),
+                              const SizedBox(height: 10),
+                              PhotoPlayer(url: player1.photoURL!),
+                              const SizedBox(height: 7),
+                              SizedBox(
+                                width: screenWidth * 0.18,
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    player1.playerName,
+                                    style: const TextStyle(
+                                      color: Color(0xFF2A2A2A),
+                                      fontSize: 13,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            const Text("Player B",
+                            ],
+                          ), // Display player1's name
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                _selectedWinner1 ?? widget.match.winner,
                                 style: TextStyle(
-                                  color: Color(0xFF2A2A2A),
-                                  fontSize: 16,
+                                  color: const Color(0xFF00344E),
+                                  fontSize: 14.sp,
                                   fontFamily: 'Poppins',
                                   fontWeight: FontWeight.w600,
-                                )),
-                            const SizedBox(height: 10),
-                            PhotoPlayer(url: player2.photoURL!),
-                            const SizedBox(height: 7),
-                            SizedBox(
-                              width: screenWidth * 0.18,
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  player2.playerName,
-                                  style: const TextStyle(
-                                    color: Color(0xFF2A2A2A),
-                                    fontSize: 13,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
-                            ),
-                          ],
-                        ), // Display player2's name
-                      ],
+                              Padding(
+                                padding: EdgeInsets.all(6.0.h),
+                                child: SizedBox(
+                                  height: 40,
+                                  width: 40,
+                                  child:
+                                      Image.asset('assets/images/versus.png'),
+                                ),
+                              ),
+                              Text(
+                                '$formattedTime\n$formattedDate',
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  color: Color(0xFF00344E),
+                                  fontSize: 15,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              const Text("Player B",
+                                  style: TextStyle(
+                                    color: Color(0xFF2A2A2A),
+                                    fontSize: 16,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w600,
+                                  )),
+                              const SizedBox(height: 10),
+                              PhotoPlayer(url: player2.photoURL!),
+                              const SizedBox(height: 7),
+                              SizedBox(
+                                width: screenWidth * 0.18,
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    player2.playerName,
+                                    style: const TextStyle(
+                                      color: Color(0xFF2A2A2A),
+                                      fontSize: 13,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ), // Display player2's name
+                        ],
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 8.h),
-
-                  Text(
-                    '$formattedTime\n$formattedDate',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Color(0xFF00344E),
-                      fontSize: 15,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0, vertical: 8.0),
+                      child: CarouselSlider(
+                        options: CarouselOptions(
+                          height: 50,
+                          aspectRatio: 16 / 9,
+                          viewportFraction: 0.33,
+                          enableInfiniteScroll: false,
+                          initialPage: 1,
+                          scrollDirection: Axis.horizontal,
+                        ),
+                        items: List.generate(
+                          5,
+                          (index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Container(
+                                  color: const Color.fromARGB(255, 34, 47, 53),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Shot ${index + 1}',
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 13,
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 3,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            teamAScores[index],
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 12,
+                                              fontFamily: 'Poppins',
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                          const Text(
+                                            '  :  ',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 12,
+                                              fontFamily: 'Poppins',
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                          Text(
+                                            teamBScores[index],
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 12,
+                                              fontFamily: 'Poppins',
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
                     ),
-                  ) // Display formatted time and date
-                ],
+                  ],
+                ),
               ),
             ),
           );

@@ -69,7 +69,7 @@ class _DoubleTournamentScreenState extends State<DoubleTournamentScreen> {
                   },
                   options: CarouselOptions(
                     height: matches.isNotEmpty
-                        ? screenHeight * .28
+                        ? screenHeight * .34
                         : 0, // Set height based on matches list
                     aspectRatio: 16 / 9,
                     viewportFraction: 0.75,

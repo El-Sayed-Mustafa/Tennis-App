@@ -82,7 +82,7 @@ class _ClubDoubleMatchesState extends State<ClubDoubleMatches> {
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
 
-    final double carouselHeight = (screenHeight + screenWidth) * 0.21;
+    final double carouselHeight = (screenHeight + screenWidth) * 0.26;
     Method method = Method();
 
     return Column(
@@ -158,7 +158,7 @@ class _ClubDoubleMatchesState extends State<ClubDoubleMatches> {
                               DoubleMatchCard(match: match),
                               Positioned(
                                 right: 0,
-                                bottom: -5,
+                                bottom: -8,
                                 child: IconButton(
                                     onPressed: () async {
                                       bool hasRight = await method
@@ -190,7 +190,7 @@ class _ClubDoubleMatchesState extends State<ClubDoubleMatches> {
                               ),
                               Positioned(
                                 left: 0,
-                                bottom: 0,
+                                bottom: -8,
                                 child: IconButton(
                                     onPressed: () async {
                                       bool hasRight = await method

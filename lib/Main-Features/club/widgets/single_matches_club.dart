@@ -83,7 +83,7 @@ class _ClubSingleMatchesState extends State<ClubSingleMatches> {
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
 
-    final double carouselHeight = (screenHeight + screenWidth) * 0.16;
+    final double carouselHeight = (screenHeight + screenWidth) * 0.22;
     Method method = Method();
 
     return Column(

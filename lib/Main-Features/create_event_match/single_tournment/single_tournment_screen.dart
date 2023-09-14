@@ -69,10 +69,10 @@ class _SingleTournamentScreenState extends State<SingleTournamentScreen> {
                   },
                   options: CarouselOptions(
                     height: matches.isNotEmpty
-                        ? screenHeight * .22
+                        ? screenHeight * .26
                         : 0, // Set height based on matches list
                     aspectRatio: 16 / 9,
-                    viewportFraction: 0.6,
+                    viewportFraction: 0.7,
                     initialPage: 0,
                     enableInfiniteScroll: false,
                     enlargeCenterPage: true,
