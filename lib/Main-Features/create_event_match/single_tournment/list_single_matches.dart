@@ -75,7 +75,7 @@ class _ListSingleMatchesState extends State<ListSingleMatches> {
                   padding:
                       const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24),
                   child: SizedBox(
-                    height: carouselHeight,
+                    height: carouselHeight * 1.12,
                     child: Stack(
                       children: [
                         SingleMatchCard(

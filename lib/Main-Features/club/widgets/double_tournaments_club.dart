@@ -27,7 +27,7 @@ class VerticalCarouselSlider extends StatelessWidget {
     final double carouselHeight = (screenHeight + screenWidth) * 0.24;
     return CarouselSlider(
       options: CarouselOptions(
-        height: matches.isNotEmpty ? carouselHeight * 1.1 : 0,
+        height: matches.isNotEmpty ? carouselHeight * 1.3 : 0,
         aspectRatio: 16 / 9,
         viewportFraction: .85,
         initialPage: 0,
@@ -132,10 +132,10 @@ class DoubleTournamentsClub extends StatelessWidget {
                 return CarouselSlider(
                   options: CarouselOptions(
                     height: filteredTournamentDocs.isNotEmpty
-                        ? carouselHeight * 1.255
+                        ? carouselHeight * 1.27
                         : 0, // Set height based on matches list
                     aspectRatio: 1,
-                    viewportFraction: 0.75,
+                    viewportFraction: 0.9,
                     initialPage: 0,
                     enableInfiniteScroll: false,
                     enlargeCenterPage: true, autoPlayCurve: Curves.linear,

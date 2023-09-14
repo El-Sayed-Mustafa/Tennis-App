@@ -48,6 +48,7 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
     ScreenUtil.init(context, designSize: const Size(360, 690));
 
     final double screenWidth = MediaQuery.of(context).size.width;
+    final double screenHeight = MediaQuery.of(context).size.height;
     return FutureBuilder<List<Player?>>(
       future: Future.wait([
         fetchPlayer(widget.match.player1Id),
@@ -96,6 +97,7 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
             },
             child: SingleChildScrollView(
               child: Container(
+                height: screenHeight * .3,
                 padding: EdgeInsets.all(8),
                 decoration: ShapeDecoration(
                   color: const Color(0xFFF3ADAB),

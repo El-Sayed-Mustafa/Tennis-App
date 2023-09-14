@@ -29,7 +29,7 @@ class VerticalCarouselSlider extends StatelessWidget {
     return CarouselSlider(
       options: CarouselOptions(
         height: matches.isNotEmpty
-            ? carouselHeight * 1
+            ? carouselHeight * 1.25
             : 0, // Set height based on matches list
         aspectRatio: 16 / 9,
         viewportFraction: .85,
@@ -133,10 +133,10 @@ class SingleTournamentsClub extends StatelessWidget {
                 return CarouselSlider(
                   options: CarouselOptions(
                     height: filteredTournamentDocs.isNotEmpty
-                        ? carouselHeight * 1.3
+                        ? carouselHeight * 1.4
                         : 0,
                     aspectRatio: 1,
-                    viewportFraction: 0.75,
+                    viewportFraction: 0.9,
                     initialPage: 0,
                     enableInfiniteScroll: false,
                     enlargeCenterPage: true,

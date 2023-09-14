@@ -79,7 +79,7 @@ class _ListDoubleMatchesState extends State<ListDoubleMatches> {
                   padding:
                       const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24),
                   child: SizedBox(
-                    height: carouselHeight,
+                    height: carouselHeight * 1.4,
                     child: Stack(
                       children: [
                         DoubleMatchCard(

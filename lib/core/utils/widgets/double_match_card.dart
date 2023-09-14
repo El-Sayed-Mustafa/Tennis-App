@@ -380,6 +380,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
+    final double screenHeight = MediaQuery.of(context).size.height;
     ScreenUtil.init(context, designSize: const Size(360, 690));
 
     return FutureBuilder<List<Player?>>(
@@ -432,6 +433,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
             },
             child: SingleChildScrollView(
               child: Container(
+                height: screenHeight * .36,
                 decoration: ShapeDecoration(
                   color: const Color(0xFFFCCBB1),
                   shape: RoundedRectangleBorder(

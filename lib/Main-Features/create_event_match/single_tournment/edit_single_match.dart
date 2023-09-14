@@ -55,7 +55,7 @@ class _EditSingleMatchState extends State<EditSingleMatch> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24),
             child: SizedBox(
-              height: carouselHeight,
+              height: carouselHeight * 1.3,
               child: SingleMatchCard(
                 match: widget.match,
                 tournamentId: widget.tournamentId,

@@ -161,7 +161,7 @@ class _ClubSingleMatchesState extends State<ClubSingleMatches> {
                               SingleMatchCard(match: match),
                               Positioned(
                                 right: 0,
-                                bottom: 0,
+                                bottom: 15,
                                 child: IconButton(
                                     onPressed: () async {
                                       bool hasRight = await method
@@ -193,7 +193,7 @@ class _ClubSingleMatchesState extends State<ClubSingleMatches> {
                               ),
                               Positioned(
                                 left: 0,
-                                bottom: 0,
+                                bottom: 15,
                                 child: IconButton(
                                     onPressed: () async {
                                       bool hasRight = await method
