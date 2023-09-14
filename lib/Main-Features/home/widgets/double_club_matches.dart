@@ -75,7 +75,7 @@ class _MyDoubleMatchesState extends State<MyDoubleMatches> {
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
 
-    final double carouselHeight = (screenHeight + screenWidth) * 0.2;
+    final double carouselHeight = (screenHeight + screenWidth) * 0.24;
 
     return Column(
       children: [
@@ -86,10 +86,10 @@ class _MyDoubleMatchesState extends State<MyDoubleMatches> {
                       ? carouselHeight
                       : 0, // Set height based on matches list
                   aspectRatio: 16 / 9,
-                  viewportFraction: 0.75,
+                  viewportFraction: 0.85,
                   initialPage: 0,
                   enableInfiniteScroll: false,
-                  enlargeCenterPage: true,
+                  enlargeCenterPage: false,
                 ),
                 carouselController: _carouselController,
                 items: matches.map((matchData) {

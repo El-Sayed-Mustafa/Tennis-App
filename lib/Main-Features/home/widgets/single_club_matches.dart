@@ -75,7 +75,7 @@ class _MySingleMatchesState extends State<MySingleMatches> {
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
 
-    final double carouselHeight = (screenHeight + screenWidth) * 0.18;
+    final double carouselHeight = (screenHeight + screenWidth) * 0.22;
 
     return Column(
       children: [
@@ -86,10 +86,10 @@ class _MySingleMatchesState extends State<MySingleMatches> {
                       ? carouselHeight
                       : 0, // Set height based on matches list
                   aspectRatio: 16 / 9,
-                  viewportFraction: 0.8,
+                  viewportFraction: 0.85,
                   initialPage: 0,
                   enableInfiniteScroll: false,
-                  enlargeCenterPage: true,
+                  enlargeCenterPage: false,
                 ),
                 carouselController: _carouselController,
                 items: matches.map((matchData) {

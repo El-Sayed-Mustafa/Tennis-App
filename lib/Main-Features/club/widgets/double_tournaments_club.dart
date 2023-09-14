@@ -138,7 +138,7 @@ class DoubleTournamentsClub extends StatelessWidget {
                     viewportFraction: 0.9,
                     initialPage: 0,
                     enableInfiniteScroll: false,
-                    enlargeCenterPage: true, autoPlayCurve: Curves.linear,
+                    enlargeCenterPage: false, autoPlayCurve: Curves.linear,
                   ),
                   items: filteredTournamentDocs.map((tournamentDoc) {
                     final tournamentData = tournamentDoc.data();

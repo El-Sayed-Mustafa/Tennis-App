@@ -139,7 +139,7 @@ class SingleTournamentsClub extends StatelessWidget {
                     viewportFraction: 0.9,
                     initialPage: 0,
                     enableInfiniteScroll: false,
-                    enlargeCenterPage: true,
+                    enlargeCenterPage: false,
                     autoPlayCurve: Curves.linear,
                   ),
                   items: filteredTournamentDocs.map((tournamentDoc) {

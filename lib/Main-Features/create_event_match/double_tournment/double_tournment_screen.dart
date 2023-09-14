@@ -75,7 +75,7 @@ class _DoubleTournamentScreenState extends State<DoubleTournamentScreen> {
                     viewportFraction: 0.75,
                     initialPage: 0,
                     enableInfiniteScroll: false,
-                    enlargeCenterPage: true,
+                    enlargeCenterPage: false,
                   ),
                 ),
               ),

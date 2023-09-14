@@ -27,7 +27,7 @@ class DayCarousel extends StatelessWidget {
           enableInfiniteScroll: false,
           reverse: false,
           autoPlay: false,
-          enlargeCenterPage: true,
+          enlargeCenterPage: false,
           viewportFraction: 0.25,
           aspectRatio: 10,
         ),

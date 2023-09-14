@@ -76,301 +76,370 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Center(child: Text(S.of(context).enterResults)),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                      controller: teamAScoreController1,
-                      keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                        labelText: 'Team A',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 16), // Add spacing between text fields
-                  Expanded(
-                    child: TextFormField(
-                      controller: teamBScoreController1,
-                      keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                        labelText: 'Team B',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                      controller: teamAScoreController2,
-                      keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                        labelText: 'Team A',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 16), // Add spacing between text fields
-                  Expanded(
-                    child: TextFormField(
-                      controller: teamBScoreController2,
-                      keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                        labelText: 'Team B',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                      controller: teamAScoreController3,
-                      keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                        labelText: 'Team A',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 16), // Add spacing between text fields
-                  Expanded(
-                    child: TextFormField(
-                      controller: teamBScoreController3,
-                      keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                        labelText: 'Team B',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                      controller: teamAScoreController4,
-                      keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                        labelText: 'Team A',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 16), // Add spacing between text fields
-                  Expanded(
-                    child: TextFormField(
-                      controller: teamBScoreController4,
-                      keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                        labelText: 'Team B',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                      controller: teamAScoreController5,
-                      keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                        labelText: 'Team A',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 16), // Add spacing between text fields
-                  Expanded(
-                    child: TextFormField(
-                      controller: teamBScoreController5,
-                      keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                        labelText: 'Team B',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(
-                      255, 34, 47, 53), // Set the background color
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: Text("Shot 1",
+                      style: TextStyle(
+                        color: Color(0xFF2A2A2A),
+                        fontSize: 16,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w600,
+                      )),
                 ),
-                onPressed: () async {
-                  GoRouter.of(context).pop();
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                        controller: teamAScoreController1,
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                          labelText: 'Team A',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                        width: 16), // Add spacing between text fields
+                    Expanded(
+                      child: TextFormField(
+                        controller: teamBScoreController1,
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                          labelText: 'Team B',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: Text("Shot 2",
+                      style: TextStyle(
+                        color: Color(0xFF2A2A2A),
+                        fontSize: 16,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w600,
+                      )),
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                        controller: teamAScoreController2,
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                          labelText: 'Team A',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                        width: 16), // Add spacing between text fields
+                    Expanded(
+                      child: TextFormField(
+                        controller: teamBScoreController2,
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                          labelText: 'Team B',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: Text("Shot 3",
+                      style: TextStyle(
+                        color: Color(0xFF2A2A2A),
+                        fontSize: 16,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w600,
+                      )),
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                        controller: teamAScoreController3,
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                          labelText: 'Team A',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                        width: 16), // Add spacing between text fields
+                    Expanded(
+                      child: TextFormField(
+                        controller: teamBScoreController3,
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                          labelText: 'Team B',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: Text("Shot 4",
+                      style: TextStyle(
+                        color: Color(0xFF2A2A2A),
+                        fontSize: 16,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w600,
+                      )),
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                        controller: teamAScoreController4,
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                          labelText: 'Team A',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                        width: 16), // Add spacing between text fields
+                    Expanded(
+                      child: TextFormField(
+                        controller: teamBScoreController4,
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                          labelText: 'Team B',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: Text("Shot 5",
+                      style: TextStyle(
+                        color: Color(0xFF2A2A2A),
+                        fontSize: 16,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w600,
+                      )),
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                        controller: teamAScoreController5,
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                          labelText: 'Team A',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                        width: 16), // Add spacing between text fields
+                    Expanded(
+                      child: TextFormField(
+                        controller: teamBScoreController5,
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                          labelText: 'Team B',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(
+                        255, 34, 47, 53), // Set the background color
+                  ),
+                  onPressed: () async {
+                    GoRouter.of(context).pop();
 
-                  int teamAScore1 =
-                      int.tryParse(teamAScoreController1.text) ?? 0;
-                  int teamBScore1 =
-                      int.tryParse(teamBScoreController1.text) ?? 0;
-                  int teamAScore2 =
-                      int.tryParse(teamAScoreController2.text) ?? 0;
-                  int teamBScore2 =
-                      int.tryParse(teamBScoreController2.text) ?? 0;
-                  int teamAScore3 =
-                      int.tryParse(teamAScoreController3.text) ?? 0;
-                  int teamBScore3 =
-                      int.tryParse(teamBScoreController3.text) ?? 0;
-                  int teamAScore4 =
-                      int.tryParse(teamAScoreController4.text) ?? 0;
-                  int teamBScore4 =
-                      int.tryParse(teamBScoreController4.text) ?? 0;
-                  int teamAScore5 =
-                      int.tryParse(teamAScoreController5.text) ?? 0;
-                  int teamBScore5 =
-                      int.tryParse(teamBScoreController5.text) ?? 0;
+                    int teamAScore1 =
+                        int.tryParse(teamAScoreController1.text) ?? 0;
+                    int teamBScore1 =
+                        int.tryParse(teamBScoreController1.text) ?? 0;
+                    int teamAScore2 =
+                        int.tryParse(teamAScoreController2.text) ?? 0;
+                    int teamBScore2 =
+                        int.tryParse(teamBScoreController2.text) ?? 0;
+                    int teamAScore3 =
+                        int.tryParse(teamAScoreController3.text) ?? 0;
+                    int teamBScore3 =
+                        int.tryParse(teamBScoreController3.text) ?? 0;
+                    int teamAScore4 =
+                        int.tryParse(teamAScoreController4.text) ?? 0;
+                    int teamBScore4 =
+                        int.tryParse(teamBScoreController4.text) ?? 0;
+                    int teamAScore5 =
+                        int.tryParse(teamAScoreController5.text) ?? 0;
+                    int teamBScore5 =
+                        int.tryParse(teamBScoreController5.text) ?? 0;
 
-                  int teamAScore = teamAScore1 +
-                      teamAScore2 +
-                      teamAScore3 +
-                      teamAScore4 +
-                      teamAScore5;
-                  int teamBScore = teamBScore1 +
-                      teamBScore2 +
-                      teamBScore3 +
-                      teamBScore4 +
-                      teamAScore5;
-                  print(teamBScore);
-                  print(teamAScore);
-                  String result;
-                  result =
-                      '$teamAScore1 : $teamBScore1 \n$teamAScore2 : $teamBScore2 \n$teamAScore3 : $teamBScore3 \n$teamAScore4 : $teamBScore4 \n$teamAScore5 : $teamBScore5';
-                  if (widget.match.result.isNotEmpty) {
+                    int teamAScore = teamAScore1 +
+                        teamAScore2 +
+                        teamAScore3 +
+                        teamAScore4 +
+                        teamAScore5;
+                    int teamBScore = teamBScore1 +
+                        teamBScore2 +
+                        teamBScore3 +
+                        teamBScore4 +
+                        teamAScore5;
+                    print(teamBScore);
+                    print(teamAScore);
+                    String result;
+                    result =
+                        '$teamAScore1 : $teamBScore1 \n$teamAScore2 : $teamBScore2 \n$teamAScore3 : $teamBScore3 \n$teamAScore4 : $teamBScore4 \n$teamAScore5 : $teamBScore5';
+                    if (widget.match.result.isNotEmpty) {
+                      if (teamAScore > teamBScore) {
+                        await method.reEnterResult(
+                            widget.match.player1Id, false);
+                        await method.reEnterResult(
+                            widget.match.player2Id, false);
+                        await method.reEnterResult(
+                            widget.match.player3Id, true);
+                        await method.reEnterResult(
+                            widget.match.player4Id, true);
+                      } else if (teamBScore > teamAScore) {
+                        await method.reEnterResult(
+                            widget.match.player1Id, true);
+                        await method.reEnterResult(
+                            widget.match.player2Id, true);
+                        await method.reEnterResult(
+                            widget.match.player3Id, false);
+                        await method.reEnterResult(
+                            widget.match.player4Id, false);
+                      } else {
+                        await method.reEnterResult(
+                            widget.match.player1Id, false);
+                        await method.reEnterResult(
+                            widget.match.player2Id, false);
+                        await method.reEnterResult(
+                            widget.match.player3Id, false);
+                        await method.reEnterResult(
+                            widget.match.player4Id, false);
+                      }
+                    }
                     if (teamAScore > teamBScore) {
-                      await method.reEnterResult(widget.match.player1Id, false);
-                      await method.reEnterResult(widget.match.player2Id, false);
-                      await method.reEnterResult(widget.match.player3Id, true);
-                      await method.reEnterResult(widget.match.player4Id, true);
+                      if (widget.tournamentId != null) {
+                        await FirebaseFirestore.instance
+                            .collection('doubleTournaments')
+                            .doc(widget.tournamentId)
+                            .collection('doubleMatches')
+                            .doc(widget.match.matchId)
+                            .update({
+                          'winner1': 'Team A Winner',
+                          'result': result,
+                        });
+                      } else {
+                        await FirebaseFirestore.instance
+                            .collection('double_matches')
+                            .doc(widget.match.matchId)
+                            .update({
+                          'winner1': 'Team A Winner',
+                          'result': result,
+                        });
+                      }
+                      await method.updateMatchPlayedAndTotalWins(
+                          widget.match.player1Id, true);
+                      await method.updateMatchPlayedAndTotalWins(
+                          widget.match.player2Id, true);
+                      await method.updateMatchPlayedAndTotalWins(
+                          widget.match.player3Id, false);
+                      await method.updateMatchPlayedAndTotalWins(
+                          widget.match.player4Id, false);
                     } else if (teamBScore > teamAScore) {
-                      await method.reEnterResult(widget.match.player1Id, true);
-                      await method.reEnterResult(widget.match.player2Id, true);
-                      await method.reEnterResult(widget.match.player3Id, false);
-                      await method.reEnterResult(widget.match.player4Id, false);
+                      print('test');
+                      if (widget.tournamentId != null) {
+                        await FirebaseFirestore.instance
+                            .collection('doubleTournaments')
+                            .doc(widget.tournamentId)
+                            .collection('doubleMatches')
+                            .doc(widget.match.matchId)
+                            .update({
+                          'winner1': 'Team B Winner',
+                          'result': result,
+                        });
+                      } else {
+                        await FirebaseFirestore.instance
+                            .collection('double_matches')
+                            .doc(widget.match.matchId)
+                            .update({
+                          'winner1': 'Team B Winner',
+                          'result': result,
+                        });
+                      }
+                      await method.updateMatchPlayedAndTotalWins(
+                          widget.match.player3Id, true);
+                      await method.updateMatchPlayedAndTotalWins(
+                          widget.match.player4Id, true);
+                      await method.updateMatchPlayedAndTotalWins(
+                          widget.match.player1Id, false);
+                      await method.updateMatchPlayedAndTotalWins(
+                          widget.match.player2Id, false);
                     } else {
-                      await method.reEnterResult(widget.match.player1Id, false);
-                      await method.reEnterResult(widget.match.player2Id, false);
-                      await method.reEnterResult(widget.match.player3Id, false);
-                      await method.reEnterResult(widget.match.player4Id, false);
+                      if (widget.tournamentId != null) {
+                        await FirebaseFirestore.instance
+                            .collection('doubleTournaments')
+                            .doc(widget.tournamentId)
+                            .collection('doubleMatches')
+                            .doc(widget.match.matchId)
+                            .update({
+                          'winner1': 'Draw',
+                          'result': result,
+                        });
+                      } else {
+                        await FirebaseFirestore.instance
+                            .collection('double_matches')
+                            .doc(widget.match.matchId)
+                            .update({
+                          'winner1': 'Draw',
+                          'result': result,
+                        });
+                      }
+                      await method.updateMatchPlayedAndTotalWins(
+                          widget.match.player1Id, false);
+                      await method.updateMatchPlayedAndTotalWins(
+                          widget.match.player2Id, false);
+                      await method.updateMatchPlayedAndTotalWins(
+                          widget.match.player3Id, false);
+                      await method.updateMatchPlayedAndTotalWins(
+                          widget.match.player4Id, false);
                     }
-                  }
-                  if (teamAScore > teamBScore) {
-                    if (widget.tournamentId != null) {
-                      await FirebaseFirestore.instance
-                          .collection('doubleTournaments')
-                          .doc(widget.tournamentId)
-                          .collection('doubleMatches')
-                          .doc(widget.match.matchId)
-                          .update({
-                        'winner1': 'Team A Winner',
-                        'result': result,
-                      });
-                    } else {
-                      await FirebaseFirestore.instance
-                          .collection('double_matches')
-                          .doc(widget.match.matchId)
-                          .update({
-                        'winner1': 'Team A Winner',
-                        'result': result,
-                      });
-                    }
-                    await method.updateMatchPlayedAndTotalWins(
-                        widget.match.player1Id, true);
-                    await method.updateMatchPlayedAndTotalWins(
-                        widget.match.player2Id, true);
-                    await method.updateMatchPlayedAndTotalWins(
-                        widget.match.player3Id, false);
-                    await method.updateMatchPlayedAndTotalWins(
-                        widget.match.player4Id, false);
-                  } else if (teamBScore > teamAScore) {
-                    print('test');
-                    if (widget.tournamentId != null) {
-                      await FirebaseFirestore.instance
-                          .collection('doubleTournaments')
-                          .doc(widget.tournamentId)
-                          .collection('doubleMatches')
-                          .doc(widget.match.matchId)
-                          .update({
-                        'winner1': 'Team B Winner',
-                        'result': result,
-                      });
-                    } else {
-                      await FirebaseFirestore.instance
-                          .collection('double_matches')
-                          .doc(widget.match.matchId)
-                          .update({
-                        'winner1': 'Team B Winner',
-                        'result': result,
-                      });
-                    }
-                    await method.updateMatchPlayedAndTotalWins(
-                        widget.match.player3Id, true);
-                    await method.updateMatchPlayedAndTotalWins(
-                        widget.match.player4Id, true);
-                    await method.updateMatchPlayedAndTotalWins(
-                        widget.match.player1Id, false);
-                    await method.updateMatchPlayedAndTotalWins(
-                        widget.match.player2Id, false);
-                  } else {
-                    if (widget.tournamentId != null) {
-                      await FirebaseFirestore.instance
-                          .collection('doubleTournaments')
-                          .doc(widget.tournamentId)
-                          .collection('doubleMatches')
-                          .doc(widget.match.matchId)
-                          .update({
-                        'winner1': 'Draw',
-                        'result': result,
-                      });
-                    } else {
-                      await FirebaseFirestore.instance
-                          .collection('double_matches')
-                          .doc(widget.match.matchId)
-                          .update({
-                        'winner1': 'Draw',
-                        'result': result,
-                      });
-                    }
-                    await method.updateMatchPlayedAndTotalWins(
-                        widget.match.player1Id, false);
-                    await method.updateMatchPlayedAndTotalWins(
-                        widget.match.player2Id, false);
-                    await method.updateMatchPlayedAndTotalWins(
-                        widget.match.player3Id, false);
-                    await method.updateMatchPlayedAndTotalWins(
-                        widget.match.player4Id, false);
-                  }
-                },
-                child: Text(S.of(context).submit),
-              ),
-            ],
+                  },
+                  child: Text(S.of(context).submit),
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -431,7 +500,8 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                 _showWinnerDialog();
               }
             },
-            child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
               child: Container(
                 height: screenHeight * .36,
                 decoration: ShapeDecoration(
@@ -440,234 +510,238 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                     borderRadius: BorderRadius.circular(31),
                   ),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Column(
-                            children: [
-                              const Text("Team A",
-                                  style: TextStyle(
-                                    color: Color(0xFF2A2A2A),
-                                    fontSize: 16,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w600,
-                                  )),
-                              const SizedBox(height: 10),
-                              PhotoPlayer(url: player1!.photoURL!),
-                              const SizedBox(height: 5),
-                              SizedBox(
-                                width: screenWidth * 0.18,
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    player1.playerName,
-                                    style: const TextStyle(
-                                      color: Color(0xFF2A2A2A),
-                                      fontSize: 13,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 15),
-                              PhotoPlayer(url: player2!.photoURL!),
-                              const SizedBox(height: 5),
-                              SizedBox(
-                                width: screenWidth * 0.18,
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    player2.playerName,
-                                    style: const TextStyle(
-                                      color: Color(0xFF2A2A2A),
-                                      fontSize: 13,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ), // Display player1's name
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                _selectedWinner1 ?? widget.match.winner1,
-                                style: TextStyle(
-                                  color: Color(0xFF00344E),
-                                  fontSize: 14.sp,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(6.0),
-                                child: SizedBox(
-                                  height: 40,
-                                  width: 40,
-                                  child:
-                                      Image.asset('assets/images/versus.png'),
-                                ),
-                              ),
-                              Text(
-                                '$formattedTime\n$formattedDate',
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  color: Color(0xFF00344E),
-                                  fontSize: 15,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              const Text("Team B",
-                                  style: TextStyle(
-                                    color: Color(0xFF2A2A2A),
-                                    fontSize: 16,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w600,
-                                  )),
-                              const SizedBox(height: 10),
-                              PhotoPlayer(url: player3!.photoURL!),
-                              const SizedBox(height: 5),
-                              SizedBox(
-                                width: screenWidth * 0.18,
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    player3.playerName,
-                                    style: const TextStyle(
-                                      color: Color(0xFF2A2A2A),
-                                      fontSize: 13,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 15),
-                              PhotoPlayer(url: player4!.photoURL!),
-                              const SizedBox(height: 5),
-                              SizedBox(
-                                width: screenWidth * 0.18,
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    player4.playerName,
-                                    style: const TextStyle(
-                                      color: Color(0xFF2A2A2A),
-                                      fontSize: 13,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0, vertical: 8.0),
-                      child: CarouselSlider(
-                        options: CarouselOptions(
-                          height: 50,
-                          aspectRatio: 16 / 9,
-                          viewportFraction: 0.33,
-                          enableInfiniteScroll: false,
-                          initialPage: 1,
-                          scrollDirection: Axis.horizontal,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Column(
+                              children: [
+                                const Text("Team A",
+                                    style: TextStyle(
+                                      color: Color(0xFF2A2A2A),
+                                      fontSize: 16,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w600,
+                                    )),
+                                const SizedBox(height: 10),
+                                PhotoPlayer(url: player1!.photoURL!),
+                                const SizedBox(height: 5),
+                                SizedBox(
+                                  width: screenWidth * 0.18,
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      player1.playerName,
+                                      style: const TextStyle(
+                                        color: Color(0xFF2A2A2A),
+                                        fontSize: 13,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 15),
+                                PhotoPlayer(url: player2!.photoURL!),
+                                const SizedBox(height: 5),
+                                SizedBox(
+                                  width: screenWidth * 0.18,
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      player2.playerName,
+                                      style: const TextStyle(
+                                        color: Color(0xFF2A2A2A),
+                                        fontSize: 13,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ), // Display player1's name
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  _selectedWinner1 ?? widget.match.winner1,
+                                  style: TextStyle(
+                                    color: Color(0xFF00344E),
+                                    fontSize: 14.sp,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(6.0),
+                                  child: SizedBox(
+                                    height: 40,
+                                    width: 40,
+                                    child:
+                                        Image.asset('assets/images/versus.png'),
+                                  ),
+                                ),
+                                Text(
+                                  '$formattedTime\n$formattedDate',
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    color: Color(0xFF00344E),
+                                    fontSize: 15,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                const Text("Team B",
+                                    style: TextStyle(
+                                      color: Color(0xFF2A2A2A),
+                                      fontSize: 16,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w600,
+                                    )),
+                                const SizedBox(height: 10),
+                                PhotoPlayer(url: player3!.photoURL!),
+                                const SizedBox(height: 5),
+                                SizedBox(
+                                  width: screenWidth * 0.18,
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      player3.playerName,
+                                      style: const TextStyle(
+                                        color: Color(0xFF2A2A2A),
+                                        fontSize: 13,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 15),
+                                PhotoPlayer(url: player4!.photoURL!),
+                                const SizedBox(height: 5),
+                                SizedBox(
+                                  width: screenWidth * 0.18,
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      player4.playerName,
+                                      style: const TextStyle(
+                                        color: Color(0xFF2A2A2A),
+                                        fontSize: 13,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                        items: List.generate(
-                          5,
-                          (index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(3.0),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Container(
-                                  color: const Color.fromARGB(255, 34, 47, 53),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Shot ${index + 1}',
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 13,
-                                          fontFamily: 'Poppins',
-                                          fontWeight: FontWeight.w600,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 8.0),
+                        child: CarouselSlider(
+                          options: CarouselOptions(
+                            height: 50,
+                            aspectRatio: 16 / 9,
+                            viewportFraction: 0.33,
+                            enableInfiniteScroll: false,
+                            initialPage: 1,
+                            scrollDirection: Axis.horizontal,
+                          ),
+                          items: List.generate(
+                            5,
+                            (index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(3.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Container(
+                                    color:
+                                        const Color.fromARGB(255, 34, 47, 53),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Shot ${index + 1}',
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 13,
+                                            fontFamily: 'Poppins',
+                                            fontWeight: FontWeight.w600,
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(
-                                        height: 3,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            teamAScores[index],
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 12,
-                                              fontFamily: 'Poppins',
-                                              fontWeight: FontWeight.w600,
+                                        const SizedBox(
+                                          height: 3,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              teamAScores[index],
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                                fontFamily: 'Poppins',
+                                                fontWeight: FontWeight.w600,
+                                              ),
                                             ),
-                                          ),
-                                          const Text(
-                                            '  :  ',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 12,
-                                              fontFamily: 'Poppins',
-                                              fontWeight: FontWeight.w600,
+                                            const Text(
+                                              '  :  ',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                                fontFamily: 'Poppins',
+                                                fontWeight: FontWeight.w600,
+                                              ),
                                             ),
-                                          ),
-                                          Text(
-                                            teamBScores[index],
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 12,
-                                              fontFamily: 'Poppins',
-                                              fontWeight: FontWeight.w600,
+                                            Text(
+                                              teamBScores[index],
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                                fontFamily: 'Poppins',
+                                                fontWeight: FontWeight.w600,
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            );
-                          },
+                              );
+                            },
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

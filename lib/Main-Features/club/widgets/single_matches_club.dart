@@ -97,10 +97,10 @@ class _ClubSingleMatchesState extends State<ClubSingleMatches> {
                           ? carouselHeight
                           : 0, // Set height based on matches list
                       aspectRatio: 16 / 9,
-                      viewportFraction: 0.7,
+                      viewportFraction: 0.85,
                       initialPage: 0,
                       enableInfiniteScroll: false,
-                      enlargeCenterPage: true,
+                      enlargeCenterPage: false,
                     ),
                     carouselController: _carouselController,
                     items: matches.map((matchData) {

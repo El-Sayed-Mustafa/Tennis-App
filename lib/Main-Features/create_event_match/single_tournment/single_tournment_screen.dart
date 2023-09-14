@@ -75,7 +75,7 @@ class _SingleTournamentScreenState extends State<SingleTournamentScreen> {
                     viewportFraction: 0.7,
                     initialPage: 0,
                     enableInfiniteScroll: false,
-                    enlargeCenterPage: true,
+                    enlargeCenterPage: false,
                   ),
                 ),
               ),
