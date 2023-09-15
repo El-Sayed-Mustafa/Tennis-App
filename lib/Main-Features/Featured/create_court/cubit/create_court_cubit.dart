@@ -24,6 +24,8 @@ class CreateCourtCubit extends Cubit<CreateCourtState> {
     required TextEditingController courtNameController,
     required TextEditingController phoneController,
     required TextEditingController addressController,
+    required String from,
+    required String to,
     Uint8List? selectedImageBytes,
   }) async {
     emit(CreateCourtLoadingState());
@@ -38,7 +40,7 @@ class CreateCourtCubit extends Cubit<CreateCourtState> {
         phoneNumber: phoneNumber,
         availableDay: selectedStartDateTime,
         courtAddress: address,
-        photoURL: '', from: '', to: '', availableTimeSlots: [],
+        photoURL: '', from: from, to: to, availableTimeSlots: [],
         reversedTimeSlots: {},
       );
 

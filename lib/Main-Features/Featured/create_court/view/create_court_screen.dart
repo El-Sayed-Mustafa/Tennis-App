@@ -150,11 +150,12 @@ class CreateCourt extends StatelessWidget {
                                   fromMinutes < toMinutes)) {
                             // "From" is smaller than "To"
                             context.read<CreateCourtCubit>().saveCourtData(
-                                  selectedImageBytes: _selectedImageBytes,
-                                  addressController: addressController,
-                                  courtNameController: courtNameController,
-                                  phoneController: phoneController,
-                                );
+                                selectedImageBytes: _selectedImageBytes,
+                                addressController: addressController,
+                                courtNameController: courtNameController,
+                                phoneController: phoneController,
+                                from: from.value,
+                                to: to.value);
                           } else {
                             showSnackBar(context,
                                 'The From time must be smaller than the To time');
