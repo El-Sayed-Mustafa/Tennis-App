@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/create_court/cubit/create_court_states.dart';
-import 'package:tennis_app/Main-Features/Featured/Event/create_event/view/widgets/club_names.dart';
-import 'package:tennis_app/Main-Features/Featured/Event/create_event/view/widgets/input_end_date.dart';
-import 'package:tennis_app/Main-Features/Featured/Event/create_event/view/widgets/player_level.dart';
-import 'package:tennis_app/Main-Features/Featured/Event/create_event/view/widgets/event_types.dart';
+import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import 'package:tennis_app/core/utils/widgets/hours_of_day.dart';
 import 'package:tennis_app/core/utils/widgets/input_date.dart';
@@ -140,12 +137,28 @@ class CreateCourt extends StatelessWidget {
                       buttonText: S.of(context).Create,
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
-                          context.read<CreateCourtCubit>().saveCourtData(
-                                selectedImageBytes: _selectedImageBytes,
-                                addressController: addressController,
-                                courtNameController: courtNameController,
-                                phoneController: phoneController,
-                              );
+                          // Get the selected hours and minutes from the ValueNotifiers
+                          final fromHours = int.parse(from.value.split(":")[0]);
+                          final fromMinutes =
+                              int.parse(from.value.split(":")[1]);
+                          final toHours = int.parse(to.value.split(":")[0]);
+                          final toMinutes = int.parse(to.value.split(":")[1]);
+
+                          // Compare the "From" and "To" values
+                          if (fromHours < toHours ||
+                              (fromHours == toHours &&
+                                  fromMinutes < toMinutes)) {
+                            // "From" is smaller than "To"
+                            context.read<CreateCourtCubit>().saveCourtData(
+                                  selectedImageBytes: _selectedImageBytes,
+                                  addressController: addressController,
+                                  courtNameController: courtNameController,
+                                  phoneController: phoneController,
+                                );
+                          } else {
+                            showSnackBar(context,
+                                'The From time must be smaller than the To time');
+                          }
                         }
                       },
                     ),
