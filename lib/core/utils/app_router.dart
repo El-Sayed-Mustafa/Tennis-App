@@ -37,7 +37,7 @@ abstract class AppRouter {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return const SplashScreen();
+          return CreateCourt();
         },
         routes: <RouteBase>[
           GoRoute(
