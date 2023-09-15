@@ -21,7 +21,7 @@ class _HoursOfDayDropdownState extends State<HoursOfDayDropdown> {
       return '$hour:00';
     });
 
-    return Container(
+    return SizedBox(
       width: screenWidth * 0.4,
       child: DropdownButtonFormField<String>(
         value: widget.selectedHourNotifier.value,
