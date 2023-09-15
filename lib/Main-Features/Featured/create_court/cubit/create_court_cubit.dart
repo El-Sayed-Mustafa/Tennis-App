@@ -11,10 +11,10 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:tennis_app/Main-Features/Featured/create_court/cubit/create_court_states.dart';
 import 'package:tennis_app/core/methodes/firebase_methodes.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
+import 'package:tennis_app/core/utils/widgets/input_date.dart';
 
 import '../../../../core/utils/widgets/input_date_and_time.dart';
 import '../../../../models/court.dart';
-import '../../Event/create_event/view/widgets/input_end_date.dart';
 
 class CreateCourtCubit extends Cubit<CreateCourtState> {
   CreateCourtCubit(this.context) : super(CreateCourtInitialState());
@@ -33,7 +33,7 @@ class CreateCourtCubit extends Cubit<CreateCourtState> {
       String courtName = courtNameController.text;
       String phoneNumber = phoneController.text;
       String address = addressController.text;
-      DateTime? selectedStartDateTime = context.read<DateTimeCubit>().state;
+      DateTime? selectedStartDateTime = context.read<DateCubit>().state;
       Court court = Court(
         courtId: '', // Assign a court ID here if applicable
         courtName: courtName,
