@@ -1,8 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:typed_data';
-
-import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,8 +10,6 @@ import 'package:tennis_app/Main-Features/Featured/create_court/cubit/create_cour
 import 'package:tennis_app/core/methodes/firebase_methodes.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/input_date.dart';
-
-import '../../../../core/utils/widgets/input_date_and_time.dart';
 import '../../../../models/court.dart';
 
 class CreateCourtCubit extends Cubit<CreateCourtState> {
@@ -34,13 +30,28 @@ class CreateCourtCubit extends Cubit<CreateCourtState> {
       String phoneNumber = phoneController.text;
       String address = addressController.text;
       DateTime? selectedStartDateTime = context.read<DateCubit>().state;
+
+      List<String> availableTimeSlots = [];
+      int fromHours = int.parse(from.split(':')[0]);
+      int toHours = int.parse(to.split(':')[0]);
+
+      // Loop through hours and add each hour range to availableTimeSlots
+      for (int currentHour = fromHours; currentHour < toHours; currentHour++) {
+        String currentHourStr = currentHour.toString().padLeft(2, '0');
+        String nextHourStr = (currentHour + 1).toString().padLeft(2, '0');
+        availableTimeSlots.add('$currentHourStr:00 - $nextHourStr:00');
+      }
+
       Court court = Court(
         courtId: '', // Assign a court ID here if applicable
         courtName: courtName,
         phoneNumber: phoneNumber,
         availableDay: selectedStartDateTime,
         courtAddress: address,
-        photoURL: '', from: from, to: to, availableTimeSlots: [],
+        photoURL: '',
+        from: from,
+        to: to,
+        availableTimeSlots: availableTimeSlots, // Assign the list of hours
         reversedTimeSlots: {},
       );
 
