@@ -4,21 +4,25 @@ class Court {
   final String courtId;
   final String courtName;
   final String phoneNumber;
-  final DateTime startDate;
-  final DateTime endDate;
+  final DateTime availableDay;
   final String courtAddress;
   final String photoURL;
-  final bool reversed; // New property with default value false
+  final String from;
+  final String to;
+  final List<String> availableTimeSlots;
+  final Map<String, String> reversedTimeSlots;
 
   Court({
     required this.courtId,
     required this.courtName,
     required this.phoneNumber,
-    required this.startDate,
-    required this.endDate,
+    required this.availableDay,
     required this.courtAddress,
     required this.photoURL,
-    this.reversed = false, // Optional
+    required this.from,
+    required this.to,
+    required this.availableTimeSlots,
+    required this.reversedTimeSlots,
   });
 
   Map<String, dynamic> toJson() {
@@ -26,26 +30,33 @@ class Court {
       'courtId': courtId,
       'courtName': courtName,
       'phoneNumber': phoneNumber,
-      'startDate': startDate,
-      'endDate': endDate,
+      'availableDay': availableDay,
       'courtAddress': courtAddress,
       'photoURL': photoURL,
-      'reversed': reversed,
+      'from': from,
+      'to': to,
+      'reversedTimeSlots': reversedTimeSlots,
+      'availableTimeSlots': availableTimeSlots,
     };
   }
 
   static Court fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot) {
     final data = snapshot.data()!;
+    final Map<String, String> reversedTimeSlots =
+        Map<String, String>.from(data['reversedTimeSlots'] ?? {});
+    final List<String> availableTimeSlots =
+        List<String>.from(data['availableTimeSlots'] ?? []);
     return Court(
       courtId: snapshot.id,
       courtName: data['courtName'] as String,
       phoneNumber: data['phoneNumber'] as String,
-      startDate: (data['startDate'] as Timestamp).toDate(),
-      endDate: (data['endDate'] as Timestamp).toDate(),
+      availableDay: (data['availableDay'] as Timestamp).toDate(),
       courtAddress: data['courtAddress'] as String,
       photoURL: data['photoURL'] as String,
-      reversed: data['reversed'] as bool? ??
-          false, // Provide a default value of false if 'reversed' is null
+      from: data['from'] as String,
+      to: data['to'] as String,
+      availableTimeSlots: availableTimeSlots,
+      reversedTimeSlots: reversedTimeSlots,
     );
   }
 }

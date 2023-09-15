@@ -19,13 +19,11 @@ class UserCourtItem extends StatelessWidget {
     final double subtitleFontSize = screenHeight * 0.0125;
 
     final DateFormat dateTimeFormat = DateFormat('yyyy-MM-dd HH:mm:ss.SSS');
-    final DateTime startDate = dateTimeFormat.parse(court.startDate.toString());
-    final DateTime endDate = dateTimeFormat.parse(court.endDate.toString());
+    final DateTime startDate =
+        dateTimeFormat.parse(court.availableDay.toString());
 
     final String formattedStartDate =
         DateFormat('MMMM d, yyyy - h:mm a').format(startDate);
-    final String formattedEndDate =
-        DateFormat('MMMM d, yyyy - h:mm a').format(endDate);
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.025),
@@ -82,16 +80,6 @@ class UserCourtItem extends StatelessWidget {
               const MyDivider(),
               Text(
                 '${S.of(context).From_} $formattedStartDate',
-                style: TextStyle(
-                  color: const Color(0xFF6D6D6D),
-                  fontSize: subtitleFontSize,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              SizedBox(height: screenWidth * .015),
-              Text(
-                '${S.of(context).To_} $formattedEndDate',
                 style: TextStyle(
                   color: const Color(0xFF6D6D6D),
                   fontSize: subtitleFontSize,

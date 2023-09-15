@@ -31,8 +31,8 @@ class _CourtItemState extends State<CourtItem> {
   @override
   void initState() {
     super.initState();
-    canTap = !widget.court.reversed;
-
+    // canTap = !widget.court.reversed;
+    //TODO: this
     _courtStream = FirebaseFirestore.instance
         .collection('courts')
         .doc(widget.court.courtId)
@@ -155,15 +155,10 @@ class _CourtItemState extends State<CourtItem> {
 
     final DateFormat dateTimeFormat = DateFormat('yyyy-MM-dd HH:mm:ss.SSS');
     final DateTime startDate =
-        dateTimeFormat.parse(widget.court.startDate.toString());
-    final DateTime endDate =
-        dateTimeFormat.parse(widget.court.endDate.toString());
+        dateTimeFormat.parse(widget.court.availableDay.toString());
 
     final String formattedStartDate =
         DateFormat('MMMM d, yyyy - h:mm a').format(startDate);
-    final String formattedEndDate =
-        DateFormat('MMMM d, yyyy - h:mm a').format(endDate);
-
     return Padding(
       padding: EdgeInsets.symmetric(
           horizontal: screenWidth * 0.041, vertical: screenHeight * 0.01),
@@ -224,16 +219,6 @@ class _CourtItemState extends State<CourtItem> {
                     const MyDivider(),
                     Text(
                       '${S.of(context).From_} $formattedStartDate',
-                      style: TextStyle(
-                        color: const Color(0xFF6D6D6D),
-                        fontSize: subtitleFontSize,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    SizedBox(height: screenWidth * .015),
-                    Text(
-                      '${S.of(context).To_} $formattedEndDate',
                       style: TextStyle(
                         color: const Color(0xFF6D6D6D),
                         fontSize: subtitleFontSize,
