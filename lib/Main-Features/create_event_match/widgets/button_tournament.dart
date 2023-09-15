@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../generated/l10n.dart';
-
 class ButtonTournament extends StatelessWidget {
   const ButtonTournament({
     Key? key,

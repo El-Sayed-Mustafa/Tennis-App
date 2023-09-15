@@ -11,7 +11,6 @@ import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 
 import '../../../core/utils/snackbar.dart';
 import '../../../core/utils/widgets/input_date_and_time.dart';
-import '../../../core/utils/widgets/text_field.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/event.dart';
 import '../../club/widgets/club_event_item.dart';

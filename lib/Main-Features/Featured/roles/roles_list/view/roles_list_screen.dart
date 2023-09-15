@@ -3,8 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/roles/roles_list/view/widgets/list_roles.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
-
-import '../../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../../generated/l10n.dart';
 
 class RolesScreen extends StatelessWidget {

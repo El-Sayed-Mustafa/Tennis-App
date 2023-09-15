@@ -8,8 +8,6 @@ import 'package:tennis_app/Main-Features/Featured/create_club/cubit/create_club_
 import 'package:tennis_app/Main-Features/Featured/create_club/cubit/create_club_state.dart';
 import 'package:tennis_app/Main-Features/Featured/create_club/view/widgets/Age_restriction.dart';
 import 'package:tennis_app/Main-Features/Featured/create_club/view/widgets/club_type.dart';
-import 'package:tennis_app/core/methodes/firebase_methodes.dart';
-import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import 'package:tennis_app/core/utils/widgets/rules_text_field.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';

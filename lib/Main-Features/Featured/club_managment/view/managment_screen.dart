@@ -73,8 +73,6 @@ class _ManagementScreenState extends State<ManagementScreen> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    final GlobalKey<RefreshIndicatorState> refreshIndicatorKey =
-        GlobalKey<RefreshIndicatorState>();
 
     return Scaffold(
       body: BlocBuilder<ClubManagementCubit, ClubManagementState>(

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/club_managment/view/widgets/item_invite.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
-import '../../../../../core/utils/widgets/app_bar_wave.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../../models/club.dart';
 import '../../../../../models/player.dart';

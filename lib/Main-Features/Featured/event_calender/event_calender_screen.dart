@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/Featured/event_calender/widgets/daily_calendar.dart';
-import 'package:tennis_app/Main-Features/Featured/event_calender/widgets/day_crausal.dart';
 import 'package:tennis_app/Main-Features/Featured/event_calender/widgets/weekly_calendar.dart';
 import 'package:tennis_app/Main-Features/Featured/event_calender/widgets/tab_bar_with_indicator.dart';
 import 'package:tennis_app/Main-Features/Featured/event_calender/widgets/schedule_calendar.dart';
@@ -22,7 +20,7 @@ class _CalendarScreenState extends State<CalendarScreen>
   late TabController _tabController;
   late PageController _pageController;
   DateTime selectedDay = DateTime.now();
-  CarouselController _carouselController = CarouselController();
+  // CarouselController _carouselController = CarouselController();
 
   @override
   void initState() {

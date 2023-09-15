@@ -38,7 +38,6 @@ class _ListDoubleMatchesState extends State<ListDoubleMatches> {
         widget.matches.removeWhere((match) => match.matchId == matchId);
       });
     } catch (error) {
-      // ignore: use_build_context_synchronously
       showSnackBar(context, 'Error while deleting');
     }
   }

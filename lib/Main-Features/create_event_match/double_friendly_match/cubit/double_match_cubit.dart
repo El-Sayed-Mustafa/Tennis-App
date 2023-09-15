@@ -2,17 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tennis_app/Main-Features/create_event_match/single_friendly_match/cubit/single_match_state.dart';
 import 'package:tennis_app/generated/l10n.dart';
 import 'package:tennis_app/models/player.dart';
 
 import '../../../Featured/Event/create_event/view/widgets/input_end_date.dart';
 import '../../../../core/methodes/firebase_methodes.dart';
-import '../../../../core/utils/snackbar.dart';
 import '../../../../core/utils/widgets/input_date_and_time.dart';
 import '../../../../models/club.dart';
 import '../../../../models/double_match.dart';
-import '../../../../models/single_match.dart';
 import 'double_match_state.dart';
 
 class DoubleMatchCubit extends Cubit<DoubleMatchState> {
@@ -30,12 +27,6 @@ class DoubleMatchCubit extends Cubit<DoubleMatchState> {
     emit(DoubleMatchInProgress());
 
     try {
-      // Check if all required data is available
-      if (selectedPlayer == null || selectedPlayer2 == null) {
-        // Display a message or alert to inform the user that both players need to be selected
-        return showSnackBar(context, 'You Must Choose Two Players');
-      }
-
       DateTime? selectedStartDateTime = context.read<DateTimeCubit>().state;
       DateTime? selectedEndDateTime = context.read<EndDateTimeCubit>().state;
 

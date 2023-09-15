@@ -8,7 +8,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/create_event_match/services/firebase_method.dart';
 import 'package:tennis_app/Main-Features/create_event_match/single_tournment/edit_single_match.dart';
-import 'package:tennis_app/constants.dart';
 import 'package:tennis_app/core/methodes/firebase_methodes.dart';
 import 'package:tennis_app/core/methodes/roles_manager.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
@@ -129,8 +128,6 @@ class _ClubSingleMatchesState extends State<ClubSingleMatches> {
                                   text: S.of(context).You_Dont_have_Matches,
                                   buttonText: S.of(context).clickToCreateMatch,
                                   onPressed: () async {
-                                    final Method method = Method();
-
                                     bool hasRight = await RolesManager.instance
                                         .doesPlayerHaveRight('Create Match');
                                     if (hasRight) {

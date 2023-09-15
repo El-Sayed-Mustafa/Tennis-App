@@ -6,7 +6,6 @@ import 'package:tennis_app/Main-Features/club/widgets/available_courts_widget.da
 import '../../Featured/Event/create_event/view/widgets/input_end_date.dart';
 import '../../../core/utils/snackbar.dart';
 import '../../../core/utils/widgets/input_date_and_time.dart';
-import '../../../core/utils/widgets/text_field.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/player.dart';
 import '../../../models/single_match.dart';
@@ -221,14 +220,6 @@ class _MatchInputFormState extends State<MatchInputForm> {
     setState(() {
       isSaving = true;
     });
-
-    if (selectedPlayer == null || selectedPlayer2 == null) {
-      showSnackBar(context, 'You Must Choose Two Players');
-      setState(() {
-        isSaving = false;
-      });
-      return;
-    }
 
     DateTime? selectedStartDateTime = context.read<DateTimeCubit>().state;
     DateTime? selectedEndDateTime = context.read<EndDateTimeCubit>().state;

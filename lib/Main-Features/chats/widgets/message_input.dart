@@ -3,8 +3,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:tennis_app/core/utils/snackbar.dart';
-
 import '../../../generated/l10n.dart';
 import '../../../models/message.dart';
 import '../screens/private_chat.dart';

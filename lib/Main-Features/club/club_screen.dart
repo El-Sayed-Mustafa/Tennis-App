@@ -20,7 +20,6 @@ import '../../core/utils/widgets/app_bar_wave.dart';
 import '../../generated/l10n.dart';
 import '../../models/club.dart';
 import '../../models/player.dart';
-import '../home/services/firebase_methods.dart';
 import '../home/widgets/button_home.dart';
 
 import '../../core/methodes/firebase_methodes.dart';

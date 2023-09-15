@@ -80,8 +80,8 @@ class FindMatch {
       playerType: playerType ?? this.playerType,
       matchId: matchId ??
           this.matchId, // Copy the match ID when creating a new instance
-      isActive: isActive ??
-          this.isActive, // Copy the isActive field when creating a new instance
+      isActive:
+          isActive, // Copy the isActive field when creating a new instance
     );
   }
 }

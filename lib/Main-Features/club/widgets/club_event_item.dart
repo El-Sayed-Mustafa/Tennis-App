@@ -5,7 +5,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:tennis_app/Main-Features/Featured/Event/event_details/event_details_screen.dart';
 import 'package:tennis_app/Main-Features/Featured/set_reminder/set_reminder_screen.dart';
 import 'package:tennis_app/Main-Features/club/widgets/text_rich.dart';
-import 'package:tennis_app/constants.dart';
 
 import '../../../core/methodes/firebase_methodes.dart';
 import '../../../core/methodes/global_method.dart';

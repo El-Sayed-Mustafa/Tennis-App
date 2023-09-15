@@ -14,7 +14,6 @@ import 'package:tennis_app/Main-Features/Featured/create_profile/widgets/profile
 import 'package:tennis_app/Main-Features/club/widgets/available_courts_widget.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/chosen_court.dart';
-import 'package:tennis_app/core/utils/widgets/court_item.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import 'package:tennis_app/core/utils/widgets/rules_text_field.dart';
 import 'package:tennis_app/Main-Features/Featured/Event/create_event/view/widgets/event_types.dart';

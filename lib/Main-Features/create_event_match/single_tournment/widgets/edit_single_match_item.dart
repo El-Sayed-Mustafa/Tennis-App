@@ -12,7 +12,6 @@ import 'package:tennis_app/Main-Features/create_event_match/single_friendly_matc
 import 'package:tennis_app/Main-Features/create_event_match/widgets/player_info_widget.dart';
 import 'package:tennis_app/core/utils/widgets/input_date_and_time.dart';
 import 'package:tennis_app/generated/l10n.dart';
-import 'package:tennis_app/models/double_match.dart';
 import 'package:tennis_app/models/player.dart';
 import 'package:tennis_app/models/single_match.dart';
 
