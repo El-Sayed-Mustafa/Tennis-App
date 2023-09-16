@@ -47,8 +47,12 @@ class _AvailableCourtsState extends State<AvailableCourts> {
                 .where('courtId', whereIn: courtIds)
                 .get();
 
-        List<Court> courts =
-            querySnapshot.docs.map((doc) => Court.fromSnapshot(doc)).toList();
+        List<Court> courts = querySnapshot.docs
+            .map((doc) => Court.fromSnapshot(doc))
+            .where((court) => court.availableTimeSlots
+                .isNotEmpty) // Filter courts with available time slots
+            .toList();
+
         setState(() {
           allCourts = courts;
           filteredCourts = List.from(
@@ -57,22 +61,6 @@ class _AvailableCourtsState extends State<AvailableCourts> {
       }
     } catch (error) {
       // Handle the error if needed
-    }
-  }
-
-  void filterCourts(String query) {
-    if (query.isEmpty) {
-      setState(() {
-        filteredCourts = List.from(allCourts);
-      });
-    } else {
-      List<Court> tempFilteredCourts = allCourts
-          .where((court) =>
-              court.courtName.toLowerCase().contains(query.toLowerCase()))
-          .toList();
-      setState(() {
-        filteredCourts = tempFilteredCourts;
-      });
     }
   }
 

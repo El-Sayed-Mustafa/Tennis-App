@@ -8,7 +8,8 @@ import '../../../models/player.dart';
 class AvailableCourtsWidget extends StatelessWidget {
   final TextEditingController? courtNameController; // Optional parameter
   final bool isSaveUser;
-  AvailableCourtsWidget({this.courtNameController, required this.isSaveUser});
+  const AvailableCourtsWidget(
+      {super.key, this.courtNameController, required this.isSaveUser});
 
   @override
   Widget build(BuildContext context) {
