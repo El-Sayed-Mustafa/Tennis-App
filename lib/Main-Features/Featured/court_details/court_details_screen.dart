@@ -208,6 +208,7 @@ class _CourtDetailsScreenState extends State<CourtDetailsScreen> {
             onPressed: () {
               updateFirebaseData();
               updateCourtReservedStatus(widget.court.courtId);
+              GoRouter.of(context).pop();
             },
           ),
         ],
