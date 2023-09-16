@@ -1,17 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/chats/widgets/player_card.dart';
 import 'package:tennis_app/core/methodes/firebase_methodes.dart';
+import 'package:tennis_app/core/utils/widgets/chosen_court.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
+import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import 'package:tennis_app/generated/l10n.dart';
 import 'package:tennis_app/models/court.dart';
 import 'package:tennis_app/models/player.dart'; // Import the Player class
 
 class CourtDetailsScreen extends StatefulWidget {
-  const CourtDetailsScreen({Key? key, required this.court}) : super(key: key);
+  const CourtDetailsScreen(
+      {Key? key, required this.court, required this.isSaveUser})
+      : super(key: key);
   final Court court;
-
+  final bool isSaveUser;
   @override
   _CourtDetailsScreenState createState() => _CourtDetailsScreenState();
 }
@@ -74,12 +79,30 @@ class _CourtDetailsScreenState extends State<CourtDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Court Details'),
-      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          PoPAppBarWave(
+            prefixIcon: IconButton(
+              onPressed: () {
+                GoRouter.of(context).pop();
+              },
+              icon: const Icon(
+                Icons.arrow_back,
+                size: 30,
+                color: Colors.white,
+              ),
+            ),
+            text: S.of(context).Courts,
+            suffixIconPath: '',
+          ),
+          const SizedBox(height: 16),
+          Center(
+            child: ChosenCourt(
+                courtId: widget.court.courtId,
+                isUser: true,
+                isSaveUser: widget.isSaveUser),
+          ),
           const Padding(
             padding: EdgeInsets.all(16.0),
             child: Text(
@@ -87,18 +110,27 @@ class _CourtDetailsScreenState extends State<CourtDetailsScreen> {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 34, 47, 53),
               ),
             ),
           ),
           Expanded(
             child: ListView.builder(
+              padding: EdgeInsets.zero,
               itemCount: widget.court.availableTimeSlots.length,
               itemBuilder: (context, index) {
                 final timeSlot = widget.court.availableTimeSlots[index];
                 final isChecked = selectedTimeSlots.contains(timeSlot);
                 return ListTile(
-                  title: Text(timeSlot),
+                  title: Text(
+                    timeSlot,
+                    style: const TextStyle(
+                        fontSize: 18,
+                        color: Color.fromARGB(255, 86, 84, 84),
+                        fontWeight: FontWeight.w500),
+                  ),
                   leading: Checkbox(
+                    activeColor: const Color.fromARGB(255, 34, 47, 53),
                     value: isChecked,
                     onChanged: (bool? isChecked) {
                       handleCheckboxChanged(timeSlot, isChecked ?? false);
@@ -115,21 +147,25 @@ class _CourtDetailsScreenState extends State<CourtDetailsScreen> {
                 showReversedCourts = !showReversedCourts;
               });
             },
-            child: Text(
-              showReversedCourts
-                  ? 'Reversed Courts (Tap to Hide)'
-                  : 'Reversed Courts (Tap to Show)',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.blue, // Change the color to your preference
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                showReversedCourts
+                    ? 'Reversed Courts (Tap to Hide)'
+                    : 'Reversed Courts (Tap to Show)',
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 34, 47, 53),
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
             ),
           ),
           if (showReversedCourts)
             Expanded(
               child: ListView.builder(
+                padding: EdgeInsets.zero,
                 itemCount: widget.court.reversedTimeSlots.length,
                 itemBuilder: (context, index) {
                   final reversedTimeSlot =
@@ -140,17 +176,18 @@ class _CourtDetailsScreenState extends State<CourtDetailsScreen> {
                     future: fetchPlayer(reversedPlayerId!),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return CircularProgressIndicator();
+                        return const Center(
+                            child: CircularProgressIndicator(
+                          color: const Color.fromARGB(255, 34, 47, 53),
+                        ));
                       } else if (snapshot.hasError) {
                         return Text('Error: ${snapshot.error}');
                       } else if (!snapshot.hasData || snapshot.data == null) {
-                        return Text('Player Data: Unknown');
+                        return const Text('Player Data: Unknown');
                       } else {
                         final player = snapshot.data!;
-                        return ListTile(
-                          title: PlayerCard(player: player),
-                          subtitle: Text('Time Slot: $reversedTimeSlot'),
-                        );
+                        return PlayerCard(
+                            player: player, timeSlot: reversedTimeSlot);
                       }
                     },
                   );
@@ -160,10 +197,49 @@ class _CourtDetailsScreenState extends State<CourtDetailsScreen> {
           const SizedBox(height: 16),
           BottomSheetContainer(
             buttonText: S.of(context).Get_Reserved,
-            onPressed: updateFirebaseData,
+            onPressed: () {
+              updateFirebaseData();
+              updateCourtReservedStatus(widget.court.courtId);
+            },
           ),
         ],
       ),
     );
+  }
+
+  void updateCourtReservedStatus(String courtId) async {
+    try {
+      // Step 1: Get the current user ID from Firebase Authentication
+      User? currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser == null) {
+        return;
+      }
+
+      String currentUserId = currentUser.uid;
+
+      // Step 2: Fetch the player document for the current user
+      DocumentSnapshot<Map<String, dynamic>> playerSnapshot =
+          await FirebaseFirestore.instance
+              .collection('players')
+              .doc(currentUserId)
+              .get();
+
+      if (!playerSnapshot.exists) {
+        return;
+      }
+
+      // Step 3: Update the 'reversedCourtsIds' property with the new courtId
+      Player currentPlayer = Player.fromSnapshot(playerSnapshot);
+      List<String> updatedReversedCourtsIds = currentPlayer.reversedCourtsIds;
+      updatedReversedCourtsIds.add(courtId);
+      print('hi');
+      // Step 4: Save the updated player document back to Firestore
+      await FirebaseFirestore.instance
+          .collection('players')
+          .doc(currentUserId)
+          .update({
+        'reversedCourtsIds': updatedReversedCourtsIds,
+      });
+    } catch (error) {}
   }
 }

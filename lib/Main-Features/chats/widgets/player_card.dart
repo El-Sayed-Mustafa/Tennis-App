@@ -4,8 +4,9 @@ import '../../../models/player.dart';
 
 class PlayerCard extends StatelessWidget {
   final Player player;
+  final String? timeSlot;
 
-  const PlayerCard({required this.player});
+  const PlayerCard({super.key, required this.player, this.timeSlot});
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +71,23 @@ class PlayerCard extends StatelessWidget {
               ),
             ),
           ),
+          if (timeSlot != null) // Check if timeSlot is not null
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    timeSlot.toString(), // Use the provided timeSlot
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Color.fromARGB(255, 86, 84, 84),
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                ],
+              ),
+            ),
         ],
       ),
     );

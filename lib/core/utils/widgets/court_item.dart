@@ -245,8 +245,10 @@ class _CourtItemState extends State<CourtItem> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            CourtDetailsScreen(court: widget.court),
+                        builder: (context) => CourtDetailsScreen(
+                          court: widget.court,
+                          isSaveUser: widget.isSaveUser,
+                        ),
                       ),
                     );
                   },
