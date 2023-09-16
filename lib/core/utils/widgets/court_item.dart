@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:tennis_app/Main-Features/Featured/court_details/court_details_screen.dart';
 
 import '../../../Main-Features/home/widgets/divider.dart';
 import '../../../generated/l10n.dart';
@@ -218,7 +219,7 @@ class _CourtItemState extends State<CourtItem> {
                   children: [
                     const MyDivider(),
                     Text(
-                      '${S.of(context).From_} $formattedStartDate',
+                      '${S.of(context).at} : $formattedStartDate',
                       style: TextStyle(
                         color: const Color(0xFF6D6D6D),
                         fontSize: subtitleFontSize,
@@ -239,149 +240,182 @@ class _CourtItemState extends State<CourtItem> {
                     SizedBox(height: screenWidth * .03),
                   ],
                 ),
-                StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-                  stream: _courtStream,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasError) {
-                      return Text(S.of(context).Error_fetching_data);
-                    }
-
-                    if (!snapshot.hasData) {
-                      return const CircularProgressIndicator();
-                    }
-
-                    final courtData = snapshot.data?.data();
-                    if (courtData == null) {
-                      return Text(S.of(context).No_data_available);
-                    }
-
-                    final bool isReversed = courtData['reversed'] ?? false;
-                    return isReversed
-                        ? Row(
-                            children: [
-                              Container(
-                                width: buttonWidth / 1.4,
-                                height: buttonHeight,
-                                decoration: ShapeDecoration(
-                                  color: const Color(0xFF1B262C),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.circular(buttonHeight / 2),
-                                  ),
-                                ),
-                                child: Center(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      if (canTap) {
-                                        _currentPlayerCourts(
-                                            widget.court.courtId);
-                                        if (widget.isSaveUser) {
-                                          _updateCourtReservedStatus(
-                                              widget.court.courtId);
-                                        }
-                                        canTap = false;
-                                        widget.courtNameController!.text =
-                                            widget.court.courtId;
-                                        setState(() {});
-                                      }
-                                    },
-                                    child: Text(
-                                      S.of(context).Occupied,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: buttonTextFontSize,
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 5),
-                              Container(
-                                width: buttonWidth / 2,
-                                height: buttonHeight,
-                                decoration: ShapeDecoration(
-                                  color:
-                                      Colors.red, // You can customize the color
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.circular(buttonHeight / 2),
-                                  ),
-                                ),
-                                child: Center(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      if (!canTap) {
-                                        _cancelReservation(
-                                            widget.court.courtId);
-                                        widget.courtNameController!.text = '';
-                                        canTap = true; // Reset the tap status
-                                        setState(() {});
-                                      } else {
-                                        setState(() {});
-
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          const SnackBar(
-                                              content: Text(
-                                                  'This Court didn\'t reverse yet.')),
-                                        );
-                                      }
-                                    },
-                                    child: Text(
-                                      S.of(context).cancel,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: buttonTextFontSize,
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              )
-                            ],
-                          )
-                        : Container(
-                            width: buttonWidth / 1.4,
-                            height: buttonHeight,
-                            decoration: ShapeDecoration(
-                              color: const Color(0xFF1B262C),
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(buttonHeight / 2),
-                              ),
-                            ),
-                            child: Center(
-                              child: GestureDetector(
-                                onTap: () {
-                                  if (canTap) {
-                                    _currentPlayerCourts(widget.court.courtId);
-                                    if (widget.isSaveUser) {
-                                      _updateCourtReservedStatus(
-                                          widget.court.courtId);
-                                    }
-                                    canTap = false;
-                                    widget.courtNameController!.text =
-                                        widget.court.courtId;
-                                    setState(() {});
-                                  }
-                                },
-                                child: Text(
-                                  S.of(context).Get_Reserved,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: buttonTextFontSize,
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            CourtDetailsScreen(court: widget.court),
+                      ),
+                    );
                   },
+                  child: Container(
+                    width: buttonWidth / 1.4,
+                    height: buttonHeight,
+                    decoration: ShapeDecoration(
+                      color: const Color(0xFF1B262C),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(buttonHeight / 2),
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        S.of(context).Get_Reserved,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: buttonTextFontSize,
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
+
+                // StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                //   stream: _courtStream,
+                //   builder: (context, snapshot) {
+                //     if (snapshot.hasError) {
+                //       return Text(S.of(context).Error_fetching_data);
+                //     }
+
+                //     if (!snapshot.hasData) {
+                //       return const CircularProgressIndicator();
+                //     }
+
+                //     final courtData = snapshot.data?.data();
+                //     if (courtData == null) {
+                //       return Text(S.of(context).No_data_available);
+                //     }
+
+                //     final bool isReversed = courtData['reversed'] ?? false;
+                //     return isReversed
+                //         ? Row(
+                //             children: [
+                //               Container(
+                //                 width: buttonWidth / 1.4,
+                //                 height: buttonHeight,
+                //                 decoration: ShapeDecoration(
+                //                   color: const Color(0xFF1B262C),
+                //                   shape: RoundedRectangleBorder(
+                //                     borderRadius:
+                //                         BorderRadius.circular(buttonHeight / 2),
+                //                   ),
+                //                 ),
+                //                 child: Center(
+                //                   child: GestureDetector(
+                //                     onTap: () {
+                //                       if (canTap) {
+                //                         _currentPlayerCourts(
+                //                             widget.court.courtId);
+                //                         if (widget.isSaveUser) {
+                //                           _updateCourtReservedStatus(
+                //                               widget.court.courtId);
+                //                         }
+                //                         canTap = false;
+                //                         widget.courtNameController!.text =
+                //                             widget.court.courtId;
+                //                         setState(() {});
+                //                       }
+                //                     },
+                //                     child: Text(
+                //                       S.of(context).Occupied,
+                //                       style: TextStyle(
+                //                         color: Colors.white,
+                //                         fontSize: buttonTextFontSize,
+                //                         fontFamily: 'Roboto',
+                //                         fontWeight: FontWeight.w500,
+                //                       ),
+                //                     ),
+                //                   ),
+                //                 ),
+                //               ),
+                //               const SizedBox(width: 5),
+                //               Container(
+                //                 width: buttonWidth / 2,
+                //                 height: buttonHeight,
+                //                 decoration: ShapeDecoration(
+                //                   color:
+                //                       Colors.red, // You can customize the color
+                //                   shape: RoundedRectangleBorder(
+                //                     borderRadius:
+                //                         BorderRadius.circular(buttonHeight / 2),
+                //                   ),
+                //                 ),
+                //                 child: Center(
+                //                   child: GestureDetector(
+                //                     onTap: () {
+                //                       if (!canTap) {
+                //                         _cancelReservation(
+                //                             widget.court.courtId);
+                //                         widget.courtNameController!.text = '';
+                //                         canTap = true; // Reset the tap status
+                //                         setState(() {});
+                //                       } else {
+                //                         setState(() {});
+
+                //                         ScaffoldMessenger.of(context)
+                //                             .showSnackBar(
+                //                           const SnackBar(
+                //                               content: Text(
+                //                                   'This Court didn\'t reverse yet.')),
+                //                         );
+                //                       }
+                //                     },
+                //                     child: Text(
+                //                       S.of(context).cancel,
+                //                       style: TextStyle(
+                //                         color: Colors.white,
+                //                         fontSize: buttonTextFontSize,
+                //                         fontFamily: 'Roboto',
+                //                         fontWeight: FontWeight.w500,
+                //                       ),
+                //                     ),
+                //                   ),
+                //                 ),
+                //               )
+                //             ],
+                //           )
+                //         : Container(
+                //             width: buttonWidth / 1.4,
+                //             height: buttonHeight,
+                //             decoration: ShapeDecoration(
+                //               color: const Color(0xFF1B262C),
+                //               shape: RoundedRectangleBorder(
+                //                 borderRadius:
+                //                     BorderRadius.circular(buttonHeight / 2),
+                //               ),
+                //             ),
+                //             child: Center(
+                //               child: GestureDetector(
+                //                 onTap: () {
+                //                   if (canTap) {
+                //                     _currentPlayerCourts(widget.court.courtId);
+                //                     if (widget.isSaveUser) {
+                //                       _updateCourtReservedStatus(
+                //                           widget.court.courtId);
+                //                     }
+                //                     canTap = false;
+                //                     widget.courtNameController!.text =
+                //                         widget.court.courtId;
+                //                     setState(() {});
+                //                   }
+                //                 },
+                //                 child: Text(
+                //                   S.of(context).Get_Reserved,
+                //                   style: TextStyle(
+                //                     color: Colors.white,
+                //                     fontSize: buttonTextFontSize,
+                //                     fontFamily: 'Roboto',
+                //                     fontWeight: FontWeight.w500,
+                //                   ),
+                //                 ),
+                //               ),
+                //             ),
+                //           );
+                //   },
+                // ),
                 SizedBox(height: screenHeight * .01),
               ],
             ),

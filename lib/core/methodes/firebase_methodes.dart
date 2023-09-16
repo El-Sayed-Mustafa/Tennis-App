@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:tennis_app/models/court.dart';
 
 import '../../models/message.dart';
 import '../../models/club.dart';
@@ -35,6 +36,17 @@ class Method {
         .get();
 
     return Player.fromSnapshot(snapshot);
+  }
+
+  Future<void> updateCourt(Court court) async {
+    try {
+      final courtDocRef =
+          FirebaseFirestore.instance.collection('courts').doc(court.courtId);
+      await courtDocRef.update(court.toJson());
+    } catch (error) {
+      // Handle the error if needed
+      throw error;
+    }
   }
 
   Future<Club> fetchClubData(String clubId) async {

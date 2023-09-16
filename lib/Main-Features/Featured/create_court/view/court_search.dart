@@ -29,10 +29,7 @@ class _CourtSearchScreenState extends State<CourtSearchScreen> {
   void fetchCourts() async {
     try {
       QuerySnapshot<Map<String, dynamic>> querySnapshot =
-          await FirebaseFirestore.instance
-              .collection('courts')
-              .where('reversed', isEqualTo: false) // Add this filter condition
-              .get();
+          await FirebaseFirestore.instance.collection('courts').get();
 
       List<Court> courts =
           querySnapshot.docs.map((doc) => Court.fromSnapshot(doc)).toList();

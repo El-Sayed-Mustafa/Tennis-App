@@ -10,7 +10,7 @@ class Court {
   final String from;
   final String to;
   final List<String> availableTimeSlots;
-  final Map<String, String> reversedTimeSlots;
+  Map<String, String> reversedTimeSlots;
 
   Court({
     required this.courtId,
