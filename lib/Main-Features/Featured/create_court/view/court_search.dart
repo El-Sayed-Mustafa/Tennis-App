@@ -31,8 +31,11 @@ class _CourtSearchScreenState extends State<CourtSearchScreen> {
       QuerySnapshot<Map<String, dynamic>> querySnapshot =
           await FirebaseFirestore.instance.collection('courts').get();
 
-      List<Court> courts =
-          querySnapshot.docs.map((doc) => Court.fromSnapshot(doc)).toList();
+      List<Court> courts = querySnapshot.docs
+          .map((doc) => Court.fromSnapshot(doc))
+          .where((court) => court.availableTimeSlots
+              .isNotEmpty) // Filter courts with available time slots
+          .toList();
 
       setState(() {
         allCourts = courts;

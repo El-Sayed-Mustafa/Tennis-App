@@ -27,6 +27,7 @@ class _CourtDetailsScreenState extends State<CourtDetailsScreen> {
   final Method firebaseMethods = Method();
 
   bool showReversedCourts = false; // Initially hidden
+  bool showAvailableCourts = true; // Initially hidden
 
   Future<Player?> fetchPlayer(String playerId) async {
     try {
@@ -58,9 +59,6 @@ class _CourtDetailsScreenState extends State<CourtDetailsScreen> {
         selectedTimeSlots.remove(timeSlot); // Remove it from selectedTimeSlots
       }
     });
-
-    // Update the Court data in Firebase Firestore
-    firebaseMethods.updateCourt(widget.court);
   }
 
   void updateFirebaseData() {
@@ -103,43 +101,53 @@ class _CourtDetailsScreenState extends State<CourtDetailsScreen> {
                 isUser: true,
                 isSaveUser: widget.isSaveUser),
           ),
-          const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text(
-              'Available Time Slots:',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 34, 47, 53),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                showAvailableCourts = !showAvailableCourts;
+              });
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                showAvailableCourts
+                    ? 'Available Courts (Tap to Hide)'
+                    : 'Available Courts (Tap to Show)',
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 34, 47, 53),
+                ),
               ),
             ),
           ),
-          Expanded(
-            child: ListView.builder(
-              padding: EdgeInsets.zero,
-              itemCount: widget.court.availableTimeSlots.length,
-              itemBuilder: (context, index) {
-                final timeSlot = widget.court.availableTimeSlots[index];
-                final isChecked = selectedTimeSlots.contains(timeSlot);
-                return ListTile(
-                  title: Text(
-                    timeSlot,
-                    style: const TextStyle(
-                        fontSize: 18,
-                        color: Color.fromARGB(255, 86, 84, 84),
-                        fontWeight: FontWeight.w500),
-                  ),
-                  leading: Checkbox(
-                    activeColor: const Color.fromARGB(255, 34, 47, 53),
-                    value: isChecked,
-                    onChanged: (bool? isChecked) {
-                      handleCheckboxChanged(timeSlot, isChecked ?? false);
-                    },
-                  ),
-                );
-              },
+          if (showAvailableCourts)
+            Expanded(
+              child: ListView.builder(
+                padding: EdgeInsets.zero,
+                itemCount: widget.court.availableTimeSlots.length,
+                itemBuilder: (context, index) {
+                  final timeSlot = widget.court.availableTimeSlots[index];
+                  final isChecked = selectedTimeSlots.contains(timeSlot);
+                  return ListTile(
+                    title: Text(
+                      timeSlot,
+                      style: const TextStyle(
+                          fontSize: 18,
+                          color: Color.fromARGB(255, 86, 84, 84),
+                          fontWeight: FontWeight.w500),
+                    ),
+                    leading: Checkbox(
+                      activeColor: const Color.fromARGB(255, 34, 47, 53),
+                      value: isChecked,
+                      onChanged: (bool? isChecked) {
+                        handleCheckboxChanged(timeSlot, isChecked ?? false);
+                      },
+                    ),
+                  );
+                },
+              ),
             ),
-          ),
           const SizedBox(height: 16),
           GestureDetector(
             onTap: () {
