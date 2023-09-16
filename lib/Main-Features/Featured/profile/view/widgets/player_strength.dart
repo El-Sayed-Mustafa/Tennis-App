@@ -24,9 +24,9 @@ class PlayerStrength extends StatelessWidget {
             ),
             child: Slider(
               value: value,
-              min: 1.0,
+              min: 0.0, // Change the minimum value to 0
               max: 10.0,
-              divisions: 9,
+              divisions: 10, // Change the number of divisions to 10
               onChanged: (newValue) {
                 // You can use this onChanged callback to update the parent widget's state if necessary.
               },
@@ -41,7 +41,7 @@ class PlayerStrength extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                for (int i = 1; i <= 10; i++)
+                for (int i = 0; i <= 10; i++) // Change the loop range to 0-10
                   Text(
                     i.toString(),
                     style: TextStyle(
@@ -60,7 +60,7 @@ class PlayerStrength extends StatelessWidget {
   }
 
   Color _getSliderTrackColor(double value) {
-    final double fraction = (value - 1) / (10 - 1);
+    final double fraction = value / 10.0; // Adjust the fraction calculation
     return Color.lerp(Colors.white, Colors.red, fraction)!;
   }
 }
