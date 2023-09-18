@@ -7,7 +7,8 @@ class DayCarousel extends StatelessWidget {
   final int selectedDay;
   final Function(int) onDayTap;
 
-  DayCarousel({
+  const DayCarousel({
+    super.key,
     required this.carouselController,
     required this.selectedDay,
     required this.onDayTap,
@@ -55,7 +56,7 @@ class DayCarousel extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     ClipRRect(
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(6),
                         topRight: Radius.circular(6),
                       ),

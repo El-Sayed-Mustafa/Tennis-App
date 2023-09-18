@@ -55,7 +55,7 @@ class AgeRestrictionWidget extends StatelessWidget {
             child: Text(
               S.of(context).Age_restriction,
               style: TextStyle(
-                color: Color(0xFF525252),
+                color: const Color(0xFF525252),
                 fontSize: 17.sp,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w500,
@@ -153,7 +153,7 @@ class AgeOptionRow extends StatelessWidget {
           Text(
             label,
             style: TextStyle(
-              color: Color(0xFF00344E),
+              color: const Color(0xFF00344E),
               fontSize: 15.sp,
               fontFamily: 'Poppins',
               fontWeight: FontWeight.w500,

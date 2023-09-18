@@ -186,7 +186,7 @@ class _CourtDetailsScreenState extends State<CourtDetailsScreen> {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(
                             child: CircularProgressIndicator(
-                          color: const Color.fromARGB(255, 34, 47, 53),
+                          color: Color.fromARGB(255, 34, 47, 53),
                         ));
                       } else if (snapshot.hasError) {
                         return Text('Error: ${snapshot.error}');

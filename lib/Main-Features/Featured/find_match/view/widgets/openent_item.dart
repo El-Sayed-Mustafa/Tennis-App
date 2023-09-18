@@ -164,7 +164,7 @@ class _OpponentItemState extends State<OpponentItem> {
           ),
           Column(
             children: [
-              Spacer(),
+              const Spacer(),
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 28.0),
                   child: BottomSheetContainer(

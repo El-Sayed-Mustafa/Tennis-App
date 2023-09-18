@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -43,7 +42,7 @@ class _ClubSingleMatchesState extends State<ClubSingleMatches> {
       // Fetch the current user's player data from Firestore
       User? currentUser = FirebaseAuth.instance.currentUser;
       if (currentUser == null) {
-        showSnackBar(context, 'No user is currently signed in.');
+        showSnackBar(context, S.of(context).noUserIsCurrentlySignedIn);
         return;
       }
 
@@ -73,7 +72,8 @@ class _ClubSingleMatchesState extends State<ClubSingleMatches> {
       // Update the carousel with the fetched data
       setState(() {});
     } catch (error) {
-      showSnackBar(context, 'Error fetching matches data: $error');
+      showSnackBar(
+          context, ' ${S.of(context).errorFetchingMatchesData} $error');
     }
   }
 
@@ -202,11 +202,12 @@ class _ClubSingleMatchesState extends State<ClubSingleMatches> {
                                               (BuildContext dialogContext) {
                                             return ConfirmationDialog(
                                               title:
-                                                  "S.of(context).confirmDelete",
-                                              content:
-                                                  "Are you sure you want to delete this Match?",
-                                              confirmText: "Delete",
-                                              cancelText: "Cancel",
+                                                  S.of(context).confirmDelete,
+                                              content: S
+                                                  .of(context)
+                                                  .areYouSureYouWantToDeleteThisMatch,
+                                              confirmText: S.of(context).delete,
+                                              cancelText: S.of(context).cancel,
                                               onConfirm: () async {
                                                 MatchesFirebaseMethod delete =
                                                     MatchesFirebaseMethod();

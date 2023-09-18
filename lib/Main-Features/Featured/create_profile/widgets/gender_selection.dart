@@ -18,7 +18,7 @@ class GenderSelection extends StatelessWidget {
           width: screenWidth * 0.6,
           height: screenHeight * 0.06,
           decoration: ShapeDecoration(
-            color: Color(0x1EFFA372),
+            color: const Color(0x1EFFA372),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(100),
             ),
@@ -57,7 +57,7 @@ class GenderSelection extends StatelessWidget {
         genderCubit.selectGender(gender);
       },
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         width: MediaQuery.of(context).size.width * 0.25,
         height: MediaQuery.of(context).size.height * 0.035,
         decoration: BoxDecoration(
@@ -68,7 +68,7 @@ class GenderSelection extends StatelessWidget {
                   BoxShadow(
                     color: Colors.black.withOpacity(0.2),
                     blurRadius: 4,
-                    offset: Offset(0, 2),
+                    offset: const Offset(0, 2),
                   ),
                 ]
               : null,
@@ -80,7 +80,7 @@ class GenderSelection extends StatelessWidget {
               fontFamily: 'Poppins',
               fontSize: isSelected ? 18 : 15,
               fontWeight: FontWeight.w500,
-              color: isSelected ? Color(0xFF00344E) : Colors.grey[600],
+              color: isSelected ? const Color(0xFF00344E) : Colors.grey[600],
             ),
           ),
         ),

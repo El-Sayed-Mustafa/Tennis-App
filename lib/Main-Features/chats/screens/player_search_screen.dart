@@ -9,13 +9,15 @@ import '../../../models/player.dart';
 import '../widgets/player_card.dart';
 
 class PlayerSearchScreen extends StatefulWidget {
+  const PlayerSearchScreen({super.key});
+
   @override
   _PlayerSearchScreenState createState() => _PlayerSearchScreenState();
 }
 
 class _PlayerSearchScreenState extends State<PlayerSearchScreen> {
   String _searchQuery = '';
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -82,7 +81,7 @@ class _ClubEventsState extends State<ClubEvents> {
             height: screenHeight * .2,
             width: screenWidth * .8,
           ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         buildPageIndicator(clubEvents.isNotEmpty ? clubEvents.length : 1),
       ],
     );

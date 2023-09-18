@@ -7,7 +7,7 @@ class NotificationApi {
       new AndroidInitializationSettings('app_icon.jpg');
 
   static Future _notificationDetails() async {
-    return NotificationDetails(
+    return const NotificationDetails(
       android: AndroidNotificationDetails(
         'channel id',
         'channel name',

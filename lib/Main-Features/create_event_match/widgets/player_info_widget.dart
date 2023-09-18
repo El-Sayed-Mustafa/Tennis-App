@@ -7,7 +7,8 @@ class PlayerInfoWidget extends StatelessWidget {
   final Player? selectedPlayer;
   final Function(Player) onPlayerSelected;
 
-  PlayerInfoWidget({
+  const PlayerInfoWidget({
+    super.key,
     required this.selectedPlayer,
     required this.onPlayerSelected,
   });
@@ -20,8 +21,8 @@ class PlayerInfoWidget extends StatelessWidget {
     final double itemHeight = screenHeight * .21;
 
     return Container(
-      margin: EdgeInsets.only(top: 8),
-      padding: EdgeInsets.only(top: 8),
+      margin: const EdgeInsets.only(top: 8),
+      padding: const EdgeInsets.only(top: 8),
       width: itemWidth,
       height: itemHeight,
       decoration: BoxDecoration(
@@ -31,7 +32,7 @@ class PlayerInfoWidget extends StatelessWidget {
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
             blurRadius: 6,
-            offset: Offset(0, 3),
+            offset: const Offset(0, 3),
           ),
         ],
       ),
@@ -113,7 +114,7 @@ class PlayerInfoWidget extends StatelessWidget {
                 ),
               );
             },
-            icon: Icon(Icons.ads_click),
+            icon: const Icon(Icons.ads_click),
           ),
         ],
       ),

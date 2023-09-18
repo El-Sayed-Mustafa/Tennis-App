@@ -394,32 +394,6 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        S.of(context).Membership,
-                                        style: const TextStyle(
-                                          color: Color(0xFF15324F),
-                                          fontSize: 18,
-                                          fontFamily: 'Roboto',
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                      Text(
-                                        widget.player.clubRoles['membership'] ??
-                                            S.of(context).Clear,
-                                        style: const TextStyle(
-                                          color: Color(0xFF6D6D6D),
-                                          fontSize: 16,
-                                          fontFamily: 'Roboto',
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  const SizedBox(height: 18),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
                                         S.of(context).Player_Type,
                                         style: const TextStyle(
                                           color: Color(0xFF15324F),
@@ -623,8 +597,8 @@ class _PlayerScreenState extends State<PlayerScreen> {
                             title: S.of(context).confirmDelete,
                             content:
                                 "Are you sure you want to delete this Club?",
-                            confirmText: "Delete",
-                            cancelText: "Cancel",
+                            confirmText: S.of(context).delete,
+                            cancelText: S.of(context).cancel,
                             onConfirm: () async {
                               await removePlayerFromClub(
                                   widget.player.playerId);

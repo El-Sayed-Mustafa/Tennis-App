@@ -46,8 +46,9 @@ class AvailableCourtsWidget extends StatelessWidget {
                       ),
                     );
                   } else if (clubSnapshot.hasError) {
-                    return Text(
-                        'No available data'); // Show appropriate error UI
+                    return Text(S
+                        .of(context)
+                        .noAvailableData); // Show appropriate error UI
                   } else {
                     final clubData = clubSnapshot.data!;
 

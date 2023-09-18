@@ -24,7 +24,7 @@ class PlayerInfo extends StatelessWidget {
     final double imageHeight = (screenHeight + screenWidth) * 0.05;
 
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 8),
+      margin: const EdgeInsets.symmetric(vertical: 8),
       width: itemWidth,
       height: itemHeight,
       decoration: BoxDecoration(
@@ -34,7 +34,7 @@ class PlayerInfo extends StatelessWidget {
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
             blurRadius: 6,
-            offset: Offset(0, 3),
+            offset: const Offset(0, 3),
           ),
         ],
       ),
@@ -87,7 +87,7 @@ class PlayerInfo extends StatelessWidget {
             clubName,
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Color(0xFF6D6D6D),
+              color: const Color(0xFF6D6D6D),
               fontSize: itemHeight * 0.06,
               fontFamily: 'Poppins',
               fontWeight: FontWeight.w500,

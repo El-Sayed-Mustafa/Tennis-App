@@ -29,8 +29,8 @@ class ButtonTournament extends StatelessWidget {
                   height: 50,
                   child: TextButton(
                     style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Color(0xFF00344E)),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          const Color(0xFF00344E)),
                       foregroundColor:
                           MaterialStateProperty.all<Color>(Colors.white),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -40,9 +40,9 @@ class ButtonTournament extends StatelessWidget {
                       ),
                     ),
                     onPressed: finish,
-                    child: Text(
+                    child: const Text(
                       'Finish',
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
                         fontFamily: 'Poppins',
@@ -54,7 +54,7 @@ class ButtonTournament extends StatelessWidget {
               ),
             ),
             Container(
-              padding: EdgeInsets.only(left: 20),
+              padding: const EdgeInsets.only(left: 20),
               height: 80,
               color: Colors.transparent,
               child: Center(
@@ -74,9 +74,9 @@ class ButtonTournament extends StatelessWidget {
                       ),
                     ),
                     onPressed: addMatch,
-                    child: Text(
+                    child: const Text(
                       'Add Match',
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
                         fontFamily: 'Poppins',

@@ -6,7 +6,7 @@ import 'appointment_data_source.dart';
 class DailyCalendar extends StatelessWidget {
   final List<EventModel> events;
 
-  DailyCalendar(this.events);
+  const DailyCalendar(this.events, {super.key});
 
   @override
   Widget build(BuildContext context) {

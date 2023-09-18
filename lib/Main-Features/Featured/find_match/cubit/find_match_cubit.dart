@@ -41,7 +41,7 @@ class FindMatchCubit extends Cubit<FindMatchState> {
             .FirebaseStorage.instance
             .ref()
             .child('matches')
-            .child(DateTime.now().millisecondsSinceEpoch.toString() + '.jpg');
+            .child('${DateTime.now().millisecondsSinceEpoch}.jpg');
         firebase_storage.UploadTask uploadTask =
             storageReference.putData(selectedImageBytes);
         firebase_storage.TaskSnapshot taskSnapshot = await uploadTask;

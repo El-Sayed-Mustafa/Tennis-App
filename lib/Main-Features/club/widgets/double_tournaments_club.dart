@@ -17,7 +17,7 @@ class VerticalCarouselSlider extends StatelessWidget {
   final List<DoubleMatch> matches;
   final String tournamentId;
   const VerticalCarouselSlider(
-      {required this.matches, required this.tournamentId});
+      {super.key, required this.matches, required this.tournamentId});
 
   @override
   Widget build(BuildContext context) {

@@ -86,7 +86,7 @@ class MyReply extends StatelessWidget {
             children: [
               Text(
                 message.content,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Color(0xFF757575),
                   fontSize: 13,
                   fontFamily: 'Poppins',
@@ -94,12 +94,12 @@ class MyReply extends StatelessWidget {
                   letterSpacing: 1,
                 ),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Align(
                 alignment: Alignment.bottomRight,
                 child: Text(
                   formattedDateTime, // Display the formatted date and time
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Color(0xFF707070),
                     fontSize: 12,
                     fontFamily: 'Poppins',

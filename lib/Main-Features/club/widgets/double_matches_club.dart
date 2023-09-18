@@ -1,6 +1,4 @@
 // ignore_for_file: use_build_context_synchronously
-
-import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -203,8 +201,9 @@ class _ClubDoubleMatchesState extends State<ClubDoubleMatches> {
                                             return ConfirmationDialog(
                                               title:
                                                   S.of(context).confirmDelete,
-                                              content:
-                                                  "Are you sure you want to delete this Match?",
+                                              content: S
+                                                  .of(context)
+                                                  .areYouSureYouWantToDeleteThisMatch,
                                               confirmText: S.of(context).delete,
                                               cancelText: S.of(context).cancel,
                                               onConfirm: () async {

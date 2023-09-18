@@ -8,7 +8,7 @@ import '../widgets/match_item.dart';
 import '../widgets/openent_item.dart';
 
 class PeopleRequirement extends StatelessWidget {
-  PeopleRequirement({super.key, required this.match});
+  const PeopleRequirement({super.key, required this.match});
   final FindMatch match;
   @override
   Widget build(BuildContext context) {

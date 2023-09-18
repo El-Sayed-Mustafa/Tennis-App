@@ -55,7 +55,7 @@ class NavigationBarScreen extends StatelessWidget {
                       ),
                     ],
                     color: Colors.white,
-                    buttonBackgroundColor: Color(0xFF15324F),
+                    buttonBackgroundColor: const Color(0xFF15324F),
                     backgroundColor: Colors.transparent,
                     animationCurve: Curves.easeInOut,
                     animationDuration: const Duration(milliseconds: 400),
@@ -78,7 +78,7 @@ class NavigationBarScreen extends StatelessWidget {
           }
         } else {
           // Show a loading indicator while fetching data
-          return Scaffold(
+          return const Scaffold(
             body: Center(
               child: CircularProgressIndicator(),
             ),

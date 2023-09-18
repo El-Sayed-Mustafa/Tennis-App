@@ -69,7 +69,7 @@ class _CreateRoleState extends State<CreateRole> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(S.of(context).Error_creating_role),
-                duration: Duration(seconds: 2),
+                duration: const Duration(seconds: 2),
               ),
             );
           }
@@ -77,8 +77,8 @@ class _CreateRoleState extends State<CreateRole> {
         builder: (context, state) {
           if (state == RoleCreationStatus.loading) {
             // Show the circular progress indicator while creating the role
-            return Scaffold(
-              body: const Center(
+            return const Scaffold(
+              body: Center(
                 child: CircularProgressIndicator(),
               ),
             );
@@ -103,7 +103,7 @@ class _CreateRoleState extends State<CreateRole> {
                             color: Colors.white,
                           ),
                         ),
-                        text: '   Roles',
+                        text: 'Roles',
                         suffixIconPath: '',
                       ),
                       Expanded(

@@ -3209,15 +3209,6 @@ class S {
     );
   }
 
-  String get youHaveAlreadyRatedThisClub {
-    return Intl.message(
-      'You have already rated this club',
-      name: 'youHaveAlreadyRatedThisClub',
-      desc: '',
-      args: [],
-    );
-  }
-
   String get thankYouForYourRating {
     return Intl.message(
       'Thank you for your rating',
@@ -3402,6 +3393,573 @@ class S {
     return Intl.message(
       'Click To Create Club',
       name: 'clickToCreateClub',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get shot {
+    return Intl.message(
+      'Shot',
+      name: 'shot',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get teamA {
+    return Intl.message(
+      'Team A',
+      name: 'teamA',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get teamB {
+    return Intl.message(
+      'Team B',
+      name: 'teamB',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get pleaseEnterAValidDateTime {
+    return Intl.message(
+      'Please enter a valid date and time',
+      name: 'pleaseEnterAValidDateTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get pleaseEnterAValidDate {
+    return Intl.message(
+      'Please enter a valid date',
+      name: 'pleaseEnterAValidDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get reverseCourt {
+    return Intl.message(
+      'Reverse Court',
+      name: 'reverseCourt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get playerA {
+    return Intl.message(
+      'Player A',
+      name: 'playerA',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get playerB {
+    return Intl.message(
+      'Player B',
+      name: 'playerB',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get errorMessageSendingMessage {
+    return Intl.message(
+      'Error sending message:',
+      name: 'errorMessageSendingMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get noClubChatIdFound {
+    return Intl.message(
+      'No clubChatId found for the current user\'s club.',
+      name: 'noClubChatIdFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get errorFetchingClubData {
+    return Intl.message(
+      'Error fetching club data:',
+      name: 'errorFetchingClubData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get noClubIdFound {
+    return Intl.message(
+      'No clubId found for the current user.',
+      name: 'noClubIdFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get errorFetchingUserData {
+    return Intl.message(
+      'Error fetching user data:',
+      name: 'errorFetchingUserData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get private {
+    return Intl.message(
+      'Private',
+      name: 'private',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get groups {
+    return Intl.message(
+      'Groups',
+      name: 'groups',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get errorFetchingGroupDetails {
+    return Intl.message(
+      'Error fetching group details:',
+      name: 'errorFetchingGroupDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get typeYourMessage {
+    return Intl.message(
+      'Type your message...',
+      name: 'typeYourMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get errorFetchingUserGroups {
+    return Intl.message(
+      'Error fetching user groups:',
+      name: 'errorFetchingUserGroups',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get noAvailableData {
+    return Intl.message(
+      'No available data',
+      name: 'noAvailableData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get youAreAlreadyRegisteredForThisEvent {
+    return Intl.message(
+      'You are already registered for this event.',
+      name: 'youAreAlreadyRegisteredForThisEvent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get youHaveAlreadyRatedThisClub {
+    return Intl.message(
+      'You have already rated this club.',
+      name: 'youHaveAlreadyRatedThisClub',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get errorUpdatingClubRating {
+    return Intl.message(
+      'Error updating club rating:',
+      name: 'errorUpdatingClubRating',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get areYouSureYouWantToDeleteThisMatch {
+    return Intl.message(
+      'Are you sure you want to delete this Match?',
+      name: 'areYouSureYouWantToDeleteThisMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get noUserIsCurrentlySignedIn {
+    return Intl.message(
+      'No user is currently signed in.',
+      name: 'noUserIsCurrentlySignedIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get playerDocumentDoesNotExistForCurrentUser {
+    return Intl.message(
+      'Player document does not exist for current user.',
+      name: 'playerDocumentDoesNotExistForCurrentUser',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get errorFetchingMatchesData {
+    return Intl.message(
+      'Error fetching matches data:',
+      name: 'errorFetchingMatchesData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get clubUpcomingMatches {
+    return Intl.message(
+      'Club Upcoming Matches',
+      name: 'clubUpcomingMatches',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get createMatch {
+    return Intl.message(
+      'Create Match',
+      name: 'createMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get doubleMatch {
+    return Intl.message(
+      'Double Match',
+      name: 'doubleMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get yourCourt {
+    return Intl.message(
+      'Your Court',
+      name: 'yourCourt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get youMustChooseTwoPlayersAndCourt {
+    return Intl.message(
+      'You Must Choose Two Players and court',
+      name: 'youMustChooseTwoPlayersAndCourt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get clickToChooseAPlayer {
+    return Intl.message(
+      'Click to choose a player',
+      name: 'clickToChooseAPlayer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get update {
+    return Intl.message(
+      'Update',
+      name: 'update',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get matchUpdatedSuccessfully {
+    return Intl.message(
+      'Match Updated Successfully',
+      name: 'matchUpdatedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get editMatch {
+    return Intl.message(
+      'Edit Match',
+      name: 'editMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get updateMatch {
+    return Intl.message(
+      'Update Match',
+      name: 'updateMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get errorWhileDeleting {
+    return Intl.message(
+      'Error while deleting',
+      name: 'errorWhileDeleting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get tournamentMatches {
+    return Intl.message(
+      'Tournament Matches',
+      name: 'tournamentMatches',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get singleMatch {
+    return Intl.message(
+      'Single Match',
+      name: 'singleMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get finish {
+    return Intl.message(
+      'Finish',
+      name: 'finish',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get addMatch {
+    return Intl.message(
+      'Add Match',
+      name: 'addMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get singleTournament {
+    return Intl.message(
+      'Single Tournament',
+      name: 'singleTournament',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get doubleTournament {
+    return Intl.message(
+      'Double Tournament',
+      name: 'doubleTournament',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get clubInvitations {
+    return Intl.message(
+      'Club Invitations',
+      name: 'clubInvitations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get youDoNotHaveAnyClubInvitationsAvailable {
+    return Intl.message(
+      'You do not have any club invitations available',
+      name: 'youDoNotHaveAnyClubInvitationsAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get errorFetchingMembersData {
+    return Intl.message(
+      'Error fetching members data',
+      name: 'errorFetchingMembersData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get clubDoesNotExist {
+    return Intl.message(
+      'Club does not exist',
+      name: 'clubDoesNotExist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get noClubIdAvailable {
+    return Intl.message(
+      'No club ID available',
+      name: 'noClubIdAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get errorLoadingClubRoles {
+    return Intl.message(
+      'Error loading club roles:',
+      name: 'errorLoadingClubRoles',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get errorFetchingRoleNames {
+    return Intl.message(
+      'Error fetching role names:',
+      name: 'errorFetchingRoleNames',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get youDontHaveRoles {
+    return Intl.message(
+      'You don\'t have Roles',
+      name: 'youDontHaveRoles',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get clickHereToCreateANewRole {
+    return Intl.message(
+      'Click here to create a new role',
+      name: 'clickHereToCreateANewRole',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get successfullyAddedRoleIdToTheClubDocument {
+    return Intl.message(
+      'Successfully added roleId to the club document',
+      name: 'successfullyAddedRoleIdToTheClubDocument',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get errorCreatingRole {
+    return Intl.message(
+      'Error creating role:',
+      name: 'errorCreatingRole',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get createRole {
+    return Intl.message(
+      'Create Role',
+      name: 'createRole',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get describeRights {
+    return Intl.message(
+      'Describe Rights',
+      name: 'describeRights',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get youCanAddMoreRightsToARole {
+    return Intl.message(
+      'You can add more rights to a role',
+      name: 'youCanAddMoreRightsToARole',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get selectTheReminderTime {
+    return Intl.message(
+      'Select the reminder time',
+      name: 'selectTheReminderTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get errorSavingEvent {
+    return Intl.message(
+      'Error saving event:',
+      name: 'errorSavingEvent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get matchPoint {
+    return Intl.message(
+      'Match Point',
+      name: 'matchPoint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get errorFetchingReversedCourts {
+    return Intl.message(
+      'Error fetching reversed courts',
+      name: 'errorFetchingReversedCourts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get areYouSureYouWantToCancelThisReservation {
+    return Intl.message(
+      'Are you sure you want to cancel this reservation',
+      name: 'areYouSureYouWantToCancelThisReservation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get language {
+    return Intl.message(
+      'Language',
+      name: 'language',
       desc: '',
       args: [],
     );

@@ -31,7 +31,7 @@ class NavigationBarItem extends StatelessWidget {
         ),
         if (!isSelected)
           Text(label,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Color.fromARGB(255, 112, 112, 112),
                 fontSize: 10,
                 fontFamily: 'Poppins',

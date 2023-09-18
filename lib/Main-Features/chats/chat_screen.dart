@@ -39,7 +39,7 @@ class _ChatScreenState extends State<ChatScreen>
 
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.only(bottom: 8),
+        padding: const EdgeInsets.only(bottom: 8),
         child: Column(
           children: [
             PoPBarWaveHome(
@@ -60,7 +60,7 @@ class _ChatScreenState extends State<ChatScreen>
               child: Theme(
                 data: Theme.of(context).copyWith(
                   tabBarTheme: TabBarTheme(
-                    labelColor: Color.fromARGB(
+                    labelColor: const Color.fromARGB(
                         255, 8, 40, 67), // Customize selected tab color
                     unselectedLabelColor:
                         const Color(0xFF6F6F6F), // Customize default tab color
@@ -113,8 +113,8 @@ class _ChatScreenState extends State<ChatScreen>
               controller: tabController,
               children: [
                 CommunityScreen(),
-                ClubChatScreen(),
-                GroupPrivateChats(),
+                const ClubChatScreen(),
+                const GroupPrivateChats(),
               ],
             ))
           ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:tennis_app/generated/l10n.dart';
 
 class DateCubit extends Cubit<DateTime> {
   DateCubit(DateTime birthDate, {DateTime? initialDate})
@@ -131,7 +132,7 @@ class _InputDateState extends State<InputDate> {
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter a valid date';
+                          return S.of(context).pleaseEnterAValidDate;
                         }
                         return null;
                       },

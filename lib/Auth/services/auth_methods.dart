@@ -92,37 +92,6 @@ class FirebaseAuthMethods {
     }
   }
 
-// // EMAIL VERIFICATION
-//   Future<void> sendEmailVerification(BuildContext context) async {
-//     try {
-//       final user = FirebaseAuth.instance.currentUser;
-
-//       if (!user!.emailVerified) {
-//         _auth.currentUser!.sendEmailVerification();
-//         showSnackBar(context, S.of(context).email_verification_sent);
-//       } else {
-//         ScaffoldMessenger.of(context).showSnackBar(
-//           SnackBar(content: Text('Email is already verified.')),
-//         );
-//         GoRouter.of(context).push('/createProfile');
-//       }
-//     } catch (e) {
-//       ScaffoldMessenger.of(context).showSnackBar(
-//         SnackBar(content: Text('Error sending email verification: $e')),
-//       );
-//     }
-//   }
-
-  // EMAIL VERIFICATION
-  // Future<void> sendEmailVerification(BuildContext context) async {
-  //   try {
-  //     _auth.currentUser!.sendEmailVerification();
-  //     showSnackBar(context, S.of(context).email_verification_sent);
-  //   } on FirebaseAuthException catch (e) {
-  //     showSnackBar(context, e.message!); // Display error message
-  //   }
-  // }
-
   // EMAIL LOGIN
 
   Future<void> loginWithEmail({

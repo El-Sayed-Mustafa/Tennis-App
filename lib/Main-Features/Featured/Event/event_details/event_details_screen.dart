@@ -262,10 +262,10 @@ class EventDetailsScreen extends StatelessWidget {
                     context: context,
                     builder: (BuildContext dialogContext) {
                       return ConfirmationDialog(
-                        title: "S.of(context).confirmDelete",
-                        content: "Are you sure you want to delete this event?",
-                        confirmText: "Delete",
-                        cancelText: "Cancel",
+                        title: S.of(context).confirmDelete,
+                        content: "Are you sure you want to delete this event",
+                        confirmText: S.of(context).delete,
+                        cancelText: S.of(context).cancel,
                         onConfirm: () {
                           GoRouter.of(context).push('/club');
                           deleteEvent(event.eventId);

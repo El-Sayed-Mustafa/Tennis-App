@@ -10,7 +10,8 @@ class SelectDoubleWinners extends StatefulWidget {
   final Player player4;
   final void Function(Player, Player) onWinnersSelected;
 
-  SelectDoubleWinners({
+  const SelectDoubleWinners({
+    super.key,
     required this.player1,
     required this.player2,
     required this.player3,

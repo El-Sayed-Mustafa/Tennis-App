@@ -220,10 +220,8 @@ class _EditEventState extends State<EditEvent> {
                           ),
                         ),
                         if (_radioValue == 1)
-                          Container(
-                            child: MemberInvites(
-                              playerIds: playerIds,
-                            ),
+                          MemberInvites(
+                            playerIds: playerIds,
                           )
                         else
                           const SizedBox.shrink(),

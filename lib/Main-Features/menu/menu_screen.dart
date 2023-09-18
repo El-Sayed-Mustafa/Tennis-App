@@ -27,7 +27,7 @@ class MenuScreen extends StatelessWidget {
           future: method.getCurrentUser(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
               return Center(
                   child: Text('${S.of(context).error}: ${snapshot.error}'));
@@ -42,7 +42,7 @@ class MenuScreen extends StatelessWidget {
                       text: S.of(context).Menu,
                       suffixIconPath: 'assets/images/app-bar-icon.svg',
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Container(
@@ -77,7 +77,7 @@ class MenuScreen extends StatelessWidget {
                               )),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     ButtonMenu(

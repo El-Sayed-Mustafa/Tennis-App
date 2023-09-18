@@ -84,7 +84,7 @@ class _MessageInputState extends State<MessageInput> {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Row(
           children: [
             Expanded(
@@ -110,7 +110,7 @@ class _MessageInputState extends State<MessageInput> {
                   controller: _textController,
                   decoration: InputDecoration(
                     hintText: S.of(context).enter_your_message,
-                    contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 16),
                     border: InputBorder.none,
                   ),
                   onSubmitted: (_) => _sendMessage(),
@@ -122,18 +122,18 @@ class _MessageInputState extends State<MessageInput> {
               height: 60,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Color(0xFF00344E),
+                color: const Color(0xFF00344E),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.1),
                     blurRadius: 6,
-                    offset: Offset(0, 3),
+                    offset: const Offset(0, 3),
                   ),
                 ],
               ),
               child: IconButton(
                 onPressed: _sendMessage,
-                icon: Icon(Icons.send),
+                icon: const Icon(Icons.send),
                 color: Colors.white,
                 iconSize: 23,
               ),

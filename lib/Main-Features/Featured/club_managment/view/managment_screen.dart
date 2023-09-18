@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -7,9 +9,7 @@ import 'package:tennis_app/Main-Features/Featured/club_managment/view/screens/me
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
 import 'package:tennis_app/core/utils/widgets/rules_text_field.dart';
 import 'package:tennis_app/models/player.dart';
-
 import 'package:go_router/go_router.dart';
-
 import '../../../../core/utils/widgets/custom_button.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../models/club.dart';
@@ -20,7 +20,7 @@ import '../cubit/club_management_cubit.dart';
 import '../cubit/club_management_state.dart';
 
 class ManagementScreen extends StatefulWidget {
-  ManagementScreen({Key? key}) : super(key: key);
+  const ManagementScreen({Key? key}) : super(key: key);
 
   @override
   State<ManagementScreen> createState() => _ManagementScreenState();
@@ -40,7 +40,7 @@ class _ManagementScreenState extends State<ManagementScreen> {
   Future<void> getCurrentUserClubId() async {
     final User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
-      final String? currentUserId = user.uid;
+      final String currentUserId = user.uid;
       final userSnapshot = await FirebaseFirestore.instance
           .collection('players')
           .doc(currentUserId)

@@ -7,6 +7,7 @@ class ButtonMatchItem extends StatelessWidget {
   final VoidCallback onPressed;
 
   const ButtonMatchItem({
+    super.key,
     required this.icon,
     required this.color,
     required this.text,
@@ -30,17 +31,17 @@ class ButtonMatchItem extends StatelessWidget {
           child: Row(
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Icon(
                   icon,
                   color: Colors.black,
                   size: 25,
                 ),
               ),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
               Text(
                 text,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Color(0xFF15324F),
                   fontSize: 18,
                   fontFamily: 'Poppins',

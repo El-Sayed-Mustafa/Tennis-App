@@ -207,9 +207,9 @@ class _EditSingleMatchItemState extends State<EditSingleMatchItem> {
                                   });
                                 },
                               ),
-                              const Text(
-                                'Reverse Court',
-                                style: TextStyle(
+                              Text(
+                                S.of(context).reverseCourt,
+                                style: const TextStyle(
                                   color: Color(0xFF525252),
                                   fontSize: 16,
                                   fontFamily: 'Poppins',

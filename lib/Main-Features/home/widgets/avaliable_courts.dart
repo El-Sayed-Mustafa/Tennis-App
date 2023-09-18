@@ -39,7 +39,7 @@ class _ReversedCourtsState extends State<ReversedCourts> {
       // Fetch the current user's player data from Firestore
       User? currentUser = FirebaseAuth.instance.currentUser;
       if (currentUser == null) {
-        showSnackBar(context, 'No user is currently signed in.');
+        showSnackBar(context, S.of(context).noUserIsCurrentlySignedIn);
         return;
       }
 
@@ -198,8 +198,12 @@ class _ReversedCourtsState extends State<ReversedCourts> {
                                           User? currentUser =
                                               FirebaseAuth.instance.currentUser;
                                           if (currentUser == null) {
-                                            showSnackBar(context,
-                                                'No user is currently signed in.');
+                                            showSnackBar(
+                                                context,
+                                                S
+                                                    .of(context)
+                                                    .noUserIsCurrentlySignedIn);
+
                                             return;
                                           }
 
@@ -207,10 +211,9 @@ class _ReversedCourtsState extends State<ReversedCourts> {
                                               currentUser.uid;
                                           cancelReservation(
                                               court, currentUserId);
-                                          deleteCourtIdFromPlayer(
+                                          await deleteCourtIdFromPlayer(
                                               currentUserId, court.courtId);
                                           GoRouter.of(context).push('/home');
-                                          setState(() {});
                                         },
                                       );
                                     },

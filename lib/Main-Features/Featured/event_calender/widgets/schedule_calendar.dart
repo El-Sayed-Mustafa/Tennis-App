@@ -7,7 +7,7 @@ import 'appointment_data_source.dart';
 class ScheduleCalendar extends StatelessWidget {
   final List<EventModel> events;
 
-  ScheduleCalendar(this.events);
+  const ScheduleCalendar(this.events, {super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -35,7 +35,7 @@ class InviteMember extends StatelessWidget {
               future: getEligiblePlayers(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
+                  return const CircularProgressIndicator();
                 } else if (snapshot.hasError) {
                   return Text('${S.of(context).error}: ${snapshot.error}');
                 } else {
@@ -45,7 +45,7 @@ class InviteMember extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final player = players[index];
                       return Container(
-                        padding: EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: ItemInvite(
                           // Pass the player to the MemberItem widget
                           member: player, club: club,

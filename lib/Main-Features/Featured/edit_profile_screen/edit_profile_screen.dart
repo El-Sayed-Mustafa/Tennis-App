@@ -53,7 +53,8 @@ class _EditProfileState extends State<EditProfile> {
           minute: int.tryParse(timeParts[1]) ?? 0);
     } else {
       // Handle invalid input format gracefully (e.g., set default time)
-      _selectedTime = TimeOfDay(hour: 0, minute: 0); // Default to midnight
+      _selectedTime =
+          const TimeOfDay(hour: 0, minute: 0); // Default to midnight
     }
   }
 

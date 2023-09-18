@@ -1,6 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:tennis_app/generated/l10n.dart';
 
 class DateTimeCubit extends Cubit<DateTime> {
   DateTimeCubit([DateTime? initialDateTime])
@@ -113,7 +116,7 @@ class _InputDateAndTimeState extends State<InputDateAndTime> {
                 ),
               ),
               child: Padding(
-                padding: EdgeInsets.only(left: 24),
+                padding: const EdgeInsets.only(left: 24),
                 child: InkWell(
                   onTap: _selectDateTime,
                   child: IgnorePointer(
@@ -147,7 +150,9 @@ class _InputDateAndTimeState extends State<InputDateAndTime> {
                                 TextEditingController(text: formattedDateTime),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter a valid date and time';
+                                return S
+                                    .of(context)
+                                    .Please_enter_a_valid_date_and_time;
                               }
                               return null;
                             },

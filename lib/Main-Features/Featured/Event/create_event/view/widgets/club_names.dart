@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,7 +47,7 @@ class ClubNamesCubit extends Cubit<List<String>> {
 }
 
 class ClubComboBox extends StatefulWidget {
-  const ClubComboBox({Key? key, required this.controller});
+  const ClubComboBox({super.key, required this.controller});
   final TextEditingController controller;
 
   @override
@@ -90,7 +89,7 @@ class _ClubComboBoxState extends State<ClubComboBox> {
       textFieldConfiguration: TextFieldConfiguration(
         controller: widget.controller,
         decoration: InputDecoration(
-          suffixIcon: Icon(
+          suffixIcon: const Icon(
             Icons.keyboard_arrow_down_rounded,
             size: 30,
             color: Colors.black,

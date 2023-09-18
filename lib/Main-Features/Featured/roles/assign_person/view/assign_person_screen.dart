@@ -15,7 +15,7 @@ import '../../create_role/view/widgets/rights_selector.dart';
 import '../service/club_roles_service.dart';
 
 class AssignPerson extends StatefulWidget {
-  AssignPerson({Key? key}) : super(key: key);
+  const AssignPerson({Key? key}) : super(key: key);
 
   @override
   State<AssignPerson> createState() => _AssignPersonState();

@@ -8,6 +8,7 @@ import 'package:tennis_app/Main-Features/chats/widgets/community_message.dart';
 import 'package:tennis_app/Main-Features/chats/widgets/my_reply.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
+import 'package:tennis_app/generated/l10n.dart';
 import 'package:tennis_app/models/message.dart';
 import 'package:tennis_app/models/player.dart'; // Import the ChatMessage model
 
@@ -42,7 +43,8 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
         });
       }
     } catch (error) {
-      showSnackBar(context, 'Error fetching group details: $error');
+      showSnackBar(
+          context, ' ${S.of(context).errorFetchingGroupDetails} $error');
     }
   }
 
@@ -81,7 +83,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
 
       return null; // Return null if the player does not exist.
     } catch (error) {
-      showSnackBar(context, 'Error fetching player data: $error');
+      showSnackBar(context, '${S.of(context).Player_data_not_found} $error');
       return null;
     }
   }
@@ -165,8 +167,8 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                 Expanded(
                   child: TextField(
                     controller: _messageController,
-                    decoration:
-                        const InputDecoration(hintText: 'Type your message...'),
+                    decoration: InputDecoration(
+                        hintText: S.of(context).typeYourMessage),
                   ),
                 ),
                 IconButton(

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -148,10 +150,9 @@ class _MyEventsState extends State<MyEvents> {
                                           confirmText: S.of(context).delete,
                                           cancelText: S.of(context).cancel,
                                           onConfirm: () async {
-                                            GoRouter.of(context).push('/home');
-
                                             await delete.deleteMyEvent(eventId);
-                                            // ignore: use_build_context_synchronously
+
+                                            GoRouter.of(context).push('/home');
                                           },
                                         );
                                       },

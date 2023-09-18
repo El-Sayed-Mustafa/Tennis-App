@@ -60,7 +60,7 @@ class ChooseClubButtons extends StatelessWidget {
               ),
             ),
             Container(
-              padding: EdgeInsets.only(left: 20),
+              padding: const EdgeInsets.only(left: 20),
               height: 80,
               color: color,
               child: Center(

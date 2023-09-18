@@ -5,9 +5,9 @@ import '../../../../../../models/roles.dart';
 
 Widget buildListView(List<Role> roles) {
   final List<Color> colors = [
-    Color(0x5172B8FF),
-    Color(0x51EE746C),
-    Color(0x51FFA372),
+    const Color(0x5172B8FF),
+    const Color(0x51EE746C),
+    const Color(0x51FFA372),
   ];
 
   final List<IconData> icons = [

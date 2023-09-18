@@ -100,7 +100,7 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
               child: SingleChildScrollView(
                 child: Container(
                   height: screenHeight * .3,
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   decoration: ShapeDecoration(
                     color: const Color(0xFFF3ADAB),
                     shape: RoundedRectangleBorder(
@@ -117,7 +117,7 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
                           children: [
                             Column(
                               children: [
-                                Text("Player A",
+                                Text(S.of(context).playerA,
                                     style: TextStyle(
                                       color: const Color(0xFF2A2A2A),
                                       fontSize: 16.sp,
@@ -181,8 +181,8 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
                             ),
                             Column(
                               children: [
-                                const Text("Player B",
-                                    style: TextStyle(
+                                Text(S.of(context).playerB,
+                                    style: const TextStyle(
                                       color: Color(0xFF2A2A2A),
                                       fontSize: 16,
                                       fontFamily: 'Poppins',
@@ -240,7 +240,7 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          'Shot ${index + 1}',
+                                          ' ${S.of(context).shot} ${index + 1}',
                                           style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 13,

@@ -31,7 +31,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
       return null; // Return null if the player does not exist.
     } catch (error) {
       // ignore: use_build_context_synchronously
-      showSnackBar(context, 'Error fetching player data: $error');
+      showSnackBar(context, '${S.of(context).Player_data_not_found} $error');
       return null;
     }
   }
@@ -176,7 +176,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
       }).then((_) {
         // Message sent successfully, do any additional actions if needed
       }).catchError(
-          (error) => showSnackBar(context, 'Error sending Message : $error'));
+          (error) => showSnackBar(context, '${S.of(context).error} $error'));
       ;
     }
   }

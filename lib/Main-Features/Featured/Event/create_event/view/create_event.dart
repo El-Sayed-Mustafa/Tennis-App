@@ -189,10 +189,8 @@ class _CreateEventState extends State<CreateEvent> {
                           ),
                         ),
                         if (_radioValue == 1)
-                          Container(
-                            child: MemberInvites(
-                              playerIds: playerIds,
-                            ),
+                          MemberInvites(
+                            playerIds: playerIds,
                           )
                         else
                           const SizedBox.shrink(),
@@ -225,7 +223,7 @@ class _CreateEventState extends State<CreateEvent> {
                             if (courtNameController.text.isEmpty) {
                               // Display a message or alert to inform the user that both players need to be selected
                               return showSnackBar(
-                                  context, 'You Must Choose court ');
+                                  context, 'You Must Choose court');
                             }
 
                             if (formKey.currentState!.validate()) {

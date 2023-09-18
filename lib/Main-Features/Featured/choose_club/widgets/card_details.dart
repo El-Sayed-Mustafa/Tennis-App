@@ -45,7 +45,7 @@ class CardDetails extends StatelessWidget {
           Text(
             value,
             style: TextStyle(
-              color: Color(0xFF00344E),
+              color: const Color(0xFF00344E),
               fontSize: containerHeight * 0.3,
               fontFamily: 'Poppins',
               fontWeight: FontWeight.w600,

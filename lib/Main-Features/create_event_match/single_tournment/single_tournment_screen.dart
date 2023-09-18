@@ -32,12 +32,12 @@ class _SingleTournamentScreenState extends State<SingleTournamentScreen> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+    final GlobalKey<RefreshIndicatorState> refreshIndicatorKey =
         GlobalKey<RefreshIndicatorState>();
 
     return Scaffold(
       body: RefreshIndicator(
-        key: _refreshIndicatorKey,
+        key: refreshIndicatorKey,
         onRefresh: () async {
           setState(() {});
         },
@@ -116,29 +116,6 @@ class _SingleTournamentScreenState extends State<SingleTournamentScreen> {
         .add(newMatch.toFirestore());
 
     newMatch.matchId = newMatchRef2.id;
-
-    // // Fetch the players based on their IDs
-    // final player1Doc = await FirebaseFirestore.instance
-    //     .collection('players')
-    //     .doc(newMatch.player1Id)
-    //     .get();
-    // final player2Doc = await FirebaseFirestore.instance
-    //     .collection('players')
-    //     .doc(newMatch.player2Id)
-    //     .get();
-
-    // final player1 = Player.fromSnapshot(player1Doc);
-    // final player2 = Player.fromSnapshot(player2Doc);
-
-    // // Update the players' singleMatchesIds lists with the new match ID
-    // player1.singleMatchesIds.add(newMatch.matchId);
-    // player2.singleMatchesIds.add(newMatch.matchId);
-
-    // // Update the players' documents with the updated lists
-    // await player1Doc.reference
-    //     .update({'singleTournamentsIds': player1.singleMatchesIds});
-    // await player2Doc.reference
-    //     .update({'singleTournamentsIds': player2.singleMatchesIds});
 
     Method method = Method();
     Player currentUser = await method.getCurrentUser();

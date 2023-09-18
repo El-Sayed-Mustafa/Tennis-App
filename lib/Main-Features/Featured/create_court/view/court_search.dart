@@ -140,11 +140,9 @@ class _CourtSearchScreenState extends State<CourtSearchScreen> {
               itemCount: filteredCourts.length,
               itemBuilder: (context, index) {
                 Court court = filteredCourts[index];
-                return Container(
-                  child: CourtItem(
-                    court: court,
-                    isSaveUser: true,
-                  ),
+                return CourtItem(
+                  court: court,
+                  isSaveUser: true,
                 );
               },
             ),

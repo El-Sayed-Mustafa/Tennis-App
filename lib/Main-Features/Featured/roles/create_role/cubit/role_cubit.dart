@@ -86,9 +86,6 @@ class RoleCubit extends Cubit<RoleCreationStatus> {
 
                 showSnackBar(
                     context, 'Successfully added roleId to the club document');
-              } else {
-                showSnackBar(context,
-                    'Club document with clubId $clubId does not exist');
               }
             }
 

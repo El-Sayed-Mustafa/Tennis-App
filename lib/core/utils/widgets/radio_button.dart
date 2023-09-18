@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tennis_app/generated/l10n.dart';
 
 class MyRadioButton extends StatefulWidget {
   const MyRadioButton({super.key, required this.radioValue});
@@ -50,9 +51,9 @@ class _MyRadioButtonState extends State<MyRadioButton> {
                   });
                 },
               ),
-              const Text(
-                'Reverse Court',
-                style: TextStyle(
+              Text(
+                S.of(context).reverseCourt,
+                style: const TextStyle(
                   color: Color(0xFF525252),
                   fontSize: 16,
                   fontFamily: 'Poppins',

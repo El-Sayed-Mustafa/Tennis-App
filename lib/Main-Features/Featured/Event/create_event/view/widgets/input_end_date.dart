@@ -85,9 +85,8 @@ class _InputEndDateAndTimeState extends State<InputEndDateAndTime> {
     return BlocBuilder<EndDateTimeCubit, DateTime>(
       builder: (context, selectedDateTime) {
         final DateFormat dateFormat = DateFormat(widget.format);
-        final String formattedDateTime = dateFormat.format(_selectedDateTime) +
-            ' ' +
-            _selectedTime.format(context);
+        final String formattedDateTime =
+            '${dateFormat.format(_selectedDateTime)} ${_selectedTime.format(context)}';
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,7 +114,7 @@ class _InputEndDateAndTimeState extends State<InputEndDateAndTime> {
                 ),
               ),
               child: Padding(
-                padding: EdgeInsets.only(left: 24),
+                padding: const EdgeInsets.only(left: 24),
                 child: InkWell(
                   onTap: _selectDateTime,
                   child: IgnorePointer(

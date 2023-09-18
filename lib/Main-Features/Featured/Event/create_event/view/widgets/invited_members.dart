@@ -4,7 +4,7 @@ import 'package:tennis_app/Main-Features/Featured/Event/create_event/view/widget
 class MemberInvites extends StatefulWidget {
   final List<String> playerIds;
 
-  MemberInvites({
+  const MemberInvites({
     Key? key,
     required this.playerIds,
   }) : super(key: key);

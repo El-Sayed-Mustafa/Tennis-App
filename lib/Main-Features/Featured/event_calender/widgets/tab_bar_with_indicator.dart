@@ -4,7 +4,8 @@ class TabBarWithIndicator extends StatelessWidget {
   final TabController tabController;
   final List<String> tabs;
 
-  TabBarWithIndicator({
+  const TabBarWithIndicator({
+    super.key,
     required this.tabController,
     required this.tabs,
   });

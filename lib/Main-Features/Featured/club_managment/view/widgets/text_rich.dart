@@ -27,7 +27,7 @@ class MyTextRich extends StatelessWidget {
           TextSpan(
             text: ': ',
             style: TextStyle(
-              color: Color(0xFF00344E),
+              color: const Color(0xFF00344E),
               fontSize: fontSize2,
               fontWeight: FontWeight.w500,
             ),

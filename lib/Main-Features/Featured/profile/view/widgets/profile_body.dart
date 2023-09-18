@@ -68,7 +68,7 @@ class ProfileBody extends StatelessWidget {
                 height: screenHeight * .2,
                 child: const NoData(
                   buttonText: 'Click here to join',
-                  text: 'You not participated in any class',
+                  text: 'You not participated in any club',
                 ),
               );
             } else {
@@ -85,7 +85,7 @@ class ProfileBody extends StatelessWidget {
                       )
                     : const NoData(
                         buttonText: 'Click here to join',
-                        text: 'You not participated in any class',
+                        text: 'You not participated in any club',
                       ), // Show the NoData widget when clubData is null
               );
             }

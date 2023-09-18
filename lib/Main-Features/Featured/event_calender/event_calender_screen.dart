@@ -11,6 +11,8 @@ import '../set_reminder/model/database_helper.dart';
 import '../set_reminder/model/evenet_data.dart';
 
 class CalendarScreen extends StatefulWidget {
+  const CalendarScreen({super.key});
+
   @override
   _CalendarScreenState createState() => _CalendarScreenState();
 }

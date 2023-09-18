@@ -554,5 +554,116 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("No Clubs data available"),
         "clickToCreateClub":
             MessageLookupByLibrary.simpleMessage("Click To Create Club"),
+        "Shot": MessageLookupByLibrary.simpleMessage("Shot"),
+        "TeamA": MessageLookupByLibrary.simpleMessage("Team A"),
+        "TeamB": MessageLookupByLibrary.simpleMessage("Team B"),
+        "PleaseEnterAValidDateTime": MessageLookupByLibrary.simpleMessage(
+            "Please enter a valid date and time"),
+        "PleaseEnterAValidDate":
+            MessageLookupByLibrary.simpleMessage("Please enter a valid date"),
+        "ReverseCourt": MessageLookupByLibrary.simpleMessage("Reverse Court"),
+        "PlayerA": MessageLookupByLibrary.simpleMessage("Player A"),
+        "PlayerB": MessageLookupByLibrary.simpleMessage("Player B"),
+        "ErrorMessageSendingMessage":
+            MessageLookupByLibrary.simpleMessage("Error sending message:"),
+        "NoClubChatIdFound": MessageLookupByLibrary.simpleMessage(
+            "No clubChatId found for the current user's club."),
+        "ErrorFetchingClubData":
+            MessageLookupByLibrary.simpleMessage("Error fetching club data:"),
+        "NoClubIdFound": MessageLookupByLibrary.simpleMessage(
+            "No clubId found for the current user."),
+        "ErrorFetchingUserData":
+            MessageLookupByLibrary.simpleMessage("Error fetching user data:"),
+        "Private": MessageLookupByLibrary.simpleMessage("Private"),
+        "Groups": MessageLookupByLibrary.simpleMessage("Groups"),
+        "ErrorFetchingGroupDetails": MessageLookupByLibrary.simpleMessage(
+            "Error fetching group details:"),
+        "TypeYourMessage":
+            MessageLookupByLibrary.simpleMessage("Type your message..."),
+        "ErrorFetchingUserGroups":
+            MessageLookupByLibrary.simpleMessage("Error fetching user groups:"),
+        "ClubRate": MessageLookupByLibrary.simpleMessage("Club Rate"),
+        "NoAvailableData":
+            MessageLookupByLibrary.simpleMessage("No available data"),
+        "YouAreAlreadyRegisteredForThisEvent":
+            MessageLookupByLibrary.simpleMessage(
+                "You are already registered for this event."),
+        "ErrorUpdatingClubRating":
+            MessageLookupByLibrary.simpleMessage("Error updating club rating:"),
+        "AreYouSureYouWantToDeleteThisMatch":
+            MessageLookupByLibrary.simpleMessage(
+                "Are you sure you want to delete this Match?"),
+        "NoUserIsCurrentlySignedIn": MessageLookupByLibrary.simpleMessage(
+            "No user is currently signed in."),
+        "PlayerDocumentDoesNotExistForCurrentUser":
+            MessageLookupByLibrary.simpleMessage(
+                "Player document does not exist for current user."),
+        "ErrorFetchingMatchesData": MessageLookupByLibrary.simpleMessage(
+            "Error fetching matches data:"),
+        "ClubUpcomingMatches":
+            MessageLookupByLibrary.simpleMessage("Club Upcoming Matches"),
+        "CreateMatch": MessageLookupByLibrary.simpleMessage("Create Match"),
+        "DoubleMatch": MessageLookupByLibrary.simpleMessage("Double Match"),
+        "YourCourt": MessageLookupByLibrary.simpleMessage("Your Court"),
+        "YouMustChooseTwoPlayersAndCourt": MessageLookupByLibrary.simpleMessage(
+            "You Must Choose Two Players and court"),
+        "ClickToChooseAPlayer":
+            MessageLookupByLibrary.simpleMessage("Click to choose a player"),
+        "Update": MessageLookupByLibrary.simpleMessage("Update"),
+        "MatchUpdatedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("Match Updated Successfully"),
+        "EditMatch": MessageLookupByLibrary.simpleMessage("Edit Match"),
+        "UpdateMatch": MessageLookupByLibrary.simpleMessage("Update Match"),
+        "ErrorWhileDeleting":
+            MessageLookupByLibrary.simpleMessage("Error while deleting"),
+        "TournamentMatches":
+            MessageLookupByLibrary.simpleMessage("Tournament Matches"),
+        "SingleMatch": MessageLookupByLibrary.simpleMessage("Single Match"),
+        "Finish": MessageLookupByLibrary.simpleMessage("Finish"),
+        "AddMatch": MessageLookupByLibrary.simpleMessage("Add Match"),
+        "SingleTournament":
+            MessageLookupByLibrary.simpleMessage("Single Tournament"),
+        "DoubleTournament":
+            MessageLookupByLibrary.simpleMessage("Double Tournament"),
+        "ClubInvitations":
+            MessageLookupByLibrary.simpleMessage("Club Invitations"),
+        "YouDoNotHaveAnyClubInvitationsAvailable":
+            MessageLookupByLibrary.simpleMessage(
+                "You do not have any club invitations available"),
+        "ErrorFetchingMembersData":
+            MessageLookupByLibrary.simpleMessage("Error fetching members data"),
+        "ClubDoesNotExist":
+            MessageLookupByLibrary.simpleMessage("Club does not exist"),
+        "NoClubIdAvailable":
+            MessageLookupByLibrary.simpleMessage("No club ID available"),
+        "ErrorLoadingClubRoles":
+            MessageLookupByLibrary.simpleMessage("Error loading club roles:"),
+        "ErrorFetchingRoleNames":
+            MessageLookupByLibrary.simpleMessage("Error fetching role names:"),
+        "YouDontHaveRoles":
+            MessageLookupByLibrary.simpleMessage("You don't have Roles"),
+        "ClickHereToCreateANewRole": MessageLookupByLibrary.simpleMessage(
+            "Click here to create a new role"),
+        "SuccessfullyAddedRoleIdToTheClubDocument":
+            MessageLookupByLibrary.simpleMessage(
+                "Successfully added roleId to the club document"),
+        "ErrorCreatingRole":
+            MessageLookupByLibrary.simpleMessage("Error creating role:"),
+        "CreateRole": MessageLookupByLibrary.simpleMessage("Create Role"),
+        "DescribeRights":
+            MessageLookupByLibrary.simpleMessage("Describe Rights"),
+        "YouCanAddMoreRightsToARole": MessageLookupByLibrary.simpleMessage(
+            "You can add more rights to a role"),
+        "SelectTheReminderTime":
+            MessageLookupByLibrary.simpleMessage("Select the reminder time"),
+        "ErrorSavingEvent":
+            MessageLookupByLibrary.simpleMessage("Error saving event:"),
+        "MatchPoint": MessageLookupByLibrary.simpleMessage("Match Point"),
+        "ErrorFetchingReversedCourts": MessageLookupByLibrary.simpleMessage(
+            "Error fetching reversed courts:"),
+        "AreYouSureYouWantToCancelThisReservation":
+            MessageLookupByLibrary.simpleMessage(
+                "Are you sure you want to cancel this reservation?"),
+        "Language": MessageLookupByLibrary.simpleMessage("Language"),
       };
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:tennis_app/generated/l10n.dart';
 
 import '../../../../core/utils/widgets/clipper.dart';
 
@@ -68,9 +69,9 @@ class WaveClipperScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'WELCOME',
-                  style: TextStyle(
+                Text(
+                  S.of(context).welcome,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 36,
                     fontFamily: 'Poppins',

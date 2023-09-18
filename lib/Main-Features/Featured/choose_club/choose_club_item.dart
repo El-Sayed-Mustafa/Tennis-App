@@ -46,7 +46,7 @@ class ChooseClubItem extends StatelessWidget {
               ),
               Text(
                 club.clubName,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                   fontSize: 20,
                   fontFamily: 'Poppins',
@@ -65,7 +65,7 @@ class ChooseClubItem extends StatelessWidget {
                 child: Text(
                   club.address,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Color(0xFF6D6D6D),
                     fontSize: 14,
                     fontFamily: 'Roboto',

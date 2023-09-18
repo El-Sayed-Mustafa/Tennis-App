@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -29,9 +31,9 @@ class _ChooseLanguageState extends State<ChooseLanguage> {
     ];
 
     final List<String> languages = [
-      'Deutsch',
+      'Deutsche',
       'English',
-      'Española',
+      'Español',
     ];
 
     final double screenWidth = MediaQuery.of(context).size.width;

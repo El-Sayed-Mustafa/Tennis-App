@@ -27,7 +27,7 @@ class ProfileScreen extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 // While waiting for the user data to be fetched
-                return Container(
+                return SizedBox(
                   height: screenHeight,
                   child: const Center(
                     child: CircularProgressIndicator(),

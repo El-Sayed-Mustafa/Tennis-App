@@ -4,8 +4,8 @@ class HoursOfDayDropdown extends StatefulWidget {
   final String labelText;
   final ValueNotifier<String> selectedHourNotifier;
 
-  HoursOfDayDropdown(
-      {required this.labelText, required this.selectedHourNotifier});
+  const HoursOfDayDropdown(
+      {super.key, required this.labelText, required this.selectedHourNotifier});
 
   @override
   _HoursOfDayDropdownState createState() => _HoursOfDayDropdownState();
@@ -38,11 +38,12 @@ class _HoursOfDayDropdownState extends State<HoursOfDayDropdown> {
         isDense: true,
         itemHeight: 50,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
           labelText: widget.labelText,
           fillColor: Colors.white,
           filled: true,
-          border: OutlineInputBorder(
+          border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(100.0),
             ),

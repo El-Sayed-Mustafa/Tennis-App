@@ -6,7 +6,7 @@ import 'appointment_data_source.dart';
 class MonthlyCalendar extends StatelessWidget {
   final List<EventModel> events;
 
-  MonthlyCalendar(this.events);
+  const MonthlyCalendar(this.events, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class MonthlyCalendar extends StatelessWidget {
       dataSource:
           dataSource, // dataSource: AppointmentDataSource(appointments),
       allowAppointmentResize: true, view: CalendarView.month,
-      monthViewSettings: MonthViewSettings(showAgenda: true),
+      monthViewSettings: const MonthViewSettings(showAgenda: true),
     );
   }
 }

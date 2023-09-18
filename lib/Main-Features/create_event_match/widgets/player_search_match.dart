@@ -17,7 +17,7 @@ class PlayerSearchMatch extends StatefulWidget {
 
 class _PlayerSearchMatchState extends State<PlayerSearchMatch> {
   String _searchQuery = '';
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

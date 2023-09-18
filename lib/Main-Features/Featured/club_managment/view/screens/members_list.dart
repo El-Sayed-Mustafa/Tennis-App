@@ -6,7 +6,7 @@ import '../widgets/member_item.dart';
 class HorizontalListView extends StatefulWidget {
   final List<Player> memberNames;
 
-  HorizontalListView({required this.memberNames});
+  const HorizontalListView({super.key, required this.memberNames});
 
   @override
   State<HorizontalListView> createState() => _HorizontalListViewState();
@@ -37,13 +37,13 @@ class _HorizontalListViewState extends State<HorizontalListView> {
           replacement: Center(
             child: Text(
               S.of(context).You_dont_have_any_members,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 color: Colors.grey,
               ),
             ),
           ), // Show only if there are members
-          child: Container(
+          child: SizedBox(
             height: screenHeight * 0.325, // Adjust the height as needed
             child: PageView.builder(
               controller: _pageController,

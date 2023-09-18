@@ -31,7 +31,7 @@ class ClubTypeInput extends StatelessWidget {
             padding: EdgeInsets.only(bottom: 2.0, left: screenWidth * .055),
             child: Text(
               S.of(context).Club_Type,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Color(0xFF525252),
                 fontSize: 15,
                 fontFamily: 'Poppins',

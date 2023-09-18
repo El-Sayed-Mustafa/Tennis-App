@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/home/widgets/avaliable_courts.dart';
@@ -35,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+    final GlobalKey<RefreshIndicatorState> refreshIndicatorKey =
         GlobalKey<RefreshIndicatorState>();
 
     final sectionTitleSize = screenWidth * 0.052;
@@ -44,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       body: RefreshIndicator(
-        key: _refreshIndicatorKey,
+        key: refreshIndicatorKey,
         onRefresh: () async {
           setState(() {});
         },

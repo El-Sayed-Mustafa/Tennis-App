@@ -205,9 +205,9 @@ class _PlayerMatchItemState extends State<PlayerMatchItem> {
                                   });
                                 },
                               ),
-                              const Text(
-                                'Reverse Court',
-                                style: TextStyle(
+                              Text(
+                                S.of(context).reverseCourt,
+                                style: const TextStyle(
                                   color: Color(0xFF525252),
                                   fontSize: 16,
                                   fontFamily: 'Poppins',
@@ -228,7 +228,7 @@ class _PlayerMatchItemState extends State<PlayerMatchItem> {
                       const SizedBox.shrink(),
                     SizedBox(height: screenHeight * .015),
                     BottomSheetContainer(
-                      buttonText: 'Create',
+                      buttonText: S.of(context).create,
                       onPressed: () {
                         if (_selectedPlayer == null ||
                             _selectedPlayer2 == null ||

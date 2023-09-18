@@ -23,7 +23,7 @@ class PlayerSearchInvite extends StatefulWidget {
 
 class _PlayerSearchInviteState extends State<PlayerSearchInvite> {
   String _searchQuery = '';
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +51,7 @@ class _PlayerSearchInviteState extends State<PlayerSearchInvite> {
               decoration: InputDecoration(
                 hintText: S.of(context).search_players,
                 suffixIcon: IconButton(
-                  icon: Icon(Icons.clear),
+                  icon: const Icon(Icons.clear),
                   onPressed: () {
                     _searchController.clear();
                     _searchQuery = '';
@@ -88,7 +88,7 @@ class _PlayerSearchInviteState extends State<PlayerSearchInvite> {
       stream: FirebaseFirestore.instance.collection('players').snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
 
         if (snapshot.hasError) {

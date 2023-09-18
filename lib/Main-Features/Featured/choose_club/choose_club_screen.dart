@@ -103,7 +103,7 @@ class _ClubInvitationsPageState extends State<ClubInvitationsPage> {
 
                 clubInvitationsIds =
                     List<String>.from(playerData['clubInvitationsIds'] ?? []);
-                if (clubInvitationsIds.length == 0) {
+                if (clubInvitationsIds.isEmpty) {
                   return Column(
                     children: [
                       PoPAppBarWave(

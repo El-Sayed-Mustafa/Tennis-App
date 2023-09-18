@@ -2,7 +2,6 @@
 
 import 'dart:typed_data';
 
-import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -199,10 +198,7 @@ class CreateEventCubit extends Cubit<CreateEventState> {
         await playerDocRef.update({
           'eventIds': FieldValue.arrayUnion([eventId]),
         });
-      } else {
-        // Handle the case when the player is not found with the given ID.
-        showSnackBar(context, 'Player not found with the ID: $playerId');
-      }
+      } else {}
     }
   }
 }

@@ -15,7 +15,7 @@ import '../widgets/player_info_widget.dart';
 class MatchInputForm extends StatefulWidget {
   final void Function(SingleMatch newMatch) onSave;
 
-  MatchInputForm({super.key, required this.onSave});
+  const MatchInputForm({super.key, required this.onSave});
 
   @override
   _MatchInputFormState createState() => _MatchInputFormState();
@@ -153,9 +153,9 @@ class _MatchInputFormState extends State<MatchInputForm> {
                             });
                           },
                         ),
-                        const Text(
-                          'Reverse Court',
-                          style: TextStyle(
+                        Text(
+                          S.of(context).reverseCourt,
+                          style: const TextStyle(
                             color: Color(0xFF525252),
                             fontSize: 16,
                             fontFamily: 'Poppins',
@@ -204,7 +204,7 @@ class _MatchInputFormState extends State<MatchInputForm> {
         if (isSaving)
           Container(
             color: Colors.black.withOpacity(0.5),
-            child: Center(
+            child: const Center(
               child: CircularProgressIndicator(),
             ),
           ),

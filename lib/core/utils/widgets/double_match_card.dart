@@ -79,10 +79,10 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Padding(
-                  padding: EdgeInsets.all(5.0),
-                  child: Text("Shot 1",
-                      style: TextStyle(
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Text("${S.of(context).shot} 1",
+                      style: const TextStyle(
                         color: Color(0xFF2A2A2A),
                         fontSize: 16,
                         fontFamily: 'Poppins',
@@ -95,9 +95,9 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                       child: TextFormField(
                         controller: teamAScoreController1,
                         keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                          labelText: 'Team A',
-                          border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                          labelText: S.of(context).teamA,
+                          border: const OutlineInputBorder(),
                         ),
                       ),
                     ),
@@ -107,9 +107,9 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                       child: TextFormField(
                         controller: teamBScoreController1,
                         keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                          labelText: 'Team B',
-                          border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                          labelText: S.of(context).teamB,
+                          border: const OutlineInputBorder(),
                         ),
                       ),
                     ),
@@ -118,10 +118,10 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                 const SizedBox(
                   height: 10,
                 ),
-                const Padding(
-                  padding: EdgeInsets.all(5.0),
-                  child: Text("Shot 2",
-                      style: TextStyle(
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Text("${S.of(context).shot} 2",
+                      style: const TextStyle(
                         color: Color(0xFF2A2A2A),
                         fontSize: 16,
                         fontFamily: 'Poppins',
@@ -134,9 +134,9 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                       child: TextFormField(
                         controller: teamAScoreController2,
                         keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                          labelText: 'Team A',
-                          border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                          labelText: S.of(context).teamA,
+                          border: const OutlineInputBorder(),
                         ),
                       ),
                     ),
@@ -146,9 +146,9 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                       child: TextFormField(
                         controller: teamBScoreController2,
                         keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                          labelText: 'Team B',
-                          border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                          labelText: S.of(context).teamB,
+                          border: const OutlineInputBorder(),
                         ),
                       ),
                     ),
@@ -157,10 +157,10 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                 const SizedBox(
                   height: 10,
                 ),
-                const Padding(
-                  padding: EdgeInsets.all(5.0),
-                  child: Text("Shot 3",
-                      style: TextStyle(
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Text("${S.of(context).shot} 3",
+                      style: const TextStyle(
                         color: Color(0xFF2A2A2A),
                         fontSize: 16,
                         fontFamily: 'Poppins',
@@ -173,9 +173,9 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                       child: TextFormField(
                         controller: teamAScoreController3,
                         keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                          labelText: 'Team A',
-                          border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                          labelText: S.of(context).teamA,
+                          border: const OutlineInputBorder(),
                         ),
                       ),
                     ),
@@ -185,9 +185,9 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                       child: TextFormField(
                         controller: teamBScoreController3,
                         keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                          labelText: 'Team B',
-                          border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                          labelText: S.of(context).teamB,
+                          border: const OutlineInputBorder(),
                         ),
                       ),
                     ),
@@ -196,10 +196,10 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                 const SizedBox(
                   height: 10,
                 ),
-                const Padding(
-                  padding: EdgeInsets.all(5.0),
-                  child: Text("Shot 4",
-                      style: TextStyle(
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Text("${S.of(context).shot} 4",
+                      style: const TextStyle(
                         color: Color(0xFF2A2A2A),
                         fontSize: 16,
                         fontFamily: 'Poppins',
@@ -212,9 +212,9 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                       child: TextFormField(
                         controller: teamAScoreController4,
                         keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                          labelText: 'Team A',
-                          border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                          labelText: S.of(context).teamA,
+                          border: const OutlineInputBorder(),
                         ),
                       ),
                     ),
@@ -224,9 +224,9 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                       child: TextFormField(
                         controller: teamBScoreController4,
                         keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                          labelText: 'Team B',
-                          border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                          labelText: S.of(context).teamB,
+                          border: const OutlineInputBorder(),
                         ),
                       ),
                     ),
@@ -235,10 +235,10 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                 const SizedBox(
                   height: 10,
                 ),
-                const Padding(
-                  padding: EdgeInsets.all(5.0),
-                  child: Text("Shot 5",
-                      style: TextStyle(
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Text("${S.of(context).shot} 5",
+                      style: const TextStyle(
                         color: Color(0xFF2A2A2A),
                         fontSize: 16,
                         fontFamily: 'Poppins',
@@ -251,9 +251,9 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                       child: TextFormField(
                         controller: teamAScoreController5,
                         keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                          labelText: 'Team A',
-                          border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                          labelText: S.of(context).teamA,
+                          border: const OutlineInputBorder(),
                         ),
                       ),
                     ),
@@ -263,9 +263,9 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                       child: TextFormField(
                         controller: teamBScoreController5,
                         keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                          labelText: 'Team B',
-                          border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                          labelText: S.of(context).teamB,
+                          border: const OutlineInputBorder(),
                         ),
                       ),
                     ),
@@ -276,7 +276,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(
+                    backgroundColor: const Color.fromARGB(
                         255, 34, 47, 53), // Set the background color
                   ),
                   onPressed: () async {
@@ -313,8 +313,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                         teamBScore3 +
                         teamBScore4 +
                         teamAScore5;
-                    print(teamBScore);
-                    print(teamAScore);
+
                     String result;
                     result =
                         '$teamAScore1 : $teamBScore1 \n$teamAScore2 : $teamBScore2 \n$teamAScore3 : $teamBScore3 \n$teamAScore4 : $teamBScore4 \n$teamAScore5 : $teamBScore5';
@@ -512,7 +511,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Padding(
@@ -522,8 +521,8 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                           children: [
                             Column(
                               children: [
-                                const Text("Team A",
-                                    style: TextStyle(
+                                Text(S.of(context).teamA,
+                                    style: const TextStyle(
                                       color: Color(0xFF2A2A2A),
                                       fontSize: 16,
                                       fontFamily: 'Poppins',
@@ -577,7 +576,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                                 Text(
                                   _selectedWinner1 ?? widget.match.winner1,
                                   style: TextStyle(
-                                    color: Color(0xFF00344E),
+                                    color: const Color(0xFF00344E),
                                     fontSize: 14.sp,
                                     fontFamily: 'Poppins',
                                     fontWeight: FontWeight.w700,
@@ -606,8 +605,8 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                             ),
                             Column(
                               children: [
-                                const Text("Team B",
-                                    style: TextStyle(
+                                Text(S.of(context).teamB,
+                                    style: const TextStyle(
                                       color: Color(0xFF2A2A2A),
                                       fontSize: 16,
                                       fontFamily: 'Poppins',
@@ -685,7 +684,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          'Shot ${index + 1}',
+                                          ' ${S.of(context).shot} ${index + 1}',
                                           style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 13,

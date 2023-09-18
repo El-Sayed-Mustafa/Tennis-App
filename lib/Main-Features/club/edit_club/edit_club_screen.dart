@@ -18,7 +18,7 @@ import '../../../../generated/l10n.dart';
 
 // ignore: must_be_immutable
 class EditClub extends StatefulWidget {
-  EditClub({Key? key, required this.club}) : super(key: key);
+  const EditClub({Key? key, required this.club}) : super(key: key);
   final Club club;
 
   @override

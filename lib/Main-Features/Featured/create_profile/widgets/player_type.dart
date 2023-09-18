@@ -36,7 +36,7 @@ class PlayerType extends StatelessWidget {
                 playerTypeCubit.state,
               ),
             ),
-            Spacer(),
+            const Spacer(),
             SizedBox(
               height: screenHeight * .05,
               width: screenWidth * .35,

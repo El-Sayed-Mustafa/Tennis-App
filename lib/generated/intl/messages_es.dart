@@ -592,5 +592,115 @@ class MessageLookup extends MessageLookupByLibrary {
             "No hay datos de clubes disponibles"),
         "clickToCreateClub": MessageLookupByLibrary.simpleMessage(
             "Haga clic para crear un club"),
+        "Shot": MessageLookupByLibrary.simpleMessage("Tiro"),
+        "TeamA": MessageLookupByLibrary.simpleMessage("Equipo A"),
+        "TeamB": MessageLookupByLibrary.simpleMessage("Equipo B"),
+        "PleaseEnterAValidDateTime": MessageLookupByLibrary.simpleMessage(
+            "Por favor, ingrese una fecha y hora válidas"),
+        "PleaseEnterAValidDate": MessageLookupByLibrary.simpleMessage(
+            "Por favor, ingrese una fecha válida"),
+        "ReverseCourt": MessageLookupByLibrary.simpleMessage("Cancha Reversa"),
+        "PlayerA": MessageLookupByLibrary.simpleMessage("Jugador A"),
+        "PlayerB": MessageLookupByLibrary.simpleMessage("Jugador B"),
+        "ErrorMessageSendingMessage":
+            MessageLookupByLibrary.simpleMessage("Error al enviar el mensaje:"),
+        "NoClubChatIdFound": MessageLookupByLibrary.simpleMessage(
+            "No se encontró clubChatId para el club actual del usuario."),
+        "ErrorFetchingClubData": MessageLookupByLibrary.simpleMessage(
+            "Error al obtener datos del club:"),
+        "NoClubIdFound": MessageLookupByLibrary.simpleMessage(
+            "No se encontró clubId para el usuario actual."),
+        "ErrorFetchingUserData": MessageLookupByLibrary.simpleMessage(
+            "Error al obtener datos del usuario:"),
+        "Private": MessageLookupByLibrary.simpleMessage("Privado"),
+        "Groups": MessageLookupByLibrary.simpleMessage("Grupos"),
+        "ErrorFetchingGroupDetails": MessageLookupByLibrary.simpleMessage(
+            "Error al obtener detalles del grupo:"),
+        "TypeYourMessage":
+            MessageLookupByLibrary.simpleMessage("Escribe tu mensaje..."),
+        "ErrorFetchingUserGroups": MessageLookupByLibrary.simpleMessage(
+            "Error al obtener grupos de usuario:"),
+        "ClubRate":
+            MessageLookupByLibrary.simpleMessage("Calificación del club"),
+        "NoAvailableData":
+            MessageLookupByLibrary.simpleMessage("No hay datos disponibles"),
+        "YouAreAlreadyRegisteredForThisEvent":
+            MessageLookupByLibrary.simpleMessage(
+                "Ya estás registrado para este evento."),
+        "ErrorUpdatingClubRating": MessageLookupByLibrary.simpleMessage(
+            "Error al actualizar la calificación del club:"),
+        "AreYouSureYouWantToDeleteThisMatch":
+            MessageLookupByLibrary.simpleMessage(
+                "¿Estás seguro de que quieres eliminar este partido?"),
+        "ClubUpcomingMatches":
+            MessageLookupByLibrary.simpleMessage("Próximos partidos del club"),
+        "CreateMatch": MessageLookupByLibrary.simpleMessage("Crear partido"),
+        "DoubleMatch": MessageLookupByLibrary.simpleMessage("Partido doble"),
+        "YourCourt": MessageLookupByLibrary.simpleMessage("Tu cancha"),
+        "YouMustChooseTwoPlayersAndCourt": MessageLookupByLibrary.simpleMessage(
+            "Debes elegir dos jugadores y una cancha"),
+        "ClickToChooseAPlayer": MessageLookupByLibrary.simpleMessage(
+            "Haz clic para elegir un jugador"),
+        "Update": MessageLookupByLibrary.simpleMessage("Actualizar"),
+        "MatchUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Partido actualizado con éxito"),
+        "EditMatch": MessageLookupByLibrary.simpleMessage("Editar partido"),
+        "UpdateMatch":
+            MessageLookupByLibrary.simpleMessage("Actualizar partido"),
+        "ErrorWhileDeleting":
+            MessageLookupByLibrary.simpleMessage("Error al eliminar"),
+        "TournamentMatches":
+            MessageLookupByLibrary.simpleMessage("Partidos de torneo"),
+        "SingleMatch":
+            MessageLookupByLibrary.simpleMessage("Partido individual"),
+        "Finish": MessageLookupByLibrary.simpleMessage("Finalizar"),
+        "AddMatch": MessageLookupByLibrary.simpleMessage("Agregar partido"),
+        "SingleTournament":
+            MessageLookupByLibrary.simpleMessage("Torneo individual"),
+        "DoubleTournament":
+            MessageLookupByLibrary.simpleMessage("Torneo doble"),
+        "YouDoNotHaveAnyClubInvitationsAvailable":
+            MessageLookupByLibrary.simpleMessage(
+                "No tienes invitaciones al club disponibles"),
+        "ErrorFetchingMembersData": MessageLookupByLibrary.simpleMessage(
+            "Error al obtener datos de los miembros"),
+        "ClubDoesNotExist":
+            MessageLookupByLibrary.simpleMessage("El club no existe"),
+        "NoClubIdAvailable": MessageLookupByLibrary.simpleMessage(
+            "No hay un ID de club disponible"),
+        "ErrorLoadingClubRoles": MessageLookupByLibrary.simpleMessage(
+            "Error al cargar los roles del club:"),
+        "ErrorFetchingRoleNames": MessageLookupByLibrary.simpleMessage(
+            "Error al obtener nombres de roles:"),
+        "YouDontHaveRoles":
+            MessageLookupByLibrary.simpleMessage("No tienes roles"),
+        "ClickHereToCreateANewRole": MessageLookupByLibrary.simpleMessage(
+            "Haz clic aquí para crear un nuevo rol"),
+        "SuccessfullyAddedRoleIdToTheClubDocument":
+            MessageLookupByLibrary.simpleMessage(
+                "Se agregó con éxito el ID del rol al documento del club"),
+        "ErrorCreatingRole":
+            MessageLookupByLibrary.simpleMessage("Error al crear el rol:"),
+        "DescribeRights":
+            MessageLookupByLibrary.simpleMessage("Describir derechos"),
+        "YouCanAddMoreRightsToARole": MessageLookupByLibrary.simpleMessage(
+            "Puedes agregar más derechos a un rol"),
+        "CreateRole": MessageLookupByLibrary.simpleMessage("Crear rol"),
+        "SelectTheReminderTime": MessageLookupByLibrary.simpleMessage(
+            "Selecciona el tiempo de recordatorio"),
+        "ErrorSavingEvent":
+            MessageLookupByLibrary.simpleMessage("Error al guardar el evento:"),
+        "MatchPoint": MessageLookupByLibrary.simpleMessage("Punto del partido"),
+        "PlayerDocumentDoesNotExistForCurrentUser":
+            MessageLookupByLibrary.simpleMessage(
+                "El documento del jugador no existe para el usuario actual"),
+        "ErrorFetchingReversedCourts": MessageLookupByLibrary.simpleMessage(
+            "Error al obtener canchas reversas:"),
+        "AreYouSureYouWantToCancelThisReservation":
+            MessageLookupByLibrary.simpleMessage(
+                "¿Estás seguro de que deseas cancelar esta reserva?"),
+        "Language": MessageLookupByLibrary.simpleMessage("Idioma"),
+        "ClubInvitations":
+            MessageLookupByLibrary.simpleMessage("Invitaciones al club"),
       };
 }
