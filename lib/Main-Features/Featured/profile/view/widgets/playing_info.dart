@@ -73,7 +73,7 @@ class _PlayingInfoState extends State<PlayingInfo> {
 
       return playerOrder;
     } catch (error) {
-      showSnackBar(context, 'Error fetching club data: $error');
+      showSnackBar(context, ' ${S.of(context).errorFetchingClubData} $error');
       return -1; // Return -1 to indicate an error
     }
   }

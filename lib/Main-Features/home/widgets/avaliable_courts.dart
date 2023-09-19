@@ -53,7 +53,7 @@ class _ReversedCourtsState extends State<ReversedCourts> {
 
       if (!playerSnapshot.exists) {
         showSnackBar(
-            context, 'Player document does not exist for current user.');
+            context, S.of(context).playerDocumentDoesNotExistForCurrentUser);
         return;
       }
 
@@ -66,7 +66,8 @@ class _ReversedCourtsState extends State<ReversedCourts> {
       // Update the carousel with the fetched data
       setState(() {});
     } catch (error) {
-      showSnackBar(context, 'Error fetching reversed courts: $error');
+      showSnackBar(
+          context, ' ${S.of(context).errorFetchingReversedCourts} $error');
     }
   }
 
@@ -190,8 +191,9 @@ class _ReversedCourtsState extends State<ReversedCourts> {
                                     builder: (BuildContext dialogContext) {
                                       return ConfirmationDialog(
                                         title: S.of(context).confirmDelete,
-                                        content:
-                                            'Are you sure you want to cancel this reservation?',
+                                        content: S
+                                            .of(context)
+                                            .areYouSureYouWantToCancelThisReservation,
                                         confirmText: S.of(context).delete,
                                         cancelText: S.of(context).cancel,
                                         onConfirm: () async {

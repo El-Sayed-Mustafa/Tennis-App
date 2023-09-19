@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:tennis_app/core/utils/snackbar.dart';
+import 'package:tennis_app/generated/l10n.dart';
 
 import '../../../../models/club.dart';
 import '../view/widgets/Age_restriction.dart';
@@ -119,7 +120,7 @@ class CreateClubCubit extends Cubit<CreateClubState> {
       await userDocRef.update({'participatedClubId': clubDocRef.id});
 
       // Data saved successfully
-      showSnackBar(context, 'Club data saved successfully.');
+      showSnackBar(context, S.of(context).clubDataSavedSuccessfully);
 
       // You can emit a success state if needed
       emit(CreateClubSuccessState());

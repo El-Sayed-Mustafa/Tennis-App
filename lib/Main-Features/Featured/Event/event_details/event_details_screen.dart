@@ -37,7 +37,7 @@ class EventDetailsScreen extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-              text: "Event Details",
+              text: S.of(context).eventDetails,
               suffixIconPath: '',
             ),
             Stack(
@@ -170,9 +170,9 @@ class EventDetailsScreen extends StatelessWidget {
                               ],
                             ),
                             const SizedBox(height: 25),
-                            const Text(
-                              "Court Reversed",
-                              style: TextStyle(
+                            Text(
+                              S.of(context).reverseCourt,
+                              style: const TextStyle(
                                 fontSize: 18,
                                 color: Color(0xFF6D6D6D),
                                 fontWeight: FontWeight.w500,
@@ -229,7 +229,7 @@ class EventDetailsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 15),
             BottomSheetContainer(
-              buttonText: "Edit Event",
+              buttonText: S.of(context).editEvent,
               onPressed: () async {
                 bool hasRight = await RolesManager.instance
                     .doesPlayerHaveRight('Edit Event');
@@ -253,7 +253,7 @@ class EventDetailsScreen extends StatelessWidget {
               },
             ),
             BottomSheetContainer(
-              buttonText: "Delete Event",
+              buttonText: S.of(context).deleteEvent,
               onPressed: () async {
                 bool hasRight = await RolesManager.instance
                     .doesPlayerHaveRight('Delete Event');
@@ -263,7 +263,8 @@ class EventDetailsScreen extends StatelessWidget {
                     builder: (BuildContext dialogContext) {
                       return ConfirmationDialog(
                         title: S.of(context).confirmDelete,
-                        content: "Are you sure you want to delete this event",
+                        content:
+                            S.of(context).areYouSureYouWantToDeleteThisEvent,
                         confirmText: S.of(context).delete,
                         cancelText: S.of(context).cancel,
                         onConfirm: () {

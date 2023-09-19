@@ -111,8 +111,8 @@ class _CourtDetailsScreenState extends State<CourtDetailsScreen> {
               padding: const EdgeInsets.all(16.0),
               child: Text(
                 showAvailableCourts
-                    ? 'Available Courts (Tap to Hide)'
-                    : 'Available Courts (Tap to Show)',
+                    ? S.of(context).availableCourtsTapToHide
+                    : S.of(context).availableCourtsTapToShow,
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -159,8 +159,8 @@ class _CourtDetailsScreenState extends State<CourtDetailsScreen> {
               padding: const EdgeInsets.all(16.0),
               child: Text(
                 showReversedCourts
-                    ? 'Reversed Courts (Tap to Hide)'
-                    : 'Reversed Courts (Tap to Show)',
+                    ? S.of(context).reversedCourtsTapToHide
+                    : S.of(context).reversedCourtsTapToShow,
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -191,7 +191,7 @@ class _CourtDetailsScreenState extends State<CourtDetailsScreen> {
                       } else if (snapshot.hasError) {
                         return Text('Error: ${snapshot.error}');
                       } else if (!snapshot.hasData || snapshot.data == null) {
-                        return const Text('Player Data: Unknown');
+                        return Text(S.of(context).playerDataUnknown);
                       } else {
                         final player = snapshot.data!;
                         return PlayerCard(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/core/utils/widgets/custom_button.dart';
+import 'package:tennis_app/generated/l10n.dart';
 
 import '../../../../core/utils/widgets/opacity_wave.dart';
 import '../../../menu/widgets/button_menu.dart';
@@ -75,7 +76,7 @@ class SettingsScreen extends StatelessWidget {
               ),
               ButtonMenu(
                 imagePath: 'assets/images/languages.svg',
-                buttonText: 'Language',
+                buttonText: S.of(context).language,
                 onPressed: () {},
               ),
               ButtonMenu(

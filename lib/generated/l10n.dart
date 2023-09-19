@@ -3964,6 +3964,195 @@ class S {
       args: [],
     );
   }
+
+  String get invitationHasBeenSentToThisPlayer {
+    return Intl.message(
+      'Invitation has already been sent to this player.',
+      name: 'invitationHasBeenSentToThisPlayer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get availableCourtsTapToShow {
+    return Intl.message(
+      'Available Courts (Tap to Show)',
+      name: 'availableCourtsTapToShow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get availableCourtsTapToHide {
+    return Intl.message(
+      'Available Courts (Tap to Hide)',
+      name: 'availableCourtsTapToHide',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get reversedCourtsTapToShow {
+    return Intl.message(
+      'Reversed Courts (Tap to Show)',
+      name: 'reversedCourtsTapToShow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get reversedCourtsTapToHide {
+    return Intl.message(
+      'Reversed Courts (Tap to Hide)',
+      name: 'reversedCourtsTapToHide',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get playerDataUnknown {
+    return Intl.message(
+      'Player Data: Unknown',
+      name: 'playerDataUnknown',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get clubDataSavedSuccessfully {
+    return Intl.message(
+      'Club data saved successfully.',
+      name: 'clubDataSavedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get selectADay {
+    return Intl.message(
+      'Select a day',
+      name: 'selectADay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get fromTimeMustBeSmallerThanToTime {
+    return Intl.message(
+      'The From time must be smaller than the To time',
+      name: 'fromTimeMustBeSmallerThanToTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get public {
+    return Intl.message(
+      'Public',
+      name: 'public',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get custom {
+    return Intl.message(
+      'Custom',
+      name: 'custom',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get youMustChooseCourt {
+    return Intl.message(
+      'You Must Choose court',
+      name: 'youMustChooseCourt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get eventDetails {
+    return Intl.message(
+      'Event Details',
+      name: 'eventDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get courtReversed {
+    return Intl.message(
+      'Court Reversed',
+      name: 'courtReversed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get editEvent {
+    return Intl.message(
+      'Edit Event',
+      name: 'editEvent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get deleteEvent {
+    return Intl.message(
+      'Delete Event',
+      name: 'deleteEvent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get areYouSureYouWantToDeleteThisEvent {
+    return Intl.message(
+      'Are you sure you want to delete this event',
+      name: 'areYouSureYouWantToDeleteThisEvent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get letsGetsStarted {
+    return Intl.message(
+      'Let\'s gets started',
+      name: 'letsGetsStarted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get clickHereToJoin {
+    return Intl.message(
+      'Click here to join',
+      name: 'clickHereToJoin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get youNotParticipatedInAnyClub {
+    return Intl.message(
+      'You not participated in any club',
+      name: 'youNotParticipatedInAnyClub',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get noPlayersFoundInYourClub {
+    return Intl.message(
+      'No players found in your club',
+      name: 'noPlayersFoundInYourClub',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

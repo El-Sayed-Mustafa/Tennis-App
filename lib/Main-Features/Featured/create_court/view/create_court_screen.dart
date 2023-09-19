@@ -110,8 +110,8 @@ class CreateCourt extends StatelessWidget {
                     ),
                     SizedBox(height: screenHeight * .03),
                     InputDate(
-                      hint: "Select a day",
-                      text: "Select a day",
+                      hint: S.of(context).selectADay,
+                      text: S.of(context).selectADay,
                       onDateTimeSelected: (DateTime dateTime) {
                         // Handle date selection
                       },
@@ -158,7 +158,7 @@ class CreateCourt extends StatelessWidget {
                                 to: to.value);
                           } else {
                             showSnackBar(context,
-                                'The From time must be smaller than the To time');
+                                S.of(context).fromTimeMustBeSmallerThanToTime);
                           }
                         }
                       },

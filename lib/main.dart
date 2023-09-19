@@ -36,7 +36,7 @@ void main() async {
   // );
 
   runApp(
-    MyApp(),
+    const MyApp(),
   );
 }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tennis_app/Main-Features/chats/screens/chats_screen.dart';
 import 'package:tennis_app/Main-Features/chats/screens/user_groups_screen.dart';
+import 'package:tennis_app/generated/l10n.dart';
 
 class GroupPrivateChats extends StatefulWidget {
   const GroupPrivateChats({Key? key}) : super(key: key);
@@ -72,12 +73,12 @@ class _GroupPrivateChatsState extends State<GroupPrivateChats>
                 child: TabBar(
                   physics: const BouncingScrollPhysics(),
                   controller: tabController,
-                  tabs: const [
+                  tabs: [
                     Tab(
-                      text: "Private",
+                      text: S.of(context).private,
                     ),
                     Tab(
-                      text: "Groups",
+                      text: S.of(context).groups,
                     ),
                   ],
                   indicator: ShapeDecoration(

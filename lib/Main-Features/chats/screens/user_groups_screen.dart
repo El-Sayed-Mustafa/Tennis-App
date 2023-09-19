@@ -61,10 +61,10 @@ class _UserGroupsScreenState extends State<UserGroupsScreen> {
 
                 if (userGroups.isEmpty) {
                   // Show "No groups found" message
-                  return const Center(
+                  return Center(
                     child: Text(
-                      'No groups found.',
-                      style: TextStyle(fontSize: 16),
+                      S.of(context).noGroupsFound,
+                      style: const TextStyle(fontSize: 16),
                     ),
                   );
                 } else {
@@ -125,7 +125,7 @@ class _UserGroupsScreenState extends State<UserGroupsScreen> {
         userGroups.add(groupChats);
       }
     } catch (error) {
-      showSnackBar(context, 'Error fetching user groups: $error');
+      showSnackBar(context, ' ${S.of(context).errorFetchingUserGroups}$error');
     }
 
     return userGroups;

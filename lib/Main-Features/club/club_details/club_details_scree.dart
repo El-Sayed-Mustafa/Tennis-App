@@ -123,9 +123,9 @@ class ClubDetailsScreen extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                const Text(
-                                  'Club Rate',
-                                  style: TextStyle(
+                                Text(
+                                  S.of(context).clubRate,
+                                  style: const TextStyle(
                                     color: Color(0xFF15324F),
                                     fontSize: 18,
                                     fontFamily: 'Roboto',

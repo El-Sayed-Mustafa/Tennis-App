@@ -183,9 +183,9 @@ class _EditEventState extends State<EditEvent> {
                                       });
                                     },
                                   ),
-                                  const Text(
-                                    'Public',
-                                    style: TextStyle(
+                                  Text(
+                                    S.of(context).public,
+                                    style: const TextStyle(
                                       color: Color(0xFF525252),
                                       fontSize: 16,
                                       fontFamily: 'Poppins',
@@ -205,9 +205,9 @@ class _EditEventState extends State<EditEvent> {
                                       });
                                     },
                                   ),
-                                  const Text(
-                                    'Custom',
-                                    style: TextStyle(
+                                  Text(
+                                    S.of(context).custom,
+                                    style: const TextStyle(
                                       color: Color(0xFF525252),
                                       fontSize: 16,
                                       fontFamily: 'Poppins',
@@ -262,7 +262,7 @@ class _EditEventState extends State<EditEvent> {
                             if (courtNameController.text.isEmpty) {
                               // Display a message or alert to inform the user that both players need to be selected
                               return showSnackBar(
-                                  context, 'You Must Choose court ');
+                                  context, S.of(context).youMustChooseCourt);
                             }
                             if (formKey.currentState!.validate()) {
                               context.read<CreateEventCubit>().saveEventData(

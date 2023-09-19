@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tennis_app/core/utils/snackbar.dart';
+import 'package:tennis_app/generated/l10n.dart';
 
 import '../../../../../models/club.dart';
 import '../../../../../models/roles.dart';
@@ -84,15 +85,16 @@ class RoleCubit extends Cubit<RoleCreationStatus> {
                 // Update the club document with the new roleIds
                 await clubRef.update({'roleIds': updatedRoleIds});
 
-                showSnackBar(
-                    context, 'Successfully added roleId to the club document');
+                showSnackBar(context,
+                    S.of(context).successfullyAddedRoleIdToTheClubDocument);
               }
             }
 
             emit(RoleCreationStatus.success);
           } catch (error) {
             // Error creating the role
-            showSnackBar(context, 'Error creating role: ${error.toString()}');
+            showSnackBar(context,
+                ' ${S.of(context).errorCreatingRole} ${error.toString()}');
             emit(RoleCreationStatus.error);
           }
         } else {

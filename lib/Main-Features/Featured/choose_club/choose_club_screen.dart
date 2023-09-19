@@ -117,7 +117,7 @@ class _ClubInvitationsPageState extends State<ClubInvitationsPage> {
                             color: Colors.white,
                           ),
                         ),
-                        text: 'Club Invitations',
+                        text: S.of(context).clubInvitations,
                         suffixIconPath: '',
                       ),
                       SizedBox(
@@ -126,10 +126,10 @@ class _ClubInvitationsPageState extends State<ClubInvitationsPage> {
                       SizedBox(
                         height: 150,
                         width: screenWidth * .8,
-                        child: const NoData(
-                          text:
-                              'You do not have any club invitations available',
-                        ),
+                        child: NoData(
+                            text: S
+                                .of(context)
+                                .youDoNotHaveAnyClubInvitationsAvailable),
                       )
                     ],
                   );
@@ -148,9 +148,10 @@ class _ClubInvitationsPageState extends State<ClubInvitationsPage> {
 
                     final clubs = snapshot.data!;
                     if (clubs.isEmpty) {
-                      return const Center(
-                        child: Text(
-                            'You do not have any club invitations available'),
+                      return Center(
+                        child: Text(S
+                            .of(context)
+                            .youDoNotHaveAnyClubInvitationsAvailable),
                       );
                     }
 

@@ -204,19 +204,17 @@ class _ClubChatScreenState extends State<ClubChatScreen> {
               }).then((_) {
                 // Message sent successfully, clear the text
               }).catchError((error) =>
-                  showSnackBar(context, 'Error sending message: $error'));
+                  showSnackBar(context, '${S.of(context).error} $error'));
             } else {
-              const SnackBar(
-                  content: Text(
-                      'No clubChatId found for the current user\'s club.'));
+              SnackBar(content: Text(S.of(context).noClubChatIdFound));
             }
-          }).catchError((error) =>
-              showSnackBar(context, 'Error fetching club data: $error'));
+          }).catchError((error) => showSnackBar(
+              context, ' ${S.of(context).errorFetchingClubData} $error'));
         } else {
-          showSnackBar(context, 'No clubId found for the current user.');
+          showSnackBar(context, S.of(context).noClubIdAvailable);
         }
-      }).catchError(
-          (error) => showSnackBar(context, 'Error fetching user data: $error'));
+      }).catchError((error) => showSnackBar(
+          context, ' ${S.of(context).errorFetchingUserData} $error'));
     }
   }
 

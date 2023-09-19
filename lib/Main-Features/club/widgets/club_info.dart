@@ -88,7 +88,7 @@ class _ClubInfoState extends State<ClubInfo> {
 
       if (isPlayerRated) {
         // Player has already rated the club
-        showSnackBar(context, 'You have already rated this club.');
+        showSnackBar(context, S.of(context).youHaveAlreadyRatedThisClub);
         return;
       }
 
@@ -141,7 +141,7 @@ class _ClubInfoState extends State<ClubInfo> {
         hasRated = true;
       });
     } catch (error) {
-      showSnackBar(context, 'Error updating club rating: $error');
+      showSnackBar(context, ' ${S.of(context).errorUpdatingClubRating} $error');
     }
   }
 

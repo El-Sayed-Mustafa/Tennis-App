@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/create_event_match/double_friendly_match/player_match_item.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
+import 'package:tennis_app/generated/l10n.dart';
 
 class DoubleMatchScreen extends StatelessWidget {
   const DoubleMatchScreen({super.key});
@@ -24,7 +25,7 @@ class DoubleMatchScreen extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            text: 'Double Match',
+            text: S.of(context).doubleMatch,
             suffixIconPath: '',
           ),
           SizedBox(height: screenHeight * .02),

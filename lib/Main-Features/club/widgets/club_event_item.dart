@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -154,17 +156,16 @@ class ClubEventItem extends StatelessWidget {
 
                                   if (currentPlayer.eventIds
                                       .contains(event.eventId)) {
-                                    // ignore: use_build_context_synchronously
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                          content: Text(
-                                              'You are already registered for this event.')),
+                                      SnackBar(
+                                          content: Text(S
+                                              .of(context)
+                                              .youAreAlreadyRegisteredForThisEvent)),
                                     );
                                   } else {
                                     // Add the eventId to the eventIds list
                                     currentPlayer.eventIds.add(event.eventId);
 
-                                    // ignore: use_build_context_synchronously
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(

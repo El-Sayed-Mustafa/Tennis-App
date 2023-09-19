@@ -25,7 +25,7 @@ class SingleMatchScreen extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            text: 'Single Match',
+            text: 'S',
             suffixIconPath: '',
           ),
           SizedBox(height: screenHeight * .02),

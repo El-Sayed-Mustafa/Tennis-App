@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/Main-Features/create_event_match/widgets/button_match_item.dart';
+import 'package:tennis_app/generated/l10n.dart';
 
 import '../../core/utils/widgets/pop_app_bar.dart';
 
@@ -23,13 +24,13 @@ class CreateEventMatchesScreen extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            text: 'Create Match',
+            text: S.of(context).createMatch,
             suffixIconPath: '',
           ),
           ButtonMatchItem(
             icon: Icons.switch_access_shortcut_add_outlined,
             color: const Color(0x5172B8FF),
-            text: "Single Match",
+            text: S.of(context).singleMatch,
             onPressed: () {
               GoRouter.of(context).push('/singleMatches');
             },
@@ -37,7 +38,7 @@ class CreateEventMatchesScreen extends StatelessWidget {
           ButtonMatchItem(
             icon: Icons.personal_injury_outlined,
             color: const Color(0x51EE746C),
-            text: "Double Match",
+            text: S.of(context).doubleMatch,
             onPressed: () {
               GoRouter.of(context).push('/doubleMatches');
             },
@@ -45,7 +46,7 @@ class CreateEventMatchesScreen extends StatelessWidget {
           ButtonMatchItem(
             icon: Icons.transcribe_sharp,
             color: const Color(0x8294D3D3),
-            text: "Single Tournament",
+            text: S.of(context).singleTournament,
             onPressed: () {
               GoRouter.of(context).push('/singleTournament');
             },
@@ -53,7 +54,7 @@ class CreateEventMatchesScreen extends StatelessWidget {
           ButtonMatchItem(
             icon: Icons.change_circle_rounded,
             color: const Color(0x51FFA372),
-            text: "Double Tournament",
+            text: S.of(context).doubleTournament,
             onPressed: () {
               GoRouter.of(context).push('/doubleTournament');
             },

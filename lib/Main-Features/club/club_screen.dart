@@ -139,7 +139,7 @@ class _ClubScreenState extends State<ClubScreen> {
                                 ),
                                 SizedBox(height: spacing * 2),
                                 Text(
-                                  "Club Upcoming Matches",
+                                  S.of(context).clubUpcomingMatches,
                                   style: TextStyle(
                                     color: const Color(0xFF313131),
                                     fontSize: sectionTitleSize,
@@ -237,7 +237,7 @@ class _ClubScreenState extends State<ClubScreen> {
                                   height: 20,
                                 ),
                                 HomeButton(
-                                  buttonText: 'Create Match',
+                                  buttonText: S.of(context).createMatch,
                                   imagePath: 'assets/images/Make-offers.svg',
                                   onPressed: () async {
                                     bool hasRight = await RolesManager.instance

@@ -702,5 +702,45 @@ class MessageLookup extends MessageLookupByLibrary {
         "Language": MessageLookupByLibrary.simpleMessage("Idioma"),
         "ClubInvitations":
             MessageLookupByLibrary.simpleMessage("Invitaciones al club"),
+        "InvitationHasBeenSentToThisPlayer":
+            MessageLookupByLibrary.simpleMessage(
+                "La invitación ya ha sido enviada a este jugador."),
+        "AvailableCourtsTapToShow": MessageLookupByLibrary.simpleMessage(
+            "Canchas Disponibles (Toca para Mostrar)"),
+        "AvailableCourtsTapToHide": MessageLookupByLibrary.simpleMessage(
+            "Canchas Disponibles (Toca para Ocultar)"),
+        "ReversedCourtsTapToShow": MessageLookupByLibrary.simpleMessage(
+            "Canchas Invertidas (Toca para Mostrar)"),
+        "ReversedCourtsTapToHide": MessageLookupByLibrary.simpleMessage(
+            "Canchas Invertidas (Toca para Ocultar)"),
+        "PlayerDataUnknown": MessageLookupByLibrary.simpleMessage(
+            "Datos del Jugador: Desconocidos"),
+        "ClubDataSavedSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Datos del club guardados exitosamente."),
+        "SelectADay": MessageLookupByLibrary.simpleMessage("Selecciona un día"),
+        "FromTimeMustBeSmallerThanToTime": MessageLookupByLibrary.simpleMessage(
+            "La hora de inicio debe ser menor que la hora de finalización"),
+        "Public": MessageLookupByLibrary.simpleMessage("Público"),
+        "Custom": MessageLookupByLibrary.simpleMessage("Personalizado"),
+        "YouMustChooseCourt":
+            MessageLookupByLibrary.simpleMessage("Debes elegir una cancha"),
+        "EventDetails":
+            MessageLookupByLibrary.simpleMessage("Detalles del Evento"),
+        "CourtReversed":
+            MessageLookupByLibrary.simpleMessage("Cancha Invertida"),
+        "EditEvent": MessageLookupByLibrary.simpleMessage("Editar Evento"),
+        "DeleteEvent": MessageLookupByLibrary.simpleMessage("Eliminar Evento"),
+        "Areyousureyouwanttodeletethisevent":
+            MessageLookupByLibrary.simpleMessage(
+                "¿Estás seguro de que deseas eliminar este evento?"),
+        "Letsgetsstarted": MessageLookupByLibrary.simpleMessage("Comencemos"),
+        "Clickheretojoin":
+            MessageLookupByLibrary.simpleMessage("Haz clic aquí para unirte"),
+        "Younotparticipatedinanyclub": MessageLookupByLibrary.simpleMessage(
+            "No has participado en ningún club"),
+        "Noplayersfoundinyouclub": MessageLookupByLibrary.simpleMessage(
+            "No se encontraron jugadores en tu club"),
+        "Youcanaddmorerightstoarole": MessageLookupByLibrary.simpleMessage(
+            "Puedes agregar más permisos a un rol"),
       };
 }

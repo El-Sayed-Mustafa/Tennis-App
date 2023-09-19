@@ -56,7 +56,7 @@ class _ClubSingleMatchesState extends State<ClubSingleMatches> {
 
       if (!playerSnapshot.exists) {
         showSnackBar(
-            context, 'Player document does not exist for current user.');
+            context, S.of(context).playerDocumentDoesNotExistForCurrentUser);
         return;
       }
 

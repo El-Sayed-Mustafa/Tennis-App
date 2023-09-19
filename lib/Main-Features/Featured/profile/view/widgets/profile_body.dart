@@ -45,11 +45,11 @@ class ProfileBody extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 10),
-        const Padding(
-          padding: EdgeInsets.all(8.0),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
           child: Text(
-            'Your Club',
-            style: TextStyle(
+            S.of(context).your_club,
+            style: const TextStyle(
               color: Color(0xFF313131),
               fontSize: 20,
               fontFamily: 'Poppins',
@@ -66,9 +66,9 @@ class ProfileBody extends StatelessWidget {
               return SizedBox(
                 width: screenWidth * .8,
                 height: screenHeight * .2,
-                child: const NoData(
-                  buttonText: 'Click here to join',
-                  text: 'You not participated in any club',
+                child: NoData(
+                  buttonText: S.of(context).clickHereToJoin,
+                  text: S.of(context).youNotParticipatedInAnyClub,
                 ),
               );
             } else {
@@ -83,9 +83,9 @@ class ProfileBody extends StatelessWidget {
                     ? ClubInfo(
                         clubData: clubData,
                       )
-                    : const NoData(
-                        buttonText: 'Click here to join',
-                        text: 'You not participated in any club',
+                    : NoData(
+                        buttonText: S.of(context).clickHereToJoin,
+                        text: S.of(context).youNotParticipatedInAnyClub,
                       ), // Show the NoData widget when clubData is null
               );
             }

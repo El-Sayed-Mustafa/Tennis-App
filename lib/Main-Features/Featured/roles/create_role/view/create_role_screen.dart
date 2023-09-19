@@ -112,9 +112,9 @@ class _CreateRoleState extends State<CreateRole> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              const Text(
-                                'Create Role',
-                                style: TextStyle(
+                              Text(
+                                S.of(context).createRole,
+                                style: const TextStyle(
                                   color: Color(0xFF616161),
                                   fontSize: 20,
                                   fontFamily: 'Poppins',
@@ -124,9 +124,9 @@ class _CreateRoleState extends State<CreateRole> {
                               SizedBox(height: screenHeight * .03),
                               CustomTextFormField(controller: roleController),
                               SizedBox(height: screenHeight * .05),
-                              const Text(
-                                'Describe Rights',
-                                style: TextStyle(
+                              Text(
+                                S.of(context).describeRights,
+                                style: const TextStyle(
                                   color: Color(0xFF616161),
                                   fontSize: 20,
                                   fontFamily: 'Poppins',
@@ -163,7 +163,7 @@ class _CreateRoleState extends State<CreateRole> {
                         child: Container(
                           color: const Color(0xFFF8F8F8),
                           child: BottomSheetContainer(
-                            buttonText: 'Create Role',
+                            buttonText: S.of(context).createRole,
                             onPressed: () {
                               // Call the Cubit method to create the role
                               context.read<RoleCubit>().createRole(

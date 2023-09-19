@@ -171,14 +171,14 @@ class MenuScreen extends StatelessWidget {
                     ),
                     ButtonMenu(
                       imagePath: 'assets/images/languages.svg',
-                      buttonText: 'Language',
+                      buttonText: S.of(context).language,
                       onPressed: () {
                         GoRouter.of(context).push('/languages');
                       },
                     ),
                     ButtonMenu(
                       imagePath: 'assets/images/members.svg',
-                      buttonText: 'Club Invitations',
+                      buttonText: S.of(context).clubInvitations,
                       onPressed: () {
                         GoRouter.of(context).push('/chooseClub');
                       },

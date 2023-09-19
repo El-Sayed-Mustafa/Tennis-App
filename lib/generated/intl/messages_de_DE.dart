@@ -699,5 +699,48 @@ class MessageLookup extends MessageLookupByLibrary {
         "Language": MessageLookupByLibrary.simpleMessage("Sprache"),
         "ClubInvitations":
             MessageLookupByLibrary.simpleMessage("Club-Einladungen"),
+        "InvitationHasBeenSentToThisPlayer":
+            MessageLookupByLibrary.simpleMessage(
+                "Die Einladung wurde bereits an diesen Spieler gesendet."),
+        "AvailableCourtsTapToShow": MessageLookupByLibrary.simpleMessage(
+            "Verfügbare Plätze (Antippen zum Anzeigen)"),
+        "AvailableCourtsTapToHide": MessageLookupByLibrary.simpleMessage(
+            "Verfügbare Plätze (Antippen zum Ausblenden)"),
+        "ReversedCourtsTapToShow": MessageLookupByLibrary.simpleMessage(
+            "Umgekehrte Plätze (Antippen zum Anzeigen)"),
+        "ReversedCourtsTapToHide": MessageLookupByLibrary.simpleMessage(
+            "Umgekehrte Plätze (Antippen zum Ausblenden)"),
+        "PlayerDataUnknown":
+            MessageLookupByLibrary.simpleMessage("Spielerdaten: Unbekannt"),
+        "ClubDataSavedSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Clubdaten erfolgreich gespeichert."),
+        "SelectADay": MessageLookupByLibrary.simpleMessage("Wähle einen Tag"),
+        "FromTimeMustBeSmallerThanToTime": MessageLookupByLibrary.simpleMessage(
+            "Die Startzeit muss kleiner sein als die Endzeit"),
+        "Public": MessageLookupByLibrary.simpleMessage("Öffentlich"),
+        "Custom": MessageLookupByLibrary.simpleMessage("Anpassen"),
+        "YouMustChooseCourt":
+            MessageLookupByLibrary.simpleMessage("Du musst einen Platz wählen"),
+        "EventDetails":
+            MessageLookupByLibrary.simpleMessage("Veranstaltungsdetails"),
+        "CourtReversed":
+            MessageLookupByLibrary.simpleMessage("Platz umgekehrt"),
+        "EditEvent":
+            MessageLookupByLibrary.simpleMessage("Veranstaltung bearbeiten"),
+        "DeleteEvent":
+            MessageLookupByLibrary.simpleMessage("Veranstaltung löschen"),
+        "Areyousureyouwanttodeletethisevent":
+            MessageLookupByLibrary.simpleMessage(
+                "Bist du sicher, dass du diese Veranstaltung löschen möchtest"),
+        "Letsgetsstarted":
+            MessageLookupByLibrary.simpleMessage("Lass uns anfangen"),
+        "Clickheretojoin": MessageLookupByLibrary.simpleMessage(
+            "Hier klicken, um beizutreten"),
+        "Younotparticipatedinanyclub": MessageLookupByLibrary.simpleMessage(
+            "Du hast an keinem Club teilgenommen"),
+        "Noplayersfoundinyourclub": MessageLookupByLibrary.simpleMessage(
+            "Keine Spieler in deinem Club gefunden"),
+        "Youcanaddmorerightstoarole": MessageLookupByLibrary.simpleMessage(
+            "Du kannst mehr Rechte zu einer Rolle hinzufügen"),
       };
 }

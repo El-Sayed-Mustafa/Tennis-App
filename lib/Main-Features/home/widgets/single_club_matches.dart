@@ -39,7 +39,7 @@ class _MySingleMatchesState extends State<MySingleMatches> {
       // Fetch the current user's player data from Firestore
       User? currentUser = FirebaseAuth.instance.currentUser;
       if (currentUser == null) {
-        showSnackBar(context, 'No user is currently signed in.');
+        showSnackBar(context, S.of(context).noUserIsCurrentlySignedIn);
         return;
       }
 
@@ -53,7 +53,7 @@ class _MySingleMatchesState extends State<MySingleMatches> {
 
       if (!playerSnapshot.exists) {
         showSnackBar(
-            context, 'Player document does not exist for current user.');
+            context, S.of(context).playerDocumentDoesNotExistForCurrentUser);
         return;
       }
 
@@ -66,7 +66,8 @@ class _MySingleMatchesState extends State<MySingleMatches> {
       // Update the carousel with the fetched data
       setState(() {});
     } catch (error) {
-      showSnackBar(context, 'Error fetching matches data: $error');
+      showSnackBar(
+          context, ' ${S.of(context).errorFetchingMatchesData} $error');
     }
   }
 

@@ -83,7 +83,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
       }
     } catch (e) {
       // Handle errors if necessary
-      showSnackBar(context, 'Error loading club roles: $e');
+      showSnackBar(context, ' ${S.of(context).errorLoadingClubRoles} $e');
     }
   }
 
@@ -95,7 +95,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
       });
     } catch (e) {
       // Handle errors if necessary
-      showSnackBar(context, 'Error fetching role names: $e');
+      showSnackBar(context, ' ${S.of(context).errorFetchingRoleNames} $e');
     }
   }
 
@@ -170,7 +170,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
         );
       }
     } catch (e) {
-      showSnackBar(context, 'Error removing player from club: $e');
+      showSnackBar(context, '${S.of(context).error} $e');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content:
@@ -270,7 +270,6 @@ class _PlayerScreenState extends State<PlayerScreen> {
         );
       }
     } catch (e) {
-      showSnackBar(context, 'Error assigning roles: $e');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
             content: Text(

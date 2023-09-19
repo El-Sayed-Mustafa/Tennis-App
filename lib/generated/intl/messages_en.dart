@@ -665,5 +665,45 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "Are you sure you want to cancel this reservation?"),
         "Language": MessageLookupByLibrary.simpleMessage("Language"),
+        // English
+        "InvitationHasBeenSentToThisPlayer":
+            MessageLookupByLibrary.simpleMessage(
+                "Invitation has already been sent to this player."),
+        "AvailableCourtsTapToShow": MessageLookupByLibrary.simpleMessage(
+            "Available Courts (Tap to Show)"),
+        "AvailableCourtsTapToHide": MessageLookupByLibrary.simpleMessage(
+            "Available Courts (Tap to Hide)"),
+        "ReversedCourtsTapToShow": MessageLookupByLibrary.simpleMessage(
+            "Reversed Courts (Tap to Show)"),
+        "ReversedCourtsTapToHide": MessageLookupByLibrary.simpleMessage(
+            "Reversed Courts (Tap to Hide)"),
+        "PlayerDataUnknown":
+            MessageLookupByLibrary.simpleMessage("Player Data: Unknown"),
+        "ClubDataSavedSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Club data saved successfully."),
+        "SelectADay": MessageLookupByLibrary.simpleMessage("Select a day"),
+        "FromTimeMustBeSmallerThanToTime": MessageLookupByLibrary.simpleMessage(
+            "The From time must be smaller than the To time"),
+        "Public": MessageLookupByLibrary.simpleMessage("Public"),
+        "Custom": MessageLookupByLibrary.simpleMessage("Custom"),
+        "YouMustChooseCourt":
+            MessageLookupByLibrary.simpleMessage("You Must Choose court"),
+        "EventDetails": MessageLookupByLibrary.simpleMessage("Event Details"),
+        "CourtReversed": MessageLookupByLibrary.simpleMessage("Court Reversed"),
+        "EditEvent": MessageLookupByLibrary.simpleMessage("Edit Event"),
+        "DeleteEvent": MessageLookupByLibrary.simpleMessage("Delete Event"),
+        "Areyousureyouwanttodeletethisevent":
+            MessageLookupByLibrary.simpleMessage(
+                "Are you sure you want to delete this event"),
+        "Letsgetsstarted":
+            MessageLookupByLibrary.simpleMessage("Let's gets started"),
+        "Clickheretojoin":
+            MessageLookupByLibrary.simpleMessage("Click here to join"),
+        "Younotparticipatedinanyclub": MessageLookupByLibrary.simpleMessage(
+            "You not participated in any club"),
+        "Noplayersfoundinyouclub": MessageLookupByLibrary.simpleMessage(
+            "No players found in your club"),
+        "Youcanaddmorerightstoarole": MessageLookupByLibrary.simpleMessage(
+            "You can add more\nrights to a role"),
       };
 }

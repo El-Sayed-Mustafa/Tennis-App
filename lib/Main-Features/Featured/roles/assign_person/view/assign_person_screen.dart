@@ -118,7 +118,6 @@ class _AssignPersonState extends State<AssignPerson> {
         );
       }
     } catch (e) {
-      showSnackBar(context, 'Error assigning roles: $e');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
             content: Text(
@@ -145,7 +144,7 @@ class _AssignPersonState extends State<AssignPerson> {
       }
     } catch (e) {
       // Handle errors if necessary
-      showSnackBar(context, 'Error loading club roles: $e');
+      showSnackBar(context, ' ${S.of(context).errorLoadingClubRoles} $e');
     }
   }
 
@@ -157,7 +156,7 @@ class _AssignPersonState extends State<AssignPerson> {
       });
     } catch (e) {
       // Handle errors if necessary
-      showSnackBar(context, 'Error fetching role names: $e');
+      showSnackBar(context, ' ${S.of(context).errorFetchingRoleNames} $e');
     }
   }
 
@@ -220,8 +219,8 @@ class _AssignPersonState extends State<AssignPerson> {
                       height: 150,
                       width: screenWidth * .8,
                       child: NoData(
-                        text: 'You don\'t have Roles',
-                        buttonText: 'Click here to create a new role',
+                        text: S.of(context).youDontHaveRoles,
+                        buttonText: S.of(context).clickHereToCreateANewRole,
                         onPressed: () {
                           GoRouter.of(context).push('/createRole');
                         },

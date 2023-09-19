@@ -153,9 +153,9 @@ class _CreatePartyState extends State<CreateParty> {
                                       });
                                     },
                                   ),
-                                  const Text(
-                                    'Public',
-                                    style: TextStyle(
+                                  Text(
+                                    S.of(context).public,
+                                    style: const TextStyle(
                                       color: Color(0xFF525252),
                                       fontSize: 16,
                                       fontFamily: 'Poppins',
@@ -175,9 +175,9 @@ class _CreatePartyState extends State<CreateParty> {
                                       });
                                     },
                                   ),
-                                  const Text(
-                                    'Custom',
-                                    style: TextStyle(
+                                  Text(
+                                    S.of(context).custom,
+                                    style: const TextStyle(
                                       color: Color(0xFF525252),
                                       fontSize: 16,
                                       fontFamily: 'Poppins',
