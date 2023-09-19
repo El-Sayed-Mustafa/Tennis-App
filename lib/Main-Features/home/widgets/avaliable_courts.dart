@@ -178,6 +178,7 @@ class _ReversedCourtsState extends State<ReversedCourts> {
                       return Stack(
                         children: [
                           CourtItem(
+                            isHome: true,
                             court: court,
                             isSaveUser: true,
                           ),

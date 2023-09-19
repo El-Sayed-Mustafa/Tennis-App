@@ -11,10 +11,12 @@ class CourtItem extends StatefulWidget {
       {Key? key,
       required this.court,
       this.courtNameController,
-      required this.isSaveUser})
+      required this.isSaveUser,
+      this.isHome})
       : super(key: key);
   final Court court;
   final bool isSaveUser;
+  final bool? isHome;
   final TextEditingController? courtNameController; // Optional parameter
 
   @override
@@ -40,7 +42,6 @@ class _CourtItemState extends State<CourtItem> {
     final DateFormat dateTimeFormat = DateFormat('yyyy-MM-dd HH:mm:ss.SSS');
     final DateTime startDate =
         dateTimeFormat.parse(widget.court.availableDay.toString());
-
     final String formattedStartDate =
         DateFormat('MMMM d, yyyy').format(startDate);
     return Padding(
@@ -148,16 +149,19 @@ class _CourtItemState extends State<CourtItem> {
                       ),
                     ),
                     child: Center(
-                      child: Text(
-                        S.of(context).Get_Reserved,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: buttonTextFontSize,
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.w500,
-                        ),
+                        child: Text(
+                      widget.isHome != null
+                          ? widget.isHome!
+                              ? 'Court Details'
+                              : S.of(context).Get_Reserved
+                          : S.of(context).Get_Reserved,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: buttonTextFontSize,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w500,
                       ),
-                    ),
+                    )),
                   ),
                 ),
                 SizedBox(height: screenHeight * .01),
