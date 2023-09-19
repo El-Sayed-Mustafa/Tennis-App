@@ -38,39 +38,37 @@ class ChosenCourt extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: FutureBuilder<Court>(
-        future: fetchCourt(),
-        builder: (context, courtSnapshot) {
-          if (courtSnapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (courtSnapshot.hasError) {
-            return Text(S.of(context).error);
-          } else if (!courtSnapshot.hasData) {
-            return Text(
-              S.of(context).No_Reversed_Courts,
-              style: const TextStyle(
-                color: Colors.black,
-                fontSize: 22,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w700,
-              ),
-            );
-          } else {
-            final courtData = courtSnapshot.data!;
+    return FutureBuilder<Court>(
+      future: fetchCourt(),
+      builder: (context, courtSnapshot) {
+        if (courtSnapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (courtSnapshot.hasError) {
+          return Text(S.of(context).error);
+        } else if (!courtSnapshot.hasData) {
+          return Text(
+            S.of(context).No_Reversed_Courts,
+            style: const TextStyle(
+              color: Colors.black,
+              fontSize: 22,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w700,
+            ),
+          );
+        } else {
+          final courtData = courtSnapshot.data!;
 
-            return isUser
-                ? UserCourtItem(court: courtData)
-                : CourtItem(
-                    court: courtData,
-                    courtNameController: courtNameController,
-                    isSaveUser: isSaveUser,
-                  );
-          }
-        },
-      ),
+          return isUser
+              ? UserCourtItem(court: courtData)
+              : CourtItem(
+                  court: courtData,
+                  courtNameController: courtNameController,
+                  isSaveUser: isSaveUser,
+                );
+        }
+      },
     );
   }
 }

@@ -23,7 +23,7 @@ class UserCourtItem extends StatelessWidget {
         dateTimeFormat.parse(court.availableDay.toString());
 
     final String formattedStartDate =
-        DateFormat('MMMM d, yyyy - h:mm a').format(startDate);
+        DateFormat('MMMM d, yyyy ').format(startDate);
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.025),
@@ -89,7 +89,9 @@ class UserCourtItem extends StatelessWidget {
               ),
               SizedBox(height: screenWidth * .015),
               Text(
-                '${S.of(context).Address_} ${court.courtAddress}',
+                court.courtAddress != ''
+                    ? '${S.of(context).Address_} ${court.courtAddress}'
+                    : ' ${S.of(context).Address_} No address',
                 style: TextStyle(
                   color: const Color(0xFF6D6D6D),
                   fontSize: subtitleFontSize,

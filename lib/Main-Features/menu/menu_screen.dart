@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tennis_app/Main-Features/menu/widgets/button_menu.dart';
 import 'package:tennis_app/core/methodes/roles_manager.dart';
+import 'package:tennis_app/core/utils/widgets/confirmation_dialog.dart';
 import 'package:tennis_app/core/utils/widgets/custom_dialouge.dart';
 
 import '../../Auth/services/auth_methods.dart';
@@ -187,16 +188,31 @@ class MenuScreen extends StatelessWidget {
                       imagePath: 'assets/images/logout.svg',
                       buttonText: S.of(context).logout,
                       onPressed: () async {
-                        final FirebaseAuthMethods _authService =
-                            FirebaseAuthMethods();
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext dialogContext) {
+                            return ConfirmationDialog(
+                              title:
+                                  '${S.of(context).confirm} ${S.of(context).logout}',
+                              content: '',
+                              confirmText: S.of(context).logout,
+                              cancelText: S.of(context).cancel,
+                              onConfirm: () async {
+                                final FirebaseAuthMethods authService =
+                                    FirebaseAuthMethods();
 
-                        await _authService.signOut();
-                        final prefs = await SharedPreferences.getInstance();
-                        prefs.setBool('showHome', false);
-                        while (GoRouter.of(context).canPop() == true) {
-                          GoRouter.of(context).pop();
-                        }
-                        GoRouter.of(context).pushReplacement('/auth');
+                                await authService.signOut();
+                                final prefs =
+                                    await SharedPreferences.getInstance();
+                                prefs.setBool('showHome', false);
+                                while (GoRouter.of(context).canPop() == true) {
+                                  GoRouter.of(context).pop();
+                                }
+                                GoRouter.of(context).pushReplacement('/auth');
+                              },
+                            );
+                          },
+                        );
                       },
                     ),
                   ],

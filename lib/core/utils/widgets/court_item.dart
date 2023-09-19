@@ -7,7 +7,7 @@ import '../../../models/court.dart';
 import 'package:intl/intl.dart';
 
 class CourtItem extends StatefulWidget {
-  CourtItem(
+  const CourtItem(
       {Key? key,
       required this.court,
       this.courtNameController,
@@ -42,7 +42,7 @@ class _CourtItemState extends State<CourtItem> {
         dateTimeFormat.parse(widget.court.availableDay.toString());
 
     final String formattedStartDate =
-        DateFormat('MMMM d, yyyy - h:mm a').format(startDate);
+        DateFormat('MMMM d, yyyy').format(startDate);
     return Padding(
       padding: EdgeInsets.symmetric(
           horizontal: screenWidth * 0.041, vertical: screenHeight * 0.01),
@@ -61,7 +61,7 @@ class _CourtItemState extends State<CourtItem> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(imageHeight / 3),
-              child: Container(
+              child: SizedBox(
                 height: imageHeight * 1.1,
                 width: imageHeight,
                 child: widget.court.photoURL != ''
@@ -112,7 +112,9 @@ class _CourtItemState extends State<CourtItem> {
                     ),
                     SizedBox(height: screenWidth * .015),
                     Text(
-                      '${S.of(context).Address_} ${widget.court.courtAddress}',
+                      widget.court.courtAddress != ''
+                          ? '${S.of(context).Address_} ${widget.court.courtAddress}'
+                          : ' ${S.of(context).Address_} No address',
                       style: TextStyle(
                         color: const Color(0xFF6D6D6D),
                         fontSize: subtitleFontSize,
@@ -129,6 +131,7 @@ class _CourtItemState extends State<CourtItem> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => CourtDetailsScreen(
+                          courtNameController: widget.courtNameController,
                           court: widget.court,
                           isSaveUser: widget.isSaveUser,
                         ),

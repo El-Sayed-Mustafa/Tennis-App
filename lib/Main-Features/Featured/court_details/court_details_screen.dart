@@ -13,10 +13,15 @@ import 'package:tennis_app/models/player.dart'; // Import the Player class
 
 class CourtDetailsScreen extends StatefulWidget {
   const CourtDetailsScreen(
-      {Key? key, required this.court, required this.isSaveUser})
+      {Key? key,
+      required this.court,
+      required this.isSaveUser,
+      this.courtNameController})
       : super(key: key);
   final Court court;
   final bool isSaveUser;
+  final TextEditingController? courtNameController;
+
   @override
   _CourtDetailsScreenState createState() => _CourtDetailsScreenState();
 }
@@ -95,12 +100,12 @@ class _CourtDetailsScreenState extends State<CourtDetailsScreen> {
             suffixIconPath: '',
           ),
           const SizedBox(height: 16),
-          Center(
-            child: ChosenCourt(
-                courtId: widget.court.courtId,
-                isUser: true,
-                isSaveUser: widget.isSaveUser),
-          ),
+          // Center(
+          //   child: ChosenCourt(
+          //       courtId: widget.court.courtId,
+          //       isUser: true,
+          //       isSaveUser: widget.isSaveUser),
+          // ),
           GestureDetector(
             onTap: () {
               setState(() {
@@ -206,9 +211,37 @@ class _CourtDetailsScreenState extends State<CourtDetailsScreen> {
           BottomSheetContainer(
             buttonText: S.of(context).Get_Reserved,
             onPressed: () {
-              updateFirebaseData();
-              updateCourtReservedStatus(widget.court.courtId);
-              GoRouter.of(context).pop();
+              if (selectedTimeSlots.isNotEmpty) {
+                updateFirebaseData();
+                if (widget.isSaveUser) {
+                  updateCourtReservedStatus(widget.court.courtId);
+                } else {
+                  widget.courtNameController!.text = widget.court.courtId;
+                }
+                GoRouter.of(context).pop();
+              } else {
+                // Show a message to the user indicating that they need to select a time slot.
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Warning'),
+                      content: const Text(
+                          'Please select at least one time slot to reserve the court.'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(
+                            S.of(context).ok,
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
             },
           ),
         ],
@@ -241,7 +274,6 @@ class _CourtDetailsScreenState extends State<CourtDetailsScreen> {
       Player currentPlayer = Player.fromSnapshot(playerSnapshot);
       List<String> updatedReversedCourtsIds = currentPlayer.reversedCourtsIds;
       updatedReversedCourtsIds.add(courtId);
-      print('hi');
       // Step 4: Save the updated player document back to Firestore
       await FirebaseFirestore.instance
           .collection('players')

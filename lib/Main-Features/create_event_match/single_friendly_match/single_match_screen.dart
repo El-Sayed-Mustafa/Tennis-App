@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_app/core/utils/widgets/pop_app_bar.dart';
+import 'package:tennis_app/generated/l10n.dart';
 
 import 'player_match_item.dart';
 
@@ -25,7 +26,7 @@ class SingleMatchScreen extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            text: 'S',
+            text: S.of(context).singleMatch,
             suffixIconPath: '',
           ),
           SizedBox(height: screenHeight * .02),
