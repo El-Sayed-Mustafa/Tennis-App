@@ -742,5 +742,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "No se encontraron jugadores en tu club"),
         "Youcanaddmorerightstoarole": MessageLookupByLibrary.simpleMessage(
             "Puedes agregar más permisos a un rol"),
+        "Please_select_at_least_one_time_slot_to_reserve_the_court.":
+            MessageLookupByLibrary.simpleMessage(
+                "Por favor, seleccione al menos un horario para reservar la cancha."),
+        "Court_Details":
+            MessageLookupByLibrary.simpleMessage("Detalles de la Cancha"),
+        "Warning": MessageLookupByLibrary.simpleMessage("Advertencia"),
+        "Delete_Account":
+            MessageLookupByLibrary.simpleMessage("Eliminar Cuenta"),
       };
 }

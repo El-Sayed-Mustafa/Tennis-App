@@ -217,14 +217,14 @@ class MenuScreen extends StatelessWidget {
                     ),
                     ButtonMenu(
                       imagePath: 'assets/images/delete.svg',
-                      buttonText: 'Delete Account',
+                      buttonText: S.of(context).deleteAccount,
                       onPressed: () async {
                         showDialog(
                           context: context,
                           builder: (BuildContext dialogContext) {
                             return ConfirmationDialog(
                               title:
-                                  '${S.of(context).confirm} ${S.of(context).delete}',
+                                  '${S.of(context).confirm} ${S.of(context).deleteAccount}',
                               content: '',
                               confirmText: S.of(context).delete,
                               cancelText: S.of(context).cancel,

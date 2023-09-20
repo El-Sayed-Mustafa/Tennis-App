@@ -431,5 +431,9 @@
     "Clickheretojoin": "Click here to join",
     "Younotparticipatedinanyclub": "You not participated in any club",
     "Noplayersfoundinyouclub": "No players found in your club",
-    "Youcanaddmorerightstoarole": "You can add more\nrights to a role"
+    "Youcanaddmorerightstoarole": "You can add more\nrights to a role",
+    "Please_select_at_least_one_time_slot_to_reserve_the_court.": "Please select at least one time slot to reserve the court.",
+    "Court_Details": "Court Details",
+    "Warning": "Warning",
+    "Delete_Account": "Delete Account"
 }

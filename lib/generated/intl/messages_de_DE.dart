@@ -742,5 +742,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "Keine Spieler in deinem Club gefunden"),
         "Youcanaddmorerightstoarole": MessageLookupByLibrary.simpleMessage(
             "Du kannst mehr Rechte zu einer Rolle hinzufügen"),
+        "NoPlayersFoundInYourClub": MessageLookupByLibrary.simpleMessage(
+            "Keine Spieler in deinem Club gefunden"),
+        "Please_select_at_least_one_time_slot_to_reserve_the_court.":
+            MessageLookupByLibrary.simpleMessage(
+                "Bitte wählen Sie mindestens einen Zeitraum, um den Platz zu reservieren."),
+        "Court_Details": MessageLookupByLibrary.simpleMessage("Platzdetails"),
+        "Warning": MessageLookupByLibrary.simpleMessage("Warnung"),
+        "Delete_Account": MessageLookupByLibrary.simpleMessage("Konto löschen"),
       };
 }

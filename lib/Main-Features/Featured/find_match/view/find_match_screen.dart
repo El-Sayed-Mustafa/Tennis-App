@@ -33,73 +33,74 @@ class FindMatch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    return BlocProvider(
-      create: (context) => FindMatchCubit(),
-      child: BlocConsumer<FindMatchCubit, FindMatchState>(
-        listener: (context, state) {
-          if (state is FindMatchSuccess) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => PeopleRequirement(match: state.match),
-              ),
-            );
-          } else if (state is FindMatchError) {
-            // Handle errors that occurred during data saving
-            showSnackBar(context, state.errorMessage);
-          }
-        },
-        builder: (context, state) {
-          if (state is FindMatchLoading) {
-            // Show a loading indicator here if needed
-            return Container(
-              color: Colors.white,
-              child: const Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          } else {
-            Method method = Method();
-            return FutureBuilder<Player>(
-                future: method.getCurrentUser(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Dialog.fullscreen(
-                      child: Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    );
-                  } else if (snapshot.hasError) {
-                    return Center(
-                        child:
-                            Text('${S.of(context).error}:${snapshot.error}'));
-                  }
+    return Scaffold(
+      body: BlocProvider(
+        create: (context) => FindMatchCubit(),
+        child: BlocConsumer<FindMatchCubit, FindMatchState>(
+          listener: (context, state) {
+            if (state is FindMatchSuccess) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PeopleRequirement(match: state.match),
+                ),
+              );
+            } else if (state is FindMatchError) {
+              // Handle errors that occurred during data saving
+              showSnackBar(context, state.errorMessage);
+            }
+          },
+          builder: (context, state) {
+            if (state is FindMatchLoading) {
+              // Show a loading indicator here if needed
+              return Container(
+                color: Colors.white,
+                child: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            } else {
+              Method method = Method();
+              return FutureBuilder<Player>(
+                  future: method.getCurrentUser(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Dialog.fullscreen(
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    } else if (snapshot.hasError) {
+                      return Center(
+                          child:
+                              Text('${S.of(context).error}:${snapshot.error}'));
+                    }
 
-                  final player = snapshot.data;
+                    final player = snapshot.data;
 
-                  // Set player's data in controllers
-                  nameController.text = player?.playerName ?? '';
+                    // Set player's data in controllers
+                    nameController.text = player?.playerName ?? '';
 
-                  return FutureBuilder<Club>(
-                      future: method.fetchClubData(player!.participatedClubId),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const Dialog.fullscreen(
-                            child: Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                          );
-                        } else if (snapshot.hasError) {
-                          return Center(
-                              child: Text(
-                                  '${S.of(context).error}: ${snapshot.error}'));
-                        }
+                    return FutureBuilder<Club>(
+                        future:
+                            method.fetchClubData(player!.participatedClubId),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Dialog.fullscreen(
+                              child: Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                            );
+                          } else if (snapshot.hasError) {
+                            return Center(
+                                child: Text(
+                                    '${S.of(context).error}: ${snapshot.error}'));
+                          }
 
-                        final club = snapshot.data;
-                        addressController.text = club!.address;
-                        return Scaffold(
-                          body: Container(
+                          final club = snapshot.data;
+                          addressController.text = club!.address;
+                          return Container(
                             color: const Color(0xFFF8F8F8),
                             child: SingleChildScrollView(
                               child: Column(
@@ -242,12 +243,12 @@ class FindMatch extends StatelessWidget {
                                 ],
                               ),
                             ),
-                          ),
-                        );
-                      });
-                });
-          }
-        },
+                          );
+                        });
+                  });
+            }
+          },
+        ),
       ),
     );
   }

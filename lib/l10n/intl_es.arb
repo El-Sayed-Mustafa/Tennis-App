@@ -427,5 +427,9 @@
     "LetsGetStarted": "Comencemos",
     "ClickHereToJoin": "Haz clic aquí para unirte",
     "YouNotParticipatedInAnyClub": "No has participado en ningún club",
-    "NoPlayersFoundInYourClub": "No se encontraron jugadores en tu club"
+    "NoPlayersFoundInYourClub": "No se encontraron jugadores en tu club",
+    "Please_select_at_least_one_time_slot_to_reserve_the_court.": "Por favor, seleccione al menos un horario para reservar la cancha.",
+    "Court_Details": "Detalles de la Cancha",
+    "Warning": "Advertencia",
+    "Delete_Account": "Eliminar Cuenta"
 }

@@ -426,5 +426,9 @@
     "LetsGetStarted": "Lass uns anfangen",
     "ClickHereToJoin": "Hier klicken, um beizutreten",
     "YouNotParticipatedInAnyClub": "Du hast an keinem Club teilgenommen",
-    "NoPlayersFoundInYourClub": "Keine Spieler in deinem Club gefunden"
+    "NoPlayersFoundInYourClub": "Keine Spieler in deinem Club gefunden",
+    "Please_select_at_least_one_time_slot_to_reserve_the_court.": "Bitte wählen Sie mindestens einen Zeitraum, um den Platz zu reservieren.",
+    "Court_Details": "Platzdetails",
+    "Warning": "Warnung",
+    "Delete_Account": "Konto löschen"
 }

@@ -107,14 +107,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(height: spacing),
               HomeButton(
-                buttonText: S.of(context).Find_Partner,
-                imagePath: 'assets/images/Find-Partner.svg',
-                onPressed: () {
-                  GoRouter.of(context).push('/findPartner');
-                },
-              ),
-              SizedBox(height: spacing),
-              HomeButton(
                   buttonText: S.of(context).Create_Event,
                   imagePath: 'assets/images/Create-Event.svg',
                   onPressed: () async {
@@ -139,14 +131,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     // Display a loading indicator while checking participation
-                    return CircularProgressIndicator();
+                    return const CircularProgressIndicator();
                   } else if (snapshot.hasError) {
                     // Handle error state
                     return Text('${S.of(context).error}: ${snapshot.error}');
                   } else {
                     final hasParticipated = snapshot.data ?? false;
                     if (hasParticipated) {
-                      return Container();
+                      return HomeButton(
+                        buttonText: S.of(context).Find_Partner,
+                        imagePath: 'assets/images/Find-Partner.svg',
+                        onPressed: () {
+                          GoRouter.of(context).push('/findPartner');
+                        },
+                      );
                     } else {
                       return HomeButton(
                         buttonText: S.of(context).Create_Club,

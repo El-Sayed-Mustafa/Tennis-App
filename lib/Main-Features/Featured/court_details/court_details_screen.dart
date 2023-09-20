@@ -96,7 +96,7 @@ class _CourtDetailsScreenState extends State<CourtDetailsScreen> {
                 color: Colors.white,
               ),
             ),
-            text: S.of(context).Courts,
+            text: S.of(context).courtDetails,
             suffixIconPath: '',
           ),
           const SizedBox(height: 16),
@@ -225,9 +225,9 @@ class _CourtDetailsScreenState extends State<CourtDetailsScreen> {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: const Text('Warning'),
-                      content: const Text(
-                          'Please select at least one time slot to reserve the court.'),
+                      title: Text(S.of(context).warning),
+                      content: Text(
+                          S.of(context).pleaseSelectTimeSlotToReserveCourt),
                       actions: [
                         TextButton(
                           onPressed: () {

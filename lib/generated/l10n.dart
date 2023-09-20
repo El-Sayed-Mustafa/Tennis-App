@@ -4153,6 +4153,42 @@ class S {
       args: [],
     );
   }
+
+  String get pleaseSelectTimeSlotToReserveCourt {
+    return Intl.message(
+      'Please select at least one time slot to reserve the court.',
+      name: 'pleaseSelectTimeSlotToReserveCourt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get courtDetails {
+    return Intl.message(
+      'Court Details',
+      name: 'courtDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get warning {
+    return Intl.message(
+      'Warning',
+      name: 'warning',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get deleteAccount {
+    return Intl.message(
+      'Delete Account',
+      name: 'deleteAccount',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
