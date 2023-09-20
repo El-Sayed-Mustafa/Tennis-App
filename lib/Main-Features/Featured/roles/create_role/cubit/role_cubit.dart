@@ -86,7 +86,7 @@ class RoleCubit extends Cubit<RoleCreationStatus> {
                 await clubRef.update({'roleIds': updatedRoleIds});
 
                 showSnackBar(context,
-                    S.of(context).successfullyAddedRoleIdToTheClubDocument);
+                    S.of(context).SuccessfullyAddedRoleIdToTheClubDocument);
               }
             }
 
@@ -94,7 +94,7 @@ class RoleCubit extends Cubit<RoleCreationStatus> {
           } catch (error) {
             // Error creating the role
             showSnackBar(context,
-                ' ${S.of(context).errorCreatingRole} ${error.toString()}');
+                ' ${S.of(context).ErrorCreatingRole} ${error.toString()}');
             emit(RoleCreationStatus.error);
           }
         } else {

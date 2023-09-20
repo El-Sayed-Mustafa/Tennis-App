@@ -208,7 +208,7 @@ class _EditSingleMatchItemState extends State<EditSingleMatchItem> {
                                 },
                               ),
                               Text(
-                                S.of(context).reverseCourt,
+                                S.of(context).ReverseCourt,
                                 style: const TextStyle(
                                   color: Color(0xFF525252),
                                   fontSize: 16,

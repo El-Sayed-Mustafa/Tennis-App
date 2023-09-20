@@ -90,7 +90,7 @@ class CreateProfileCubit extends Cubit<CreateProfileState> {
       }
 
       // Data saved successfully
-      showSnackBar(context, S.of(context).userDataSavedSuccessfully);
+      showSnackBar(context, S.of(context).UserDataSavedSuccessfully);
 
       emit(CreateProfileSuccessState());
       while (GoRouter.of(context).canPop() == true) {

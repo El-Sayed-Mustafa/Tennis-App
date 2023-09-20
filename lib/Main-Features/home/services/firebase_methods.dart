@@ -23,9 +23,9 @@ void navigateToCreateEvent(BuildContext context) async {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text(S.of(context).noClubMembership),
+            title: Text(S.of(context).NoClubMembership),
             content:
-                Text(S.of(context).youNeedToBeAMemberOfAClubToCreateAnEvent),
+                Text(S.of(context).YouNeedToBeAMemberOfAClubToCreateAnEvent),
             actions: [
               TextButton(
                 onPressed: () {
@@ -44,7 +44,7 @@ void navigateToCreateEvent(BuildContext context) async {
       builder: (context) {
         return AlertDialog(
           title: Text(S.of(context).Player_data_not_found),
-          content: Text(S.of(context).playerNotFoundWithTheGivenID),
+          content: Text(S.of(context).PlayerNotFoundWithTheGivenID),
           actions: [
             TextButton(
               onPressed: () {

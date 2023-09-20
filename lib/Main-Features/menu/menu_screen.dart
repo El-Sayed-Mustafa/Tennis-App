@@ -172,14 +172,14 @@ class MenuScreen extends StatelessWidget {
                     ),
                     ButtonMenu(
                       imagePath: 'assets/images/languages.svg',
-                      buttonText: S.of(context).language,
+                      buttonText: S.of(context).Language,
                       onPressed: () {
                         GoRouter.of(context).push('/languages');
                       },
                     ),
                     ButtonMenu(
                       imagePath: 'assets/images/members.svg',
-                      buttonText: S.of(context).clubInvitations,
+                      buttonText: S.of(context).ClubInvitations,
                       onPressed: () {
                         GoRouter.of(context).push('/chooseClub');
                       },
@@ -193,7 +193,7 @@ class MenuScreen extends StatelessWidget {
                           builder: (BuildContext dialogContext) {
                             return ConfirmationDialog(
                               title:
-                                  '${S.of(context).confirm} ${S.of(context).logout}',
+                                  '${S.of(context).Confirm} ${S.of(context).logout}',
                               content: '',
                               confirmText: S.of(context).logout,
                               cancelText: S.of(context).cancel,
@@ -217,16 +217,16 @@ class MenuScreen extends StatelessWidget {
                     ),
                     ButtonMenu(
                       imagePath: 'assets/images/delete.svg',
-                      buttonText: S.of(context).deleteAccount,
+                      buttonText: S.of(context).Delete_Account,
                       onPressed: () async {
                         showDialog(
                           context: context,
                           builder: (BuildContext dialogContext) {
                             return ConfirmationDialog(
                               title:
-                                  '${S.of(context).confirm} ${S.of(context).deleteAccount}',
+                                  '${S.of(context).Confirm} ${S.of(context).Delete_Account}',
                               content: '',
-                              confirmText: S.of(context).delete,
+                              confirmText: S.of(context).Delete,
                               cancelText: S.of(context).cancel,
                               onConfirm: () async {
                                 final Method authService = Method();

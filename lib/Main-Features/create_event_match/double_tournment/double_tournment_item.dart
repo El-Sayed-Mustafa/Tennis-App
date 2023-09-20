@@ -209,7 +209,7 @@ class _MatchInputFormState extends State<MatchInputForm> {
                       },
                     ),
                     Text(
-                      S.of(context).reverseCourt,
+                      S.of(context).ReverseCourt,
                       style: const TextStyle(
                         color: Color(0xFF525252),
                         fontSize: 16,

@@ -85,7 +85,7 @@ class _SelectDoubleWinnersState extends State<SelectDoubleWinners> {
               widget.onWinnersSelected(_selectedWinner1!, _selectedWinner2!);
             }
           },
-          child: Text(S.of(context).confirm),
+          child: Text(S.of(context).Confirm),
         ),
       ],
     );

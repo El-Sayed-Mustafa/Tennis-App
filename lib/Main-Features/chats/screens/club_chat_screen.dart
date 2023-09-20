@@ -206,15 +206,15 @@ class _ClubChatScreenState extends State<ClubChatScreen> {
               }).catchError((error) =>
                   showSnackBar(context, '${S.of(context).error} $error'));
             } else {
-              SnackBar(content: Text(S.of(context).noClubChatIdFound));
+              SnackBar(content: Text(S.of(context).NoClubChatIdFound));
             }
           }).catchError((error) => showSnackBar(
-              context, ' ${S.of(context).errorFetchingClubData} $error'));
+              context, ' ${S.of(context).ErrorFetchingClubData} $error'));
         } else {
-          showSnackBar(context, S.of(context).noClubIdAvailable);
+          showSnackBar(context, S.of(context).NoClubIdAvailable);
         }
       }).catchError((error) => showSnackBar(
-          context, ' ${S.of(context).errorFetchingUserData} $error'));
+          context, ' ${S.of(context).ErrorFetchingUserData} $error'));
     }
   }
 

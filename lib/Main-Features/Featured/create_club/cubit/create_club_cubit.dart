@@ -120,7 +120,7 @@ class CreateClubCubit extends Cubit<CreateClubState> {
       await userDocRef.update({'participatedClubId': clubDocRef.id});
 
       // Data saved successfully
-      showSnackBar(context, S.of(context).clubDataSavedSuccessfully);
+      showSnackBar(context, 'Club data saved successfully.');
 
       // You can emit a success state if needed
       emit(CreateClubSuccessState());

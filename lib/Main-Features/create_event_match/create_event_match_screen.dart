@@ -24,13 +24,13 @@ class CreateEventMatchesScreen extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            text: S.of(context).createMatch,
+            text: S.of(context).CreateMatch,
             suffixIconPath: '',
           ),
           ButtonMatchItem(
             icon: Icons.switch_access_shortcut_add_outlined,
             color: const Color(0x5172B8FF),
-            text: S.of(context).singleMatch,
+            text: S.of(context).SingleMatch,
             onPressed: () {
               GoRouter.of(context).push('/singleMatches');
             },
@@ -38,7 +38,7 @@ class CreateEventMatchesScreen extends StatelessWidget {
           ButtonMatchItem(
             icon: Icons.personal_injury_outlined,
             color: const Color(0x51EE746C),
-            text: S.of(context).doubleMatch,
+            text: S.of(context).DoubleMatch,
             onPressed: () {
               GoRouter.of(context).push('/doubleMatches');
             },
@@ -46,7 +46,7 @@ class CreateEventMatchesScreen extends StatelessWidget {
           ButtonMatchItem(
             icon: Icons.transcribe_sharp,
             color: const Color(0x8294D3D3),
-            text: S.of(context).singleTournament,
+            text: S.of(context).SingleTournament,
             onPressed: () {
               GoRouter.of(context).push('/singleTournament');
             },
@@ -54,7 +54,7 @@ class CreateEventMatchesScreen extends StatelessWidget {
           ButtonMatchItem(
             icon: Icons.change_circle_rounded,
             color: const Color(0x51FFA372),
-            text: S.of(context).doubleTournament,
+            text: S.of(context).DoubleTournament,
             onPressed: () {
               GoRouter.of(context).push('/doubleTournament');
             },

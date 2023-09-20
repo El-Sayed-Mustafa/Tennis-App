@@ -72,7 +72,7 @@ class NavigationBarScreen extends StatelessWidget {
             // Handle the case where fetchUserRoles didn't return valid data
             return Scaffold(
               body: Center(
-                child: Text(S.of(context).failedToFetchUserRoles),
+                child: Text(S.of(context).FailedToFetchUserRoles),
               ),
             );
           }

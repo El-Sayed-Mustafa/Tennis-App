@@ -74,14 +74,14 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Center(child: Text(S.of(context).enterResults)),
+          title: Center(child: Text(S.of(context).EnterResults)),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Padding(
                   padding: const EdgeInsets.all(5.0),
-                  child: Text("${S.of(context).shot} 1",
+                  child: Text("${S.of(context).Shot} 1",
                       style: const TextStyle(
                         color: Color(0xFF2A2A2A),
                         fontSize: 16,
@@ -96,7 +96,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                         controller: teamAScoreController1,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          labelText: S.of(context).teamA,
+                          labelText: S.of(context).TeamA,
                           border: const OutlineInputBorder(),
                         ),
                       ),
@@ -108,7 +108,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                         controller: teamBScoreController1,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          labelText: S.of(context).teamB,
+                          labelText: S.of(context).TeamB,
                           border: const OutlineInputBorder(),
                         ),
                       ),
@@ -120,7 +120,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(5.0),
-                  child: Text("${S.of(context).shot} 2",
+                  child: Text("${S.of(context).Shot} 2",
                       style: const TextStyle(
                         color: Color(0xFF2A2A2A),
                         fontSize: 16,
@@ -135,7 +135,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                         controller: teamAScoreController2,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          labelText: S.of(context).teamA,
+                          labelText: S.of(context).TeamA,
                           border: const OutlineInputBorder(),
                         ),
                       ),
@@ -147,7 +147,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                         controller: teamBScoreController2,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          labelText: S.of(context).teamB,
+                          labelText: S.of(context).TeamB,
                           border: const OutlineInputBorder(),
                         ),
                       ),
@@ -159,7 +159,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(5.0),
-                  child: Text("${S.of(context).shot} 3",
+                  child: Text("${S.of(context).Shot} 3",
                       style: const TextStyle(
                         color: Color(0xFF2A2A2A),
                         fontSize: 16,
@@ -174,7 +174,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                         controller: teamAScoreController3,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          labelText: S.of(context).teamA,
+                          labelText: S.of(context).TeamA,
                           border: const OutlineInputBorder(),
                         ),
                       ),
@@ -186,7 +186,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                         controller: teamBScoreController3,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          labelText: S.of(context).teamB,
+                          labelText: S.of(context).TeamB,
                           border: const OutlineInputBorder(),
                         ),
                       ),
@@ -198,7 +198,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(5.0),
-                  child: Text("${S.of(context).shot} 4",
+                  child: Text("${S.of(context).Shot} 4",
                       style: const TextStyle(
                         color: Color(0xFF2A2A2A),
                         fontSize: 16,
@@ -213,7 +213,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                         controller: teamAScoreController4,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          labelText: S.of(context).teamA,
+                          labelText: S.of(context).TeamA,
                           border: const OutlineInputBorder(),
                         ),
                       ),
@@ -225,7 +225,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                         controller: teamBScoreController4,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          labelText: S.of(context).teamB,
+                          labelText: S.of(context).TeamB,
                           border: const OutlineInputBorder(),
                         ),
                       ),
@@ -237,7 +237,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(5.0),
-                  child: Text("${S.of(context).shot} 5",
+                  child: Text("${S.of(context).Shot} 5",
                       style: const TextStyle(
                         color: Color(0xFF2A2A2A),
                         fontSize: 16,
@@ -252,7 +252,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                         controller: teamAScoreController5,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          labelText: S.of(context).teamA,
+                          labelText: S.of(context).TeamA,
                           border: const OutlineInputBorder(),
                         ),
                       ),
@@ -264,7 +264,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                         controller: teamBScoreController5,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          labelText: S.of(context).teamB,
+                          labelText: S.of(context).TeamB,
                           border: const OutlineInputBorder(),
                         ),
                       ),
@@ -433,7 +433,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                           widget.match.player4Id, false);
                     }
                   },
-                  child: Text(S.of(context).submit),
+                  child: Text(S.of(context).Submit),
                 ),
               ],
             ),
@@ -462,7 +462,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
         } else if (snapshot.hasError ||
             snapshot.data == null ||
             snapshot.data!.length < 4) {
-          return Text(S.of(context).errorLoadingPlayerData);
+          return Text(S.of(context).ErrorLoadingPlayerData);
         } else {
           final player1 = snapshot.data![0];
           final player2 = snapshot.data![1];
@@ -520,7 +520,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                           children: [
                             Column(
                               children: [
-                                Text(S.of(context).teamA,
+                                Text(S.of(context).TeamA,
                                     style: const TextStyle(
                                       color: Color(0xFF2A2A2A),
                                       fontSize: 16,
@@ -604,7 +604,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                             ),
                             Column(
                               children: [
-                                Text(S.of(context).teamB,
+                                Text(S.of(context).TeamB,
                                     style: const TextStyle(
                                       color: Color(0xFF2A2A2A),
                                       fontSize: 16,
@@ -683,7 +683,7 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          ' ${S.of(context).shot} ${index + 1}',
+                                          ' ${S.of(context).Shot} ${index + 1}',
                                           style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 13,

@@ -37,7 +37,7 @@ class ClubDetailsScreen extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-              text: S.of(context).clubDetails,
+              text: S.of(context).Club,
               suffixIconPath: '',
             ),
             Stack(
@@ -124,7 +124,7 @@ class ClubDetailsScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  S.of(context).clubRate,
+                                  S.of(context).ClubRate,
                                   style: const TextStyle(
                                     color: Color(0xFF15324F),
                                     fontSize: 18,
@@ -203,7 +203,7 @@ class ClubDetailsScreen extends StatelessWidget {
                                       left: 24, right: 24, bottom: 6, top: 6),
                                   child: Text(
                                     club.rulesAndRegulations.isEmpty
-                                        ? S.of(context).noRulesAndRegulations
+                                        ? 'No Rules and Regulations'
                                         : club.rulesAndRegulations,
                                     style: const TextStyle(
                                       color: Color.fromARGB(255, 152, 150, 150),
@@ -258,7 +258,7 @@ class ClubDetailsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 15),
             BottomSheetContainer(
-              buttonText: S.of(context).editClub,
+              buttonText: S.of(context).Edit_club,
               onPressed: () async {
                 bool hasRight = await RolesManager.instance
                     .doesPlayerHaveRight('Edit Club');
@@ -283,7 +283,7 @@ class ClubDetailsScreen extends StatelessWidget {
               },
             ),
             BottomSheetContainer(
-              buttonText: S.of(context).deleteClub,
+              buttonText: S.of(context).Delete_club,
               onPressed: () async {
                 bool hasRight = await RolesManager.instance
                     .doesPlayerHaveRight('Delete Club');
@@ -294,9 +294,9 @@ class ClubDetailsScreen extends StatelessWidget {
                     context: context,
                     builder: (BuildContext dialogContext) {
                       return ConfirmationDialog(
-                        title: S.of(context).confirmDelete,
-                        content: S.of(context).areYouSureToDeleteClub,
-                        confirmText: S.of(context).delete,
+                        title: S.of(context).Confirm,
+                        content: S.of(context).Delete_club,
+                        confirmText: S.of(context).Delete,
                         cancelText: S.of(context).cancel,
                         onConfirm: () {
                           method.deleteClub(club.clubId);

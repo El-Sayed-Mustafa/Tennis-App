@@ -102,7 +102,7 @@ class SetReminder extends StatelessWidget {
                     SizedBox(height: screenHeight * .03),
                     InputDateAndTime(
                       text: S.of(context).set_reminder,
-                      hint: S.of(context).selectTheReminderTime,
+                      hint: S.of(context).SelectTheReminderTime,
                       onDateTimeSelected: (DateTime dateTime) {},
                     ),
                     SizedBox(height: screenHeight * .03),
@@ -136,7 +136,7 @@ class SetReminder extends StatelessWidget {
               GoRouter.of(context).push('/calendar');
             } catch (e) {
               // Handle any exceptions that occurred during event saving
-              showSnackBar(context, ' ${S.of(context).errorSavingEvent}: $e');
+              showSnackBar(context, ' ${S.of(context).ErrorSavingEvent}: $e');
               // You can show a snackbar, dialog, or any other error message to the user.
             }
           }

@@ -152,7 +152,7 @@ class _CourtItemState extends State<CourtItem> {
                         child: Text(
                       widget.isHome != null
                           ? widget.isHome!
-                              ? S.of(context).courtDetails
+                              ? S.of(context).Court_Details
                               : S.of(context).Get_Reserved
                           : S.of(context).Get_Reserved,
                       style: TextStyle(

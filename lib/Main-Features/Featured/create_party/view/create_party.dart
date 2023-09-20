@@ -154,7 +154,7 @@ class _CreatePartyState extends State<CreateParty> {
                                     },
                                   ),
                                   Text(
-                                    S.of(context).public,
+                                    S.of(context).Public,
                                     style: const TextStyle(
                                       color: Color(0xFF525252),
                                       fontSize: 16,
@@ -176,7 +176,7 @@ class _CreatePartyState extends State<CreateParty> {
                                     },
                                   ),
                                   Text(
-                                    S.of(context).custom,
+                                    S.of(context).Custom,
                                     style: const TextStyle(
                                       color: Color(0xFF525252),
                                       fontSize: 16,

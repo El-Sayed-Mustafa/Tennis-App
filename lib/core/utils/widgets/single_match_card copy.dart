@@ -60,7 +60,7 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
         } else if (snapshot.hasError ||
             snapshot.data == null ||
             snapshot.data!.length < 2) {
-          return Text(S.of(context).errorLoadingPlayerData);
+          return Text(S.of(context).ErrorLoadingPlayerData);
         } else {
           final player1 = snapshot.data![0]!;
           final player2 = snapshot.data![1]!;
@@ -117,7 +117,7 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
                           children: [
                             Column(
                               children: [
-                                Text(S.of(context).playerA,
+                                Text(S.of(context).PlayerA,
                                     style: TextStyle(
                                       color: const Color(0xFF2A2A2A),
                                       fontSize: 16.sp,
@@ -181,7 +181,7 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
                             ),
                             Column(
                               children: [
-                                Text(S.of(context).playerB,
+                                Text(S.of(context).PlayerB,
                                     style: const TextStyle(
                                       color: Color(0xFF2A2A2A),
                                       fontSize: 16,
@@ -240,7 +240,7 @@ class _SingleMatchCardState extends State<SingleMatchCard> {
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          ' ${S.of(context).shot} ${index + 1}',
+                                          ' ${S.of(context).Shot} ${index + 1}',
                                           style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 13,

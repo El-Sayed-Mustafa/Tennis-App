@@ -48,8 +48,8 @@ class _CreateRoleState extends State<CreateRole> {
             showDialog(
               context: context,
               builder: (context) => AlertDialog(
-                title: Text(S.of(context).roleCreated),
-                content: Text(S.of(context).roleHasBeenCreatedSuccessfully),
+                title: Text(S.of(context).RoleCreated),
+                content: Text(S.of(context).RoleHasBeenCreatedSuccessfully),
                 actions: [
                   ElevatedButton(
                     onPressed: () {
@@ -113,7 +113,7 @@ class _CreateRoleState extends State<CreateRole> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                S.of(context).createRole,
+                                S.of(context).CreateRole,
                                 style: const TextStyle(
                                   color: Color(0xFF616161),
                                   fontSize: 20,
@@ -125,7 +125,7 @@ class _CreateRoleState extends State<CreateRole> {
                               CustomTextFormField(controller: roleController),
                               SizedBox(height: screenHeight * .05),
                               Text(
-                                S.of(context).describeRights,
+                                S.of(context).DescribeRights,
                                 style: const TextStyle(
                                   color: Color(0xFF616161),
                                   fontSize: 20,
@@ -163,7 +163,7 @@ class _CreateRoleState extends State<CreateRole> {
                         child: Container(
                           color: const Color(0xFFF8F8F8),
                           child: BottomSheetContainer(
-                            buttonText: S.of(context).createRole,
+                            buttonText: S.of(context).CreateRole,
                             onPressed: () {
                               // Call the Cubit method to create the role
                               context.read<RoleCubit>().createRole(

@@ -76,7 +76,7 @@ class SettingsScreen extends StatelessWidget {
               ),
               ButtonMenu(
                 imagePath: 'assets/images/languages.svg',
-                buttonText: S.of(context).language,
+                buttonText: S.of(context).Language,
                 onPressed: () {},
               ),
               ButtonMenu(

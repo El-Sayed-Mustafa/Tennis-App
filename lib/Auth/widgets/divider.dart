@@ -17,7 +17,7 @@ class MyDivider extends StatelessWidget {
           )),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Text(S.of(context).orContinueWith,
+            child: Text(S.of(context).OrContinueWith,
                 style: TextStyle(color: Colors.grey[700])),
           ),
           Expanded(

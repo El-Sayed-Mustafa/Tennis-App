@@ -435,5 +435,6 @@
     "Please_select_at_least_one_time_slot_to_reserve_the_court.": "Please select at least one time slot to reserve the court.",
     "Court_Details": "Court Details",
     "Warning": "Warning",
-    "Delete_Account": "Delete Account"
+    "Delete_Account": "Delete Account",
+    "reversedCourtsTapToShow": "Reversed Courts Tap To Show"
 }

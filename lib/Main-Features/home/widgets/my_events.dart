@@ -108,9 +108,9 @@ class _MyEventsState extends State<MyEvents> {
                                         context: context,
                                         builder: (BuildContext dialogContext) {
                                           return ConfirmationDialog(
-                                            title: S.of(context).confirmDelete,
+                                            title: S.of(context).Confirm,
                                             content: '',
-                                            confirmText: S.of(context).delete,
+                                            confirmText: S.of(context).Delete,
                                             cancelText: S.of(context).cancel,
                                             onConfirm: () async {
                                               await delete
@@ -145,9 +145,9 @@ class _MyEventsState extends State<MyEvents> {
                                       context: context,
                                       builder: (BuildContext dialogContext) {
                                         return ConfirmationDialog(
-                                          title: S.of(context).confirmDelete,
+                                          title: S.of(context).Confirm,
                                           content: '',
-                                          confirmText: S.of(context).delete,
+                                          confirmText: S.of(context).Delete,
                                           cancelText: S.of(context).cancel,
                                           onConfirm: () async {
                                             await delete.deleteMyEvent(eventId);

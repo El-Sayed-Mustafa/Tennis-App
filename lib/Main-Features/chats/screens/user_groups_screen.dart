@@ -55,7 +55,7 @@ class _UserGroupsScreenState extends State<UserGroupsScreen> {
                 );
               } else if (snapshot.hasError) {
                 return Text(
-                    '${S.of(context).errorLoadingGroups}: ${snapshot.error}');
+                    '${S.of(context).ErrorLoadingGroups}: ${snapshot.error}');
               } else if (snapshot.hasData) {
                 List<GroupChats> userGroups = snapshot.data as List<GroupChats>;
 
@@ -63,7 +63,7 @@ class _UserGroupsScreenState extends State<UserGroupsScreen> {
                   // Show "No groups found" message
                   return Center(
                     child: Text(
-                      S.of(context).noGroupsFound,
+                      S.of(context).NoGroupsFound,
                       style: const TextStyle(fontSize: 16),
                     ),
                   );
@@ -90,7 +90,7 @@ class _UserGroupsScreenState extends State<UserGroupsScreen> {
                   );
                 }
               } else {
-                return Center(child: Text(S.of(context).noGroupsFound));
+                return Center(child: Text(S.of(context).NoGroupsFound));
               }
             },
           ),
@@ -125,7 +125,7 @@ class _UserGroupsScreenState extends State<UserGroupsScreen> {
         userGroups.add(groupChats);
       }
     } catch (error) {
-      showSnackBar(context, ' ${S.of(context).errorFetchingUserGroups}$error');
+      showSnackBar(context, ' ${S.of(context).ErrorFetchingUserGroups}$error');
     }
 
     return userGroups;

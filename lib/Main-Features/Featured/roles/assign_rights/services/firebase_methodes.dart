@@ -26,8 +26,8 @@ class AssignRightsService {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text(S.of(context).roleUpdated),
-          content: Text(S.of(context).roleRightsUpdatedSuccessfully),
+          title: Text(S.of(context).RoleUpdated),
+          content: Text(S.of(context).RoleRightsUpdatedSuccessfully),
           actions: [
             ElevatedButton(
               onPressed: () {

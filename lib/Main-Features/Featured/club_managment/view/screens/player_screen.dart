@@ -83,7 +83,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
       }
     } catch (e) {
       // Handle errors if necessary
-      showSnackBar(context, ' ${S.of(context).errorLoadingClubRoles} $e');
+      showSnackBar(context, ' ${S.of(context).ErrorLoadingClubRoles} $e');
     }
   }
 
@@ -95,7 +95,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
       });
     } catch (e) {
       // Handle errors if necessary
-      showSnackBar(context, ' ${S.of(context).errorFetchingRoleNames} $e');
+      showSnackBar(context, ' ${S.of(context).ErrorFetchingRoleNames} $e');
     }
   }
 
@@ -593,10 +593,10 @@ class _PlayerScreenState extends State<PlayerScreen> {
                         context: context,
                         builder: (BuildContext dialogContext) {
                           return ConfirmationDialog(
-                            title: S.of(context).confirmDelete,
+                            title: S.of(context).Confirm,
                             content:
                                 "Are you sure you want to delete this Club?",
-                            confirmText: S.of(context).delete,
+                            confirmText: S.of(context).Delete,
                             cancelText: S.of(context).cancel,
                             onConfirm: () async {
                               await removePlayerFromClub(

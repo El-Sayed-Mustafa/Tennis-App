@@ -82,10 +82,10 @@ class GroupCard extends StatelessWidget {
                       return SizedBox.shrink();
                     } else if (snapshot.hasError) {
                       return Text(
-                          '${S.of(context).errorLoadingMessages}: ${snapshot.error}');
+                          '${S.of(context).ErrorLoadingGroups}: ${snapshot.error}');
                     } else if (!snapshot.hasData ||
                         snapshot.data!.docs.isEmpty) {
-                      return Text(S.of(context).noMessages);
+                      return Text(S.of(context).NoMessages);
                     } else {
                       String lastMessage =
                           snapshot.data!.docs[0]['content'] as String;

@@ -67,8 +67,8 @@ class ProfileBody extends StatelessWidget {
                 width: screenWidth * .8,
                 height: screenHeight * .2,
                 child: NoData(
-                  buttonText: S.of(context).clickHereToJoin,
-                  text: S.of(context).youNotParticipatedInAnyClub,
+                  buttonText: 'Click here to join',
+                  text: 'You Are not Participant in any Club',
                 ),
               );
             } else {
@@ -84,8 +84,8 @@ class ProfileBody extends StatelessWidget {
                         clubData: clubData,
                       )
                     : NoData(
-                        buttonText: S.of(context).clickHereToJoin,
-                        text: S.of(context).youNotParticipatedInAnyClub,
+                        buttonText: 'Click here to join',
+                        text: 'You Are not Participant in any Club',
                       ), // Show the NoData widget when clubData is null
               );
             }

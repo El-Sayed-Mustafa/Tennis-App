@@ -96,7 +96,7 @@ class _CourtDetailsScreenState extends State<CourtDetailsScreen> {
                 color: Colors.white,
               ),
             ),
-            text: S.of(context).courtDetails,
+            text: S.of(context).Court_Details,
             suffixIconPath: '',
           ),
           const SizedBox(height: 16),
@@ -116,8 +116,8 @@ class _CourtDetailsScreenState extends State<CourtDetailsScreen> {
               padding: const EdgeInsets.all(16.0),
               child: Text(
                 showAvailableCourts
-                    ? S.of(context).availableCourtsTapToHide
-                    : S.of(context).availableCourtsTapToShow,
+                    ? "Available Courts Tap To Hide"
+                    : 'Available Courts Tap To Show',
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -164,8 +164,8 @@ class _CourtDetailsScreenState extends State<CourtDetailsScreen> {
               padding: const EdgeInsets.all(16.0),
               child: Text(
                 showReversedCourts
-                    ? S.of(context).reversedCourtsTapToHide
-                    : S.of(context).reversedCourtsTapToShow,
+                    ? 'Reversed Courts (Tap to Hide)'
+                    : 'Reversed Courts (Tap to Show)',
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -196,7 +196,7 @@ class _CourtDetailsScreenState extends State<CourtDetailsScreen> {
                       } else if (snapshot.hasError) {
                         return Text('Error: ${snapshot.error}');
                       } else if (!snapshot.hasData || snapshot.data == null) {
-                        return Text(S.of(context).playerDataUnknown);
+                        return Text(S.of(context).Player_data_not_found);
                       } else {
                         final player = snapshot.data!;
                         return PlayerCard(
@@ -225,9 +225,10 @@ class _CourtDetailsScreenState extends State<CourtDetailsScreen> {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: Text(S.of(context).warning),
+                      title: Text(S.of(context).Warning),
                       content: Text(
-                          S.of(context).pleaseSelectTimeSlotToReserveCourt),
+                        'Please Select  At least one Time',
+                      ),
                       actions: [
                         TextButton(
                           onPressed: () {

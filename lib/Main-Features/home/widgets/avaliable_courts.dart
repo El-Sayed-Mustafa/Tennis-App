@@ -39,7 +39,7 @@ class _ReversedCourtsState extends State<ReversedCourts> {
       // Fetch the current user's player data from Firestore
       User? currentUser = FirebaseAuth.instance.currentUser;
       if (currentUser == null) {
-        showSnackBar(context, S.of(context).noUserIsCurrentlySignedIn);
+        showSnackBar(context, S.of(context).NoUserIsCurrentlySignedIn);
         return;
       }
 
@@ -53,7 +53,7 @@ class _ReversedCourtsState extends State<ReversedCourts> {
 
       if (!playerSnapshot.exists) {
         showSnackBar(
-            context, S.of(context).playerDocumentDoesNotExistForCurrentUser);
+            context, S.of(context).PlayerDocumentDoesNotExistForCurrentUser);
         return;
       }
 
@@ -67,7 +67,7 @@ class _ReversedCourtsState extends State<ReversedCourts> {
       setState(() {});
     } catch (error) {
       showSnackBar(
-          context, ' ${S.of(context).errorFetchingReversedCourts} $error');
+          context, ' ${S.of(context).ErrorFetchingReversedCourts} $error');
     }
   }
 
@@ -158,7 +158,7 @@ class _ReversedCourtsState extends State<ReversedCourts> {
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
-                        return Text(S.of(context).errorFetchingCourtData);
+                        return Text(S.of(context).ErrorFetchingCourtData);
                       }
 
                       if (!snapshot.hasData) {
@@ -167,7 +167,7 @@ class _ReversedCourtsState extends State<ReversedCourts> {
 
                       final courtData = snapshot.data?.data();
                       if (courtData == null) {
-                        return Text(S.of(context).noCourtDataAvailable);
+                        return Text(S.of(context).NoCourtDataAvailable);
                       }
 
                       // Create a Court instance from the snapshot data
@@ -190,11 +190,11 @@ class _ReversedCourtsState extends State<ReversedCourts> {
                                     context: context,
                                     builder: (BuildContext dialogContext) {
                                       return ConfirmationDialog(
-                                        title: S.of(context).confirmDelete,
+                                        title: S.of(context).Confirm,
                                         content: S
                                             .of(context)
-                                            .areYouSureYouWantToCancelThisReservation,
-                                        confirmText: S.of(context).delete,
+                                            .AreYouSureYouWantToCancelThisReservation,
+                                        confirmText: S.of(context).Delete,
                                         cancelText: S.of(context).cancel,
                                         onConfirm: () async {
                                           User? currentUser =
@@ -204,7 +204,7 @@ class _ReversedCourtsState extends State<ReversedCourts> {
                                                 context,
                                                 S
                                                     .of(context)
-                                                    .noUserIsCurrentlySignedIn);
+                                                    .NoUserIsCurrentlySignedIn);
 
                                             return;
                                           }

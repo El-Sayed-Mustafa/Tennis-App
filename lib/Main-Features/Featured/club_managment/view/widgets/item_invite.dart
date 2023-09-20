@@ -57,14 +57,14 @@ class _ItemInviteState extends State<ItemInvite> {
         FirebaseFirestore firestore = FirebaseFirestore.instance;
         CollectionReference playersCollection = firestore.collection('players');
         await playersCollection.doc(player.playerId).update(player.toJson());
-        showSnackBar(context, S.of(context).userDataSavedSuccessfully);
+        showSnackBar(context, S.of(context).UserDataSavedSuccessfully);
       } catch (e) {
         // Handle any errors while saving data to Firebase
         showSnackBar(context, ' ${S.of(context).error}: $e');
       }
     } else {
       // Invitation already sent, show a message or perform any action as needed
-      showSnackBar(context, S.of(context).invitationHasBeenSentToThisPlayer);
+      // showSnackBar(context, S.of(context).invitationHasBeenSentToThisPlayer);
     }
   }
 

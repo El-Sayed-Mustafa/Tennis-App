@@ -38,7 +38,8 @@ class _PlayersRankingState extends State<PlayersRanking> {
                   width: screenWidth * .8,
                   height: 150,
                   child: NoData(
-                      text: S.of(context).noPlayersAvailable, buttonText: ''),
+                      text: S.of(context).Noplayersfoundinyouclub,
+                      buttonText: ''),
                 );
               } else {
                 // Use the fetched sorted players to build the list

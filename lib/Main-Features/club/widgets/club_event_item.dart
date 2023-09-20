@@ -160,7 +160,7 @@ class ClubEventItem extends StatelessWidget {
                                       SnackBar(
                                           content: Text(S
                                               .of(context)
-                                              .youAreAlreadyRegisteredForThisEvent)),
+                                              .YouAreAlreadyRegisteredForThisEvent)),
                                     );
                                   } else {
                                     // Add the eventId to the eventIds list

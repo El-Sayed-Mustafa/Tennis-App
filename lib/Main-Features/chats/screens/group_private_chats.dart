@@ -75,10 +75,10 @@ class _GroupPrivateChatsState extends State<GroupPrivateChats>
                   controller: tabController,
                   tabs: [
                     Tab(
-                      text: S.of(context).private,
+                      text: S.of(context).Private,
                     ),
                     Tab(
-                      text: S.of(context).groups,
+                      text: S.of(context).Groups,
                     ),
                   ],
                   indicator: ShapeDecoration(

@@ -132,7 +132,7 @@ class _InputDateState extends State<InputDate> {
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return S.of(context).pleaseEnterAValidDate;
+                          return S.of(context).PleaseEnterAValidDate;
                         }
                         return null;
                       },

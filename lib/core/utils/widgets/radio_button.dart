@@ -52,7 +52,7 @@ class _MyRadioButtonState extends State<MyRadioButton> {
                 },
               ),
               Text(
-                S.of(context).reverseCourt,
+                S.of(context).ReverseCourt,
                 style: const TextStyle(
                   color: Color(0xFF525252),
                   fontSize: 16,

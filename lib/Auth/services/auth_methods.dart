@@ -128,16 +128,16 @@ class FirebaseAuthMethods {
         } else {
           // User's email is not verified
           showSnackBar(
-              context, S.of(context).pleaseVerifyYourEmailBeforeLoggingIn);
+              context, S.of(context).PleaseVerifyYourEmailBeforeLoggingIn);
           await _auth.signOut(); // Sign out the user
         }
       } else {
         // User is not registered
-        showSnackBar(context, S.of(context).userIsNotRegistered);
+        showSnackBar(context, S.of(context).UserIsNotRegistered);
       }
     } on FirebaseAuthException {
       showSnackBar(
-          context, S.of(context).userIsNotRegisteredSwapRightToRegister);
+          context, S.of(context).UserIsNotRegisteredSwapRightToRegister);
     }
   }
 

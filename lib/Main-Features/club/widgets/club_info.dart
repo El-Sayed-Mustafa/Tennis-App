@@ -88,7 +88,7 @@ class _ClubInfoState extends State<ClubInfo> {
 
       if (isPlayerRated) {
         // Player has already rated the club
-        showSnackBar(context, S.of(context).youHaveAlreadyRatedThisClub);
+        showSnackBar(context, S.of(context).YouHaveAlreadyRatedThisClub);
         return;
       }
 
@@ -141,7 +141,7 @@ class _ClubInfoState extends State<ClubInfo> {
         hasRated = true;
       });
     } catch (error) {
-      showSnackBar(context, ' ${S.of(context).errorUpdatingClubRating} $error');
+      showSnackBar(context, ' ${S.of(context).ErrorUpdatingClubRating} $error');
     }
   }
 
@@ -150,8 +150,8 @@ class _ClubInfoState extends State<ClubInfo> {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text(S.of(context).youHaveAlreadyRatedThisClub),
-          content: Text(S.of(context).thankYouForYourRating),
+          title: Text(S.of(context).YouHaveAlreadyRatedThisClub),
+          content: Text(S.of(context).ThankYouForYourRating),
           actions: [
             TextButton(
               onPressed: () {
@@ -166,12 +166,12 @@ class _ClubInfoState extends State<ClubInfo> {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text(S.of(context).rateThisClub),
+          title: Text(S.of(context).RateThisClub),
           content: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(S.of(context).pleaseLeaveYourRate),
+              Text(S.of(context).PleaseLeaveYourRate),
               buildRating(),
             ],
           ),

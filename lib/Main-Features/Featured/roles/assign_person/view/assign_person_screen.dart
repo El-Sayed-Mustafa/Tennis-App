@@ -144,7 +144,7 @@ class _AssignPersonState extends State<AssignPerson> {
       }
     } catch (e) {
       // Handle errors if necessary
-      showSnackBar(context, ' ${S.of(context).errorLoadingClubRoles} $e');
+      showSnackBar(context, ' ${S.of(context).ErrorLoadingClubRoles} $e');
     }
   }
 
@@ -156,7 +156,7 @@ class _AssignPersonState extends State<AssignPerson> {
       });
     } catch (e) {
       // Handle errors if necessary
-      showSnackBar(context, ' ${S.of(context).errorFetchingRoleNames} $e');
+      showSnackBar(context, ' ${S.of(context).ErrorFetchingRoleNames} $e');
     }
   }
 
@@ -219,8 +219,8 @@ class _AssignPersonState extends State<AssignPerson> {
                       height: 150,
                       width: screenWidth * .8,
                       child: NoData(
-                        text: S.of(context).youDontHaveRoles,
-                        buttonText: S.of(context).clickHereToCreateANewRole,
+                        text: S.of(context).YouDontHaveRoles,
+                        buttonText: S.of(context).ClickHereToCreateANewRole,
                         onPressed: () {
                           GoRouter.of(context).push('/createRole');
                         },

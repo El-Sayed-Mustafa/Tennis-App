@@ -48,7 +48,7 @@ class AvailableCourtsWidget extends StatelessWidget {
                   } else if (clubSnapshot.hasError) {
                     return Text(S
                         .of(context)
-                        .noAvailableData); // Show appropriate error UI
+                        .NoAvailableData); // Show appropriate error UI
                   } else {
                     final clubData = clubSnapshot.data!;
 

@@ -37,7 +37,7 @@ class EventDetailsScreen extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-              text: S.of(context).eventDetails,
+              text: S.of(context).EventDetails,
               suffixIconPath: '',
             ),
             Stack(
@@ -171,7 +171,7 @@ class EventDetailsScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 25),
                             Text(
-                              S.of(context).reverseCourt,
+                              S.of(context).ReverseCourt,
                               style: const TextStyle(
                                 fontSize: 18,
                                 color: Color(0xFF6D6D6D),
@@ -229,7 +229,7 @@ class EventDetailsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 15),
             BottomSheetContainer(
-              buttonText: S.of(context).editEvent,
+              buttonText: S.of(context).EditEvent,
               onPressed: () async {
                 bool hasRight = await RolesManager.instance
                     .doesPlayerHaveRight('Edit Event');
@@ -253,7 +253,7 @@ class EventDetailsScreen extends StatelessWidget {
               },
             ),
             BottomSheetContainer(
-              buttonText: S.of(context).deleteEvent,
+              buttonText: S.of(context).DeleteEvent,
               onPressed: () async {
                 bool hasRight = await RolesManager.instance
                     .doesPlayerHaveRight('Delete Event');
@@ -262,10 +262,10 @@ class EventDetailsScreen extends StatelessWidget {
                     context: context,
                     builder: (BuildContext dialogContext) {
                       return ConfirmationDialog(
-                        title: S.of(context).confirmDelete,
+                        title: S.of(context).Confirm,
                         content:
-                            S.of(context).areYouSureYouWantToDeleteThisEvent,
-                        confirmText: S.of(context).delete,
+                            S.of(context).Areyousureyouwanttodeletethisevent,
+                        confirmText: S.of(context).Delete,
                         cancelText: S.of(context).cancel,
                         onConfirm: () {
                           GoRouter.of(context).push('/club');

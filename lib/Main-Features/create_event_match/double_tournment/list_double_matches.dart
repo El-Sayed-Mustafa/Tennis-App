@@ -129,11 +129,11 @@ class _ListDoubleMatchesState extends State<ListDoubleMatches> {
                                   context: context,
                                   builder: (BuildContext dialogContext) {
                                     return ConfirmationDialog(
-                                      title: S.of(context).confirmDelete,
+                                      title: S.of(context).Confirm,
                                       content: S
                                           .of(context)
-                                          .areYouSureYouWantToDeleteThisMatch,
-                                      confirmText: S.of(context).delete,
+                                          .AreYouSureYouWantToDeleteThisMatch,
+                                      confirmText: S.of(context).Delete,
                                       cancelText: S.of(context).cancel,
                                       onConfirm: () async {
                                         _deleteMatchAndUpdateUI(

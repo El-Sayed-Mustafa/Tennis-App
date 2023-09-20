@@ -25,7 +25,7 @@ class DoubleMatchScreen extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            text: S.of(context).doubleMatch,
+            text: S.of(context).DoubleMatch,
             suffixIconPath: '',
           ),
           SizedBox(height: screenHeight * .02),

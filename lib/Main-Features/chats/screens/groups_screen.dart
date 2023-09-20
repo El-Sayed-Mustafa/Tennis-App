@@ -44,7 +44,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
       }
     } catch (error) {
       showSnackBar(
-          context, ' ${S.of(context).errorFetchingGroupDetails} $error');
+          context, ' ${S.of(context).ErrorFetchingGroupDetails} $error');
     }
   }
 
@@ -168,7 +168,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                   child: TextField(
                     controller: _messageController,
                     decoration: InputDecoration(
-                        hintText: S.of(context).typeYourMessage),
+                        hintText: S.of(context).TypeYourMessage),
                   ),
                 ),
                 IconButton(

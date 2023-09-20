@@ -117,7 +117,7 @@ class _ClubInvitationsPageState extends State<ClubInvitationsPage> {
                             color: Colors.white,
                           ),
                         ),
-                        text: S.of(context).clubInvitations,
+                        text: S.of(context).ClubInvitations,
                         suffixIconPath: '',
                       ),
                       SizedBox(
@@ -129,7 +129,7 @@ class _ClubInvitationsPageState extends State<ClubInvitationsPage> {
                         child: NoData(
                             text: S
                                 .of(context)
-                                .youDoNotHaveAnyClubInvitationsAvailable),
+                                .YouDoNotHaveAnyClubInvitationsAvailable),
                       )
                     ],
                   );
@@ -151,7 +151,7 @@ class _ClubInvitationsPageState extends State<ClubInvitationsPage> {
                       return Center(
                         child: Text(S
                             .of(context)
-                            .youDoNotHaveAnyClubInvitationsAvailable),
+                            .YouDoNotHaveAnyClubInvitationsAvailable),
                       );
                     }
 

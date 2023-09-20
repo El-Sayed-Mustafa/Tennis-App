@@ -184,7 +184,7 @@ class _EditEventState extends State<EditEvent> {
                                     },
                                   ),
                                   Text(
-                                    S.of(context).public,
+                                    S.of(context).Public,
                                     style: const TextStyle(
                                       color: Color(0xFF525252),
                                       fontSize: 16,
@@ -206,7 +206,7 @@ class _EditEventState extends State<EditEvent> {
                                     },
                                   ),
                                   Text(
-                                    S.of(context).custom,
+                                    S.of(context).Custom,
                                     style: const TextStyle(
                                       color: Color(0xFF525252),
                                       fontSize: 16,
@@ -262,7 +262,7 @@ class _EditEventState extends State<EditEvent> {
                             if (courtNameController.text.isEmpty) {
                               // Display a message or alert to inform the user that both players need to be selected
                               return showSnackBar(
-                                  context, S.of(context).youMustChooseCourt);
+                                  context, S.of(context).YouMustChoosecourt);
                             }
                             if (formKey.currentState!.validate()) {
                               context.read<CreateEventCubit>().saveEventData(

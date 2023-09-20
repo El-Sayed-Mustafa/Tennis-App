@@ -9,7 +9,7 @@ class CustomDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(S.of(context).accessDenied),
+      title: Text(S.of(context).AccessDenied),
       content: Text(text),
       actions: [
         TextButton(

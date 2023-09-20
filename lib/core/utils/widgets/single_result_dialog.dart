@@ -19,14 +19,14 @@ Future<void> showWinnerDialog(method, context, match, tournamentId) async {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text(S.of(context).selectWinners),
+        title: Text(S.of(context).SelectWinners),
         content: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Padding(
                 padding: const EdgeInsets.all(5.0),
-                child: Text("${S.of(context).shot} 1",
+                child: Text("${S.of(context).Shot} 1",
                     style: const TextStyle(
                       color: Color(0xFF2A2A2A),
                       fontSize: 16,
@@ -41,7 +41,7 @@ Future<void> showWinnerDialog(method, context, match, tournamentId) async {
                       controller: teamAScoreController1,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        labelText: S.of(context).teamA,
+                        labelText: S.of(context).TeamA,
                         border: const OutlineInputBorder(),
                       ),
                     ),
@@ -52,7 +52,7 @@ Future<void> showWinnerDialog(method, context, match, tournamentId) async {
                       controller: teamBScoreController1,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        labelText: S.of(context).teamB,
+                        labelText: S.of(context).TeamB,
                         border: const OutlineInputBorder(),
                       ),
                     ),
@@ -64,7 +64,7 @@ Future<void> showWinnerDialog(method, context, match, tournamentId) async {
               ),
               Padding(
                 padding: const EdgeInsets.all(5.0),
-                child: Text("${S.of(context).shot} 2",
+                child: Text("${S.of(context).Shot} 2",
                     style: const TextStyle(
                       color: Color(0xFF2A2A2A),
                       fontSize: 16,
@@ -79,7 +79,7 @@ Future<void> showWinnerDialog(method, context, match, tournamentId) async {
                       controller: teamAScoreController2,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        labelText: S.of(context).teamA,
+                        labelText: S.of(context).TeamA,
                         border: const OutlineInputBorder(),
                       ),
                     ),
@@ -90,7 +90,7 @@ Future<void> showWinnerDialog(method, context, match, tournamentId) async {
                       controller: teamBScoreController2,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        labelText: S.of(context).teamB,
+                        labelText: S.of(context).TeamB,
                         border: const OutlineInputBorder(),
                       ),
                     ),
@@ -102,7 +102,7 @@ Future<void> showWinnerDialog(method, context, match, tournamentId) async {
               ),
               Padding(
                 padding: const EdgeInsets.all(5.0),
-                child: Text("${S.of(context).shot} 3",
+                child: Text("${S.of(context).Shot} 3",
                     style: const TextStyle(
                       color: Color(0xFF2A2A2A),
                       fontSize: 16,
@@ -117,7 +117,7 @@ Future<void> showWinnerDialog(method, context, match, tournamentId) async {
                       controller: teamAScoreController3,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        labelText: S.of(context).teamA,
+                        labelText: S.of(context).TeamA,
                         border: const OutlineInputBorder(),
                       ),
                     ),
@@ -128,7 +128,7 @@ Future<void> showWinnerDialog(method, context, match, tournamentId) async {
                       controller: teamBScoreController3,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        labelText: S.of(context).teamB,
+                        labelText: S.of(context).TeamB,
                         border: const OutlineInputBorder(),
                       ),
                     ),
@@ -140,7 +140,7 @@ Future<void> showWinnerDialog(method, context, match, tournamentId) async {
               ),
               Padding(
                 padding: const EdgeInsets.all(5.0),
-                child: Text("${S.of(context).shot} 4",
+                child: Text("${S.of(context).Shot} 4",
                     style: const TextStyle(
                       color: Color(0xFF2A2A2A),
                       fontSize: 16,
@@ -155,7 +155,7 @@ Future<void> showWinnerDialog(method, context, match, tournamentId) async {
                       controller: teamAScoreController4,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        labelText: S.of(context).teamA,
+                        labelText: S.of(context).TeamA,
                         border: const OutlineInputBorder(),
                       ),
                     ),
@@ -166,7 +166,7 @@ Future<void> showWinnerDialog(method, context, match, tournamentId) async {
                       controller: teamBScoreController4,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        labelText: S.of(context).teamB,
+                        labelText: S.of(context).TeamB,
                         border: const OutlineInputBorder(),
                       ),
                     ),
@@ -178,7 +178,7 @@ Future<void> showWinnerDialog(method, context, match, tournamentId) async {
               ),
               Padding(
                 padding: const EdgeInsets.all(5.0),
-                child: Text("${S.of(context).shot} 5",
+                child: Text("${S.of(context).Shot} 5",
                     style: const TextStyle(
                       color: Color(0xFF2A2A2A),
                       fontSize: 16,
@@ -193,7 +193,7 @@ Future<void> showWinnerDialog(method, context, match, tournamentId) async {
                       controller: teamAScoreController5,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        labelText: S.of(context).teamA,
+                        labelText: S.of(context).TeamA,
                         border: const OutlineInputBorder(),
                       ),
                     ),
@@ -204,7 +204,7 @@ Future<void> showWinnerDialog(method, context, match, tournamentId) async {
                       controller: teamBScoreController5,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        labelText: S.of(context).teamB,
+                        labelText: S.of(context).TeamB,
                         border: const OutlineInputBorder(),
                       ),
                     ),
@@ -350,7 +350,7 @@ Future<void> showWinnerDialog(method, context, match, tournamentId) async {
                         match.player2Id, false);
                   }
                 },
-                child: Text(S.of(context).submit),
+                child: Text(S.of(context).Submit),
               ),
             ],
           ),

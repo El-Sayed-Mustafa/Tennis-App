@@ -39,7 +39,7 @@ class _MyMatchesState extends State<MyMatches> {
       // Fetch the current user's player data from Firestore
       User? currentUser = FirebaseAuth.instance.currentUser;
       if (currentUser == null) {
-        showSnackBar(context, S.of(context).noUserIsCurrentlySignedIn);
+        showSnackBar(context, S.of(context).NoUserIsCurrentlySignedIn);
         return;
       }
 
@@ -53,7 +53,7 @@ class _MyMatchesState extends State<MyMatches> {
 
       if (!playerSnapshot.exists) {
         showSnackBar(
-            context, S.of(context).playerDocumentDoesNotExistForCurrentUser);
+            context, S.of(context).PlayerDocumentDoesNotExistForCurrentUser);
         return;
       }
 
@@ -67,7 +67,7 @@ class _MyMatchesState extends State<MyMatches> {
       setState(() {});
     } catch (error) {
       showSnackBar(
-          context, ' ${S.of(context).errorFetchingMatchesData} $error');
+          context, ' ${S.of(context).ErrorFetchingMatchesData} $error');
     }
   }
 
@@ -142,9 +142,9 @@ class _MyMatchesState extends State<MyMatches> {
                                     context: context,
                                     builder: (BuildContext dialogContext) {
                                       return ConfirmationDialog(
-                                        title: S.of(context).confirmDelete,
+                                        title: S.of(context).Confirm,
                                         content: '',
-                                        confirmText: S.of(context).delete,
+                                        confirmText: S.of(context).Delete,
                                         cancelText: S.of(context).cancel,
                                         onConfirm: () async {
                                           await delete
