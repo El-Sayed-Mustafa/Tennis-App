@@ -376,7 +376,6 @@ class _DoubleMatchCardState extends State<DoubleMatchCard> {
                       await method.updateMatchPlayedAndTotalWins(
                           widget.match.player4Id, false);
                     } else if (teamBScore > teamAScore) {
-                      print('test');
                       if (widget.tournamentId != null) {
                         await FirebaseFirestore.instance
                             .collection('doubleTournaments')

@@ -2,6 +2,8 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:tennis_app/generated/l10n.dart';
 import 'package:tennis_app/models/court.dart';
 import 'package:tennis_app/models/event.dart';
 
@@ -11,6 +13,7 @@ import '../../models/player.dart';
 
 class Method {
   late final FirebaseAuth _auth;
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   Future<void> signOut() async {
     try {
@@ -36,9 +39,49 @@ class Method {
       }
     } catch (e) {
       // Handle any errors that may occur during the fetch.
-      print('Error fetching event: $e');
     }
     return null;
+  }
+
+// Method to delete the currently signed-in user.
+  Future<void> deleteUser() async {
+    try {
+      final FirebaseAuth auth = FirebaseAuth.instance;
+
+      // Get the currently signed-in user.
+      User? user = auth.currentUser;
+
+      if (user != null) {
+        final DocumentSnapshot<Map<String, dynamic>> admin =
+            await FirebaseFirestore.instance
+                .collection('players')
+                .doc(user.uid)
+                .get();
+        final data = admin.data();
+        final String clubId = data!['participatedClubId'] as String? ?? '';
+
+        final DocumentReference<Map<String, dynamic>> clubReference =
+            FirebaseFirestore.instance.collection('clubs').doc(clubId);
+
+        final clubSnapshot = await clubReference.get();
+        final clubData = clubSnapshot.data();
+        if (clubData != null) {
+          final List<String> memberIds =
+              List<String>.from(clubData['memberIds'] ?? []);
+          if (memberIds.contains(user.uid)) {
+            memberIds.remove(user.uid);
+            await clubReference.update({'memberIds': memberIds});
+          }
+        }
+        final DocumentReference playerRef =
+            firestore.collection('players').doc(user.uid);
+
+        // Delete the player document.
+        await playerRef.delete();
+        // Delete the user account.
+        await user.delete();
+      } else {}
+    } catch (e) {}
   }
 
   Future<Player> getCurrentUser() async {

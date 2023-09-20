@@ -215,6 +215,36 @@ class MenuScreen extends StatelessWidget {
                         );
                       },
                     ),
+                    ButtonMenu(
+                      imagePath: 'assets/images/delete.svg',
+                      buttonText: 'Delete Account',
+                      onPressed: () async {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext dialogContext) {
+                            return ConfirmationDialog(
+                              title:
+                                  '${S.of(context).confirm} ${S.of(context).delete}',
+                              content: '',
+                              confirmText: S.of(context).delete,
+                              cancelText: S.of(context).cancel,
+                              onConfirm: () async {
+                                final Method authService = Method();
+
+                                await authService.deleteUser();
+                                final prefs =
+                                    await SharedPreferences.getInstance();
+                                prefs.setBool('showHome', false);
+                                while (GoRouter.of(context).canPop() == true) {
+                                  GoRouter.of(context).pop();
+                                }
+                                GoRouter.of(context).pushReplacement('/auth');
+                              },
+                            );
+                          },
+                        );
+                      },
+                    ),
                   ],
                 ),
               );

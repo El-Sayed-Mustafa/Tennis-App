@@ -124,7 +124,6 @@ class _ReversedCourtsState extends State<ReversedCourts> {
       });
     } catch (error) {
       // Handle the error if needed
-      print('Error deleting court ID from player: $error');
     }
   }
 
