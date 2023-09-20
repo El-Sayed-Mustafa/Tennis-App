@@ -5,13 +5,14 @@ class EventModel {
   final DateTime endTime;
   final String subject;
   final Color color;
+  final eventId;
 
-  EventModel({
-    required this.startTime,
-    required this.endTime,
-    required this.subject,
-    required this.color,
-  });
+  EventModel(
+      {required this.startTime,
+      required this.endTime,
+      required this.subject,
+      required this.color,
+      required this.eventId});
 
   // Convert EventModel to a map for database insertion
   Map<String, dynamic> toMap() {
@@ -20,6 +21,7 @@ class EventModel {
       'endTime': endTime.millisecondsSinceEpoch,
       'subject': subject,
       'color': color.value,
+      'eventId': eventId
     };
   }
 }

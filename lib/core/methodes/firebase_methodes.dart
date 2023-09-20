@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tennis_app/models/court.dart';
+import 'package:tennis_app/models/event.dart';
 
 import '../../models/message.dart';
 import '../../models/club.dart';
@@ -15,6 +16,29 @@ class Method {
     try {
       await _auth.signOut();
     } catch (error) {}
+  }
+
+  Future<Event?> fetchEventById(String eventId) async {
+    try {
+      // Reference to the "events" collection in Firestore.
+      final CollectionReference eventsCollection =
+          FirebaseFirestore.instance.collection('events');
+
+      // Query the collection to find the document with the specified event ID.
+      final DocumentSnapshot eventSnapshot =
+          await eventsCollection.doc(eventId).get();
+
+      // Check if the document exists.
+      if (eventSnapshot.exists) {
+        // Convert the data from Firestore to your EventModel class.
+        final data = eventSnapshot.data() as Map<String, dynamic>;
+        return Event.fromMap(data); // Replace EventModel with your model.
+      }
+    } catch (e) {
+      // Handle any errors that may occur during the fetch.
+      print('Error fetching event: $e');
+    }
+    return null;
   }
 
   Future<Player> getCurrentUser() async {

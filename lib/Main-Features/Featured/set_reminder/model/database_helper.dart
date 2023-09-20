@@ -33,6 +33,7 @@ class DatabaseHelper {
             startTime INTEGER,
             endTime INTEGER,
             subject TEXT,
+            eventId TEXT,
             color INTEGER
           )
         ''');
@@ -53,6 +54,7 @@ class DatabaseHelper {
         startTime: DateTime.fromMillisecondsSinceEpoch(maps[i]['startTime']),
         endTime: DateTime.fromMillisecondsSinceEpoch(maps[i]['endTime']),
         subject: maps[i]['subject'],
+        eventId: maps[i]['eventId'],
         color: Color(maps[i]['color']),
       );
     });

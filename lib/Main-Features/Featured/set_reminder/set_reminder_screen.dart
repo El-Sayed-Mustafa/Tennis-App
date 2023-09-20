@@ -30,13 +30,14 @@ class SetReminder extends StatelessWidget {
   final dbHelper = DatabaseHelper();
 
   // Method to save the event to the database
-  Future<void> saveEvent(
-      DateTime startTime, DateTime endTime, String subject, Color color) async {
+  Future<void> saveEvent(DateTime startTime, DateTime endTime, String subject,
+      Color color, String eventId) async {
     final event = EventModel(
       startTime: startTime,
       endTime: endTime,
       subject: subject,
       color: color,
+      eventId: eventId,
     );
     await dbHelper.insertEvent(event);
   }
@@ -124,7 +125,8 @@ class SetReminder extends StatelessWidget {
               Color color = GoogleCalendarColors.getRandomEventColor();
 
               // Save the event to the database
-              await saveEvent(startDate, endDate, event.eventName, color);
+              await saveEvent(
+                  startDate, endDate, event.eventName, color, event.eventId);
 
               NotificationApi.showSchaduleNotification(
                 title: event.eventName,
