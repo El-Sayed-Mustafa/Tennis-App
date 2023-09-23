@@ -52,13 +52,18 @@ class CardDetails extends StatelessWidget {
             ),
           ),
           SizedBox(height: containerHeight * 0.02),
-          Text(
-            label,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: containerHeight * 0.1,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.w500,
+          SizedBox(
+            width: containerWidth * .9,
+            child: Text(
+              label,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: containerHeight * 0.08,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
         ],

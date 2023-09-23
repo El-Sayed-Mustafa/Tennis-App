@@ -410,13 +410,13 @@
     "ErrorFetchingReversedCourts": "Error fetching reversed courts:",
     "AreYouSureYouWantToCancelThisReservation": "Are you sure you want to cancel this reservation?",
     "Language": "Language",
-    "Invitationhasalreadybeensenttothisplayer.": "Invitation has already been sent to this player.",
-    "AvailableCourts(Taptoshow)": "Available Courts (Tap to Show)",
-    "AvailableCourts(TaptoHide)": "Available Courts (Tap to Hide)",
-    "ReversedCourts(Taptoshow)": "Reversed Courts (Tap to Show)",
-    "ReversedCourts(TaptoHide)": "Reversed Courts (Tap to Hide)",
+    "Invitationhasalreadybeensenttothisplayer": "Invitation has already been sent to this player.",
+    "AvailableCourtsTaptoshow": "Available Courts (Tap to Show)",
+    "AvailableCourtsTaptoHide": "Available Courts (Tap to Hide)",
+    "ReversedCourtsTaptoshow": "Reversed Courts (Tap to Show)",
+    "ReversedCourtsTaptoHide": "Reversed Courts (Tap to Hide)",
     "PlayerData:Unknown": "Player Data: Unknown",
-    "Clubdatasavedsuccessfully.": "Club data saved successfully.",
+    "Clubdatasavedsuccessfully": "Club data saved successfully.",
     "Selectaday": "Select a day",
     "TheFromtimemustbesmallerthantheTotime": "The From time must be smaller than the To time",
     "Public": "Public",
@@ -435,6 +435,5 @@
     "Please_select_at_least_one_time_slot_to_reserve_the_court.": "Please select at least one time slot to reserve the court.",
     "Court_Details": "Court Details",
     "Warning": "Warning",
-    "Delete_Account": "Delete Account",
-    "reversedCourtsTapToShow": "Reversed Courts Tap To Show"
+    "Delete_Account": "Delete Account"
 }
